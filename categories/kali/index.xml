@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Kali on Retr0的小窝</title>
+        <link>https://example.com/categories/kali/</link>
+        <description>Recent content in Kali on Retr0的小窝</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>Retr0</copyright>
+        <lastBuildDate>Mon, 27 Oct 2025 12:46:38 +0800</lastBuildDate><atom:link href="https://example.com/categories/kali/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>1.1Kali的下载与安装</title>
+        <link>https://example.com/p/1.1kali%E7%9A%84%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/</link>
+        <pubDate>Mon, 27 Oct 2025 12:46:38 +0800</pubDate>
+        
+        <guid>https://example.com/p/1.1kali%E7%9A%84%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/</guid>
+        <description>&lt;img src="https://example.com/kali.jpeg" alt="Featured image of post 1.1Kali的下载与安装" /&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;h2 id=&#34;下载kali&#34;&gt;下载kali
+&lt;/h2&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;几种可选方案：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;官网下载：&lt;a class=&#34;link&#34; href=&#34;https://www.kali.org/get-kali/#kali-virtual-machines&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Get Kali | Kali Linux&lt;/a&gt;选择VMware下载即可（不推荐）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;镜像源下载：阿里云镜像源&lt;a class=&#34;link&#34; href=&#34;https://mirrors.aliyun.com/kali-images/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;kali-images安装包下载_开源镜像站-阿里云&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;​                       清华镜像源&lt;a class=&#34;link&#34; href=&#34;https://mirrors.tuna.tsinghua.edu.cn/kali-images/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;清华大学开源软件镜像站 | Tsinghua Open Source Mirror&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;​                       中科大镜像源&lt;a class=&#34;link&#34; href=&#34;https://mirrors.ustc.edu.cn/kali-images/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Index of /kali-images/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;以上几个都是从最新版本中找到后缀为**[vmware-amd64.7z]**的下载即可&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;
+&lt;h2 id=&#34;安装kali&#34;&gt;安装kali
+&lt;/h2&gt;&lt;p&gt;将下载好的压缩包解压在某文件夹内&lt;/p&gt;
+&lt;p&gt;然后打开&lt;strong&gt;VMware Workstation Pro&lt;/strong&gt;点击主页上的【打开虚拟机】&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/kali%e4%bb%8e%e5%85%a5%e9%97%a8%e5%88%b0%e5%85%a5%e7%8b%b1/1.1.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;选择你刚刚解压出的那一堆文件中后缀为**.vmx**的文件即可（一般会自动筛选的）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h2 id=&#34;登录kali&#34;&gt;登录kali
+&lt;/h2&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;默认超级用户名和密码均为&lt;strong&gt;kali&lt;/strong&gt;，&lt;/p&gt;
+&lt;p&gt;至此，&lt;/p&gt;
+&lt;p&gt;享受你的个人kali吧。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

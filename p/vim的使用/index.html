@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="此文章包含vim常用指令，建议Ctrl+F查找">
+<title>Vim的使用</title>
+
+<link rel='canonical' href='https://example.com/p/vim%E7%9A%84%E4%BD%BF%E7%94%A8/'>
+
+<link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="Vim的使用">
+<meta property='og:description' content="此文章包含vim常用指令，建议Ctrl+F查找">
+<meta property='og:url' content='https://example.com/p/vim%E7%9A%84%E4%BD%BF%E7%94%A8/'>
+<meta property='og:site_name' content='Retr0的小窝'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-10-27T09:27:38&#43;08:00'/><meta property='article:modified_time' content='2025-10-27T09:27:38&#43;08:00'/><meta property='og:image' content='https://example.com/vim.webp' />
+<meta name="twitter:title" content="Vim的使用">
+<meta name="twitter:description" content="此文章包含vim常用指令，建议Ctrl+F查找"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://example.com/vim.webp' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_ebc91df3395e592b.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🥶</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Retr0的小窝</a></h1>
+            <h2 class="site-description">天冷了，进来暖和暖和吧！</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/349466985'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/makabaka11'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://t.me/ded000'
+                        target="_blank"
+                        title="Telegram"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页 | Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E-about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于 | About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索 | Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>技术链接 | Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/vim%E7%9A%84%E4%BD%BF%E7%94%A8/">
+                
+                    <img src="/vim.webp" loading="lazy" alt="Featured image of post Vim的使用" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/linux/" >
+                Linux
+            </a>
+        
+            <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" >
+                基础知识
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/vim%E7%9A%84%E4%BD%BF%E7%94%A8/">Vim的使用</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            此文章包含vim常用指令，建议Ctrl&#43;F查找
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-10-27</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left"><font style="color:rgb(25, 27, 31);">指令</font></th>
+          <th style="text-align: left"><font style="color:rgb(25, 27, 31);">用法</font></th>
+          <th style="text-align: left"><font style="color:rgb(25, 27, 31);">示例</font></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">&quot;&quot;(引号)</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">用引号来查询一个确切的单词或短语</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">查找有关《百年孤独》这本书的网页，语法：&ldquo;百年孤独&rdquo;</font></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">OR(或者)</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">用OR分隔搜索词，同时执行两个搜索查询，这将找到包含多个单词之一的页面。</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">搜索引用了“Google Drive”、“</font><a class="link" href="https://zhida.zhihu.com/search?content_id=232851466&amp;content_type=Article&amp;match_order=1&amp;q=Dropbox&amp;zhida_source=entity"  target="_blank" rel="noopener"
+    ><font style="color:rgb(9, 64, 142);">Dropbox</font></a><br/><font style="color:rgb(25, 27, 31);">”或“</font><a class="link" href="https://zhida.zhihu.com/search?content_id=232851466&amp;content_type=Article&amp;match_order=1&amp;q=OneDrive&amp;zhida_source=entity"  target="_blank" rel="noopener"
+    ><font style="color:rgb(9, 64, 142);">OneDrive</font></a><br/><font style="color:rgb(25, 27, 31);">”的页面，语法：Google Drive OR Dropbox OR OneDrive</font></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">-(减号、连字符)</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">在单词或网站前使用连字符将其从搜索结果中排除</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">从搜索结果中排除维基百科页面，语法：- site:</font><a class="link" href="https://link.zhihu.com/?target=http%3A//wikipedia.org"  target="_blank" rel="noopener"
+    >http://wikipedia.org</a></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">allintext:</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">使用allintext:[搜索短语]查找正文中包含这些单词的页面</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">查找正文中有关Roth、IRA投资讯息的页面，语法：allintext:</font><a class="link" href="https://zhida.zhihu.com/search?content_id=232851466&amp;content_type=Article&amp;match_order=1&amp;q=Roth&#43;IRA&amp;zhida_source=entity"  target="_blank" rel="noopener"
+    ><font style="color:rgb(9, 64, 142);">Roth IRA</font></a><br/><font style="color:rgb(25, 27, 31);"> </font><font style="color:rgb(25, 27, 31);">投资</font></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">allintitle:</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">使用allintitle:[搜索短语]查找标题中包含这些单词的页面</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">查找标题中同时包含“Apple”和“notebook”的页面，语法：allintitle:Apple notebook</font></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">allinurl:</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">使用allinurl:[搜索短语]查找URL中包含这些单词的页面</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">查找URL中同时包含”Microsoft” and “Surface”的页面，语法：allinurl:Microsoft Surface</font></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">site:</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">使用site:[URL]将搜索结果限制到特定网站</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">查找</font><a class="link" href="https://zhida.zhihu.com/search?content_id=232851466&amp;content_type=Article&amp;match_order=1&amp;q=%E4%BA%91%E7%82%B9SEO%E7%BD%91&amp;zhida_source=entity"  target="_blank" rel="noopener"
+    ><font style="color:rgb(9, 64, 142);">云点SEO网</font></a><br/><font style="color:rgb(25, 27, 31);">关于谷歌SEO的页面，语法：site:</font><a class="link" href="https://link.zhihu.com/?target=http%3A//yundianseo.com"  target="_blank" rel="noopener"
+    >http://yundianseo.com</a><br/><font style="color:rgb(25, 27, 31);"> </font><font style="color:rgb(25, 27, 31);">谷歌SEO</font></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">~(波浪号)</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">使用波浪号获得目标关键词及其近似词的搜索结果</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">查找SEO方面的策略或者教程，语法：SEO ~教程</font></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">related:</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">使用related:[URL]查找与特定网站类似的网站</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">查找与云点SEO类似的网站，语法：related:</font><a class="link" href="https://link.zhihu.com/?target=http%3A//yundianseo.com"  target="_blank" rel="noopener"
+    >http://yundianseo.com</a></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">define:</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">使用define:[搜索短语]查找其定义</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">查找SEO的定义，语法：define:SEO</font></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">$</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">使用$查找特定价格的商品</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">查找一款售价在99美金的手机，语法：mobile phone $99</font></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">location:</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">使用location:[地点]查看某个地区内的相关信息</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">查询南京的酒店，语法：hotel location:Nanjing</font></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">*（星号）</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">添加星号作为未知单词或事实的占位符</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">查找以“生活就像一个”开头的引语，语法：生活就像一个*</font></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">filetype:</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">使用filetype:[后缀]将结果限制为特定的文件格式，如PDF或DOC。</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">查找PDF格式的Microsoft Office键盘快捷键相关文件，语法：filetype:pdf Microsoft Office键盘快捷键</font></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">..（两点）</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">用两个句点分隔数字，不带空格，以搜索该范围内的数字</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">查找1950年至2000年间发生的计算机里程碑，语法：”计算机里程碑” 1950..2000</font></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">AROUND(n)</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">在两个搜索词之间加上AROUND(n)，以查找两个词间有特定距离的页面。用数字n设置术语之间的最大距离，这对于查找两个搜索词之间的关系很有用。</font></td>
+          <td style="text-align: left"><font style="color:rgb(25, 27, 31);">查找在同一句话或段落中提到Facebook和Microsoft的页面，语法：Facebook AROUND(7) Microsoft</font></td>
+      </tr>
+  </tbody>
+</table></div>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%E9%AD%94%E6%B3%95%E4%B8%8A%E7%BD%91/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">魔法上网</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="makabaka11/makabaka11.github.io"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Retr0
+    </section>
+    
+    <section class="powerby">
+        
+            Powered by ctOS <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
