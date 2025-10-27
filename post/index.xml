@@ -7,7 +7,51 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Mon, 27 Oct 2025 18:27:38 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 27 Oct 2025 22:43:38 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>swaks伪造邮件</title>
+        <link>https://example.com/p/swaks%E4%BC%AA%E9%80%A0%E9%82%AE%E4%BB%B6/</link>
+        <pubDate>Mon, 27 Oct 2025 22:43:38 +0800</pubDate>
+        
+        <guid>https://example.com/p/swaks%E4%BC%AA%E9%80%A0%E9%82%AE%E4%BB%B6/</guid>
+        <description>&lt;img src="https://example.com/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/email.jpg" alt="Featured image of post swaks伪造邮件" /&gt;&lt;p&gt;##1.  伪装学校邮件&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;大前提（原理）： 大多数学校的邮箱都可以使用代发服务  &lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;重要提醒： 接收邮件的邮箱只有网易系，qq邮箱因为安全限制问题无法接收到  &lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;打开终端并按需要输入指令&lt;/p&gt;
+&lt;p&gt;指令例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;swaks --body &amp;#34;学校紧急通知&amp;#34; --header &amp;#34;Subject:教务处&amp;#34; -t ⽬标邮箱@XXX.com -f 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;admin@XXX.edu.cn 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;参数解释&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;body参数是发送过去邮件的内容&lt;/p&gt;
+&lt;p&gt;header是发送过去邮件的标题&lt;/p&gt;
+&lt;p&gt;-t是我们的目标邮箱&lt;/p&gt;
+&lt;p&gt;-f是发送者的邮箱&lt;/p&gt;
+&lt;p&gt;&amp;ndash;attach是指定要附加的文件的路径&lt;/p&gt;
+&lt;p&gt;To be continue——&amp;raquo;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>VMware的安装</title>
+        <link>https://example.com/p/vmware%E7%9A%84%E5%AE%89%E8%A3%85/</link>
+        <pubDate>Mon, 27 Oct 2025 22:39:38 +0800</pubDate>
+        
+        <guid>https://example.com/p/vmware%E7%9A%84%E5%AE%89%E8%A3%85/</guid>
+        <description>&lt;p&gt;虽说目前官网开放了个人免费下载使用，但是注册什么的对很多人还不是太友好，所以这里直接提供打包好的安装包和注册码&lt;/p&gt;
+&lt;p&gt;链接：&lt;a class=&#34;link&#34; href=&#34;https://pan.quark.cn/s/85f0cadc8f12&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.quark.cn/s/85f0cadc8f12&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下载不多说，客户端下还是找解析网站自行解决&lt;/p&gt;
+&lt;p&gt;安装除了位置自己看着改一下，其他下一步就完事了&lt;/p&gt;
+&lt;p&gt;最后软件让你注册时，请输入压缩包内提供的注册码即可&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>1.2Kali的本地化配置：更适合中国宝宝的Kali</title>
         <link>https://example.com/p/1.2kali%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%E6%9B%B4%E9%80%82%E5%90%88%E4%B8%AD%E5%9B%BD%E5%AE%9D%E5%AE%9D%E7%9A%84kali/</link>
         <pubDate>Mon, 27 Oct 2025 18:27:38 +0800</pubDate>
@@ -40,10 +84,8 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo vim /etc/apt/sources.list
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;:::color4
-⚠️⚠️⚠️注意：这里需要使用到世界上最伟大的编辑器（没有之一）使用方法见下面的文章&lt;/p&gt;
-&lt;p&gt;:::&lt;/p&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;[Vim%e7%9a%84%e4%bd%bf%e7%94%a8]%28https://makabaka11.github.io/p/vim%e7%9a%84%e4%bd%bf%e7%94%a8/%29&#34; &gt;vim的使用&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;⚠️⚠️⚠️注意：这里需要使用到世界上最伟大的编辑器（没有之一）使用方法见下面的文章&lt;/p&gt;
+&lt;p&gt;[retr0的小窝：Vim的使用](&lt;a class=&#34;link&#34; href=&#34;[Vim%e7%9a%84%e4%bd%bf%e7%94%a8]%28https://www.retr0.qzz.io/p/vim%e7%9a%84%e4%bd%bf%e7%94%a8/%29&#34; &gt;Vim的使用&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在文件末加上以下任意国内源&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
