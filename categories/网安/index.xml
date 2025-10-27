@@ -27,7 +27,7 @@
     &gt;清华大学开源软件镜像站 | Tsinghua Open Source Mirror&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;​                       中科大镜像源&lt;a class=&#34;link&#34; href=&#34;https://mirrors.ustc.edu.cn/kali-images/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Index of /kali-images/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;以上几个都是从最新版本中找到后缀为**[vmware-amd64.7z]**的下载即可&lt;/p&gt;
+&lt;p&gt;以上几个都是从最新版本中找到后缀为&lt;strong&gt;vmware-amd64.7z&lt;/strong&gt;的下载即可&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;2-安装kali&#34;&gt;2. 安装kali
@@ -41,7 +41,7 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;选择你刚刚解压出的那一堆文件中后缀为**.vmx**的文件即可（一般会自动筛选的）&lt;/p&gt;
+&lt;p&gt;选择你刚刚解压出的那一堆文件中后缀为&lt;strong&gt;vmx&lt;/strong&gt;的文件即可（一般会自动筛选的）&lt;/p&gt;
 &lt;h2 id=&#34;3-登录kali&#34;&gt;3. 登录kali
 &lt;/h2&gt;&lt;p&gt;默认超级用户名和密码均为&lt;strong&gt;kali&lt;/strong&gt;，&lt;/p&gt;
 &lt;p&gt;至此，&lt;/p&gt;
