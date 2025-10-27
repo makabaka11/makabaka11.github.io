@@ -7,7 +7,209 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Mon, 27 Oct 2025 12:46:38 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 27 Oct 2025 18:27:38 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>1.2Kali的本地化配置：更适合中国宝宝的Kali</title>
+        <link>https://example.com/p/1.2kali%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%E6%9B%B4%E9%80%82%E5%90%88%E4%B8%AD%E5%9B%BD%E5%AE%9D%E5%AE%9D%E7%9A%84kali/</link>
+        <pubDate>Mon, 27 Oct 2025 18:27:38 +0800</pubDate>
+        
+        <guid>https://example.com/p/1.2kali%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%E6%9B%B4%E9%80%82%E5%90%88%E4%B8%AD%E5%9B%BD%E5%AE%9D%E5%AE%9D%E7%9A%84kali/</guid>
+        <description>&lt;img src="https://example.com/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/kali2.webp" alt="Featured image of post 1.2Kali的本地化配置：更适合中国宝宝的Kali" /&gt;&lt;p&gt;感谢jm汉化组&lt;/p&gt;
+&lt;h2 id=&#34;切换简中语言包&#34;&gt;切换简中语言包
+&lt;/h2&gt;&lt;p&gt;打开终端&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo dpkg-reconfigure locales
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在打开的界面中使用pg up，pg dn，⬆️，⬇️翻页，使用空格选择，按tab切换到下方的确定和取消，按enter确定&lt;/p&gt;
+&lt;p&gt;这里我们选择
+&lt;strong&gt;zh_CN.UTF-8&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;使用reboot重启即可&lt;/p&gt;
+&lt;h2 id=&#34;换源&#34;&gt;换源
+&lt;/h2&gt;&lt;p&gt;所谓换源就是切换软件仓库源&lt;/p&gt;
+&lt;p&gt;这里需要修改以下文件&lt;strong&gt;sources&lt;/strong&gt;.&lt;strong&gt;list&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在终端中输入&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo vim /etc/apt/sources.list
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;:::color4
+⚠️⚠️⚠️注意：这里需要使用到世界上最伟大的编辑器（没有之一）使用方法见下面的文章&lt;/p&gt;
+&lt;p&gt;:::&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;[Vim%e7%9a%84%e4%bd%bf%e7%94%a8]%28https://makabaka11.github.io/p/vim%e7%9a%84%e4%bd%bf%e7%94%a8/%29&#34; &gt;vim的使用&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在文件末加上以下任意国内源&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 官方源(国外的太慢不推荐)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb http://http.kali.org/kali kali-rolling main non-free contrib
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb-src http://http.kali.org/kali kali-rolling main non-free contrib
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#中科大
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#阿里云
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#清华大学
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb http://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb-src https://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#浙大
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb-src http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#东软大学
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb-src http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#南京大学
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb https://mirrors.nju.edu.cn/kali kali-rolling main non-free contrib
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb-src https://mirrors.nju.edu.cn/kali kali-rolling main non-free contrib
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;添加并保存后需要到终端中更新&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt upgrade
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;调整文字大小可选&#34;&gt;调整文字大小（可选）
+&lt;/h2&gt;&lt;p&gt;注意：这里我们去设置里在dpi选项中调整，而不要去“display”选项中调整，因为效果很差&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>遲到的補完：《終》觀影指南</title>
+        <link>https://example.com/p/%E9%81%B2%E5%88%B0%E7%9A%84%E8%A3%9C%E5%AE%8C%E7%B5%82%E8%A7%80%E5%BD%B1%E6%8C%87%E5%8D%97/</link>
+        <pubDate>Mon, 27 Oct 2025 18:27:38 +0800</pubDate>
+        
+        <guid>https://example.com/p/%E9%81%B2%E5%88%B0%E7%9A%84%E8%A3%9C%E5%AE%8C%E7%B5%82%E8%A7%80%E5%BD%B1%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;img src="https://example.com/post/%E5%BD%B1%E8%A7%86/%E5%9B%BE%E7%89%871.png" alt="Featured image of post 遲到的補完：《終》觀影指南" /&gt;&lt;h1 id=&#34;遲到的補完終觀影指南&#34;&gt;遲到的補完：《終》觀影指南
+&lt;/h1&gt;&lt;p&gt;2025年10月31日，《&lt;strong&gt;天鹰战士：最后的冲击&lt;/strong&gt;》将登录大陆内各影院，但我们仍用《&lt;strong&gt;新·福音战士剧场版：终&lt;/strong&gt;》来称呼它，或者更简单的《&lt;strong&gt;终&lt;/strong&gt;》也可以。&lt;/p&gt;
+&lt;p&gt;然而上文表述都是&lt;strong&gt;不准确的&lt;/strong&gt;，它真正的名字《シン・エヴァンゲリオン劇場版𝄇》（这么多片假名谁看得懂啊）里并没有“终”或者“最后”的字样，只有一个音乐符号**𝄇&lt;strong&gt;——它是乐谱中的段落终止线，表示一个完整段落的&lt;/strong&gt;结束**。其副标题&lt;strong&gt;Thrice upon a time&lt;/strong&gt;出自同名科幻小说，后者同时也是《命运石之门》的原型。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/%e5%bd%b1%e8%a7%86/%e5%9b%be%e7%89%871.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;即使你没看过EVA，也可能晓得EVA&lt;strong&gt;很难看懂&lt;/strong&gt;，甚至形成了专门的学问叫“&lt;strong&gt;E学&lt;/strong&gt;”。不过笔者在此只提供&lt;strong&gt;EVA的基本认识&lt;/strong&gt;和&lt;strong&gt;一套简单易懂的世界观&lt;/strong&gt;，希望对各位提供些许帮助。&lt;/p&gt;
+&lt;h2 id=&#34;你所必须知道的&#34;&gt;你所必须知道的…
+&lt;/h2&gt;&lt;p&gt;许多年前，“第一先祖种族”&lt;strong&gt;FAR&lt;/strong&gt;（就是&lt;strong&gt;牛逼外星人&lt;/strong&gt;）生活在银河系内。它们在灭亡之前制造了名为“&lt;strong&gt;月亮&lt;/strong&gt;”的运输船，月亮可以通过颜色来区分，比如在地球上空的白月，称为“白之月”。运输船运输的是&lt;strong&gt;生命之种&lt;/strong&gt;、&lt;strong&gt;朗基努斯之枪&lt;/strong&gt;、&lt;strong&gt;死海文书&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/%e5%bd%b1%e8%a7%86/%e5%9b%be%e7%89%872.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;它们仨分别是用来&lt;strong&gt;产生生命的&lt;/strong&gt;（白之月的“&lt;strong&gt;亚当&lt;/strong&gt;”产生“使徒”，黑之月的“&lt;strong&gt;莉莉丝&lt;/strong&gt;”产生地球生物）、&lt;strong&gt;前者的开关&lt;/strong&gt;（为了生物多样性，FAR要求&lt;strong&gt;一个星球上只允许一颗生命之种起作用&lt;/strong&gt;）和&lt;strong&gt;前两者的使用说明书&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;40亿年前，白之月降落到南极区域，亚当繁衍“使徒”，使徒拥有&lt;strong&gt;生命之果&lt;/strong&gt;，所以体型巨大而且难杀；之后，黑之月也来了，出于未知的原因，黑之月中的朗枪没有抑制莉莉丝，于是莉莉丝产生生命，人类拥有&lt;strong&gt;智慧之果&lt;/strong&gt;，能造EVA去干使徒。亚当这边则受委屈了，白之月携带的朗基努斯之枪抑制了它产生生命。&lt;/p&gt;
+&lt;p&gt;1947年，&lt;strong&gt;掌控人类的组织Seele&lt;/strong&gt;（“灵魂”的德语）发现了死海文书，相信这是“神明”的启示，他们就要执行上面的计划（这就是EVA宗教色彩的来源，但EVA从任何角度上都不应当被定义为“&lt;strong&gt;宗教动漫&lt;/strong&gt;”）。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/%e5%bd%b1%e8%a7%86/%e5%9b%be%e7%89%873.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;1999年，人类在南极发现了白之月撞击地球时产生了巨大坑洞，并在其内部发现了亚当，称为“&lt;strong&gt;第一使徒&lt;/strong&gt;”。为了验证死海古书上的内容，人类进行了一些实验，导致南极的亚当发生了&lt;strong&gt;暴走&lt;/strong&gt;，其释放出的能量对地球造成了不小的影响，所以EVA可以说是&lt;strong&gt;末世作品&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;2003年，人类在日本发现了巨大的地洞，也就是黑之月，Seele的下属机构&lt;strong&gt;NERV&lt;/strong&gt;（“神经”的英语）的总部就建在其中，表面上是为了对抗使徒，实际是为了执行Seele的&lt;strong&gt;人类补完计划&lt;/strong&gt;（就是&lt;strong&gt;全人类共同进化&lt;/strong&gt;呗，灵魂脱离&lt;strong&gt;橙汁组成的肉体&lt;/strong&gt;，合为一个整体，地球球长总喜欢搞这种）。&lt;/p&gt;
+&lt;p&gt;NERV通过克隆亚当和莉莉丝的细胞制作了“终极泛用人型决战兵器，人造人&lt;strong&gt;EVANGELION&lt;/strong&gt;”来打败使徒，由此可知，&lt;strong&gt;EVA并不是机甲番&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;政策的制定者&lt;strong&gt;Seele&lt;/strong&gt;、政策的执行者&lt;strong&gt;NERV&lt;/strong&gt;、在战斗一线的&lt;strong&gt;少年少女&lt;/strong&gt;们——EVA的故事就是他们三者之间以及内部的&lt;strong&gt;矛盾&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;之前发生了什么&#34;&gt;𝄇之前，发生了什么？
+&lt;/h2&gt;&lt;p&gt;我们不得不承认，如果《终》是你接触的第一步EVA作品，那诸位在电影院基本上也就是看个热闹，别说看懂&lt;strong&gt;EVA的内核&lt;/strong&gt;、&lt;strong&gt;导演庵野秀明的表达&lt;/strong&gt;、&lt;strong&gt;主角的愿景&lt;/strong&gt;，最基本的&lt;strong&gt;这几个人在干什么&lt;/strong&gt;都会搞不明白，所以介绍这部电影之前发生了什么，是很有必要的。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;旧EVA&lt;/strong&gt;（26集TV+两部剧场版）我们不再讲了，只需要知道在旧剧场版的最后，人类补完计划&lt;strong&gt;没有得到完美执行&lt;/strong&gt;，世界进行了一次&lt;strong&gt;轮回&lt;/strong&gt;而进入到&lt;strong&gt;新EVA&lt;/strong&gt;的故事即可。&lt;/p&gt;
+&lt;p&gt;《终》之前有三部剧场版《&lt;strong&gt;序&lt;/strong&gt;》《&lt;strong&gt;破&lt;/strong&gt;》《&lt;strong&gt;Q&lt;/strong&gt;》，我们简要说一说各个&lt;strong&gt;人物的动机和行为&lt;/strong&gt;，相信这会对各位看明白《终》起到一定帮助。&lt;/p&gt;
+&lt;p&gt;执行人类补完计划的势力&lt;strong&gt;NERV&lt;/strong&gt;：&lt;strong&gt;碇源堂&lt;/strong&gt;和&lt;strong&gt;冬月教授&lt;/strong&gt;。碇源堂争取到了Seele老登们的信任，他希望主导人类补完计划，从而在人与人完全没有隔阂的世界中&lt;strong&gt;和老婆团聚&lt;/strong&gt;；冬月教授则是他的得力助手。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/%e5%bd%b1%e8%a7%86/%e5%9b%be%e7%89%874.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;反对NERV的&lt;strong&gt;Wille&lt;/strong&gt;（意为意志）：&lt;strong&gt;美里小姐&lt;/strong&gt;、&lt;strong&gt;律子博士&lt;/strong&gt;及其他机组人员。美里小姐的爱人&lt;strong&gt;良治&lt;/strong&gt;在Wille起义时牺牲，继承了爱人意志的她一方面&lt;strong&gt;要阻止真嗣再一次不小心毁灭地球&lt;/strong&gt;，另一方面又要&lt;strong&gt;阻止碇司令的疯狂计划&lt;/strong&gt;，她能够成功吗；律子博士是她的得力助手。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/%e5%bd%b1%e8%a7%86/%e5%9b%be%e7%89%875.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;EVA驾驶员&lt;/strong&gt;：&lt;strong&gt;碇真嗣&lt;/strong&gt;、&lt;strong&gt;明日香&lt;/strong&gt;、&lt;strong&gt;绫波丽&lt;/strong&gt;、&lt;strong&gt;真希波&lt;/strong&gt;。碇真嗣先是在《序》《破》中被老爹骗去帮忙执行计划，而后又在《Q》中和薰一起进他爹圈套，在《终》里他还能拯救世界吗；明日香在之前的作战中成为了半使徒半生物的存在，迷茫的她就要全力帮助美里小姐，等会，&lt;strong&gt;她会不会是克隆人&lt;/strong&gt;；至少我们确定绫波丽是克隆人，是&lt;strong&gt;碇源堂妻子的克隆&lt;/strong&gt;，《序》《破》中出现了白衣服的绫波丽（&lt;strong&gt;白丽&lt;/strong&gt;），她对真嗣觉醒了感情，也就是“爱他”，却连同初号机被封印了，《Q》《终》出现的&lt;strong&gt;黑丽&lt;/strong&gt;是否会觉醒“爱我”呢；真希波，她对世界真相的认识似乎比Seele还要多，我们不知道她为什么会帮助真嗣，但事实就是这样。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/%e5%bd%b1%e8%a7%86/%e5%9b%be%e7%89%876.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;生活在&lt;strong&gt;第三村&lt;/strong&gt;的人们：真嗣以前的同班同学们，在《Q》中差点&lt;strong&gt;毁灭世界的他&lt;/strong&gt;，需要一些&lt;strong&gt;友人们&lt;/strong&gt;的帮助呢……&lt;/p&gt;
+&lt;p&gt;总而言之，神秘兮兮的那群人干神神鬼鬼的事情本质上都是“碇司令为了见老婆，在举办&lt;strong&gt;神明的高科技仪式&lt;/strong&gt;”，其他人则都是来阻止他的，阻止的方式就是&lt;strong&gt;开生物高达嗯打&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;万一你喜欢上了eva&#34;&gt;万一，你喜欢上了EVA？
+&lt;/h2&gt;&lt;p&gt;在观影之后，各位或许会对EVA产生了更多的兴趣，或许也想要和笔者一样对“&lt;strong&gt;E学&lt;/strong&gt;”进行一些学习和研究。对此，笔者的回答是：&lt;/p&gt;
+&lt;p&gt;正如《终》里的台词“&lt;strong&gt;再见是希望彼此再见时说的话&lt;/strong&gt;”，各位读者朋友们，&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;再见&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;​                                                                                                                                                                         &lt;strong&gt;終劇&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/%e5%bd%b1%e8%a7%86/%e5%9b%be%e7%89%877.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>1.1Kali的下载与安装</title>
         <link>https://example.com/p/1.1kali%E7%9A%84%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/</link>
         <pubDate>Mon, 27 Oct 2025 12:46:38 +0800</pubDate>

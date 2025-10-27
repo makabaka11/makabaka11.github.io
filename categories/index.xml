@@ -7,10 +7,18 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Mon, 27 Oct 2025 12:46:38 +0800</lastBuildDate><atom:link href="https://example.com/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 27 Oct 2025 18:27:38 +0800</lastBuildDate><atom:link href="https://example.com/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>ACG</title>
+        <link>https://example.com/categories/acg/</link>
+        <pubDate>Mon, 27 Oct 2025 18:27:38 +0800</pubDate>
+        
+        <guid>https://example.com/categories/acg/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Kali</title>
         <link>https://example.com/categories/kali/</link>
-        <pubDate>Mon, 27 Oct 2025 12:46:38 +0800</pubDate>
+        <pubDate>Mon, 27 Oct 2025 18:27:38 +0800</pubDate>
         
         <guid>https://example.com/categories/kali/</guid>
         <description></description>
@@ -18,9 +26,17 @@
         <item>
         <title>网安</title>
         <link>https://example.com/categories/%E7%BD%91%E5%AE%89/</link>
-        <pubDate>Mon, 27 Oct 2025 12:46:38 +0800</pubDate>
+        <pubDate>Mon, 27 Oct 2025 18:27:38 +0800</pubDate>
         
         <guid>https://example.com/categories/%E7%BD%91%E5%AE%89/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>影视</title>
+        <link>https://example.com/categories/%E5%BD%B1%E8%A7%86/</link>
+        <pubDate>Mon, 27 Oct 2025 18:27:38 +0800</pubDate>
+        
+        <guid>https://example.com/categories/%E5%BD%B1%E8%A7%86/</guid>
         <description></description>
         </item>
         <item>

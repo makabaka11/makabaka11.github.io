@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="在此篇文章中学习如何下载并在VM中安装Kali">
-<title>1.1Kali的下载与安装</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="此篇文章教您让自己的kali用起来更顺手">
+<title>1.2Kali的本地化配置：更适合中国宝宝的Kali</title>
 
-<link rel='canonical' href='https://example.com/p/1.1kali%E7%9A%84%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/'>
+<link rel='canonical' href='https://example.com/p/1.2kali%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%E6%9B%B4%E9%80%82%E5%90%88%E4%B8%AD%E5%9B%BD%E5%AE%9D%E5%AE%9D%E7%9A%84kali/'>
 
-<link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="1.1Kali的下载与安装">
-<meta property='og:description' content="在此篇文章中学习如何下载并在VM中安装Kali">
-<meta property='og:url' content='https://example.com/p/1.1kali%E7%9A%84%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/'>
+<link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="1.2Kali的本地化配置：更适合中国宝宝的Kali">
+<meta property='og:description' content="此篇文章教您让自己的kali用起来更顺手">
+<meta property='og:url' content='https://example.com/p/1.2kali%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%E6%9B%B4%E9%80%82%E5%90%88%E4%B8%AD%E5%9B%BD%E5%AE%9D%E5%AE%9D%E7%9A%84kali/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-10-27T12:46:38&#43;08:00'/><meta property='article:modified_time' content='2025-10-27T12:46:38&#43;08:00'/><meta property='og:image' content='https://example.com/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/kali.jpeg' />
-<meta name="twitter:title" content="1.1Kali的下载与安装">
-<meta name="twitter:description" content="在此篇文章中学习如何下载并在VM中安装Kali"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://example.com/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/kali.jpeg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-10-27T18:27:38&#43;08:00'/><meta property='article:modified_time' content='2025-10-27T18:27:38&#43;08:00'/><meta property='og:image' content='https://example.com/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/kali2.webp' />
+<meta name="twitter:title" content="1.2Kali的本地化配置：更适合中国宝宝的Kali">
+<meta name="twitter:description" content="此篇文章教您让自己的kali用起来更顺手"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://example.com/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/kali2.webp' />
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -276,9 +276,9 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#1-下载kali">1. 下载kali</a></li>
-    <li><a href="#2-安装kali">2. 安装kali</a></li>
-    <li><a href="#3-登录kali">3. 登录kali</a></li>
+    <li><a href="#切换简中语言包">切换简中语言包</a></li>
+    <li><a href="#换源">换源</a></li>
+    <li><a href="#调整文字大小可选">调整文字大小（可选）</a></li>
   </ol>
 </nav>
         </div>
@@ -293,9 +293,9 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/1.1kali%E7%9A%84%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/">
+            <a href="/p/1.2kali%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%E6%9B%B4%E9%80%82%E5%90%88%E4%B8%AD%E5%9B%BD%E5%AE%9D%E5%AE%9D%E7%9A%84kali/">
                 
-                    <img src="/post/kali%e4%bb%8e%e5%85%a5%e9%97%a8%e5%88%b0%e5%85%a5%e7%8b%b1/kali.jpeg" loading="lazy" alt="Featured image of post 1.1Kali的下载与安装" />
+                    <img src="/post/kali%e4%bb%8e%e5%85%a5%e9%97%a8%e5%88%b0%e5%85%a5%e7%8b%b1/kali2.webp" loading="lazy" alt="Featured image of post 1.2Kali的本地化配置：更适合中国宝宝的Kali" />
                 
             </a>
         </div>
@@ -318,12 +318,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/1.1kali%E7%9A%84%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/">1.1Kali的下载与安装</a>
+            <a href="/p/1.2kali%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%E6%9B%B4%E9%80%82%E5%90%88%E4%B8%AD%E5%9B%BD%E5%AE%9D%E5%AE%9D%E7%9A%84kali/">1.2Kali的本地化配置：更适合中国宝宝的Kali</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            在此篇文章中学习如何下载并在VM中安装Kali
+            此篇文章教您让自己的kali用起来更顺手
         </h3>
         
     </div>
@@ -360,39 +360,109 @@
     <section class="article-content">
     
     
-    <h2 id="1-下载kali">1. 下载kali
-</h2><p>几种可选方案：</p>
-<ul>
-<li>
-<p>官网下载：<a class="link" href="https://www.kali.org/get-kali/#kali-virtual-machines"  target="_blank" rel="noopener"
-    >Get Kali | Kali Linux</a>选择VMware下载即可（不推荐）</p>
-</li>
-<li>
-<p>镜像源下载：阿里云镜像源<a class="link" href="https://mirrors.aliyun.com/kali-images/"  target="_blank" rel="noopener"
-    >kali-images安装包下载_开源镜像站-阿里云</a></p>
-<p>​                       清华镜像源<a class="link" href="https://mirrors.tuna.tsinghua.edu.cn/kali-images/"  target="_blank" rel="noopener"
-    >清华大学开源软件镜像站 | Tsinghua Open Source Mirror</a></p>
-<p>​                       中科大镜像源<a class="link" href="https://mirrors.ustc.edu.cn/kali-images/"  target="_blank" rel="noopener"
-    >Index of /kali-images/</a></p>
-<p>以上几个都是从最新版本中找到后缀为<strong>vmware-amd64.7z</strong>的下载即可</p>
-</li>
-</ul>
-<h2 id="2-安装kali">2. 安装kali
-</h2><p>将下载好的压缩包解压在某文件夹内</p>
-<p>然后打开<strong>VMware Workstation Pro</strong>点击主页上的【打开虚拟机】</p>
-<p><img src="/post/kali%e4%bb%8e%e5%85%a5%e9%97%a8%e5%88%b0%e5%85%a5%e7%8b%b1/1.1.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<p>选择你刚刚解压出的那一堆文件中后缀为<strong>vmx</strong>的文件即可（一般会自动筛选的）</p>
-<h2 id="3-登录kali">3. 登录kali
-</h2><p>默认超级用户名和密码均为<strong>kali</strong>，</p>
-<p>至此，</p>
-<p>享受你的个人kali吧。</p>
+    <p>感谢jm汉化组</p>
+<h2 id="切换简中语言包">切换简中语言包
+</h2><p>打开终端</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo dpkg-reconfigure locales
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在打开的界面中使用pg up，pg dn，⬆️，⬇️翻页，使用空格选择，按tab切换到下方的确定和取消，按enter确定</p>
+<p>这里我们选择
+<strong>zh_CN.UTF-8</strong></p>
+<p>使用reboot重启即可</p>
+<h2 id="换源">换源
+</h2><p>所谓换源就是切换软件仓库源</p>
+<p>这里需要修改以下文件<strong>sources</strong>.<strong>list</strong></p>
+<p>在终端中输入</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo vim /etc/apt/sources.list
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>:::color4
+⚠️⚠️⚠️注意：这里需要使用到世界上最伟大的编辑器（没有之一）使用方法见下面的文章</p>
+<p>:::</p>
+<p><a class="link" href="[Vim%e7%9a%84%e4%bd%bf%e7%94%a8]%28https://makabaka11.github.io/p/vim%e7%9a%84%e4%bd%bf%e7%94%a8/%29" >vim的使用</a></p>
+<p>在文件末加上以下任意国内源</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl"># 官方源(国外的太慢不推荐)
+</span></span><span class="line"><span class="cl">deb http://http.kali.org/kali kali-rolling main non-free contrib
+</span></span><span class="line"><span class="cl">deb-src http://http.kali.org/kali kali-rolling main non-free contrib
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#中科大
+</span></span><span class="line"><span class="cl">deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib
+</span></span><span class="line"><span class="cl">deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#阿里云
+</span></span><span class="line"><span class="cl">deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib
+</span></span><span class="line"><span class="cl">deb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#清华大学
+</span></span><span class="line"><span class="cl">deb http://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free
+</span></span><span class="line"><span class="cl">deb-src https://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#浙大
+</span></span><span class="line"><span class="cl">deb http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free
+</span></span><span class="line"><span class="cl">deb-src http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#东软大学
+</span></span><span class="line"><span class="cl">deb http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib
+</span></span><span class="line"><span class="cl">deb-src http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#南京大学
+</span></span><span class="line"><span class="cl">deb https://mirrors.nju.edu.cn/kali kali-rolling main non-free contrib
+</span></span><span class="line"><span class="cl">deb-src https://mirrors.nju.edu.cn/kali kali-rolling main non-free contrib
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>添加并保存后需要到终端中更新</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo apt upgrade
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="调整文字大小可选">调整文字大小（可选）
+</h2><p>注意：这里我们去设置里在dpi选项中调整，而不要去“display”选项中调整，因为效果很差</p>
 
 </section>
 
@@ -455,18 +525,18 @@
             
                 
 <article class="has-image">
-    <a href="/p/1.2kali%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%E6%9B%B4%E9%80%82%E5%90%88%E4%B8%AD%E5%9B%BD%E5%AE%9D%E5%AE%9D%E7%9A%84kali/">
+    <a href="/p/1.1kali%E7%9A%84%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/">
         
         
             <div class="article-image">
                 
-                    <img src="/post/kali%e4%bb%8e%e5%85%a5%e9%97%a8%e5%88%b0%e5%85%a5%e7%8b%b1/kali2.webp" loading="lazy" data-key="" data-hash="/post/kali从入门到入狱/kali2.webp"/>
+                    <img src="/post/kali%e4%bb%8e%e5%85%a5%e9%97%a8%e5%88%b0%e5%85%a5%e7%8b%b1/kali.jpeg" loading="lazy" data-key="" data-hash="/post/kali从入门到入狱/kali.jpeg"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">1.2Kali的本地化配置：更适合中国宝宝的Kali</h2>
+            <h2 class="article-title">1.1Kali的下载与安装</h2>
         </div>
     </a>
 </article>
