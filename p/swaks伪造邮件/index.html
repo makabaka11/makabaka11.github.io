@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://example.com/p/swaks%E4%BC%AA%E9%80%A0%E9%82%AE%E4%BB%B6/'>
 
-<link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="swaks伪造邮件">
+<link rel="stylesheet" href="/scss/style.min.8ae9cd871baee326363e2392090059df40f51b48d9532352614e8c1a053d1181.css"><meta property='og:title' content="swaks伪造邮件">
 <meta property='og:description' content="本篇文章将介绍kali内置软件swaks的用法">
 <meta property='og:url' content='https://example.com/p/swaks%E4%BC%AA%E9%80%A0%E9%82%AE%E4%BB%B6/'>
 <meta property='og:site_name' content='Retr0的小窝'>
@@ -16,6 +16,7 @@
     <meta name="twitter:image" content='https://example.com/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/email.jpg' />
     <link rel="shortcut icon" href="/favicon.ico" />
 
+        <link rel="stylesheet" href="/css/APlayer.min.css">
     </head>
     <body class="
     article-page
@@ -617,5 +618,440 @@
     }());
 </script>
 
+         
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/swaks%E4%BC%AA%E9%80%A0%E9%82%AE%E4%BB%B6/">
+                
+                    <img src="/post/kali%e4%bb%8e%e5%85%a5%e9%97%a8%e5%88%b0%e5%85%a5%e7%8b%b1/email.jpg" loading="lazy" alt="Featured image of post swaks伪造邮件" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/kali/" >
+                Kali
+            </a>
+        
+            <a href="/categories/%E7%BD%91%E5%AE%89/" >
+                网安
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/swaks%E4%BC%AA%E9%80%A0%E9%82%AE%E4%BB%B6/">swaks伪造邮件</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本篇文章将介绍kali内置软件swaks的用法
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-10-27</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>##1.  伪装学校邮件</p>
+<p><strong><font style="color:#DF2A3F;">大前提（原理）： 大多数学校的邮箱都可以使用代发服务  </font></strong></p>
+<p><font style="color:#DF2A3F;">重要提醒： 接收邮件的邮箱只有网易系，qq邮箱因为安全限制问题无法接收到  </font></p>
+<p>打开终端并按需要输入指令</p>
+<p>指令例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">swaks --body &#34;学校紧急通知&#34; --header &#34;Subject:教务处&#34; -t ⽬标邮箱@XXX.com -f 
+</span></span><span class="line"><span class="cl">admin@XXX.edu.cn 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>参数解释</strong></p>
+<p>body参数是发送过去邮件的内容</p>
+<p>header是发送过去邮件的标题</p>
+<p>-t是我们的目标邮箱</p>
+<p>-f是发送者的邮箱</p>
+<p>&ndash;attach是指定要附加的文件的路径</p>
+<p>To be continue——&raquo;</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/1.2kali%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%E6%9B%B4%E9%80%82%E5%90%88%E4%B8%AD%E5%9B%BD%E5%AE%9D%E5%AE%9D%E7%9A%84kali/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/post/kali%e4%bb%8e%e5%85%a5%e9%97%a8%e5%88%b0%e5%85%a5%e7%8b%b1/kali2.webp" loading="lazy" data-key="" data-hash="/post/kali从入门到入狱/kali2.webp"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.2Kali的本地化配置：更适合中国宝宝的Kali</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/1.1kali%E7%9A%84%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/post/kali%e4%bb%8e%e5%85%a5%e9%97%a8%e5%88%b0%e5%85%a5%e7%8b%b1/kali.jpeg" loading="lazy" data-key="" data-hash="/post/kali从入门到入狱/kali.jpeg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.1Kali的下载与安装</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="makabaka11/makabaka11.github.io"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Retr0
+    </section>
+    
+    <section class="powerby">
+        
+            Powered by ctOS <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+
+        
+        <script src="/js/APlayer.min.js"></script>
+        <script src="/js/Meting.min.js"></script>
+
+        
+        
+
+<meting-js
+  server="netease"
+  type="playlist"
+  id="14477349320"
+  fixed="true"
+  bottom="20px"
+  right="20px"
+  autoplay="false"
+  width="300px"
+></meting-js>
+
+
+<script>
+  let apInstance = null;
+  const currentPlaylistId = "14477349320";
+  const STORAGE_KEY = "playInfo";
+
+  
+  const checkInstanceInterval = setInterval(() => {
+    const aplayerElement = document.querySelector('.aplayer');
+    if (aplayerElement && aplayerElement.aplayer) {
+      apInstance = aplayerElement.aplayer;
+      clearInterval(checkInstanceInterval);
+      console.log("Hugo 中获取 APlayer 实例成功");
+      initPlayerEvents();
+      return;
+    }
+
+    if (window.APlayer && window.APlayer.instances && window.APlayer.instances.length > 0) {
+      apInstance = window.APlayer.instances[0];
+      clearInterval(checkInstanceInterval);
+      console.log("从全局列表获取实例");
+      initPlayerEvents();
+      return;
+    }
+
+    console.log("Hugo 中等待 APlayer 实例...");
+  }, 300);
+
+  function initPlayerEvents() {
+    if (!apInstance) return;
+
+    
+    window.addEventListener('beforeunload', savePlayState);
+    document.addEventListener('visibilitychange', savePlayState);
+
+    
+    apInstance.on('list:loaded', restorePlayState);
+  }
+
+  function savePlayState() {
+    if (!apInstance) return;
+    const playInfo = {
+      playlistId: currentPlaylistId,
+      index: apInstance.list.index,
+      currentTime: apInstance.audio.currentTime,
+      paused: apInstance.paused
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(playInfo));
+  }
+
+  function restorePlayState() {
+    const savedInfo = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!savedInfo || savedInfo.playlistId !== currentPlaylistId) return;
+
+    if (savedInfo.index < apInstance.list.songs.length) {
+      apInstance.list.switch(savedInfo.index);
+      apInstance.once('canplay', () => {
+        apInstance.seek(savedInfo.currentTime);
+        if (!savedInfo.paused) {
+          apInstance.play().catch(() => {
+            apInstance.notice("点击继续播放", 3000);
+          });
+        }
+      });
+    }
+  }
+
+  
+  document.addEventListener('click', () => {
+    if (apInstance && !apInstance.paused) {
+      apInstance.play().catch(() => {});
+    }
+  }, { once: true });
+</script>  
     </body>
 </html>

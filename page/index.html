@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://example.com/page/'>
 
-<link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="Pages">
+<link rel="stylesheet" href="/scss/style.min.8ae9cd871baee326363e2392090059df40f51b48d9532352614e8c1a053d1181.css"><meta property='og:title' content="Pages">
 <meta property='og:description' content="天冷了，进来暖和暖和吧！">
 <meta property='og:url' content='https://example.com/page/'>
 <meta property='og:site_name' content='Retr0的小窝'>
@@ -15,6 +15,7 @@
 <meta name="twitter:description" content="天冷了，进来暖和暖和吧！"><link rel="alternate" type="application/rss&#43;xml" href="https://example.com/page/index.xml">
     <link rel="shortcut icon" href="/favicon.ico" />
 
+        <link rel="stylesheet" href="/css/APlayer.min.css">
     </head>
     <body class="">
     <script>
@@ -460,5 +461,180 @@
     }());
 </script>
 
+         
+    <header>
+        <h3 class="section-title">
+            
+                章节
+            
+        </h3>
+
+        <div class="section-card">
+            <div class="section-details">
+                <h3 class="section-count">4 个页面</h3>
+                <h1 class="section-term">Pages</h1>
+                
+            </div>
+        </div>
+    </header>
+    
+    <section class="article-list--compact">
+        
+            <article>
+    <a href="/archives/">
+        <div class="article-details">
+            <h2 class="article-title">归档 | Archives</h2>
+            <footer class="article-time">
+                <time datetime='2019-05-28T00:00:00Z'>2019-05-28</time>
+            </footer>
+        </div>
+    </a>
+</article>
+        
+            <article>
+    <a href="/%E5%85%B3%E4%BA%8E-about/">
+        <div class="article-details">
+            <h2 class="article-title">关于 | About</h2>
+            <footer class="article-time">
+                <time datetime='0001-01-01T00:00:00Z'>0001-01-01</time>
+            </footer>
+        </div>
+    </a>
+</article>
+        
+            <article>
+    <a href="/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/">
+        <div class="article-details">
+            <h2 class="article-title">技术链接 | Links</h2>
+            <footer class="article-time">
+                <time datetime='0001-01-01T00:00:00Z'>0001-01-01</time>
+            </footer>
+        </div>
+    </a>
+</article>
+        
+            <article>
+    <a href="/search/">
+        <div class="article-details">
+            <h2 class="article-title">搜索 | Search</h2>
+            <footer class="article-time">
+                <time datetime='0001-01-01T00:00:00Z'>0001-01-01</time>
+            </footer>
+        </div>
+    </a>
+</article>
+        
+    </section>
+<footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Retr0
+    </section>
+    
+    <section class="powerby">
+        
+            Powered by ctOS <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+
+        
+        <script src="/js/APlayer.min.js"></script>
+        <script src="/js/Meting.min.js"></script>
+
+        
+        
+
+<meting-js
+  server="netease"
+  type="playlist"
+  id="14477349320"
+  fixed="true"
+  bottom="20px"
+  right="20px"
+  autoplay="false"
+  width="300px"
+></meting-js>
+
+
+<script>
+  let apInstance = null;
+  const currentPlaylistId = "14477349320";
+  const STORAGE_KEY = "playInfo";
+
+  
+  const checkInstanceInterval = setInterval(() => {
+    const aplayerElement = document.querySelector('.aplayer');
+    if (aplayerElement && aplayerElement.aplayer) {
+      apInstance = aplayerElement.aplayer;
+      clearInterval(checkInstanceInterval);
+      console.log("Hugo 中获取 APlayer 实例成功");
+      initPlayerEvents();
+      return;
+    }
+
+    if (window.APlayer && window.APlayer.instances && window.APlayer.instances.length > 0) {
+      apInstance = window.APlayer.instances[0];
+      clearInterval(checkInstanceInterval);
+      console.log("从全局列表获取实例");
+      initPlayerEvents();
+      return;
+    }
+
+    console.log("Hugo 中等待 APlayer 实例...");
+  }, 300);
+
+  function initPlayerEvents() {
+    if (!apInstance) return;
+
+    
+    window.addEventListener('beforeunload', savePlayState);
+    document.addEventListener('visibilitychange', savePlayState);
+
+    
+    apInstance.on('list:loaded', restorePlayState);
+  }
+
+  function savePlayState() {
+    if (!apInstance) return;
+    const playInfo = {
+      playlistId: currentPlaylistId,
+      index: apInstance.list.index,
+      currentTime: apInstance.audio.currentTime,
+      paused: apInstance.paused
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(playInfo));
+  }
+
+  function restorePlayState() {
+    const savedInfo = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!savedInfo || savedInfo.playlistId !== currentPlaylistId) return;
+
+    if (savedInfo.index < apInstance.list.songs.length) {
+      apInstance.list.switch(savedInfo.index);
+      apInstance.once('canplay', () => {
+        apInstance.seek(savedInfo.currentTime);
+        if (!savedInfo.paused) {
+          apInstance.play().catch(() => {
+            apInstance.notice("点击继续播放", 3000);
+          });
+        }
+      });
+    }
+  }
+
+  
+  document.addEventListener('click', () => {
+    if (apInstance && !apInstance.paused) {
+      apInstance.play().catch(() => {});
+    }
+  }, { once: true });
+</script>  
     </body>
 </html>

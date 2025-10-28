@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://example.com/p/vim%E7%9A%84%E4%BD%BF%E7%94%A8/'>
 
-<link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="Vim的使用">
+<link rel="stylesheet" href="/scss/style.min.8ae9cd871baee326363e2392090059df40f51b48d9532352614e8c1a053d1181.css"><meta property='og:title' content="Vim的使用">
 <meta property='og:description' content="此文章包含vim常用指令，建议Ctrl+F查找">
 <meta property='og:url' content='https://example.com/p/vim%E7%9A%84%E4%BD%BF%E7%94%A8/'>
 <meta property='og:site_name' content='Retr0的小窝'>
@@ -16,6 +16,7 @@
     <meta name="twitter:image" content='https://example.com/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/vim.webp' />
     <link rel="shortcut icon" href="/favicon.ico" />
 
+        <link rel="stylesheet" href="/css/APlayer.min.css">
     </head>
     <body class="
     article-page
@@ -735,5 +736,494 @@
     }());
 </script>
 
+         
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/vim%E7%9A%84%E4%BD%BF%E7%94%A8/">
+                
+                    <img src="/post/kali%e4%bb%8e%e5%85%a5%e9%97%a8%e5%88%b0%e5%85%a5%e7%8b%b1/vim.webp" loading="lazy" alt="Featured image of post Vim的使用" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/linux/" >
+                Linux
+            </a>
+        
+            <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" >
+                基础知识
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/vim%E7%9A%84%E4%BD%BF%E7%94%A8/">Vim的使用</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            此文章包含vim常用指令，建议Ctrl&#43;F查找
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-10-27</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="一vim-基本操作">一、Vim 基本操作
+</h2><h3 id="1-启动和退出-vim">1. 启动和退出 Vim
+</h3><p><strong>启动 Vim:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">vim filename
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>退出 Vim:</strong></p>
+<p>正常退出并保存：:wq 或 ZZ</p>
+<p>仅退出（不保存）：:q</p>
+<p>强制退出（不保存）：:q!</p>
+<p>仅保存文件：:w</p>
+<h3 id="2-模式切换">2. 模式切换
+</h3><p>Vim 有多种模式，最常用的是以下几种：</p>
+<p><strong>正常模式（Normal Mode）</strong>：Vim 启动时默认的模式，可以执行各种命令，如移动光标、删除文本等。按 Esc 键进入。</p>
+<p><strong>插入模式（Insert Mode）</strong>：可以输入文本。按 i 进入，按 Esc 返回正常模式。</p>
+<p><strong>可视模式（Visual Mode）</strong>：用于选中文本块。按 v 进入，可视模式下可使用方向键选择文本。</p>
+<p><strong>常用模式切换命令：</strong></p>
+<p>i：进入插入模式，在当前光标位置前插入。</p>
+<p>a：进入插入模式，在当前光标位置后插入。</p>
+<p>o：在当前行下方打开新行并进入插入模式。</p>
+<p>v：进入可视模式。</p>
+<p>V：进入可视行模式（选中整行）。</p>
+<p>Ctrl + v：进入可视块模式（列选择）。</p>
+<h2 id="二vim-光标移动命令">二、Vim 光标移动命令
+</h2><h3 id="1-基本移动">1. 基本移动
+</h3><p>h：向左移动一个字符。</p>
+<p>l：向右移动一个字符。</p>
+<p>j：向下移动一行。</p>
+<p>k：向上移动一行。</p>
+<h3 id="2-行内移动">2. 行内移动
+</h3><p>0：移动到行首。</p>
+<p>^：移动到本行第一个非空白字符。</p>
+<p>$：移动到行尾。</p>
+<h3 id="3-单词移动">3. 单词移动
+</h3><p>w：移动到下一个单词的开头。</p>
+<p>e：移动到当前或下一个单词的末尾。</p>
+<p>b：移动到上一个单词的开头。</p>
+<h3 id="4-页面移动">4. 页面移动
+</h3><p>Ctrl + u：向上滚动半页。</p>
+<p>Ctrl + d：向下滚动半页。</p>
+<p>Ctrl + b：向上滚动一整页。</p>
+<p>Ctrl + f：向下滚动一整页。</p>
+<p>G：移动到文件末尾。</p>
+<p>gg：移动到文件开头。</p>
+<h3 id="5-行跳转">5. 行跳转
+</h3><p>:n：跳转到第 n 行。</p>
+<p>nG：跳转到第 n 行。</p>
+<h2 id="三vim-文本编辑命令">三、Vim 文本编辑命令
+</h2><h3 id="1-插入和删除">1. 插入和删除
+</h3><p>i：进入插入模式。</p>
+<p>a：在当前光标后插入文本。</p>
+<p>o：在当前行下方新开一行并进入插入模式。</p>
+<p>dd：删除当前行。</p>
+<p>D：删除当前光标到行尾的所有内容。</p>
+<p>x：删除当前光标所在的字符。</p>
+<p>dw：删除当前光标到单词末尾的内容。</p>
+<p>u：撤销上一步操作。</p>
+<p>Ctrl + r：重做上一步撤销的操作。</p>
+<h3 id="2-复制剪切与粘贴">2. 复制、剪切与粘贴
+</h3><p>yy：复制当前行。</p>
+<p>yw：复制一个单词。</p>
+<p>p：粘贴到光标后。</p>
+<p>P：粘贴到光标前。</p>
+<p>dd：剪切当前行。</p>
+<p>daw：剪切一个单词。</p>
+<h3 id="3-替换与修改">3. 替换与修改
+</h3><p>r：替换当前字符。</p>
+<p>R：进入替换模式，从光标开始的字符将被逐个替换，直到退出替换模式为止。</p>
+<p>cw：修改当前单词（删除当前单词并进入插入模式）。</p>
+<p>c$：修改从光标位置到行尾的内容。</p>
+<h2 id="四vim-查找与替换命令">四、Vim 查找与替换命令
+</h2><h3 id="1-查找">1. 查找
+</h3><p>/pattern：向下查找 pattern（正则表达式）。</p>
+<p>?pattern：向上查找 pattern。</p>
+<p>n：在查找模式下，查找下一个匹配项。</p>
+<p>N：在查找模式下，查找上一个匹配项。</p>
+<p>*：查找光标所在单词的下一个匹配项。</p>
+<p>#：查找光标所在单词的上一个匹配项。</p>
+<h3 id="2-替换">2. 替换
+</h3><p>:s/old/new：替换当前行的第一个匹配的 old 为 new。</p>
+<p>:s/old/new/g：替换当前行的所有 old 为 new。</p>
+<p>:%s/old/new/g：替换整个文件中的所有 old 为 new。</p>
+<p>:%s/old/new/gc：替换整个文件中的所有 old 为 new，每次替换前提示确认。</p>
+<h2 id="五vim-多窗口与多文件操作">五、Vim 多窗口与多文件操作
+</h2><h3 id="1-多窗口操作">1. 多窗口操作
+</h3><p>:split 或 :sp：水平分割窗口。</p>
+<p>:vsplit 或 :vsp：垂直分割窗口。</p>
+<p>Ctrl + w, w：在分割窗口之间切换。</p>
+<p>Ctrl + w, h/j/k/l：分别向左、下、上、右切换窗口。</p>
+<p>:q：关闭当前窗口。</p>
+<h3 id="2-多文件操作">2. 多文件操作
+</h3><p>:e filename：打开指定文件。</p>
+<p>:bnext 或 :bn：切换到下一个缓冲区（文件）。</p>
+<p>:bprev 或 :bp：切换到上一个缓冲区（文件）。</p>
+<p>:ls：列出所有缓冲区（打开的文件）。</p>
+<p>:bN：切换到缓冲区 N。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/vmware%E7%9A%84%E5%AE%89%E8%A3%85/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">VMware的安装</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="makabaka11/makabaka11.github.io"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Retr0
+    </section>
+    
+    <section class="powerby">
+        
+            Powered by ctOS <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+
+        
+        <script src="/js/APlayer.min.js"></script>
+        <script src="/js/Meting.min.js"></script>
+
+        
+        
+
+<meting-js
+  server="netease"
+  type="playlist"
+  id="14477349320"
+  fixed="true"
+  bottom="20px"
+  right="20px"
+  autoplay="false"
+  width="300px"
+></meting-js>
+
+
+<script>
+  let apInstance = null;
+  const currentPlaylistId = "14477349320";
+  const STORAGE_KEY = "playInfo";
+
+  
+  const checkInstanceInterval = setInterval(() => {
+    const aplayerElement = document.querySelector('.aplayer');
+    if (aplayerElement && aplayerElement.aplayer) {
+      apInstance = aplayerElement.aplayer;
+      clearInterval(checkInstanceInterval);
+      console.log("Hugo 中获取 APlayer 实例成功");
+      initPlayerEvents();
+      return;
+    }
+
+    if (window.APlayer && window.APlayer.instances && window.APlayer.instances.length > 0) {
+      apInstance = window.APlayer.instances[0];
+      clearInterval(checkInstanceInterval);
+      console.log("从全局列表获取实例");
+      initPlayerEvents();
+      return;
+    }
+
+    console.log("Hugo 中等待 APlayer 实例...");
+  }, 300);
+
+  function initPlayerEvents() {
+    if (!apInstance) return;
+
+    
+    window.addEventListener('beforeunload', savePlayState);
+    document.addEventListener('visibilitychange', savePlayState);
+
+    
+    apInstance.on('list:loaded', restorePlayState);
+  }
+
+  function savePlayState() {
+    if (!apInstance) return;
+    const playInfo = {
+      playlistId: currentPlaylistId,
+      index: apInstance.list.index,
+      currentTime: apInstance.audio.currentTime,
+      paused: apInstance.paused
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(playInfo));
+  }
+
+  function restorePlayState() {
+    const savedInfo = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!savedInfo || savedInfo.playlistId !== currentPlaylistId) return;
+
+    if (savedInfo.index < apInstance.list.songs.length) {
+      apInstance.list.switch(savedInfo.index);
+      apInstance.once('canplay', () => {
+        apInstance.seek(savedInfo.currentTime);
+        if (!savedInfo.paused) {
+          apInstance.play().catch(() => {
+            apInstance.notice("点击继续播放", 3000);
+          });
+        }
+      });
+    }
+  }
+
+  
+  document.addEventListener('click', () => {
+    if (apInstance && !apInstance.paused) {
+      apInstance.play().catch(() => {});
+    }
+  }, { once: true });
+</script>  
     </body>
 </html>
