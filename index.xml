@@ -7,7 +7,52 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Mon, 27 Oct 2025 22:43:38 +0800</lastBuildDate><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 28 Oct 2025 15:27:38 +0800</lastBuildDate><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>矩阵的秩及其性质</title>
+        <link>https://example.com/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/</link>
+        <pubDate>Tue, 28 Oct 2025 15:27:38 +0800</pubDate>
+        
+        <guid>https://example.com/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/</guid>
+        <description>&lt;p&gt;判断n阶方阵A是否可逆，核心看以下&lt;strong&gt;快速等价条件&lt;/strong&gt;（满足其一即可，优先选前2个最便捷）：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;行列式非零：$|A| \neq 0$（直接计算行列式，最快上手）；&lt;/li&gt;
+&lt;li&gt;矩阵满秩：秩$r(A) = n$（通过初等行变换看是否能化为单位矩阵）；&lt;/li&gt;
+&lt;li&gt;齐次方程组$AX = 0$只有零解；&lt;/li&gt;
+&lt;li&gt;行/列向量组线性无关；&lt;/li&gt;
+&lt;li&gt;存在方阵B，使得$AB = BA = I$（I为单位矩阵）。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>矩阵的秩及其性质</title>
+        <link>https://example.com/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/</link>
+        <pubDate>Tue, 28 Oct 2025 15:27:38 +0800</pubDate>
+        
+        <guid>https://example.com/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/</guid>
+        <description>&lt;h3 id=&#34;一矩阵的秩核心定义&#34;&gt;一、矩阵的秩（核心定义）
+&lt;/h3&gt;&lt;p&gt;矩阵的秩是&lt;strong&gt;最高阶非零子式的阶数&lt;/strong&gt;，也等于矩阵行向量组/列向量组的“极大无关组个数”（通俗说：最多能找出多少个不互相“多余”的行/列）。记为 &lt;/p&gt;
+$$r(A)$$&lt;p&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;二核心性质&#34;&gt;二、核心性质
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;非负性与有界性：$0 \leq r(A) \leq \min{m, n}$（秩是0或正整数，不超过行数和列数）；&lt;/li&gt;
+&lt;li&gt;零矩阵专属：$A = O \iff r(A) = 0$（零矩阵秩为0，反之亦然）；&lt;/li&gt;
+&lt;li&gt;转置不变性：$r(A^T) = r(A)$（矩阵与其转置秩相等）；&lt;/li&gt;
+&lt;li&gt;初等变换不变性：初等行/列变换后，矩阵秩不变；&lt;/li&gt;
+&lt;li&gt;和秩不等式：$r(A + B) \leq r(A) + r(B)$（两矩阵和的秩不超过各自秩的和）；&lt;/li&gt;
+&lt;li&gt;乘积秩不等式：$r(AB) \leq \min{r(A), r(B)}$（两矩阵乘积的秩不超过任一矩阵的秩）；&lt;/li&gt;
+&lt;li&gt;可逆矩阵作用：$r(PA) = r(AQ) = r(PAQ) = r(A)$（可逆矩阵左乘/右乘，秩不变）；&lt;/li&gt;
+&lt;li&gt;伴随矩阵秩关系：
+&lt;ul&gt;
+&lt;li&gt;若$r(A) = n$，则$r(A^*) = n$；&lt;/li&gt;
+&lt;li&gt;若$r(A) = n-1$，则$r(A^*) = 1$；&lt;/li&gt;
+&lt;li&gt;若$r(A) &amp;lt; n-1$，则$r(A^*) = 0$；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;分块矩阵秩：$r\begin{pmatrix} A &amp;amp; O \ O &amp;amp; B \end{pmatrix} = r(A) + r(B)$（对角分块矩阵的秩等于各块秩的和）。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>swaks伪造邮件</title>
         <link>https://example.com/p/swaks%E4%BC%AA%E9%80%A0%E9%82%AE%E4%BB%B6/</link>
         <pubDate>Mon, 27 Oct 2025 22:43:38 +0800</pubDate>
