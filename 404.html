@@ -16,6 +16,9 @@
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
+        
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
     </head>
     <body class="">
     <script>
@@ -252,7 +255,8 @@
     </ol>
 </aside>
 
-            <main class="main full-width">
+            
+            <main class="main full-width" id="pjax-container">
     <div class="not-found-card">
         <h1 class="article-title">404 错误</h1>
         <h2 class="article-subtitle">页面不存在</h2>
@@ -308,9 +312,6 @@
 </footer>
 
 
-
-                <script src="/js/APlayer.min.js"></script>
-                <script src="/js/Meting.min.js"></script>
             </main>
         </div>
         <script 
@@ -541,5 +542,9 @@
     }
   }, { once: true });
 </script>
+
+        
+        <script src="/js/APlayer.min.js"></script>
+        <script src="/js/Meting.min.js"></script>
     </body>
 </html>
