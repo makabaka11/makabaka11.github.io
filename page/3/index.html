@@ -16,9 +16,10 @@
 <meta name="twitter:description" content="天冷了，进来暖和暖和吧！"><link rel="alternate" type="application/rss&#43;xml" href="https://www.retr0.qzz.io/index.xml">
     <link rel="shortcut icon" href="/favicon.ico" />
 
+        
         <link rel="stylesheet" href="/css/APlayer.min.css">
         
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
     </head>
     <body class="">
@@ -465,6 +466,7 @@
 
             </main>
         </div>
+
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
@@ -606,6 +608,10 @@
         renderKaTeX();
     })
 </script>
+
+        
+        <script src="/js/APlayer.min.js"></script>
+        <script src="/js/Meting.min.js"></script>
         
 
 <meting-js
@@ -692,10 +698,26 @@
       apInstance.play().catch(() => {});
     }
   }, { once: true });
-</script>
+</script>  
 
         
-        <script src="/js/APlayer.min.js"></script>
-        <script src="/js/Meting.min.js"></script>
+        <script>
+            
+            $(document).pjax('a[href^="https:\/\/www.retr0.qzz.io\/"]:not([data-no-pjax])', {
+                container: '#pjax-container',  
+                timeout: 5000,
+                fragment: '#pjax-container'    
+            });
+
+            
+            $(document).on('pjax:start', function() {
+                $('#pjax-container').css('opacity', '0.6'); 
+            });
+            $(document).on('pjax:end', function() {
+                $('#pjax-container').css('opacity', '1');   
+                
+                
+            });
+        </script>
     </body>
 </html>
