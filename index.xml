@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Retr0的小窝</title>
-        <link>https://example.com/</link>
+        <link>https://www.retr0.qzz.io/</link>
         <description>Recent content on Retr0的小窝</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Tue, 28 Oct 2025 15:27:38 +0800</lastBuildDate><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 28 Oct 2025 15:27:38 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>矩阵的秩及其性质</title>
-        <link>https://example.com/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/</link>
+        <link>https://www.retr0.qzz.io/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/</link>
         <pubDate>Tue, 28 Oct 2025 15:27:38 +0800</pubDate>
         
-        <guid>https://example.com/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/</guid>
+        <guid>https://www.retr0.qzz.io/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/</guid>
         <description>&lt;h3 id=&#34;一矩阵的秩核心定义&#34;&gt;一、矩阵的秩（核心定义）
 &lt;/h3&gt;&lt;p&gt;矩阵的秩是&lt;strong&gt;最高阶非零子式的阶数&lt;/strong&gt;，也等于矩阵行向量组/列向量组的“极大无关组个数”(通俗说：最多能找出多少个不互相“多余”的行/列)记为 &lt;/p&gt;
 $$r(A)$$&lt;p&gt;。&lt;/p&gt;
@@ -38,10 +38,10 @@ $$r(A)$$&lt;p&gt;。&lt;/p&gt;
         </item>
         <item>
         <title>快速判断矩阵是否可逆</title>
-        <link>https://example.com/p/%E5%BF%AB%E9%80%9F%E5%88%A4%E6%96%AD%E7%9F%A9%E9%98%B5%E6%98%AF%E5%90%A6%E5%8F%AF%E9%80%86/</link>
+        <link>https://www.retr0.qzz.io/p/%E5%BF%AB%E9%80%9F%E5%88%A4%E6%96%AD%E7%9F%A9%E9%98%B5%E6%98%AF%E5%90%A6%E5%8F%AF%E9%80%86/</link>
         <pubDate>Tue, 28 Oct 2025 15:27:38 +0800</pubDate>
         
-        <guid>https://example.com/p/%E5%BF%AB%E9%80%9F%E5%88%A4%E6%96%AD%E7%9F%A9%E9%98%B5%E6%98%AF%E5%90%A6%E5%8F%AF%E9%80%86/</guid>
+        <guid>https://www.retr0.qzz.io/p/%E5%BF%AB%E9%80%9F%E5%88%A4%E6%96%AD%E7%9F%A9%E9%98%B5%E6%98%AF%E5%90%A6%E5%8F%AF%E9%80%86/</guid>
         <description>&lt;p&gt;判断n阶方阵A是否可逆，核心看以下&lt;strong&gt;快速等价条件&lt;/strong&gt;（满足其一即可，优先选前2个最便捷）：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;行列式非零：$|A| \neq 0$（直接计算行列式，最快上手）；&lt;/li&gt;
@@ -54,11 +54,11 @@ $$r(A)$$&lt;p&gt;。&lt;/p&gt;
         </item>
         <item>
         <title>swaks伪造邮件</title>
-        <link>https://example.com/p/swaks%E4%BC%AA%E9%80%A0%E9%82%AE%E4%BB%B6/</link>
+        <link>https://www.retr0.qzz.io/p/swaks%E4%BC%AA%E9%80%A0%E9%82%AE%E4%BB%B6/</link>
         <pubDate>Mon, 27 Oct 2025 22:43:38 +0800</pubDate>
         
-        <guid>https://example.com/p/swaks%E4%BC%AA%E9%80%A0%E9%82%AE%E4%BB%B6/</guid>
-        <description>&lt;img src="https://example.com/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/email.jpg" alt="Featured image of post swaks伪造邮件" /&gt;&lt;p&gt;##1.  伪装学校邮件&lt;/p&gt;
+        <guid>https://www.retr0.qzz.io/p/swaks%E4%BC%AA%E9%80%A0%E9%82%AE%E4%BB%B6/</guid>
+        <description>&lt;img src="https://www.retr0.qzz.io/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/email.jpg" alt="Featured image of post swaks伪造邮件" /&gt;&lt;p&gt;##1.  伪装学校邮件&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;大前提（原理）： 大多数学校的邮箱都可以使用代发服务  &lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;重要提醒： 接收邮件的邮箱只有网易系，qq邮箱因为安全限制问题无法接收到  &lt;/font&gt;&lt;/p&gt;
 &lt;p&gt;打开终端并按需要输入指令&lt;/p&gt;
@@ -84,10 +84,10 @@ $$r(A)$$&lt;p&gt;。&lt;/p&gt;
         </item>
         <item>
         <title>VMware的安装</title>
-        <link>https://example.com/p/vmware%E7%9A%84%E5%AE%89%E8%A3%85/</link>
+        <link>https://www.retr0.qzz.io/p/vmware%E7%9A%84%E5%AE%89%E8%A3%85/</link>
         <pubDate>Mon, 27 Oct 2025 22:39:38 +0800</pubDate>
         
-        <guid>https://example.com/p/vmware%E7%9A%84%E5%AE%89%E8%A3%85/</guid>
+        <guid>https://www.retr0.qzz.io/p/vmware%E7%9A%84%E5%AE%89%E8%A3%85/</guid>
         <description>&lt;p&gt;虽说目前官网开放了个人免费下载使用，但是注册什么的对很多人还不是太友好，所以这里直接提供打包好的安装包和注册码&lt;/p&gt;
 &lt;p&gt;链接：&lt;a class=&#34;link&#34; href=&#34;https://pan.quark.cn/s/85f0cadc8f12&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://pan.quark.cn/s/85f0cadc8f12&lt;/a&gt;&lt;/p&gt;
@@ -98,11 +98,11 @@ $$r(A)$$&lt;p&gt;。&lt;/p&gt;
         </item>
         <item>
         <title>1.2Kali的本地化配置：更适合中国宝宝的Kali</title>
-        <link>https://example.com/p/1.2kali%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%E6%9B%B4%E9%80%82%E5%90%88%E4%B8%AD%E5%9B%BD%E5%AE%9D%E5%AE%9D%E7%9A%84kali/</link>
+        <link>https://www.retr0.qzz.io/p/1.2kali%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%E6%9B%B4%E9%80%82%E5%90%88%E4%B8%AD%E5%9B%BD%E5%AE%9D%E5%AE%9D%E7%9A%84kali/</link>
         <pubDate>Mon, 27 Oct 2025 18:27:38 +0800</pubDate>
         
-        <guid>https://example.com/p/1.2kali%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%E6%9B%B4%E9%80%82%E5%90%88%E4%B8%AD%E5%9B%BD%E5%AE%9D%E5%AE%9D%E7%9A%84kali/</guid>
-        <description>&lt;img src="https://example.com/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/kali2.webp" alt="Featured image of post 1.2Kali的本地化配置：更适合中国宝宝的Kali" /&gt;&lt;p&gt;感谢jm汉化组&lt;/p&gt;
+        <guid>https://www.retr0.qzz.io/p/1.2kali%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%E6%9B%B4%E9%80%82%E5%90%88%E4%B8%AD%E5%9B%BD%E5%AE%9D%E5%AE%9D%E7%9A%84kali/</guid>
+        <description>&lt;img src="https://www.retr0.qzz.io/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/kali2.webp" alt="Featured image of post 1.2Kali的本地化配置：更适合中国宝宝的Kali" /&gt;&lt;p&gt;感谢jm汉化组&lt;/p&gt;
 &lt;h2 id=&#34;切换简中语言包&#34;&gt;切换简中语言包
 &lt;/h2&gt;&lt;p&gt;打开终端&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -207,14 +207,14 @@ $$r(A)$$&lt;p&gt;。&lt;/p&gt;
         </item>
         <item>
         <title>遲到的補完：《終》觀影指南</title>
-        <link>https://example.com/p/%E9%81%B2%E5%88%B0%E7%9A%84%E8%A3%9C%E5%AE%8C%E7%B5%82%E8%A7%80%E5%BD%B1%E6%8C%87%E5%8D%97/</link>
+        <link>https://www.retr0.qzz.io/p/%E9%81%B2%E5%88%B0%E7%9A%84%E8%A3%9C%E5%AE%8C%E7%B5%82%E8%A7%80%E5%BD%B1%E6%8C%87%E5%8D%97/</link>
         <pubDate>Mon, 27 Oct 2025 18:27:38 +0800</pubDate>
         
-        <guid>https://example.com/p/%E9%81%B2%E5%88%B0%E7%9A%84%E8%A3%9C%E5%AE%8C%E7%B5%82%E8%A7%80%E5%BD%B1%E6%8C%87%E5%8D%97/</guid>
-        <description>&lt;img src="https://example.com/post/%E5%BD%B1%E8%A7%86/%E5%9B%BE%E7%89%871.png" alt="Featured image of post 遲到的補完：《終》觀影指南" /&gt;&lt;h1 id=&#34;遲到的補完終觀影指南&#34;&gt;遲到的補完：《終》觀影指南
+        <guid>https://www.retr0.qzz.io/p/%E9%81%B2%E5%88%B0%E7%9A%84%E8%A3%9C%E5%AE%8C%E7%B5%82%E8%A7%80%E5%BD%B1%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;img src="https://www.retr0.qzz.io/post/%E5%BD%B1%E8%A7%86/%E5%9B%BE%E7%89%871.png" alt="Featured image of post 遲到的補完：《終》觀影指南" /&gt;&lt;h1 id=&#34;遲到的補完終觀影指南&#34;&gt;遲到的補完：《終》觀影指南
 &lt;/h1&gt;&lt;p&gt;2025年10月31日，《&lt;strong&gt;天鹰战士：最后的冲击&lt;/strong&gt;》将登录大陆内各影院，但我们仍用《&lt;strong&gt;新·福音战士剧场版：终&lt;/strong&gt;》来称呼它，或者更简单的《&lt;strong&gt;终&lt;/strong&gt;》也可以。&lt;/p&gt;
 &lt;p&gt;然而上文表述都是&lt;strong&gt;不准确的&lt;/strong&gt;，它真正的名字《シン・エヴァンゲリオン劇場版𝄇》（这么多片假名谁看得懂啊）里并没有“终”或者“最后”的字样，只有一个音乐符号**𝄇&lt;strong&gt;——它是乐谱中的段落终止线，表示一个完整段落的&lt;/strong&gt;结束**。其副标题&lt;strong&gt;Thrice upon a time&lt;/strong&gt;出自同名科幻小说，后者同时也是《命运石之门》的原型。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/%e5%bd%b1%e8%a7%86/%e5%9b%be%e7%89%871.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/%e5%bd%b1%e8%a7%86/%e5%9b%be%e7%89%871.png&#34;
 	
 	
 	
@@ -225,7 +225,7 @@ $$r(A)$$&lt;p&gt;。&lt;/p&gt;
 &lt;p&gt;即使你没看过EVA，也可能晓得EVA&lt;strong&gt;很难看懂&lt;/strong&gt;，甚至形成了专门的学问叫“&lt;strong&gt;E学&lt;/strong&gt;”。不过笔者在此只提供&lt;strong&gt;EVA的基本认识&lt;/strong&gt;和&lt;strong&gt;一套简单易懂的世界观&lt;/strong&gt;，希望对各位提供些许帮助。&lt;/p&gt;
 &lt;h2 id=&#34;你所必须知道的&#34;&gt;你所必须知道的…
 &lt;/h2&gt;&lt;p&gt;许多年前，“第一先祖种族”&lt;strong&gt;FAR&lt;/strong&gt;（就是&lt;strong&gt;牛逼外星人&lt;/strong&gt;）生活在银河系内。它们在灭亡之前制造了名为“&lt;strong&gt;月亮&lt;/strong&gt;”的运输船，月亮可以通过颜色来区分，比如在地球上空的白月，称为“白之月”。运输船运输的是&lt;strong&gt;生命之种&lt;/strong&gt;、&lt;strong&gt;朗基努斯之枪&lt;/strong&gt;、&lt;strong&gt;死海文书&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/%e5%bd%b1%e8%a7%86/%e5%9b%be%e7%89%872.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/%e5%bd%b1%e8%a7%86/%e5%9b%be%e7%89%872.png&#34;
 	
 	
 	
@@ -236,7 +236,7 @@ $$r(A)$$&lt;p&gt;。&lt;/p&gt;
 &lt;p&gt;它们仨分别是用来&lt;strong&gt;产生生命的&lt;/strong&gt;（白之月的“&lt;strong&gt;亚当&lt;/strong&gt;”产生“使徒”，黑之月的“&lt;strong&gt;莉莉丝&lt;/strong&gt;”产生地球生物）、&lt;strong&gt;前者的开关&lt;/strong&gt;（为了生物多样性，FAR要求&lt;strong&gt;一个星球上只允许一颗生命之种起作用&lt;/strong&gt;）和&lt;strong&gt;前两者的使用说明书&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;40亿年前，白之月降落到南极区域，亚当繁衍“使徒”，使徒拥有&lt;strong&gt;生命之果&lt;/strong&gt;，所以体型巨大而且难杀；之后，黑之月也来了，出于未知的原因，黑之月中的朗枪没有抑制莉莉丝，于是莉莉丝产生生命，人类拥有&lt;strong&gt;智慧之果&lt;/strong&gt;，能造EVA去干使徒。亚当这边则受委屈了，白之月携带的朗基努斯之枪抑制了它产生生命。&lt;/p&gt;
 &lt;p&gt;1947年，&lt;strong&gt;掌控人类的组织Seele&lt;/strong&gt;（“灵魂”的德语）发现了死海文书，相信这是“神明”的启示，他们就要执行上面的计划（这就是EVA宗教色彩的来源，但EVA从任何角度上都不应当被定义为“&lt;strong&gt;宗教动漫&lt;/strong&gt;”）。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/%e5%bd%b1%e8%a7%86/%e5%9b%be%e7%89%873.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/%e5%bd%b1%e8%a7%86/%e5%9b%be%e7%89%873.png&#34;
 	
 	
 	
@@ -253,7 +253,7 @@ $$r(A)$$&lt;p&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;旧EVA&lt;/strong&gt;（26集TV+两部剧场版）我们不再讲了，只需要知道在旧剧场版的最后，人类补完计划&lt;strong&gt;没有得到完美执行&lt;/strong&gt;，世界进行了一次&lt;strong&gt;轮回&lt;/strong&gt;而进入到&lt;strong&gt;新EVA&lt;/strong&gt;的故事即可。&lt;/p&gt;
 &lt;p&gt;《终》之前有三部剧场版《&lt;strong&gt;序&lt;/strong&gt;》《&lt;strong&gt;破&lt;/strong&gt;》《&lt;strong&gt;Q&lt;/strong&gt;》，我们简要说一说各个&lt;strong&gt;人物的动机和行为&lt;/strong&gt;，相信这会对各位看明白《终》起到一定帮助。&lt;/p&gt;
 &lt;p&gt;执行人类补完计划的势力&lt;strong&gt;NERV&lt;/strong&gt;：&lt;strong&gt;碇源堂&lt;/strong&gt;和&lt;strong&gt;冬月教授&lt;/strong&gt;。碇源堂争取到了Seele老登们的信任，他希望主导人类补完计划，从而在人与人完全没有隔阂的世界中&lt;strong&gt;和老婆团聚&lt;/strong&gt;；冬月教授则是他的得力助手。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/%e5%bd%b1%e8%a7%86/%e5%9b%be%e7%89%874.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/%e5%bd%b1%e8%a7%86/%e5%9b%be%e7%89%874.png&#34;
 	
 	
 	
@@ -262,7 +262,7 @@ $$r(A)$$&lt;p&gt;。&lt;/p&gt;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;反对NERV的&lt;strong&gt;Wille&lt;/strong&gt;（意为意志）：&lt;strong&gt;美里小姐&lt;/strong&gt;、&lt;strong&gt;律子博士&lt;/strong&gt;及其他机组人员。美里小姐的爱人&lt;strong&gt;良治&lt;/strong&gt;在Wille起义时牺牲，继承了爱人意志的她一方面&lt;strong&gt;要阻止真嗣再一次不小心毁灭地球&lt;/strong&gt;，另一方面又要&lt;strong&gt;阻止碇司令的疯狂计划&lt;/strong&gt;，她能够成功吗；律子博士是她的得力助手。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/%e5%bd%b1%e8%a7%86/%e5%9b%be%e7%89%875.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/%e5%bd%b1%e8%a7%86/%e5%9b%be%e7%89%875.png&#34;
 	
 	
 	
@@ -271,7 +271,7 @@ $$r(A)$$&lt;p&gt;。&lt;/p&gt;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;EVA驾驶员&lt;/strong&gt;：&lt;strong&gt;碇真嗣&lt;/strong&gt;、&lt;strong&gt;明日香&lt;/strong&gt;、&lt;strong&gt;绫波丽&lt;/strong&gt;、&lt;strong&gt;真希波&lt;/strong&gt;。碇真嗣先是在《序》《破》中被老爹骗去帮忙执行计划，而后又在《Q》中和薰一起进他爹圈套，在《终》里他还能拯救世界吗；明日香在之前的作战中成为了半使徒半生物的存在，迷茫的她就要全力帮助美里小姐，等会，&lt;strong&gt;她会不会是克隆人&lt;/strong&gt;；至少我们确定绫波丽是克隆人，是&lt;strong&gt;碇源堂妻子的克隆&lt;/strong&gt;，《序》《破》中出现了白衣服的绫波丽（&lt;strong&gt;白丽&lt;/strong&gt;），她对真嗣觉醒了感情，也就是“爱他”，却连同初号机被封印了，《Q》《终》出现的&lt;strong&gt;黑丽&lt;/strong&gt;是否会觉醒“爱我”呢；真希波，她对世界真相的认识似乎比Seele还要多，我们不知道她为什么会帮助真嗣，但事实就是这样。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/%e5%bd%b1%e8%a7%86/%e5%9b%be%e7%89%876.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/%e5%bd%b1%e8%a7%86/%e5%9b%be%e7%89%876.png&#34;
 	
 	
 	
@@ -286,7 +286,7 @@ $$r(A)$$&lt;p&gt;。&lt;/p&gt;
 &lt;p&gt;正如《终》里的台词“&lt;strong&gt;再见是希望彼此再见时说的话&lt;/strong&gt;”，各位读者朋友们，&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;再见&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;​                                                                                                                                                                         &lt;strong&gt;終劇&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/%e5%bd%b1%e8%a7%86/%e5%9b%be%e7%89%877.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/%e5%bd%b1%e8%a7%86/%e5%9b%be%e7%89%877.png&#34;
 	
 	
 	
@@ -298,11 +298,11 @@ $$r(A)$$&lt;p&gt;。&lt;/p&gt;
         </item>
         <item>
         <title>1.1Kali的下载与安装</title>
-        <link>https://example.com/p/1.1kali%E7%9A%84%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/</link>
+        <link>https://www.retr0.qzz.io/p/1.1kali%E7%9A%84%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/</link>
         <pubDate>Mon, 27 Oct 2025 12:46:38 +0800</pubDate>
         
-        <guid>https://example.com/p/1.1kali%E7%9A%84%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/</guid>
-        <description>&lt;img src="https://example.com/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/kali.jpeg" alt="Featured image of post 1.1Kali的下载与安装" /&gt;&lt;h2 id=&#34;1-下载kali&#34;&gt;1. 下载kali
+        <guid>https://www.retr0.qzz.io/p/1.1kali%E7%9A%84%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/</guid>
+        <description>&lt;img src="https://www.retr0.qzz.io/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/kali.jpeg" alt="Featured image of post 1.1Kali的下载与安装" /&gt;&lt;h2 id=&#34;1-下载kali&#34;&gt;1. 下载kali
 &lt;/h2&gt;&lt;p&gt;几种可选方案：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -322,7 +322,7 @@ $$r(A)$$&lt;p&gt;。&lt;/p&gt;
 &lt;h2 id=&#34;2-安装kali&#34;&gt;2. 安装kali
 &lt;/h2&gt;&lt;p&gt;将下载好的压缩包解压在某文件夹内&lt;/p&gt;
 &lt;p&gt;然后打开&lt;strong&gt;VMware Workstation Pro&lt;/strong&gt;点击主页上的【打开虚拟机】&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/kali%e4%bb%8e%e5%85%a5%e9%97%a8%e5%88%b0%e5%85%a5%e7%8b%b1/1.1.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/kali%e4%bb%8e%e5%85%a5%e9%97%a8%e5%88%b0%e5%85%a5%e7%8b%b1/1.1.png&#34;
 	
 	
 	
@@ -339,11 +339,11 @@ $$r(A)$$&lt;p&gt;。&lt;/p&gt;
         </item>
         <item>
         <title>Vim的使用</title>
-        <link>https://example.com/p/vim%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+        <link>https://www.retr0.qzz.io/p/vim%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
         <pubDate>Mon, 27 Oct 2025 09:27:38 +0800</pubDate>
         
-        <guid>https://example.com/p/vim%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
-        <description>&lt;img src="https://example.com/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/vim.webp" alt="Featured image of post Vim的使用" /&gt;&lt;h2 id=&#34;一vim-基本操作&#34;&gt;一、Vim 基本操作
+        <guid>https://www.retr0.qzz.io/p/vim%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+        <description>&lt;img src="https://www.retr0.qzz.io/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/vim.webp" alt="Featured image of post Vim的使用" /&gt;&lt;h2 id=&#34;一vim-基本操作&#34;&gt;一、Vim 基本操作
 &lt;/h2&gt;&lt;h3 id=&#34;1-启动和退出-vim&#34;&gt;1. 启动和退出 Vim
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;启动 Vim:&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -448,10 +448,10 @@ $$r(A)$$&lt;p&gt;。&lt;/p&gt;
         </item>
         <item>
         <title>谷歌搜索语法</title>
-        <link>https://example.com/p/%E8%B0%B7%E6%AD%8C%E6%90%9C%E7%B4%A2%E8%AF%AD%E6%B3%95/</link>
+        <link>https://www.retr0.qzz.io/p/%E8%B0%B7%E6%AD%8C%E6%90%9C%E7%B4%A2%E8%AF%AD%E6%B3%95/</link>
         <pubDate>Mon, 27 Oct 2025 09:27:38 +0800</pubDate>
         
-        <guid>https://example.com/p/%E8%B0%B7%E6%AD%8C%E6%90%9C%E7%B4%A2%E8%AF%AD%E6%B3%95/</guid>
+        <guid>https://www.retr0.qzz.io/p/%E8%B0%B7%E6%AD%8C%E6%90%9C%E7%B4%A2%E8%AF%AD%E6%B3%95/</guid>
         <description>&lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
@@ -554,10 +554,10 @@ $$r(A)$$&lt;p&gt;。&lt;/p&gt;
         </item>
         <item>
         <title>魔法上网</title>
-        <link>https://example.com/p/%E9%AD%94%E6%B3%95%E4%B8%8A%E7%BD%91/</link>
+        <link>https://www.retr0.qzz.io/p/%E9%AD%94%E6%B3%95%E4%B8%8A%E7%BD%91/</link>
         <pubDate>Mon, 27 Oct 2025 08:58:50 +0800</pubDate>
         
-        <guid>https://example.com/p/%E9%AD%94%E6%B3%95%E4%B8%8A%E7%BD%91/</guid>
+        <guid>https://www.retr0.qzz.io/p/%E9%AD%94%E6%B3%95%E4%B8%8A%E7%BD%91/</guid>
         <description>&lt;h3 id=&#34;代理工具&#34;&gt;代理工具：
 &lt;/h3&gt;&lt;p&gt;很久以前：&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;ShadowsocksR&lt;/strong&gt; &lt;strong&gt;谁家文物&lt;/strong&gt;&lt;/p&gt;
@@ -592,7 +592,7 @@ $$r(A)$$&lt;p&gt;。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;孩子们，P站并不好看。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/%e6%9d%82%e9%a1%b9/%e7%89%a2%e5%a4%a7.webp&#34;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/%e6%9d%82%e9%a1%b9/%e7%89%a2%e5%a4%a7.webp&#34;
 	
 	
 	
@@ -604,10 +604,10 @@ $$r(A)$$&lt;p&gt;。&lt;/p&gt;
         </item>
         <item>
         <title>Hello_world</title>
-        <link>https://example.com/p/hello_world/</link>
+        <link>https://www.retr0.qzz.io/p/hello_world/</link>
         <pubDate>Sun, 26 Oct 2025 23:13:26 +0800</pubDate>
         
-        <guid>https://example.com/p/hello_world/</guid>
+        <guid>https://www.retr0.qzz.io/p/hello_world/</guid>
         <description>&lt;h1 id=&#34;hello-world&#34;&gt;Hello World!
 &lt;/h1&gt;&lt;p&gt;如果你能看到这篇文章，说明我的博客已经正常开通。&lt;/p&gt;
 &lt;p&gt;总之，&lt;/p&gt;
@@ -616,35 +616,35 @@ $$r(A)$$&lt;p&gt;。&lt;/p&gt;
         </item>
         <item>
         <title>归档 | Archives</title>
-        <link>https://example.com/archives/</link>
+        <link>https://www.retr0.qzz.io/archives/</link>
         <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/archives/</guid>
+        <guid>https://www.retr0.qzz.io/archives/</guid>
         <description></description>
         </item>
         <item>
         <title>关于 | About</title>
-        <link>https://example.com/%E5%85%B3%E4%BA%8E-about/</link>
+        <link>https://www.retr0.qzz.io/%E5%85%B3%E4%BA%8E-about/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/%E5%85%B3%E4%BA%8E-about/</guid>
+        <guid>https://www.retr0.qzz.io/%E5%85%B3%E4%BA%8E-about/</guid>
         <description>&lt;p&gt;本人目前南京信息工程大学(NUIST)海洋科学在读，欢迎联系。&lt;/p&gt;
 </description>
         </item>
         <item>
         <title>技术链接 | Links</title>
-        <link>https://example.com/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/</link>
+        <link>https://www.retr0.qzz.io/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/</guid>
+        <guid>https://www.retr0.qzz.io/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/</guid>
         <description></description>
         </item>
         <item>
         <title>搜索 | Search</title>
-        <link>https://example.com/search/</link>
+        <link>https://www.retr0.qzz.io/search/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/search/</guid>
+        <guid>https://www.retr0.qzz.io/search/</guid>
         <description></description>
         </item>
         

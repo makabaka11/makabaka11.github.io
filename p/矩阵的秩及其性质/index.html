@@ -4,11 +4,11 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="一、矩阵的秩（核心定义） 矩阵的秩是最高阶非零子式的阶数，也等于矩阵行向量组/列向量组的“极大无关组个数”(通俗说：最多能找出多少个不互相“多余”的行/列)记为 $$r(A)$$。\n二、核心性质 非负性与有界性：$0 \\leq r(A) \\leq \\min{m, n}$（秩是0或正整数，不超过行数和列数）； 零矩阵专属：$A = O \\iff r(A) = 0$（零矩阵秩为0，反之亦然）； 转置不变性：$r(A^T) = r(A)$（矩阵与其转置秩相等）； 初等变换不变性：初等行/列变换后，矩阵秩不变； 和秩不等式：$r(A + B) \\leq r(A) + r(B)$（两矩阵和的秩不超过各自秩的和）； 乘积秩不等式：$r(AB) \\leq \\min{r(A), r(B)}$（两矩阵乘积的秩不超过任一矩阵的秩）； 可逆矩阵作用：$r(PA) = r(AQ) = r(PAQ) = r(A)$（可逆矩阵左乘/右乘，秩不变）； 伴随矩阵秩关系： 若$r(A) = n$，则$r(A^*) = n$； 若$r(A) = n-1$，则$r(A^*) = 1$； 若$r(A) &lt; n-1$，则$r(A^*) = 0$； 分块矩阵秩：$r\\begin{pmatrix} A &amp; O \\ O &amp; B \\end{pmatrix} = r(A) + r(B)$（对角分块矩阵的秩等于各块秩的和）。 ">
 <title>矩阵的秩及其性质</title>
 
-<link rel='canonical' href='https://example.com/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/'>
+<link rel='canonical' href='https://www.retr0.qzz.io/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/'>
 
 <link rel="stylesheet" href="/scss/style.min.8ae9cd871baee326363e2392090059df40f51b48d9532352614e8c1a053d1181.css"><meta property='og:title' content="矩阵的秩及其性质">
 <meta property='og:description' content="一、矩阵的秩（核心定义） 矩阵的秩是最高阶非零子式的阶数，也等于矩阵行向量组/列向量组的“极大无关组个数”(通俗说：最多能找出多少个不互相“多余”的行/列)记为 $$r(A)$$。\n二、核心性质 非负性与有界性：$0 \\leq r(A) \\leq \\min{m, n}$（秩是0或正整数，不超过行数和列数）； 零矩阵专属：$A = O \\iff r(A) = 0$（零矩阵秩为0，反之亦然）； 转置不变性：$r(A^T) = r(A)$（矩阵与其转置秩相等）； 初等变换不变性：初等行/列变换后，矩阵秩不变； 和秩不等式：$r(A + B) \\leq r(A) + r(B)$（两矩阵和的秩不超过各自秩的和）； 乘积秩不等式：$r(AB) \\leq \\min{r(A), r(B)}$（两矩阵乘积的秩不超过任一矩阵的秩）； 可逆矩阵作用：$r(PA) = r(AQ) = r(PAQ) = r(A)$（可逆矩阵左乘/右乘，秩不变）； 伴随矩阵秩关系： 若$r(A) = n$，则$r(A^*) = n$； 若$r(A) = n-1$，则$r(A^*) = 1$； 若$r(A) &lt; n-1$，则$r(A^*) = 0$； 分块矩阵秩：$r\\begin{pmatrix} A &amp; O \\ O &amp; B \\end{pmatrix} = r(A) + r(B)$（对角分块矩阵的秩等于各块秩的和）。 ">
-<meta property='og:url' content='https://example.com/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/'>
+<meta property='og:url' content='https://www.retr0.qzz.io/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/'>
 <meta property='og:site_name' content='Retr0的小窝'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-10-28T15:27:38&#43;08:00'/><meta property='article:modified_time' content='2025-10-28T15:27:38&#43;08:00'/>
 <meta name="twitter:title" content="矩阵的秩及其性质">

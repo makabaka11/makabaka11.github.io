@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>网安 on Retr0的小窝</title>
-        <link>https://example.com/categories/%E7%BD%91%E5%AE%89/</link>
+        <link>https://www.retr0.qzz.io/categories/%E7%BD%91%E5%AE%89/</link>
         <description>Recent content in 网安 on Retr0的小窝</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Mon, 27 Oct 2025 22:43:38 +0800</lastBuildDate><atom:link href="https://example.com/categories/%E7%BD%91%E5%AE%89/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 27 Oct 2025 22:43:38 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/categories/%E7%BD%91%E5%AE%89/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>swaks伪造邮件</title>
-        <link>https://example.com/p/swaks%E4%BC%AA%E9%80%A0%E9%82%AE%E4%BB%B6/</link>
+        <link>https://www.retr0.qzz.io/p/swaks%E4%BC%AA%E9%80%A0%E9%82%AE%E4%BB%B6/</link>
         <pubDate>Mon, 27 Oct 2025 22:43:38 +0800</pubDate>
         
-        <guid>https://example.com/p/swaks%E4%BC%AA%E9%80%A0%E9%82%AE%E4%BB%B6/</guid>
-        <description>&lt;img src="https://example.com/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/email.jpg" alt="Featured image of post swaks伪造邮件" /&gt;&lt;p&gt;##1.  伪装学校邮件&lt;/p&gt;
+        <guid>https://www.retr0.qzz.io/p/swaks%E4%BC%AA%E9%80%A0%E9%82%AE%E4%BB%B6/</guid>
+        <description>&lt;img src="https://www.retr0.qzz.io/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/email.jpg" alt="Featured image of post swaks伪造邮件" /&gt;&lt;p&gt;##1.  伪装学校邮件&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;大前提（原理）： 大多数学校的邮箱都可以使用代发服务  &lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;重要提醒： 接收邮件的邮箱只有网易系，qq邮箱因为安全限制问题无法接收到  &lt;/font&gt;&lt;/p&gt;
 &lt;p&gt;打开终端并按需要输入指令&lt;/p&gt;
@@ -39,11 +39,11 @@
         </item>
         <item>
         <title>1.2Kali的本地化配置：更适合中国宝宝的Kali</title>
-        <link>https://example.com/p/1.2kali%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%E6%9B%B4%E9%80%82%E5%90%88%E4%B8%AD%E5%9B%BD%E5%AE%9D%E5%AE%9D%E7%9A%84kali/</link>
+        <link>https://www.retr0.qzz.io/p/1.2kali%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%E6%9B%B4%E9%80%82%E5%90%88%E4%B8%AD%E5%9B%BD%E5%AE%9D%E5%AE%9D%E7%9A%84kali/</link>
         <pubDate>Mon, 27 Oct 2025 18:27:38 +0800</pubDate>
         
-        <guid>https://example.com/p/1.2kali%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%E6%9B%B4%E9%80%82%E5%90%88%E4%B8%AD%E5%9B%BD%E5%AE%9D%E5%AE%9D%E7%9A%84kali/</guid>
-        <description>&lt;img src="https://example.com/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/kali2.webp" alt="Featured image of post 1.2Kali的本地化配置：更适合中国宝宝的Kali" /&gt;&lt;p&gt;感谢jm汉化组&lt;/p&gt;
+        <guid>https://www.retr0.qzz.io/p/1.2kali%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%E6%9B%B4%E9%80%82%E5%90%88%E4%B8%AD%E5%9B%BD%E5%AE%9D%E5%AE%9D%E7%9A%84kali/</guid>
+        <description>&lt;img src="https://www.retr0.qzz.io/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/kali2.webp" alt="Featured image of post 1.2Kali的本地化配置：更适合中国宝宝的Kali" /&gt;&lt;p&gt;感谢jm汉化组&lt;/p&gt;
 &lt;h2 id=&#34;切换简中语言包&#34;&gt;切换简中语言包
 &lt;/h2&gt;&lt;p&gt;打开终端&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -148,11 +148,11 @@
         </item>
         <item>
         <title>1.1Kali的下载与安装</title>
-        <link>https://example.com/p/1.1kali%E7%9A%84%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/</link>
+        <link>https://www.retr0.qzz.io/p/1.1kali%E7%9A%84%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/</link>
         <pubDate>Mon, 27 Oct 2025 12:46:38 +0800</pubDate>
         
-        <guid>https://example.com/p/1.1kali%E7%9A%84%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/</guid>
-        <description>&lt;img src="https://example.com/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/kali.jpeg" alt="Featured image of post 1.1Kali的下载与安装" /&gt;&lt;h2 id=&#34;1-下载kali&#34;&gt;1. 下载kali
+        <guid>https://www.retr0.qzz.io/p/1.1kali%E7%9A%84%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/</guid>
+        <description>&lt;img src="https://www.retr0.qzz.io/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/kali.jpeg" alt="Featured image of post 1.1Kali的下载与安装" /&gt;&lt;h2 id=&#34;1-下载kali&#34;&gt;1. 下载kali
 &lt;/h2&gt;&lt;p&gt;几种可选方案：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -172,7 +172,7 @@
 &lt;h2 id=&#34;2-安装kali&#34;&gt;2. 安装kali
 &lt;/h2&gt;&lt;p&gt;将下载好的压缩包解压在某文件夹内&lt;/p&gt;
 &lt;p&gt;然后打开&lt;strong&gt;VMware Workstation Pro&lt;/strong&gt;点击主页上的【打开虚拟机】&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/kali%e4%bb%8e%e5%85%a5%e9%97%a8%e5%88%b0%e5%85%a5%e7%8b%b1/1.1.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/kali%e4%bb%8e%e5%85%a5%e9%97%a8%e5%88%b0%e5%85%a5%e7%8b%b1/1.1.png&#34;
 	
 	
 	
