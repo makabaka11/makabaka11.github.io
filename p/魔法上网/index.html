@@ -15,11 +15,7 @@
 <meta name="twitter:description" content="代理工具： 很久以前：\nShadowsocksR 谁家文物\nReleases · ShadowsocksR-Live/ssrWin\n现在主流：\nv2rayN 支持vmess格式\nv2rayN/ at master · 2dust/v2rayN\nclash 最全能\nGitHub - clash-version/clash-download: Clash 下载|持续收藏CLash版本|2025年8月更新\n目前自用\nGitHub - chen08209/FlClash: A multi-platform proxy client based on ClashMeta,simple and easy to use, open-source and ad-free.\n备用方案：\n去tg上找破解vpn\n机场： GitHub推荐列表\nGitHub - yonghumeijj/jichang: 2025年最新性价比机场推荐VPN、翻墙🚀推荐稳定性高，适合各类人需求的机场\n目前自用\nyiyuan.co\n备选方案：\n海外VPS自己部署\n起飞： 选择合适的套餐订阅后使用一键导入按钮导入节点 测试真延迟并选择延迟最低节点 芜湖起飞 孩子们，P站并不好看。\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
-        
         <link rel="stylesheet" href="/css/APlayer.min.css">
-        
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
     </head>
     <body class="
     article-page
@@ -297,8 +293,7 @@
     </aside>
 
 
-            
-            <main class="main full-width" id="pjax-container">
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
 
@@ -619,9 +614,11 @@
                 href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
             >
 
+
+                <script src="/js/APlayer.min.js"></script>
+                <script src="/js/Meting.min.js"></script>
             </main>
         </div>
-
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
@@ -763,10 +760,6 @@
         renderKaTeX();
     })
 </script>
-
-        
-        <script src="/js/APlayer.min.js"></script>
-        <script src="/js/Meting.min.js"></script>
         
 
 <meting-js
@@ -853,26 +846,6 @@
       apInstance.play().catch(() => {});
     }
   }, { once: true });
-</script>  
-
-        
-        <script>
-            
-            $(document).pjax('a[href^="https:\/\/www.retr0.qzz.io\/"]:not([data-no-pjax])', {
-                container: '#pjax-container',  
-                timeout: 5000,
-                fragment: '#pjax-container'    
-            });
-
-            
-            $(document).on('pjax:start', function() {
-                $('#pjax-container').css('opacity', '0.6'); 
-            });
-            $(document).on('pjax:end', function() {
-                $('#pjax-container').css('opacity', '1');   
-                
-                
-            });
-        </script>
+</script>
     </body>
 </html>

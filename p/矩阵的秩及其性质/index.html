@@ -15,11 +15,7 @@
 <meta name="twitter:description" content="一、矩阵的秩（核心定义） 矩阵的秩是最高阶非零子式的阶数，也等于矩阵行向量组/列向量组的“极大无关组个数”(通俗说：最多能找出多少个不互相“多余”的行/列)记为 $$r(A)$$。\n二、核心性质 非负性与有界性：$0 \\leq r(A) \\leq \\min{m, n}$（秩是0或正整数，不超过行数和列数）； 零矩阵专属：$A = O \\iff r(A) = 0$（零矩阵秩为0，反之亦然）； 转置不变性：$r(A^T) = r(A)$（矩阵与其转置秩相等）； 初等变换不变性：初等行/列变换后，矩阵秩不变； 和秩不等式：$r(A + B) \\leq r(A) + r(B)$（两矩阵和的秩不超过各自秩的和）； 乘积秩不等式：$r(AB) \\leq \\min{r(A), r(B)}$（两矩阵乘积的秩不超过任一矩阵的秩）； 可逆矩阵作用：$r(PA) = r(AQ) = r(PAQ) = r(A)$（可逆矩阵左乘/右乘，秩不变）； 伴随矩阵秩关系： 若$r(A) = n$，则$r(A^*) = n$； 若$r(A) = n-1$，则$r(A^*) = 1$； 若$r(A) &lt; n-1$，则$r(A^*) = 0$； 分块矩阵秩：$r\\begin{pmatrix} A &amp; O \\ O &amp; B \\end{pmatrix} = r(A) + r(B)$（对角分块矩阵的秩等于各块秩的和）。 ">
     <link rel="shortcut icon" href="/favicon.ico" />
 
-        
         <link rel="stylesheet" href="/css/APlayer.min.css">
-        
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
     </head>
     <body class="
     article-page
@@ -296,8 +292,7 @@
     </aside>
 
 
-            
-            <main class="main full-width" id="pjax-container">
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
 
@@ -601,9 +596,11 @@ $$r(A)$$<p>。</p>
                 href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
             >
 
+
+                <script src="/js/APlayer.min.js"></script>
+                <script src="/js/Meting.min.js"></script>
             </main>
         </div>
-
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
@@ -745,10 +742,6 @@ $$r(A)$$<p>。</p>
         renderKaTeX();
     })
 </script>
-
-        
-        <script src="/js/APlayer.min.js"></script>
-        <script src="/js/Meting.min.js"></script>
         
 
 <meting-js
@@ -835,26 +828,6 @@ $$r(A)$$<p>。</p>
       apInstance.play().catch(() => {});
     }
   }, { once: true });
-</script>  
-
-        
-        <script>
-            
-            $(document).pjax('a[href^="https:\/\/www.retr0.qzz.io\/"]:not([data-no-pjax])', {
-                container: '#pjax-container',  
-                timeout: 5000,
-                fragment: '#pjax-container'    
-            });
-
-            
-            $(document).on('pjax:start', function() {
-                $('#pjax-container').css('opacity', '0.6'); 
-            });
-            $(document).on('pjax:end', function() {
-                $('#pjax-container').css('opacity', '1');   
-                
-                
-            });
-        </script>
+</script>
     </body>
 </html>
