@@ -576,7 +576,30 @@
         topbar.hide();
         
         initUtterances();
+        
+        updateViewCount();
     })
+
+    
+    function updateViewCount() {
+        
+        const viewCountEl = document.getElementById('vercount_value_page_pv');
+        if (viewCountEl) viewCountEl.textContent = 'loading...';
+
+        
+        const vercountScriptUrl = 'https://cn.vercount.one/js';
+        
+        const oldScript = document.querySelector(`script[src="${vercountScriptUrl}"]`);
+        if (oldScript) oldScript.remove();
+        
+        const newScript = document.createElement('script');
+        newScript.src = vercountScriptUrl;
+        newScript.defer = true;
+        document.head.appendChild(newScript);
+
+        
+        showHideView();
+    }
 </script>
 <script>
     async function renderKaTeX() {
@@ -610,7 +633,43 @@
         renderKaTeX();
     })
 </script>
+<div id="particles-js"></div>
 
+<script src=https://www.retr0.qzz.io/background/particles.min.js></script>
+<script>
+  particlesJS.load('particles-js', "https://www.retr0.qzz.io/background/particlesjs-config.json", function() {
+    console.log('particles.js loaded - callback');
+  });
+</script>
+
+<style>
+  #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+  }
+</style>
+
+<script defer src="https://cn.vercount.one/js"></script>
+<script>
+    function showHideView() {
+        
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
         
 
 <meting-js

@@ -276,7 +276,7 @@
 
     
     
-    
+     
     
     <footer class="article-time">
         
@@ -295,12 +295,19 @@
         
 
         
+
+        
+        <div id="viewCount">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
+        </div>
     </footer>
     
 
     
 </div>
-
 </header>
 
     <section class="article-content">
@@ -614,7 +621,30 @@
         topbar.hide();
         
         initUtterances();
+        
+        updateViewCount();
     })
+
+    
+    function updateViewCount() {
+        
+        const viewCountEl = document.getElementById('vercount_value_page_pv');
+        if (viewCountEl) viewCountEl.textContent = 'loading...';
+
+        
+        const vercountScriptUrl = 'https://cn.vercount.one/js';
+        
+        const oldScript = document.querySelector(`script[src="${vercountScriptUrl}"]`);
+        if (oldScript) oldScript.remove();
+        
+        const newScript = document.createElement('script');
+        newScript.src = vercountScriptUrl;
+        newScript.defer = true;
+        document.head.appendChild(newScript);
+
+        
+        showHideView();
+    }
 </script>
 <script>
     async function renderKaTeX() {
@@ -648,7 +678,43 @@
         renderKaTeX();
     })
 </script>
+<div id="particles-js"></div>
 
+<script src=https://www.retr0.qzz.io/background/particles.min.js></script>
+<script>
+  particlesJS.load('particles-js', "https://www.retr0.qzz.io/background/particlesjs-config.json", function() {
+    console.log('particles.js loaded - callback');
+  });
+</script>
+
+<style>
+  #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+  }
+</style>
+
+<script defer src="https://cn.vercount.one/js"></script>
+<script>
+    function showHideView() {
+        
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
         
 
 <meting-js
