@@ -29,7 +29,7 @@
         <pubDate>Mon, 27 Oct 2025 22:43:38 +0800</pubDate>
         
         <guid>https://example.com/categories/kali/</guid>
-        <description></description>
+        <description>&lt;img src="https://example.com/categories/kali/kali22.webp" alt="Featured image of post Kali" /&gt;</description>
         </item>
         <item>
         <title>网安</title>
@@ -61,7 +61,7 @@
         <pubDate>Mon, 27 Oct 2025 18:27:38 +0800</pubDate>
         
         <guid>https://example.com/categories/acg/</guid>
-        <description></description>
+        <description>&lt;img src="https://example.com/categories/acg/IMG_20250821_133541.png" alt="Featured image of post ACG" /&gt;</description>
         </item>
         <item>
         <title>影视</title>
@@ -78,14 +78,6 @@
         
         <guid>https://example.com/categories/%E6%9D%82%E9%A1%B9/</guid>
         <description></description>
-        </item>
-        <item>
-        <title>Test</title>
-        <link>https://example.com/categories/test/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-        
-        <guid>https://example.com/categories/test/</guid>
-        <description>&lt;img src="https://example.com/categories/test/hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg" alt="Featured image of post Test" /&gt;</description>
         </item>
         
     </channel>

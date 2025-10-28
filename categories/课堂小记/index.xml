@@ -13,24 +13,8 @@
         <pubDate>Tue, 28 Oct 2025 15:27:38 +0800</pubDate>
         
         <guid>https://example.com/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/</guid>
-        <description>&lt;p&gt;判断n阶方阵A是否可逆，核心看以下&lt;strong&gt;快速等价条件&lt;/strong&gt;（满足其一即可，优先选前2个最便捷）：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;行列式非零：$|A| \neq 0$（直接计算行列式，最快上手）；&lt;/li&gt;
-&lt;li&gt;矩阵满秩：秩$r(A) = n$（通过初等行变换看是否能化为单位矩阵）；&lt;/li&gt;
-&lt;li&gt;齐次方程组$AX = 0$只有零解；&lt;/li&gt;
-&lt;li&gt;行/列向量组线性无关；&lt;/li&gt;
-&lt;li&gt;存在方阵B，使得$AB = BA = I$（I为单位矩阵）。&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        </item>
-        <item>
-        <title>矩阵的秩及其性质</title>
-        <link>https://example.com/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/</link>
-        <pubDate>Tue, 28 Oct 2025 15:27:38 +0800</pubDate>
-        
-        <guid>https://example.com/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/</guid>
         <description>&lt;h3 id=&#34;一矩阵的秩核心定义&#34;&gt;一、矩阵的秩（核心定义）
-&lt;/h3&gt;&lt;p&gt;矩阵的秩是&lt;strong&gt;最高阶非零子式的阶数&lt;/strong&gt;，也等于矩阵行向量组/列向量组的“极大无关组个数”（通俗说：最多能找出多少个不互相“多余”的行/列）。记为 &lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;矩阵的秩是&lt;strong&gt;最高阶非零子式的阶数&lt;/strong&gt;，也等于矩阵行向量组/列向量组的“极大无关组个数”(通俗说：最多能找出多少个不互相“多余”的行/列)记为 &lt;/p&gt;
 $$r(A)$$&lt;p&gt;。&lt;/p&gt;
 &lt;h3 id=&#34;二核心性质&#34;&gt;二、核心性质
 &lt;/h3&gt;&lt;ol&gt;
@@ -49,6 +33,22 @@ $$r(A)$$&lt;p&gt;。&lt;/p&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;分块矩阵秩：$r\begin{pmatrix} A &amp;amp; O \ O &amp;amp; B \end{pmatrix} = r(A) + r(B)$（对角分块矩阵的秩等于各块秩的和）。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>快速判断矩阵是否可逆</title>
+        <link>https://example.com/p/%E5%BF%AB%E9%80%9F%E5%88%A4%E6%96%AD%E7%9F%A9%E9%98%B5%E6%98%AF%E5%90%A6%E5%8F%AF%E9%80%86/</link>
+        <pubDate>Tue, 28 Oct 2025 15:27:38 +0800</pubDate>
+        
+        <guid>https://example.com/p/%E5%BF%AB%E9%80%9F%E5%88%A4%E6%96%AD%E7%9F%A9%E9%98%B5%E6%98%AF%E5%90%A6%E5%8F%AF%E9%80%86/</guid>
+        <description>&lt;p&gt;判断n阶方阵A是否可逆，核心看以下&lt;strong&gt;快速等价条件&lt;/strong&gt;（满足其一即可，优先选前2个最便捷）：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;行列式非零：$|A| \neq 0$（直接计算行列式，最快上手）；&lt;/li&gt;
+&lt;li&gt;矩阵满秩：秩$r(A) = n$（通过初等行变换看是否能化为单位矩阵）；&lt;/li&gt;
+&lt;li&gt;齐次方程组$AX = 0$只有零解；&lt;/li&gt;
+&lt;li&gt;行/列向量组线性无关；&lt;/li&gt;
+&lt;li&gt;存在方阵B，使得$AB = BA = I$（I为单位矩阵）。&lt;/li&gt;
 &lt;/ol&gt;
 </description>
         </item>
