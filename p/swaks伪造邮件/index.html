@@ -17,6 +17,9 @@
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     </head>
     <body class="
     article-page
@@ -455,6 +458,9 @@
      
     
         
+        <div class="comment-container mt-8"></div>
+        
+        
     <script src="https://utteranc.es/client.js" 
         repo="makabaka11/makabaka11.github.io"
         issue-term="pathname"
@@ -608,7 +614,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.eaf1211e4c7db355f37ceea53df13700e1b77fbcc3cfe8c1c1f69e4468a752e1.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
@@ -619,6 +625,118 @@
 
         document.head.appendChild(customFont);
     }());
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+<script>
+    var pjax = new Pjax({
+        selectors: [
+            ".main-container"
+        ]
+    })
+</script>
+
+    
+    <script src=https://www.retr0.qzz.io/js/topbar.min.js></script>
+
+<div class="js-Pjax">
+    <script>
+        
+        function initUtterances() {
+            
+            const isArticle = document.querySelector('.article-content') !== null;
+            if (!isArticle) return;
+
+            
+            const oldScript = document.querySelector('script[src^="https://utteranc.es/client.js"]');
+            if (oldScript) oldScript.remove();
+
+            
+            const container = document.querySelector('.comment-container');
+            if (!container) return;
+
+            let script = document.createElement('script');
+            script.src = 'https://utteranc.es/client.js';
+            script.setAttribute('repo', 'makabaka11/makabaka11.github.io');
+            script.setAttribute('issue-term', 'pathname');
+            if (window.utterancesLabel) script.setAttribute('label', window.utterancesLabel);
+            script.setAttribute('crossorigin', 'anonymous');
+            script.async = true;
+            container.appendChild(script); 
+        }
+
+        
+        (function() {
+            
+            document.addEventListener('DOMContentLoaded', initUtterances);
+        })(document)
+    </script>
+</div>
+<script>
+    pjax._handleResponse = pjax.handleResponse;
+    pjax.handleResponse = function(responseText, request, href, options) {
+        if (request.responseText.match("<html")) {
+            if (responseText) {
+                let newDom = new DOMParser().parseFromString(responseText, 'text/html');
+                let bodyClass = newDom.body.className;
+                document.body.setAttribute("class", bodyClass)
+            }
+            pjax._handleResponse(responseText, request, href, options);
+        } else {
+            
+        }
+    }
+</script>
+<script>
+    topbar.config({
+        barColors: {
+            '0': 'rgba(255,  255, 255, 1)',
+            '1.0': 'rgba(0, 149, 234,  1)'
+        }
+    })
+	
+    document.addEventListener('pjax:send', () => {
+        topbar.show();
+    })
+	
+    document.addEventListener('pjax:complete', () => {
+        window.Stack.init();
+        topbar.hide();
+        
+        initUtterances();
+    })
+</script>
+<script>
+    async function renderKaTeX() {
+        let katex = document.querySelector(".math-katex");
+        if (!katex) {
+            return;
+        }
+        while (typeof renderMathInElement !== 'function') {
+            await delay(500);
+        }        
+        
+        const content = document.querySelector('.article-content') || document.body;
+        renderMathInElement(content, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });
+    }
+    
+    function delay(time) {
+        return new Promise(resolve => {
+            setTimeout(resolve, time)
+        })
+    }
+
+    document.addEventListener('pjax:complete', () => {
+        renderKaTeX();
+    })
 </script>
 
         
