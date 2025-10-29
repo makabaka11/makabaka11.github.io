@@ -21,11 +21,9 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;swaks --body &amp;#34;学校紧急通知&amp;#34; --header &amp;#34;Subject:教务处&amp;#34; -t ⽬标邮箱@XXX.com -f 
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;admin@XXX.edu.cn 
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;swaks --body &amp;#34;学校紧急通知&amp;#34; --header &amp;#34;Subject:教务处&amp;#34; -t ⽬标邮箱@XXX.com -f admin@XXX.edu.cn 
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;strong&gt;参数解释&lt;/strong&gt;&lt;/p&gt;
@@ -34,7 +32,39 @@
 &lt;p&gt;-t是我们的目标邮箱&lt;/p&gt;
 &lt;p&gt;-f是发送者的邮箱&lt;/p&gt;
 &lt;p&gt;&amp;ndash;attach是指定要附加的文件的路径&lt;/p&gt;
-&lt;p&gt;To be continue——&amp;raquo;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;10月19日更新&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;使用例：&lt;/p&gt;
+&lt;p&gt;这里我们输入以下代码&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;swaks --body &amp;#34;恭喜你已被我所拟录取，请在24小时内确认是否同意待录取，12小时后仍未确认的将取消资格。&amp;#34; --header &amp;#34;Subject:南京大学招生办：待录取通知&amp;#34; -t example@163.com -f zsb@nju.edu.cn 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/fcf3d846ffa3ff1dabac8823139f0029.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;回车后查看接收邮箱&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/8d33d74787f97306c2becaa1ac81e8a3.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;发现正常接收了邮件，但是有提示可能伪造的标&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;&lt;strong&gt;因此，在生活中各位务必确认邮件内容的真实性。&lt;/strong&gt;&lt;/font&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
