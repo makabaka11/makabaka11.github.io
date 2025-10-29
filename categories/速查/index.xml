@@ -7,7 +7,60 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Tue, 28 Oct 2025 15:27:38 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/categories/%E9%80%9F%E6%9F%A5/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 29 Oct 2025 12:31:38 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/categories/%E9%80%9F%E6%9F%A5/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>三个微分中值定理</title>
+        <link>https://www.retr0.qzz.io/p/%E4%B8%89%E4%B8%AA%E5%BE%AE%E5%88%86%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86/</link>
+        <pubDate>Wed, 29 Oct 2025 12:31:38 +0800</pubDate>
+        
+        <guid>https://www.retr0.qzz.io/p/%E4%B8%89%E4%B8%AA%E5%BE%AE%E5%88%86%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86/</guid>
+        <description>&lt;h3 id=&#34;一罗尔定理rolles-theorem&#34;&gt;一、罗尔定理（Rolle&amp;rsquo;s Theorem）
+&lt;/h3&gt;&lt;h4 id=&#34;1-核心条件&#34;&gt;1. 核心条件
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;函数 $f(x)$ 在闭区间 $[a, b]$ 上 &lt;strong&gt;连续&lt;/strong&gt;；&lt;/li&gt;
+&lt;li&gt;函数 $f(x)$ 在开区间 $(a, b)$ 内 &lt;strong&gt;可导&lt;/strong&gt;；&lt;/li&gt;
+&lt;li&gt;端点函数值相等：$f(a) = f(b)$。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-结论&#34;&gt;2. 结论
+&lt;/h4&gt;&lt;p&gt;存在至少一点 $\xi \in (a, b)$，使得 $f&amp;rsquo;(\xi) = 0$。&lt;/p&gt;
+&lt;h4 id=&#34;3-使用例子&#34;&gt;3. 使用例子
+&lt;/h4&gt;&lt;p&gt;设 $f(x) = x^2 - 2x$，区间 $[0, 2]$。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;验证条件：$f(x)$ 是多项式（闭区间连续、开区间可导）；$f(0) = 0$，$f(2) = 0$，满足 $f(0)=f(2)$；&lt;/li&gt;
+&lt;li&gt;应用结论：求导得 $f&amp;rsquo;(x) = 2x - 2$，令 $f&amp;rsquo;(x)=0$，解得 $x=1$，即 $\xi=1 \in (0,2)$，符合定理。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;二拉格朗日中值定理lagranges-mean-value-theorem&#34;&gt;二、拉格朗日中值定理（Lagrange&amp;rsquo;s Mean Value Theorem）
+&lt;/h3&gt;&lt;h4 id=&#34;1-核心条件-1&#34;&gt;1. 核心条件
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;函数 $f(x)$ 在闭区间 $[a, b]$ 上 &lt;strong&gt;连续&lt;/strong&gt;；&lt;/li&gt;
+&lt;li&gt;函数 $f(x)$ 在开区间 $(a, b)$ 内 &lt;strong&gt;可导&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-结论-1&#34;&gt;2. 结论
+&lt;/h4&gt;&lt;p&gt;存在至少一点 $\xi \in (a, b)$，使得 $f&amp;rsquo;(\xi) = \frac{f(b) - f(a)}{b - a}$（几何意义：曲线在 $\xi$ 处的切线与端点连线平行）。&lt;/p&gt;
+&lt;h4 id=&#34;3-使用例子-1&#34;&gt;3. 使用例子
+&lt;/h4&gt;&lt;p&gt;设 $f(x) = \ln x$，区间 $[1, e]$。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;验证条件：$f(x)$ 在 $[1,e]$ 连续、$(1,e)$ 可导；&lt;/li&gt;
+&lt;li&gt;应用结论：端点斜率 $\frac{f(e) - f(1)}{e - 1} = \frac{1 - 0}{e - 1} = \frac{1}{e - 1}$；求导得 $f&amp;rsquo;(x) = \frac{1}{x}$，令 $\frac{1}{x} = \frac{1}{e - 1}$，解得 $x = e - 1 \in (1,e)$，即 $\xi = e - 1$，符合定理。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;三柯西中值定理cauchys-mean-value-theorem&#34;&gt;三、柯西中值定理（Cauchy&amp;rsquo;s Mean Value Theorem）
+&lt;/h3&gt;&lt;h4 id=&#34;1-核心条件-2&#34;&gt;1. 核心条件
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;函数 $f(x)$、$g(x)$ 均在闭区间 $[a, b]$ 上 &lt;strong&gt;连续&lt;/strong&gt;；&lt;/li&gt;
+&lt;li&gt;函数 $f(x)$、$g(x)$ 均在开区间 $(a, b)$ 内 &lt;strong&gt;可导&lt;/strong&gt;；&lt;/li&gt;
+&lt;li&gt;对任意 $x \in (a, b)$，$g&amp;rsquo;(x) \neq 0$；&lt;/li&gt;
+&lt;li&gt;端点函数值不等：$g(a) \neq g(b)$。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-结论-2&#34;&gt;2. 结论
+&lt;/h4&gt;&lt;p&gt;存在至少一点 $\xi \in (a, b)$，使得 $\frac{f(b) - f(a)}{g(b) - g(a)} = \frac{f&amp;rsquo;(\xi)}{g&amp;rsquo;(\xi)}$（拉格朗日中值定理的推广，$g(x)=x$ 时退化为拉格朗日定理）。&lt;/p&gt;
+&lt;h4 id=&#34;3-使用例子-2&#34;&gt;3. 使用例子
+&lt;/h4&gt;&lt;p&gt;设 $f(x) = \sin x$，$g(x) = \cos x$，区间 $[0, \frac{\pi}{2}]$。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;验证条件：$f(x)$、$g(x)$ 均连续可导；$g&amp;rsquo;(x) = -\sin x$，在 $(0, \frac{\pi}{2})$ 内不为0；$g(0)=1 \neq g(\frac{\pi}{2})=0$；&lt;/li&gt;
+&lt;li&gt;应用结论：增量比 $\frac{f(\frac{\pi}{2}) - f(0)}{g(\frac{\pi}{2}) - g(0)} = \frac{1 - 0}{0 - 1} = -1$；导数比 $\frac{f&amp;rsquo;(\xi)}{g&amp;rsquo;(\xi)} = \frac{\cos \xi}{-\sin \xi} = -\cot \xi$；令 $-\cot \xi = -1$，解得 $\xi = \frac{\pi}{4} \in (0, \frac{\pi}{2})$，符合定理。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>矩阵的秩及其性质</title>
         <link>https://www.retr0.qzz.io/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/</link>
         <pubDate>Tue, 28 Oct 2025 15:27:38 +0800</pubDate>
@@ -18,21 +71,21 @@
 $$r(A)$$&lt;p&gt;。&lt;/p&gt;
 &lt;h3 id=&#34;二核心性质&#34;&gt;二、核心性质
 &lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;非负性与有界性：$0 \leq r(A) \leq \min{m, n}$（秩是0或正整数，不超过行数和列数）；&lt;/li&gt;
-&lt;li&gt;零矩阵专属：$A = O \iff r(A) = 0$（零矩阵秩为0，反之亦然）；&lt;/li&gt;
-&lt;li&gt;转置不变性：$r(A^T) = r(A)$（矩阵与其转置秩相等）；&lt;/li&gt;
+&lt;li&gt;非负性与有界性：$\displaystyle 0 \leq r(A) \leq \min{m, n}$（秩是0或正整数，不超过行数和列数）；&lt;/li&gt;
+&lt;li&gt;零矩阵专属：$\displaystyle A = O \iff r(A) = 0$（零矩阵秩为0，反之亦然）；&lt;/li&gt;
+&lt;li&gt;转置不变性：$\displaystyle r(A^T) = r(A)$（矩阵与其转置秩相等）；&lt;/li&gt;
 &lt;li&gt;初等变换不变性：初等行/列变换后，矩阵秩不变；&lt;/li&gt;
-&lt;li&gt;和秩不等式：$r(A + B) \leq r(A) + r(B)$（两矩阵和的秩不超过各自秩的和）；&lt;/li&gt;
-&lt;li&gt;乘积秩不等式：$r(AB) \leq \min{r(A), r(B)}$（两矩阵乘积的秩不超过任一矩阵的秩）；&lt;/li&gt;
-&lt;li&gt;可逆矩阵作用：$r(PA) = r(AQ) = r(PAQ) = r(A)$（可逆矩阵左乘/右乘，秩不变）；&lt;/li&gt;
+&lt;li&gt;和秩不等式：$\displaystyle r(A + B) \leq r(A) + r(B)$（两矩阵和的秩不超过各自秩的和）；&lt;/li&gt;
+&lt;li&gt;乘积秩不等式：$\displaystyle r(AB) \leq \min{r(A), r(B)}$（两矩阵乘积的秩不超过任一矩阵的秩）；&lt;/li&gt;
+&lt;li&gt;可逆矩阵作用：$\displaystyle r(PA) = r(AQ) = r(PAQ) = r(A)$（可逆矩阵左乘/右乘，秩不变）；&lt;/li&gt;
 &lt;li&gt;伴随矩阵秩关系：
 &lt;ul&gt;
-&lt;li&gt;若$r(A) = n$，则$r(A^*) = n$；&lt;/li&gt;
-&lt;li&gt;若$r(A) = n-1$，则$r(A^*) = 1$；&lt;/li&gt;
-&lt;li&gt;若$r(A) &amp;lt; n-1$，则$r(A^*) = 0$；&lt;/li&gt;
+&lt;li&gt;若$\displaystyle r(A) = n$，则$\displaystyle r(A^*) = n$；&lt;/li&gt;
+&lt;li&gt;若$\displaystyle r(A) = n-1$，则$\displaystyle r(A^*) = 1$；&lt;/li&gt;
+&lt;li&gt;若$\displaystyle r(A) &amp;lt; n-1$，则$\displaystyle r(A^*) = 0$；&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;分块矩阵秩：$r\begin{pmatrix} A &amp;amp; O \ O &amp;amp; B \end{pmatrix} = r(A) + r(B)$（对角分块矩阵的秩等于各块秩的和）。&lt;/li&gt;
+&lt;li&gt;分块矩阵秩：$\displaystyle r\begin{pmatrix} A &amp;amp; O \ O &amp;amp; B \end{pmatrix} = r(A) + r(B)$（对角分块矩阵的秩等于各块秩的和）。&lt;/li&gt;
 &lt;/ol&gt;
 </description>
         </item>
