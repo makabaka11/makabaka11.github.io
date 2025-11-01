@@ -469,17 +469,22 @@
         
         function initUtterances() {
             
-            const isArticle = document.querySelector('.article-content') !== null;
+            const isArticle = document.querySelector('.article-page') && document.querySelector('.article-content');
             if (!isArticle) return;
 
             
             const oldScript = document.querySelector('script[src^="https://utteranc.es/client.js"]');
             if (oldScript) oldScript.remove();
-
+            
             
             const container = document.querySelector('.comment-container');
-            if (!container) return;
+            if (!container) {
+                console.warn('评论容器未找到，请检查single.html是否添加了.comment-container');
+                return;
+            }
+            container.innerHTML = ''; 
 
+            
             let script = document.createElement('script');
             script.src = 'https://utteranc.es/client.js';
             script.setAttribute('repo', 'makabaka11/makabaka11.github.io');
@@ -487,13 +492,17 @@
             if (window.utterancesLabel) script.setAttribute('label', window.utterancesLabel);
             script.setAttribute('crossorigin', 'anonymous');
             script.async = true;
-            container.appendChild(script); 
+            container.appendChild(script);
         }
 
         
         (function() {
-            
-            document.addEventListener('DOMContentLoaded', initUtterances);
+            document.addEventListener('DOMContentLoaded', function() {
+                
+                if (!window.pjax || !window.pjax.state) {
+                    initUtterances();
+                }
+            });
         })(document)
     </script>
 </div>
@@ -528,42 +537,42 @@
         window.Stack.init();
         topbar.hide();
         
-        initUtterances();
+        setTimeout(initUtterances, 0); 
         
         updateViewCount();
+        
+        renderKaTeX();
     })
 
     
     function updateViewCount() {
-        
         const viewCountEl = document.getElementById('vercount_value_page_pv');
-        if (viewCountEl) viewCountEl.textContent = 'loading...';
+        if (!viewCountEl) return;
 
-        
+        viewCountEl.textContent = 'loading...';
         const vercountScriptUrl = 'https://cn.vercount.one/js';
+        
         
         const oldScript = document.querySelector(`script[src="${vercountScriptUrl}"]`);
         if (oldScript) oldScript.remove();
+        
         
         const newScript = document.createElement('script');
         newScript.src = vercountScriptUrl;
         newScript.defer = true;
         document.head.appendChild(newScript);
 
-        
         showHideView();
     }
 </script>
 <script>
     async function renderKaTeX() {
         let katex = document.querySelector(".math-katex");
-        if (!katex) {
-            return;
-        }
+        if (!katex) return;
+
         while (typeof renderMathInElement !== 'function') {
             await delay(500);
         }        
-        
         const content = document.querySelector('.article-content') || document.body;
         renderMathInElement(content, {
             delimiters: [
@@ -577,14 +586,8 @@
     }
     
     function delay(time) {
-        return new Promise(resolve => {
-            setTimeout(resolve, time)
-        })
+        return new Promise(resolve => setTimeout(resolve, time));
     }
-
-    document.addEventListener('pjax:complete', () => {
-        renderKaTeX();
-    })
 </script>
 <div id="particles-js"></div>
 
@@ -608,17 +611,13 @@
 <script defer src="https://cn.vercount.one/js"></script>
 <script>
     function showHideView() {
-        
-        let viewCounts = document.querySelectorAll("#viewCount");
-        if (viewCounts) {
-            
-            let article =  document.querySelector(".article-page");
-            if (!article) {
-                viewCounts.forEach(ele => {
-                    ele.style.display = 'none';
-                });
-            }
-        }
+        const viewCounts = document.querySelectorAll("#viewCount");
+        if (!viewCounts.length) return;
+
+        const isArticle = document.querySelector(".article-page");
+        viewCounts.forEach(ele => {
+            ele.style.display = isArticle ? 'block' : 'none';
+        });
     }
     
     showHideView();
