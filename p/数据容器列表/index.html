@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="一、矩阵的秩（核心定义） 矩阵的秩是最高阶非零子式的阶数，也等于矩阵行向量组/列向量组的“极大无关组个数”(通俗说：最多能找出多少个不互相“多余”的行/列)记为 $$r(A)$$。\n二、核心性质 非负性与有界性：$\\displaystyle 0 \\leq r(A) \\leq \\min{m, n}$（秩是0或正整数，不超过行数和列数）； 零矩阵专属：$\\displaystyle A = O \\iff r(A) = 0$（零矩阵秩为0，反之亦然）； 转置不变性：$\\displaystyle r(A^T) = r(A)$（矩阵与其转置秩相等）； 初等变换不变性：初等行/列变换后，矩阵秩不变； 和秩不等式：$\\displaystyle r(A + B) \\leq r(A) + r(B)$（两矩阵和的秩不超过各自秩的和）； 乘积秩不等式：$\\displaystyle r(AB) \\leq \\min{r(A), r(B)}$（两矩阵乘积的秩不超过任一矩阵的秩）； 可逆矩阵作用：$\\displaystyle r(PA) = r(AQ) = r(PAQ) = r(A)$（可逆矩阵左乘/右乘，秩不变）； 伴随矩阵秩关系： 若$\\displaystyle r(A) = n$，则$\\displaystyle r(A^*) = n$； 若$\\displaystyle r(A) = n-1$，则$\\displaystyle r(A^*) = 1$； 若$\\displaystyle r(A) &lt; n-1$，则$\\displaystyle r(A^*) = 0$； 分块矩阵秩：$\\displaystyle r\\begin{pmatrix} A &amp; O \\ O &amp; B \\end{pmatrix} = r(A) + r(B)$（对角分块矩阵的秩等于各块秩的和）。 ">
-<title>矩阵的秩及其性质</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="学习Python中的一个重要数据容器：列表">
+<title>数据容器：列表</title>
 
-<link rel='canonical' href='https://www.retr0.qzz.io/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/'>
+<link rel='canonical' href='https://www.retr0.qzz.io/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%88%97%E8%A1%A8/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="矩阵的秩及其性质">
-<meta property='og:description' content="一、矩阵的秩（核心定义） 矩阵的秩是最高阶非零子式的阶数，也等于矩阵行向量组/列向量组的“极大无关组个数”(通俗说：最多能找出多少个不互相“多余”的行/列)记为 $$r(A)$$。\n二、核心性质 非负性与有界性：$\\displaystyle 0 \\leq r(A) \\leq \\min{m, n}$（秩是0或正整数，不超过行数和列数）； 零矩阵专属：$\\displaystyle A = O \\iff r(A) = 0$（零矩阵秩为0，反之亦然）； 转置不变性：$\\displaystyle r(A^T) = r(A)$（矩阵与其转置秩相等）； 初等变换不变性：初等行/列变换后，矩阵秩不变； 和秩不等式：$\\displaystyle r(A + B) \\leq r(A) + r(B)$（两矩阵和的秩不超过各自秩的和）； 乘积秩不等式：$\\displaystyle r(AB) \\leq \\min{r(A), r(B)}$（两矩阵乘积的秩不超过任一矩阵的秩）； 可逆矩阵作用：$\\displaystyle r(PA) = r(AQ) = r(PAQ) = r(A)$（可逆矩阵左乘/右乘，秩不变）； 伴随矩阵秩关系： 若$\\displaystyle r(A) = n$，则$\\displaystyle r(A^*) = n$； 若$\\displaystyle r(A) = n-1$，则$\\displaystyle r(A^*) = 1$； 若$\\displaystyle r(A) &lt; n-1$，则$\\displaystyle r(A^*) = 0$； 分块矩阵秩：$\\displaystyle r\\begin{pmatrix} A &amp; O \\ O &amp; B \\end{pmatrix} = r(A) + r(B)$（对角分块矩阵的秩等于各块秩的和）。 ">
-<meta property='og:url' content='https://www.retr0.qzz.io/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/'>
+<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="数据容器：列表">
+<meta property='og:description' content="学习Python中的一个重要数据容器：列表">
+<meta property='og:url' content='https://www.retr0.qzz.io/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%88%97%E8%A1%A8/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-10-28T15:27:38&#43;08:00'/><meta property='article:modified_time' content='2025-10-28T15:27:38&#43;08:00'/>
-<meta name="twitter:title" content="矩阵的秩及其性质">
-<meta name="twitter:description" content="一、矩阵的秩（核心定义） 矩阵的秩是最高阶非零子式的阶数，也等于矩阵行向量组/列向量组的“极大无关组个数”(通俗说：最多能找出多少个不互相“多余”的行/列)记为 $$r(A)$$。\n二、核心性质 非负性与有界性：$\\displaystyle 0 \\leq r(A) \\leq \\min{m, n}$（秩是0或正整数，不超过行数和列数）； 零矩阵专属：$\\displaystyle A = O \\iff r(A) = 0$（零矩阵秩为0，反之亦然）； 转置不变性：$\\displaystyle r(A^T) = r(A)$（矩阵与其转置秩相等）； 初等变换不变性：初等行/列变换后，矩阵秩不变； 和秩不等式：$\\displaystyle r(A + B) \\leq r(A) + r(B)$（两矩阵和的秩不超过各自秩的和）； 乘积秩不等式：$\\displaystyle r(AB) \\leq \\min{r(A), r(B)}$（两矩阵乘积的秩不超过任一矩阵的秩）； 可逆矩阵作用：$\\displaystyle r(PA) = r(AQ) = r(PAQ) = r(A)$（可逆矩阵左乘/右乘，秩不变）； 伴随矩阵秩关系： 若$\\displaystyle r(A) = n$，则$\\displaystyle r(A^*) = n$； 若$\\displaystyle r(A) = n-1$，则$\\displaystyle r(A^*) = 1$； 若$\\displaystyle r(A) &lt; n-1$，则$\\displaystyle r(A^*) = 0$； 分块矩阵秩：$\\displaystyle r\\begin{pmatrix} A &amp; O \\ O &amp; B \\end{pmatrix} = r(A) + r(B)$（对角分块矩阵的秩等于各块秩的和）。 ">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-02T22:54:24&#43;08:00'/><meta property='article:modified_time' content='2025-11-02T22:54:24&#43;08:00'/>
+<meta name="twitter:title" content="数据容器：列表">
+<meta name="twitter:description" content="学习Python中的一个重要数据容器：列表">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -279,12 +279,19 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li>
+    <li><a href="#列表的标准定义形式">列表的标准定义形式</a></li>
+    <li><a href="#列表的常用操作">列表的常用操作</a>
       <ol>
-        <li><a href="#一矩阵的秩核心定义">一、矩阵的秩（核心定义）</a></li>
-        <li><a href="#二核心性质">二、核心性质</a></li>
+        <li><a href="#查询列表中元素的下标号">查询列表中元素的下标号</a></li>
+        <li><a href="#修改指定位置的元素">修改指定位置的元素</a></li>
+        <li><a href="#列表的插入">列表的插入</a></li>
+        <li><a href="#列表的追加">列表的追加</a></li>
+        <li><a href="#删除元素">删除元素</a></li>
+        <li><a href="#清空列表">清空列表</a></li>
+        <li><a href="#统计某元素在列表中的数量">统计某元素在列表中的数量</a></li>
       </ol>
     </li>
+    <li><a href="#未完待续-to-be-continued">未完待续 To be continued……</a></li>
   </ol>
 </nav>
         </div>
@@ -303,12 +310,12 @@
     
     <header class="article-category">
         
-            <a href="/categories/%E9%80%9F%E6%9F%A5/" >
-                速查
+            <a href="/categories/python/" >
+                Python
             </a>
         
-            <a href="/categories/%E8%AF%BE%E5%A0%82%E5%B0%8F%E8%AE%B0/" >
-                课堂小记
+            <a href="/categories/%E9%80%9F%E6%9F%A5/" >
+                速查
             </a>
         
     </header>
@@ -316,9 +323,13 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/">矩阵的秩及其性质</a>
+            <a href="/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%88%97%E8%A1%A8/">数据容器：列表</a>
         </h2>
     
+        
+        <h3 class="article-subtitle">
+            学习Python中的一个重要数据容器：列表
+        </h3>
         
     </div>
 
@@ -338,7 +349,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-10-28</time>
+                <time class="article-time--published">2025-11-02</time>
             </div>
         
 
@@ -361,28 +372,166 @@
     <section class="article-content">
     
     
-    <h3 id="一矩阵的秩核心定义">一、矩阵的秩（核心定义）
-</h3><p>矩阵的秩是<strong>最高阶非零子式的阶数</strong>，也等于矩阵行向量组/列向量组的“极大无关组个数”(通俗说：最多能找出多少个不互相“多余”的行/列)记为 </p>
-$$r(A)$$<p>。</p>
-<h3 id="二核心性质">二、核心性质
-</h3><ol>
-<li>非负性与有界性：$\displaystyle 0 \leq r(A) \leq \min{m, n}$（秩是0或正整数，不超过行数和列数）；</li>
-<li>零矩阵专属：$\displaystyle A = O \iff r(A) = 0$（零矩阵秩为0，反之亦然）；</li>
-<li>转置不变性：$\displaystyle r(A^T) = r(A)$（矩阵与其转置秩相等）；</li>
-<li>初等变换不变性：初等行/列变换后，矩阵秩不变；</li>
-<li>和秩不等式：$\displaystyle r(A + B) \leq r(A) + r(B)$（两矩阵和的秩不超过各自秩的和）；</li>
-<li>乘积秩不等式：$\displaystyle r(AB) \leq \min{r(A), r(B)}$（两矩阵乘积的秩不超过任一矩阵的秩）；</li>
-<li>可逆矩阵作用：$\displaystyle r(PA) = r(AQ) = r(PAQ) = r(A)$（可逆矩阵左乘/右乘，秩不变）；</li>
-<li>伴随矩阵秩关系：
-<ul>
-<li>若$\displaystyle r(A) = n$，则$\displaystyle r(A^*) = n$；</li>
-<li>若$\displaystyle r(A) = n-1$，则$\displaystyle r(A^*) = 1$；</li>
-<li>若$\displaystyle r(A) &lt; n-1$，则$\displaystyle r(A^*) = 0$；</li>
-</ul>
-</li>
-<li>分块矩阵秩：$\displaystyle r\begin{pmatrix} A &amp; O \ O &amp; B \end{pmatrix} = r(A) + r(B)$（对角分块矩阵的秩等于各块秩的和）。</li>
-</ol>
-
+    <h2 id="列表的标准定义形式">列表的标准定义形式
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;三&#39;</span><span class="err">，</span><span class="n">d</span><span class="p">,</span><span class="s1">&#39;我是一个元素&#39;</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="列表的常用操作">列表的常用操作
+</h2><p><strong>正向索引： <font style="color:#DF2A3F;">注意正向索引时从列表内第一个元素开始，其下标号为0，向右以此为1、2、3……</font></strong></p>
+<p><strong>反向索引：<font style="color:#DF2A3F;">注意反向索引时从列表内倒数第一个元素开始，其下标号为-1，向左以此为-2、-3……</font></strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span><span class="p">[</span><span class="n">N</span><span class="p">]</span>   <span class="c1">#其中N为列表元素的下标号，‘list’要换为实际列表名</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="查询列表中元素的下标号">查询列表中元素的下标号
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;我是一个元素&#39;</span><span class="p">)</span>	<span class="c1">#‘list’要换为实际列表名</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>特别地，对于嵌套列表需要指定除了所查询元素在其列表的下标号之外的所有下标号，例如</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>	<span class="c1">#此处我们查询元素‘5’的下标号</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="修改指定位置的元素">修改指定位置的元素
+</h3><p>支持正反索引下标号</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;example&#39;</span>	<span class="c1">#列表[下标] = 值</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="列表的插入">列表的插入
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">list</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;Hello&#39;</span><span class="p">)</span>	<span class="c1">#列表.insert(下标，值)	在所填下标之前插入一个值</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="列表的追加">列表的追加
+</h3><p>追加单个元素</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;五&#39;</span><span class="p">)</span>	<span class="c1">#列表.append(值)	在列表尾追加一个元素</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>追加一批元素</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">list1</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">list2</span><span class="p">)</span>	<span class="c1">#列表.extend(数据容器)	在列表尾导入一批元素，此处括号内直接填写也可以</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">list1</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="删除元素">删除元素
+</h3><p>方法一：del指定下标删除		<strong><font style="color:#DF2A3F;">注意：由于del是Python主环境中的一个关键字，所以到此只有它的语法是放在列表名前面的</font></strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">del</span> <span class="nb">list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>	<span class="c1">#del 列表[下标]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>方法二：pop取出</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="nb">list</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>		<span class="c1">#列表.pop(下标)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>			<span class="c1">#获取被取出的元素</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>方法三：remove指定内容删除		<strong><font style="color:#DF2A3F;">注意：remove方法会从前往后依次检索列表中的元素，并删除第一个匹配的元素，如果想删除多个相同元素，请执行多次remove</font></strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;一&#39;</span><span class="p">,</span><span class="s1">&#39;二&#39;</span><span class="p">,</span><span class="s1">&#39;删我&#39;</span><span class="p">,</span><span class="s1">&#39;三&#39;</span><span class="p">,</span><span class="s1">&#39;删我&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;删我&#39;</span><span class="p">)</span>	<span class="c1">#列表.remove(元素值)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="清空列表">清空列表
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">list</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>	<span class="c1">#列表.clear()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="统计某元素在列表中的数量">统计某元素在列表中的数量
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>	
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>		<span class="c1">#列表.count(元素值)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="未完待续-to-be-continued">未完待续 To be continued……
+</h2>
 </section>
 
 
@@ -483,12 +632,12 @@ $$r(A)$$<p>。</p>
             
                 
 <article class="">
-    <a href="/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%88%97%E8%A1%A8/">
+    <a href="/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">数据容器：列表</h2>
+            <h2 class="article-title">矩阵的秩及其性质</h2>
         </div>
     </a>
 </article>

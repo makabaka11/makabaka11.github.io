@@ -7,7 +7,150 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Wed, 29 Oct 2025 12:31:38 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/categories/%E8%AF%BE%E5%A0%82%E5%B0%8F%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 02 Nov 2025 21:54:18 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/categories/%E8%AF%BE%E5%A0%82%E5%B0%8F%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>几种方法求逆矩阵</title>
+        <link>https://www.retr0.qzz.io/p/%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95%E6%B1%82%E9%80%86%E7%9F%A9%E9%98%B5/</link>
+        <pubDate>Sun, 02 Nov 2025 21:54:18 +0800</pubDate>
+        
+        <guid>https://www.retr0.qzz.io/p/%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95%E6%B1%82%E9%80%86%E7%9F%A9%E9%98%B5/</guid>
+        <description>&lt;h3 id=&#34;一伴随矩阵与伴随矩阵法求逆矩阵&#34;&gt;一、伴随矩阵与伴随矩阵法求逆矩阵
+&lt;/h3&gt;&lt;h4 id=&#34;1-伴随矩阵的定义&#34;&gt;1. 伴随矩阵的定义
+&lt;/h4&gt;&lt;p&gt;对于n阶方阵$A = (a_{ij})$，其&lt;strong&gt;代数余子式&lt;/strong&gt;$A_{ij}$定义为：$A_{ij} = (-1)^{i+j}M_{ij}$，其中$M_{ij}$是$A$中去掉第$i$行第$j$列后剩余子矩阵的行列式（即余子式）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;伴随矩阵&lt;/strong&gt;$A^*$是由$A$的代数余子式按&lt;strong&gt;转置顺序&lt;/strong&gt;排列而成的矩阵，即：
+&lt;/p&gt;
+$$
+A^* = \begin{pmatrix} A_{11} &amp; A_{21} &amp; \cdots &amp; A_{n1} \\ A_{12} &amp; A_{22} &amp; \cdots &amp; A_{n2} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ A_{1n} &amp; A_{2n} &amp; \cdots &amp; A_{nn} \end{pmatrix}
+$$&lt;h4 id=&#34;2-伴随矩阵的核心性质&#34;&gt;2. 伴随矩阵的核心性质
+&lt;/h4&gt;&lt;p&gt;对于任意n阶方阵$A$，有：
+&lt;/p&gt;
+$$
+A \cdot A^* = A^* \cdot A = |A|I_n
+$$&lt;p&gt;
+其中$|A|$是$A$的行列式，$I_n$是n阶单位矩阵。&lt;/p&gt;
+&lt;h4 id=&#34;3-伴随矩阵法求逆矩阵&#34;&gt;3. 伴随矩阵法求逆矩阵
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;可逆条件&lt;/strong&gt;：矩阵$A$可逆的充要条件是$|A| \neq 0$。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;逆矩阵公式&lt;/strong&gt;：若$|A| \neq 0$，则$A$的逆矩阵为：
+&lt;/p&gt;
+$$
+A^{-1} = \frac{1}{|A|}A^*
+$$&lt;p&gt;&lt;strong&gt;推导过程&lt;/strong&gt;：由$A \cdot A^* = |A|I_n$，两边同时除以$|A|$（因$|A| \neq 0$），得：
+&lt;/p&gt;
+$$
+A \cdot \frac{1}{|A|}A^* = I_n
+$$&lt;p&gt;
+根据逆矩阵的定义，可知$\frac{1}{|A|}A^&lt;em&gt;$是$A$的逆矩阵，即$A^{-1} = \frac{1}{|A|}A^&lt;/em&gt;$。&lt;/p&gt;
+&lt;h4 id=&#34;4-示例用伴随矩阵法求2阶矩阵的逆&#34;&gt;4. 示例：用伴随矩阵法求2阶矩阵的逆
+&lt;/h4&gt;&lt;p&gt;设$A = \begin{pmatrix} 1 &amp;amp; 2 \ 3 &amp;amp; 4 \end{pmatrix}$，求$A^{-1}$。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;步骤1：计算行列式$|A|$
+&lt;/p&gt;
+$$
+  |A| = 1 \times 4 - 2 \times 3 = 4 - 6 = -2 \neq 0
+  $$&lt;p&gt;
+故$A$可逆。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;步骤2：计算代数余子式，构造伴随矩阵$A^*$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$A_{11} = (-1)^{1+1} \times 4 = 4$，$A_{12} = (-1)^{1+2} \times 3 = -3$&lt;/li&gt;
+&lt;li&gt;$A_{21} = (-1)^{2+1} \times 2 = -2$，$A_{22} = (-1)^{2+2} \times 1 = 1$
+因此，伴随矩阵：
+$$
+  A^* = \begin{pmatrix} A_{11} &amp; A_{21} \\ A_{12} &amp; A_{22} \end{pmatrix} = \begin{pmatrix} 4 &amp; -2 \\ -3 &amp; 1 \end{pmatrix}
+  $$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;步骤3：代入逆矩阵公式
+&lt;/p&gt;
+$$
+  A^{-1} = \frac{1}{|A|}A^* = \frac{1}{-2} \begin{pmatrix} 4 &amp; -2 \\ -3 &amp; 1 \end{pmatrix} = \begin{pmatrix} -2 &amp; 1 \\ \frac{3}{2} &amp; -\frac{1}{2} \end{pmatrix}
+  $$&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;验证（可选）：
+&lt;/p&gt;
+$$
+  A \cdot A^{-1} = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix} \begin{pmatrix} -2 &amp; 1 \\ \frac{3}{2} &amp; -\frac{1}{2} \end{pmatrix} = \begin{pmatrix} 1 \times (-2) + 2 \times \frac{3}{2} &amp; 1 \times 1 + 2 \times (-\frac{1}{2}) \\ 3 \times (-2) + 4 \times \frac{3}{2} &amp; 3 \times 1 + 4 \times (-\frac{1}{2}) \end{pmatrix} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = I_2
+  $$&lt;p&gt;
+验证成立。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;二初等变换法求逆矩阵&#34;&gt;二、初等变换法求逆矩阵
+&lt;/h3&gt;&lt;h4 id=&#34;1-核心原理&#34;&gt;1. 核心原理
+&lt;/h4&gt;&lt;p&gt;对于n阶可逆矩阵$A$，构造&lt;strong&gt;增广矩阵&lt;/strong&gt;$[A \mid I_n]$（$I_n$为n阶单位矩阵），通过&lt;strong&gt;初等行变换&lt;/strong&gt;（不可混用列变换）将左侧的$A$化为$I_n$，此时右侧原$I_n$会同步化为$A^{-1}$，即：
+&lt;/p&gt;
+$$
+[A \mid I_n] \xrightarrow{初等行变换} [I_n \mid A^{-1}]
+$$&lt;h4 id=&#34;2-关键步骤&#34;&gt;2. 关键步骤
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;构造增广矩阵：将$A$与同阶单位矩阵并排拼接，形成$[A \mid I_n]$；&lt;/li&gt;
+&lt;li&gt;初等行变换（仅3种：换行、某行乘非零常数、某行加另一行的$k$倍）；&lt;/li&gt;
+&lt;li&gt;当左侧$A$化为$I_n$时，右侧矩阵即为$A^{-1}$；&lt;/li&gt;
+&lt;li&gt;验证（可选）：计算$A \cdot A^{-1}$，若结果为$I_n$则正确。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;3-示例用初等变换法求3阶矩阵的逆&#34;&gt;3. 示例：用初等变换法求3阶矩阵的逆
+&lt;/h4&gt;&lt;p&gt;设$A = \begin{pmatrix} 1 &amp;amp; 0 &amp;amp; 1 \ 2 &amp;amp; 1 &amp;amp; 0 \ -3 &amp;amp; 2 &amp;amp; -5 \end{pmatrix}$，求$A^{-1}$。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;步骤1：构造增广矩阵$[A \mid I_3]$
+&lt;/p&gt;
+$$
+  [A \mid I_3] = \begin{pmatrix} 1 &amp; 0 &amp; 1 &amp; \vdots &amp; 1 &amp; 0 &amp; 0 \\ 2 &amp; 1 &amp; 0 &amp; \vdots &amp; 0 &amp; 1 &amp; 0 \\ -3 &amp; 2 &amp; -5 &amp; \vdots &amp; 0 &amp; 0 &amp; 1 \end{pmatrix}
+  $$&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;步骤2：初等行变换&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;消去第2、3行第1列元素：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;第2行 = 第2行 - 2×第1行：$R_2 = R_2 - 2R_1$&lt;/li&gt;
+&lt;li&gt;第3行 = 第3行 + 3×第1行：$R_3 = R_3 + 3R_1$
+得到：
+$$
+     \begin{pmatrix} 1 &amp; 0 &amp; 1 &amp; \vdots &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; -2 &amp; \vdots &amp; -2 &amp; 1 &amp; 0 \\ 0 &amp; 2 &amp; -2 &amp; \vdots &amp; 3 &amp; 0 &amp; 1 \end{pmatrix}
+     $$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;消去第3行第2列元素：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;第3行 = 第3行 - 2×第2行：$R_3 = R_3 - 2R_2$
+得到：
+$$
+     \begin{pmatrix} 1 &amp; 0 &amp; 1 &amp; \vdots &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; -2 &amp; \vdots &amp; -2 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 2 &amp; \vdots &amp; 7 &amp; -2 &amp; 1 \end{pmatrix}
+     $$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;化为行最简形（首元为1，消去上方对应元素）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;第3行 = 第3行 × $\frac{1}{2}$：$R_3 = \frac{1}{2}R_3$&lt;/li&gt;
+&lt;li&gt;第1行 = 第1行 - 1×第3行：$R_1 = R_1 - R_3$&lt;/li&gt;
+&lt;li&gt;第2行 = 第2行 + 2×第3行：$R_2 = R_2 + 2R_3$
+最终得到：
+$$
+     \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; \vdots &amp; -\frac{5}{2} &amp; 1 &amp; -\frac{1}{2} \\ 0 &amp; 1 &amp; 0 &amp; \vdots &amp; 5 &amp; -1 &amp; 1 \\ 0 &amp; 0 &amp; 1 &amp; \vdots &amp; \frac{7}{2} &amp; -1 &amp; \frac{1}{2} \end{pmatrix}
+     $$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;步骤3：得到逆矩阵
+左侧已化为$I_3$，右侧即为$A^{-1}$：
+&lt;/p&gt;
+$$
+  A^{-1} = \begin{pmatrix} -\frac{5}{2} &amp; 1 &amp; -\frac{1}{2} \\ 5 &amp; -1 &amp; 1 \\ \frac{7}{2} &amp; -1 &amp; \frac{1}{2} \end{pmatrix}
+  $$&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;验证（可选）：
+计算$A \cdot A^{-1}$，结果为$I_3$（过程略），验证成立。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>三个微分中值定理</title>
         <link>https://www.retr0.qzz.io/p/%E4%B8%89%E4%B8%AA%E5%BE%AE%E5%88%86%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86/</link>
         <pubDate>Wed, 29 Oct 2025 12:31:38 +0800</pubDate>
