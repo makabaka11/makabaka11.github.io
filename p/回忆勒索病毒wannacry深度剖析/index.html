@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="代理工具： 很久以前：\nShadowsocksR 谁家文物\nReleases · ShadowsocksR-Live/ssrWin\n现在主流：\nv2rayN 支持vmess格式\nv2rayN/ at master · 2dust/v2rayN\nclash 最全能\nGitHub - clash-version/clash-download: Clash 下载|持续收藏CLash版本|2025年8月更新\n目前自用\nGitHub - chen08209/FlClash: A multi-platform proxy client based on ClashMeta,simple and easy to use, open-source and ad-free.\n备用方案：\n去tg上找破解vpn\n机场： GitHub推荐列表\nGitHub - yonghumeijj/jichang: 2025年最新性价比机场推荐VPN、翻墙🚀推荐稳定性高，适合各类人需求的机场\n目前自用\nyiyuan.co\n备选方案：\n海外VPS自己部署\n起飞： 选择合适的套餐订阅后使用一键导入按钮导入节点 测试真延迟并选择延迟最低节点 芜湖起飞 孩子们，P站并不好看。\n">
-<title>魔法上网</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="从样本出发，带您回忆并深度剖析那个2017年大杀四方的传奇病毒">
+<title>回忆勒索病毒WannaCry：深度剖析</title>
 
-<link rel='canonical' href='https://www.retr0.qzz.io/p/%E9%AD%94%E6%B3%95%E4%B8%8A%E7%BD%91/'>
+<link rel='canonical' href='https://www.retr0.qzz.io/p/%E5%9B%9E%E5%BF%86%E5%8B%92%E7%B4%A2%E7%97%85%E6%AF%92wannacry%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="魔法上网">
-<meta property='og:description' content="代理工具： 很久以前：\nShadowsocksR 谁家文物\nReleases · ShadowsocksR-Live/ssrWin\n现在主流：\nv2rayN 支持vmess格式\nv2rayN/ at master · 2dust/v2rayN\nclash 最全能\nGitHub - clash-version/clash-download: Clash 下载|持续收藏CLash版本|2025年8月更新\n目前自用\nGitHub - chen08209/FlClash: A multi-platform proxy client based on ClashMeta,simple and easy to use, open-source and ad-free.\n备用方案：\n去tg上找破解vpn\n机场： GitHub推荐列表\nGitHub - yonghumeijj/jichang: 2025年最新性价比机场推荐VPN、翻墙🚀推荐稳定性高，适合各类人需求的机场\n目前自用\nyiyuan.co\n备选方案：\n海外VPS自己部署\n起飞： 选择合适的套餐订阅后使用一键导入按钮导入节点 测试真延迟并选择延迟最低节点 芜湖起飞 孩子们，P站并不好看。\n">
-<meta property='og:url' content='https://www.retr0.qzz.io/p/%E9%AD%94%E6%B3%95%E4%B8%8A%E7%BD%91/'>
+<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="回忆勒索病毒WannaCry：深度剖析">
+<meta property='og:description' content="从样本出发，带您回忆并深度剖析那个2017年大杀四方的传奇病毒">
+<meta property='og:url' content='https://www.retr0.qzz.io/p/%E5%9B%9E%E5%BF%86%E5%8B%92%E7%B4%A2%E7%97%85%E6%AF%92wannacry%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-10-27T08:58:50&#43;08:00'/><meta property='article:modified_time' content='2025-10-27T08:58:50&#43;08:00'/>
-<meta name="twitter:title" content="魔法上网">
-<meta name="twitter:description" content="代理工具： 很久以前：\nShadowsocksR 谁家文物\nReleases · ShadowsocksR-Live/ssrWin\n现在主流：\nv2rayN 支持vmess格式\nv2rayN/ at master · 2dust/v2rayN\nclash 最全能\nGitHub - clash-version/clash-download: Clash 下载|持续收藏CLash版本|2025年8月更新\n目前自用\nGitHub - chen08209/FlClash: A multi-platform proxy client based on ClashMeta,simple and easy to use, open-source and ad-free.\n备用方案：\n去tg上找破解vpn\n机场： GitHub推荐列表\nGitHub - yonghumeijj/jichang: 2025年最新性价比机场推荐VPN、翻墙🚀推荐稳定性高，适合各类人需求的机场\n目前自用\nyiyuan.co\n备选方案：\n海外VPS自己部署\n起飞： 选择合适的套餐订阅后使用一键导入按钮导入节点 测试真延迟并选择延迟最低节点 芜湖起飞 孩子们，P站并不好看。\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-03T13:18:39&#43;08:00'/><meta property='article:modified_time' content='2025-11-03T13:18:39&#43;08:00'/><meta property='og:image' content='https://s.secrss.com/anquanneican/eba6dc46083f85d24ac9474fa735590a.jpg' />
+<meta name="twitter:title" content="回忆勒索病毒WannaCry：深度剖析">
+<meta name="twitter:description" content="从样本出发，带您回忆并深度剖析那个2017年大杀四方的传奇病毒"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://s.secrss.com/anquanneican/eba6dc46083f85d24ac9474fa735590a.jpg' />
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -281,9 +282,21 @@
   <ol>
     <li>
       <ol>
-        <li><a href="#代理工具">代理工具：</a></li>
-        <li><a href="#机场">机场：</a></li>
-        <li><a href="#起飞">起飞：</a></li>
+        <li><a href="#一事件概述">一、事件概述</a>
+          <ol>
+            <li><a href="#1-攻击爆发与范围">1. <strong>攻击爆发与范围</strong></a></li>
+            <li><a href="#2-传播与加密机制">2. <strong>传播与加密机制</strong></a></li>
+            <li><a href="#3-关键转折点">3. <strong>关键转折点</strong></a></li>
+          </ol>
+        </li>
+        <li><a href="#二病毒原理简单解析">二、病毒原理简单解析</a>
+          <ol>
+            <li><a href="#1-漏洞利用永恒之蓝ms17-010">1. <strong>漏洞利用：永恒之蓝（MS17-010）</strong></a></li>
+            <li><a href="#2-加密流程">2. <strong>加密流程</strong></a></li>
+            <li><a href="#3-传播扩散">3. <strong>传播扩散</strong></a></li>
+          </ol>
+        </li>
+        <li><a href="#三样本深度分析">三、样本深度分析</a></li>
       </ol>
     </li>
   </ol>
@@ -297,8 +310,16 @@
 
 
             <main class="main full-width">
-    <article class="main-article">
+    <article class="has-image main-article">
     <header class="article-header">
+        <div class="article-image">
+            <a href="/p/%E5%9B%9E%E5%BF%86%E5%8B%92%E7%B4%A2%E7%97%85%E6%AF%92wannacry%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90/">
+                
+                    <img src="https://s.secrss.com/anquanneican/eba6dc46083f85d24ac9474fa735590a.jpg" loading="lazy" alt="Featured image of post 回忆勒索病毒WannaCry：深度剖析" />
+                
+            </a>
+        </div>
+    
 
     <div class="article-details">
     
@@ -313,9 +334,13 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E9%AD%94%E6%B3%95%E4%B8%8A%E7%BD%91/">魔法上网</a>
+            <a href="/p/%E5%9B%9E%E5%BF%86%E5%8B%92%E7%B4%A2%E7%97%85%E6%AF%92wannacry%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90/">回忆勒索病毒WannaCry：深度剖析</a>
         </h2>
     
+        
+        <h3 class="article-subtitle">
+            从样本出发，带您回忆并深度剖析那个2017年大杀四方的传奇病毒
+        </h3>
         
     </div>
 
@@ -335,7 +360,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-10-27</time>
+                <time class="article-time--published">2025-11-03</time>
             </div>
         
 
@@ -358,41 +383,18 @@
     <section class="article-content">
     
     
-    <h3 id="代理工具">代理工具：
-</h3><p>很久以前：</p>
-<p><strong>ShadowsocksR</strong> <strong>谁家文物</strong></p>
-<p><a class="link" href="https://github.com/ShadowsocksR-Live/ssrWin/releases"  target="_blank" rel="noopener"
-    >Releases · ShadowsocksR-Live/ssrWin</a></p>
-<p>现在主流：</p>
-<p><strong>v2rayN 支持vmess格式</strong></p>
-<p><a class="link" href="https://github.com/2dust/v2rayN?search=1"  target="_blank" rel="noopener"
-    >v2rayN/ at master · 2dust/v2rayN</a></p>
-<p><strong>clash 最全能</strong></p>
-<p><a class="link" href="https://github.com/clash-version/clash-download"  target="_blank" rel="noopener"
-    >GitHub - clash-version/clash-download: Clash 下载|持续收藏CLash版本|2025年8月更新</a></p>
-<p>目前自用</p>
-<p><a class="link" href="https://github.com/chen08209/FlClash"  target="_blank" rel="noopener"
-    >GitHub - chen08209/FlClash: A multi-platform proxy client based on ClashMeta,simple and easy to use, open-source and ad-free.</a></p>
-<p><strong>备用方案：</strong></p>
-<p>去tg上找破解vpn</p>
-<h3 id="机场">机场：
-</h3><p>GitHub推荐列表</p>
-<p><a class="link" href="https://github.com/yonghumeijj/jichang"  target="_blank" rel="noopener"
-    >GitHub - yonghumeijj/jichang: 2025年最新性价比机场推荐VPN、翻墙🚀推荐稳定性高，适合各类人需求的机场</a></p>
-<p>目前自用</p>
-<p>yiyuan.co</p>
-<p>备选方案：</p>
-<p>海外VPS自己部署</p>
-<h3 id="起飞">起飞：
-</h3><ul>
-<li>选择合适的套餐订阅后使用一键导入按钮导入节点</li>
-<li>测试真延迟并选择延迟最低节点</li>
-<li>芜湖起飞</li>
-</ul>
-<blockquote>
-<p>孩子们，P站并不好看。</p>
-</blockquote>
-<p><img src="/post/%e6%9d%82%e9%a1%b9/%e7%89%a2%e5%a4%a7.webp"
+    <h3 id="一事件概述">一、事件概述
+</h3><h4 id="1-攻击爆发与范围">1. <strong>攻击爆发与范围</strong>
+</h4><ul>
+<li>
+<p><strong>时间</strong>：2017 年 5 月 12 日，黑客利用美国国家安全局（NSA）泄露的 &ldquo;永恒之蓝&rdquo;（EternalBlue）漏洞发动攻击，迅速波及全球。</p>
+</li>
+<li>
+<p><strong>规模</strong>：超过 150 个国家、30 多万台设备被感染，包括英国 NHS 医院、中国高校、俄罗斯电信公司等关键基础设施。</p>
+</li>
+<li>
+<p><strong>行业影响</strong>：医疗系统瘫痪导致手术延误，教育机构数据丢失影响毕业季，物流企业供应链中断，全球经济损失估算达<strong>40 亿至 500 亿美元</strong>。</p>
+<p><img src="https://www.yunweipai.com/wp-content/uploads/2017/05/f48f700abb9f671f98a9759cb8b96489-480x360.jpg"
 	
 	
 	
@@ -400,6 +402,433 @@
 	
 	
 ></p>
+<center>被入侵的公安网</center>
+</li>
+</ul>
+<p><img src="https://www.yunweipai.com/wp-content/uploads/2017/05/60da8c656a3d1b3e1bb43e88c7bab4ab-480x640.jpg"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<center>某加油站中毒</center>
+<p><img src="https://www.yunweipai.com/wp-content/uploads/2017/05/7d08c7167d2a8ce6c445829a32a6a322-480x640.jpg"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<center>某高校机房中毒</center>
+<h4 id="2-传播与加密机制">2. <strong>传播与加密机制</strong>
+</h4><ul>
+<li>
+<p><strong>蠕虫式传播</strong>：病毒通过扫描开放 445 端口（SMB 协议）的 Windows 设备，利用 &ldquo;永恒之蓝&rdquo; 漏洞自动植入恶意代码，无需用户交互即可横向扩散。</p>
+</li>
+<li>
+<p><strong>文件加密</strong>：感染设备后，病毒使用<strong>AES-256 对称加密</strong>和<strong>RSA-1024 非对称加密</strong>组合，将文档、照片、数据库等文件后缀改为<code>.wncry</code>，并在桌面显示勒索弹窗。</p>
+</li>
+<li>
+<p><strong>赎金要求</strong>：索要 300-600 美元比特币，付款后承诺提供解密密钥，但实际仅有少数受害者成功恢复数据。</p>
+<p><img src="https://mc.qcloudimg.com/img594ca8fe62c7f.jpg"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+</li>
+</ul>
+<h4 id="3-关键转折点">3. <strong>关键转折点</strong>
+</h4><ul>
+<li>
+<p><strong>Kill Switch（自毁开关）</strong>：病毒代码中隐藏了一个检测特定域名（<code>iuqerfsodp9ifjaposdfjhgosurijfaewrwergwea.com</code>）是否存在的机制。英国安全研究员马库斯・哈钦斯（Marcus Hutchins）以 8 英镑注册该域名，意外触发病毒自毁，阻止了约 10 万台设备感染。</p>
+<p><img src="http://p1.img.cctvpic.com/photoworkspace/contentimg/2017/08/04/2017080415332342242.jpg"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<center>当时媒体对马库斯・哈钦斯的报道</center>
+</li>
+<li>
+<p><strong>变种威胁</strong>：5 月 14 日出现的 WannaCry 2.0 移除了 Kill Switch，传播速度更快，但未造成大规模二次爆发。</p>
+</li>
+</ul>
+<h3 id="二病毒原理简单解析">二、病毒原理简单解析
+</h3><h4 id="1-漏洞利用永恒之蓝ms17-010">1. <strong>漏洞利用：永恒之蓝（MS17-010）</strong>
+</h4><ul>
+<li><strong>漏洞背景</strong>：该漏洞存在于 Windows SMBv1 协议实现中，攻击者通过发送特制数据包触发内存错误，实现远程代码执行（RCE）。</li>
+<li><strong>攻击流程</strong>：
+<ol>
+<li><strong>扫描阶段</strong>：病毒通过 445 端口向目标主机发送 SMB 请求，探测是否存在漏洞。</li>
+<li><strong>漏洞触发</strong>：构造包含恶意指令的数据包，利用 SMB 协议中的缓冲区溢出漏洞，覆盖内存中的返回地址。</li>
+<li><strong>代码执行</strong>：强制目标系统执行病毒 Payload，下载并运行 WannaCry 本体。</li>
+</ol>
+</li>
+</ul>
+<h4 id="2-加密流程">2. <strong>加密流程</strong>
+</h4><ul>
+<li><strong>密钥生成</strong>：每台感染设备生成唯一的 AES-256 密钥用于文件加密，该密钥再通过攻击者的 RSA 公钥加密后上传至控制服务器。</li>
+<li><strong>文件锁定</strong>：病毒遍历系统磁盘，对文档（.doc/.xls）、媒体（.mp4/.jpg）、数据库（.mdb/.sql）等 70 余种格式文件进行加密，同时删除原始文件备份。</li>
+</ul>
+<h4 id="3-传播扩散">3. <strong>传播扩散</strong>
+</h4><ul>
+<li><strong>横向移动</strong>：成功感染一台设备后，病毒通过以下方式继续传播：
+<ul>
+<li><strong>漏洞复用</strong>：利用相同的永恒之蓝漏洞攻击局域网内其他未打补丁的设备。</li>
+<li><strong>共享渗透</strong>：扫描网络共享目录，尝试弱密码登录并植入病毒。</li>
+</ul>
+</li>
+<li><strong>传播速度</strong>：由于许多企业未及时更新系统（如 Windows XP、Server 2003），病毒在数小时内形成全球扩散。</li>
+</ul>
+<h3 id="三样本深度分析">三、样本深度分析
+</h3><p>该病毒分为两个部分：</p>
+<ol>
+<li>
+<p>蠕虫部分，用于病毒传播，并释放出勒索病毒。</p>
+</li>
+<li>
+<p>勒索病毒部分，加密用户文件索要赎金。<br>
+####1. 蠕虫部分详细分析：</p>
+</li>
+</ol>
+<p>1.蠕虫代码运行后先会连接域名：http://www.iuqerfsodp9ifjaposdfjhgosurijfaewrwergwea.com 如果该域名可以成功连接，则直接退出。</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/d027166d9fd1232ca5de41f597cb7a78.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1.png"
+	
+	
+></p>
+<p>关于这个“Kill Switch”的存在网络上众说纷纭，我们认为相对可靠的解释是：开关的存在是为了检测安全软件沙箱。这种手法多见于恶意代码混淆器，但是除了看到几个人为修改“Kill Switch”的样本外，该病毒并没有批量生成、混淆的迹象。另外，如果真是为了对抗安全软件沙箱，和以往对抗沙箱的样本比起来，这段代码过于简单，而且出现的位置也过于明显。所以，放置这样一个“低级”的“Kill Switch”具体出于何种原因，恐怕只有恶意代码作者能够解释了。</p>
+<p>2. 如果上述域名无法访问，则会安装病毒服务，服务的二进制文件路径为当前进程文件路径，参数为：-m security，并启动服务。</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/8be31a24c70322ce301e1b0597d5269e.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="2.png"
+	
+	
+></p>
+<p>3. 释放资源到C:WINDOWS目录下的tasksche.exe（该程序是勒索病毒），并将其启动。</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/9d1f4df5a97a931f7463bb2321f77715.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="3.png"
+	
+	
+></p>
+<p>4. 蠕虫病毒服务启动后，会利用MS17-010漏洞传播。传播分为两种渠道，一种是局域网传播，另一种是公网传播。如下图所示：</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/221e81d2d75598ec961b14cf719b6d96.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="4.png"
+	
+	
+></p>
+<p>局域网传播主要代码如下图：</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/13e7b311baef1c507084f09e350eb3fd.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="5.png"
+	
+	
+></p>
+<p>病毒会根据用户计算机内网IP，生成覆盖整个局域网网段表，然后循环依次尝试攻击。相关代码如下：</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/6c95b708d7e323facecd8e7d2692fa8f.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="6.png"
+	
+	
+></p>
+<p>公网传播主要代码如下图，病毒会随机生成IP地址，尝试发送攻击代码。</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/d3d77c49ca62ed27f4fcf4a410f756b9.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="7.png"
+	
+	
+></p>
+<p>SMB漏洞攻击数据包数据，如下图所示：</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/c74989e822eb02dc391dae0e29b3167f.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="8.png"
+	
+	
+></p>
+<p>Worm病毒的PE文件中包含有两个动态库文件，是攻击模块的Payload，分别是：x86版本的payload，大小0x4060和x64版本的payload，大小0xc8a4。</p>
+<p>两个Payload都是只有资源目录结构没有具体资源的无效PE动态库文件。病毒在攻击前，会构造两块内存，在内存中分别组合Payload和打开Worm病毒自身，凑成有效攻击Payload，代码如下图所示：</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/155621df486a622111f8c941f8ad62b8.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="9.png"
+	
+	
+></p>
+<p>有效攻击Payload模型如下：</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/82c50cdca3ffb421cf952e3c8fca21d4.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="10.png"
+	
+	
+></p>
+<p>完整的攻击Payload的资源如下图，资源中的第一个DWORD是病毒大小，之后就是病毒本身。</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/8d0deee30d27da3a02d88ca56242fefc.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="11.png"
+	
+	
+></p>
+<p>然后使用MS17-010漏洞，通过APC方式注入动态库到被攻击计算机的Lsass.exe，并执行Payload动态库的导出函数PlayGame，该函数非常简单，功能就是释放资源“W”到被攻击计算机“C:Windowsmssecsvc.exe”，并执行，如下图所示：</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/6fd440a3f597e5b44f6cbeb59e82d33c.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="12.png"
+	
+	
+></p>
+<p>火绒剑监控被攻击计算机的如下：</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/366fb6aab39480d820a0ad8f7ccdaba3.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="13.png"
+	
+	
+></p>
+<p>被攻击的计算机包含病毒的完整功能，除了会被勒索，还会继续使用MS17-010漏洞进行传播，这种传播呈几何级向外扩张，这也是该病毒短时间内大规模爆发的主要原因。如下图：</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/78f7993892ef07259ee85b6178185afb.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="14.png"
+	
+	
+></p>
+<p>目前，攻击内网IP需要用户计算机直接暴露在公网且没有安装相应操作系统补丁的计算机才会受到影响，因此那些通过路由拨号的个人用户，并不会直接通过公网被攻击。如果企业网络也是通过总路由出口访问公网的，那么企业网络中的电脑也不会受到来自公网的直接攻击。但是，现实中一些机构的网络存在直接连接公网的电脑，且内部网络又类似一个大局域网，因此一旦暴露在公网上的电脑被攻破，就会导致整个局域网存在被感染的风险。<br>
+####2. 勒索病毒部分详细分析：<br>
+1. 该程序资源中包含带有密码的压缩文件，使用密码“WNcry@2ol7”解压之后释放出一组文件：<br>
+a) taskdl.exe，删除临时目录下的所有“*.WNCRYT”扩展名的临时文件。<br>
+b) taskse.exe，以任意session运行指定程序。</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/d6426ab7e15e356803c3a8d08117ca2a.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="15.png"
+	
+	
+></p>
+<p>c) u.wnry，解密程序，释放后名为@WanaDecryptor@.exe。</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/315d11d4c70cd4b1d37287aca0dd42fc.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="16.png"
+	
+	
+></p>
+<p>d) b.wnry勒索图片资源。</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/5a70dbf31ba456bf7411d726e0b7160f.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="17.png"
+	
+	
+></p>
+<p>e) s.wnry，包含洋葱路由器组件的压缩包。病毒作者将勒索服务器搭建在”暗网”，需要通过tor.exe和服务器进行通信。</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/68f10889e810d467c9285619571838e0.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="18.png"
+	
+	
+></p>
+<p>f) c.wnry，洋葱路由器地址信息。</p>
+<p> <img src="http://www.huorong.cn/d/file/2017-05-16/203d41c3a336e2d5f8a6fc53c96a6740.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="19.png"
+	
+	
+></p>
+<p>g) t.wnry，解密后得到加密文件主要逻辑代码。</p>
+<p>h) r.wnry，勒索Q&amp;A。</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/8d72aee391909dc67326a87c60267898.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="20.png"
+	
+	
+></p>
+<p>2. 通过命令行修改所有文件的权限为完全访问权限。命令行如下：<br>
+icacls . /grant Everyone:F /T /C /Q<br>
+3. 解密t.wnry文件数据得到含有主要加密逻辑代码的动态库，通过其模拟的LoadLibrary和GetProcAddress函数调用该动态库中的导出函数执行其加密逻辑。<br>
+调用勒索动态库代码，如下图所示：</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/980eba1874e139dcc6199edf53e34f7a.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="21.png"
+	
+	
+></p>
+<p>勒索主逻辑执行，先会导入一个存放在镜像中的RSA公钥，之后调用CryptGenKey生成一组RSA算法的Session key。之后将这组Key的公钥通过CryptExportKey导出，再写入到00000000.pky文件中。将Session key中的私钥用刚导入RSA公钥进行加密，存放在00000000.eky如下图所示： </p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/6976c7a4bb64a9255b3f74b6c1423244.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="22.png"
+	
+	
+></p>
+<p>如果遍历到的文件扩展名在欲加密的文件扩展名列表中，如下图所示：</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/1f44129b0e4499be4d1aea6f2c98dbf5.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="23.png"
+	
+	
+></p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/749cc7c680e9d51fc6c0382fab275538.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="24.png"
+	
+	
+></p>
+<p>对于每个需要加密的文件，都会调用CryptGenRadom随机生成AES密钥，之后使用Session Key中的RSA公钥对AES密钥进行加密，存放在加密后的数据文件头中，之后将原始文件数据用该AES密钥进行加密。如下图所示：</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/a38783adacc9db96030db6aa22114141.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="25.png"
+	
+	
+></p>
+<p>整体加密流程，如下图所示：</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/17fd5cd20c0f6d46d8a754e32d39bf7d.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="26.png"
+	
+	
+></p>
+<p>因为病毒是生成加密过的用户文件后再删除原始文件，所以存在通过文件恢复类工具恢复原始未加密文件的可能。但是因为病毒对文件系统的修改操作过于频繁，导致被删除的原始文件数据块被覆盖，致使实际恢复效果有限。且随着系统持续运行，恢复类工具恢复数据的可能性会显著降低。</p>
+<p><strong>四、 关于“WannaCry”新变种的说明</strong></p>
+<p>早期版本的“WannaCry”病毒存在“Kill Switch”开关，也就是病毒中检测“http://www.iuqerfsodp9ifjaposdfjhgosurijfaewrwergwea.com”这个网址是否可以访问的代码片段，如果可以访问则不会利用“永恒之蓝”漏洞继续传播。</p>
+<p>现在这个域名已经被注册，这个版本“WannaCry”传播功能等于已经关闭，因为这段代码本身没有加密，所以很可能会被得到改病毒样本的“骇客”修改，放开开关，使病毒继续传播。</p>
+<p>截止到今日，收集到的所谓“WannaCry”最新版本的“变种”，正如我们推测的一样，网上两个“热炒&quot;变种, SHA256分别为：<br>
+32f24601153be0885f11d62e0a8a2f0280a2034fc981d8184180c5d3b1b9e8cf<br>
+c8d816410ebfb134ee14d287a34cea9d34d627a2c5e16234ab726cf9fde47ec6</p>
+<p>和早期的“WannaCry”相比<br>
+SHA256：24d004a104d4d54034dbcffc2a4b19a11f39008a575aa614ea04703480b1022c</p>
+<p>有明显人为修改痕迹，如下图所示：</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/a64db14b629be44dc4c73f1ecc36cd7d.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="27.png"
+	
+	
+></p>
+<p>这个样本仅仅是16进制修改了两个字节，让&quot;Kill Switch&quot;失效，这个修改不会影响检测。<br>
+另外一个样本除了修改了&quot;Kill Switch&quot;域名，还修改了病毒携带勒索模块。经过测试勒索代码已经被修改坏了，无法运行。如下图：</p>
+<p><img src="http://www.huorong.cn/d/file/2017-05-16/7ded83407df3872febdd476825b1ab9a.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="28.png"
+	
+	
+></p>
+<p>除了以上两个样本，火绒还截获另一个人为修改的” WannaCry “样本，同样被修改的不能运行</p>
+<p>SHA256如下：<br>
+99c0d50b088df94cb0b150a203de6433cb97d4f8fd3b106ce442757c5faa35c4</p>
 
 </section>
 
@@ -461,25 +890,6 @@
         <div class="flex article-list--tile">
             
                 
-<article class="has-image">
-    <a href="/p/%E5%9B%9E%E5%BF%86%E5%8B%92%E7%B4%A2%E7%97%85%E6%AF%92wannacry%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="https://s.secrss.com/anquanneican/eba6dc46083f85d24ac9474fa735590a.jpg" loading="lazy" data-key="" data-hash="https://s.secrss.com/anquanneican/eba6dc46083f85d24ac9474fa735590a.jpg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">回忆勒索病毒WannaCry：深度剖析</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
 <article class="">
     <a href="/p/%E8%B0%B7%E6%AD%8C%E6%90%9C%E7%B4%A2%E8%AF%AD%E6%B3%95/">
         
@@ -487,6 +897,19 @@
 
         <div class="article-details">
             <h2 class="article-title">谷歌搜索语法</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E9%AD%94%E6%B3%95%E4%B8%8A%E7%BD%91/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">魔法上网</h2>
         </div>
     </a>
 </article>
