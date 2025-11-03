@@ -98,7 +98,7 @@
         <guid>https://www.retr0.qzz.io/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%85%83%E7%BB%84/</guid>
         <description>&lt;blockquote&gt;
 &lt;p&gt;什么是元组？&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:rgba(0, 0, 0, 0.8);&#34;&gt;元组&lt;/font&gt;&lt;/strong&gt;&lt;font style=&#34;color:rgba(0, 0, 0, 0.8);&#34;&gt;是Python中的一种基本数据结构，它是一个不可变的序列，意味着&lt;/font&gt;&lt;u&gt;&lt;font style=&#34;color:#DF2A3F&#34;&gt;一旦创建，元组中的元素不能被修改、添加或删除。&lt;/font&gt;&lt;/u&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;元组&lt;/strong&gt;是Python中的一种基本数据结构，它是一个不可变的序列，意味着&lt;u&gt;&lt;font style=&#34;color:#DF2A3F&#34;&gt;一旦创建，元组中的元素不能被修改、添加或删除。&lt;/font&gt;&lt;/u&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;元组的定义&#34;&gt;元组的定义
 &lt;/h2&gt;&lt;p&gt;定义元组使用&lt;font style=&#34;color:#DF2A3F;&#34;&gt;小括号&lt;/font&gt;，且用&lt;font style=&#34;color:#DF2A3F;&#34;&gt;逗号&lt;/font&gt;隔开各个数据，&lt;font style=&#34;color:#DF2A3F;&#34;&gt;数据可以是不同数据类型&lt;/font&gt;&lt;/p&gt;
