@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="判断n阶方阵A是否可逆，核心看以下快速等价条件（满足其一即可，优先选前2个最便捷）：\n行列式非零：$|A| \\neq 0$（直接计算行列式，最快上手）； 矩阵满秩：秩$r(A) = n$（通过初等行变换看是否能化为单位矩阵）； 齐次方程组$AX = 0$只有零解； 行/列向量组线性无关； 存在方阵B，使得$AB = BA = I$（I为单位矩阵）。 ">
-<title>快速判断矩阵是否可逆</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="学习Python中的一个重要数据容器：集合">
+<title>数据容器：集合</title>
 
-<link rel='canonical' href='https://www.retr0.qzz.io/p/%E5%BF%AB%E9%80%9F%E5%88%A4%E6%96%AD%E7%9F%A9%E9%98%B5%E6%98%AF%E5%90%A6%E5%8F%AF%E9%80%86/'>
+<link rel='canonical' href='https://www.retr0.qzz.io/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E9%9B%86%E5%90%88/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="快速判断矩阵是否可逆">
-<meta property='og:description' content="判断n阶方阵A是否可逆，核心看以下快速等价条件（满足其一即可，优先选前2个最便捷）：\n行列式非零：$|A| \\neq 0$（直接计算行列式，最快上手）； 矩阵满秩：秩$r(A) = n$（通过初等行变换看是否能化为单位矩阵）； 齐次方程组$AX = 0$只有零解； 行/列向量组线性无关； 存在方阵B，使得$AB = BA = I$（I为单位矩阵）。 ">
-<meta property='og:url' content='https://www.retr0.qzz.io/p/%E5%BF%AB%E9%80%9F%E5%88%A4%E6%96%AD%E7%9F%A9%E9%98%B5%E6%98%AF%E5%90%A6%E5%8F%AF%E9%80%86/'>
+<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="数据容器：集合">
+<meta property='og:description' content="学习Python中的一个重要数据容器：集合">
+<meta property='og:url' content='https://www.retr0.qzz.io/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E9%9B%86%E5%90%88/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-10-28T15:27:38&#43;08:00'/><meta property='article:modified_time' content='2025-10-28T15:27:38&#43;08:00'/>
-<meta name="twitter:title" content="快速判断矩阵是否可逆">
-<meta name="twitter:description" content="判断n阶方阵A是否可逆，核心看以下快速等价条件（满足其一即可，优先选前2个最便捷）：\n行列式非零：$|A| \\neq 0$（直接计算行列式，最快上手）； 矩阵满秩：秩$r(A) = n$（通过初等行变换看是否能化为单位矩阵）； 齐次方程组$AX = 0$只有零解； 行/列向量组线性无关； 存在方阵B，使得$AB = BA = I$（I为单位矩阵）。 ">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-06T22:30:30&#43;08:00'/><meta property='article:modified_time' content='2025-11-06T22:30:30&#43;08:00'/>
+<meta name="twitter:title" content="数据容器：集合">
+<meta name="twitter:description" content="学习Python中的一个重要数据容器：集合">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -257,7 +257,55 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#集合的定义">集合的定义</a></li>
+    <li><a href="#集合的常用操作">集合的常用操作</a>
+      <ol>
+        <li><a href="#添加新元素-add">添加新元素 add</a></li>
+        <li><a href="#移除元素-remove">移除元素 remove</a></li>
+        <li><a href="#从集合中随机抽取元素-pop">从集合中随机抽取元素 pop</a></li>
+        <li><a href="#清空集合-clear">清空集合 clear</a></li>
+        <li><a href="#取出两个集合的差集-difference">取出两个集合的差集 difference</a></li>
+        <li><a href="#消除两个集合的差集">消除两个集合的差集</a></li>
+        <li><a href="#两个集合合并">两个集合合并</a></li>
+        <li><a href="#统计集合元素数量">统计集合元素数量</a></li>
+      </ol>
+    </li>
+    <li><a href="#集合的循环遍历">集合的循环遍历</a>
+      <ol>
+        <li><a href="#for循环">for循环</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -267,12 +315,12 @@
     
     <header class="article-category">
         
-            <a href="/categories/%E9%80%9F%E6%9F%A5/" >
-                速查
+            <a href="/categories/python/" style="background-color: #2A87D8; color: #fff;">
+                Python
             </a>
         
-            <a href="/categories/%E8%AF%BE%E5%A0%82%E5%B0%8F%E8%AE%B0/" >
-                课堂小记
+            <a href="/categories/%E9%80%9F%E6%9F%A5/" >
+                速查
             </a>
         
     </header>
@@ -280,9 +328,13 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E5%BF%AB%E9%80%9F%E5%88%A4%E6%96%AD%E7%9F%A9%E9%98%B5%E6%98%AF%E5%90%A6%E5%8F%AF%E9%80%86/">快速判断矩阵是否可逆</a>
+            <a href="/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E9%9B%86%E5%90%88/">数据容器：集合</a>
         </h2>
     
+        
+        <h3 class="article-subtitle">
+            学习Python中的一个重要数据容器：集合
+        </h3>
         
     </div>
 
@@ -302,7 +354,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-10-28</time>
+                <time class="article-time--published">2025-11-06</time>
             </div>
         
 
@@ -325,15 +377,174 @@
     <section class="article-content">
     
     
-    <p>判断n阶方阵A是否可逆，核心看以下<strong>快速等价条件</strong>（满足其一即可，优先选前2个最便捷）：</p>
-<ol>
-<li>行列式非零：$|A| \neq 0$（直接计算行列式，最快上手）；</li>
-<li>矩阵满秩：秩$r(A) = n$（通过初等行变换看是否能化为单位矩阵）；</li>
-<li>齐次方程组$AX = 0$只有零解；</li>
-<li>行/列向量组线性无关；</li>
-<li>存在方阵B，使得$AB = BA = I$（I为单位矩阵）。</li>
-</ol>
-
+    <blockquote>
+<p>集合不支持元素的重复（自带去重功能），并且内容无序。</p>
+</blockquote>
+<h2 id="集合的定义">集合的定义
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 定义集合变量</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 定义空集合</span>
+</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>	<span class="c1"># 输出{1, 2, 3, 4, 5} 发现自动去重</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="集合的常用操作">集合的常用操作
+</h2><p>因为集合是无序的，所以集合**<font style="color:#DF2A3F;">不支持下标索引</font>**，但是集合是可以修改的</p>
+<h3 id="添加新元素-add">添加新元素 add
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;hi&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>	<span class="c1"># 添加成功</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>		<span class="c1"># 添加失败，因为被自动去重</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>		<span class="c1"># 输出{1, 2, 3, 4, 5, &#39;hi&#39;, &#39;hello&#39;}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="移除元素-remove">移除元素 remove
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;hi&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="从集合中随机抽取元素-pop">从集合中随机抽取元素 pop
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;hi&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意：取出元素后集合本身被修改，对应元素移除，因此你需要用一个变量来接收取出的元素</p>
+<h3 id="清空集合-clear">清空集合 clear
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;hi&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="取出两个集合的差集-difference">取出两个集合的差集 difference
+</h3><p>语法：<strong>集合1.difference(集合2)</strong>，功能：取出集合1和集合2的差集**（集合1有而集合2没有的，即 C=A-A∩B ）**</p>
+<p><strong><font style="color:#DF2A3F;">结果：得到一个新集合，集合1和集合2不变</font></strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">set2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">set3</span> <span class="o">=</span> <span class="n">set1</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">set2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">set3</span><span class="p">)</span>		<span class="c1"># 结果：{2,3} 	得到的新集合</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>		<span class="c1"># 结果：{1,2,3} 不变</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">set2</span><span class="p">)</span>		<span class="c1"># 结果：{1,5,6} 不变</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="消除两个集合的差集">消除两个集合的差集
+</h3><p>语法：集合1.difference_update(集合2)</p>
+<p>功能：对比集合1和集合2，在集合1内，删除和集合2相同的元素（<strong>即 A=A-A∩B</strong>）</p>
+<p>因此只有集合1被修改，不会产生新的集合。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">set2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">set1</span><span class="o">.</span><span class="n">difference_update</span><span class="p">(</span><span class="n">set2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>		<span class="c1"># 结果{2, 3}，被修改</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">set2</span><span class="p">)</span>		<span class="c1"># 结果{1,5,6}，不变</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="两个集合合并">两个集合合并
+</h3><p>语法：集合1.union(集合2)</p>
+<p>功能：将集合1和集合2合并为<font style="color:#DF2A3F;">新集合</font></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">set2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">set3</span> <span class="o">=</span> <span class="n">set1</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">set2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">set3</span><span class="p">)</span>		<span class="c1"># 结果：{1,2,3,5,6}，新集合</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>		<span class="c1"># 结果：{1,2,3}，不变</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">set2</span><span class="p">)</span>		<span class="c1"># 结果：{1,5,6}，不变</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="统计集合元素数量">统计集合元素数量
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;hi&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="集合的循环遍历">集合的循环遍历
+</h2><p><strong><font style="color:#DF2A3F;">注意：因为集合不支持下标索引，所以无法为while循环提供条件，因此只能使用for循环</font></strong></p>
+<h3 id="for循环">for循环
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;hi&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
 
@@ -395,64 +606,64 @@
             
                 
 <article class="">
-    <a href="/p/%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95%E6%B1%82%E9%80%86%E7%9F%A9%E9%98%B5/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">几种方法求逆矩阵</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/%E4%B8%89%E4%B8%AA%E5%BE%AE%E5%88%86%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">三个微分中值定理</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">矩阵的秩及其性质</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E9%9B%86%E5%90%88/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">数据容器：集合</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
     <a href="/p/%E5%BA%8F%E5%88%97%E7%9A%84%E6%93%8D%E4%BD%9C%E5%88%87%E7%89%87/">
         
         
 
         <div class="article-details">
             <h2 class="article-title">序列的操作：切片</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E7%AC%A6%E4%B8%B2/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">数据容器：字符串</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%85%83%E7%BB%84/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">数据容器：元组</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%88%97%E8%A1%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">数据容器：列表</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95%E6%B1%82%E9%80%86%E7%9F%A9%E9%98%B5/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">几种方法求逆矩阵</h2>
         </div>
     </a>
 </article>
