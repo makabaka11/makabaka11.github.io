@@ -7,7 +7,71 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Mon, 03 Nov 2025 13:18:39 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/categories/%E6%9D%82%E9%A1%B9/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 08 Nov 2025 20:57:28 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/categories/%E6%9D%82%E9%A1%B9/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>主流网盘解析,满速下载 ,(百度,夸克,迅雷,阿里)</title>
+        <link>https://www.retr0.qzz.io/p/%E4%B8%BB%E6%B5%81%E7%BD%91%E7%9B%98%E8%A7%A3%E6%9E%90%E6%BB%A1%E9%80%9F%E4%B8%8B%E8%BD%BD-%E7%99%BE%E5%BA%A6%E5%A4%B8%E5%85%8B%E8%BF%85%E9%9B%B7%E9%98%BF%E9%87%8C/</link>
+        <pubDate>Sat, 08 Nov 2025 20:57:28 +0800</pubDate>
+        
+        <guid>https://www.retr0.qzz.io/p/%E4%B8%BB%E6%B5%81%E7%BD%91%E7%9B%98%E8%A7%A3%E6%9E%90%E6%BB%A1%E9%80%9F%E4%B8%8B%E8%BD%BD-%E7%99%BE%E5%BA%A6%E5%A4%B8%E5%85%8B%E8%BF%85%E9%9B%B7%E9%98%BF%E9%87%8C/</guid>
+        <description>&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;网盘&lt;/th&gt;
+          &lt;th&gt;地址&lt;/th&gt;
+          &lt;th&gt;使用说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;百度&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://analysis.icy6.cn/user/parse&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Vite App&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;font style=&#34;color:rgb(52, 73, 94);background-color:rgba(255, 255, 255, 0.8);&#34;&gt;无使用条件,解析50个文件,大小限制&lt;/font&gt;&lt;strong&gt;&lt;font style=&#34;color:rgb(133, 0, 255);background-color:rgba(255, 255, 255, 0.8);&#34;&gt;10TB&lt;/font&gt;&lt;/strong&gt;&lt;font style=&#34;color:rgb(52, 73, 94);background-color:rgba(255, 255, 255, 0.8);&#34;&gt;内(每日刷新)&lt;/font&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;百度&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://bw.01233.xyz&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;百度网盘资源搜索&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;font style=&#34;color:rgb(52, 73, 94);background-color:rgba(255, 255, 255, 0.8);&#34;&gt;因成本问题,该站点已经停止运行&lt;/font&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;百度&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://bw.01233.xyz&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;百度网盘资源搜索&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;font style=&#34;color:rgb(52, 73, 94);background-color:rgba(255, 255, 255, 0.8);&#34;&gt;需要获取解析密码,解析20个文件,大小限制&lt;/font&gt;&lt;strong&gt;&lt;font style=&#34;color:rgb(133, 0, 255);background-color:rgba(255, 255, 255, 0.8);&#34;&gt;30GB&lt;/font&gt;&lt;/strong&gt;&lt;font style=&#34;color:rgb(52, 73, 94);background-color:rgba(255, 255, 255, 0.8);&#34;&gt;内(每日刷新)&lt;/font&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;夸克&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://kdown.moiu.cn/quark-free/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Kdown - 夸克网盘解析 Free版本&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;font style=&#34;color:rgb(52, 73, 94);background-color:rgba(255, 255, 255, 0.8);&#34;&gt;需要获取解析密码,无数量限制,无大小限制&lt;/font&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;阿里&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://bw.01233.xyz/alipan&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://bw.01233.xyz/alipan&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;寄了&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;百度&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://kdown.moiu.cn/free/#/index&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;KDown-Free - 百度网盘解析工具&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;font style=&#34;color:rgb(52, 73, 94);background-color:rgba(255, 255, 255, 0.8);&#34;&gt;需要获取解析密码,无数量限制,无大小限制&lt;/font&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;迅雷&lt;/td&gt;
+          &lt;td&gt;&lt;font style=&#34;color:rgb(52, 73, 94);background-color:rgba(255, 255, 255, 0.8);&#34;&gt;客户端破解&lt;/font&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;font style=&#34;color:rgb(52, 73, 94);background-color:rgba(255, 255, 255, 0.8);&#34;&gt;因被投诉,已删除下架&lt;/font&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;安卓端下载器:&lt;a class=&#34;link&#34; href=&#34;https://zxxxx.lanzoul.com/idBjb34k55pi&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AriaNgGUI&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;PC端下载器:&lt;a class=&#34;link&#34; href=&#34;https://motrix.app/zh-CN/about&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Motrix&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>回忆勒索病毒WannaCry：深度剖析</title>
         <link>https://www.retr0.qzz.io/p/%E5%9B%9E%E5%BF%86%E5%8B%92%E7%B4%A2%E7%97%85%E6%AF%92wannacry%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90/</link>
         <pubDate>Mon, 03 Nov 2025 13:18:39 +0800</pubDate>
