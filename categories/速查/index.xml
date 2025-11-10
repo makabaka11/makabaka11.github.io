@@ -7,12 +7,131 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Sun, 09 Nov 2025 17:49:07 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/categories/%E9%80%9F%E6%9F%A5/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>数据容器的通用操作</title>
-        <link>https://www.retr0.qzz.io/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E7%9A%84%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C/</link>
+        <lastBuildDate>Sun, 09 Nov 2025 23:27:53 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/categories/%E9%80%9F%E6%9F%A5/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>7.1 进阶函数</title>
+        <link>https://www.retr0.qzz.io/p/7.1-%E8%BF%9B%E9%98%B6%E5%87%BD%E6%95%B0/</link>
+        <pubDate>Sun, 09 Nov 2025 23:27:53 +0800</pubDate>
+        
+        <guid>https://www.retr0.qzz.io/p/7.1-%E8%BF%9B%E9%98%B6%E5%87%BD%E6%95%B0/</guid>
+        <description>&lt;h2 id=&#34;多个返回值的写法&#34;&gt;多个返回值的写法
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;test&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;test&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;按照返回值的顺序，写对应的多个变量接收即可&lt;/p&gt;
+&lt;p&gt;变量之间用逗号隔开&lt;/p&gt;
+&lt;p&gt;支持不同类型的数据return&lt;/p&gt;
+&lt;h2 id=&#34;函数的多种参数使用形式&#34;&gt;函数的多种参数使用形式
+&lt;/h2&gt;&lt;h3 id=&#34;位置参数&#34;&gt;位置参数
+&lt;/h3&gt;&lt;p&gt;调用时根据函数定义的参数位置来传递参数&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;user_info&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;age&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gender&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;您的姓名是&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;，年龄是&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;age&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;，性别是&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gender&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;	&lt;span class=&#34;c1&#34;&gt;# 注意此处print内有f，意为在字符串内插入表达式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;user_info&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Retr0&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;18&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;男&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;关键字参数&#34;&gt;关键字参数
+&lt;/h3&gt;&lt;p&gt;调用时通过“键=值”形式传递参数&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;user_info&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;age&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gender&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;您的姓名是&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;，年龄是&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;age&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;，性别是&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gender&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 关键字传参&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;user_info&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;小明&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;age&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;20&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gender&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;男&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 可以不按照固定顺序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;user_info&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;age&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;20&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gender&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;男&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;小明&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 可以和位置参数混用，位置参数必须在前，且匹配参数顺序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;user_info&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;小明&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;age&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;20&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gender&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;男&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;注意：函数调用时，如果有位置参数时位置参数必须在关键字参数的前面，但关键字参数之间不存在先后顺序&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;缺省参数&#34;&gt;缺省参数
+&lt;/h3&gt;&lt;p&gt;也叫默认参数，用于定义函数，为参数提供默认值，调用函数时刻不传该默认参数的值&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;注意：所有位置参数必须出现在默认参数前，包括函数定义和调用&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;user_info&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;age&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gender&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;男&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;您的姓名是&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;，年龄是&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;age&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;，性别是&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gender&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;user_info&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Retr0&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;20&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;user_info&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;小红&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;20&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;女&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;函数调用时，如果为缺省参数传值则修改默认参数值，否则使用这个默认值&lt;/p&gt;
+&lt;h3 id=&#34;不定长参数&#34;&gt;不定长参数
+&lt;/h3&gt;&lt;p&gt;也叫可变参数，用于不确定调用的时候会传递多少个参数（不传参也可以）的场景&lt;/p&gt;
+&lt;p&gt;类型包括：&lt;/p&gt;
+&lt;h4 id=&#34;位置传递&#34;&gt;位置传递
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;test&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;	&lt;span class=&#34;c1&#34;&gt;# *标记表示args这个形式参数接收的参数数量无限，且采用位置传递&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;test&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Retr0&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;test&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Retr0&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;18&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;传进的所有参数都会被args变量收集，它会根据传进参数的位置合并为一个元组，args是元组类型&lt;/p&gt;
+&lt;h4 id=&#34;关键字参数-1&#34;&gt;关键字参数
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;test&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;**&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;kwargs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;	&lt;span class=&#34;c1&#34;&gt;# **标记表示kwargs这个形式参数接收的参数数量无限，且采用关键字传递&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;kwargs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;test&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Retr0&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;age&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;18&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gender&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;男&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;参数是“键=值”的形式的情况下，所有的“键=值”都会被kwargs接受，同时根据“键=值”组成字典&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>6.7 数据容器的通用操作</title>
+        <link>https://www.retr0.qzz.io/p/6.7-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E7%9A%84%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C/</link>
         <pubDate>Sun, 09 Nov 2025 17:49:07 +0800</pubDate>
         
-        <guid>https://www.retr0.qzz.io/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E7%9A%84%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C/</guid>
+        <guid>https://www.retr0.qzz.io/p/6.7-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E7%9A%84%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C/</guid>
         <description>&lt;h3 id=&#34;统计容器的元素个数-len&#34;&gt;统计容器的元素个数 len
 &lt;/h3&gt;&lt;p&gt;前几篇中都有提到，不做演示&lt;/p&gt;
 &lt;h3 id=&#34;统计容器的最大元素-max&#34;&gt;统计容器的最大元素 max
@@ -37,7 +156,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;min&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;注意：字符串的比较大小原则按照ASCII表顺序比较&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;注意：字符串的比较大小原则按照ASCII表顺序比较,从第一个字符开始一位位比较只要有一个字符大整体就大&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;h3 id=&#34;类型转换&#34;&gt;类型转换
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -197,11 +316,11 @@
 &lt;/div&gt;</description>
         </item>
         <item>
-        <title>数据容器：字典</title>
-        <link>https://www.retr0.qzz.io/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E5%85%B8/</link>
+        <title>6.6 数据容器：字典</title>
+        <link>https://www.retr0.qzz.io/p/6.6-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E5%85%B8/</link>
         <pubDate>Fri, 07 Nov 2025 22:21:09 +0800</pubDate>
         
-        <guid>https://www.retr0.qzz.io/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E5%85%B8/</guid>
+        <guid>https://www.retr0.qzz.io/p/6.6-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E5%85%B8/</guid>
         <description>&lt;blockquote&gt;
 &lt;p&gt;Python中，字典（Dictionary）是一种内置的数据结构，用于存储键值对的集合。它是一种可变容器，允许用户存储任意类型的对象。字典中的每个元素由一个键（key）和一个值（value）组成，键和值之间用冒号（:）分隔，而各个键值对之间用逗号（,）分隔，整个字典被包含在花括号（{}）中。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -444,11 +563,11 @@
 &lt;/div&gt;</description>
         </item>
         <item>
-        <title>数据容器：集合</title>
-        <link>https://www.retr0.qzz.io/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E9%9B%86%E5%90%88/</link>
+        <title>6.5 数据容器：集合</title>
+        <link>https://www.retr0.qzz.io/p/6.5-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E9%9B%86%E5%90%88/</link>
         <pubDate>Thu, 06 Nov 2025 22:30:30 +0800</pubDate>
         
-        <guid>https://www.retr0.qzz.io/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E9%9B%86%E5%90%88/</guid>
+        <guid>https://www.retr0.qzz.io/p/6.5-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E9%9B%86%E5%90%88/</guid>
         <description>&lt;blockquote&gt;
 &lt;p&gt;集合不支持元素的重复（自带去重功能），并且内容无序。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -619,11 +738,11 @@
 &lt;/div&gt;</description>
         </item>
         <item>
-        <title>序列的操作：切片</title>
-        <link>https://www.retr0.qzz.io/p/%E5%BA%8F%E5%88%97%E7%9A%84%E6%93%8D%E4%BD%9C%E5%88%87%E7%89%87/</link>
+        <title>6.4 序列的操作：切片</title>
+        <link>https://www.retr0.qzz.io/p/6.4-%E5%BA%8F%E5%88%97%E7%9A%84%E6%93%8D%E4%BD%9C%E5%88%87%E7%89%87/</link>
         <pubDate>Wed, 05 Nov 2025 18:17:46 +0800</pubDate>
         
-        <guid>https://www.retr0.qzz.io/p/%E5%BA%8F%E5%88%97%E7%9A%84%E6%93%8D%E4%BD%9C%E5%88%87%E7%89%87/</guid>
+        <guid>https://www.retr0.qzz.io/p/6.4-%E5%BA%8F%E5%88%97%E7%9A%84%E6%93%8D%E4%BD%9C%E5%88%87%E7%89%87/</guid>
         <description>&lt;blockquote&gt;
 &lt;p&gt;序列是指：内容连续、有序，可使用下标索引的一类数据容器&lt;/p&gt;
 &lt;p&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;列表、元组、字符串，均可以视为序列。&lt;/font&gt;&lt;/p&gt;
@@ -691,11 +810,11 @@
 &lt;/div&gt;</description>
         </item>
         <item>
-        <title>数据容器：字符串</title>
-        <link>https://www.retr0.qzz.io/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
+        <title>6.3 数据容器：字符串</title>
+        <link>https://www.retr0.qzz.io/p/6.3-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
         <pubDate>Tue, 04 Nov 2025 17:45:08 +0800</pubDate>
         
-        <guid>https://www.retr0.qzz.io/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid>
+        <guid>https://www.retr0.qzz.io/p/6.3-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid>
         <description>&lt;blockquote&gt;
 &lt;p&gt;字符串是字符的容器，一个字符串可以存放任意数量的字符。字符串同样&lt;font style=&#34;color:#DF2A3F;&#34;&gt;无法修改&lt;/font&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -859,11 +978,11 @@
 &lt;/div&gt;</description>
         </item>
         <item>
-        <title>数据容器：元组</title>
-        <link>https://www.retr0.qzz.io/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%85%83%E7%BB%84/</link>
+        <title>6.2 数据容器：元组</title>
+        <link>https://www.retr0.qzz.io/p/6.2-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%85%83%E7%BB%84/</link>
         <pubDate>Mon, 03 Nov 2025 18:14:15 +0800</pubDate>
         
-        <guid>https://www.retr0.qzz.io/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%85%83%E7%BB%84/</guid>
+        <guid>https://www.retr0.qzz.io/p/6.2-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%85%83%E7%BB%84/</guid>
         <description>&lt;blockquote&gt;
 &lt;p&gt;什么是元组？&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;元组&lt;/strong&gt;是Python中的一种基本数据结构，它是一个不可变的序列，意味着&lt;u&gt;&lt;font style=&#34;color:#DF2A3F&#34;&gt;一旦创建，元组中的元素不能被修改、添加或删除。&lt;/font&gt;&lt;/u&gt;&lt;/p&gt;
@@ -1004,11 +1123,11 @@
 &lt;/div&gt;</description>
         </item>
         <item>
-        <title>数据容器：列表</title>
-        <link>https://www.retr0.qzz.io/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%88%97%E8%A1%A8/</link>
+        <title>6.1 数据容器：列表</title>
+        <link>https://www.retr0.qzz.io/p/6.1-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%88%97%E8%A1%A8/</link>
         <pubDate>Sun, 02 Nov 2025 22:54:24 +0800</pubDate>
         
-        <guid>https://www.retr0.qzz.io/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%88%97%E8%A1%A8/</guid>
+        <guid>https://www.retr0.qzz.io/p/6.1-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%88%97%E8%A1%A8/</guid>
         <description>&lt;h2 id=&#34;列表的标准定义形式&#34;&gt;列表的标准定义形式
 &lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;

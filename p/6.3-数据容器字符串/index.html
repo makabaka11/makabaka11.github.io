@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="学习Python中的一个重要数据容器：字典">
-<title>数据容器：字典</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="学习Python中的一个重要数据容器：字符串">
+<title>6.3 数据容器：字符串</title>
 
-<link rel='canonical' href='https://www.retr0.qzz.io/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E5%85%B8/'>
+<link rel='canonical' href='https://www.retr0.qzz.io/p/6.3-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E7%AC%A6%E4%B8%B2/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="数据容器：字典">
-<meta property='og:description' content="学习Python中的一个重要数据容器：字典">
-<meta property='og:url' content='https://www.retr0.qzz.io/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E5%85%B8/'>
+<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="6.3 数据容器：字符串">
+<meta property='og:description' content="学习Python中的一个重要数据容器：字符串">
+<meta property='og:url' content='https://www.retr0.qzz.io/p/6.3-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E7%AC%A6%E4%B8%B2/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-07T22:21:09&#43;08:00'/><meta property='article:modified_time' content='2025-11-07T22:21:09&#43;08:00'/>
-<meta name="twitter:title" content="数据容器：字典">
-<meta name="twitter:description" content="学习Python中的一个重要数据容器：字典">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-04T17:45:08&#43;08:00'/><meta property='article:modified_time' content='2025-11-04T17:45:08&#43;08:00'/>
+<meta name="twitter:title" content="6.3 数据容器：字符串">
+<meta name="twitter:description" content="学习Python中的一个重要数据容器：字符串">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -279,26 +279,21 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#字典的定义">字典的定义</a>
+    <li><a href="#字符串的定义">字符串的定义</a></li>
+    <li><a href="#字符串的常用操作">字符串的常用操作</a>
       <ol>
-        <li><a href="#字典标准格式">字典标准格式</a></li>
-        <li><a href="#字典数据的获取">字典数据的获取</a></li>
-        <li><a href="#字典的嵌套">字典的嵌套</a></li>
+        <li><a href="#找到特定字符串的下标">找到特定字符串的下标</a></li>
+        <li><a href="#字符串的替换">字符串的替换</a></li>
+        <li><a href="#字符串的分割">字符串的分割</a></li>
+        <li><a href="#字符串的规整操作">字符串的规整操作</a></li>
+        <li><a href="#统计字符串中某字符串出现的次数">统计字符串中某字符串出现的次数</a></li>
+        <li><a href="#统计字符串的长度">统计字符串的长度</a></li>
       </ol>
     </li>
-    <li><a href="#字典的常用操作">字典的常用操作</a>
+    <li><a href="#字符串的遍历">字符串的遍历</a>
       <ol>
-        <li><a href="#字典的新增元素">字典的新增元素</a></li>
-        <li><a href="#字典的更新修改元素">字典的更新/修改元素</a></li>
-        <li><a href="#删除元素-pop">删除元素 pop</a></li>
-        <li><a href="#清空字典">清空字典</a></li>
-        <li><a href="#获取全部的key-keys">获取全部的Key keys</a></li>
-        <li><a href="#统计字典内的元素数量-len">统计字典内的元素数量 len</a></li>
-      </ol>
-    </li>
-    <li><a href="#字典的遍历">字典的遍历</a>
-      <ol>
-        <li><a href="#for函数">for函数</a></li>
+        <li><a href="#while循环">while循环</a></li>
+        <li><a href="#for循环">for循环</a></li>
       </ol>
     </li>
   </ol>
@@ -332,12 +327,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E5%85%B8/">数据容器：字典</a>
+            <a href="/p/6.3-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E7%AC%A6%E4%B8%B2/">6.3 数据容器：字符串</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            学习Python中的一个重要数据容器：字典
+            学习Python中的一个重要数据容器：字符串
         </h3>
         
     </div>
@@ -358,7 +353,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-11-07</time>
+                <time class="article-time--published">2025-11-04</time>
             </div>
         
 
@@ -382,39 +377,151 @@
     
     
     <blockquote>
-<p>Python中，字典（Dictionary）是一种内置的数据结构，用于存储键值对的集合。它是一种可变容器，允许用户存储任意类型的对象。字典中的每个元素由一个键（key）和一个值（value）组成，键和值之间用冒号（:）分隔，而各个键值对之间用逗号（,）分隔，整个字典被包含在花括号（{}）中。</p>
+<p>字符串是字符的容器，一个字符串可以存放任意数量的字符。字符串同样<font style="color:#DF2A3F;">无法修改</font>。</p>
 </blockquote>
-<h2 id="字典的定义">字典的定义
-</h2><h3 id="字典标准格式">字典标准格式
+<h2 id="字符串的定义">字符串的定义
+</h2><p>字符串中的每个字符都为一个元素，同样可以用下标号索引，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>		<span class="c1">#输出h</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>	<span class="c1">#输出o</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此外，需要注意空格也属于一种字符</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;you and me&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">])</span>	<span class="c1">#输出空格</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="字符串的常用操作">字符串的常用操作
+</h2><h3 id="找到特定字符串的下标">找到特定字符串的下标
 </h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;you and me&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;and&#39;</span><span class="p">))</span>	<span class="c1">#输出4</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="字符串的替换">字符串的替换
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;12345666&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">s2</span> <span class="o">=</span> <span class="n">s1</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;6&#39;</span><span class="p">,</span><span class="s1">&#39;7&#39;</span><span class="p">)</span>	<span class="c1">#字符串.replace（‘要替换的字符’，‘替换后的字符’）</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>	<span class="c1">#输出12345666</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>	<span class="c1">#输出12345777</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可见replace并没有修改字符串本身，而是产生了一个新字符串，因此你需要一个变量来接收它</p>
+<h3 id="字符串的分割">字符串的分割
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;you and me&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">s2</span> <span class="o">=</span> <span class="n">s1</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>	<span class="c1">#字符串.split(&#39;分割依据&#39;)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>			<span class="c1">#输出you and me</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>			<span class="c1">#输出[&#39;you&#39;, &#39;and&#39;, &#39;me&#39;]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在括号内填入你想要按照哪一个字符分割后，split会将原字符串分割为若干元素并装入一个列表</p>
+<p>但是原字符串仍被未修改，因此你需要一个变量来接收分割结果</p>
+<h3 id="字符串的规整操作">字符串的规整操作
+</h3><p>当括号内不填参数时，strip会去除字符串前后的空格</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;  you and me  &#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>	<span class="c1">#输出you and me</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>当括号内填入参数后，strip会去除字符串首尾全部满足参数的字符（不严格：满足参数的任意字符就去除）例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;23you and me34&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;234&#39;</span><span class="p">))</span>	<span class="c1">#输出you and me</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此处表明于strip并不是找到'234&rsquo;这一整体才去除，而是把'2&rsquo;、&lsquo;3&rsquo;、&lsquo;4&rsquo;分别都去除</p>
+<h3 id="统计字符串中某字符串出现的次数">统计字符串中某字符串出现的次数
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;itheima and itcast&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;it&#39;</span><span class="p">))</span>	<span class="c1">#输出2</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>严格按照所查找字符串整体查找，区分大小写</p>
+<h3 id="统计字符串的长度">统计字符串的长度
+</h3><p>同样包括空格，用法与之前相同</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;you and me&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>	<span class="c1">#输出10</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="字符串的遍历">字符串的遍历
+</h2><h3 id="while循环">while循环
+</h3><p>示例：</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
+</span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 定义字典变量</span>
-</span></span><span class="line"><span class="cl"><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span><span class="n">value</span><span class="p">,</span><span class="n">key</span><span class="p">:</span><span class="n">value</span><span class="p">,</span><span class="err">……</span><span class="p">,</span><span class="n">key</span><span class="p">:</span><span class="n">value</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 定义空字典</span>
-</span></span><span class="line"><span class="cl"><span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl"><span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">{}</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;12345&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>	<span class="c1">#对元素a进行处理</span>
+</span></span><span class="line"><span class="cl">    <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>使用例：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 使用字典记录学生及其成绩</span>
-</span></span><span class="line"><span class="cl"><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;小明&#39;</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span><span class="s1">&#39;小华&#39;</span><span class="p">:</span><span class="mi">84</span><span class="p">,</span><span class="s1">&#39;小红&#39;</span><span class="p">:</span><span class="mi">90</span><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="字典数据的获取">字典数据的获取
-</h3><p>字典不支持下标索引，可以通过Key值来取得对应的Value</p>
+</div><h3 id="for循环">for循环
+</h3><p>示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -423,201 +530,10 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;小明&#39;</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span><span class="s1">&#39;小华&#39;</span><span class="p">:</span><span class="mi">84</span><span class="p">,</span><span class="s1">&#39;小红&#39;</span><span class="p">:</span><span class="mi">90</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">dict</span><span class="p">[</span><span class="s1">&#39;小明&#39;</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">dict</span><span class="p">[</span><span class="s1">&#39;小华&#39;</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">dict</span><span class="p">[</span><span class="s1">&#39;小红&#39;</span><span class="p">])</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="字典的嵌套">字典的嵌套
-</h3><p>字典的Key和Value可以是任意数据类型**<font style="color:#DF2A3F;">（Key不可以是字典）</font>**</p>
-<p>使用例：使用字典记录学生及其成绩</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>姓名</th>
-          <th>语文</th>
-          <th>数学</th>
-          <th>英语</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>小明</td>
-          <td>77</td>
-          <td>66</td>
-          <td>33</td>
-      </tr>
-      <tr>
-          <td>小华</td>
-          <td>88</td>
-          <td>86</td>
-          <td>55</td>
-      </tr>
-      <tr>
-          <td>小红</td>
-          <td>99</td>
-          <td>96</td>
-          <td>66</td>
-      </tr>
-  </tbody>
-</table></div>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">score</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;小明&#39;</span><span class="p">:{</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;语文&#39;</span><span class="p">:</span><span class="mi">77</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;数学&#39;</span><span class="p">:</span><span class="mi">66</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;英语&#39;</span><span class="p">:</span><span class="mi">33</span>
-</span></span><span class="line"><span class="cl">    <span class="p">},</span><span class="s1">&#39;小华&#39;</span><span class="p">:{</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;语文&#39;</span><span class="p">:</span><span class="mi">88</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;数学&#39;</span><span class="p">:</span><span class="mi">86</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;英语&#39;</span><span class="p">:</span><span class="mi">55</span>
-</span></span><span class="line"><span class="cl">    <span class="p">},</span><span class="s1">&#39;小红&#39;</span><span class="p">:{</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;语文&#39;</span><span class="p">:</span><span class="mi">99</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;数学&#39;</span><span class="p">:</span><span class="mi">96</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;英语&#39;</span><span class="p">:</span><span class="mi">66</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 接下来是索引教程</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 此处查询小华的数学成绩</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="s1">&#39;小华&#39;</span><span class="p">][</span><span class="s1">&#39;数学&#39;</span><span class="p">])</span>		<span class="c1">#输出 86</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="字典的常用操作">字典的常用操作
-</h2><h3 id="字典的新增元素">字典的新增元素
-</h3><p>直接对新元素执行以下命令即可</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;小明&#39;</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span><span class="s1">&#39;小华&#39;</span><span class="p">:</span><span class="mi">84</span><span class="p">,</span><span class="s1">&#39;小红&#39;</span><span class="p">:</span><span class="mi">90</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nb">dict</span><span class="p">[</span><span class="s1">&#39;小芳&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">94</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="字典的更新修改元素">字典的更新/修改元素
-</h3><p>字典Key不可重复，所以直接对已有元素执行以下命令即可</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;小明&#39;</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span><span class="s1">&#39;小华&#39;</span><span class="p">:</span><span class="mi">84</span><span class="p">,</span><span class="s1">&#39;小红&#39;</span><span class="p">:</span><span class="mi">90</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nb">dict</span><span class="p">[</span><span class="s1">&#39;小明&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="删除元素-pop">删除元素 pop
-</h3><p>删除的同时取出元素</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;小明&#39;</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span><span class="s1">&#39;小华&#39;</span><span class="p">:</span><span class="mi">84</span><span class="p">,</span><span class="s1">&#39;小红&#39;</span><span class="p">:</span><span class="mi">90</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;小红&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="清空字典">清空字典
-</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;小明&#39;</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span><span class="s1">&#39;小华&#39;</span><span class="p">:</span><span class="mi">84</span><span class="p">,</span><span class="s1">&#39;小红&#39;</span><span class="p">:</span><span class="mi">90</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nb">dict</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="获取全部的key-keys">获取全部的Key keys
-</h3><p>和pop相同，你需要用变量来接收</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;小明&#39;</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span><span class="s1">&#39;小华&#39;</span><span class="p">:</span><span class="mi">84</span><span class="p">,</span><span class="s1">&#39;小红&#39;</span><span class="p">:</span><span class="mi">90</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>	<span class="c1"># 输出 dict_keys([&#39;小明&#39;, &#39;小华&#39;, &#39;小红&#39;])</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="统计字典内的元素数量-len">统计字典内的元素数量 len
-</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;小明&#39;</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span><span class="s1">&#39;小华&#39;</span><span class="p">:</span><span class="mi">84</span><span class="p">,</span><span class="s1">&#39;小红&#39;</span><span class="p">:</span><span class="mi">90</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">dict</span><span class="p">))</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="字典的遍历">字典的遍历
-</h2><p>由于不能通过下标索引，字典同样不支持while循环</p>
-<h3 id="for函数">for函数
-</h3><p>方式一：使用 <em><strong>2.5获取全部的Key keys</strong></em> 处的指令</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;小明&#39;</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span><span class="s1">&#39;小华&#39;</span><span class="p">:</span><span class="mi">84</span><span class="p">,</span><span class="s1">&#39;小红&#39;</span><span class="p">:</span><span class="mi">90</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="n">k</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>		<span class="c1">#此处的k本质是列表，所以接下来参考列表的遍历</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">k</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="s1">&#39;的成绩是&#39;</span><span class="p">,</span><span class="nb">dict</span><span class="p">[</span><span class="n">m</span><span class="p">])</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>方式二：直接遍历</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;小明&#39;</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span><span class="s1">&#39;小华&#39;</span><span class="p">:</span><span class="mi">84</span><span class="p">,</span><span class="s1">&#39;小红&#39;</span><span class="p">:</span><span class="mi">90</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">dict</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="s1">&#39;的成绩是&#39;</span><span class="p">,</span><span class="nb">dict</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;12345&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
@@ -682,12 +598,12 @@
             
                 
 <article class="">
-    <a href="/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E7%9A%84%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C/">
+    <a href="/p/7.1-%E8%BF%9B%E9%98%B6%E5%87%BD%E6%95%B0/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">数据容器的通用操作</h2>
+            <h2 class="article-title">7.1 进阶函数</h2>
         </div>
     </a>
 </article>
@@ -695,12 +611,12 @@
             
                 
 <article class="">
-    <a href="/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E9%9B%86%E5%90%88/">
+    <a href="/p/6.7-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E7%9A%84%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">数据容器：集合</h2>
+            <h2 class="article-title">6.7 数据容器的通用操作</h2>
         </div>
     </a>
 </article>
@@ -708,12 +624,12 @@
             
                 
 <article class="">
-    <a href="/p/%E5%BA%8F%E5%88%97%E7%9A%84%E6%93%8D%E4%BD%9C%E5%88%87%E7%89%87/">
+    <a href="/p/6.6-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E5%85%B8/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">序列的操作：切片</h2>
+            <h2 class="article-title">6.6 数据容器：字典</h2>
         </div>
     </a>
 </article>
@@ -721,12 +637,12 @@
             
                 
 <article class="">
-    <a href="/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E7%AC%A6%E4%B8%B2/">
+    <a href="/p/6.5-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E9%9B%86%E5%90%88/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">数据容器：字符串</h2>
+            <h2 class="article-title">6.5 数据容器：集合</h2>
         </div>
     </a>
 </article>
@@ -734,12 +650,12 @@
             
                 
 <article class="">
-    <a href="/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%85%83%E7%BB%84/">
+    <a href="/p/6.4-%E5%BA%8F%E5%88%97%E7%9A%84%E6%93%8D%E4%BD%9C%E5%88%87%E7%89%87/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">数据容器：元组</h2>
+            <h2 class="article-title">6.4 序列的操作：切片</h2>
         </div>
     </a>
 </article>

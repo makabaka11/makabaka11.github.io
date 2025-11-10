@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="学习Python中的一个重要数据容器：字符串">
-<title>数据容器：字符串</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="学习Python中的一个重要数据容器：列表">
+<title>6.1 数据容器：列表</title>
 
-<link rel='canonical' href='https://www.retr0.qzz.io/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E7%AC%A6%E4%B8%B2/'>
+<link rel='canonical' href='https://www.retr0.qzz.io/p/6.1-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%88%97%E8%A1%A8/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="数据容器：字符串">
-<meta property='og:description' content="学习Python中的一个重要数据容器：字符串">
-<meta property='og:url' content='https://www.retr0.qzz.io/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E7%AC%A6%E4%B8%B2/'>
+<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="6.1 数据容器：列表">
+<meta property='og:description' content="学习Python中的一个重要数据容器：列表">
+<meta property='og:url' content='https://www.retr0.qzz.io/p/6.1-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%88%97%E8%A1%A8/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-04T17:45:08&#43;08:00'/><meta property='article:modified_time' content='2025-11-04T17:45:08&#43;08:00'/>
-<meta name="twitter:title" content="数据容器：字符串">
-<meta name="twitter:description" content="学习Python中的一个重要数据容器：字符串">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-02T22:54:24&#43;08:00'/><meta property='article:modified_time' content='2025-11-02T22:54:24&#43;08:00'/>
+<meta name="twitter:title" content="6.1 数据容器：列表">
+<meta name="twitter:description" content="学习Python中的一个重要数据容器：列表">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -279,18 +279,26 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#字符串的定义">字符串的定义</a></li>
-    <li><a href="#字符串的常用操作">字符串的常用操作</a>
+    <li><a href="#列表的标准定义形式">列表的标准定义形式</a></li>
+    <li><a href="#列表的常用操作">列表的常用操作</a>
       <ol>
-        <li><a href="#找到特定字符串的下标">找到特定字符串的下标</a></li>
-        <li><a href="#字符串的替换">字符串的替换</a></li>
-        <li><a href="#字符串的分割">字符串的分割</a></li>
-        <li><a href="#字符串的规整操作">字符串的规整操作</a></li>
-        <li><a href="#统计字符串中某字符串出现的次数">统计字符串中某字符串出现的次数</a></li>
-        <li><a href="#统计字符串的长度">统计字符串的长度</a></li>
+        <li><a href="#查询列表中元素的下标号">查询列表中元素的下标号</a></li>
+        <li><a href="#修改指定位置的元素">修改指定位置的元素</a></li>
+        <li><a href="#列表的插入">列表的插入</a></li>
+        <li><a href="#列表的追加">列表的追加</a></li>
+        <li><a href="#删除元素">删除元素</a></li>
+        <li><a href="#清空列表">清空列表</a></li>
+        <li><a href="#统计某元素在列表中的数量">统计某元素在列表中的数量</a></li>
+        <li><a href="#统计列表内全部元素数量">统计列表内全部元素数量</a></li>
+        <li><a href="#列表的排序">列表的排序</a>
+          <ol>
+            <li><a href="#sort函数">sort()函数</a></li>
+            <li><a href="#sorted函数">sorted()函数</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
-    <li><a href="#字符串的遍历">字符串的遍历</a>
+    <li><a href="#列表的循环遍历">列表的循环遍历</a>
       <ol>
         <li><a href="#while循环">while循环</a></li>
         <li><a href="#for循环">for循环</a></li>
@@ -327,12 +335,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E7%AC%A6%E4%B8%B2/">数据容器：字符串</a>
+            <a href="/p/6.1-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%88%97%E8%A1%A8/">6.1 数据容器：列表</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            学习Python中的一个重要数据容器：字符串
+            学习Python中的一个重要数据容器：列表
         </h3>
         
     </div>
@@ -353,7 +361,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-11-04</time>
+                <time class="article-time--published">2025-11-02</time>
             </div>
         
 
@@ -376,11 +384,71 @@
     <section class="article-content">
     
     
-    <blockquote>
-<p>字符串是字符的容器，一个字符串可以存放任意数量的字符。字符串同样<font style="color:#DF2A3F;">无法修改</font>。</p>
-</blockquote>
-<h2 id="字符串的定义">字符串的定义
-</h2><p>字符串中的每个字符都为一个元素，同样可以用下标号索引，例如：</p>
+    <h2 id="列表的标准定义形式">列表的标准定义形式
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;三&#39;</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="s1">&#39;我是一个元素&#39;</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="列表的常用操作">列表的常用操作
+</h2><p><strong>正向索引： <font style="color:#DF2A3F;">注意正向索引时从列表内第一个元素开始，其下标号为0，向右以此为1、2、3……</font></strong></p>
+<p><strong>反向索引：<font style="color:#DF2A3F;">注意反向索引时从列表内倒数第一个元素开始，其下标号为-1，向左以此为-2、-3……</font></strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span><span class="p">[</span><span class="n">N</span><span class="p">]</span>   <span class="c1">#其中N为列表元素的下标号，‘list’要换为实际列表名</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="查询列表中元素的下标号">查询列表中元素的下标号
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;我是一个元素&#39;</span><span class="p">)</span>	<span class="c1">#‘list’要换为实际列表名</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>特别地，对于嵌套列表需要指定除了所查询元素在其列表的下标号之外的所有下标号，例如</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>	<span class="c1">#此处我们查询元素‘5’的下标号</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="修改指定位置的元素">修改指定位置的元素
+</h3><p>支持正反索引下标号</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;example&#39;</span>	<span class="c1">#列表[下标] = 值</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="列表的插入">列表的插入
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">list</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;Hello&#39;</span><span class="p">)</span>	<span class="c1">#列表.insert(下标，值)	在所填下标之前插入一个值</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="列表的追加">列表的追加
+</h3><p>追加单个元素</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -388,38 +456,13 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>		<span class="c1">#输出h</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>	<span class="c1">#输出o</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;五&#39;</span><span class="p">)</span>	<span class="c1">#列表.append(值)	在列表尾追加一个元素</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>此外，需要注意空格也属于一种字符</p>
+</div><p>追加一批元素</p>
 <div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;you and me&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">])</span>	<span class="c1">#输出空格</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="字符串的常用操作">字符串的常用操作
-</h2><h3 id="找到特定字符串的下标">找到特定字符串的下标
-</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;you and me&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;and&#39;</span><span class="p">))</span>	<span class="c1">#输出4</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="字符串的替换">字符串的替换
-</h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -427,15 +470,28 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;12345666&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="n">s2</span> <span class="o">=</span> <span class="n">s1</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;6&#39;</span><span class="p">,</span><span class="s1">&#39;7&#39;</span><span class="p">)</span>	<span class="c1">#字符串.replace（‘要替换的字符’，‘替换后的字符’）</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>	<span class="c1">#输出12345666</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>	<span class="c1">#输出12345777</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">list1</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">list2</span><span class="p">)</span>	<span class="c1">#列表.extend(数据容器)	在列表尾导入一批元素，此处括号内直接填写也可以</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">list1</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>可见replace并没有修改字符串本身，而是产生了一个新字符串，因此你需要一个变量来接收它</p>
-<h3 id="字符串的分割">字符串的分割
-</h3><div class="highlight"><div class="chroma">
+</div><h3 id="删除元素">删除元素
+</h3><p>方法一：del指定下标删除		<strong><font style="color:#DF2A3F;">注意：由于del是Python主环境中的一个关键字，所以到此只有它的语法是放在列表名前面的</font></strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">del</span> <span class="nb">list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>	<span class="c1">#del 列表[下标]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>方法二：pop取出</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -443,63 +499,159 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;you and me&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="n">s2</span> <span class="o">=</span> <span class="n">s1</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>	<span class="c1">#字符串.split(&#39;分割依据&#39;)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>			<span class="c1">#输出you and me</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>			<span class="c1">#输出[&#39;you&#39;, &#39;and&#39;, &#39;me&#39;]</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="nb">list</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>		<span class="c1">#列表.pop(下标)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>			<span class="c1">#获取被取出的元素</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>在括号内填入你想要按照哪一个字符分割后，split会将原字符串分割为若干元素并装入一个列表</p>
-<p>但是原字符串仍被未修改，因此你需要一个变量来接收分割结果</p>
-<h3 id="字符串的规整操作">字符串的规整操作
-</h3><p>当括号内不填参数时，strip会去除字符串前后的空格</p>
+</div><p>方法三：remove指定内容删除		<strong><font style="color:#DF2A3F;">注意：remove方法会从前往后依次检索列表中的元素，并删除第一个匹配的元素，如果想删除多个相同元素，请执行多次remove</font></strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;  you and me  &#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>	<span class="c1">#输出you and me</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;一&#39;</span><span class="p">,</span><span class="s1">&#39;二&#39;</span><span class="p">,</span><span class="s1">&#39;删我&#39;</span><span class="p">,</span><span class="s1">&#39;三&#39;</span><span class="p">,</span><span class="s1">&#39;删我&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;删我&#39;</span><span class="p">)</span>	<span class="c1">#列表.remove(元素值)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>当括号内填入参数后，strip会去除字符串首尾全部满足参数的字符（不严格：满足参数的任意字符就去除）例：</p>
-<div class="highlight"><div class="chroma">
+</div><h3 id="清空列表">清空列表
+</h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;23you and me34&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;234&#39;</span><span class="p">))</span>	<span class="c1">#输出you and me</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">list</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>	<span class="c1">#列表.clear()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>此处表明于strip并不是找到'234&rsquo;这一整体才去除，而是把'2&rsquo;、&lsquo;3&rsquo;、&lsquo;4&rsquo;分别都去除</p>
-<h3 id="统计字符串中某字符串出现的次数">统计字符串中某字符串出现的次数
+</div><h3 id="统计某元素在列表中的数量">统计某元素在列表中的数量
 </h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;itheima and itcast&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;it&#39;</span><span class="p">))</span>	<span class="c1">#输出2</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>	
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>		<span class="c1">#列表.count(元素值)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>严格按照所查找字符串整体查找，区分大小写</p>
-<h3 id="统计字符串的长度">统计字符串的长度
-</h3><p>同样包括空格，用法与之前相同</p>
+</div><h3 id="统计列表内全部元素数量">统计列表内全部元素数量
+</h3><p><strong><font style="color:#DF2A3F;">注意：它的语法也是放在列表名前面的</font></strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;you and me&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>	<span class="c1">#输出10</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>	
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">))</span>		<span class="c1">#len(列表)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="字符串的遍历">字符串的遍历
+</div><h3 id="列表的排序">列表的排序
+</h3><h4 id="sort函数">sort()函数
+</h4><p>默认升序（数字从小到大，首字母从前到后），且会修改当前列表</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">54</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;f&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;d&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">list1</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">list2</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">list1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">list2</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可选参数：reverse	降序</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">list</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可选参数：key	自定义排序</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;java&#39;</span><span class="p">,</span><span class="s1">&#39;python&#39;</span><span class="p">,</span><span class="s1">&#39;C++&#39;</span><span class="p">,</span><span class="s1">&#39;go&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">list</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">)</span>	<span class="c1">#此处以长度为参考量，仅为其中一种用法</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>你也可以将其组合</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;java&#39;</span><span class="p">,</span><span class="s1">&#39;python&#39;</span><span class="p">,</span><span class="s1">&#39;C++&#39;</span><span class="p">,</span><span class="s1">&#39;go&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">list</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>	
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="sorted函数">sorted()函数
+</h4><p>用法与sort()一致，但是<font style="color:#DF2A3F;">不会修改列表本身</font>，而是将修改后的列表创建一个副本。简而言之，你需要一个变量来接收它。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;java&#39;</span><span class="p">,</span><span class="s1">&#39;python&#39;</span><span class="p">,</span><span class="s1">&#39;C++&#39;</span><span class="p">,</span><span class="s1">&#39;go&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们来比较一下二者的区别</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">list3</span> <span class="o">=</span> <span class="n">list1</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">list4</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">list2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">list1</span><span class="p">)</span>	<span class="c1">#[1, 2, 3, 4, 5]	列表本身也被修改</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">list2</span><span class="p">)</span>	<span class="c1">#[5, 4, 3, 2, 1]	可见列表本身未被修改</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">list3</span><span class="p">)</span>	<span class="c1">#None	因为sort()函数不会传出修改后的列表</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">list4</span><span class="p">)</span>	<span class="c1">#[1, 2, 3, 4, 5]	</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="列表的循环遍历">列表的循环遍历
 </h2><h3 id="while循环">while循环
 </h3><p>示例：</p>
 <div class="highlight"><div class="chroma">
@@ -512,10 +664,10 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;12345&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl"><span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">=</span> <span class="nb">list</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>	<span class="c1">#对元素a进行处理</span>
 </span></span><span class="line"><span class="cl">    <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
 </span></span></code></pre></td></tr></table>
@@ -530,9 +682,9 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;12345&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">=</span> <span class="nb">list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -598,12 +750,12 @@
             
                 
 <article class="">
-    <a href="/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E7%9A%84%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C/">
+    <a href="/p/7.1-%E8%BF%9B%E9%98%B6%E5%87%BD%E6%95%B0/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">数据容器的通用操作</h2>
+            <h2 class="article-title">7.1 进阶函数</h2>
         </div>
     </a>
 </article>
@@ -611,12 +763,12 @@
             
                 
 <article class="">
-    <a href="/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E5%85%B8/">
+    <a href="/p/6.7-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E7%9A%84%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">数据容器：字典</h2>
+            <h2 class="article-title">6.7 数据容器的通用操作</h2>
         </div>
     </a>
 </article>
@@ -624,12 +776,12 @@
             
                 
 <article class="">
-    <a href="/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E9%9B%86%E5%90%88/">
+    <a href="/p/6.6-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E5%85%B8/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">数据容器：集合</h2>
+            <h2 class="article-title">6.6 数据容器：字典</h2>
         </div>
     </a>
 </article>
@@ -637,12 +789,12 @@
             
                 
 <article class="">
-    <a href="/p/%E5%BA%8F%E5%88%97%E7%9A%84%E6%93%8D%E4%BD%9C%E5%88%87%E7%89%87/">
+    <a href="/p/6.5-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E9%9B%86%E5%90%88/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">序列的操作：切片</h2>
+            <h2 class="article-title">6.5 数据容器：集合</h2>
         </div>
     </a>
 </article>
@@ -650,12 +802,12 @@
             
                 
 <article class="">
-    <a href="/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%85%83%E7%BB%84/">
+    <a href="/p/6.4-%E5%BA%8F%E5%88%97%E7%9A%84%E6%93%8D%E4%BD%9C%E5%88%87%E7%89%87/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">数据容器：元组</h2>
+            <h2 class="article-title">6.4 序列的操作：切片</h2>
         </div>
     </a>
 </article>

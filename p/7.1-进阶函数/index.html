@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="学习Python中的一个重要数据容器：元组">
-<title>数据容器：元组</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="在此篇中进一步学习函数的用法">
+<title>7.1 进阶函数</title>
 
-<link rel='canonical' href='https://www.retr0.qzz.io/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%85%83%E7%BB%84/'>
+<link rel='canonical' href='https://www.retr0.qzz.io/p/7.1-%E8%BF%9B%E9%98%B6%E5%87%BD%E6%95%B0/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="数据容器：元组">
-<meta property='og:description' content="学习Python中的一个重要数据容器：元组">
-<meta property='og:url' content='https://www.retr0.qzz.io/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%85%83%E7%BB%84/'>
+<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="7.1 进阶函数">
+<meta property='og:description' content="在此篇中进一步学习函数的用法">
+<meta property='og:url' content='https://www.retr0.qzz.io/p/7.1-%E8%BF%9B%E9%98%B6%E5%87%BD%E6%95%B0/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-03T18:14:15&#43;08:00'/><meta property='article:modified_time' content='2025-11-03T18:14:15&#43;08:00'/>
-<meta name="twitter:title" content="数据容器：元组">
-<meta name="twitter:description" content="学习Python中的一个重要数据容器：元组">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-09T23:27:53&#43;08:00'/><meta property='article:modified_time' content='2025-11-09T23:27:53&#43;08:00'/>
+<meta name="twitter:title" content="7.1 进阶函数">
+<meta name="twitter:description" content="在此篇中进一步学习函数的用法">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -279,20 +279,18 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#元组的定义">元组的定义</a></li>
-    <li><a href="#元组的常用操作同列表基本一致">元组的常用操作	（同列表基本一致）</a>
+    <li><a href="#多个返回值的写法">多个返回值的写法</a></li>
+    <li><a href="#函数的多种参数使用形式">函数的多种参数使用形式</a>
       <ol>
-        <li><a href="#元组的索引">元组的索引</a></li>
-        <li><a href="#查询元组中元素的下标号">查询元组中元素的下标号</a></li>
-        <li><a href="#统计某元素在元组中的数量">统计某元素在元组中的数量</a></li>
-        <li><a href="#统计元组内全部元素数量">统计元组内全部元素数量</a></li>
-        <li><a href="#特别修改元组内的列表的元素">特别：修改元组内的列表的元素</a></li>
-      </ol>
-    </li>
-    <li><a href="#元组的循环遍历">元组的循环遍历</a>
-      <ol>
-        <li><a href="#while循环">while循环</a></li>
-        <li><a href="#for循环">for循环</a></li>
+        <li><a href="#位置参数">位置参数</a></li>
+        <li><a href="#关键字参数">关键字参数</a></li>
+        <li><a href="#缺省参数">缺省参数</a></li>
+        <li><a href="#不定长参数">不定长参数</a>
+          <ol>
+            <li><a href="#位置传递">位置传递</a></li>
+            <li><a href="#关键字参数-1">关键字参数</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
   </ol>
@@ -326,12 +324,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%85%83%E7%BB%84/">数据容器：元组</a>
+            <a href="/p/7.1-%E8%BF%9B%E9%98%B6%E5%87%BD%E6%95%B0/">7.1 进阶函数</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            学习Python中的一个重要数据容器：元组
+            在此篇中进一步学习函数的用法
         </h3>
         
     </div>
@@ -352,7 +350,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-11-03</time>
+                <time class="article-time--published">2025-11-09</time>
             </div>
         
 
@@ -375,47 +373,29 @@
     <section class="article-content">
     
     
-    <blockquote>
-<p>什么是元组？</p>
-<p><strong>元组</strong>是Python中的一种基本数据结构，它是一个不可变的序列，意味着<u><font style="color:#DF2A3F">一旦创建，元组中的元素不能被修改、添加或删除。</font></u></p>
-</blockquote>
-<h2 id="元组的定义">元组的定义
-</h2><p>定义元组使用<font style="color:#DF2A3F;">小括号</font>，且用<font style="color:#DF2A3F;">逗号</font>隔开各个数据，<font style="color:#DF2A3F;">数据可以是不同数据类型</font></p>
-<div class="highlight"><div class="chroma">
+    <h2 id="多个返回值的写法">多个返回值的写法
+</h2><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;ok&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="kc">True</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#定义空元组</span>
-</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="p">()</span>		<span class="c1">#方式1</span>
-</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">()</span>	<span class="c1">#方式2</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">=</span> <span class="n">test</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>注意：如果元组中只有一个元素，它的后面也要加上逗号，例如</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>此外，元组也可以嵌套</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">tuple</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="元组的常用操作同列表基本一致">元组的常用操作	（同列表基本一致）
-</h2><h3 id="元组的索引">元组的索引
-</h3><p>元组同样支持通过下标号正反向索引</p>
+</div><p>按照返回值的顺序，写对应的多个变量接收即可</p>
+<p>变量之间用逗号隔开</p>
+<p>支持不同类型的数据return</p>
+<h2 id="函数的多种参数使用形式">函数的多种参数使用形式
+</h2><h3 id="位置参数">位置参数
+</h3><p>调用时根据函数定义的参数位置来传递参数</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -423,61 +403,13 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;一&#39;</span><span class="p">,</span><span class="s1">&#39;二&#39;</span><span class="p">,</span><span class="s1">&#39;三&#39;</span><span class="p">,</span><span class="s1">&#39;四&#39;</span><span class="p">,</span><span class="s1">&#39;五&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">user_info</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">age</span><span class="p">,</span><span class="n">gender</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;您的姓名是</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">，年龄是</span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s1">，性别是</span><span class="si">{</span><span class="n">gender</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>	<span class="c1"># 注意此处print内有f，意为在字符串内插入表达式</span>
+</span></span><span class="line"><span class="cl"><span class="n">user_info</span><span class="p">(</span><span class="s1">&#39;Retr0&#39;</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="s1">&#39;男&#39;</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="查询元组中元素的下标号">查询元组中元素的下标号
-</h3><p>同样只查询到第一个匹配的元素</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;一&#39;</span><span class="p">,</span><span class="s1">&#39;二&#39;</span><span class="p">,</span><span class="s1">&#39;三&#39;</span><span class="p">,</span><span class="s1">&#39;四&#39;</span><span class="p">,</span><span class="s1">&#39;五&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;三&#39;</span><span class="p">))</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="统计某元素在元组中的数量">统计某元素在元组中的数量
-</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="统计元组内全部元素数量">统计元组内全部元素数量
-</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;一&#39;</span><span class="p">,</span><span class="s1">&#39;二&#39;</span><span class="p">,</span><span class="s1">&#39;三&#39;</span><span class="p">,</span><span class="s1">&#39;四&#39;</span><span class="p">,</span><span class="s1">&#39;五&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="特别修改元组内的列表的元素">特别：修改元组内的列表的元素
-</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">t1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;hello&#39;</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl"><span class="n">t1</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;c&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="元组的循环遍历">元组的循环遍历
-</h2><h3 id="while循环">while循环
-</h3><p>示例：</p>
+</div><h3 id="关键字参数">关键字参数
+</h3><p>调用时通过“键=值”形式传递参数</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -486,18 +418,24 @@
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>	<span class="c1">#对元素a进行处理</span>
-</span></span><span class="line"><span class="cl">    <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">user_info</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">age</span><span class="p">,</span><span class="n">gender</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;您的姓名是</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">，年龄是</span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s1">，性别是</span><span class="si">{</span><span class="n">gender</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 关键字传参</span>
+</span></span><span class="line"><span class="cl"><span class="n">user_info</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;小明&#39;</span><span class="p">,</span><span class="n">age</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">gender</span><span class="o">=</span><span class="s1">&#39;男&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 可以不按照固定顺序</span>
+</span></span><span class="line"><span class="cl"><span class="n">user_info</span><span class="p">(</span><span class="n">age</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">gender</span><span class="o">=</span><span class="s1">&#39;男&#39;</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;小明&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 可以和位置参数混用，位置参数必须在前，且匹配参数顺序</span>
+</span></span><span class="line"><span class="cl"><span class="n">user_info</span><span class="p">(</span><span class="s1">&#39;小明&#39;</span><span class="p">,</span><span class="n">age</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">gender</span><span class="o">=</span><span class="s1">&#39;男&#39;</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="for循环">for循环
-</h3><p>示例：</p>
+</div><p><strong><font style="color:#DF2A3F;">注意：函数调用时，如果有位置参数时位置参数必须在关键字参数的前面，但关键字参数之间不存在先后顺序</font></strong></p>
+<h3 id="缺省参数">缺省参数
+</h3><p>也叫默认参数，用于定义函数，为参数提供默认值，调用函数时刻不传该默认参数的值</p>
+<p><strong><font style="color:#DF2A3F;">注意：所有位置参数必须出现在默认参数前，包括函数定义和调用</font></strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -506,13 +444,47 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">user_info</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">age</span><span class="p">,</span><span class="n">gender</span><span class="o">=</span><span class="s1">&#39;男&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;您的姓名是</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">，年龄是</span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s1">，性别是</span><span class="si">{</span><span class="n">gender</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">user_info</span><span class="p">(</span><span class="s1">&#39;Retr0&#39;</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">user_info</span><span class="p">(</span><span class="s1">&#39;小红&#39;</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="s1">&#39;女&#39;</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
+</div><p>函数调用时，如果为缺省参数传值则修改默认参数值，否则使用这个默认值</p>
+<h3 id="不定长参数">不定长参数
+</h3><p>也叫可变参数，用于不确定调用的时候会传递多少个参数（不传参也可以）的场景</p>
+<p>类型包括：</p>
+<h4 id="位置传递">位置传递
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>	<span class="c1"># *标记表示args这个形式参数接收的参数数量无限，且采用位置传递</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">test</span><span class="p">(</span><span class="s1">&#39;Retr0&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">test</span><span class="p">(</span><span class="s1">&#39;Retr0&#39;</span><span class="p">,</span><span class="s1">&#39;18&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
+</div><p>传进的所有参数都会被args变量收集，它会根据传进参数的位置合并为一个元组，args是元组类型</p>
+<h4 id="关键字参数-1">关键字参数
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>	<span class="c1"># **标记表示kwargs这个形式参数接收的参数数量无限，且采用关键字传递</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">test</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Retr0&#39;</span><span class="p">,</span><span class="n">age</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span><span class="n">gender</span><span class="o">=</span><span class="s1">&#39;男&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>参数是“键=值”的形式的情况下，所有的“键=值”都会被kwargs接受，同时根据“键=值”组成字典</p>
+
 </section>
 
 
@@ -574,12 +546,12 @@
             
                 
 <article class="">
-    <a href="/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E7%9A%84%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C/">
+    <a href="/p/6.7-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E7%9A%84%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">数据容器的通用操作</h2>
+            <h2 class="article-title">6.7 数据容器的通用操作</h2>
         </div>
     </a>
 </article>
@@ -587,12 +559,12 @@
             
                 
 <article class="">
-    <a href="/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E5%85%B8/">
+    <a href="/p/6.6-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E5%85%B8/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">数据容器：字典</h2>
+            <h2 class="article-title">6.6 数据容器：字典</h2>
         </div>
     </a>
 </article>
@@ -600,12 +572,12 @@
             
                 
 <article class="">
-    <a href="/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E9%9B%86%E5%90%88/">
+    <a href="/p/6.5-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E9%9B%86%E5%90%88/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">数据容器：集合</h2>
+            <h2 class="article-title">6.5 数据容器：集合</h2>
         </div>
     </a>
 </article>
@@ -613,12 +585,12 @@
             
                 
 <article class="">
-    <a href="/p/%E5%BA%8F%E5%88%97%E7%9A%84%E6%93%8D%E4%BD%9C%E5%88%87%E7%89%87/">
+    <a href="/p/6.4-%E5%BA%8F%E5%88%97%E7%9A%84%E6%93%8D%E4%BD%9C%E5%88%87%E7%89%87/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">序列的操作：切片</h2>
+            <h2 class="article-title">6.4 序列的操作：切片</h2>
         </div>
     </a>
 </article>
@@ -626,12 +598,12 @@
             
                 
 <article class="">
-    <a href="/p/%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E7%AC%A6%E4%B8%B2/">
+    <a href="/p/6.3-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E7%AC%A6%E4%B8%B2/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">数据容器：字符串</h2>
+            <h2 class="article-title">6.3 数据容器：字符串</h2>
         </div>
     </a>
 </article>
