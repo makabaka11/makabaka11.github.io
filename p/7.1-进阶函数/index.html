@@ -10,7 +10,7 @@
 <meta property='og:description' content="在此篇中进一步学习函数的用法">
 <meta property='og:url' content='https://www.retr0.qzz.io/p/7.1-%E8%BF%9B%E9%98%B6%E5%87%BD%E6%95%B0/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-09T23:27:53&#43;08:00'/><meta property='article:modified_time' content='2025-11-09T23:27:53&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-11T22:51:43&#43;08:00'/><meta property='article:modified_time' content='2025-11-11T22:51:43&#43;08:00'/>
 <meta name="twitter:title" content="7.1 进阶函数">
 <meta name="twitter:description" content="在此篇中进一步学习函数的用法">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -293,6 +293,12 @@
         </li>
       </ol>
     </li>
+    <li><a href="#函数作为参数传递">函数作为参数传递</a></li>
+    <li><a href="#lambda匿名函数">lambda匿名函数</a>
+      <ol>
+        <li><a href="#匿名函数定义语法">匿名函数定义语法</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -350,7 +356,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-11-09</time>
+                <time class="article-time--published">2025-11-11</time>
             </div>
         
 
@@ -484,7 +490,58 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>参数是“键=值”的形式的情况下，所有的“键=值”都会被kwargs接受，同时根据“键=值”组成字典</p>
-
+<h2 id="函数作为参数传递">函数作为参数传递
+</h2><p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">compute</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">result</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</span></span><span class="line"><span class="cl"><span class="n">test</span><span class="p">(</span><span class="n">compute</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此处函数compute作为参数传入了test函数中使用</p>
+<p>实质上数据由test函数内部传入的compute函数进行计算</p>
+<p>所以这是一种**<font style="color:#DF2A3F;">计算逻辑的传递，而非数据的传递，而任何逻辑都可以自行定义并作为函数传入</font>**</p>
+<h2 id="lambda匿名函数">lambda匿名函数
+</h2><p>众所周知，</p>
+<p>def 关键字，可以定义<font style="color:#DF2A3F;">带有名称</font>的函数</p>
+<p>而 lambda关键字，可以<font style="color:#DF2A3F;">定义匿名</font>函数（无名称）</p>
+<p>有名称的函数，可以基于名称<font style="color:#DF2A3F;">重复使用</font></p>
+<p>无名称的匿名函数，只能<font style="color:#DF2A3F;">临时使用一次</font></p>
+<h3 id="匿名函数定义语法">匿名函数定义语法
+</h3><p><font style="color:#7E45E8;">lambda</font> 传入参数: 函数体(一行代码)</p>
+<ul>
+<li>lambda 是关键字，表示定义匿名函数</li>
+<li>传入参数表示匿名函数的形式参数，如：x，y表示接收2个形式参数</li>
+<li>函数体，就是函数的执行逻辑，要注意：只能写一行，无法写多行代码</li>
+</ul>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">compute</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">result</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">test</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
 
@@ -546,6 +603,19 @@
             
                 
 <article class="">
+    <a href="/p/8.1-%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">8.1 文件相关操作</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
     <a href="/p/6.7-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E7%9A%84%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C/">
         
         
@@ -591,19 +661,6 @@
 
         <div class="article-details">
             <h2 class="article-title">6.4 序列的操作：切片</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/6.3-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E7%AC%A6%E4%B8%B2/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">6.3 数据容器：字符串</h2>
         </div>
     </a>
 </article>

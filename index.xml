@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Sun, 09 Nov 2025 23:27:53 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 11 Nov 2025 23:18:35 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>恰到好处的补完—《轻音少女》观后感</title>
         <link>https://www.retr0.qzz.io/p/%E6%81%B0%E5%88%B0%E5%A5%BD%E5%A4%84%E7%9A%84%E8%A1%A5%E5%AE%8C%E8%BD%BB%E9%9F%B3%E5%B0%91%E5%A5%B3%E8%A7%82%E5%90%8E%E6%84%9F/</link>
         <pubDate>Sat, 01 Nov 2025 09:58:38 +0800</pubDate>
@@ -109,7 +109,7 @@
           &lt;td&gt;百度&lt;/td&gt;
           &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://analysis.icy6.cn/user/parse&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Vite App&lt;/a&gt;&lt;/td&gt;
-          &lt;td&gt;无使用条件,解析50个文件,大小限制**&lt;font style=&#34;color:rgb(133, 0, 255);;&#34;&gt;10TB&lt;/font&gt;**内(每日刷新)&lt;/td&gt;
+          &lt;td&gt;无使用条件,解析50个文件,大小限制 &lt;strong&gt;&lt;font style=&#34;color:rgb(133, 0, 255);;&#34;&gt;10TB&lt;/font&gt;&lt;/strong&gt; 内(每日刷新)&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td&gt;百度&lt;/td&gt;
@@ -121,7 +121,7 @@
           &lt;td&gt;百度&lt;/td&gt;
           &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://bw.01233.xyz&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;百度网盘资源搜索&lt;/a&gt;&lt;/td&gt;
-          &lt;td&gt;需要获取解析密码,解析20个文件,大小限制**&lt;font style=&#34;color:rgb(133, 0, 255);&#34;&gt;30GB&lt;/font&gt;**内(每日刷新)&lt;/td&gt;
+          &lt;td&gt;需要获取解析密码,解析20个文件,大小限制 &lt;strong&gt;&lt;font style=&#34;color:rgb(133, 0, 255);&#34;&gt;30GB&lt;/font&gt;&lt;/strong&gt; 内(每日刷新)&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td&gt;夸克&lt;/td&gt;
@@ -155,9 +155,35 @@
 </description>
         </item>
         <item>
+        <title>8.1 文件相关操作</title>
+        <link>https://www.retr0.qzz.io/p/8.1-%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/</link>
+        <pubDate>Tue, 11 Nov 2025 23:18:35 +0800</pubDate>
+        
+        <guid>https://www.retr0.qzz.io/p/8.1-%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/</guid>
+        <description>&lt;h2 id=&#34;文件编码&#34;&gt;文件编码
+&lt;/h2&gt;
+  
+  
+
+
+&lt;div style=&#34;position: relative; width: 100%; padding-top: 56.25%;&#34;&gt;
+  
+  &lt;iframe 
+    src=&#34;https://player.bilibili.com/player.html?bvid=BV1qW4y1a7fU&amp;page=85&amp;high_quality=1&amp;danmaku=1&#34;
+    scrolling=&#34;no&#34; 
+    border=&#34;0&#34; 
+    frameborder=&#34;no&#34; 
+    framespacing=&#34;0&#34; 
+    allowfullscreen=&#34;true&#34;
+    style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34;
+  &gt;&lt;/iframe&gt;
+&lt;/div&gt;
+</description>
+        </item>
+        <item>
         <title>7.1 进阶函数</title>
         <link>https://www.retr0.qzz.io/p/7.1-%E8%BF%9B%E9%98%B6%E5%87%BD%E6%95%B0/</link>
-        <pubDate>Sun, 09 Nov 2025 23:27:53 +0800</pubDate>
+        <pubDate>Tue, 11 Nov 2025 22:51:43 +0800</pubDate>
         
         <guid>https://www.retr0.qzz.io/p/7.1-%E8%BF%9B%E9%98%B6%E5%87%BD%E6%95%B0/</guid>
         <description>&lt;h2 id=&#34;多个返回值的写法&#34;&gt;多个返回值的写法
@@ -271,7 +297,58 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;参数是“键=值”的形式的情况下，所有的“键=值”都会被kwargs接受，同时根据“键=值”组成字典&lt;/p&gt;
-</description>
+&lt;h2 id=&#34;函数作为参数传递&#34;&gt;函数作为参数传递
+&lt;/h2&gt;&lt;p&gt;示例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;test&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;compute&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;result&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;compute&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;compute&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;test&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;compute&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;此处函数compute作为参数传入了test函数中使用&lt;/p&gt;
+&lt;p&gt;实质上数据由test函数内部传入的compute函数进行计算&lt;/p&gt;
+&lt;p&gt;所以这是一种**&lt;font style=&#34;color:#DF2A3F;&#34;&gt;计算逻辑的传递，而非数据的传递，而任何逻辑都可以自行定义并作为函数传入&lt;/font&gt;**&lt;/p&gt;
+&lt;h2 id=&#34;lambda匿名函数&#34;&gt;lambda匿名函数
+&lt;/h2&gt;&lt;p&gt;众所周知，&lt;/p&gt;
+&lt;p&gt;def 关键字，可以定义&lt;font style=&#34;color:#DF2A3F;&#34;&gt;带有名称&lt;/font&gt;的函数&lt;/p&gt;
+&lt;p&gt;而 lambda关键字，可以&lt;font style=&#34;color:#DF2A3F;&#34;&gt;定义匿名&lt;/font&gt;函数（无名称）&lt;/p&gt;
+&lt;p&gt;有名称的函数，可以基于名称&lt;font style=&#34;color:#DF2A3F;&#34;&gt;重复使用&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;无名称的匿名函数，只能&lt;font style=&#34;color:#DF2A3F;&#34;&gt;临时使用一次&lt;/font&gt;&lt;/p&gt;
+&lt;h3 id=&#34;匿名函数定义语法&#34;&gt;匿名函数定义语法
+&lt;/h3&gt;&lt;p&gt;&lt;font style=&#34;color:#7E45E8;&#34;&gt;lambda&lt;/font&gt; 传入参数: 函数体(一行代码)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;lambda 是关键字，表示定义匿名函数&lt;/li&gt;
+&lt;li&gt;传入参数表示匿名函数的形式参数，如：x，y表示接收2个形式参数&lt;/li&gt;
+&lt;li&gt;函数体，就是函数的执行逻辑，要注意：只能写一行，无法写多行代码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;test&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;compute&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;result&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;compute&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;test&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;lambda&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
         </item>
         <item>
         <title>6.7 数据容器的通用操作</title>
