@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Tue, 11 Nov 2025 23:18:35 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 14 Nov 2025 23:41:10 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>恰到好处的补完—《轻音少女》观后感</title>
         <link>https://www.retr0.qzz.io/p/%E6%81%B0%E5%88%B0%E5%A5%BD%E5%A4%84%E7%9A%84%E8%A1%A5%E5%AE%8C%E8%BD%BB%E9%9F%B3%E5%B0%91%E5%A5%B3%E8%A7%82%E5%90%8E%E6%84%9F/</link>
         <pubDate>Sat, 01 Nov 2025 09:58:38 +0800</pubDate>
@@ -155,9 +155,232 @@
 </description>
         </item>
         <item>
+        <title>证明矩阵等价</title>
+        <link>https://www.retr0.qzz.io/p/%E8%AF%81%E6%98%8E%E7%9F%A9%E9%98%B5%E7%AD%89%E4%BB%B7/</link>
+        <pubDate>Fri, 14 Nov 2025 23:41:10 +0800</pubDate>
+        
+        <guid>https://www.retr0.qzz.io/p/%E8%AF%81%E6%98%8E%E7%9F%A9%E9%98%B5%E7%AD%89%E4%BB%B7/</guid>
+        <description>&lt;h3 id=&#34;证明两个矩阵等价的核心方法简要版&#34;&gt;证明两个矩阵等价的核心方法（简要版）
+&lt;/h3&gt;&lt;p&gt;矩阵等价的核心定义：设$A$、$B$为$m \times n$同型矩阵，若存在$m$阶可逆矩阵$P$和$n$阶可逆矩阵$Q$，使得$PAQ = B$，则$A$与$B$等价。&lt;/p&gt;
+&lt;h4 id=&#34;关键充要条件满足其一即可证明&#34;&gt;关键充要条件（满足其一即可证明）
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;秩相等&lt;/strong&gt;：$r(A) = r(B)$（最常用，无需构造可逆矩阵，计算秩即可）；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;初等变换互化&lt;/strong&gt;：$A$可通过有限次初等行/列变换化为$B$；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;等价标准形相同&lt;/strong&gt;：$A$和$B$的等价标准形均为$\begin{pmatrix} I_r &amp;amp; O \ O &amp;amp; O \end{pmatrix}$（$r$为秩，$I_r$为$r$阶单位矩阵）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;简要证明思路&#34;&gt;简要证明思路
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;先验证$A$与$B$是&lt;strong&gt;同型矩阵&lt;/strong&gt;（行数、列数一致，否则必不等价）；&lt;/li&gt;
+&lt;li&gt;任选上述充要条件验证：
+&lt;ul&gt;
+&lt;li&gt;便捷法：计算$r(A)$和$r(B)$，若相等则等价；&lt;/li&gt;
+&lt;li&gt;严谨法：通过初等变换将$A$化为$B$，或构造$P$、$Q$使$PAQ = B$。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>算行列式的几种方法</title>
+        <link>https://www.retr0.qzz.io/p/%E7%AE%97%E8%A1%8C%E5%88%97%E5%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</link>
+        <pubDate>Fri, 14 Nov 2025 23:40:45 +0800</pubDate>
+        
+        <guid>https://www.retr0.qzz.io/p/%E7%AE%97%E8%A1%8C%E5%88%97%E5%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</guid>
+        <description>&lt;h3 id=&#34;一行列式的核心计算方法及适用情况&#34;&gt;一、行列式的核心计算方法及适用情况
+&lt;/h3&gt;&lt;h4 id=&#34;1-定义法&#34;&gt;1. 定义法
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;核心思路&lt;/strong&gt;：直接利用n阶行列式的定义（所有$n!$项的代数和），即：&lt;br&gt;
+$$|A| = \sum_{p_1p_2\cdots p_n} (-1)^{\tau(p_1p_2\cdots p_n)} a_{1p_1}a_{2p_2}\cdots a_{np_n}$$&lt;br&gt;
+其中$\tau$是排列$p_1p_2\cdots p_n$的逆序数。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;1阶、2阶行列式（直接计算，无需简化）；&lt;/li&gt;
+&lt;li&gt;高阶行列式但&lt;strong&gt;零元素极多&lt;/strong&gt;（非零项仅1-2项，可快速筛选）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;：直观、无需额外技巧；&lt;strong&gt;缺点&lt;/strong&gt;：高阶（≥3阶）非零项多，计算量爆炸。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-按行列展开法降阶法&#34;&gt;2. 按行（列）展开法（降阶法）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;原理&lt;/strong&gt;：行列式等于它的任意一行(列)各元素与其对应的代数余子式乘积之和，即
+$$D=a_{i1}A_{i1}+a_{i2}A_{i3}+ \cdots +a_{in}A_{in}   
+(i=1,2, \cdots ,n) $$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;核心思路&lt;/strong&gt;：利用行列式展开定理，将n阶行列式按某行（列）展开为n个n-1阶行列式的线性组合：&lt;br&gt;
+$$|A| = \sum_{j=1}^n a_{ij}A_{ij} \quad (\text{按第}i\text{行展开})$$&lt;br&gt;
+其中$A_{ij}=(-1)^{i+j}M_{ij}$（$M_{ij}$为余子式）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;某行（列）&lt;strong&gt;零元素≥n-2个&lt;/strong&gt;（直接展开后计算量小）；&lt;/li&gt;
+&lt;li&gt;可通过初等变换（如某行加另一行的$k$倍）快速造出一行（列）多零元素。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关键技巧&lt;/strong&gt;：优先选择零元素最多的行（列）展开，减少计算量。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-初等变换法化三角法&#34;&gt;3. 初等变换法（化三角法）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;核心思路&lt;/strong&gt;：利用行列式的初等变换性质，将行列式化为&lt;strong&gt;上三角行列式&lt;/strong&gt;（主对角线下方全为0）或&lt;strong&gt;下三角行列式&lt;/strong&gt;（主对角线上方全为0），三角行列式的值=主对角线元素乘积：&lt;br&gt;
+$$\begin{vmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ 0 &amp; a_{22} &amp; \cdots &amp; a_{2n} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; a_{nn} \end{vmatrix} = a_{11}a_{22}\cdots a_{nn}$$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;任意n阶行列式（3阶及以上最常用）；&lt;/li&gt;
+&lt;li&gt;元素无明显规律、零元素少的普通行列式。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;常用变换&lt;/strong&gt;：换行变号、某行乘非零常数、某行加另一行的$k$倍（不改变行列式值）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;4-递推法&#34;&gt;4. 递推法
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;核心思路&lt;/strong&gt;：通过展开或变换，建立n阶行列式$D_n$与低阶行列式（$D_{n-1}$、$D_{n-2}$）的递推关系（如$D_n = pD_{n-1} + qD_{n-2}$），求解递推公式得结果。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;具有&lt;strong&gt;带状结构&lt;/strong&gt;的行列式（如三对角行列式）；&lt;/li&gt;
+&lt;li&gt;结构对称、元素按规律重复的行列式（如$n$阶循环行列式）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：三对角行列式（主对角线及相邻两条对角线非零，其余为0）：&lt;br&gt;
+$$D_n = \begin{vmatrix} a &amp; b &amp; &amp; \\ c &amp; a &amp; b &amp; \\ &amp; c &amp; a &amp; \ddots \\ &amp; &amp; \ddots &amp; \ddots &amp; b \\ &amp; &amp; &amp; c &amp; a \end{vmatrix}$$&lt;br&gt;
+展开后得递推关系$D_n = aD_{n-1} - bcD_{n-2}$，结合初始条件$D_1=a$、$D_2=a^2-bc$求解。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;5-数学归纳法&#34;&gt;5. 数学归纳法
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;核心思路&lt;/strong&gt;：先验证$n=1$（或$n=2$）时行列式等式成立，假设$n=k$时成立，证明$n=k+1$时也成立，从而推广到所有$n$。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;已知行列式结果（需证明）；&lt;/li&gt;
+&lt;li&gt;结构具有明显递推规律的行列式（如范德蒙德行列式、高阶对称行列式）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;二特殊结构行列式的专门解法及适用情况&#34;&gt;二、特殊结构行列式的专门解法及适用情况
+&lt;/h3&gt;&lt;h4 id=&#34;1-三角对角行列式含数量矩阵&#34;&gt;1. 三角/对角行列式（含数量矩阵）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;结构特征&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;上三角：主对角线下方全为0；下三角：主对角线上方全为0；&lt;/li&gt;
+&lt;li&gt;对角行列式：仅主对角线非零（三角行列式的特例）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：直接符合上述结构，或可通过1-2步初等变换化为该结构。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;解法&lt;/strong&gt;：直接取主对角线元素的乘积，即$|A| = \prod_{i=1}^n a_{ii}$。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-范德蒙德行列式vandermonde-determinant&#34;&gt;2. 范德蒙德行列式（Vandermonde Determinant）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;结构特征&lt;/strong&gt;：第$i$行（或列）为变量$x_1,x_2,\cdots,x_n$的0到$n-1$次幂，形式如下：&lt;br&gt;
+$$V_n = \begin{vmatrix} 1 &amp; 1 &amp; \cdots &amp; 1 \\ x_1 &amp; x_2 &amp; \cdots &amp; x_n \\ x_1^2 &amp; x_2^2 &amp; \cdots &amp; x_n^2 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ x_1^{n-1} &amp; x_2^{n-1} &amp; \cdots &amp; x_n^{n-1} \end{vmatrix}$$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：完全符合上述结构，或可通过转置、换行（列）调整为该结构（注意换行变号）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;解法&lt;/strong&gt;：直接套用公式（所有变量两两差的乘积）：&lt;br&gt;
+$$V_n = \prod_{1 \leq j &lt; i \leq n} (x_i - x_j)$$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关键提醒&lt;/strong&gt;：若行列式是“列为幂次”，转置后仍为范德蒙德行列式（$|V_n^T|=|V_n|$）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-爪型行列式星形行列式&#34;&gt;3. 爪型行列式（星形行列式）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;结构特征&lt;/strong&gt;：主对角线有非零元素，仅第一行、第一列（或最后一行、最后一列）有非零元素，其余为0，形如“爪”：&lt;br&gt;
+$$D_n = \begin{vmatrix} a_0 &amp; b_1 &amp; b_2 &amp; \cdots &amp; b_n \\ c_1 &amp; a_1 &amp; 0 &amp; \cdots &amp; 0 \\ c_2 &amp; 0 &amp; a_2 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ c_n &amp; 0 &amp; 0 &amp; \cdots &amp; a_n \end{vmatrix} \quad (a_i \neq 0)$$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：严格符合“主对角线+第一行+第一列”的爪形结构（无其他非零元素）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;解法&lt;/strong&gt;：消去第一列（或第一行）的非零元素，化为对角行列式：&lt;br&gt;
+第$i$行（$i\geq2$）减去$\frac{c_i}{a_i} \times$第1行，得：&lt;br&gt;
+$$D_n = \begin{vmatrix} a_0 - \sum_{i=1}^n \frac{b_i c_i}{a_i} &amp; b_1 &amp; b_2 &amp; \cdots &amp; b_n \\ 0 &amp; a_1 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; 0 &amp; a_2 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; 0 &amp; \cdots &amp; a_n \end{vmatrix} = \left( a_0 - \sum_{i=1}^n \frac{b_i c_i}{a_i} \right) \prod_{i=1}^n a_i$$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;4-箭型行列式特殊爪型&#34;&gt;4. 箭型行列式（特殊爪型）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;结构特征&lt;/strong&gt;：仅第一行、最后一行、第一列、最后一列有非零元素，其余为0，形如“箭”：&lt;br&gt;
+$$D_n = \begin{vmatrix} a &amp; b &amp; &amp; &amp; c \\ d &amp; a_2 &amp; &amp; &amp; \\ &amp; &amp; a_3 &amp; &amp; \\ &amp; &amp; &amp; \ddots &amp; \\ e &amp; &amp; &amp; &amp; a_n \end{vmatrix} \quad (a_i \neq 0)$$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：符合“四边非零、中间全零”的箭形结构。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;解法&lt;/strong&gt;：用第一列或最后一列的非零元素消去第一行、最后一行的非零元素，化为三角行列式。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;5-分块行列式&#34;&gt;5. 分块行列式
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;结构特征&lt;/strong&gt;：矩阵可分块为对角块、上三角块或下三角块，例如：
+&lt;ul&gt;
+&lt;li&gt;分块对角：$A = \begin{pmatrix} A_1 &amp;amp; O \ O &amp;amp; A_2 \end{pmatrix}$（$O$为零矩阵）；&lt;/li&gt;
+&lt;li&gt;分块上三角：$A = \begin{pmatrix} A_1 &amp;amp; B \ O &amp;amp; A_2 \end{pmatrix}$。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：分块后非对角块为零矩阵（或可通过变换化为零块）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;解法&lt;/strong&gt;：套用分块行列式公式：
+&lt;ul&gt;
+&lt;li&gt;分块对角：$|A| = |A_1| \cdot |A_2| \cdots |A_k|$；&lt;/li&gt;
+&lt;li&gt;分块上/下三角：$|A| = |A_1| \cdot |A_2| \cdots |A_k|$（仅需对角块非奇异）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;6-hessenberg行列式&#34;&gt;6. Hessenberg行列式
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;结构特征&lt;/strong&gt;：上Hessenberg（主对角线下方仅一条非零元素带）或下Hessenberg（主对角线上方仅一条非零元素带）：&lt;br&gt;
+$$D_n = \begin{vmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\ &amp; a_{32} &amp; \cdots &amp; a_{3n} \\ &amp; &amp; \ddots &amp; \vdots \\ &amp; &amp; &amp; a_{nn} \end{vmatrix}$$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：带状结构、非零元素集中在主对角线附近。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;解法&lt;/strong&gt;：按第一列（或最后一列）展开，建立递推关系求解。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;三方法选择优先级总结&#34;&gt;三、方法选择优先级总结
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;先判断是否为&lt;strong&gt;特殊结构&lt;/strong&gt;（范德蒙德、爪型、三角等）→ 直接套用专门公式；&lt;/li&gt;
+&lt;li&gt;若为普通行列式，先看是否有&lt;strong&gt;多零元素行（列）&lt;/strong&gt; → 按行（列）展开降阶；&lt;/li&gt;
+&lt;li&gt;无明显零元素→ 用&lt;strong&gt;初等变换法化三角&lt;/strong&gt;（3阶及以上首选）；&lt;/li&gt;
+&lt;li&gt;结构对称/带状→ 用&lt;strong&gt;递推法&lt;/strong&gt;；需证明结果→ 用&lt;strong&gt;数学归纳法&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>几种多项式及余项</title>
+        <link>https://www.retr0.qzz.io/p/%E5%87%A0%E7%A7%8D%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%8F%8A%E4%BD%99%E9%A1%B9/</link>
+        <pubDate>Fri, 14 Nov 2025 23:40:16 +0800</pubDate>
+        
+        <guid>https://www.retr0.qzz.io/p/%E5%87%A0%E7%A7%8D%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%8F%8A%E4%BD%99%E9%A1%B9/</guid>
+        <description>&lt;blockquote&gt;
+&lt;p&gt;多项式+余项=公式&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;一泰勒多项式taylor-polynomial&#34;&gt;一、泰勒多项式（Taylor Polynomial）
+&lt;/h3&gt;&lt;h4 id=&#34;定义&#34;&gt;定义
+&lt;/h4&gt;&lt;p&gt;设函数$ f(x) $在点$ x = a $处$ n $阶可导，则以$ x = a $为中心的$ n $次泰勒多项式为：
+&lt;/p&gt;
+$$
+P_n(x) = f(a) + f&#39;(a)(x - a) + \frac{f&#39;&#39;(a)}{2!}(x - a)^2 + \cdots + \frac{f^{(n)}(a)}{n!}(x - a)^n
+$$&lt;h4 id=&#34;核心特点&#34;&gt;核心特点
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;本质：用$ f(x) $在$ x = a $处的函数值及各阶导数值，构造多项式逼近$ f(x) $；&lt;/li&gt;
+&lt;li&gt;局部性：在$ a $的邻域内逼近效果好，阶数$ n $越高，逼近越精确。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;二麦克劳林多项式maclaurin-polynomial&#34;&gt;二、麦克劳林多项式（Maclaurin Polynomial）
+&lt;/h3&gt;&lt;h4 id=&#34;定义-1&#34;&gt;定义
+&lt;/h4&gt;&lt;p&gt;泰勒多项式的特殊情况——当中心$ a = 0 $时，$ n $次麦克劳林多项式为：
+&lt;/p&gt;
+$$
+P_n(x) = f(0) + f&#39;(0)x + \frac{f&#39;&#39;(0)}{2!}x^2 + \cdots + \frac{f^{(n)}(0)}{n!}x^n
+$$&lt;h4 id=&#34;核心特点-1&#34;&gt;核心特点
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;简化形式：无需考虑$ (x - a) $项，直接以$ x $的幂次展开；&lt;/li&gt;
+&lt;li&gt;适用场景：$ f(x) $在$ x = 0 $处易求各阶导数（如$ e^x $、$ \sin x $、$ \cos x $等）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;三拉格朗日余项lagrange-remainder&#34;&gt;三、拉格朗日余项（Lagrange Remainder）
+&lt;/h3&gt;&lt;h4 id=&#34;定义-2&#34;&gt;定义
+&lt;/h4&gt;&lt;p&gt;泰勒公式中，$ f(x) $与泰勒多项式$ P_n(x) $的误差（定量余项），表达式为：
+&lt;/p&gt;
+$$
+R_n(x) = \frac{f^{(n+1)}(\xi)}{(n+1)!}(x - a)^{n+1}
+$$&lt;p&gt;
+其中$ \xi $是介于$ a $与$ x $之间的某个数。&lt;/p&gt;
+&lt;h4 id=&#34;核心特点-2&#34;&gt;核心特点
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;定量误差：给出误差的具体表达式，可精确估计逼近精度；&lt;/li&gt;
+&lt;li&gt;条件：要求$ f(x) $在$ a $的邻域内$ n+1 $阶可导。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;四佩亚诺余项peano-remainder&#34;&gt;四、佩亚诺余项（Peano Remainder）
+&lt;/h3&gt;&lt;h4 id=&#34;定义-3&#34;&gt;定义
+&lt;/h4&gt;&lt;p&gt;泰勒公式中，误差的定性描述（高阶无穷小余项），表达式为：
+&lt;/p&gt;
+$$
+R_n(x) = o\left((x - a)^n\right) \quad (x \to a)
+$$&lt;h4 id=&#34;核心特点-3&#34;&gt;核心特点
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;定性误差：仅说明“当$ x \to a $时，误差是$ (x - a)^n $的高阶无穷小”，不给出具体大小；&lt;/li&gt;
+&lt;li&gt;条件：仅需$ f(x) $在$ x = a $处$ n $阶可导，要求比拉格朗日余项低。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>8.1 文件相关操作</title>
         <link>https://www.retr0.qzz.io/p/8.1-%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/</link>
-        <pubDate>Tue, 11 Nov 2025 23:18:35 +0800</pubDate>
+        <pubDate>Fri, 14 Nov 2025 23:36:48 +0800</pubDate>
         
         <guid>https://www.retr0.qzz.io/p/8.1-%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/</guid>
         <description>&lt;h2 id=&#34;文件编码&#34;&gt;文件编码
@@ -178,7 +401,148 @@
     style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34;
   &gt;&lt;/iframe&gt;
 &lt;/div&gt;
-</description>
+&lt;h2 id=&#34;文件的读取操作&#34;&gt;文件的读取操作
+&lt;/h2&gt;&lt;h3 id=&#34;open打开函数&#34;&gt;&lt;font style=&#34;color:rgb(28, 31, 35);&#34;&gt;open()打开函数&lt;/font&gt;
+&lt;/h3&gt;&lt;p&gt;使用open函数，可以打开一个已经存在的文件，或者创建一个新文件，语法如下&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;open(name,mode,encoding)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;name：是要打开的目标文件名的字符串（可以包含文件所在的具体路径）&lt;/p&gt;
+&lt;p&gt;mode：设置打开文件的模式（访问模式）：只读r、写入w、追加a等。&lt;/p&gt;
+&lt;p&gt;encoding：编码格式（推荐使用UTF-8）&lt;/p&gt;
+&lt;p&gt;示例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;python.txt&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;r&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encoding&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;UTF-8&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# encoding的顺序不是第三位，所以不能用位置参数，用关键字参数直接指定&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;注意：此处‘f’是‘open’函数的文件对象，对象是Python中一种特殊的数据类型，拥有属性和方法可以使用对象.属性或对象.方法访问。&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;模式&lt;/th&gt;
+          &lt;th&gt;描述&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;r&lt;/td&gt;
+          &lt;td&gt;以只读方式打开文件。文件的指针会放在文件的开头。这是默认模式。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;w&lt;/td&gt;
+          &lt;td&gt;打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;原有内容会被删除&lt;/font&gt;&lt;/strong&gt;。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;a&lt;/td&gt;
+          &lt;td&gt;打开一个文件用于追加。如果该文件已存在，&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;新的内容会被写道已有内容之后&lt;/font&gt;&lt;/strong&gt;。如果该文件**&lt;font style=&#34;color:#DF2A3F;&#34;&gt;不存在，创建新文件&lt;/font&gt;**进行写入。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;read方法&#34;&gt;read()方法
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;文件对象.read(num) &lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;num表示要从文件中读取的数据的长度（单位是字符），如果没有传入num，那么就表示读取文件中所有的数据。&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 有test.txt文件内容为：abcdefghijk&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;read&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;	&lt;span class=&#34;c1&#34;&gt;# 输出abc&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;read&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;	&lt;span class=&#34;c1&#34;&gt;# 输出defgh&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;readlines方法&#34;&gt;readlines()方法
+&lt;/h3&gt;&lt;p&gt;readlines可以按照行的方式把整个文件中的内容进行一次性读取，并且返回的是一个列表，其中返回的是一个**&lt;font style=&#34;color:#DF2A3F;&#34;&gt;列表&lt;/font&gt;**，其中每一行的数据为一个元素。&lt;/p&gt;
+&lt;p&gt;示例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 有python.txt文件内容为：&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# abc&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# def&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# ghi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;python.txt&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;content&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;readlines&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;	&lt;span class=&#34;c1&#34;&gt;# 输出[&amp;#39;abc\n&amp;#39;,&amp;#39;def\n&amp;#39;,&amp;#39;ghi\n&amp;#39;] 此处\n为换行符&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;close&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;	&lt;span class=&#34;c1&#34;&gt;# 关闭文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;注意：连续调用多次read或readlines，后面的read会接着前面的继续读取而不是从头开始，相当于每次读取时文本中会有一个指针再向后读取，读到最后就没有东西可读了&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;readline方法&#34;&gt;readline()方法
+&lt;/h3&gt;&lt;p&gt;readline可以一次读取一行内容&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 有python.txt文件内容为：&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# abc&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# def&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# ghi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;python.txt&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;content&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;readline&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;第一行:&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;	&lt;span class=&#34;c1&#34;&gt;# 输出 abc&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;content&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;readline&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;第二行:&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;	&lt;span class=&#34;c1&#34;&gt;# 输出 def&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;close&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;for循环读取文件行&#34;&gt;for循环读取文件行
+&lt;/h3&gt;&lt;p&gt;示例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;line&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;python.txt&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;r&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;line&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;文件的关闭&#34;&gt;文件的关闭
+&lt;/h3&gt;&lt;p&gt;前面已经有提到，以对象名为&amp;rsquo;f&amp;rsquo;为例：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;f.close()&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;with-open语法&#34;&gt;with open()语法
+&lt;/h3&gt;&lt;p&gt;通过在with open的语句块中对文件进行操作，可以在操作完成后自动关闭close文件，避免遗忘掉close方法&lt;/p&gt;
+&lt;p&gt;以对象名为&amp;rsquo;f&amp;rsquo;为例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;with&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;python.txt&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;r&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;readline&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
         </item>
         <item>
         <title>7.1 进阶函数</title>
