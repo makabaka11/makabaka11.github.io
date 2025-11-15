@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="在此篇文章中学习Python中文件相关操作">
-<title>8.1 文件相关操作</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="在此篇文章中学习Python中文件的写入操作">
+<title>8.2 文件的写入操作</title>
 
-<link rel='canonical' href='https://www.retr0.qzz.io/p/8.1-%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/'>
+<link rel='canonical' href='https://www.retr0.qzz.io/p/8.2-%E6%96%87%E4%BB%B6%E7%9A%84%E5%86%99%E5%85%A5%E6%93%8D%E4%BD%9C/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="8.1 文件相关操作">
-<meta property='og:description' content="在此篇文章中学习Python中文件相关操作">
-<meta property='og:url' content='https://www.retr0.qzz.io/p/8.1-%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/'>
+<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="8.2 文件的写入操作">
+<meta property='og:description' content="在此篇文章中学习Python中文件的写入操作">
+<meta property='og:url' content='https://www.retr0.qzz.io/p/8.2-%E6%96%87%E4%BB%B6%E7%9A%84%E5%86%99%E5%85%A5%E6%93%8D%E4%BD%9C/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-14T23:36:48&#43;08:00'/><meta property='article:modified_time' content='2025-11-14T23:36:48&#43;08:00'/>
-<meta name="twitter:title" content="8.1 文件相关操作">
-<meta name="twitter:description" content="在此篇文章中学习Python中文件相关操作">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-15T21:50:41&#43;08:00'/><meta property='article:modified_time' content='2025-11-15T21:50:41&#43;08:00'/>
+<meta name="twitter:title" content="8.2 文件的写入操作">
+<meta name="twitter:description" content="在此篇文章中学习Python中文件的写入操作">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -279,18 +279,13 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#文件编码">文件编码</a></li>
-    <li><a href="#文件的读取操作">文件的读取操作</a>
+    <li><a href="#文件的从头写入">文件的从头写入</a>
       <ol>
-        <li><a href="#open打开函数">open()打开函数</a></li>
-        <li><a href="#read方法">read()方法</a></li>
-        <li><a href="#readlines方法">readlines()方法</a></li>
-        <li><a href="#readline方法">readline()方法</a></li>
-        <li><a href="#for循环读取文件行">for循环读取文件行</a></li>
-        <li><a href="#文件的关闭">文件的关闭</a></li>
-        <li><a href="#with-open语法">with open()语法</a></li>
+        <li><a href="#文件不存在">文件不存在</a></li>
+        <li><a href="#文件已经存在">文件已经存在</a></li>
       </ol>
     </li>
+    <li><a href="#文件的追加写入">文件的追加写入</a></li>
   </ol>
 </nav>
         </div>
@@ -322,12 +317,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/8.1-%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/">8.1 文件相关操作</a>
+            <a href="/p/8.2-%E6%96%87%E4%BB%B6%E7%9A%84%E5%86%99%E5%85%A5%E6%93%8D%E4%BD%9C/">8.2 文件的写入操作</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            在此篇文章中学习Python中文件相关操作
+            在此篇文章中学习Python中文件的写入操作
         </h3>
         
     </div>
@@ -348,7 +343,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-11-14</time>
+                <time class="article-time--published">2025-11-15</time>
             </div>
         
 
@@ -371,112 +366,9 @@
     <section class="article-content">
     
     
-    <h2 id="文件编码">文件编码
-</h2>
-  
-  
-
-
-<div style="position: relative; width: 100%; padding-top: 56.25%;">
-  
-  <iframe 
-    src="https://player.bilibili.com/player.html?bvid=BV1qW4y1a7fU&page=85&high_quality=1&danmaku=1"
-    scrolling="no" 
-    border="0" 
-    frameborder="no" 
-    framespacing="0" 
-    allowfullscreen="true"
-    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-  ></iframe>
-</div>
-<h2 id="文件的读取操作">文件的读取操作
-</h2><h3 id="open打开函数"><font style="color:rgb(28, 31, 35);">open()打开函数</font>
-</h3><p>使用open函数，可以打开一个已经存在的文件，或者创建一个新文件，语法如下</p>
-<p><code>open(name,mode,encoding)</code></p>
-<p>name：是要打开的目标文件名的字符串（可以包含文件所在的具体路径）</p>
-<p>mode：设置打开文件的模式（访问模式）：只读r、写入w、追加a等。</p>
-<p>encoding：编码格式（推荐使用UTF-8）</p>
-<p>示例：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;python.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&#34;UTF-8&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># encoding的顺序不是第三位，所以不能用位置参数，用关键字参数直接指定</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong><font style="color:#DF2A3F;">注意：此处‘f’是‘open’函数的文件对象，对象是Python中一种特殊的数据类型，拥有属性和方法可以使用对象.属性或对象.方法访问。</font></strong></p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>模式</th>
-          <th>描述</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>r</td>
-          <td>以只读方式打开文件。文件的指针会放在文件的开头。这是默认模式。</td>
-      </tr>
-      <tr>
-          <td>w</td>
-          <td>打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，<strong><font style="color:#DF2A3F;">原有内容会被删除</font></strong>。</td>
-      </tr>
-      <tr>
-          <td>a</td>
-          <td>打开一个文件用于追加。如果该文件已存在，<strong><font style="color:#DF2A3F;">新的内容会被写道已有内容之后</font></strong>。如果该文件**<font style="color:#DF2A3F;">不存在，创建新文件</font>**进行写入。</td>
-      </tr>
-  </tbody>
-</table></div>
-<h3 id="read方法">read()方法
-</h3><p><code>文件对象.read(num) </code></p>
-<p>num表示要从文件中读取的数据的长度（单位是字符），如果没有传入num，那么就表示读取文件中所有的数据。</p>
-<p>例如：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 有test.txt文件内容为：abcdefghijk</span>
-</span></span><span class="line"><span class="cl"><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>	<span class="c1"># 输出abc</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>	<span class="c1"># 输出defgh</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="readlines方法">readlines()方法
-</h3><p>readlines可以按照行的方式把整个文件中的内容进行一次性读取，并且返回的是一个列表，其中返回的是一个**<font style="color:#DF2A3F;">列表</font>**，其中每一行的数据为一个元素。</p>
-<p>示例：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 有python.txt文件内容为：</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># abc</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># def</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># ghi</span>
-</span></span><span class="line"><span class="cl"><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;python.txt&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>	<span class="c1"># 输出[&#39;abc\n&#39;,&#39;def\n&#39;,&#39;ghi\n&#39;] 此处\n为换行符</span>
-</span></span><span class="line"><span class="cl"><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>	<span class="c1"># 关闭文件</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong><font style="color:#DF2A3F;">注意：连续调用多次read或readlines，后面的read会接着前面的继续读取而不是从头开始，相当于每次读取时文本中会有一个指针再向后读取，读到最后就没有东西可读了</font></strong></p>
-<h3 id="readline方法">readline()方法
-</h3><p>readline可以一次读取一行内容</p>
-<div class="highlight"><div class="chroma">
+    <h2 id="文件的从头写入">文件的从头写入
+</h2><h3 id="文件不存在">文件不存在
+</h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -488,49 +380,70 @@
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
+</span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 有python.txt文件内容为：</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># abc</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># def</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># ghi</span>
-</span></span><span class="line"><span class="cl"><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;python.txt&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;第一行:</span><span class="si">{</span><span class="n">content</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>	<span class="c1"># 输出 abc</span>
-</span></span><span class="line"><span class="cl"><span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;第二行:</span><span class="si">{</span><span class="n">content</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>	<span class="c1"># 输出 def</span>
-</span></span><span class="line"><span class="cl"><span class="n">f</span><span class="o">.</span><span class="n">close</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 1.创建文件</span>
+</span></span><span class="line"><span class="cl"><span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;python.txt&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 2.文件写入</span>
+</span></span><span class="line"><span class="cl"><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;hello world&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 3.内容刷新</span>
+</span></span><span class="line"><span class="cl"><span class="n">f</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 4.文件关闭</span>
+</span></span><span class="line"><span class="cl"><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="for循环读取文件行">for循环读取文件行
-</h3><p>示例：</p>
-<div class="highlight"><div class="chroma">
+</div><p><strong><font style="color:#DF2A3F;">注意：</font></strong></p>
+<ul>
+<li><strong><font style="color:#DF2A3F;">直接调用write，内容并未真正写入文件，而是会积攒在程序的内存中，称之为缓冲区</font></strong></li>
+<li><strong><font style="color:#DF2A3F;">当调用flush的时候，内容会真正写入文件</font></strong></li>
+<li><strong><font style="color:#DF2A3F;">这样做是避免频繁的操作硬盘，导致效率下降（攒一堆，一次性写磁盘）</font></strong></li>
+</ul>
+<h3 id="文件已经存在">文件已经存在
+</h3><p>w模式会直接打开已有文件并清空所有内容</p>
+<p>其他与上述示例代码相同。</p>
+<h2 id="文件的追加写入">文件的追加写入
+</h2><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;python.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 1.打开文件，通过a模式打开即可</span>
+</span></span><span class="line"><span class="cl"><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;python.txt&#39;</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 文件写入</span>
+</span></span><span class="line"><span class="cl"><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;hello world&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 3. 内容刷新</span>
+</span></span><span class="line"><span class="cl"><span class="n">f</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 4.文件关闭</span>
+</span></span><span class="line"><span class="cl"><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="文件的关闭">文件的关闭
-</h3><p>前面已经有提到，以对象名为&rsquo;f&rsquo;为例：</p>
-<p><code>f.close()</code></p>
-<h3 id="with-open语法">with open()语法
-</h3><p>通过在with open的语句块中对文件进行操作，可以在操作完成后自动关闭close文件，避免遗忘掉close方法</p>
-<p>以对象名为&rsquo;f&rsquo;为例：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;python.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div>
+</div><p><strong><font style="color:#DF2A3F;">注意：</font></strong></p>
+<ul>
+<li><strong><font style="color:#DF2A3F;">a模式，文件不存在会创建文件</font></strong></li>
+<li><strong><font style="color:#DF2A3F;">a模式，文件存在会在最后，追加写入文件</font></strong></li>
+</ul>
+<p><strong><font style="color:#DF2A3F;"></font></strong></p>
+<blockquote>
+<p><font style="background-color:#AD1A2B;">换行操作可以通过在写入内容中加入&rsquo;\n&rsquo; 实现</font></p>
+</blockquote>
+
 </section>
 
 
@@ -592,6 +505,19 @@
             
                 
 <article class="">
+    <a href="/p/8.1-%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%BB%E5%8F%96%E6%93%8D%E4%BD%9C/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">8.1 文件的读取操作</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
     <a href="/p/7.1-%E8%BF%9B%E9%98%B6%E5%87%BD%E6%95%B0/">
         
         
@@ -637,19 +563,6 @@
 
         <div class="article-details">
             <h2 class="article-title">6.5 数据容器：集合</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/6.4-%E5%BA%8F%E5%88%97%E7%9A%84%E6%93%8D%E4%BD%9C%E5%88%87%E7%89%87/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">6.4 序列的操作：切片</h2>
         </div>
     </a>
 </article>

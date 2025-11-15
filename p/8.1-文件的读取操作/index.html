@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
-    <head>
-	<meta name="generator" content="Hugo 0.152.2"><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="天冷了，进来暖和暖和吧！">
-<title>Retr0的小窝</title>
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="在此篇文章中学习Python中文件读取相关操作">
+<title>8.1 文件的读取操作</title>
 
-<link rel='canonical' href='https://www.retr0.qzz.io/'>
+<link rel='canonical' href='https://www.retr0.qzz.io/p/8.1-%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%BB%E5%8F%96%E6%93%8D%E4%BD%9C/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="Retr0的小窝">
-<meta property='og:description' content="天冷了，进来暖和暖和吧！">
-<meta property='og:url' content='https://www.retr0.qzz.io/'>
+<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="8.1 文件的读取操作">
+<meta property='og:description' content="在此篇文章中学习Python中文件读取相关操作">
+<meta property='og:url' content='https://www.retr0.qzz.io/p/8.1-%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%BB%E5%8F%96%E6%93%8D%E4%BD%9C/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2025-11-15T21:50:41&#43;08:00 '/>
-<meta name="twitter:title" content="Retr0的小窝">
-<meta name="twitter:description" content="天冷了，进来暖和暖和吧！"><link rel="alternate" type="application/rss&#43;xml" href="https://www.retr0.qzz.io/index.xml">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-14T23:36:48&#43;08:00'/><meta property='article:modified_time' content='2025-11-14T23:36:48&#43;08:00'/>
+<meta name="twitter:title" content="8.1 文件的读取操作">
+<meta name="twitter:description" content="在此篇文章中学习Python中文件读取相关操作">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -21,7 +20,9 @@
         <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     </head>
-    <body class="">
+    <body class="
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -131,7 +132,7 @@
         
         
         
-        <li  class='current' >
+        <li >
             <a href='/' >
                 
                 
@@ -259,61 +260,10 @@
     <aside class="sidebar right-sidebar sticky">
         
             
-                <form action="/search/" class="search-form widget" >
-        <p>
-            <label>搜索</label>
-            <input name="keyword" required placeholder="输入关键词..." />
-        
-            <button title="搜索">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-            </button>
-        </p>
-    </form>
-            
-        
-            
-                <section class="widget archives">
+                
+    <section class="widget archives">
         <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">归档</h2>
-
-        
-        
-        
-        
-        
-        <div class="widget-archive--list">
-            <div class="archives-year">
-                    <a href="/archives/#2025">
-                        
-                            <span class="year">2025</span>
-                            <span class="count">30</span>
-                        
-                    </a> 
-                </div>
-            
-        </div>
-    </section>
-            
-        
-            
-                <section class="widget tagCloud">
-    <div class="widget-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <line x1="5" y1="9" x2="19" y2="9" />
   <line x1="5" y1="15" x2="19" y2="15" />
@@ -323,53 +273,28 @@
 
 
 
-    </div>
-    <h2 class="widget-title section-title">分类</h2>
-
-    <div class="tagCloud-tags">
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
         
-            <a href="/categories/%E9%80%9F%E6%9F%A5/" class="font_size_17">
-                速查
-            </a>
-        
-            <a href="/categories/python/" class="font_size_10">
-                Python
-            </a>
-        
-            <a href="/categories/%E8%AF%BE%E5%A0%82%E5%B0%8F%E8%AE%B0/" class="font_size_7">
-                课堂小记
-            </a>
-        
-            <a href="/categories/kali/" class="font_size_3">
-                Kali
-            </a>
-        
-            <a href="/categories/%E6%9D%82%E9%A1%B9/" class="font_size_3">
-                杂项
-            </a>
-        
-            <a href="/categories/%E7%BD%91%E5%AE%89/" class="font_size_3">
-                网安
-            </a>
-        
-            <a href="/categories/acg/" class="font_size_2">
-                ACG
-            </a>
-        
-            <a href="/categories/linux/" class="font_size_2">
-                Linux
-            </a>
-        
-            <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="font_size_2">
-                基础知识
-            </a>
-        
-            <a href="/categories/%E5%BD%B1%E8%A7%86/" class="font_size_2">
-                影视
-            </a>
-        
-    </div>
-</section>
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#文件编码">文件编码</a></li>
+    <li><a href="#文件的读取操作">文件的读取操作</a>
+      <ol>
+        <li><a href="#open打开函数">open()打开函数</a></li>
+        <li><a href="#read方法">read()方法</a></li>
+        <li><a href="#readlines方法">readlines()方法</a></li>
+        <li><a href="#readline方法">readline()方法</a></li>
+        <li><a href="#for循环读取文件行">for循环读取文件行</a></li>
+        <li><a href="#文件的关闭">文件的关闭</a></li>
+        <li><a href="#with-open语法">with open()语法</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
 
             
         
@@ -377,147 +302,7 @@
 
 
             <main class="main full-width">
-    
-    
-    
-    
-
-    <section class="article-list">
-        
-            
-<article class="has-image">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/%E6%81%B0%E5%88%B0%E5%A5%BD%E5%A4%84%E7%9A%84%E8%A1%A5%E5%AE%8C%E8%BD%BB%E9%9F%B3%E5%B0%91%E5%A5%B3%E8%A7%82%E5%90%8E%E6%84%9F/">
-                
-                    <img src="/post/%e5%bd%b1%e8%a7%86/qy3.png" loading="lazy" alt="Featured image of post 恰到好处的补完—《轻音少女》观后感" />
-                
-            </a>
-        </div>
-    
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/%E5%BD%B1%E8%A7%86/" >
-                影视
-            </a>
-        
-            <a href="/categories/acg/" style="background-color: #EFC3CA; color: #fff;">
-                ACG
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/%E6%81%B0%E5%88%B0%E5%A5%BD%E5%A4%84%E7%9A%84%E8%A1%A5%E5%AE%8C%E8%BD%BB%E9%9F%B3%E5%B0%91%E5%A5%B3%E8%A7%82%E5%90%8E%E6%84%9F/">恰到好处的补完—《轻音少女》观后感</a>
-        </h2>
-    
-        
-        <h3 class="article-subtitle">
-            爷的青春结束了😭......
-        </h3>
-        
-    </div>
-
-    
-    
-     
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">2025-11-01</time>
-            </div>
-        
-
-        
-
-        
-        <div id="viewCount">
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-            <time class="article-time--reading">
-                <span id="vercount_value_page_pv">loading... </span>次
-            </time>
-        </div>
-    </footer>
-    
-
-    
-</div>
-</header>
-</article>
-        
-            
-<article class="">
-    <header class="article-header">
-
-    <div class="article-details">
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/%E4%B8%BB%E6%B5%81%E7%BD%91%E7%9B%98%E8%A7%A3%E6%9E%90%E6%BB%A1%E9%80%9F%E4%B8%8B%E8%BD%BD-%E7%99%BE%E5%BA%A6%E5%A4%B8%E5%85%8B%E8%BF%85%E9%9B%B7%E9%98%BF%E9%87%8C/">主流网盘解析,满速下载 ,(百度,夸克,迅雷,阿里)</a>
-        </h2>
-    
-        
-        <h3 class="article-subtitle">
-            博主分享了百度、夸克、阿里和迅雷网盘的解析工具和下载器，实现满速下载。
-        </h3>
-        
-    </div>
-
-    
-    
-     
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">2025-11-08</time>
-            </div>
-        
-
-        
-
-        
-        <div id="viewCount">
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-            <time class="article-time--reading">
-                <span id="vercount_value_page_pv">loading... </span>次
-            </time>
-        </div>
-    </footer>
-    
-
-    
-</div>
-</header>
-</article>
-        
-            
-<article class="">
+    <article class="main-article">
     <header class="article-header">
 
     <div class="article-details">
@@ -537,12 +322,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/8.2-%E6%96%87%E4%BB%B6%E7%9A%84%E5%86%99%E5%85%A5%E6%93%8D%E4%BD%9C/">8.2 文件的写入操作</a>
+            <a href="/p/8.1-%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%BB%E5%8F%96%E6%93%8D%E4%BD%9C/">8.1 文件的读取操作</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            在此篇文章中学习Python中文件的写入操作
+            在此篇文章中学习Python中文件读取相关操作
         </h3>
         
     </div>
@@ -563,70 +348,6 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-11-15</time>
-            </div>
-        
-
-        
-
-        
-        <div id="viewCount">
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-            <time class="article-time--reading">
-                <span id="vercount_value_page_pv">loading... </span>次
-            </time>
-        </div>
-    </footer>
-    
-
-    
-</div>
-</header>
-</article>
-        
-            
-<article class="">
-    <header class="article-header">
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/%E9%80%9F%E6%9F%A5/" >
-                速查
-            </a>
-        
-            <a href="/categories/%E8%AF%BE%E5%A0%82%E5%B0%8F%E8%AE%B0/" >
-                课堂小记
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/%E8%AF%81%E6%98%8E%E7%9F%A9%E9%98%B5%E7%AD%89%E4%BB%B7/">证明矩阵等价</a>
-        </h2>
-    
-        
-    </div>
-
-    
-    
-     
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
                 <time class="article-time--published">2025-11-14</time>
             </div>
         
@@ -646,108 +367,353 @@
     
 </div>
 </header>
-</article>
-        
-            
-<article class="">
-    <header class="article-header">
 
-    <div class="article-details">
+    <section class="article-content">
     
-    <header class="article-category">
-        
-            <a href="/categories/%E9%80%9F%E6%9F%A5/" >
-                速查
-            </a>
-        
-            <a href="/categories/%E8%AF%BE%E5%A0%82%E5%B0%8F%E8%AE%B0/" >
-                课堂小记
-            </a>
-        
-    </header>
     
+    <h2 id="文件编码">文件编码
+</h2>
+  
+  
 
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/%E7%AE%97%E8%A1%8C%E5%88%97%E5%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/">算行列式的几种方法</a>
-        </h2>
-    
-        
-    </div>
 
-    
-    
-     
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">2025-11-14</time>
-            </div>
-        
-
-        
-
-        
-        <div id="viewCount">
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-            <time class="article-time--reading">
-                <span id="vercount_value_page_pv">loading... </span>次
-            </time>
-        </div>
-    </footer>
-    
-
-    
+<div style="position: relative; width: 100%; padding-top: 56.25%;">
+  
+  <iframe 
+    src="https://player.bilibili.com/player.html?bvid=BV1qW4y1a7fU&page=85&high_quality=1&danmaku=1"
+    scrolling="no" 
+    border="0" 
+    frameborder="no" 
+    framespacing="0" 
+    allowfullscreen="true"
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+  ></iframe>
 </div>
-</header>
-</article>
-        
+<h2 id="文件的读取操作">文件的读取操作
+</h2><h3 id="open打开函数"><font style="color:rgb(28, 31, 35);">open()打开函数</font>
+</h3><p>使用open函数，可以打开一个已经存在的文件，或者创建一个新文件，语法如下</p>
+<p><code>open(name,mode,encoding)</code></p>
+<p>name：是要打开的目标文件名的字符串（可以包含文件所在的具体路径）</p>
+<p>mode：设置打开文件的模式（访问模式）：只读r、写入w、追加a等。</p>
+<p>encoding：编码格式（推荐使用UTF-8）</p>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;python.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&#34;UTF-8&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># encoding的顺序不是第三位，所以不能用位置参数，用关键字参数直接指定</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong><font style="color:#DF2A3F;">注意：此处‘f’是‘open’函数的文件对象，对象是Python中一种特殊的数据类型，拥有属性和方法可以使用对象.属性或对象.方法访问。</font></strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>模式</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>r</td>
+          <td>以只读方式打开文件。文件的指针会放在文件的开头。这是默认模式。</td>
+      </tr>
+      <tr>
+          <td>w</td>
+          <td>打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，<strong><font style="color:#DF2A3F;">原有内容会被删除</font></strong>。</td>
+      </tr>
+      <tr>
+          <td>a</td>
+          <td>打开一个文件用于追加。如果该文件已存在，<strong><font style="color:#DF2A3F;">新的内容会被写道已有内容之后</font></strong>。如果该文件**<font style="color:#DF2A3F;">不存在，创建新文件</font>**进行写入。</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="read方法">read()方法
+</h3><p><code>文件对象.read(num) </code></p>
+<p>num表示要从文件中读取的数据的长度（单位是字符），如果没有传入num，那么就表示读取文件中所有的数据。</p>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 有test.txt文件内容为：abcdefghijk</span>
+</span></span><span class="line"><span class="cl"><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>	<span class="c1"># 输出abc</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>	<span class="c1"># 输出defgh</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="readlines方法">readlines()方法
+</h3><p>readlines可以按照行的方式把整个文件中的内容进行一次性读取，并且返回的是一个列表，其中返回的是一个**<font style="color:#DF2A3F;">列表</font>**，其中每一行的数据为一个元素。</p>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 有python.txt文件内容为：</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># abc</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># def</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ghi</span>
+</span></span><span class="line"><span class="cl"><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;python.txt&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>	<span class="c1"># 输出[&#39;abc\n&#39;,&#39;def\n&#39;,&#39;ghi\n&#39;] 此处\n为换行符</span>
+</span></span><span class="line"><span class="cl"><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>	<span class="c1"># 关闭文件</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong><font style="color:#DF2A3F;">注意：连续调用多次read或readlines，后面的read会接着前面的继续读取而不是从头开始，相当于每次读取时文本中会有一个指针再向后读取，读到最后就没有东西可读了</font></strong></p>
+<h3 id="readline方法">readline()方法
+</h3><p>readline可以一次读取一行内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 有python.txt文件内容为：</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># abc</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># def</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ghi</span>
+</span></span><span class="line"><span class="cl"><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;python.txt&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;第一行:</span><span class="si">{</span><span class="n">content</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>	<span class="c1"># 输出 abc</span>
+</span></span><span class="line"><span class="cl"><span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;第二行:</span><span class="si">{</span><span class="n">content</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>	<span class="c1"># 输出 def</span>
+</span></span><span class="line"><span class="cl"><span class="n">f</span><span class="o">.</span><span class="n">close</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="for循环读取文件行">for循环读取文件行
+</h3><p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;python.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="文件的关闭">文件的关闭
+</h3><p>前面已经有提到，以对象名为&rsquo;f&rsquo;为例：</p>
+<p><code>f.close()</code></p>
+<h3 id="with-open语法">with open()语法
+</h3><p>通过在with open的语句块中对文件进行操作，可以在操作完成后自动关闭close文件，避免遗忘掉close方法</p>
+<p>以对象名为&rsquo;f&rsquo;为例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;python.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
     </section>
-    <nav class='pagination'>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+<div class="math-katex"></div>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/8.2-%E6%96%87%E4%BB%B6%E7%9A%84%E5%86%99%E5%85%A5%E6%93%8D%E4%BD%9C/">
         
         
 
-        
-            
-                <span class='page-link current'>1</span>
-                
-            
-            
-                    <a class='page-link' href='/page/2/'>2</a>
-                
-            
-            
-                    
-                        
-                        <span class='page-link dots'>&hellip;</span>
-                    
-                
-            
-            
-                    
-                
-            
-            
-                    
-                
-            
-            
-                    <a class='page-link' href='/page/6/'>6</a>
-                
-            
-    </nav>
+        <div class="article-details">
+            <h2 class="article-title">8.2 文件的写入操作</h2>
+        </div>
+    </a>
+</article>
 
-<footer class="site-footer">
+            
+                
+<article class="">
+    <a href="/p/7.1-%E8%BF%9B%E9%98%B6%E5%87%BD%E6%95%B0/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">7.1 进阶函数</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/6.7-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E7%9A%84%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">6.7 数据容器的通用操作</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/6.6-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E5%85%B8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">6.6 数据容器：字典</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/6.5-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E9%9B%86%E5%90%88/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">6.5 数据容器：集合</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+        <div class="comment-container mt-8"></div>
+        
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="makabaka11/makabaka11.github.io"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
     <section class="copyright">
         &copy; 
         
@@ -763,6 +729,85 @@
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
 
 
                 <script src="/js/APlayer.min.js"></script>
