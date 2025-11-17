@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Sun, 16 Nov 2025 22:37:55 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 17 Nov 2025 15:59:43 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>恰到好处的补完—《轻音少女》观后感</title>
         <link>https://www.retr0.qzz.io/p/%E6%81%B0%E5%88%B0%E5%A5%BD%E5%A4%84%E7%9A%84%E8%A1%A5%E5%AE%8C%E8%BD%BB%E9%9F%B3%E5%B0%91%E5%A5%B3%E8%A7%82%E5%90%8E%E6%84%9F/</link>
         <pubDate>Sat, 01 Nov 2025 09:58:38 +0800</pubDate>
@@ -152,6 +152,384 @@
     &gt;AriaNgGUI&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;PC端下载器:&lt;a class=&#34;link&#34; href=&#34;https://motrix.app/zh-CN/about&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Motrix&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>1.1 抓包和web基本知识</title>
+        <link>https://www.retr0.qzz.io/p/1.1-%E6%8A%93%E5%8C%85%E5%92%8Cweb%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/</link>
+        <pubDate>Mon, 17 Nov 2025 15:59:43 +0800</pubDate>
+        
+        <guid>https://www.retr0.qzz.io/p/1.1-%E6%8A%93%E5%8C%85%E5%92%8Cweb%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/</guid>
+        <description>&lt;blockquote&gt;
+&lt;p&gt;本篇课程使用资源库内的“win10渗透测试工具预安装虚拟机（日常使用）”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;抓包&#34;&gt;抓包
+&lt;/h1&gt;&lt;h2 id=&#34;环境准备&#34;&gt;环境准备
+&lt;/h2&gt;&lt;h3 id=&#34;java环境准备&#34;&gt;Java环境准备
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;打开&lt;code&gt;C:\tools\alltools\java环境&lt;/code&gt;中的&lt;code&gt;jre-8u261-windows-x64.rar&lt;/code&gt;压缩包，解压并安装Java&lt;/li&gt;
+&lt;li&gt;安装完成后按&lt;code&gt;win+R&lt;/code&gt;打开“运行”窗口，输入cmd并回车进入命令行控制台。&lt;/li&gt;
+&lt;li&gt;分别输入&lt;code&gt;java&lt;/code&gt;和&lt;code&gt;javac&lt;/code&gt;均有内容返回则说明安装成功。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;burpsuite软件的准备&#34;&gt;Burpsuite软件的准备
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;打开&lt;code&gt;C:\tools\alltools\抓包工具&lt;/code&gt;中的&lt;code&gt;Burpsuitepro_Unlimited_jb51.rar&lt;/code&gt;压缩包并解压到合适的位置。&lt;/li&gt;
+&lt;li&gt;在解压的文件夹内创建一个&lt;code&gt;.bat&lt;/code&gt;批处理文件用于启动Burpsuite，名称随便，内容为：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;java&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;jar&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;BurpUnlimited&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;jar&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;双击该批处理文件即可启动Burpsuite,一路next进入软件界面。&lt;/li&gt;
+&lt;li&gt;检查并确认Options选项卡中监听地址和端口为&lt;code&gt;127.0.0.1:8080&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.nlark.com/yuque/0/2025/png/61753668/1763355215423-7b599a09-c92d-4548-98a0-1b4a442e17c6.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;firefox浏览器的准备需要开着burpsuite&#34;&gt;Firefox浏览器的准备（需要开着Burpsuite）
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;打开Firefox浏览器，并转到&lt;strong&gt;选项&lt;/strong&gt;中，在&lt;strong&gt;高级-网络-连接-设置&lt;/strong&gt;中选择“手动配置代理”并勾选为所有协议使用相同代理，填写好之前获取的地址和端口。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.nlark.com/yuque/0/2025/png/61753668/1763355827266-ead26195-a885-415e-82f2-58c92cc6c8f9.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;在地址栏输入&lt;code&gt;http://burp/&lt;/code&gt;能进入页面说明配置成功，接下来点击页面右上角的‘CA Certificate’按钮保存证书。&lt;/li&gt;
+&lt;li&gt;再次转到浏览器的&lt;strong&gt;选项&lt;/strong&gt;中，在&lt;strong&gt;高级-证书-查看证书-证书机构-导入&lt;/strong&gt;中选择刚才保存到证书导入，弹窗内全部勾上。&lt;/li&gt;
+&lt;li&gt;证书机构的列表中多出名为PortSwigger CA的证书则导入成功。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;charles软件的准备可选&#34;&gt;Charles软件的准备（可选）
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;打开位于&lt;code&gt;C:\tools\Charles&lt;/code&gt;内的&lt;code&gt;Charles.exe&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;点击&lt;strong&gt;代理&lt;/strong&gt;选项，可以看到默认勾选了Windows代理，说明Charles默认使用系统代理的方法抓包，也因此能抓取系统上所有软件的http数据包。&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;正如上述，我们需要在浏览器的代理设置中更改为：**使用系统代理 **（&lt;code&gt;1.1.3&lt;/code&gt;中提到）&lt;/li&gt;
+&lt;li&gt;因为未知原因，charles的证书不能从本地保存后导入，所以这里我们选择 **帮助-SSL代理-在移动设备或远程浏览器上安装Charles根证书 **点击后出现弹窗，例如：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.nlark.com/yuque/0/2025/png/61753668/1763361636019-7c4d5389-bcc5-458f-a4eb-b113dcad1a20.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这里我们只看后面的&lt;code&gt;chls.pro/ssl&lt;/code&gt;在浏览器中访问该地址。&lt;/p&gt;
+&lt;p&gt;安装证书的操作不再过多叙述。&lt;/p&gt;
+&lt;h2 id=&#34;抓包实操&#34;&gt;抓包实操
+&lt;/h2&gt;&lt;h3 id=&#34;burp抓包&#34;&gt;Burp抓包
+&lt;/h3&gt;&lt;p&gt;在Burp软件内Proxy-Intercept选项卡中点击&lt;strong&gt;Intercept is off&lt;/strong&gt;开始抓包&lt;/p&gt;
+&lt;p&gt;此时在百度上搜索任意关键词（以&amp;quot;test&amp;quot;为例）可以看到抓取到数据包&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.nlark.com/yuque/0/2025/png/61753668/1763360511337-f80a268f-add0-47cf-a79f-cfaeb28741aa.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;修改数据包首行&lt;code&gt;wd&lt;/code&gt;参数值为&amp;quot;ok&amp;quot;&lt;/p&gt;
+&lt;p&gt;点击&lt;strong&gt;Intercept is on&lt;/strong&gt;放行数据包&lt;/p&gt;
+&lt;p&gt;发现搜索关键词被替换为&amp;quot;ok&amp;quot;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.nlark.com/yuque/0/2025/png/61753668/1763360810847-92b2003d-204e-4a57-a73d-4ef989ce3c58.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;charles抓包&#34;&gt;Charles抓包
+&lt;/h3&gt;&lt;p&gt;打开Charles软件并访问百度&lt;/p&gt;
+&lt;p&gt;发现抓取到数据包，查看内容发现与页面原代码一致&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.nlark.com/yuque/0/2025/png/61753668/1763362821318-495daa16-f527-4302-86ce-047c7680d852.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h1 id=&#34;web基本知识&#34;&gt;web基本知识
+&lt;/h1&gt;&lt;p&gt;一些术语：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;GET&lt;/strong&gt; 通过地址栏输入===从服务器获取&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;POST&lt;/strong&gt; 提交表单===向服务器发送&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;request&lt;/strong&gt; 向服务器发起一个请求，服务器会返回一个&lt;u&gt;结果(response)&lt;/u&gt;给客户端&lt;/p&gt;
+&lt;p&gt;**forward **服务器内部发送重定向（网页发生改变但地址不变）&lt;/p&gt;
+&lt;p&gt;**redirect **服务器收到一个请求后，发送一个状态给客户端，客户端会再次请求，此时url发生了改变&lt;/p&gt;
+&lt;p&gt;**url **统一资源定位器（链接）&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;url的组成，以百度搜索为例：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;https:// www.baidu.com/ s ? wd=test &amp;amp; rsv_spt=1 &amp;amp; issp=1 &amp;amp; f=8&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;http:// == 协议&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.baidu.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;www.baidu.com&lt;/a&gt; == 域名&lt;/p&gt;
+&lt;p&gt;s == 文件&lt;/p&gt;
+&lt;p&gt;？== get请求&lt;/p&gt;
+&lt;p&gt;wd/rsv_spt/issp/f == 参数名&lt;/p&gt;
+&lt;p&gt;参数名等号后为参数值&lt;/p&gt;
+&lt;p&gt;&amp;amp; == 连接符&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>0.安全类工具文件资源库</title>
+        <link>https://www.retr0.qzz.io/p/0.%E5%AE%89%E5%85%A8%E7%B1%BB%E5%B7%A5%E5%85%B7%E6%96%87%E4%BB%B6%E8%B5%84%E6%BA%90%E5%BA%93/</link>
+        <pubDate>Mon, 17 Nov 2025 15:58:53 +0800</pubDate>
+        
+        <guid>https://www.retr0.qzz.io/p/0.%E5%AE%89%E5%85%A8%E7%B1%BB%E5%B7%A5%E5%85%B7%E6%96%87%E4%BB%B6%E8%B5%84%E6%BA%90%E5%BA%93/</guid>
+        <description>&lt;p&gt;&lt;strong&gt;部分虚拟机的密码在文件名上&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;===============================&lt;/p&gt;
+&lt;p&gt;日常工具（包含VMware以及其他常用小工具）&lt;/p&gt;
+&lt;p&gt;链接：&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1Cas0WpP1XkOf8Blh0pOFSw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1Cas0WpP1XkOf8Blh0pOFSw&lt;/a&gt;&lt;br&gt;
+提取码：67uq&lt;/p&gt;
+&lt;p&gt;vmware激活&lt;/p&gt;
+&lt;p&gt;vmware17.5.2激活（本机为win11系统使用）&lt;/p&gt;
+&lt;p&gt;MC60H-DWHD5-H80U9-6V85M-8280D&lt;/p&gt;
+&lt;p&gt;vmware17.5.2安装参考&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://word.huayunsys.com/thread-688-1-1.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://word.huayunsys.com/thread-688-1-1.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;=============================&lt;/p&gt;
+&lt;p&gt;win10渗透测试工具预安装虚拟机（日常使用）&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1VydYshBifpLR1U7tLowyBA&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1VydYshBifpLR1U7tLowyBA&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: zy7p&lt;/p&gt;
+&lt;p&gt;parrot渗透src工具预安装虚拟机（日常使用）&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1GOqLxz-tCSIGZrX2TLeaZg&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1GOqLxz-tCSIGZrX2TLeaZg&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: qjp7&lt;/p&gt;
+&lt;p&gt;=============================&lt;/p&gt;
+&lt;p&gt;kali预安装虚拟机系列&lt;/p&gt;
+&lt;p&gt;kali2018 x64（预安装）-优先使用（文件传输使用bitvise）&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/10lm6F5UO0q2f16kRVKXRqw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/10lm6F5UO0q2f16kRVKXRqw&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: 6s8i&lt;/p&gt;
+&lt;p&gt;kali 2025-1 x64位（预安装）&lt;/p&gt;
+&lt;p&gt;链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1gXSP1me3Z6djvsFJjV7-Jw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1gXSP1me3Z6djvsFJjV7-Jw&lt;/a&gt; 提取码: c2sd&lt;/p&gt;
+&lt;p&gt;kali2023.2 with Clash（需要高版本kali实验以及全局vpn使用）&lt;/p&gt;
+&lt;p&gt;链接：&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1h-2pY_NmDEWzD5ve_sadLw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1h-2pY_NmDEWzD5ve_sadLw&lt;/a&gt;&lt;br&gt;
+提取码：a7vm&lt;/p&gt;
+&lt;p&gt;关于v2ray转clash配置的生成地址&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://acl4ssr-sub.github.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://acl4ssr-sub.github.io/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;kali 1.0.6 x64位（预安装）&lt;/p&gt;
+&lt;p&gt;链接：&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1fE6sTVYLNXVi1wokT0GE_w&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1fE6sTVYLNXVi1wokT0GE_w&lt;/a&gt;&lt;br&gt;
+提取码：oe8g&lt;/p&gt;
+&lt;p&gt;=========================&lt;/p&gt;
+&lt;p&gt;空靶机系列&lt;/p&gt;
+&lt;p&gt;win7nosp预安装虚拟机（适合渗透测试实验，自带chrome，phpstudy，无vmwaretools）&lt;/p&gt;
+&lt;p&gt;链接：&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1ZIEB06P727Fau6afz5zI1A&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1ZIEB06P727Fau6afz5zI1A&lt;/a&gt; 提取码：pvql&lt;/p&gt;
+&lt;p&gt;win7sp1预安装虚拟机（适合普通实验）&lt;/p&gt;
+&lt;p&gt;链接：&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1adkc-lYiw2IRc2ztpTWVjg&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1adkc-lYiw2IRc2ztpTWVjg&lt;/a&gt;  提取码：dvl5&lt;/p&gt;
+&lt;p&gt;win10预安装虚拟机链接（普通实验靶机）：&lt;/p&gt;
+&lt;p&gt;链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1qWT4DeG8uujcsjgpeFBWjg&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1qWT4DeG8uujcsjgpeFBWjg&lt;/a&gt; 提取码: bpat&lt;/p&gt;
+&lt;p&gt;===============================&lt;/p&gt;
+&lt;p&gt;特殊实验虚拟机&lt;/p&gt;
+&lt;p&gt;src挖洞虚拟机&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1QTZJ1ExIyYKkEEj-hTV8Gw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1QTZJ1ExIyYKkEEj-hTV8Gw&lt;/a&gt; 提取码: mesk&lt;/p&gt;
+&lt;p&gt;parrot预安装虚拟机&lt;/p&gt;
+&lt;p&gt;链接：&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1m9GAPluSlkeb1ul8qYW2ag&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1m9GAPluSlkeb1ul8qYW2ag&lt;/a&gt;  提取码：mo8m&lt;/p&gt;
+&lt;p&gt;win2019数据中心版预安装虚拟机&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1P8VXiwHay9HpA6BshBI6tw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1P8VXiwHay9HpA6BshBI6tw&lt;/a&gt; 提取码: cbl9&lt;/p&gt;
+&lt;p&gt;win2012标准版预安装虚拟机&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1leMe8dBmf1A0R9xA-0N0aA&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1leMe8dBmf1A0R9xA-0N0aA&lt;/a&gt; 提取码: voou&lt;/p&gt;
+&lt;p&gt;win2008企业版预安装虚拟机+phpstudy&lt;br&gt;
+链接：&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1gAhA8A14HL5zXXJTFRGNDQ&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1gAhA8A14HL5zXXJTFRGNDQ&lt;/a&gt; 提取码：97fa&lt;/p&gt;
+&lt;p&gt;centos7普通预安装虚拟机&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1vU6w6jJ58C9v9wxnGOEr0Q&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1vU6w6jJ58C9v9wxnGOEr0Q&lt;/a&gt; 提取码: f1c4&lt;/p&gt;
+&lt;p&gt;centos7预安装phpstudy&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1pol4yliVnnau9LqsM0nUjw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1pol4yliVnnau9LqsM0nUjw&lt;/a&gt; 提取码: xtmv&lt;/p&gt;
+&lt;p&gt;centos7预安装redis&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1sdIu2_96xr5M7xG5EIOivQ&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1sdIu2_96xr5M7xG5EIOivQ&lt;/a&gt; 提取码: qyv8&lt;/p&gt;
+&lt;p&gt;centos7预安装docker&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1bZqqRKEAQH0FdEzxvnHmBA&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1bZqqRKEAQH0FdEzxvnHmBA&lt;/a&gt; 提取码: 1vr3&lt;/p&gt;
+&lt;p&gt;云安全3台centos7预安装k8s&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1awjXfkR4xRitkenSyPpn_w&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1awjXfkR4xRitkenSyPpn_w&lt;/a&gt; 提取码: 9ieh&lt;/p&gt;
+&lt;p&gt;ubuntu x64 20.04.3预安装虚拟机&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1PIRuo1h4RBxegqYIkMFx2g&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1PIRuo1h4RBxegqYIkMFx2g&lt;/a&gt; 提取码: rcsd&lt;/p&gt;
+&lt;p&gt;域环境3台虚拟机（用户名密码都在文件名中）&lt;/p&gt;
+&lt;p&gt;链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1oq4bG4ecWaB97324V91GCw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1oq4bG4ecWaB97324V91GCw&lt;/a&gt; 提取码: 174l&lt;/p&gt;
+&lt;p&gt;预安装防火墙Monowall&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1EBYTLw_U74z6uj18UIA-Yw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1EBYTLw_U74z6uj18UIA-Yw&lt;/a&gt; 提取码: wkvh&lt;/p&gt;
+&lt;p&gt;=====================&lt;/p&gt;
+&lt;p&gt;特殊情况&lt;/p&gt;
+&lt;p&gt;苹果m1芯片win10虚拟机&lt;/p&gt;
+&lt;p&gt;链接：&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1cRvML1jPv6JfGBYfhAwEkA&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1cRvML1jPv6JfGBYfhAwEkA&lt;/a&gt;&lt;br&gt;
+提取码：3r0j&lt;/p&gt;
+&lt;p&gt;=========================&lt;/p&gt;
+&lt;p&gt;渗透+逆向工程虚拟机&lt;/p&gt;
+&lt;p&gt;win7完整滲透測試+逆向工程工具預安裝虛擬機&lt;/p&gt;
+&lt;p&gt;链接：&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1r6AhgRLtkciqyUtep7okcA&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1r6AhgRLtkciqyUtep7okcA&lt;/a&gt;&lt;br&gt;
+提取码：5z9u&lt;/p&gt;
+&lt;p&gt;=====================&lt;/p&gt;
+&lt;p&gt;ctf版win10预安装虚拟机&lt;/p&gt;
+&lt;p&gt;win10-ctf.ova&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1wGtsdYzBIr4GcnjHxmh4lQ&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1wGtsdYzBIr4GcnjHxmh4lQ&lt;/a&gt; 提取码: pzjj&lt;/p&gt;
+&lt;p&gt;=====================&lt;/p&gt;
+&lt;p&gt;安全靶场类&lt;/p&gt;
+&lt;p&gt;链接：&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1dmU9DcXAthjY0te4qv4tAg&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1dmU9DcXAthjY0te4qv4tAg&lt;/a&gt;&lt;br&gt;
+提取码：38mj&lt;/p&gt;
+&lt;p&gt;代码审计源码类&lt;/p&gt;
+&lt;p&gt;链接：&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1VU5IZAMXSmSrerN69-502w&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1VU5IZAMXSmSrerN69-502w&lt;/a&gt;&lt;br&gt;
+提取码：p7vj&lt;/p&gt;
+&lt;p&gt;misc类&lt;/p&gt;
+&lt;p&gt;链接：&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/10d_oMAABD1sulW83qbDMtA&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/10d_oMAABD1sulW83qbDMtA&lt;/a&gt;&lt;br&gt;
+提取码：hk03&lt;/p&gt;
+&lt;p&gt;数字取证类&lt;/p&gt;
+&lt;p&gt;链接：&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/11yOS0eQajxSnSqQ8xHQFgA&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/11yOS0eQajxSnSqQ8xHQFgA&lt;/a&gt;&lt;br&gt;
+提取码：qfux&lt;/p&gt;
+&lt;p&gt;========================&lt;/p&gt;
+&lt;p&gt;逆向工程实验包&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1lwAKPU6leg2A1bJX7LMyUg&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1lwAKPU6leg2A1bJX7LMyUg&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: 8pj5&lt;/p&gt;
+&lt;p&gt;=========================&lt;/p&gt;
+&lt;p&gt;ctf系列实验包&lt;/p&gt;
+&lt;p&gt;链接：&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1ZPfV05b7AoL4CF2Ex9wHwg&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1ZPfV05b7AoL4CF2Ex9wHwg&lt;/a&gt;&lt;br&gt;
+提取码：qafo&lt;/p&gt;
+&lt;p&gt;==========================&lt;/p&gt;
+&lt;p&gt;AOME备份还原系统&lt;/p&gt;
+&lt;p&gt;链接：&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1xwEQC4d0ub5S3pg78fGPrA&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1xwEQC4d0ub5S3pg78fGPrA&lt;/a&gt;&lt;br&gt;
+提取码：8cnu&lt;/p&gt;
+&lt;p&gt;============================&lt;/p&gt;
+&lt;p&gt;游戏外挂辅助学习&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1MLKND0RapwTPxW2ciOC1Wg&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1MLKND0RapwTPxW2ciOC1Wg&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: h4bm&lt;/p&gt;
+&lt;p&gt;免杀工具包&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/17Rd6YAYhgHDv5u7pteWWJw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/17Rd6YAYhgHDv5u7pteWWJw&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: 3f1d&lt;/p&gt;
+&lt;p&gt;web漏洞.rar&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1YA7RjBa4-ibrkxyhWJfz0A&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1YA7RjBa4-ibrkxyhWJfz0A&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: wcgt&lt;/p&gt;
+&lt;p&gt;服务攻防&lt;/p&gt;
+&lt;p&gt;链接无法分享&lt;/p&gt;
+&lt;p&gt;红队工具&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1AYGBjVYVKlDx9AEF_maiPQ&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1AYGBjVYVKlDx9AEF_maiPQ&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: em5w&lt;/p&gt;
+&lt;p&gt;蓝队工具&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1Zkc1vCsonzZBQ2Q2stZQNA&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1Zkc1vCsonzZBQ2Q2stZQNA&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: hw32&lt;/p&gt;
+&lt;p&gt;免杀webshell&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1plbtPsJllE4fetMcAmtU4g&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1plbtPsJllE4fetMcAmtU4g&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: 7inr&lt;/p&gt;
+&lt;p&gt;信息收集补充&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1P8HoH3jMPwTIXf-ji6Scsg&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1P8HoH3jMPwTIXf-ji6Scsg&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: gfhg&lt;/p&gt;
+&lt;p&gt;云安全工具&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1l-FMgaccQlrxhFJHakGvNA&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1l-FMgaccQlrxhFJHakGvNA&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: q9ev&lt;/p&gt;
+&lt;p&gt;ONE-FOX集成工具箱_V6&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1gu5Z7z2Ls6wW_8FOSOEH0A&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1gu5Z7z2Ls6wW_8FOSOEH0A&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: exxx&lt;/p&gt;
+&lt;p&gt;移动终端工具(密码huayunsys.com).rar&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1gNQ-okYjgeg7aoz6Cono0Q&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1gNQ-okYjgeg7aoz6Cono0Q&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: x227&lt;/p&gt;
+&lt;p&gt;===========================&lt;/p&gt;
+&lt;p&gt;vulfocus靶场&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1YPJfsN6WFwA7Q9viE8ejLg&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1YPJfsN6WFwA7Q9viE8ejLg&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: wbsv&lt;/p&gt;
+&lt;p&gt;snort2虚拟机&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1oZpepxjTHY5qLqYb5UD4IQ&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1oZpepxjTHY5qLqYb5UD4IQ&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: 4fsi&lt;/p&gt;
+&lt;p&gt;雷池虚拟机&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1tByIap_RTrLPFwKRfAaxBA&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1tByIap_RTrLPFwKRfAaxBA&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: ceuv&lt;/p&gt;
+&lt;p&gt;蜜罐虚拟机&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1u3EauAmLuILovlcbe-cGnw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1u3EauAmLuILovlcbe-cGnw&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: akvm&lt;/p&gt;
+&lt;p&gt;suicata虚拟机&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1uImCWMW_LttEbFrEae5n-Q&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1uImCWMW_LttEbFrEae5n-Q&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: sg9t&lt;/p&gt;
+&lt;p&gt;jumpserver堡垒机&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1fUJFAkUPg99f6g72oELVBA&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1fUJFAkUPg99f6g72oELVBA&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: gvi5&lt;/p&gt;
+&lt;p&gt;Mobexler&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1OFdDyEkyNiWP5ms2IEMrEg&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1OFdDyEkyNiWP5ms2IEMrEg&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: 2nm8&lt;/p&gt;
+&lt;p&gt;ELK日志分析&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/176TUQmmRjwGmuQhuPFLCuw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/176TUQmmRjwGmuQhuPFLCuw&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: s73m&lt;/p&gt;
+&lt;p&gt;HIDS-Wazuh&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1s7_Xh6XOJ9Ea648gJnOeNw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1s7_Xh6XOJ9Ea648gJnOeNw&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: e6rv&lt;/p&gt;
+&lt;p&gt;==========================&lt;/p&gt;
+&lt;p&gt;win10-java8预安装虚拟机&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1QEAM5-apx8UKn1ZijQZ8IQ&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1QEAM5-apx8UKn1ZijQZ8IQ&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: m9wd&lt;/p&gt;
+&lt;p&gt;===========================&lt;/p&gt;
+&lt;p&gt;win10-vc2022-qt预安装虚拟机&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/18BudoNm569KZk4ildcODJw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/18BudoNm569KZk4ildcODJw&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;提取码-79qu&#34;&gt;提取码: 79qu
+&lt;/h1&gt;&lt;p&gt;win10-ctf虚拟机&lt;br&gt;
+链接: &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1ayzi1gzJGmiiNo1KBVo3kA&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1ayzi1gzJGmiiNo1KBVo3kA&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提取码: ku4v&lt;/p&gt;
+&lt;p&gt;============================&lt;/p&gt;
 </description>
         </item>
         <item>
