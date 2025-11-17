@@ -41,7 +41,7 @@
 &lt;li&gt;双击该批处理文件即可启动Burpsuite,一路next进入软件界面。&lt;/li&gt;
 &lt;li&gt;检查并确认Options选项卡中监听地址和端口为&lt;code&gt;127.0.0.1:8080&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.nlark.com/yuque/0/2025/png/61753668/1763355215423-7b599a09-c92d-4548-98a0-1b4a442e17c6.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/%e7%bd%91%e5%ae%89/img/1.1-1.png&#34;
 	
 	
 	
@@ -53,7 +53,7 @@
 &lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;打开Firefox浏览器，并转到&lt;strong&gt;选项&lt;/strong&gt;中，在&lt;strong&gt;高级-网络-连接-设置&lt;/strong&gt;中选择“手动配置代理”并勾选为所有协议使用相同代理，填写好之前获取的地址和端口。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.nlark.com/yuque/0/2025/png/61753668/1763355827266-ead26195-a885-415e-82f2-58c92cc6c8f9.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/%e7%bd%91%e5%ae%89/img/1.1-2.png&#34;
 	
 	
 	
@@ -75,7 +75,7 @@
 &lt;li&gt;正如上述，我们需要在浏览器的代理设置中更改为：**使用系统代理 **（&lt;code&gt;1.1.3&lt;/code&gt;中提到）&lt;/li&gt;
 &lt;li&gt;因为未知原因，charles的证书不能从本地保存后导入，所以这里我们选择 **帮助-SSL代理-在移动设备或远程浏览器上安装Charles根证书 **点击后出现弹窗，例如：&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.nlark.com/yuque/0/2025/png/61753668/1763361636019-7c4d5389-bcc5-458f-a4eb-b113dcad1a20.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/%e7%bd%91%e5%ae%89/img/1.1-3.png&#34;
 	
 	
 	
@@ -89,7 +89,7 @@
 &lt;/h2&gt;&lt;h3 id=&#34;burp抓包&#34;&gt;Burp抓包
 &lt;/h3&gt;&lt;p&gt;在Burp软件内Proxy-Intercept选项卡中点击&lt;strong&gt;Intercept is off&lt;/strong&gt;开始抓包&lt;/p&gt;
 &lt;p&gt;此时在百度上搜索任意关键词（以&amp;quot;test&amp;quot;为例）可以看到抓取到数据包&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.nlark.com/yuque/0/2025/png/61753668/1763360511337-f80a268f-add0-47cf-a79f-cfaeb28741aa.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/%e7%bd%91%e5%ae%89/img/1.1-4.png&#34;
 	
 	
 	
@@ -100,7 +100,7 @@
 &lt;p&gt;修改数据包首行&lt;code&gt;wd&lt;/code&gt;参数值为&amp;quot;ok&amp;quot;&lt;/p&gt;
 &lt;p&gt;点击&lt;strong&gt;Intercept is on&lt;/strong&gt;放行数据包&lt;/p&gt;
 &lt;p&gt;发现搜索关键词被替换为&amp;quot;ok&amp;quot;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.nlark.com/yuque/0/2025/png/61753668/1763360810847-92b2003d-204e-4a57-a73d-4ef989ce3c58.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/%e7%bd%91%e5%ae%89/img/1.1-5.png&#34;
 	
 	
 	
@@ -111,7 +111,7 @@
 &lt;h3 id=&#34;charles抓包&#34;&gt;Charles抓包
 &lt;/h3&gt;&lt;p&gt;打开Charles软件并访问百度&lt;/p&gt;
 &lt;p&gt;发现抓取到数据包，查看内容发现与页面原代码一致&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.nlark.com/yuque/0/2025/png/61753668/1763362821318-495daa16-f527-4302-86ce-047c7680d852.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/%e7%bd%91%e5%ae%89/img/1.1-6.png&#34;
 	
 	
 	
@@ -383,216 +383,6 @@
     &gt;https://pan.baidu.com/s/1ayzi1gzJGmiiNo1KBVo3kA&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;提取码: ku4v&lt;/p&gt;
 &lt;p&gt;============================&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>swaks伪造邮件</title>
-        <link>https://www.retr0.qzz.io/p/swaks%E4%BC%AA%E9%80%A0%E9%82%AE%E4%BB%B6/</link>
-        <pubDate>Mon, 27 Oct 2025 22:43:38 +0800</pubDate>
-        
-        <guid>https://www.retr0.qzz.io/p/swaks%E4%BC%AA%E9%80%A0%E9%82%AE%E4%BB%B6/</guid>
-        <description>&lt;img src="https://www.retr0.qzz.io/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/email.jpg" alt="Featured image of post swaks伪造邮件" /&gt;&lt;h2 id=&#34;1--伪装学校邮件&#34;&gt;1.  伪装学校邮件
-&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;大前提（原理）： 大多数学校的邮箱都可以使用代发服务  &lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;重要提醒： 接收邮件的邮箱只有网易系，qq邮箱因为安全限制问题无法接收到  &lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;打开终端并按需要输入指令&lt;/p&gt;
-&lt;p&gt;指令例：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;swaks --body &amp;#34;学校紧急通知&amp;#34; --header &amp;#34;Subject:教务处&amp;#34; -t ⽬标邮箱@XXX.com -f admin@XXX.edu.cn 
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;strong&gt;参数解释&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;body参数是发送过去邮件的内容&lt;/p&gt;
-&lt;p&gt;header是发送过去邮件的标题&lt;/p&gt;
-&lt;p&gt;-t是我们的目标邮箱&lt;/p&gt;
-&lt;p&gt;-f是发送者的邮箱&lt;/p&gt;
-&lt;p&gt;&amp;ndash;attach是指定要附加的文件的路径&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;10月19日更新&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;使用例：&lt;/p&gt;
-&lt;p&gt;这里我们输入以下代码&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;swaks --body &amp;#34;恭喜你已被我所拟录取，请在24小时内确认是否同意待录取，12小时后仍未确认的将取消资格。&amp;#34; --header &amp;#34;Subject:南京大学招生办：待录取通知&amp;#34; -t example@163.com -f zsb@nju.edu.cn 
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/kali%e4%bb%8e%e5%85%a5%e9%97%a8%e5%88%b0%e5%85%a5%e7%8b%b1/fcf3d846ffa3ff1dabac8823139f0029.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;回车后查看接收邮箱&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/kali%e4%bb%8e%e5%85%a5%e9%97%a8%e5%88%b0%e5%85%a5%e7%8b%b1/8d33d74787f97306c2becaa1ac81e8a3.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;发现正常接收了邮件，但是有提示可能伪造的标&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;&lt;strong&gt;因此，在生活中各位务必确认邮件内容的真实性。&lt;/strong&gt;&lt;/font&gt;&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>1.2Kali的本地化配置：更适合中国宝宝的Kali</title>
-        <link>https://www.retr0.qzz.io/p/1.2kali%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%E6%9B%B4%E9%80%82%E5%90%88%E4%B8%AD%E5%9B%BD%E5%AE%9D%E5%AE%9D%E7%9A%84kali/</link>
-        <pubDate>Mon, 27 Oct 2025 18:27:38 +0800</pubDate>
-        
-        <guid>https://www.retr0.qzz.io/p/1.2kali%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%E6%9B%B4%E9%80%82%E5%90%88%E4%B8%AD%E5%9B%BD%E5%AE%9D%E5%AE%9D%E7%9A%84kali/</guid>
-        <description>&lt;img src="https://www.retr0.qzz.io/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/kali2.webp" alt="Featured image of post 1.2Kali的本地化配置：更适合中国宝宝的Kali" /&gt;&lt;p&gt;感谢jm汉化组&lt;/p&gt;
-&lt;h2 id=&#34;切换简中语言包&#34;&gt;切换简中语言包
-&lt;/h2&gt;&lt;p&gt;打开终端&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo dpkg-reconfigure locales
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;在打开的界面中使用pg up，pg dn，⬆️，⬇️翻页，使用空格选择，按tab切换到下方的确定和取消，按enter确定&lt;/p&gt;
-&lt;p&gt;这里我们选择
-&lt;strong&gt;zh_CN.UTF-8&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;使用reboot重启即可&lt;/p&gt;
-&lt;h2 id=&#34;换源&#34;&gt;换源
-&lt;/h2&gt;&lt;p&gt;所谓换源就是切换软件仓库源&lt;/p&gt;
-&lt;p&gt;这里需要修改以下文件&lt;strong&gt;sources&lt;/strong&gt;.&lt;strong&gt;list&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;在终端中输入&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo vim /etc/apt/sources.list
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;⚠️⚠️⚠️注意：这里需要使用到世界上最伟大的编辑器（没有之一）使用方法见下面的文章&lt;/p&gt;
-&lt;p&gt;[retr0的小窝：Vim的使用](&lt;a class=&#34;link&#34; href=&#34;[Vim%e7%9a%84%e4%bd%bf%e7%94%a8]%28https://www.retr0.qzz.io/p/vim%e7%9a%84%e4%bd%bf%e7%94%a8/%29&#34; &gt;Vim的使用&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;在文件末加上以下任意国内源&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 官方源(国外的太慢不推荐)
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb http://http.kali.org/kali kali-rolling main non-free contrib
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb-src http://http.kali.org/kali kali-rolling main non-free contrib
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#中科大
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#阿里云
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#清华大学
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb http://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb-src https://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#浙大
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb-src http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#东软大学
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb-src http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#南京大学
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb https://mirrors.nju.edu.cn/kali kali-rolling main non-free contrib
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb-src https://mirrors.nju.edu.cn/kali kali-rolling main non-free contrib
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;添加并保存后需要到终端中更新&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt upgrade
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;调整文字大小可选&#34;&gt;调整文字大小（可选）
-&lt;/h2&gt;&lt;p&gt;注意：这里我们去设置里在dpi选项中调整，而不要去“display”选项中调整，因为效果很差&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>1.1Kali的下载与安装</title>
-        <link>https://www.retr0.qzz.io/p/1.1kali%E7%9A%84%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/</link>
-        <pubDate>Mon, 27 Oct 2025 12:46:38 +0800</pubDate>
-        
-        <guid>https://www.retr0.qzz.io/p/1.1kali%E7%9A%84%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/</guid>
-        <description>&lt;img src="https://www.retr0.qzz.io/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/kali.jpeg" alt="Featured image of post 1.1Kali的下载与安装" /&gt;&lt;h2 id=&#34;1-下载kali&#34;&gt;1. 下载kali
-&lt;/h2&gt;&lt;p&gt;几种可选方案：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;官网下载：&lt;a class=&#34;link&#34; href=&#34;https://www.kali.org/get-kali/#kali-virtual-machines&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Get Kali | Kali Linux&lt;/a&gt;选择VMware下载即可（不推荐）&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;镜像源下载：阿里云镜像源&lt;a class=&#34;link&#34; href=&#34;https://mirrors.aliyun.com/kali-images/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;kali-images安装包下载_开源镜像站-阿里云&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;​                       清华镜像源&lt;a class=&#34;link&#34; href=&#34;https://mirrors.tuna.tsinghua.edu.cn/kali-images/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;清华大学开源软件镜像站 | Tsinghua Open Source Mirror&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;​                       中科大镜像源&lt;a class=&#34;link&#34; href=&#34;https://mirrors.ustc.edu.cn/kali-images/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Index of /kali-images/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;以上几个都是从最新版本中找到后缀为&lt;strong&gt;vmware-amd64.7z&lt;/strong&gt;的下载即可&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;2-安装kali&#34;&gt;2. 安装kali
-&lt;/h2&gt;&lt;p&gt;将下载好的压缩包解压在某文件夹内&lt;/p&gt;
-&lt;p&gt;然后打开&lt;strong&gt;VMware Workstation Pro&lt;/strong&gt;点击主页上的【打开虚拟机】&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/kali%e4%bb%8e%e5%85%a5%e9%97%a8%e5%88%b0%e5%85%a5%e7%8b%b1/1.1.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;选择你刚刚解压出的那一堆文件中后缀为&lt;strong&gt;vmx&lt;/strong&gt;的文件即可（一般会自动筛选的）&lt;/p&gt;
-&lt;h2 id=&#34;3-登录kali&#34;&gt;3. 登录kali
-&lt;/h2&gt;&lt;p&gt;默认超级用户名和密码均为&lt;strong&gt;kali&lt;/strong&gt;，&lt;/p&gt;
-&lt;p&gt;至此，&lt;/p&gt;
-&lt;p&gt;享受你的个人kali吧。&lt;/p&gt;
 </description>
         </item>
         
