@@ -674,241 +674,294 @@
     }());
 </script>
 
+
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+
 <script>
     var pjax = new Pjax({
-        selectors: [
-            ".main-container"
-        ]
-    })
+        selectors: [".main-container"]
+    });
 </script>
 
-    
-    <script src=https://www.retr0.qzz.io/js/topbar.min.js></script>
 
-<div class="js-Pjax">
-    <script>
-        
-        function initUtterances() {
-            
-            const isArticle = document.querySelector('.article-page') && document.querySelector('.article-content');
-            if (!isArticle) return;
+<script src=https://www.retr0.qzz.io/js/topbar.min.js></script>
 
-            
-            const oldScript = document.querySelector('script[src^="https://utteranc.es/client.js"]');
-            if (oldScript) oldScript.remove();
-            
-            
-            const container = document.querySelector('.comment-container');
-            if (!container) {
-                console.warn('评论容器未找到，请检查single.html是否添加了.comment-container');
-                return;
-            }
-            container.innerHTML = ''; 
 
-            
-            let script = document.createElement('script');
-            script.src = 'https://utteranc.es/client.js';
-            script.setAttribute('repo', 'makabaka11/makabaka11.github.io');
-            script.setAttribute('issue-term', 'pathname');
-            if (window.utterancesLabel) script.setAttribute('label', window.utterancesLabel);
-            script.setAttribute('crossorigin', 'anonymous');
-            script.async = true;
-            container.appendChild(script);
-        }
 
-        
-        (function() {
-            document.addEventListener('DOMContentLoaded', function() {
-                
-                if (!window.pjax || !window.pjax.state) {
-                    initUtterances();
-                }
-            });
-        })(document)
-    </script>
-</div>
 <script>
-    pjax._handleResponse = pjax.handleResponse;
-    pjax.handleResponse = function(responseText, request, href, options) {
-        if (request.responseText.match("<html")) {
-            if (responseText) {
-                let newDom = new DOMParser().parseFromString(responseText, 'text/html');
-                let bodyClass = newDom.body.className;
-                document.body.setAttribute("class", bodyClass)
-            }
-            pjax._handleResponse(responseText, request, href, options);
-        } else {
-            
-        }
-    }
+function initUtterances() {
+    const isArticle = document.querySelector('.article-page') && document.querySelector('.article-content');
+    if (!isArticle) return;
+
+    const oldScript = document.querySelector('script[src^="https://utteranc.es/client.js"]');
+    if (oldScript) oldScript.remove();
+
+    const container = document.querySelector('.comment-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    let script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'makabaka11/makabaka11.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+    container.appendChild(script);
+}
 </script>
+
 <script>
-    topbar.config({
-        barColors: {
-            '0': 'rgba(255,  255, 255, 1)',
-            '1.0': 'rgba(255, 183, 197,  1)'
-        }
-    })
-	
-    document.addEventListener('pjax:send', () => {
-        topbar.show();
-    })
-	
-    document.addEventListener('pjax:complete', () => {
-        window.Stack.init();
-        topbar.hide();
-        
-        setTimeout(initUtterances, 0); 
-        
-        updateViewCount();
-        
-        renderKaTeX();
-    })
-
-    
-    function updateViewCount() {
-        const viewCountEl = document.getElementById('vercount_value_page_pv');
-        if (!viewCountEl) return;
-
-        viewCountEl.textContent = 'loading...';
-        const vercountScriptUrl = 'https://cn.vercount.one/js';
-        
-        
-        const oldScript = document.querySelector(`script[src="${vercountScriptUrl}"]`);
-        if (oldScript) oldScript.remove();
-        
-        
-        const newScript = document.createElement('script');
-        newScript.src = vercountScriptUrl;
-        newScript.defer = true;
-        document.head.appendChild(newScript);
-
-        showHideView();
-    }
+document.addEventListener("DOMContentLoaded", () => {
+    if (!window.pjax || !window.pjax.state) initUtterances();
+});
 </script>
+
+
 <script>
-    async function renderKaTeX() {
-        let katex = document.querySelector(".math-katex");
-        if (!katex) return;
-
-        while (typeof renderMathInElement !== 'function') {
-            await delay(500);
-        }        
-        const content = document.querySelector('.article-content') || document.body;
-        renderMathInElement(content, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });
+pjax._handleResponse = pjax.handleResponse;
+pjax.handleResponse = function(responseText, request, href, options) {
+    if (request.responseText.match("<html")) {
+        if (responseText) {
+            let newDom = new DOMParser().parseFromString(responseText, 'text/html');
+            document.body.setAttribute("class", newDom.body.className);
+        }
+        pjax._handleResponse(responseText, request, href, options);
     }
-    
-    function delay(time) {
-        return new Promise(resolve => setTimeout(resolve, time));
-    }
+};
 </script>
+
+
+<script>
+topbar.config({
+    barColors: {
+        '0': 'rgba(255, 255, 255, 1)',
+        '1.0': 'rgba(255, 183, 197, 1)'
+    }
+});
+
+document.addEventListener('pjax:send', () => topbar.show());
+
+document.addEventListener('pjax:complete', () => {
+    window.Stack.init();
+    topbar.hide();
+    setTimeout(initUtterances, 0);
+    updateViewCount();
+    renderKaTeX();
+    initPhotoSwipeFromDOM('.article-content');   
+    initLive2D();                                
+});
+</script>
+
+
+<script>
+function updateViewCount() {
+    const viewCountEl = document.getElementById('vercount_value_page_pv');
+    if (!viewCountEl) return;
+
+    viewCountEl.textContent = 'loading...';
+    const url = 'https://cn.vercount.one/js';
+
+    const old = document.querySelector(`script[src="${url}"]`);
+    if (old) old.remove();
+
+    const s = document.createElement('script');
+    s.src = url;
+    s.defer = true;
+    document.head.appendChild(s);
+
+    showHideView();
+}
+
+function showHideView() {
+    const viewCounts = document.querySelectorAll("#viewCount");
+    const isArticle = document.querySelector(".article-page");
+    viewCounts.forEach(ele => ele.style.display = isArticle ? 'block' : 'none');
+}
+</script>
+
+
+<script>
+async function renderKaTeX() {
+    let katex = document.querySelector(".math-katex");
+    if (!katex) return;
+
+    while (typeof renderMathInElement !== 'function') {
+        await new Promise(r => setTimeout(r, 500));
+    }
+
+    const content = document.querySelector('.article-content') || document.body;
+    renderMathInElement(content, {
+        delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true }
+        ],
+        ignoredClasses: ["gist"]
+    });
+}
+</script>
+
+
 <div id="particles-js"></div>
 
 <script src=https://www.retr0.qzz.io/background/particles.min.js></script>
 <script>
-  particlesJS.load('particles-js', "https://www.retr0.qzz.io/background/particlesjs-config.json", function() {
-    console.log('particles.js loaded - callback');
-  });
+particlesJS.load('particles-js',
+    "https://www.retr0.qzz.io/background/particlesjs-config.json",
+    () => console.log('particles.js loaded')
+);
 </script>
 
 <style>
-  #particles-js {
+#particles-js {
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 0; left: 0;
     width: 100%;
     z-index: -1;
-  }
+}
 </style>
 
-<script defer src="https://cn.vercount.one/js"></script>
 <script>
-    function showHideView() {
-        const viewCounts = document.querySelectorAll("#viewCount");
-        if (!viewCounts.length) return;
 
-        const isArticle = document.querySelector(".article-page");
-        viewCounts.forEach(ele => {
-            ele.style.display = isArticle ? 'block' : 'none';
+function initPhotoSwipeFromDOM(selector) {
+    if (!window.PhotoSwipe) return;
+
+    const containers = document.querySelectorAll(selector);
+    if (!containers.length) return;
+
+    containers.forEach(container => {
+        const images = container.querySelectorAll('img');
+
+        images.forEach((img, index) => {
+
+            
+            function getImageSize() {
+                return new Promise(resolve => {
+                    if (img.complete && img.naturalWidth) {
+                        resolve({
+                            w: img.naturalWidth,
+                            h: img.naturalHeight
+                        });
+                    } else {
+                        const tmp = new Image();
+                        tmp.src = img.src || img.getAttribute("data-src");
+                        tmp.onload = () => resolve({ w: tmp.width, h: tmp.height });
+                    }
+                });
+            }
+
+            img.style.cursor = "zoom-in";
+
+            
+            img.addEventListener("click", async (e) => {
+                e.preventDefault();
+
+                const size = await getImageSize();
+                const pswpEl = document.querySelector('.pswp');
+
+                const items = Array.from(images).map(i => ({
+                    src: i.src || i.getAttribute("data-src"),
+                    msrc: i.src,
+                    w: i.naturalWidth || 800,
+                    h: i.naturalHeight || 600,
+                }));
+
+                items[index].w = size.w;
+                items[index].h = size.h;
+
+                const gallery = new PhotoSwipe(pswpEl, PhotoSwipeUI_Default, items, {
+                    index,
+                    history: false
+                });
+
+                
+                
+                
+                enablePhotoSwipeWebShare(gallery);
+
+                gallery.init();
+            });
         });
-    }
-    
-    showHideView();
+    });
+}
+
+
+
+
+
+function enablePhotoSwipeWebShare(gallery) {
+    gallery.listen('shareLinkClick', function(shareButtonData, e) {
+        e.preventDefault();
+
+        const item = gallery.currItem;
+
+        if (navigator.share) {
+            navigator.share({
+                title: document.title,
+                text: '给你分享一张图片：',
+                url: item.src
+            }).catch(err => console.log("分享失败：", err));
+
+            return false; 
+        }
+
+        
+        return true;
+    });
+}
 </script>
+
+
 
 <script>
-  const cdnPath = "https://www.retr0.qzz.io/blog-live2d/";
-  const config = {
-    
-    path: {
-      homePath: "/",
-      modelPath: cdnPath + "/Resources/",
-      cssPath: cdnPath + "/waifu.css",
-      tipsJsonPath: cdnPath + "/waifu-tips.json",
-      tipsJsPath: cdnPath + "/waifu-tips.js",
-      live2dCorePath: cdnPath + "/Core/live2dcubismcore.js",
-      live2dSdkPath: cdnPath + "/live2d-sdk.js"
-    },
-    
-    tools: ["hitokoto", "asteroids", "express", "switch-model", "switch-texture", "photo", "info", "quit"],
-    
-    drag: {
-      enable: true,
-      direction: ["x", "y"]
-    },
-    
-    switchType: "order"
-  }
+function initLive2D() {
+    if (screen.width < 768) return;
 
-  
-  if (screen.width >= 768) {
+    const cdnPath = "https://www.retr0.qzz.io/blog-live2d/";
+    const config = {
+        path: {
+            modelPath: cdnPath + "Resources/",
+            cssPath: cdnPath + "waifu.css",
+            tipsJsonPath: cdnPath + "waifu-tips.json",
+            tipsJsPath: cdnPath + "waifu-tips.js",
+            live2dCorePath: cdnPath + "Core/live2dcubismcore.js",
+            live2dSdkPath: cdnPath + "live2d-sdk.js"
+        }
+    };
+
     Promise.all([
-      loadExternalResource(config.path.cssPath, "css"),
-      loadExternalResource(config.path.live2dCorePath, "js"),
-      loadExternalResource(config.path.live2dSdkPath, "js"),
-      loadExternalResource(config.path.tipsJsPath, "js")
+        loadRes(config.path.cssPath, "css"),
+        loadRes(config.path.live2dCorePath, "js"),
+        loadRes(config.path.live2dSdkPath, "js"),
+        loadRes(config.path.tipsJsPath, "js")
     ]).then(() => {
-      initWidget({
-        waifuPath: config.path.tipsJsonPath,
-        cdnPath: config.path.modelPath,
-        tools: config.tools,
-        dragEnable: config.drag.enable,
-        dragDirection: config.drag.direction,
-        switchType: config.switchType
-      });
+        initWidget({
+            waifuPath: config.path.tipsJsonPath,
+            cdnPath: config.path.modelPath
+        });
     });
-  }
+}
 
-  
-  function loadExternalResource(url, type) {
-    return new Promise((resolve, reject) => {
-      let tag;
-      if (type === "css") {
-        tag = document.createElement("link");
-        tag.rel = "stylesheet";
-        tag.href = url;
-      }
-      else if (type === "js") {
-        tag = document.createElement("script");
-        tag.src = url;
-      }
-      if (tag) {
-        tag.onload = () => resolve(url);
-        tag.onerror = () => reject(url);
+function loadRes(url, type) {
+    return new Promise((resolve) => {
+        const tag = type === "css" ? document.createElement("link") : document.createElement("script");
+        if (type === "css") {
+            tag.rel = "stylesheet";
+            tag.href = url;
+        } else {
+            tag.src = url;
+        }
+        tag.onload = resolve;
         document.head.appendChild(tag);
-      }
     });
-  }
+}
+
+initLive2D();
 </script>
+
+
         
 
 <meting-js
