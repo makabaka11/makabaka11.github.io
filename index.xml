@@ -334,7 +334,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;异常之finally&#34;&gt;异常之finally
-&lt;/h3&gt;&lt;p&gt;finally表示的是&lt;font style=&#34;color:#DF2A3F;&#34;&gt;无论是否异常都要执行&lt;/font&gt;的代码，例如关闭文件。&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;finally表示的是无论是否异常都要执行的代码，例如关闭文件。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -394,17 +394,17 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;strong&gt;输出及报错内容：&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;这是func02开始&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:#DF2A3F;&amp;quot;&amp;gt;Traceback (most recent call last):&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:#DF2A3F;&amp;quot;&amp;gt;File &amp;quot;/home/cloudlab/main.py&amp;quot;, &amp;lt;/font&amp;gt;&amp;lt;font style=&amp;quot;color:#DF2A3F;background-color:#FBDE28;&amp;quot;&amp;gt;line 13&amp;lt;/font&amp;gt;&amp;lt;font style=&amp;quot;color:#DF2A3F;&amp;quot;&amp;gt;, in &amp;lt;module&amp;gt;&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Traceback (most recent call last):&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;File &amp;quot;/home/cloudlab/main.py&amp;quot;,line 13, in &amp;lt;module&amp;gt;&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;这是func01开始&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt; &lt;/font&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:#DF2A3F;&amp;quot;&amp;gt;main()&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:#DF2A3F;&amp;quot;&amp;gt;File &amp;quot;/home/cloudlab/main.py&amp;quot;, &amp;lt;/font&amp;gt;&amp;lt;font style=&amp;quot;color:#DF2A3F;background-color:#FBDE28;&amp;quot;&amp;gt;line 12&amp;lt;/font&amp;gt;&amp;lt;font style=&amp;quot;color:#DF2A3F;&amp;quot;&amp;gt;, in main&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:#DF2A3F;&amp;quot;&amp;gt;func02()&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:#DF2A3F;&amp;quot;&amp;gt;File &amp;quot;/home/cloudlab/main.py&amp;quot;, &amp;lt;/font&amp;gt;&amp;lt;font style=&amp;quot;color:#DF2A3F;background-color:#FBDE28;&amp;quot;&amp;gt;line 8&amp;lt;/font&amp;gt;&amp;lt;font style=&amp;quot;color:#DF2A3F;&amp;quot;&amp;gt;, in func02&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:#DF2A3F;&amp;quot;&amp;gt;func01()&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:#DF2A3F;&amp;quot;&amp;gt;File &amp;quot;/home/cloudlab/main.py&amp;quot;, &amp;lt;/font&amp;gt;&amp;lt;font style=&amp;quot;color:#DF2A3F;background-color:#FBDE28;&amp;quot;&amp;gt;line 3,&amp;lt;/font&amp;gt;&amp;lt;font style=&amp;quot;color:#DF2A3F;&amp;quot;&amp;gt; in func01&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:#DF2A3F;&amp;quot;&amp;gt;nmu = 1 / 0&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:#DF2A3F;&amp;quot;&amp;gt;ZeroDivisionError: division by zero&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;main()&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;File &amp;quot;/home/cloudlab/main.py&amp;quot;,line 12, in main&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;func02()&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;File &amp;quot;/home/cloudlab/main.py&amp;quot;,line 8, in func02&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;func01()&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;File &amp;quot;/home/cloudlab/main.py&amp;quot;,line 3, in func01&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;nmu = 1 / 0&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ZeroDivisionError: division by zero&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;注意观察报错中错误所在代码行数的变化，体现了异常的传递&lt;/p&gt;
 &lt;h3 id=&#34;有捕获时&#34;&gt;有捕获时：
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -459,9 +459,9 @@
 &lt;p&gt;&lt;code&gt;这是func02开始&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;这是func01开始&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;检测到异常! division by zero&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;当&lt;font style=&#34;color:#DF2A3F;&#34;&gt;函数func01&lt;/font&gt;中发生异常,并且没有捕获处理这个异常的时候,异常&lt;/p&gt;
-&lt;p&gt;会传递到&lt;font style=&#34;color:#DF2A3F;&#34;&gt;函数func02&lt;/font&gt;,当func02也没有捕获处理这个异常的时候&lt;/p&gt;
-&lt;p&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;main函数&lt;/font&gt;会捕获这个异常,这就是&lt;font style=&#34;color:#DF2A3F;&#34;&gt;异常的传递性&lt;/font&gt;.&lt;/p&gt;
+&lt;p&gt;当函数func01中发生异常,并且没有捕获处理这个异常的时候,异常&lt;/p&gt;
+&lt;p&gt;会传递到函数func02,当func02也没有捕获处理这个异常的时候&lt;/p&gt;
+&lt;p&gt;main函数会捕获这个异常,这就是异常的传递性.&lt;/p&gt;
 &lt;p&gt;而且代码再按步骤执行时一旦遇到异常就会立即停止接下来的步骤，除非被捕获&lt;/p&gt;
 </description>
         </item>

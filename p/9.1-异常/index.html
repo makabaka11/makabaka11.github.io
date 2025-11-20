@@ -555,7 +555,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="异常之finally">异常之finally
-</h3><p>finally表示的是<font style="color:#DF2A3F;">无论是否异常都要执行</font>的代码，例如关闭文件。</p>
+</h3><p>finally表示的是无论是否异常都要执行的代码，例如关闭文件。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -615,17 +615,17 @@
 </div>
 </div><p><strong>输出及报错内容：</strong></p>
 <p><code>这是func02开始</code></p>
-<p><code>&lt;font style=&quot;color:#DF2A3F;&quot;&gt;Traceback (most recent call last):&lt;/font&gt;</code></p>
-<p><code>&lt;font style=&quot;color:#DF2A3F;&quot;&gt;File &quot;/home/cloudlab/main.py&quot;, &lt;/font&gt;&lt;font style=&quot;color:#DF2A3F;background-color:#FBDE28;&quot;&gt;line 13&lt;/font&gt;&lt;font style=&quot;color:#DF2A3F;&quot;&gt;, in &lt;module&gt;&lt;/font&gt;</code></p>
+<p><code>Traceback (most recent call last):</code></p>
+<p><code>File &quot;/home/cloudlab/main.py&quot;,line 13, in &lt;module&gt;</code></p>
 <p><code>这是func01开始</code></p>
-<p><font style="color:#DF2A3F;"> </font><code>&lt;font style=&quot;color:#DF2A3F;&quot;&gt;main()&lt;/font&gt;</code></p>
-<p><code>&lt;font style=&quot;color:#DF2A3F;&quot;&gt;File &quot;/home/cloudlab/main.py&quot;, &lt;/font&gt;&lt;font style=&quot;color:#DF2A3F;background-color:#FBDE28;&quot;&gt;line 12&lt;/font&gt;&lt;font style=&quot;color:#DF2A3F;&quot;&gt;, in main&lt;/font&gt;</code></p>
-<p><code>&lt;font style=&quot;color:#DF2A3F;&quot;&gt;func02()&lt;/font&gt;</code></p>
-<p><code>&lt;font style=&quot;color:#DF2A3F;&quot;&gt;File &quot;/home/cloudlab/main.py&quot;, &lt;/font&gt;&lt;font style=&quot;color:#DF2A3F;background-color:#FBDE28;&quot;&gt;line 8&lt;/font&gt;&lt;font style=&quot;color:#DF2A3F;&quot;&gt;, in func02&lt;/font&gt;</code></p>
-<p><code>&lt;font style=&quot;color:#DF2A3F;&quot;&gt;func01()&lt;/font&gt;</code></p>
-<p><code>&lt;font style=&quot;color:#DF2A3F;&quot;&gt;File &quot;/home/cloudlab/main.py&quot;, &lt;/font&gt;&lt;font style=&quot;color:#DF2A3F;background-color:#FBDE28;&quot;&gt;line 3,&lt;/font&gt;&lt;font style=&quot;color:#DF2A3F;&quot;&gt; in func01&lt;/font&gt;</code></p>
-<p><code>&lt;font style=&quot;color:#DF2A3F;&quot;&gt;nmu = 1 / 0&lt;/font&gt;</code></p>
-<p><code>&lt;font style=&quot;color:#DF2A3F;&quot;&gt;ZeroDivisionError: division by zero&lt;/font&gt;</code></p>
+<p><code>main()</code></p>
+<p><code>File &quot;/home/cloudlab/main.py&quot;,line 12, in main</code></p>
+<p><code>func02()</code></p>
+<p><code>File &quot;/home/cloudlab/main.py&quot;,line 8, in func02</code></p>
+<p><code>func01()</code></p>
+<p><code>File &quot;/home/cloudlab/main.py&quot;,line 3, in func01</code></p>
+<p><code>nmu = 1 / 0</code></p>
+<p><code>ZeroDivisionError: division by zero</code></p>
 <p>注意观察报错中错误所在代码行数的变化，体现了异常的传递</p>
 <h3 id="有捕获时">有捕获时：
 </h3><div class="highlight"><div class="chroma">
@@ -680,9 +680,9 @@
 <p><code>这是func02开始</code></p>
 <p><code>这是func01开始</code></p>
 <p><code>检测到异常! division by zero</code></p>
-<p>当<font style="color:#DF2A3F;">函数func01</font>中发生异常,并且没有捕获处理这个异常的时候,异常</p>
-<p>会传递到<font style="color:#DF2A3F;">函数func02</font>,当func02也没有捕获处理这个异常的时候</p>
-<p><font style="color:#DF2A3F;">main函数</font>会捕获这个异常,这就是<font style="color:#DF2A3F;">异常的传递性</font>.</p>
+<p>当函数func01中发生异常,并且没有捕获处理这个异常的时候,异常</p>
+<p>会传递到函数func02,当func02也没有捕获处理这个异常的时候</p>
+<p>main函数会捕获这个异常,这就是异常的传递性.</p>
 <p>而且代码再按步骤执行时一旦遇到异常就会立即停止接下来的步骤，除非被捕获</p>
 
 </section>
