@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="天冷了，进来暖和暖和吧！">
-<title>Categories</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="一、行列式法（仅适用于系数矩阵$A$为$n$阶方阵，$n$为变量个数） 1. 线性齐次方程组（$Ax=0$） 若 $|A| \\neq 0$，方程组 只有零解； 若 $|A| = 0$，方程组 有无穷多非零解。 2. 线性非齐次方程组（$Ax=b$，$\\overline{A}=(A,b)$为增广矩阵） 若 $|A| \\neq 0$，方程组 有唯一解； 若 $|A| = 0$： 当 $r(A) \\neq r(\\overline{A})$ 时，方程组 无解； 当 $r(A) = r(\\overline{A})$ 时，方程组 有无穷多解。 二、矩阵的秩法（通用，无方阵限制） 1. 核心定义 $A$：系数矩阵； $\\overline{A}=(A,b)$：线性非齐次方程组的增广矩阵（齐次方程组无需增广矩阵）； $n$：变量个数。 2. 线性齐次方程组（$Ax=0$） 若 $r(A) = n$，方程组 只有零解； 若 $r(A) &lt; n$，方程组 有无穷多非零解。 3. 线性非齐次方程组（$Ax=b$） 若 $r(A) \\neq r(\\overline{A})$，方程组 无解； 若 $r(A) = r(\\overline{A}) = n$，方程组 有唯一解； 若 $r(A) = r(\\overline{A}) &lt; n$，方程组 有无穷多解。 ">
+<title>两种方法判断线性方程组解的情况</title>
 
-<link rel='canonical' href='https://www.retr0.qzz.io/categories/'>
+<link rel='canonical' href='https://www.retr0.qzz.io/p/%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%E5%88%A4%E6%96%AD%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%A7%A3%E7%9A%84%E6%83%85%E5%86%B5/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="Categories">
-<meta property='og:description' content="天冷了，进来暖和暖和吧！">
-<meta property='og:url' content='https://www.retr0.qzz.io/categories/'>
+<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="两种方法判断线性方程组解的情况">
+<meta property='og:description' content="一、行列式法（仅适用于系数矩阵$A$为$n$阶方阵，$n$为变量个数） 1. 线性齐次方程组（$Ax=0$） 若 $|A| \\neq 0$，方程组 只有零解； 若 $|A| = 0$，方程组 有无穷多非零解。 2. 线性非齐次方程组（$Ax=b$，$\\overline{A}=(A,b)$为增广矩阵） 若 $|A| \\neq 0$，方程组 有唯一解； 若 $|A| = 0$： 当 $r(A) \\neq r(\\overline{A})$ 时，方程组 无解； 当 $r(A) = r(\\overline{A})$ 时，方程组 有无穷多解。 二、矩阵的秩法（通用，无方阵限制） 1. 核心定义 $A$：系数矩阵； $\\overline{A}=(A,b)$：线性非齐次方程组的增广矩阵（齐次方程组无需增广矩阵）； $n$：变量个数。 2. 线性齐次方程组（$Ax=0$） 若 $r(A) = n$，方程组 只有零解； 若 $r(A) &lt; n$，方程组 有无穷多非零解。 3. 线性非齐次方程组（$Ax=b$） 若 $r(A) \\neq r(\\overline{A})$，方程组 无解； 若 $r(A) = r(\\overline{A}) = n$，方程组 有唯一解； 若 $r(A) = r(\\overline{A}) &lt; n$，方程组 有无穷多解。 ">
+<meta property='og:url' content='https://www.retr0.qzz.io/p/%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%E5%88%A4%E6%96%AD%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%A7%A3%E7%9A%84%E6%83%85%E5%86%B5/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2025-11-19T22:22:08&#43;08:00 '/>
-<meta name="twitter:title" content="Categories">
-<meta name="twitter:description" content="天冷了，进来暖和暖和吧！"><link rel="alternate" type="application/rss&#43;xml" href="https://www.retr0.qzz.io/categories/index.xml">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-21T20:45:26&#43;08:00'/><meta property='article:modified_time' content='2025-11-21T20:45:26&#43;08:00'/>
+<meta name="twitter:title" content="两种方法判断线性方程组解的情况">
+<meta name="twitter:description" content="一、行列式法（仅适用于系数矩阵$A$为$n$阶方阵，$n$为变量个数） 1. 线性齐次方程组（$Ax=0$） 若 $|A| \\neq 0$，方程组 只有零解； 若 $|A| = 0$，方程组 有无穷多非零解。 2. 线性非齐次方程组（$Ax=b$，$\\overline{A}=(A,b)$为增广矩阵） 若 $|A| \\neq 0$，方程组 有唯一解； 若 $|A| = 0$： 当 $r(A) \\neq r(\\overline{A})$ 时，方程组 无解； 当 $r(A) = r(\\overline{A})$ 时，方程组 有无穷多解。 二、矩阵的秩法（通用，无方阵限制） 1. 核心定义 $A$：系数矩阵； $\\overline{A}=(A,b)$：线性非齐次方程组的增广矩阵（齐次方程组无需增广矩阵）； $n$：变量个数。 2. 线性齐次方程组（$Ax=0$） 若 $r(A) = n$，方程组 只有零解； 若 $r(A) &lt; n$，方程组 有无穷多非零解。 3. 线性非齐次方程组（$Ax=b$） 若 $r(A) \\neq r(\\overline{A})$，方程组 无解； 若 $r(A) = r(\\overline{A}) = n$，方程组 有唯一解； 若 $r(A) = r(\\overline{A}) &lt; n$，方程组 有无穷多解。 ">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -20,7 +20,9 @@
         <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     </head>
-    <body class="">
+    <body class="
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -74,7 +76,7 @@
         
         <div class="site-meta">
             <h1 class="site-name"><a href="/">Retr0的小窝</a></h1>
-            <h2 class="site-description">天冷了，进来暖和暖和吧！</h2>
+            <h2 class="site-description">多冷啊，我在东北玩泥巴~</h2>
         </div>
     </header><ol class="menu-social">
             
@@ -114,7 +116,7 @@
             
                 <li>
                     <a 
-                        href='https://t.me/ded000'
+                        href='https://t.me/ded0000'
                         target="_blank"
                         title="Telegram"
                         rel="me"
@@ -258,61 +260,10 @@
     <aside class="sidebar right-sidebar sticky">
         
             
-                <form action="/search/" class="search-form widget" >
-        <p>
-            <label>搜索</label>
-            <input name="keyword" required placeholder="输入关键词..." />
-        
-            <button title="搜索">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-            </button>
-        </p>
-    </form>
-            
-        
-            
-                <section class="widget archives">
+                
+    <section class="widget archives">
         <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">归档</h2>
-
-        
-        
-        
-        
-        
-        <div class="widget-archive--list">
-            <div class="archives-year">
-                    <a href="/archives/#2025">
-                        
-                            <span class="year">2025</span>
-                            <span class="count">34</span>
-                        
-                    </a> 
-                </div>
-            
-        </div>
-    </section>
-            
-        
-            
-                <section class="widget tagCloud">
-    <div class="widget-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <line x1="5" y1="9" x2="19" y2="9" />
   <line x1="5" y1="15" x2="19" y2="15" />
@@ -322,53 +273,33 @@
 
 
 
-    </div>
-    <h2 class="widget-title section-title">分类</h2>
-
-    <div class="tagCloud-tags">
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
         
-            <a href="/categories/%E9%80%9F%E6%9F%A5/" class="font_size_19">
-                速查
-            </a>
-        
-            <a href="/categories/python/" class="font_size_12">
-                Python
-            </a>
-        
-            <a href="/categories/%E8%AF%BE%E5%A0%82%E5%B0%8F%E8%AE%B0/" class="font_size_7">
-                课堂小记
-            </a>
-        
-            <a href="/categories/kali/" class="font_size_3">
-                Kali
-            </a>
-        
-            <a href="/categories/%E6%9D%82%E9%A1%B9/" class="font_size_3">
-                杂项
-            </a>
-        
-            <a href="/categories/acg/" class="font_size_2">
-                ACG
-            </a>
-        
-            <a href="/categories/linux/" class="font_size_2">
-                Linux
-            </a>
-        
-            <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="font_size_2">
-                基础知识
-            </a>
-        
-            <a href="/categories/%E5%BD%B1%E8%A7%86/" class="font_size_2">
-                影视
-            </a>
-        
-            <a href="/categories/%E7%BD%91%E5%AE%89/" class="font_size_2">
-                网安
-            </a>
-        
-    </div>
-</section>
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#一行列式法仅适用于系数矩阵a为n阶方阵n为变量个数">一、行列式法（仅适用于系数矩阵$A$为$n$阶方阵，$n$为变量个数）</a>
+          <ol>
+            <li><a href="#1-线性齐次方程组ax0">1. 线性齐次方程组（$Ax=0$）</a></li>
+            <li><a href="#2-线性非齐次方程组axboverlineaab为增广矩阵">2. 线性非齐次方程组（$Ax=b$，$\overline{A}=(A,b)$为增广矩阵）</a></li>
+          </ol>
+        </li>
+        <li><a href="#二矩阵的秩法通用无方阵限制">二、矩阵的秩法（通用，无方阵限制）</a>
+          <ol>
+            <li><a href="#1-核心定义">1. 核心定义</a></li>
+            <li><a href="#2-线性齐次方程组ax0">2. 线性齐次方程组（$Ax=0$）</a></li>
+            <li><a href="#3-线性非齐次方程组axb">3. 线性非齐次方程组（$Ax=b$）</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
 
             
         
@@ -376,67 +307,289 @@
 
 
             <main class="main full-width">
-    <header>
-        <h3 class="section-title">
-            
-                章节
-            
-        </h3>
+    <article class="main-article">
+    <header class="article-header">
 
-        <div class="section-card">
-            <div class="section-details">
-                <h3 class="section-count">12 个页面</h3>
-                <h1 class="section-term">Categories</h1>
-                
-            </div>
-        </div>
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E8%AF%BE%E5%A0%82%E5%B0%8F%E8%AE%B0/" >
+                课堂小记
+            </a>
+        
+            <a href="/categories/%E9%80%9F%E6%9F%A5/" >
+                速查
+            </a>
+        
     </header>
     
-    <section class="article-list--compact">
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%E5%88%A4%E6%96%AD%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%A7%A3%E7%9A%84%E6%83%85%E5%86%B5/">两种方法判断线性方程组解的情况</a>
+        </h2>
+    
         
-            <article>
-    <a href="/categories/linux/">
-        <div class="article-details">
-            <h2 class="article-title">Linux</h2>
-            <footer class="article-time">
-                <time datetime='2025-10-27T22:39:38&#43;08:00'>2025-10-27</time>
-            </footer>
+    </div>
+
+    
+    
+     
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-11-21</time>
+            </div>
+        
+
+        
+
+        
+        <div id="viewCount">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
         </div>
-    </a>
-</article>
-        
-            <article>
-    <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
-        <div class="article-details">
-            <h2 class="article-title">基础知识</h2>
-            <footer class="article-time">
-                <time datetime='2025-10-27T22:39:38&#43;08:00'>2025-10-27</time>
-            </footer>
-        </div>
-    </a>
-</article>
-        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="一行列式法仅适用于系数矩阵a为n阶方阵n为变量个数">一、行列式法（仅适用于系数矩阵$A$为$n$阶方阵，$n$为变量个数）
+</h3><h4 id="1-线性齐次方程组ax0">1. 线性齐次方程组（$Ax=0$）
+</h4><ul>
+<li>若 $|A| \neq 0$，方程组 <strong>只有零解</strong>；</li>
+<li>若 $|A| = 0$，方程组 <strong>有无穷多非零解</strong>。</li>
+</ul>
+<h4 id="2-线性非齐次方程组axboverlineaab为增广矩阵">2. 线性非齐次方程组（$Ax=b$，$\overline{A}=(A,b)$为增广矩阵）
+</h4><ul>
+<li>若 $|A| \neq 0$，方程组 <strong>有唯一解</strong>；</li>
+<li>若 $|A| = 0$：
+<ul>
+<li>当 $r(A) \neq r(\overline{A})$ 时，方程组 <strong>无解</strong>；</li>
+<li>当 $r(A) = r(\overline{A})$ 时，方程组 <strong>有无穷多解</strong>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="二矩阵的秩法通用无方阵限制">二、矩阵的秩法（通用，无方阵限制）
+</h3><h4 id="1-核心定义">1. 核心定义
+</h4><ul>
+<li>$A$：系数矩阵；</li>
+<li>$\overline{A}=(A,b)$：线性非齐次方程组的增广矩阵（齐次方程组无需增广矩阵）；</li>
+<li>$n$：变量个数。</li>
+</ul>
+<h4 id="2-线性齐次方程组ax0">2. 线性齐次方程组（$Ax=0$）
+</h4><ul>
+<li>若 $r(A) = n$，方程组 <strong>只有零解</strong>；</li>
+<li>若 $r(A) &lt; n$，方程组 <strong>有无穷多非零解</strong>。</li>
+</ul>
+<h4 id="3-线性非齐次方程组axb">3. 线性非齐次方程组（$Ax=b$）
+</h4><ul>
+<li>若 $r(A) \neq r(\overline{A})$，方程组 <strong>无解</strong>；</li>
+<li>若 $r(A) = r(\overline{A}) = n$，方程组 <strong>有唯一解</strong>；</li>
+<li>若 $r(A) = r(\overline{A}) &lt; n$，方程组 <strong>有无穷多解</strong>。</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
     </section>
-    <nav class='pagination'>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+<div class="math-katex"></div>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%E8%AF%81%E6%98%8E%E7%9F%A9%E9%98%B5%E7%AD%89%E4%BB%B7/">
         
         
 
-        
-            
-                    <a class='page-link' href='/categories/'>1</a>
-                
-            
-            
-                    <a class='page-link' href='/categories/page/2/'>2</a>
-                
-            
-            
-                <span class='page-link current'>3</span>
-                
-            
-    </nav>
+        <div class="article-details">
+            <h2 class="article-title">证明矩阵等价</h2>
+        </div>
+    </a>
+</article>
 
-<footer class="site-footer">
+            
+                
+<article class="">
+    <a href="/p/%E7%AE%97%E8%A1%8C%E5%88%97%E5%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">算行列式的几种方法</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E5%87%A0%E7%A7%8D%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%8F%8A%E4%BD%99%E9%A1%B9/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">几种多项式及余项</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95%E6%B1%82%E9%80%86%E7%9F%A9%E9%98%B5/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">几种方法求逆矩阵</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E4%B8%89%E4%B8%AA%E5%BE%AE%E5%88%86%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">三个微分中值定理</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+        <div class="comment-container mt-8"></div>
+        
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="makabaka11/makabaka11.github.io"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
     <section class="copyright">
         &copy; 
         
@@ -453,6 +606,84 @@
     </section>
 </footer>
 
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
 
 
                 <script src="/js/APlayer.min.js"></script>

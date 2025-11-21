@@ -7,21 +7,29 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Wed, 19 Nov 2025 22:22:08 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Python</title>
-        <link>https://www.retr0.qzz.io/categories/python/</link>
-        <pubDate>Wed, 19 Nov 2025 22:22:08 +0800</pubDate>
+        <lastBuildDate>Fri, 21 Nov 2025 20:45:26 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>课堂小记</title>
+        <link>https://www.retr0.qzz.io/categories/%E8%AF%BE%E5%A0%82%E5%B0%8F%E8%AE%B0/</link>
+        <pubDate>Fri, 21 Nov 2025 20:45:26 +0800</pubDate>
         
-        <guid>https://www.retr0.qzz.io/categories/python/</guid>
-        <description>&lt;img src="https://www.retr0.qzz.io/categories/python/python.webp" alt="Featured image of post Python" /&gt;</description>
+        <guid>https://www.retr0.qzz.io/categories/%E8%AF%BE%E5%A0%82%E5%B0%8F%E8%AE%B0/</guid>
+        <description></description>
         </item>
         <item>
         <title>速查</title>
         <link>https://www.retr0.qzz.io/categories/%E9%80%9F%E6%9F%A5/</link>
-        <pubDate>Wed, 19 Nov 2025 22:22:08 +0800</pubDate>
+        <pubDate>Fri, 21 Nov 2025 20:45:26 +0800</pubDate>
         
         <guid>https://www.retr0.qzz.io/categories/%E9%80%9F%E6%9F%A5/</guid>
         <description></description>
+        </item>
+        <item>
+        <title>Python</title>
+        <link>https://www.retr0.qzz.io/categories/python/</link>
+        <pubDate>Fri, 21 Nov 2025 20:43:18 +0800</pubDate>
+        
+        <guid>https://www.retr0.qzz.io/categories/python/</guid>
+        <description>&lt;img src="https://www.retr0.qzz.io/categories/python/python.webp" alt="Featured image of post Python" /&gt;</description>
         </item>
         <item>
         <title>杂项</title>
@@ -46,14 +54,6 @@
         
         <guid>https://www.retr0.qzz.io/categories/%E7%BD%91%E5%AE%89/</guid>
         <description>&lt;img src="https://www.retr0.qzz.io/categories/%E7%BD%91%E5%AE%89/wa.png" alt="Featured image of post 网安" /&gt;</description>
-        </item>
-        <item>
-        <title>课堂小记</title>
-        <link>https://www.retr0.qzz.io/categories/%E8%AF%BE%E5%A0%82%E5%B0%8F%E8%AE%B0/</link>
-        <pubDate>Fri, 14 Nov 2025 23:41:10 +0800</pubDate>
-        
-        <guid>https://www.retr0.qzz.io/categories/%E8%AF%BE%E5%A0%82%E5%B0%8F%E8%AE%B0/</guid>
-        <description></description>
         </item>
         <item>
         <title>ACG</title>

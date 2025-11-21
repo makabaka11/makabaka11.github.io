@@ -7,7 +7,49 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Fri, 14 Nov 2025 23:41:10 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/categories/%E8%AF%BE%E5%A0%82%E5%B0%8F%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 21 Nov 2025 20:45:26 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/categories/%E8%AF%BE%E5%A0%82%E5%B0%8F%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>两种方法判断线性方程组解的情况</title>
+        <link>https://www.retr0.qzz.io/p/%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%E5%88%A4%E6%96%AD%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%A7%A3%E7%9A%84%E6%83%85%E5%86%B5/</link>
+        <pubDate>Fri, 21 Nov 2025 20:45:26 +0800</pubDate>
+        
+        <guid>https://www.retr0.qzz.io/p/%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%E5%88%A4%E6%96%AD%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%A7%A3%E7%9A%84%E6%83%85%E5%86%B5/</guid>
+        <description>&lt;h3 id=&#34;一行列式法仅适用于系数矩阵a为n阶方阵n为变量个数&#34;&gt;一、行列式法（仅适用于系数矩阵$A$为$n$阶方阵，$n$为变量个数）
+&lt;/h3&gt;&lt;h4 id=&#34;1-线性齐次方程组ax0&#34;&gt;1. 线性齐次方程组（$Ax=0$）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;若 $|A| \neq 0$，方程组 &lt;strong&gt;只有零解&lt;/strong&gt;；&lt;/li&gt;
+&lt;li&gt;若 $|A| = 0$，方程组 &lt;strong&gt;有无穷多非零解&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-线性非齐次方程组axboverlineaab为增广矩阵&#34;&gt;2. 线性非齐次方程组（$Ax=b$，$\overline{A}=(A,b)$为增广矩阵）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;若 $|A| \neq 0$，方程组 &lt;strong&gt;有唯一解&lt;/strong&gt;；&lt;/li&gt;
+&lt;li&gt;若 $|A| = 0$：
+&lt;ul&gt;
+&lt;li&gt;当 $r(A) \neq r(\overline{A})$ 时，方程组 &lt;strong&gt;无解&lt;/strong&gt;；&lt;/li&gt;
+&lt;li&gt;当 $r(A) = r(\overline{A})$ 时，方程组 &lt;strong&gt;有无穷多解&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;二矩阵的秩法通用无方阵限制&#34;&gt;二、矩阵的秩法（通用，无方阵限制）
+&lt;/h3&gt;&lt;h4 id=&#34;1-核心定义&#34;&gt;1. 核心定义
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;$A$：系数矩阵；&lt;/li&gt;
+&lt;li&gt;$\overline{A}=(A,b)$：线性非齐次方程组的增广矩阵（齐次方程组无需增广矩阵）；&lt;/li&gt;
+&lt;li&gt;$n$：变量个数。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-线性齐次方程组ax0&#34;&gt;2. 线性齐次方程组（$Ax=0$）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;若 $r(A) = n$，方程组 &lt;strong&gt;只有零解&lt;/strong&gt;；&lt;/li&gt;
+&lt;li&gt;若 $r(A) &amp;lt; n$，方程组 &lt;strong&gt;有无穷多非零解&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-线性非齐次方程组axb&#34;&gt;3. 线性非齐次方程组（$Ax=b$）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;若 $r(A) \neq r(\overline{A})$，方程组 &lt;strong&gt;无解&lt;/strong&gt;；&lt;/li&gt;
+&lt;li&gt;若 $r(A) = r(\overline{A}) = n$，方程组 &lt;strong&gt;有唯一解&lt;/strong&gt;；&lt;/li&gt;
+&lt;li&gt;若 $r(A) = r(\overline{A}) &amp;lt; n$，方程组 &lt;strong&gt;有无穷多解&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>证明矩阵等价</title>
         <link>https://www.retr0.qzz.io/p/%E8%AF%81%E6%98%8E%E7%9F%A9%E9%98%B5%E7%AD%89%E4%BB%B7/</link>
         <pubDate>Fri, 14 Nov 2025 23:41:10 +0800</pubDate>
