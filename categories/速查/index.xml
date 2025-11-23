@@ -59,7 +59,7 @@
 &lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;模块（Module），是一个Python文件，以&lt;code&gt;.py&lt;/code&gt;结尾。模块能定义函数，类和变量，模块里也能包含可执行的代码。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;**&lt;font style=&#34;color:#DF2A3F;&#34;&gt;模块的作用：&lt;/font&gt;**python中有很多各种不同的模块,每一个模块都可以帮助我们快速的实现一些&lt;font style=&#34;color:#DF2A3F;&#34;&gt;功能&lt;/font&gt;,比如实现和时间相关的功能就可以使用time模块我们可以认为&lt;font style=&#34;color:#DF2A3F;&#34;&gt;一个模块&lt;/font&gt;就是&lt;font style=&#34;color:#DF2A3F;&#34;&gt;一个工具包&lt;/font&gt;,每一个工具包中都有各种不同的工具供我们使用进而实现各种不同的功能.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;模块的作用：&lt;/font&gt;&lt;/strong&gt; python中有很多各种不同的模块,每一个模块都可以帮助我们快速的实现一些&lt;font style=&#34;color:#DF2A3F;&#34;&gt;功能&lt;/font&gt;,比如实现和时间相关的功能就可以使用time模块我们可以认为&lt;font style=&#34;color:#DF2A3F;&#34;&gt;一个模块&lt;/font&gt;就是&lt;font style=&#34;color:#DF2A3F;&#34;&gt;一个工具包&lt;/font&gt;,每一个工具包中都有各种不同的工具供我们使用进而实现各种不同的功能.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;大白话：模块就是一个Python文件,里面有类、函数、变量等,我们可以拿过来用(导入模块去使用)&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;h3 id=&#34;模块的导入方式&#34;&gt;模块的导入方式
 &lt;/h3&gt;&lt;p&gt;模块在使用前需要先导入，语法如下：&lt;/p&gt;
