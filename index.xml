@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Sun, 23 Nov 2025 22:35:58 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 24 Nov 2025 21:59:02 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>恰到好处的补完—《轻音少女》观后感</title>
         <link>https://www.retr0.qzz.io/p/%E6%81%B0%E5%88%B0%E5%A5%BD%E5%A4%84%E7%9A%84%E8%A1%A5%E5%AE%8C%E8%BD%BB%E9%9F%B3%E5%B0%91%E5%A5%B3%E8%A7%82%E5%90%8E%E6%84%9F/</link>
         <pubDate>Sat, 01 Nov 2025 09:58:38 +0800</pubDate>
@@ -314,6 +314,115 @@
 </description>
         </item>
         <item>
+        <title>9.3 包</title>
+        <link>https://www.retr0.qzz.io/p/9.3-%E5%8C%85/</link>
+        <pubDate>Mon, 24 Nov 2025 21:59:02 +0800</pubDate>
+        
+        <guid>https://www.retr0.qzz.io/p/9.3-%E5%8C%85/</guid>
+        <description>&lt;h2 id=&#34;自定义python包&#34;&gt;自定义Python包
+&lt;/h2&gt;&lt;h3 id=&#34;什么是python包&#34;&gt;什么是Python包
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;从物理上看，包就是一个文件夹，在该文件夹下包含了一个&lt;code&gt;__init__.py&lt;/code&gt;文件，该文件夹可用于包含多个模块文件。&lt;/p&gt;
+&lt;p&gt;从逻辑上看，包的本质依然是模块&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/0%e5%9f%ba%e7%a1%80Python/img/9.3-1.png/&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;包的作用：&lt;/font&gt;&lt;/strong&gt; 当我们的&lt;font style=&#34;color:#DF2A3F;&#34;&gt;模块文件&lt;/font&gt;越来越多时，&lt;font style=&#34;color:#DF2A3F;&#34;&gt;包&lt;/font&gt;可以帮助我们管理这些模块，包的作用就是&lt;font style=&#34;color:#DF2A3F;&#34;&gt;包含多个模块&lt;/font&gt;，但包的本质依然是&lt;font style=&#34;color:#DF2A3F;&#34;&gt;模块&lt;/font&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;包的创建&#34;&gt;包的创建
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Quickstart：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在Pycharm中右键新建Python软件包(Python Package)&lt;code&gt;my_packages&lt;/code&gt; 自动生成&lt;code&gt;__init__.py&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;新建包内模块：&lt;code&gt;my_module1&lt;/code&gt;和&lt;code&gt;my_module2&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;模块内代码如下&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# my_module1模块中&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;info_print1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;my_module1&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# my_module2模块中&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;info_print2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;my_module2&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;包的导入&#34;&gt;包的导入
+&lt;/h3&gt;&lt;h4 id=&#34;方式一&#34;&gt;方式一：
+&lt;/h4&gt;&lt;p&gt;导入：&lt;code&gt;import 包名.模块名&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;调用：&lt;code&gt;包名.模块名.目标&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;方式二&#34;&gt;方式二：
+&lt;/h4&gt;&lt;p&gt;导入：&lt;code&gt;from 包名 import 模块&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;调用：&lt;code&gt;模块名.目标&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;补充：__main__变量的使用&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;__init__.py&lt;/code&gt;文件中写入&lt;code&gt;__main__=[xxx,xxx]&lt;/code&gt;即可控制通过&lt;code&gt;from xxx import *&lt;/code&gt;导入时的模块&lt;/p&gt;
+&lt;h2 id=&#34;第三方包&#34;&gt;第三方包
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;在Python程序的生态中,有许多非常多的第三方包(非Python官方),可以极大的帮助我们提高开发效率,如&lt;/p&gt;
+&lt;p&gt;· 科学计算中常用的:numpy包&lt;/p&gt;
+&lt;p&gt;· 数据分析中常用的:pandas包&lt;/p&gt;
+&lt;p&gt;· 大数据计算中常用的:pyspark、apache-flink包&lt;/p&gt;
+&lt;p&gt;· 图形可视化常用的:matplotlib、pyecharts&lt;/p&gt;
+&lt;p&gt;, 人工智能常用的:tensorflow&lt;/p&gt;
+&lt;p&gt;· 等&lt;/p&gt;
+&lt;p&gt;这些第三方的包,极大的丰富了Python的生态,提高了开发效率。&lt;/p&gt;
+&lt;p&gt;但是由于是第三方,所以Python没有内置,所以我们需要安装它们才可以导入使用&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;安装第三方包-pip&#34;&gt;安装第三方包-pip
+&lt;/h3&gt;&lt;h4 id=&#34;常规&#34;&gt;常规
+&lt;/h4&gt;&lt;p&gt;按&lt;code&gt;win+R&lt;/code&gt;后输入 cmd 回车或使用其他方法打开命令提示符。&lt;/p&gt;
+&lt;p&gt;使用命令：&lt;code&gt;pip install [包名称]&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;网络优化&#34;&gt;网络优化
+&lt;/h4&gt;&lt;p&gt;使用命令：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;pip install -i https://pypi.tuna.tsinghua.edu.cn/simple [包名称]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;此处使用&lt;strong&gt;清华镜像源&lt;/strong&gt;，也可以根据需要选择其镜像源&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;以下是一些常用的国内镜像源地址，可根据需求选择：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;清华大学: https://pypi.tuna.tsinghua.edu.cn/simple
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;阿里云: https://mirrors.aliyun.com/pypi/simple
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;中国科学技术大学: https://pypi.mirrors.ustc.edu.cn/simple
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;腾讯云: https://mirrors.cloud.tencent.com/pypi/simple
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;华为云: https://repo.huaweicloud.com/repository/pypi/simple
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
         <title>【人物特写】山上彻野：她长得像妈妈却已不再是妈妈</title>
         <link>https://www.retr0.qzz.io/p/%E4%BA%BA%E7%89%A9%E7%89%B9%E5%86%99%E5%B1%B1%E4%B8%8A%E5%BD%BB%E9%87%8E%E5%A5%B9%E9%95%BF%E5%BE%97%E5%83%8F%E5%A6%88%E5%A6%88%E5%8D%B4%E5%B7%B2%E4%B8%8D%E5%86%8D%E6%98%AF%E5%A6%88%E5%A6%88/</link>
         <pubDate>Sun, 23 Nov 2025 22:35:58 +0800</pubDate>
@@ -325,7 +434,7 @@
 &lt;/h3&gt;&lt;p&gt;1980年的日本，昭和余晖尚未散尽，经济泡沫催生的繁荣仍笼罩着列岛。山上彻野降生在奈良一个精英家庭：外祖父是建筑公司老板兼拳击协会会长，家底殷实；父亲毕业于京都大学，是建筑界的青年才俊。彼时的家，是昭和梦的缩影——安稳、体面，满是对未来的期许。&lt;/p&gt;
 &lt;p&gt;命运的裂痕在彻野4岁时骤然撕开。1984年，不堪工作重压与人际倾轧的父亲，以跳楼自杀的方式告别了这个世界。年轻的母亲一夜沦为寡妇，独自扛起抚养重病哥哥、懵懂彻野与襁褓中妹妹的重担。那一天，彻野眼中的阳光，一半随父亲沉入黑暗。&lt;/p&gt;
 &lt;h3 id=&#34;邪教织就的地狱网&#34;&gt;邪教织就的地狱网
-&lt;/h3&gt;&lt;p&gt;家庭的崩塌让母亲的精神防线彻底溃败。1991年，在一名教徒的诱骗下，她一头扎进了**「统一教」**（现世界和平统一家庭联合会）的怀抱。对她而言，这是亡夫“超度”、家庭“救赎”的唯一稻草；对三个孩子来说，这却是万劫不复的开始。&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;家庭的崩塌让母亲的精神防线彻底溃败。1991年，在一名教徒的诱骗下，她一头扎进了 &lt;strong&gt;「统一教」&lt;/strong&gt; （现世界和平统一家庭联合会）的怀抱。对她而言，这是亡夫“超度”、家庭“救赎”的唯一稻草；对三个孩子来说，这却是万劫不复的开始。&lt;/p&gt;
 &lt;p&gt;为了所谓的“信仰虔诚”，母亲开始了疯狂的捐献。她变卖了外祖父留下的土地、房产，掏空了丈夫的人寿保险金，甚至不惜抵押仅剩的家当。最终，流向邪教的捐款总额超过一亿日元（约合人民币500万元），这个曾经富足的家庭，被神权榨干了最后一滴血。&lt;/p&gt;
 &lt;h3 id=&#34;饥饿与死亡的双重绞杀&#34;&gt;饥饿与死亡的双重绞杀
 &lt;/h3&gt;&lt;p&gt;2002年，山上家宣告破产。彼时的彻野，天资聪颖，就读于奈良顶尖的郡山高校，梦想是成为消防员或宇航员，同学们都坚信他会考入名牌大学。但学费的空缺，硬生生掐断了他的求学路——他被迫转入技校，最终因家境困顿未能毕业，昭和青年的理想，碎在了现实的泥沼里。&lt;/p&gt;
@@ -341,7 +450,7 @@
 &lt;h3 id=&#34;陋室中的凶器与孤勇&#34;&gt;陋室中的凶器与孤勇
 &lt;/h3&gt;&lt;p&gt;凭借海上自卫队学到的枪械知识，彻野在狭小的公寓里开始了武器制作。他在网上购买铁管、胶带、木板，用农业肥料自制火药，每一个步骤都带着决绝的冷静。为了测试威力，他深夜开着二手轻型车，驶入奈良深山试射，山林的寂静中，回荡着一个受害者的悲鸣。&lt;/p&gt;
 &lt;p&gt;他一丝不苟地打磨着武器，从三管、五管到最后的双管霰弹枪，每一次改进，都凝聚着他对邪教的恨、对家庭的痛、对现实的绝望。邻居曾听到锯木头和金属撞击的声音，却无人过问——现代社会的冷漠，为这场悲剧埋下了最后的伏笔。&lt;/p&gt;
-&lt;p&gt;（笔者注：后经警方测试凶器，发现该土制枪即便在极近距离下设计也很难准确打中目标，何不说山上把这辈子的幸运都用在了此刻）&lt;/p&gt;
+&lt;p&gt;（笔者注：后经警方测试凶器，发现该土制枪即便在极近距离下射击也很难准确打中目标，何不说山上把这辈子的幸运都用在了此刻）&lt;/p&gt;
 &lt;h3 id=&#34;2022年7月8日奈良的宿命时刻&#34;&gt;2022年7月8日：奈良的宿命时刻
 &lt;/h3&gt;&lt;p&gt;那天，奈良的阳光格外刺眼。彻野得知安倍晋三将在大和西大寺站进行街头演说，他背着伪装成相机的自制土枪，混入了人群。监控录像里，他站在远处，眼神冰冷如铁，偶尔随着人群鼓掌，那掌声里没有丝毫温度，只有赴死的决绝。&lt;/p&gt;
 &lt;p&gt;上午11时30分，安倍的演讲开始。彻野从背后悄然逼近，第一声枪响划破长空，安倍惊讶回头；第二声枪响，命运尘埃落定。&lt;/p&gt;
@@ -357,7 +466,7 @@
 &lt;h3 id=&#34;妹妹黑暗中唯一的守望者&#34;&gt;妹妹：黑暗中唯一的守望者
 &lt;/h3&gt;&lt;p&gt;彻野最牵挂的妹妹，成了这场悲剧的另一个受害者。她不得不辞掉工作，隐姓埋名，搬离熟悉的城市，却始终没有与哥哥割裂。面对最后检方询问她与被告之间的关系时，她毫不犹豫的说：&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;「山上是我最喜欢的哥哥」&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;「私とって兄は 大好きな兄ちゃんでした」&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;「私とって兄は 大好(daisuki)きな兄ちゃんでした」&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;她记得哥哥为了养活自己，辍学打工的艰辛；记得哥哥为了保护她，挡在母亲与邪教徒面前的背影；记得哥哥在哥哥自杀后，抱着她痛哭的夜晚。而对母亲，她始终挣脱不开那份复杂的执念：&lt;strong&gt;“她已经不是母亲了，她只是统一教的疯狂的信徒，但是她长了一张妈妈的脸，我不能甩开她，也不能抛弃她。”&lt;/strong&gt; 这份“放不下”，是最苦情的牵绊，是邪教留给她最沉重的创伤——她既恨母亲的执迷不悟，又心疼那张承载着童年记忆的脸，在爱恨交织中独自煎熬。这份支持，是彻野黑暗人生里唯一的暖意，也是这场悲壮故事中，最令人心碎的温柔。她用自己的方式守护着哥哥的名誉，也守护着这个破碎家庭最后的尊严。&lt;/p&gt;
 &lt;h3 id=&#34;未落的法槌与未尽的悲歌&#34;&gt;未落的法槌与未尽的悲歌
 &lt;/h3&gt;&lt;p&gt;截至2025年11月，对山上彻野的审判仍在“公判前整理程序”中缓慢推进。案件的复杂性、证据链的庞大，再加上法院收到的危险品邮包，让庭审多次延期。检方追求死刑，认为他破坏了民主制度；辩护律师主张减刑，强调他“情有可原的动机”与“悲剧性的成长环境”。&lt;/p&gt;

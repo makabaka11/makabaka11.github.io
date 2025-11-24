@@ -7,7 +7,116 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Fri, 21 Nov 2025 20:43:18 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/categories/python/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 24 Nov 2025 21:59:02 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/categories/python/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>9.3 包</title>
+        <link>https://www.retr0.qzz.io/p/9.3-%E5%8C%85/</link>
+        <pubDate>Mon, 24 Nov 2025 21:59:02 +0800</pubDate>
+        
+        <guid>https://www.retr0.qzz.io/p/9.3-%E5%8C%85/</guid>
+        <description>&lt;h2 id=&#34;自定义python包&#34;&gt;自定义Python包
+&lt;/h2&gt;&lt;h3 id=&#34;什么是python包&#34;&gt;什么是Python包
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;从物理上看，包就是一个文件夹，在该文件夹下包含了一个&lt;code&gt;__init__.py&lt;/code&gt;文件，该文件夹可用于包含多个模块文件。&lt;/p&gt;
+&lt;p&gt;从逻辑上看，包的本质依然是模块&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/0%e5%9f%ba%e7%a1%80Python/img/9.3-1.png/&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;包的作用：&lt;/font&gt;&lt;/strong&gt; 当我们的&lt;font style=&#34;color:#DF2A3F;&#34;&gt;模块文件&lt;/font&gt;越来越多时，&lt;font style=&#34;color:#DF2A3F;&#34;&gt;包&lt;/font&gt;可以帮助我们管理这些模块，包的作用就是&lt;font style=&#34;color:#DF2A3F;&#34;&gt;包含多个模块&lt;/font&gt;，但包的本质依然是&lt;font style=&#34;color:#DF2A3F;&#34;&gt;模块&lt;/font&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;包的创建&#34;&gt;包的创建
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Quickstart：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在Pycharm中右键新建Python软件包(Python Package)&lt;code&gt;my_packages&lt;/code&gt; 自动生成&lt;code&gt;__init__.py&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;新建包内模块：&lt;code&gt;my_module1&lt;/code&gt;和&lt;code&gt;my_module2&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;模块内代码如下&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# my_module1模块中&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;info_print1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;my_module1&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# my_module2模块中&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;info_print2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;my_module2&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;包的导入&#34;&gt;包的导入
+&lt;/h3&gt;&lt;h4 id=&#34;方式一&#34;&gt;方式一：
+&lt;/h4&gt;&lt;p&gt;导入：&lt;code&gt;import 包名.模块名&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;调用：&lt;code&gt;包名.模块名.目标&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;方式二&#34;&gt;方式二：
+&lt;/h4&gt;&lt;p&gt;导入：&lt;code&gt;from 包名 import 模块&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;调用：&lt;code&gt;模块名.目标&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;补充：__main__变量的使用&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;__init__.py&lt;/code&gt;文件中写入&lt;code&gt;__main__=[xxx,xxx]&lt;/code&gt;即可控制通过&lt;code&gt;from xxx import *&lt;/code&gt;导入时的模块&lt;/p&gt;
+&lt;h2 id=&#34;第三方包&#34;&gt;第三方包
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;在Python程序的生态中,有许多非常多的第三方包(非Python官方),可以极大的帮助我们提高开发效率,如&lt;/p&gt;
+&lt;p&gt;· 科学计算中常用的:numpy包&lt;/p&gt;
+&lt;p&gt;· 数据分析中常用的:pandas包&lt;/p&gt;
+&lt;p&gt;· 大数据计算中常用的:pyspark、apache-flink包&lt;/p&gt;
+&lt;p&gt;· 图形可视化常用的:matplotlib、pyecharts&lt;/p&gt;
+&lt;p&gt;, 人工智能常用的:tensorflow&lt;/p&gt;
+&lt;p&gt;· 等&lt;/p&gt;
+&lt;p&gt;这些第三方的包,极大的丰富了Python的生态,提高了开发效率。&lt;/p&gt;
+&lt;p&gt;但是由于是第三方,所以Python没有内置,所以我们需要安装它们才可以导入使用&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;安装第三方包-pip&#34;&gt;安装第三方包-pip
+&lt;/h3&gt;&lt;h4 id=&#34;常规&#34;&gt;常规
+&lt;/h4&gt;&lt;p&gt;按&lt;code&gt;win+R&lt;/code&gt;后输入 cmd 回车或使用其他方法打开命令提示符。&lt;/p&gt;
+&lt;p&gt;使用命令：&lt;code&gt;pip install [包名称]&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;网络优化&#34;&gt;网络优化
+&lt;/h4&gt;&lt;p&gt;使用命令：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;pip install -i https://pypi.tuna.tsinghua.edu.cn/simple [包名称]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;此处使用&lt;strong&gt;清华镜像源&lt;/strong&gt;，也可以根据需要选择其镜像源&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;以下是一些常用的国内镜像源地址，可根据需求选择：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;清华大学: https://pypi.tuna.tsinghua.edu.cn/simple
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;阿里云: https://mirrors.aliyun.com/pypi/simple
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;中国科学技术大学: https://pypi.mirrors.ustc.edu.cn/simple
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;腾讯云: https://mirrors.cloud.tencent.com/pypi/simple
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;华为云: https://repo.huaweicloud.com/repository/pypi/simple
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
         <title>9.2 模块</title>
         <link>https://www.retr0.qzz.io/p/9.2-%E6%A8%A1%E5%9D%97/</link>
         <pubDate>Fri, 21 Nov 2025 20:43:18 +0800</pubDate>
