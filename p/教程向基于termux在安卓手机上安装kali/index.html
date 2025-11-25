@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="学习Python中的一个重要数据容器：元组">
-<title>6.2 数据容器：元组</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="在你的手机上搭建一台随时可用的Kali！">
+<title>[教程向]基于Termux在安卓手机上安装Kali</title>
 
-<link rel='canonical' href='https://www.retr0.qzz.io/p/6.2-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%85%83%E7%BB%84/'>
+<link rel='canonical' href='https://www.retr0.qzz.io/p/%E6%95%99%E7%A8%8B%E5%90%91%E5%9F%BA%E4%BA%8Etermux%E5%9C%A8%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E5%AE%89%E8%A3%85kali/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="6.2 数据容器：元组">
-<meta property='og:description' content="学习Python中的一个重要数据容器：元组">
-<meta property='og:url' content='https://www.retr0.qzz.io/p/6.2-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%85%83%E7%BB%84/'>
+<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="[教程向]基于Termux在安卓手机上安装Kali">
+<meta property='og:description' content="在你的手机上搭建一台随时可用的Kali！">
+<meta property='og:url' content='https://www.retr0.qzz.io/p/%E6%95%99%E7%A8%8B%E5%90%91%E5%9F%BA%E4%BA%8Etermux%E5%9C%A8%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E5%AE%89%E8%A3%85kali/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-03T18:14:15&#43;08:00'/><meta property='article:modified_time' content='2025-11-03T18:14:15&#43;08:00'/>
-<meta name="twitter:title" content="6.2 数据容器：元组">
-<meta name="twitter:description" content="学习Python中的一个重要数据容器：元组">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-25T23:23:58&#43;08:00'/><meta property='article:modified_time' content='2025-11-25T23:23:58&#43;08:00'/><meta property='og:image' content='https://www.retr0.qzz.io/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/termux.webp' />
+<meta name="twitter:title" content="[教程向]基于Termux在安卓手机上安装Kali">
+<meta name="twitter:description" content="在你的手机上搭建一台随时可用的Kali！"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://www.retr0.qzz.io/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/termux.webp' />
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -279,20 +280,14 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#元组的定义">元组的定义</a></li>
-    <li><a href="#元组的常用操作同列表基本一致">元组的常用操作	（同列表基本一致）</a>
+    <li><a href="#获取termux">获取termux</a></li>
+    <li><a href="#安装kali">安装Kali</a></li>
+    <li><a href="#使用vnc连接可视化界面">使用VNC连接可视化界面</a></li>
+    <li><a href="#问题解决vnc服务停止输出process-completed-signal-9">问题解决：VNC服务停止，输出Process-completed-signal-9</a>
       <ol>
-        <li><a href="#元组的索引">元组的索引</a></li>
-        <li><a href="#查询元组中元素的下标号">查询元组中元素的下标号</a></li>
-        <li><a href="#统计某元素在元组中的数量">统计某元素在元组中的数量</a></li>
-        <li><a href="#统计元组内全部元素数量">统计元组内全部元素数量</a></li>
-        <li><a href="#特别修改元组内的列表的元素">特别：修改元组内的列表的元素</a></li>
-      </ol>
-    </li>
-    <li><a href="#元组的循环遍历">元组的循环遍历</a>
-      <ol>
-        <li><a href="#while循环">while循环</a></li>
-        <li><a href="#for循环">for循环</a></li>
+        <li><a href="#简述">简述</a></li>
+        <li><a href="#如果手机没有root权限">如果手机没有Root权限</a></li>
+        <li><a href="#如果手机有root权限">如果手机有Root权限</a></li>
       </ol>
     </li>
   </ol>
@@ -306,19 +301,23 @@
 
 
             <main class="main full-width">
-    <article class="main-article">
+    <article class="has-image main-article">
     <header class="article-header">
+        <div class="article-image">
+            <a href="/p/%E6%95%99%E7%A8%8B%E5%90%91%E5%9F%BA%E4%BA%8Etermux%E5%9C%A8%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E5%AE%89%E8%A3%85kali/">
+                
+                    <img src="/post/kali%e4%bb%8e%e5%85%a5%e9%97%a8%e5%88%b0%e5%85%a5%e7%8b%b1/termux.webp" loading="lazy" alt="Featured image of post [教程向]基于Termux在安卓手机上安装Kali" />
+                
+            </a>
+        </div>
+    
 
     <div class="article-details">
     
     <header class="article-category">
         
-            <a href="/categories/python/" style="background-color: #2A87D8; color: #fff;">
-                Python
-            </a>
-        
-            <a href="/categories/%E9%80%9F%E6%9F%A5/" >
-                速查
+            <a href="/categories/kali/" style="background-color: #018AE1; color: #fff;">
+                Kali
             </a>
         
     </header>
@@ -326,12 +325,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/6.2-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%85%83%E7%BB%84/">6.2 数据容器：元组</a>
+            <a href="/p/%E6%95%99%E7%A8%8B%E5%90%91%E5%9F%BA%E4%BA%8Etermux%E5%9C%A8%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E5%AE%89%E8%A3%85kali/">[教程向]基于Termux在安卓手机上安装Kali</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            学习Python中的一个重要数据容器：元组
+            在你的手机上搭建一台随时可用的Kali！
         </h3>
         
     </div>
@@ -352,7 +351,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-11-03</time>
+                <time class="article-time--published">2025-11-25</time>
             </div>
         
 
@@ -375,144 +374,269 @@
     <section class="article-content">
     
     
-    <blockquote>
-<p>什么是元组？</p>
-<p><strong>元组</strong>是Python中的一种基本数据结构，它是一个不可变的序列，意味着<u><font style="color:#DF2A3F">一旦创建，元组中的元素不能被修改、添加或删除。</font></u></p>
-</blockquote>
-<h2 id="元组的定义">元组的定义
-</h2><p>定义元组使用<font style="color:#DF2A3F;">小括号</font>，且用<font style="color:#DF2A3F;">逗号</font>隔开各个数据，<font style="color:#DF2A3F;">数据可以是不同数据类型</font></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;ok&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="kc">True</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#定义空元组</span>
-</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="p">()</span>		<span class="c1">#方式1</span>
-</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">()</span>	<span class="c1">#方式2</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>注意：如果元组中只有一个元素，它的后面也要加上逗号，例如</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>此外，元组也可以嵌套</p>
+    <h2 id="获取termux">获取termux
+</h2><p>由<a class="link" href="https://termux.dev/cn/"  target="_blank" rel="noopener"
+    >Termux</a>官网指引，我们可以从官方Github软件仓库下载最新版本，链接如下：</p>
+<p><a class="link" href="https://github.com/termux/termux-app#github"  target="_blank" rel="noopener"
+    >GitHub - termux/termux-app: Termux - a terminal emulator application for Android OS extendible by variety of packages.</a></p>
+<p>安装相应版本即可</p>
+<h2 id="安装kali">安装Kali
+</h2><ol>
+<li>打开termux（打开之后不要切换目录，在当前目录下执行以下命令）</li>
+</ol>
+<p><img src="https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908213905654-1209646322.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ol start="2">
+<li><code>pkg update</code> 更新依赖，类似于更新以安装的软件(依赖更新检查完成之后会有一个让你确认是否继续更新的操作，我们输入y就可以了）</li>
+</ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">tuple</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">pkg update
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="元组的常用操作同列表基本一致">元组的常用操作	（同列表基本一致）
-</h2><h3 id="元组的索引">元组的索引
-</h3><p>元组同样支持通过下标号正反向索引</p>
+</div><p><img src="https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908214419642-1630043572.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ol start="3">
+<li><code>pkg upgrade</code>升极版本，这个相比较上个命令，更新的是系统版本</li>
+</ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;一&#39;</span><span class="p">,</span><span class="s1">&#39;二&#39;</span><span class="p">,</span><span class="s1">&#39;三&#39;</span><span class="p">,</span><span class="s1">&#39;四&#39;</span><span class="p">,</span><span class="s1">&#39;五&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">pkg upgrade
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="查询元组中元素的下标号">查询元组中元素的下标号
-</h3><p>同样只查询到第一个匹配的元素</p>
+</div><p><img src="https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908214711041-1370117140.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ol start="4">
+<li>申请存储访问权限 <code>termux-setup-storage</code>（这个命令可以是我们能使用termux向手机写入数据）</li>
+</ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;一&#39;</span><span class="p">,</span><span class="s1">&#39;二&#39;</span><span class="p">,</span><span class="s1">&#39;三&#39;</span><span class="p">,</span><span class="s1">&#39;四&#39;</span><span class="p">,</span><span class="s1">&#39;五&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;三&#39;</span><span class="p">))</span>
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">termux-setup-storage
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="统计某元素在元组中的数量">统计某元素在元组中的数量
-</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="统计元组内全部元素数量">统计元组内全部元素数量
-</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;一&#39;</span><span class="p">,</span><span class="s1">&#39;二&#39;</span><span class="p">,</span><span class="s1">&#39;三&#39;</span><span class="p">,</span><span class="s1">&#39;四&#39;</span><span class="p">,</span><span class="s1">&#39;五&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="特别修改元组内的列表的元素">特别：修改元组内的列表的元素
-</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">t1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;hello&#39;</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl"><span class="n">t1</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;c&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="元组的循环遍历">元组的循环遍历
-</h2><h3 id="while循环">while循环
-</h3><p>示例：</p>
+</div><p><img src="https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908214859487-405945903.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ol start="5">
+<li>安装 <code>pkg install wget</code>（用来下载文件的命令）</li>
+</ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>	<span class="c1">#对元素a进行处理</span>
-</span></span><span class="line"><span class="cl">    <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">pkg install wget (因为我已经安装过了，所以显示的是这个)
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="for循环">for循环
-</h3><p>示例：</p>
+</div><p><img src="https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908215100002-1684231819.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ol start="6">
+<li>下载 安装脚本<code>wget -O install-nethunter-termux https://offs.ec/2MceZWr</code> （这个是用来安装kaili的脚本，这个是重点，因为系统的镜像是在这里下载的，我们需要耐心的等待下载完成）</li>
+</ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">wget -O install-nethunter-termux https://offs.ec/2MceZWr
 </span></span></code></pre></td></tr></table>
 </div>
+</div><p><img src="https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908215318461-581192724.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>然后就得到了这样一个文件</p>
+<p><img src="https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908215448792-1011518424.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ol start="7">
+<li>给脚本执行权限<code>chmod +x install-nethunter-termux</code> （这样我们可以执行这个脚本&rsquo;x&rsquo;是执行权限）</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">chmod +x install-nethunter-termux
+</span></span></code></pre></td></tr></table>
 </div>
+</div><p><img src="https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908220412422-717118842.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ol start="8">
+<li>运行安装脚本 <code>./install-nethunter-termux</code></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">./install-nethunter-termux
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908215727585-1405190499.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ol start="9">
+<li>
+<p>然后会出现一个kali的banner，等待下载完成（要有耐心，和一个流畅的网络，中途可能会下载失败，我们只需要重新开始就行了 因为wget 加上了O选项，所以会继续上次的下载位置，若是下载完成，但是不能安装系统，多半是系统安装包被命名其他的名字或者是下载的确是失败了）</p>
+</li>
+<li>
+<p>下载完成之后，执行 <code>./install-nethunter-termux</code>,等待一阵之后，安装完成。</p>
+</li>
+</ol>
+<p><code>nethunter</code>（或者缩写<code>nh</code>） 开启 kalilinux命令行，注意开启的是普通权限的命令行</p>
+<p><code>nethunter -r</code> 开启的是管理员的命令行</p>
+<p><code>nh kex</code>		打开vnc图形化界面（普通权限）<strong><font style="color:#DF2A3F;">首次使用需要配置密码（还会问你要不要设一个仅观看的vnc密码，自行选择是否启用）</font></strong></p>
+<p><code>nh kex stop</code>	停止桌面服务</p>
+<h2 id="使用vnc连接可视化界面">使用VNC连接可视化界面
+</h2><p>下载安装app：**VNC Viewer，**下载地址：<a class="link" href="https://www.lanzouo.com/i8Uf14aelmb"  target="_blank" rel="noopener"
+    >VNC-Viewer 蓝奏云</a></p>
+<p>在Termux中输入以下指令启动图形化界面：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">nh kex
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这时会下面会输出地址和端口，一般为<code>127.0.0.1:5901</code></p>
+<p>在VNC中填写地址和端口后设置画质为<strong>高画质</strong>后点击连接</p>
+<p>要求输入密码，填写你创建的密码即可</p>
+<h2 id="问题解决vnc服务停止输出process-completed-signal-9">问题解决：VNC服务停止，输出Process-completed-signal-9
+</h2><h3 id="简述">简述
+</h3><p>使用Termux安装Kali发行版，用RealVNC Viewer登入系统，没过几秒就会收到The connection closed unexpectedly的警告！</p>
+<p>接着回到Termux，看到终端机显示[Process completed (signal 9) - press Enter]的错误，原来是Termux的行程被Android系统中止了，但是手机RAM明明还够用啊？</p>
+<p>此问题源自于Android 12引入的新机制，下面简述原因，以及提供暂时的解决方法。</p>
+<p>Termux发生signal 9错误的原因：agnostic-apollo在Phantom, Cached And Empty Processes一文中详述了Android 12引进的新机制。Android系统将会监控APP所fork出来的子行程，并在达到32个以上子行程后将其终止，避免占用过多CPU资源。</p>
+<p>此一机制称为&quot;Phantom Processes Killing&quot;，因为开发者最害怕看到这种情况，得名影子行程杀手。</p>
+<p>在开发者要求下，Google于Android 12L以及Android 13以上版本加入了关闭Phantom Processes Killing的选项settings_enable_monitor_phantom_procs，然而使用者还是要手动使用ADB指令关闭。因此这是Google Android的问题，Temrux开发者尚未找到正式解决办法，下面指令停用的办法是agnostic-apollo提出的。</p>
+<p>以Termux来说，Phantom Processes Killing会导致Termux执行指令的时候被系统随机中止。Proot distro若要跑图形环境自然就会制造更多子行程了吧。尤其在切换到后台，要用VNC Viewer连线的时候，就会触发Phantom Processes Killing，不管手机RAM有多大。接著回到Termux便会看到[Process completed (signal 9) - press Enter]的错误讯息。</p>
+<p>解决Termux的signal 9错误执行指令将Phantom Processes Killing停用即可，虽然会导致某些APP的背景行程跟著不受控制。</p>
+<p>以下假定Android手机皆有安装Google Play服务框架，因为GMS会不定时覆写装置设定，所以要一并将其关闭。然而关闭GMS覆写可能会导致手机卡开机。</p>
+<h3 id="如果手机没有root权限">如果手机没有Root权限
+</h3><p><a class="link" href="https://developer.android.google.cn/studio/releases/platform-tools?hl=zh-cn"  target="_blank" rel="noopener"
+    >点击下载Windows版adb工具包</a>并且解压缩。</p>
+<p>进入platform_tools目录，会看到ADB和Fastboot的执行档。在这里按SHIFT + 右键，开启终端机(或Powershell)。</p>
+<p>手机开启系统设定→关于手机，版本号码点5下，之后搜寻“开发人员选项”进去开启“ADB侦错”。</p>
+<p>将手机插上电脑，于Windows的终端机输入以下指令，在手机上同意侦错。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">adb devices		检测设备
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>接著按照Android版本，执行以下指令：</strong></p>
+<p><strong>Android 12L和Android 13：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">/adb shell &#34;settings put global settings_enable_monitor_phantom_procs false&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Android 12：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">adb shell &#34;/system/bin/device_config set_sync_disabled_for_tests persistent; /system/bin/device_config put activity_manager max_phantom_processes 2147483647&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>执行<code>reboot</code>或手动重启，完成。</p>
+<h3 id="如果手机有root权限">如果手机有Root权限
+</h3><p>开启Termux，切换到su，取得root权限</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">su #取得root权限
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>按照Android版本执行指令。</p>
+<p><strong>Android 12L和Android 13以上：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">su -c &#34;settings put global settings_enable_monitor_phantom_procs false&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Android 12：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">su -c &#34;/system/bin/device_config set_sync_disabled_for_tests persistent; /system/bin/device_config put activity_manager max_phantom_processes 2147483647&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>执行<code>reboot</code>或手动重启，完成。</p>
+
 </section>
 
 
@@ -566,80 +690,6 @@
     
 
     
-
-<aside class="related-content--wrapper">
-    <h2 class="section-title">相关文章</h2>
-    <div class="related-content">
-        <div class="flex article-list--tile">
-            
-                
-<article class="">
-    <a href="/p/10.1-%E7%BB%83%E4%B9%A0%E5%BA%8F/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">10.1 练习：序</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/9.3-%E5%8C%85/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">9.3 包</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/9.2-%E6%A8%A1%E5%9D%97/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">9.2 模块</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/9.1-%E5%BC%82%E5%B8%B8/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">9.1 异常</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/8.3-%E7%BB%83%E4%B9%A0%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E7%9A%84%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">8.3 练习：文件操作的综合案例</h2>
-        </div>
-    </a>
-</article>
-
-            
-        </div>
-    </div>
-</aside>
 
      
     

@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Tue, 25 Nov 2025 10:56:43 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 25 Nov 2025 23:23:58 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>恰到好处的补完—《轻音少女》观后感</title>
         <link>https://www.retr0.qzz.io/p/%E6%81%B0%E5%88%B0%E5%A5%BD%E5%A4%84%E7%9A%84%E8%A1%A5%E5%AE%8C%E8%BD%BB%E9%9F%B3%E5%B0%91%E5%A5%B3%E8%A7%82%E5%90%8E%E6%84%9F/</link>
         <pubDate>Sat, 01 Nov 2025 09:58:38 +0800</pubDate>
@@ -311,6 +311,316 @@
     &gt;AriaNgGUI&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;PC端下载器:&lt;a class=&#34;link&#34; href=&#34;https://motrix.app/zh-CN/about&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Motrix&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>[教程向]基于Termux在安卓手机上安装Kali</title>
+        <link>https://www.retr0.qzz.io/p/%E6%95%99%E7%A8%8B%E5%90%91%E5%9F%BA%E4%BA%8Etermux%E5%9C%A8%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E5%AE%89%E8%A3%85kali/</link>
+        <pubDate>Tue, 25 Nov 2025 23:23:58 +0800</pubDate>
+        
+        <guid>https://www.retr0.qzz.io/p/%E6%95%99%E7%A8%8B%E5%90%91%E5%9F%BA%E4%BA%8Etermux%E5%9C%A8%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E5%AE%89%E8%A3%85kali/</guid>
+        <description>&lt;img src="https://www.retr0.qzz.io/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/termux.webp" alt="Featured image of post [教程向]基于Termux在安卓手机上安装Kali" /&gt;&lt;h2 id=&#34;获取termux&#34;&gt;获取termux
+&lt;/h2&gt;&lt;p&gt;由&lt;a class=&#34;link&#34; href=&#34;https://termux.dev/cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Termux&lt;/a&gt;官网指引，我们可以从官方Github软件仓库下载最新版本，链接如下：&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/termux/termux-app#github&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GitHub - termux/termux-app: Termux - a terminal emulator application for Android OS extendible by variety of packages.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;安装相应版本即可&lt;/p&gt;
+&lt;h2 id=&#34;安装kali&#34;&gt;安装Kali
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;打开termux（打开之后不要切换目录，在当前目录下执行以下命令）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908213905654-1209646322.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;code&gt;pkg update&lt;/code&gt; 更新依赖，类似于更新以安装的软件(依赖更新检查完成之后会有一个让你确认是否继续更新的操作，我们输入y就可以了）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pkg update
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908214419642-1630043572.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;code&gt;pkg upgrade&lt;/code&gt;升极版本，这个相比较上个命令，更新的是系统版本&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pkg upgrade
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908214711041-1370117140.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;申请存储访问权限 &lt;code&gt;termux-setup-storage&lt;/code&gt;（这个命令可以是我们能使用termux向手机写入数据）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;termux-setup-storage
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908214859487-405945903.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;安装 &lt;code&gt;pkg install wget&lt;/code&gt;（用来下载文件的命令）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pkg install wget (因为我已经安装过了，所以显示的是这个)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908215100002-1684231819.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;下载 安装脚本&lt;code&gt;wget -O install-nethunter-termux https://offs.ec/2MceZWr&lt;/code&gt; （这个是用来安装kaili的脚本，这个是重点，因为系统的镜像是在这里下载的，我们需要耐心的等待下载完成）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;wget -O install-nethunter-termux https://offs.ec/2MceZWr
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908215318461-581192724.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;然后就得到了这样一个文件&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908215448792-1011518424.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ol start=&#34;7&#34;&gt;
+&lt;li&gt;给脚本执行权限&lt;code&gt;chmod +x install-nethunter-termux&lt;/code&gt; （这样我们可以执行这个脚本&amp;rsquo;x&amp;rsquo;是执行权限）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;chmod +x install-nethunter-termux
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908220412422-717118842.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ol start=&#34;8&#34;&gt;
+&lt;li&gt;运行安装脚本 &lt;code&gt;./install-nethunter-termux&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;./install-nethunter-termux
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908215727585-1405190499.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ol start=&#34;9&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;然后会出现一个kali的banner，等待下载完成（要有耐心，和一个流畅的网络，中途可能会下载失败，我们只需要重新开始就行了 因为wget 加上了O选项，所以会继续上次的下载位置，若是下载完成，但是不能安装系统，多半是系统安装包被命名其他的名字或者是下载的确是失败了）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;下载完成之后，执行 &lt;code&gt;./install-nethunter-termux&lt;/code&gt;,等待一阵之后，安装完成。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;nethunter&lt;/code&gt;（或者缩写&lt;code&gt;nh&lt;/code&gt;） 开启 kalilinux命令行，注意开启的是普通权限的命令行&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;nethunter -r&lt;/code&gt; 开启的是管理员的命令行&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;nh kex&lt;/code&gt;		打开vnc图形化界面（普通权限）&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;首次使用需要配置密码（还会问你要不要设一个仅观看的vnc密码，自行选择是否启用）&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;nh kex stop&lt;/code&gt;	停止桌面服务&lt;/p&gt;
+&lt;h2 id=&#34;使用vnc连接可视化界面&#34;&gt;使用VNC连接可视化界面
+&lt;/h2&gt;&lt;p&gt;下载安装app：**VNC Viewer，**下载地址：&lt;a class=&#34;link&#34; href=&#34;https://www.lanzouo.com/i8Uf14aelmb&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;VNC-Viewer 蓝奏云&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在Termux中输入以下指令启动图形化界面：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nh kex
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这时会下面会输出地址和端口，一般为&lt;code&gt;127.0.0.1:5901&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在VNC中填写地址和端口后设置画质为&lt;strong&gt;高画质&lt;/strong&gt;后点击连接&lt;/p&gt;
+&lt;p&gt;要求输入密码，填写你创建的密码即可&lt;/p&gt;
+&lt;h2 id=&#34;问题解决vnc服务停止输出process-completed-signal-9&#34;&gt;问题解决：VNC服务停止，输出Process-completed-signal-9
+&lt;/h2&gt;&lt;h3 id=&#34;简述&#34;&gt;简述
+&lt;/h3&gt;&lt;p&gt;使用Termux安装Kali发行版，用RealVNC Viewer登入系统，没过几秒就会收到The connection closed unexpectedly的警告！&lt;/p&gt;
+&lt;p&gt;接着回到Termux，看到终端机显示[Process completed (signal 9) - press Enter]的错误，原来是Termux的行程被Android系统中止了，但是手机RAM明明还够用啊？&lt;/p&gt;
+&lt;p&gt;此问题源自于Android 12引入的新机制，下面简述原因，以及提供暂时的解决方法。&lt;/p&gt;
+&lt;p&gt;Termux发生signal 9错误的原因：agnostic-apollo在Phantom, Cached And Empty Processes一文中详述了Android 12引进的新机制。Android系统将会监控APP所fork出来的子行程，并在达到32个以上子行程后将其终止，避免占用过多CPU资源。&lt;/p&gt;
+&lt;p&gt;此一机制称为&amp;quot;Phantom Processes Killing&amp;quot;，因为开发者最害怕看到这种情况，得名影子行程杀手。&lt;/p&gt;
+&lt;p&gt;在开发者要求下，Google于Android 12L以及Android 13以上版本加入了关闭Phantom Processes Killing的选项settings_enable_monitor_phantom_procs，然而使用者还是要手动使用ADB指令关闭。因此这是Google Android的问题，Temrux开发者尚未找到正式解决办法，下面指令停用的办法是agnostic-apollo提出的。&lt;/p&gt;
+&lt;p&gt;以Termux来说，Phantom Processes Killing会导致Termux执行指令的时候被系统随机中止。Proot distro若要跑图形环境自然就会制造更多子行程了吧。尤其在切换到后台，要用VNC Viewer连线的时候，就会触发Phantom Processes Killing，不管手机RAM有多大。接著回到Termux便会看到[Process completed (signal 9) - press Enter]的错误讯息。&lt;/p&gt;
+&lt;p&gt;解决Termux的signal 9错误执行指令将Phantom Processes Killing停用即可，虽然会导致某些APP的背景行程跟著不受控制。&lt;/p&gt;
+&lt;p&gt;以下假定Android手机皆有安装Google Play服务框架，因为GMS会不定时覆写装置设定，所以要一并将其关闭。然而关闭GMS覆写可能会导致手机卡开机。&lt;/p&gt;
+&lt;h3 id=&#34;如果手机没有root权限&#34;&gt;如果手机没有Root权限
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://developer.android.google.cn/studio/releases/platform-tools?hl=zh-cn&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;点击下载Windows版adb工具包&lt;/a&gt;并且解压缩。&lt;/p&gt;
+&lt;p&gt;进入platform_tools目录，会看到ADB和Fastboot的执行档。在这里按SHIFT + 右键，开启终端机(或Powershell)。&lt;/p&gt;
+&lt;p&gt;手机开启系统设定→关于手机，版本号码点5下，之后搜寻“开发人员选项”进去开启“ADB侦错”。&lt;/p&gt;
+&lt;p&gt;将手机插上电脑，于Windows的终端机输入以下指令，在手机上同意侦错。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;adb devices		检测设备
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;接著按照Android版本，执行以下指令：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Android 12L和Android 13：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/adb shell &amp;#34;settings put global settings_enable_monitor_phantom_procs false&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Android 12：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;adb shell &amp;#34;/system/bin/device_config set_sync_disabled_for_tests persistent; /system/bin/device_config put activity_manager max_phantom_processes 2147483647&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;执行&lt;code&gt;reboot&lt;/code&gt;或手动重启，完成。&lt;/p&gt;
+&lt;h3 id=&#34;如果手机有root权限&#34;&gt;如果手机有Root权限
+&lt;/h3&gt;&lt;p&gt;开启Termux，切换到su，取得root权限&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;su #取得root权限
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;按照Android版本执行指令。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Android 12L和Android 13以上：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;su -c &amp;#34;settings put global settings_enable_monitor_phantom_procs false&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Android 12：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;su -c &amp;#34;/system/bin/device_config set_sync_disabled_for_tests persistent; /system/bin/device_config put activity_manager max_phantom_processes 2147483647&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;执行&lt;code&gt;reboot&lt;/code&gt;或手动重启，完成。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>10.1 练习：序</title>
+        <link>https://www.retr0.qzz.io/p/10.1-%E7%BB%83%E4%B9%A0%E5%BA%8F/</link>
+        <pubDate>Tue, 25 Nov 2025 22:37:43 +0800</pubDate>
+        
+        <guid>https://www.retr0.qzz.io/p/10.1-%E7%BB%83%E4%B9%A0%E5%BA%8F/</guid>
+        <description>&lt;p&gt;本章共有三个练习，如下所示：&lt;/p&gt;
+&lt;h3 id=&#34;练习一2020年印美日新冠累计确诊人数&#34;&gt;练习一：2020年印美日新冠累计确诊人数
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/0%e5%9f%ba%e7%a1%80Python/img/10.1-1.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;练习二全国疫情地图可视化&#34;&gt;练习二：全国疫情地图可视化
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/0%e5%9f%ba%e7%a1%80Python/img/10.1-2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;练习三动态gdp增长图&#34;&gt;练习三：动态GDP增长图
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/0%e5%9f%ba%e7%a1%80Python/img/10.1-3.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;数据来源&#34;&gt;数据来源
+&lt;/h3&gt;&lt;p&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;练习数据全部来自《百度疫情实时大数据报告》，及公开的全球各国GDP数据&lt;/font&gt;&lt;/p&gt;
+&lt;h3 id=&#34;使用的技术&#34;&gt;使用的技术
+&lt;/h3&gt;&lt;p&gt;Echarts 是个由百度开源的数据可视化,凭借着良好的交互性,精巧的图表设计,得到了众多开发者的认可。而 Python是门富有表达力的语言,很适合用于数据处理. 当数据分析遇上数据可视化时 &lt;strong&gt;pyecharts&lt;/strong&gt; 诞生了。&lt;/p&gt;
 </description>
         </item>
         <item>
