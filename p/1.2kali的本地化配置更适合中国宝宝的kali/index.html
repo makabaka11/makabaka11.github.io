@@ -381,7 +381,7 @@
 </div><p>在打开的界面中使用pg up，pg dn，⬆️，⬇️翻页，使用空格选择，按tab切换到下方的确定和取消，按enter确定</p>
 <p>这里我们选择
 <strong>zh_CN.UTF-8</strong></p>
-<p>使用reboot重启即可</p>
+<p>使用<code>reboot</code>重启即可</p>
 <h2 id="换源">换源
 </h2><p>所谓换源就是切换软件仓库源</p>
 <p>这里需要修改以下文件<strong>sources</strong>.<strong>list</strong></p>
@@ -466,7 +466,30 @@
 <pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo apt upgrade
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="调整文字大小可选">调整文字大小（可选）
+</div><p><strong><font style="color:#DF2A3F;">注意：部分情况可能报错</font></strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">W: GPG 错误：http://mirrors.ustc.edu.cn/kali kali-rolling InRelease: 下列签名无效： EXPKEYSIG ED444FF07D8D0BF6 Kali Linux Repository &lt;devel@kali.org&gt;
+</span></span><span class="line"><span class="cl">E: 仓库 “http://mirrors.ustc.edu.cn/kali kali-rolling InRelease” 没有数字签名。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>要解决这个问题，你需要下载并安装正确的GPG签名：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">wget archive.kali.org/archive-key.asc
+</span></span><span class="line"><span class="cl">apt-key add archive-key.asc
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后再<strong>更新软件包列表</strong>即可</p>
+<h2 id="调整文字大小可选">调整文字大小（可选）
 </h2><p>注意：这里我们去设置里在dpi选项中调整，而不要去“display”选项中调整，因为效果很差</p>
 
 </section>
