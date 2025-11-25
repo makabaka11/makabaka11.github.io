@@ -329,7 +329,7 @@
 &lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;打开termux（打开之后不要切换目录，在当前目录下执行以下命令）&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908213905654-1209646322.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2025/11/26/69263d72565f8.png&#34;
 	
 	
 	
@@ -348,7 +348,7 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pkg update
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908214419642-1630043572.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2025/11/26/69263d7297445.png&#34;
 	
 	
 	
@@ -367,7 +367,7 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pkg upgrade
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908214711041-1370117140.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2025/11/26/69263d7298f29.png&#34;
 	
 	
 	
@@ -386,7 +386,7 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;termux-setup-storage
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908214859487-405945903.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2025/11/26/69263d725b764.png&#34;
 	
 	
 	
@@ -405,7 +405,7 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pkg install wget (因为我已经安装过了，所以显示的是这个)
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908215100002-1684231819.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2025/11/26/69263d72740d0.png&#34;
 	
 	
 	
@@ -424,7 +424,7 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;wget -O install-nethunter-termux https://offs.ec/2MceZWr
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908215318461-581192724.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2025/11/26/69263d8494ed8.png&#34;
 	
 	
 	
@@ -433,7 +433,7 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;然后就得到了这样一个文件&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908215448792-1011518424.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2025/11/26/69263d8457681.png&#34;
 	
 	
 	
@@ -452,7 +452,7 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;chmod +x install-nethunter-termux
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908220412422-717118842.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2025/11/26/69263d845a6ad.png&#34;
 	
 	
 	
@@ -471,7 +471,7 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;./install-nethunter-termux
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://img2020.cnblogs.com/blog/1872311/202009/1872311-20200908215727585-1405190499.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2025/11/26/69263d8461b55.png&#34;
 	
 	
 	
