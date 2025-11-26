@@ -30,7 +30,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;此处&lt;code&gt;echo&lt;/code&gt;就相当于Python里的&lt;code&gt;print&lt;/code&gt;输出&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;且中间部分每行结尾一定一定要加&lt;/font&gt;&lt;/strong&gt;&lt;code&gt;;&lt;/code&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;（因为真的很容易忘&lt;/font&gt;****&lt;font style=&#34;color:#DF2A3F;&#34;&gt;）&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;且中间部分每行结尾一定一定要加&lt;/font&gt;&lt;/strong&gt;&lt;code&gt;;&lt;/code&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;（因为真的很容易忘&lt;/font&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;）&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;h4 id=&#34;变量&#34;&gt;变量
 &lt;/h4&gt;&lt;p&gt;此外，再输出内容中如果有多个部分组成请用英文句号&lt;code&gt;.&lt;/code&gt;隔开（相当于python中print里的逗号全部换成句号，仅此而已）例如：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -47,7 +47,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;if判断&#34;&gt;if判断
+&lt;/div&gt;&lt;h4 id=&#34;if-判断&#34;&gt;if 判断
 &lt;/h4&gt;&lt;p&gt;Quickstart：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -110,7 +110,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;while循环&#34;&gt;while循环
+&lt;/div&gt;&lt;h4 id=&#34;while-循环&#34;&gt;while 循环
 &lt;/h4&gt;&lt;p&gt;Quickstart：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -171,7 +171,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;get命令&#34;&gt;GET命令
+&lt;/div&gt;&lt;h3 id=&#34;get-命令&#34;&gt;GET 命令
 &lt;/h3&gt;&lt;p&gt;使用GET命令可以获取用户输入的信息并赋值给变量，例如：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -209,8 +209,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;code&gt;http://localhost/index.php?name=example&amp;amp;job=xxx&lt;/code&gt;即可&lt;/p&gt;
-&lt;p&gt;**&lt;font style=&#34;color:#DF2A3F;&#34;&gt;尤其注意：&lt;/font&gt;**在php文件后加上&lt;code&gt;?变量名1=变量值1&amp;amp;变量名2=变量值2&lt;/code&gt;的格式&lt;/p&gt;
-&lt;h3 id=&#34;post命令&#34;&gt;POST命令
+&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;尤其注意：&lt;/font&gt;&lt;/strong&gt; 在php文件后加上&lt;code&gt;?变量名1=变量值1&amp;amp;变量名2=变量值2&lt;/code&gt;的格式&lt;/p&gt;
+&lt;h3 id=&#34;post-命令&#34;&gt;POST 命令
 &lt;/h3&gt;&lt;p&gt;很简单，把上面的GET全改为POST就行了&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
