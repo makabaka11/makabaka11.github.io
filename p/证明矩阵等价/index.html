@@ -4,11 +4,11 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="证明两个矩阵等价的核心方法（简要版） 矩阵等价的核心定义：设$A$、$B$为$m \\times n$同型矩阵，若存在$m$阶可逆矩阵$P$和$n$阶可逆矩阵$Q$，使得$PAQ = B$，则$A$与$B$等价。\n关键充要条件（满足其一即可证明） 秩相等：$r(A) = r(B)$（最常用，无需构造可逆矩阵，计算秩即可）； 初等变换互化：$A$可通过有限次初等行/列变换化为$B$； 等价标准形相同：$A$和$B$的等价标准形均为$\\begin{pmatrix} I_r &amp; O \\ O &amp; O \\end{pmatrix}$（$r$为秩，$I_r$为$r$阶单位矩阵）。 简要证明思路 先验证$A$与$B$是同型矩阵（行数、列数一致，否则必不等价）； 任选上述充要条件验证： 便捷法：计算$r(A)$和$r(B)$，若相等则等价； 严谨法：通过初等变换将$A$化为$B$，或构造$P$、$Q$使$PAQ = B$。 ">
 <title>证明矩阵等价</title>
 
-<link rel='canonical' href='https://www.retr0.qzz.io/p/%E8%AF%81%E6%98%8E%E7%9F%A9%E9%98%B5%E7%AD%89%E4%BB%B7/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/%E8%AF%81%E6%98%8E%E7%9F%A9%E9%98%B5%E7%AD%89%E4%BB%B7/'>
 
 <link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="证明矩阵等价">
 <meta property='og:description' content="证明两个矩阵等价的核心方法（简要版） 矩阵等价的核心定义：设$A$、$B$为$m \\times n$同型矩阵，若存在$m$阶可逆矩阵$P$和$n$阶可逆矩阵$Q$，使得$PAQ = B$，则$A$与$B$等价。\n关键充要条件（满足其一即可证明） 秩相等：$r(A) = r(B)$（最常用，无需构造可逆矩阵，计算秩即可）； 初等变换互化：$A$可通过有限次初等行/列变换化为$B$； 等价标准形相同：$A$和$B$的等价标准形均为$\\begin{pmatrix} I_r &amp; O \\ O &amp; O \\end{pmatrix}$（$r$为秩，$I_r$为$r$阶单位矩阵）。 简要证明思路 先验证$A$与$B$是同型矩阵（行数、列数一致，否则必不等价）； 任选上述充要条件验证： 便捷法：计算$r(A)$和$r(B)$，若相等则等价； 严谨法：通过初等变换将$A$化为$B$，或构造$P$、$Q$使$PAQ = B$。 ">
-<meta property='og:url' content='https://www.retr0.qzz.io/p/%E8%AF%81%E6%98%8E%E7%9F%A9%E9%98%B5%E7%AD%89%E4%BB%B7/'>
+<meta property='og:url' content='https://www.retr0.xyz/p/%E8%AF%81%E6%98%8E%E7%9F%A9%E9%98%B5%E7%AD%89%E4%BB%B7/'>
 <meta property='og:site_name' content='Retr0的小窝'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-14T23:41:10&#43;08:00'/><meta property='article:modified_time' content='2025-11-14T23:41:10&#43;08:00'/>
 <meta name="twitter:title" content="证明矩阵等价">
@@ -694,7 +694,7 @@
 </script>
 
 
-<script src=https://www.retr0.qzz.io/js/topbar.min.js></script>
+<script src=https://www.retr0.xyz/js/topbar.min.js></script>
 
 
 
@@ -816,10 +816,10 @@ async function renderKaTeX() {
 
 <div id="particles-js"></div>
 
-<script src=https://www.retr0.qzz.io/background/particles.min.js></script>
+<script src=https://www.retr0.xyz/background/particles.min.js></script>
 <script>
 particlesJS.load('particles-js',
-    "https://www.retr0.qzz.io/background/particlesjs-config.json",
+    "https://www.retr0.xyz/background/particlesjs-config.json",
     () => console.log('particles.js loaded')
 );
 </script>

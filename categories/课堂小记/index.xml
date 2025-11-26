@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>课堂小记 on Retr0的小窝</title>
-        <link>https://www.retr0.qzz.io/categories/%E8%AF%BE%E5%A0%82%E5%B0%8F%E8%AE%B0/</link>
+        <link>https://www.retr0.xyz/categories/%E8%AF%BE%E5%A0%82%E5%B0%8F%E8%AE%B0/</link>
         <description>Recent content in 课堂小记 on Retr0的小窝</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Fri, 21 Nov 2025 20:45:26 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/categories/%E8%AF%BE%E5%A0%82%E5%B0%8F%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 21 Nov 2025 20:45:26 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/%E8%AF%BE%E5%A0%82%E5%B0%8F%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>两种方法判断线性方程组解的情况</title>
-        <link>https://www.retr0.qzz.io/p/%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%E5%88%A4%E6%96%AD%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%A7%A3%E7%9A%84%E6%83%85%E5%86%B5/</link>
+        <link>https://www.retr0.xyz/p/%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%E5%88%A4%E6%96%AD%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%A7%A3%E7%9A%84%E6%83%85%E5%86%B5/</link>
         <pubDate>Fri, 21 Nov 2025 20:45:26 +0800</pubDate>
         
-        <guid>https://www.retr0.qzz.io/p/%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%E5%88%A4%E6%96%AD%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%A7%A3%E7%9A%84%E6%83%85%E5%86%B5/</guid>
+        <guid>https://www.retr0.xyz/p/%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%E5%88%A4%E6%96%AD%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%A7%A3%E7%9A%84%E6%83%85%E5%86%B5/</guid>
         <description>&lt;h3 id=&#34;一行列式法仅适用于系数矩阵a为n阶方阵n为变量个数&#34;&gt;一、行列式法（仅适用于系数矩阵$A$为$n$阶方阵，$n$为变量个数）
 &lt;/h3&gt;&lt;h4 id=&#34;1-线性齐次方程组ax0&#34;&gt;1. 线性齐次方程组（$Ax=0$）
 &lt;/h4&gt;&lt;ul&gt;
@@ -51,10 +51,10 @@
         </item>
         <item>
         <title>证明矩阵等价</title>
-        <link>https://www.retr0.qzz.io/p/%E8%AF%81%E6%98%8E%E7%9F%A9%E9%98%B5%E7%AD%89%E4%BB%B7/</link>
+        <link>https://www.retr0.xyz/p/%E8%AF%81%E6%98%8E%E7%9F%A9%E9%98%B5%E7%AD%89%E4%BB%B7/</link>
         <pubDate>Fri, 14 Nov 2025 23:41:10 +0800</pubDate>
         
-        <guid>https://www.retr0.qzz.io/p/%E8%AF%81%E6%98%8E%E7%9F%A9%E9%98%B5%E7%AD%89%E4%BB%B7/</guid>
+        <guid>https://www.retr0.xyz/p/%E8%AF%81%E6%98%8E%E7%9F%A9%E9%98%B5%E7%AD%89%E4%BB%B7/</guid>
         <description>&lt;h3 id=&#34;证明两个矩阵等价的核心方法简要版&#34;&gt;证明两个矩阵等价的核心方法（简要版）
 &lt;/h3&gt;&lt;p&gt;矩阵等价的核心定义：设$A$、$B$为$m \times n$同型矩阵，若存在$m$阶可逆矩阵$P$和$n$阶可逆矩阵$Q$，使得$PAQ = B$，则$A$与$B$等价。&lt;/p&gt;
 &lt;h4 id=&#34;关键充要条件满足其一即可证明&#34;&gt;关键充要条件（满足其一即可证明）
@@ -77,10 +77,10 @@
         </item>
         <item>
         <title>算行列式的几种方法</title>
-        <link>https://www.retr0.qzz.io/p/%E7%AE%97%E8%A1%8C%E5%88%97%E5%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</link>
+        <link>https://www.retr0.xyz/p/%E7%AE%97%E8%A1%8C%E5%88%97%E5%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</link>
         <pubDate>Fri, 14 Nov 2025 23:40:45 +0800</pubDate>
         
-        <guid>https://www.retr0.qzz.io/p/%E7%AE%97%E8%A1%8C%E5%88%97%E5%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</guid>
+        <guid>https://www.retr0.xyz/p/%E7%AE%97%E8%A1%8C%E5%88%97%E5%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</guid>
         <description>&lt;h3 id=&#34;一行列式的核心计算方法及适用情况&#34;&gt;一、行列式的核心计算方法及适用情况
 &lt;/h3&gt;&lt;h4 id=&#34;1-定义法&#34;&gt;1. 定义法
 &lt;/h4&gt;&lt;ul&gt;
@@ -217,10 +217,10 @@ $$D_n = \begin{vmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ a_{21} 
         </item>
         <item>
         <title>几种多项式及余项</title>
-        <link>https://www.retr0.qzz.io/p/%E5%87%A0%E7%A7%8D%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%8F%8A%E4%BD%99%E9%A1%B9/</link>
+        <link>https://www.retr0.xyz/p/%E5%87%A0%E7%A7%8D%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%8F%8A%E4%BD%99%E9%A1%B9/</link>
         <pubDate>Fri, 14 Nov 2025 23:40:16 +0800</pubDate>
         
-        <guid>https://www.retr0.qzz.io/p/%E5%87%A0%E7%A7%8D%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%8F%8A%E4%BD%99%E9%A1%B9/</guid>
+        <guid>https://www.retr0.xyz/p/%E5%87%A0%E7%A7%8D%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%8F%8A%E4%BD%99%E9%A1%B9/</guid>
         <description>&lt;blockquote&gt;
 &lt;p&gt;多项式+余项=公式&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -274,10 +274,10 @@ $$&lt;h4 id=&#34;核心特点-3&#34;&gt;核心特点
         </item>
         <item>
         <title>几种方法求逆矩阵</title>
-        <link>https://www.retr0.qzz.io/p/%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95%E6%B1%82%E9%80%86%E7%9F%A9%E9%98%B5/</link>
+        <link>https://www.retr0.xyz/p/%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95%E6%B1%82%E9%80%86%E7%9F%A9%E9%98%B5/</link>
         <pubDate>Sun, 02 Nov 2025 21:54:18 +0800</pubDate>
         
-        <guid>https://www.retr0.qzz.io/p/%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95%E6%B1%82%E9%80%86%E7%9F%A9%E9%98%B5/</guid>
+        <guid>https://www.retr0.xyz/p/%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95%E6%B1%82%E9%80%86%E7%9F%A9%E9%98%B5/</guid>
         <description>&lt;h3 id=&#34;一伴随矩阵与伴随矩阵法求逆矩阵&#34;&gt;一、伴随矩阵与伴随矩阵法求逆矩阵
 &lt;/h3&gt;&lt;h4 id=&#34;1-伴随矩阵的定义&#34;&gt;1. 伴随矩阵的定义
 &lt;/h4&gt;&lt;p&gt;对于n阶方阵$A = (a_{ij})$，其&lt;strong&gt;代数余子式&lt;/strong&gt;$A_{ij}$定义为：$A_{ij} = (-1)^{i+j}M_{ij}$，其中$M_{ij}$是$A$中去掉第$i$行第$j$列后剩余子矩阵的行列式（即余子式）。&lt;/p&gt;
@@ -417,10 +417,10 @@ $$
         </item>
         <item>
         <title>三个微分中值定理</title>
-        <link>https://www.retr0.qzz.io/p/%E4%B8%89%E4%B8%AA%E5%BE%AE%E5%88%86%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86/</link>
+        <link>https://www.retr0.xyz/p/%E4%B8%89%E4%B8%AA%E5%BE%AE%E5%88%86%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86/</link>
         <pubDate>Wed, 29 Oct 2025 12:31:38 +0800</pubDate>
         
-        <guid>https://www.retr0.qzz.io/p/%E4%B8%89%E4%B8%AA%E5%BE%AE%E5%88%86%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86/</guid>
+        <guid>https://www.retr0.xyz/p/%E4%B8%89%E4%B8%AA%E5%BE%AE%E5%88%86%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86/</guid>
         <description>&lt;h3 id=&#34;一罗尔定理rolles-theorem&#34;&gt;一、罗尔定理（Rolle&amp;rsquo;s Theorem）
 &lt;/h3&gt;&lt;h4 id=&#34;1-核心条件&#34;&gt;1. 核心条件
 &lt;/h4&gt;&lt;ul&gt;
@@ -470,10 +470,10 @@ $$
         </item>
         <item>
         <title>矩阵的秩及其性质</title>
-        <link>https://www.retr0.qzz.io/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/</link>
+        <link>https://www.retr0.xyz/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/</link>
         <pubDate>Tue, 28 Oct 2025 15:27:38 +0800</pubDate>
         
-        <guid>https://www.retr0.qzz.io/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/</guid>
+        <guid>https://www.retr0.xyz/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/</guid>
         <description>&lt;h3 id=&#34;一矩阵的秩核心定义&#34;&gt;一、矩阵的秩（核心定义）
 &lt;/h3&gt;&lt;p&gt;矩阵的秩是&lt;strong&gt;最高阶非零子式的阶数&lt;/strong&gt;，也等于矩阵行向量组/列向量组的“极大无关组个数”(通俗说：最多能找出多少个不互相“多余”的行/列)记为 &lt;/p&gt;
 $$r(A)$$&lt;p&gt;。&lt;/p&gt;
@@ -499,10 +499,10 @@ $$r(A)$$&lt;p&gt;。&lt;/p&gt;
         </item>
         <item>
         <title>快速判断矩阵是否可逆</title>
-        <link>https://www.retr0.qzz.io/p/%E5%BF%AB%E9%80%9F%E5%88%A4%E6%96%AD%E7%9F%A9%E9%98%B5%E6%98%AF%E5%90%A6%E5%8F%AF%E9%80%86/</link>
+        <link>https://www.retr0.xyz/p/%E5%BF%AB%E9%80%9F%E5%88%A4%E6%96%AD%E7%9F%A9%E9%98%B5%E6%98%AF%E5%90%A6%E5%8F%AF%E9%80%86/</link>
         <pubDate>Tue, 28 Oct 2025 15:27:38 +0800</pubDate>
         
-        <guid>https://www.retr0.qzz.io/p/%E5%BF%AB%E9%80%9F%E5%88%A4%E6%96%AD%E7%9F%A9%E9%98%B5%E6%98%AF%E5%90%A6%E5%8F%AF%E9%80%86/</guid>
+        <guid>https://www.retr0.xyz/p/%E5%BF%AB%E9%80%9F%E5%88%A4%E6%96%AD%E7%9F%A9%E9%98%B5%E6%98%AF%E5%90%A6%E5%8F%AF%E9%80%86/</guid>
         <description>&lt;p&gt;判断n阶方阵A是否可逆，核心看以下&lt;strong&gt;快速等价条件&lt;/strong&gt;（满足其一即可，优先选前2个最便捷）：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;行列式非零：$|A| \neq 0$（直接计算行列式，最快上手）；&lt;/li&gt;

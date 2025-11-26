@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>渗透测试微专业 on Retr0的小窝</title>
-        <link>https://www.retr0.qzz.io/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%BE%AE%E4%B8%93%E4%B8%9A/</link>
+        <link>https://www.retr0.xyz/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%BE%AE%E4%B8%93%E4%B8%9A/</link>
         <description>Recent content in 渗透测试微专业 on Retr0的小窝</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Tue, 25 Nov 2025 10:56:43 +0800</lastBuildDate><atom:link href="https://www.retr0.qzz.io/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%BE%AE%E4%B8%93%E4%B8%9A/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 25 Nov 2025 10:56:43 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%BE%AE%E4%B8%93%E4%B8%9A/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>1.3 信息搜集工具的使用</title>
-        <link>https://www.retr0.qzz.io/p/1.3-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+        <link>https://www.retr0.xyz/p/1.3-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
         <pubDate>Tue, 25 Nov 2025 10:56:43 +0800</pubDate>
         
-        <guid>https://www.retr0.qzz.io/p/1.3-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+        <guid>https://www.retr0.xyz/p/1.3-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
         <description>&lt;h2 id=&#34;信息搜集&#34;&gt;信息搜集
 &lt;/h2&gt;&lt;h3 id=&#34;本地信息搜集windows-命令&#34;&gt;本地信息搜集(Windows 命令)
 &lt;/h3&gt;&lt;p&gt;&lt;code&gt;whoami&lt;/code&gt;			查看自己身份&lt;/p&gt;
@@ -98,10 +98,10 @@
         </item>
         <item>
         <title>1.2 kali基础知识和指令及几个小工具</title>
-        <link>https://www.retr0.qzz.io/p/1.2-kali%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%92%8C%E6%8C%87%E4%BB%A4%E5%8F%8A%E5%87%A0%E4%B8%AA%E5%B0%8F%E5%B7%A5%E5%85%B7/</link>
+        <link>https://www.retr0.xyz/p/1.2-kali%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%92%8C%E6%8C%87%E4%BB%A4%E5%8F%8A%E5%87%A0%E4%B8%AA%E5%B0%8F%E5%B7%A5%E5%85%B7/</link>
         <pubDate>Sun, 23 Nov 2025 22:19:56 +0800</pubDate>
         
-        <guid>https://www.retr0.qzz.io/p/1.2-kali%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%92%8C%E6%8C%87%E4%BB%A4%E5%8F%8A%E5%87%A0%E4%B8%AA%E5%B0%8F%E5%B7%A5%E5%85%B7/</guid>
+        <guid>https://www.retr0.xyz/p/1.2-kali%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%92%8C%E6%8C%87%E4%BB%A4%E5%8F%8A%E5%87%A0%E4%B8%AA%E5%B0%8F%E5%B7%A5%E5%85%B7/</guid>
         <description>&lt;h1 id=&#34;知识和指令&#34;&gt;知识和指令
 &lt;/h1&gt;&lt;h2 id=&#34;基础知识&#34;&gt;基础知识
 &lt;/h2&gt;&lt;h3 id=&#34;文件属性&#34;&gt;文件属性
@@ -637,10 +637,10 @@
         </item>
         <item>
         <title>1.1 抓包和web基本知识</title>
-        <link>https://www.retr0.qzz.io/p/1.1-%E6%8A%93%E5%8C%85%E5%92%8Cweb%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/</link>
+        <link>https://www.retr0.xyz/p/1.1-%E6%8A%93%E5%8C%85%E5%92%8Cweb%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/</link>
         <pubDate>Mon, 17 Nov 2025 15:59:43 +0800</pubDate>
         
-        <guid>https://www.retr0.qzz.io/p/1.1-%E6%8A%93%E5%8C%85%E5%92%8Cweb%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/</guid>
+        <guid>https://www.retr0.xyz/p/1.1-%E6%8A%93%E5%8C%85%E5%92%8Cweb%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/</guid>
         <description>&lt;blockquote&gt;
 &lt;p&gt;本篇课程使用资源库内的“win10渗透测试工具预安装虚拟机（日常使用）”&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -669,7 +669,7 @@
 &lt;li&gt;双击该批处理文件即可启动Burpsuite,一路next进入软件界面。&lt;/li&gt;
 &lt;li&gt;检查并确认Options选项卡中监听地址和端口为&lt;code&gt;127.0.0.1:8080&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/%e7%bd%91%e5%ae%89/img/1.1-1.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e7%bd%91%e5%ae%89/img/1.1-1.png&#34;
 	
 	
 	
@@ -681,7 +681,7 @@
 &lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;打开Firefox浏览器，并转到&lt;strong&gt;选项&lt;/strong&gt;中，在&lt;strong&gt;高级-网络-连接-设置&lt;/strong&gt;中选择“手动配置代理”并勾选为所有协议使用相同代理，填写好之前获取的地址和端口。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/%e7%bd%91%e5%ae%89/img/1.1-2.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e7%bd%91%e5%ae%89/img/1.1-2.png&#34;
 	
 	
 	
@@ -703,7 +703,7 @@
 &lt;li&gt;正如上述，我们需要在浏览器的代理设置中更改为：**使用系统代理 **（&lt;code&gt;1.1.3&lt;/code&gt;中提到）&lt;/li&gt;
 &lt;li&gt;因为未知原因，charles的证书不能从本地保存后导入，所以这里我们选择 **帮助-SSL代理-在移动设备或远程浏览器上安装Charles根证书 **点击后出现弹窗，例如：&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/%e7%bd%91%e5%ae%89/img/1.1-3.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e7%bd%91%e5%ae%89/img/1.1-3.png&#34;
 	
 	
 	
@@ -717,7 +717,7 @@
 &lt;/h2&gt;&lt;h3 id=&#34;burp抓包&#34;&gt;Burp抓包
 &lt;/h3&gt;&lt;p&gt;在Burp软件内Proxy-Intercept选项卡中点击&lt;strong&gt;Intercept is off&lt;/strong&gt;开始抓包&lt;/p&gt;
 &lt;p&gt;此时在百度上搜索任意关键词（以&amp;quot;test&amp;quot;为例）可以看到抓取到数据包&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/%e7%bd%91%e5%ae%89/img/1.1-4.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e7%bd%91%e5%ae%89/img/1.1-4.png&#34;
 	
 	
 	
@@ -728,7 +728,7 @@
 &lt;p&gt;修改数据包首行&lt;code&gt;wd&lt;/code&gt;参数值为&amp;quot;ok&amp;quot;&lt;/p&gt;
 &lt;p&gt;点击&lt;strong&gt;Intercept is on&lt;/strong&gt;放行数据包&lt;/p&gt;
 &lt;p&gt;发现搜索关键词被替换为&amp;quot;ok&amp;quot;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/%e7%bd%91%e5%ae%89/img/1.1-5.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e7%bd%91%e5%ae%89/img/1.1-5.png&#34;
 	
 	
 	
@@ -739,7 +739,7 @@
 &lt;h3 id=&#34;charles抓包&#34;&gt;Charles抓包
 &lt;/h3&gt;&lt;p&gt;打开Charles软件并访问百度&lt;/p&gt;
 &lt;p&gt;发现抓取到数据包，查看内容发现与页面原代码一致&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.retr0.qzz.io/post/%e7%bd%91%e5%ae%89/img/1.1-6.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e7%bd%91%e5%ae%89/img/1.1-6.png&#34;
 	
 	
 	
