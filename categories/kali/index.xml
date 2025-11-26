@@ -186,7 +186,7 @@
 &lt;p&gt;&lt;code&gt;nh kex&lt;/code&gt;		打开vnc图形化界面（普通权限）&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;首次使用需要配置密码（还会问你要不要设一个仅观看的vnc密码，自行选择是否启用）&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;nh kex stop&lt;/code&gt;	停止桌面服务&lt;/p&gt;
 &lt;h2 id=&#34;使用vnc连接可视化界面&#34;&gt;使用VNC连接可视化界面
-&lt;/h2&gt;&lt;p&gt;下载安装app：**VNC Viewer，**下载地址：&lt;a class=&#34;link&#34; href=&#34;https://www.lanzouo.com/i8Uf14aelmb&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/h2&gt;&lt;p&gt;下载安装app：&lt;strong&gt;VNC Viewer&lt;/strong&gt; ，下载地址：&lt;a class=&#34;link&#34; href=&#34;https://www.lanzouo.com/i8Uf14aelmb&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;VNC-Viewer 蓝奏云&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在Termux中输入以下指令启动图形化界面：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
