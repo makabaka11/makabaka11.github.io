@@ -7,7 +7,15 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Fri, 28 Nov 2025 20:07:03 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 29 Nov 2025 23:01:17 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>游戏</title>
+        <link>https://www.retr0.xyz/categories/%E6%B8%B8%E6%88%8F/</link>
+        <pubDate>Sat, 29 Nov 2025 23:01:17 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/categories/%E6%B8%B8%E6%88%8F/</guid>
+        <description>&lt;img src="https://www.retr0.xyz/categories/%E6%B8%B8%E6%88%8F/game.png" alt="Featured image of post 游戏" /&gt;</description>
+        </item>
+        <item>
         <title>渗透测试微专业</title>
         <link>https://www.retr0.xyz/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%BE%AE%E4%B8%93%E4%B8%9A/</link>
         <pubDate>Fri, 28 Nov 2025 20:07:03 +0800</pubDate>
