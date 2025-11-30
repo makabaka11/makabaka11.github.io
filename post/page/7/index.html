@@ -840,41 +840,58 @@ function enablePhotoSwipeWebShare(gallery) {
 
 
 <script>
-function initLive2D() {
-    if (screen.width < 768) return;
 
-    const cdnPath = "https://www.retr0.xyz/blog-live2d/";
-    const config = {
-        path: {
-            modelPath: cdnPath + "Resources/",
-            cssPath: cdnPath + "waifu.css",
-            tipsJsonPath: cdnPath + "waifu-tips.json",
-            tipsJsPath: cdnPath + "waifu-tips.js",
-            live2dCorePath: cdnPath + "Core/live2dcubismcore.js",
-            live2dSdkPath: cdnPath + "live2d-sdk.js"
-        }
-    };
 
-    Promise.all([
-        loadRes(config.path.cssPath, "css"),
-        loadRes(config.path.live2dCorePath, "js"),
-        loadRes(config.path.live2dSdkPath, "js"),
-        loadRes(config.path.tipsJsPath, "js")
-    ]).then(() => {
-        initWidget({
-            waifuPath: config.path.tipsJsonPath,
-            cdnPath: config.path.modelPath
-        });
-    });
+window._live2d_loaded = window._live2d_loaded || false;
+window._live2d_initialized = window._live2d_initialized || false;
+
+
+function loadLive2DAssetsOnce(cdnPath) {
+    if (window._live2d_loaded) return Promise.resolve();
+
+    window._live2d_loaded = true;
+
+    return Promise.all([
+        loadRes(cdnPath + "waifu.css", "css"),
+        loadRes(cdnPath + "Core/live2dcubismcore.js", "js"),
+        loadRes(cdnPath + "live2d-sdk.js", "js"),
+        loadRes(cdnPath + "waifu-tips.js", "js")
+    ]);
 }
+
+
+function initLive2DWidgetOnce(cdnPath) {
+
+    if (window._live2d_initialized) return;
+
+    
+    const old = document.querySelector("#waifu");
+    if (old) old.remove();
+
+    window._live2d_initialized = true;
+
+    initWidget({
+        waifuPath: cdnPath + "waifu-tips.json",
+        cdnPath: cdnPath + "Resources/",
+        tools: ["hitokoto", "asteroids", "express", "switch-model", "switch-texture", "photo", "info", "quit"],
+        dragEnable: true,
+        dragDirection: ["x", "y"],
+        switchType: "order"
+    });
+
+    console.log("[Live2D] Widget initialized.");
+}
+
 
 function loadRes(url, type) {
     return new Promise((resolve) => {
-        const tag = type === "css" ? document.createElement("link") : document.createElement("script");
+        let tag;
         if (type === "css") {
+            tag = document.createElement("link");
             tag.rel = "stylesheet";
             tag.href = url;
         } else {
+            tag = document.createElement("script");
             tag.src = url;
         }
         tag.onload = resolve;
@@ -882,7 +899,22 @@ function loadRes(url, type) {
     });
 }
 
-initLive2D();
+
+function initLive2D() {
+    if (screen.width < 768) return;
+
+    const cdnPath = "https://www.retr0.xyz/blog-live2d/";
+
+    loadLive2DAssetsOnce(cdnPath)
+        .then(() => initLive2DWidgetOnce(cdnPath));
+}
+
+initLive2D();  
+
+
+document.addEventListener("pjax:complete", () => {
+    initLive2D(); 
+});
 </script>
 
 
