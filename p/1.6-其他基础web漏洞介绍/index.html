@@ -297,6 +297,10 @@
     <li><a href="#靶场的使用">靶场的使用</a>
       <ol>
         <li><a href="#暴力破解-brute-force">暴力破解 Brute Force</a></li>
+      </ol>
+    </li>
+    <li><a href="#命令注入-command-injection命令执行漏洞">命令注入 Command injection（命令执行漏洞）</a>
+      <ol>
         <li><a href="#low-低难度">low 低难度</a></li>
         <li><a href="#high-高难度">high 高难度</a></li>
         <li><a href="#如果在linux环境下">如果在linux环境下</a></li>
@@ -410,7 +414,7 @@
 <p><font style="color:rgb(72, 78, 84);">链接：</font><a class="link" href="https://pan.baidu.com/s/1dmU9DcXAthjY0te4qv4tAg"  target="_blank" rel="noopener"
     ><font style="color:rgb(0, 184, 119);">https://pan.baidu.com/s/1dmU9DcXAthjY0te4qv4tAg</font></a><font style="color:rgb(72, 78, 84);"> </font><br>
 <font style="color:rgb(72, 78, 84);">提取码：38mj </font></p>
-<p><font style="color:rgb(72, 78, 84);">下载得到</font><code>&lt;font style=&quot;color:rgb(72, 78, 84);&quot;&gt;dvwa汉化版.zip&lt;/font&gt;</code><font style="color:rgb(72, 78, 84);">，将压缩包里</font><code>&lt;font style=&quot;color:rgb(72, 78, 84);&quot;&gt;dvwa&lt;/font&gt;</code><font style="color:rgb(72, 78, 84);">文件夹里的文件解压到</font><code>&lt;font style=&quot;color:rgb(72, 78, 84);&quot;&gt;C:\phpstudy_pro\WWW&lt;/font&gt;</code><font style="color:rgb(72, 78, 84);">中，注意提前将</font><font style="color:#DF2A3F;">phpmyadmin以外</font><font style="color:rgb(72, 78, 84);">的其他文件删除</font></p>
+<p>下载得到<code>dvwa汉化版.zip</code><font style="color:rgb(72, 78, 84);">，将压缩包里</font><code>dvwa</code>文件夹里的文件解压到<code>C:\phpstudy_pro\WWW</code><font style="color:rgb(72, 78, 84);">中，注意提前将</font><font style="color:#DF2A3F;">phpmyadmin以外</font><font style="color:rgb(72, 78, 84);">的其他文件删除</font></p>
 <hr>
 <ol>
 <li>打开phpstudy，在“网站”菜单中的“管理”处设置php版本为<code>5.6.x</code>;</li>
@@ -418,7 +422,7 @@
 <li>使用Ctrl+F搜索<code>allow_url_fopen</code>和<code>allow_url_include</code>确保这两项后面的配置都是<code>On</code>，保存文件</li>
 <li>回到首页，启动Apache和MySQL，打开FireFox浏览器访问<code>127.0.0.1</code>，点击下面的 |创建/重置数据库| 按钮</li>
 <li>登录，用户名为：<code>admin</code>，密码为：<code>password</code></li>
-<li>在DVWA安全页面里设置安全等级为LOW</li>
+<li>在DVWA安全页面里设置安全等级为low</li>
 </ol>
 <h2 id="靶场的使用">靶场的使用
 </h2><p>提前配置好抓包环境并打开burp suite，详见<a class="link" href="https://www.retr0.xyz/p/1.1-%E6%8A%93%E5%8C%85%E5%92%8Cweb%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/"  target="_blank" rel="noopener"
@@ -433,13 +437,14 @@
 <li>点击Start attack等待攻击完成提示Finished</li>
 <li>点击Length按照长度排序，发现“password”的长度明显与其他不同，说明password是正确密码</li>
 </ol>
-<details class="lake-collapse"><summary id="u0d490cef"><strong><span class="ne-text">补充1：</span></strong></summary><p id="u09e9fb60" class="ne-p"><span class="ne-text">不同的攻击模式：</span></p><ul class="ne-ul"><li id="udc9315e9" data-lake-index-type="0"><strong><span class="ne-text">sniper 模式[单向爆破]</span></strong><span class="ne-text"> 知道用户名不知道密码的情况，破解一些单一的输入框</span></li><li id="ue535ab34" data-lake-index-type="0"><strong><span class="ne-text">battering ram 模式[并发攻击]</span></strong><span class="ne-text"> 对多个目标进行单一的payload攻击，也就是用户名和密码一致</span></li><li id="u9ec15bf0" data-lake-index-type="0"><strong><span class="ne-text">pitchfork 模式[交叉攻击(撞库)] </span></strong><span class="ne-text">有几个变量就可以选几个字典，从字典中随机抽取穷举</span></li><li id="u3fb2f0aa" data-lake-index-type="0"><strong><span class="ne-text">cluster bomb 模式[完整爆破] </span></strong><span class="ne-text">从字典中挨个抽取尝试</span></li></ul></details>
-## 命令注入 Command injection（命令执行漏洞）
-> 所谓命令执行漏洞就是说一个地方可以执行操作系统的命令
->
+<details class="lake-collapse"><summary id="u0d490cef"><strong><span class="ne-text">补充1(点击展开)：</span></strong></summary><p id="u09e9fb60" class="ne-p"><span class="ne-text">不同的攻击模式：</span></p><ul class="ne-ul"><li id="udc9315e9" data-lake-index-type="0"><strong><span class="ne-text">sniper 模式[单向爆破]</span></strong><span class="ne-text"> 知道用户名不知道密码的情况，破解一些单一的输入框</span></li><li id="ue535ab34" data-lake-index-type="0"><strong><span class="ne-text">battering ram 模式[并发攻击]</span></strong><span class="ne-text"> 对多个目标进行单一的payload攻击，也就是用户名和密码一致</span></li><li id="u9ec15bf0" data-lake-index-type="0"><strong><span class="ne-text">pitchfork 模式[交叉攻击(撞库)] </span></strong><span class="ne-text">有几个变量就可以选几个字典，从字典中随机抽取穷举</span></li><li id="u3fb2f0aa" data-lake-index-type="0"><strong><span class="ne-text">cluster bomb 模式[完整爆破] </span></strong><span class="ne-text">从字典中挨个抽取尝试</span></li></ul></details>
+<h2 id="命令注入-command-injection命令执行漏洞">命令注入 Command injection（命令执行漏洞）
+</h2><blockquote>
+<p>所谓命令执行漏洞就是说一个地方可以执行操作系统的命令</p>
+</blockquote>
 <h3 id="low-低难度">low 低难度
 </h3><p>打开dvwa中命令注入页面，可以点击右下角查看源代码简单分析功能如何实现</p>
-<details class="lake-collapse"><summary id="u379e3f46"><strong><span class="ne-text">补充2：</span></strong></summary><p id="ub9fb94c3" class="ne-p"><span class="ne-text">在Windows CMD中可以通过</span><code class="ne-code"><span class="ne-text">&amp;、&amp;&amp;</span></code><span class="ne-text">符号同时输入并执行两条指令，其他也有</span><code class="ne-code"><span class="ne-text">|、||</span></code><span class="ne-text">等在特定条件下可用</span></p><p id="u8c44826e" class="ne-p"><span class="ne-text">例如执行</span><code class="ne-code"><span class="ne-text">ping www.retr0.xyz &amp; ipconfig</span></code><span class="ne-text">，输出</span></p><pre data-language="plain" id="wvxQd" class="ne-codeblock language-plain"><code>正在 Ping www.retr0.xyz [104.21.69.83] 具有 32 字节的数据:
+<details class="lake-collapse"><summary id="u379e3f46"><strong><span class="ne-text">补充2(点击展开)：</span></strong></summary><p id="ub9fb94c3" class="ne-p"><span class="ne-text">在Windows CMD中可以通过</span><code class="ne-code"><span class="ne-text">&amp;、&amp;&amp;</span></code><span class="ne-text">符号同时输入并执行两条指令，其他也有</span><code class="ne-code"><span class="ne-text">|、||</span></code><span class="ne-text">等在特定条件下可用</span></p><p id="u8c44826e" class="ne-p"><span class="ne-text">例如执行</span><code class="ne-code"><span class="ne-text">ping www.retr0.xyz &amp; ipconfig</span></code><span class="ne-text">，输出</span></p><pre data-language="plain" id="wvxQd" class="ne-codeblock language-plain"><code>正在 Ping www.retr0.xyz [104.21.69.83] 具有 32 字节的数据:
 来自 104.21.69.83 的回复: 字节=32 时间=211ms TTL=128
 来自 104.21.69.83 的回复: 字节=32 时间=202ms TTL=128
 来自 104.21.69.83 的回复: 字节=32 时间=200ms TTL=128
@@ -494,12 +499,12 @@ Windows IP 配置
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nv">$target</span> <span class="o">=</span> <span class="nx">str_replace</span><span class="p">(</span> <span class="nx">array_keys</span><span class="p">(</span> <span class="nv">$substitutions</span> <span class="p">),</span> <span class="nv">$substitutions</span><span class="p">,</span> <span class="nv">$target</span> <span class="p">);</span> 
 </span></span></code></pre></td></tr></table>
 </div>
-</div><details class="lake-collapse"><summary id="u2313980e"><strong><span class="ne-text">补充3：</span></strong></summary><p id="u5ff13468" class="ne-p"><span class="ne-text">str_replace的用法：str_replace(&quot;要换的字符串&quot;,&quot;替换为&quot;,作用于哪个变量)，例如：</span></p><pre data-language="php" id="EylAn" class="ne-codeblock language-php"><code>&lt;?php
+</div><details class="lake-collapse"><summary id="u2313980e"><strong><span class="ne-text">补充3(点击展开)：</span></strong></summary><p id="u5ff13468" class="ne-p"><span class="ne-text">str_replace的用法：str_replace(&quot;要换的字符串&quot;,&quot;替换为&quot;,作用于哪个变量)，例如：</span></p><pre data-language="php" id="EylAn" class="ne-codeblock language-php"><code>&lt;?php
 $a = $_GET['username'];
 $b = str_replace('t','x',$a);
 echo $b;
 ?&gt;  </code></pre><p id="u9f0eeedd" class="ne-p"><span class="ne-text">打开url:</span><span class="ne-text" style="text-decoration: underline">http://127.0.0.1/test.php?username=retr0</span><span class="ne-text">，返回 rexr0</span></p><p id="u3ffb944b" class="ne-p"><strong><span class="ne-text"></span></strong></p></details>
-**漏洞解析：**观察发现屏蔽名单中'| '为一个管道符加一个空格，因此我们填入`127.0.0.1 |ipconfig`即可 
+<p><strong>漏洞解析：</strong> 观察发现屏蔽名单中&rsquo;| &lsquo;为一个管道符加一个空格，因此我们填入<code>127.0.0.1 |ipconfig</code>即可</p>
 <h3 id="如果在linux环境下">如果在linux环境下
 </h3><p><code>ping 127.0.0.1 &amp; cat /etc/passwd</code>		几乎同时执行</p>
 <p><code>ping 127.0.0.1 &amp;&amp; cat /etc/passwd</code>	执行完左边去执行右面</p>
@@ -517,7 +522,7 @@ echo $b;
 	
 ></p>
 <p>结合右下角查看php源代码也可以得到</p>
-<p>**漏洞解析：**因此我们可以在输入的字符串中插入<code>&lt;script&gt;&lt;/script&gt;</code>的html脚本，让网页执行我们的脚本代码</p>
+<p><strong>漏洞解析：</strong> 因此我们可以在输入的字符串中插入<code>&lt;script&gt;&lt;/script&gt;</code>的html脚本，让网页执行我们的脚本代码</p>
 <p>填入<code>ret&lt;script&gt;alert(123)&lt;/script&gt;r0</code>,网页弹窗内容‘123’</p>
 <h3 id="medium-中等难度">medium 中等难度
 </h3><p>点击右下角查看源代码发现添加了过滤机制：</p>
@@ -529,7 +534,7 @@ echo $b;
 <pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$name</span> <span class="o">=</span> <span class="nx">str_replace</span><span class="p">(</span> <span class="s1">&#39;&lt;script&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nv">$_GET</span><span class="p">[</span> <span class="s1">&#39;name&#39;</span> <span class="p">]</span> <span class="p">);</span> 
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>漏洞解析：<strong>屏蔽代码只过滤了一次<code>&lt;script&gt;</code>，因此我们使用</strong>双写绕过</strong>，填入<code>ret&lt;sc&lt;script&gt;ript&gt;alert(123)&lt;/script&gt;r0</code>，其中<code>&lt;script&gt;</code>被过滤后又重新组合为新的<code>&lt;script&gt;</code>从而生效；此外将<code>&lt;script&gt;</code>中的字符替换为大写也可以，例如<code>ret&lt;sCRIpt&gt;alert(123)&lt;/script&gt;r0</code>（原理：前端代码不识别<code>&lt;script&gt;</code>大小写）</p>
+</div><p><strong>漏洞解析：</strong> 屏蔽代码只过滤了一次<code>&lt;script&gt;</code>，因此我们使用<strong>双写绕过</strong>，填入<code>ret&lt;sc&lt;script&gt;ript&gt;alert(123)&lt;/script&gt;r0</code>，其中<code>&lt;script&gt;</code>被过滤后又重新组合为新的<code>&lt;script&gt;</code>从而生效；此外将<code>&lt;script&gt;</code>中的字符替换为大写也可以，例如<code>ret&lt;sCRIpt&gt;alert(123)&lt;/script&gt;r0</code>（原理：前端代码不识别<code>&lt;script&gt;</code>大小写）</p>
 <h3 id="high-高难度-1">high 高难度
 </h3><p>点击右下角查看源代码发现升级了过滤机制：</p>
 <div class="highlight"><div class="chroma">
@@ -541,8 +546,8 @@ echo $b;
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>因此直接使用<code>&lt;script&gt;</code>的方法已经完全不可用</p>
-<details class="lake-collapse"><summary id="uac399e3e"><strong><span class="ne-text">补充4：</span></strong></summary><p id="ua01b29af" class="ne-p"><span class="ne-text">html存在以下加载图片的句法：</span></p><p id="ub002ff6c" class="ne-p"><code class="ne-code"><span class="ne-text">&lt;img src='x' onerror='alert(123)'/&gt;</span></code></p><p id="ud33b8c46" class="ne-p"><span class="ne-text">当页面试图加载名为x的图片但是失败时就会把onerror后面的代码当作JavaScript来执行</span></p><p id="u687461e0" class="ne-p"><span class="ne-text">另外还有</span><code class="ne-code"><span class="ne-text">onmouseover=</span></code><span class="ne-text">(鼠标浮过)</span><code class="ne-code"><span class="ne-text">onmouseup=</span></code><span class="ne-text">(鼠标松开)</span><code class="ne-code"><span class="ne-text">onmousedown=</span></code><span class="ne-text">(鼠标按下)等参数可供替换</span></p></details>
-**漏洞解析：**我们利用html图片加载代码来执行js，填入`ret<img src='x' onerror='alert(123)'/>r0`
+<details class="lake-collapse"><summary id="uac399e3e"><strong><span class="ne-text">补充4(点击展开)：</span></strong></summary><p id="ua01b29af" class="ne-p"><span class="ne-text">html存在以下加载图片的句法：</span></p><p id="ub002ff6c" class="ne-p"><code class="ne-code"><span class="ne-text">&lt;img src='x' onerror='alert(123)'/&gt;</span></code></p><p id="ud33b8c46" class="ne-p"><span class="ne-text">当页面试图加载名为x的图片但是失败时就会把onerror后面的代码当作JavaScript来执行</span></p><p id="u687461e0" class="ne-p"><span class="ne-text">另外还有</span><code class="ne-code"><span class="ne-text">onmouseover=</span></code><span class="ne-text">(鼠标浮过)</span><code class="ne-code"><span class="ne-text">onmouseup=</span></code><span class="ne-text">(鼠标松开)</span><code class="ne-code"><span class="ne-text">onmousedown=</span></code><span class="ne-text">(鼠标按下)等参数可供替换</span></p></details>
+<p><strong>漏洞解析：</strong> 我们利用html图片加载代码来执行js，填入<code>ret&lt;img src='x' onerror='alert(123)'/&gt;r0</code></p>
 <h2 id="存储的跨站点脚本xss">存储的跨站点脚本（XSS）
 </h2><p>打开dvwa中XSS 存储型页面，随便输入几个字符测试</p>
 <h3 id="low-低难度-2">low 低难度
@@ -575,7 +580,7 @@ echo $b;
 <pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$name</span> <span class="o">=</span> <span class="nx">preg_replace</span><span class="p">(</span> <span class="s1">&#39;/&lt;(.*)s(.*)c(.*)r(.*)i(.*)p(.*)t/i&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nv">$name</span> <span class="p">);</span> 
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>**漏洞解析：**依旧结合抓包使用图片加载机制传入字符串<code>hel&lt;img src='x' onerror='alert(123)'/&gt;lo</code>，成功提交</p>
+</div><p><strong>漏洞解析：</strong> 依旧结合抓包使用图片加载机制传入字符串<code>hel&lt;img src='x' onerror='alert(123)'/&gt;lo</code>，成功提交</p>
 <h2 id="跨站请求伪造-csrf">跨站请求伪造 (CSRF)
 </h2><h3 id="low-低难度-3">low 低难度
 </h3><p>打开dvwa中跨站请求伪造 (CSRF)页面，随便输入几个字符测试</p>
