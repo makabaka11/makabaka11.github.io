@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="数据准备 资料获取 接下来的几个练习所用数据都在这里，请自行下载：\n链接: https://pan.baidu.com/s/1b5ZZ5cVyS-9_06tql4tNFw 提取码: i3i6\n分析文件 我们任选一个文件打开分析（此处以美国.txt为例）\n文件大致为jsonp_1629344292311_69436({&quot;status&quot;:0,&quot;msg&quot;:&quot;success&quot; 。。。。。。32695,271457,169842]}]}}]});\n发现此文件内容并不完全符合json格式，存在以下两点问题：\n开头的花括号前多出来了jsonp_1629344292311_69436(部分 结尾多了出了括号和分号); 接下来为例便于查看json的层级结构，我们打开工具网站：JSON在线视图查看器(Online JSON Viewer)将上面文本中间去头去尾符合正确json格式的部分复制到左面的输入框，点击格式化按钮，这时右面已经出现了便于查看的结构树，如图：\n也可以参考下面给出的省略版：\n总体可以看出其中，&ldquo;update&quot;中和下面的&quot;data&quot;中的数据应该具有对应关系\n开始操作 为了方便演示，将三个国家分开操作，因此可以将任务总共分为下面几步：\n打开并读取文件 去掉不合json规范的开头 去掉不合json规范的结尾 json转python字典 获取trend key 获取日期数据，用于x轴，取2020年（到314下标结束） 获取确诊数据，用于y轴，取2020年（到314下标结束） 生成图表 分块演示 以美国.txt为例。\n1 2 3 # 打开并读取文件 usdoc = open(&#39;T:/美国.txt&#39;,&#39;r&#39;,encoding=&#39;UTF-8&#39;) us_data = usdoc.read() 打开美国.txt文件查看发现开头要删除的内容为：jsonp_1629344292311_69436(\n根据前面所学的6.3 数据容器：字符串中2.2 节字符串的替换，我们这里使用replace()函数处理\n1 us_data = us_data.replace(&#39;jsonp_1629344292311_69436(&#39;,&#39;&#39;) 接下来的结尾不能也用replace()，因为在文件中可能有多处出现了);，会出现多处替换的情况，因此我们使用字符串的切片，详见6.4 序列的操作：切片\n1 us_data = us_data[:-2] 下面导入json模块将字符串转为字典\n1 2 import json us_dict = json.loads(us_data) 下面回到浏览器，根据json视图一点点获取层级数据\n1 us_trend = us_dict[&#39;data&#39;][0][&#39;trend&#39;] 目前剩下的结构\n1 2 3 JSON ├─list(字典，格式为0:&#34;2.22&#34;,1:&#34;2.23&#34;) └─updateDate 下面我们获取日期数据\n">
+<title>10.3 练习一：折线图</title>
+
+<link rel='canonical' href='https://www.retr0.xyz/p/10.3-%E7%BB%83%E4%B9%A0%E4%B8%80%E6%8A%98%E7%BA%BF%E5%9B%BE/'>
+
+<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="10.3 练习一：折线图">
+<meta property='og:description' content="数据准备 资料获取 接下来的几个练习所用数据都在这里，请自行下载：\n链接: https://pan.baidu.com/s/1b5ZZ5cVyS-9_06tql4tNFw 提取码: i3i6\n分析文件 我们任选一个文件打开分析（此处以美国.txt为例）\n文件大致为jsonp_1629344292311_69436({&quot;status&quot;:0,&quot;msg&quot;:&quot;success&quot; 。。。。。。32695,271457,169842]}]}}]});\n发现此文件内容并不完全符合json格式，存在以下两点问题：\n开头的花括号前多出来了jsonp_1629344292311_69436(部分 结尾多了出了括号和分号); 接下来为例便于查看json的层级结构，我们打开工具网站：JSON在线视图查看器(Online JSON Viewer)将上面文本中间去头去尾符合正确json格式的部分复制到左面的输入框，点击格式化按钮，这时右面已经出现了便于查看的结构树，如图：\n也可以参考下面给出的省略版：\n总体可以看出其中，&ldquo;update&quot;中和下面的&quot;data&quot;中的数据应该具有对应关系\n开始操作 为了方便演示，将三个国家分开操作，因此可以将任务总共分为下面几步：\n打开并读取文件 去掉不合json规范的开头 去掉不合json规范的结尾 json转python字典 获取trend key 获取日期数据，用于x轴，取2020年（到314下标结束） 获取确诊数据，用于y轴，取2020年（到314下标结束） 生成图表 分块演示 以美国.txt为例。\n1 2 3 # 打开并读取文件 usdoc = open(&#39;T:/美国.txt&#39;,&#39;r&#39;,encoding=&#39;UTF-8&#39;) us_data = usdoc.read() 打开美国.txt文件查看发现开头要删除的内容为：jsonp_1629344292311_69436(\n根据前面所学的6.3 数据容器：字符串中2.2 节字符串的替换，我们这里使用replace()函数处理\n1 us_data = us_data.replace(&#39;jsonp_1629344292311_69436(&#39;,&#39;&#39;) 接下来的结尾不能也用replace()，因为在文件中可能有多处出现了);，会出现多处替换的情况，因此我们使用字符串的切片，详见6.4 序列的操作：切片\n1 us_data = us_data[:-2] 下面导入json模块将字符串转为字典\n1 2 import json us_dict = json.loads(us_data) 下面回到浏览器，根据json视图一点点获取层级数据\n1 us_trend = us_dict[&#39;data&#39;][0][&#39;trend&#39;] 目前剩下的结构\n1 2 3 JSON ├─list(字典，格式为0:&#34;2.22&#34;,1:&#34;2.23&#34;) └─updateDate 下面我们获取日期数据\n">
+<meta property='og:url' content='https://www.retr0.xyz/p/10.3-%E7%BB%83%E4%B9%A0%E4%B8%80%E6%8A%98%E7%BA%BF%E5%9B%BE/'>
+<meta property='og:site_name' content='Retr0的小窝'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-01T08:35:56&#43;08:00'/><meta property='article:modified_time' content='2025-12-01T08:35:56&#43;08:00'/>
+<meta name="twitter:title" content="10.3 练习一：折线图">
+<meta name="twitter:description" content="数据准备 资料获取 接下来的几个练习所用数据都在这里，请自行下载：\n链接: https://pan.baidu.com/s/1b5ZZ5cVyS-9_06tql4tNFw 提取码: i3i6\n分析文件 我们任选一个文件打开分析（此处以美国.txt为例）\n文件大致为jsonp_1629344292311_69436({&quot;status&quot;:0,&quot;msg&quot;:&quot;success&quot; 。。。。。。32695,271457,169842]}]}}]});\n发现此文件内容并不完全符合json格式，存在以下两点问题：\n开头的花括号前多出来了jsonp_1629344292311_69436(部分 结尾多了出了括号和分号); 接下来为例便于查看json的层级结构，我们打开工具网站：JSON在线视图查看器(Online JSON Viewer)将上面文本中间去头去尾符合正确json格式的部分复制到左面的输入框，点击格式化按钮，这时右面已经出现了便于查看的结构树，如图：\n也可以参考下面给出的省略版：\n总体可以看出其中，&ldquo;update&quot;中和下面的&quot;data&quot;中的数据应该具有对应关系\n开始操作 为了方便演示，将三个国家分开操作，因此可以将任务总共分为下面几步：\n打开并读取文件 去掉不合json规范的开头 去掉不合json规范的结尾 json转python字典 获取trend key 获取日期数据，用于x轴，取2020年（到314下标结束） 获取确诊数据，用于y轴，取2020年（到314下标结束） 生成图表 分块演示 以美国.txt为例。\n1 2 3 # 打开并读取文件 usdoc = open(&#39;T:/美国.txt&#39;,&#39;r&#39;,encoding=&#39;UTF-8&#39;) us_data = usdoc.read() 打开美国.txt文件查看发现开头要删除的内容为：jsonp_1629344292311_69436(\n根据前面所学的6.3 数据容器：字符串中2.2 节字符串的替换，我们这里使用replace()函数处理\n1 us_data = us_data.replace(&#39;jsonp_1629344292311_69436(&#39;,&#39;&#39;) 接下来的结尾不能也用replace()，因为在文件中可能有多处出现了);，会出现多处替换的情况，因此我们使用字符串的切片，详见6.4 序列的操作：切片\n1 us_data = us_data[:-2] 下面导入json模块将字符串转为字典\n1 2 import json us_dict = json.loads(us_data) 下面回到浏览器，根据json视图一点点获取层级数据\n1 us_trend = us_dict[&#39;data&#39;][0][&#39;trend&#39;] 目前剩下的结构\n1 2 3 JSON ├─list(字典，格式为0:&#34;2.22&#34;,1:&#34;2.23&#34;) └─updateDate 下面我们获取日期数据\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+        <link rel="stylesheet" href="/css/APlayer.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_dda478d092d7a4a0.gif" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🥶</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Retr0的小窝</a></h1>
+            <h2 class="site-description">多冷啊，我在东北玩泥巴~</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/349466985'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:ded000@qq.com'
+                        target="_blank"
+                        title="email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/makabaka11'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://t.me/ded0000'
+                        target="_blank"
+                        title="Telegram"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页 | Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E-about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于 | About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/message/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-message"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 9h8" /><path d="M8 13h6" /><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" /></svg>
+                
+                <span>留言板 | Msg Board</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索 | Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>技术链接 | Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#数据准备">数据准备</a>
+      <ol>
+        <li><a href="#资料获取">资料获取</a></li>
+        <li><a href="#分析文件">分析文件</a></li>
+      </ol>
+    </li>
+    <li><a href="#开始操作">开始操作</a>
+      <ol>
+        <li><a href="#分块演示">分块演示</a></li>
+        <li><a href="#单国完整版">单国完整版</a></li>
+        <li><a href="#终极版成品">终极版(成品)</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/python/" style="background-color: #2A87D8; color: #fff;">
+                Python
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/10.3-%E7%BB%83%E4%B9%A0%E4%B8%80%E6%8A%98%E7%BA%BF%E5%9B%BE/">10.3 练习一：折线图</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+     
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-01</time>
+            </div>
+        
+
+        
+
+        
+        <div id="viewCount">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="数据准备">数据准备
+</h2><h3 id="资料获取">资料获取
+</h3><p>接下来的几个练习所用数据都在这里，请自行下载：</p>
+<p>链接: <a class="link" href="https://pan.baidu.com/s/1b5ZZ5cVyS-9_06tql4tNFw"  target="_blank" rel="noopener"
+    >https://pan.baidu.com/s/1b5ZZ5cVyS-9_06tql4tNFw</a> 提取码: i3i6</p>
+<h3 id="分析文件">分析文件
+</h3><p>我们任选一个文件打开分析（此处以美国.txt为例）</p>
+<p>文件大致为<code>jsonp_1629344292311_69436({&quot;status&quot;:0,&quot;msg&quot;:&quot;success&quot; 。。。。。。32695,271457,169842]}]}}]});</code></p>
+<p>发现此文件内容并不完全符合json格式，存在以下两点问题：</p>
+<ul>
+<li>开头的花括号前多出来了<code>jsonp_1629344292311_69436(</code>部分</li>
+<li>结尾多了出了括号和分号<code>);</code></li>
+</ul>
+<p>接下来为例便于查看json的层级结构，我们打开工具网站：<a class="link" href="https://www.bejson.com/jsonviewernew/"  target="_blank" rel="noopener"
+    >JSON在线视图查看器(Online JSON Viewer)</a>将上面文本中间去头去尾符合正确json格式的部分复制到左面的输入框，点击格式化按钮，这时右面已经出现了便于查看的结构树，如图：</p>
+<p><img src="https://free.picui.cn/free/2025/12/01/692ce14f64d1d.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>也可以参考下面给出的省略版：</p>
+<p><img src="https://free.picui.cn/free/2025/12/01/692ce159a55de.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>总体可以看出其中，&ldquo;update&quot;中和下面的&quot;data&quot;中的数据应该具有对应关系</p>
+<h2 id="开始操作">开始操作
+</h2><p>为了方便演示，将三个国家分开操作，因此可以将任务总共分为下面几步：</p>
+<ol>
+<li>打开并读取文件</li>
+<li>去掉不合json规范的开头</li>
+<li>去掉不合json规范的结尾</li>
+<li>json转python字典</li>
+<li>获取trend key</li>
+<li>获取日期数据，用于x轴，取2020年（到314下标结束）</li>
+<li>获取确诊数据，用于y轴，取2020年（到314下标结束）</li>
+<li>生成图表</li>
+</ol>
+<hr>
+<h3 id="分块演示">分块演示
+</h3><p>以<code>美国.txt</code>为例。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 打开并读取文件</span>
+</span></span><span class="line"><span class="cl"><span class="n">usdoc</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;T:/美国.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">us_data</span> <span class="o">=</span> <span class="n">usdoc</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>打开<code>美国.txt</code>文件查看发现开头要删除的内容为：<code>jsonp_1629344292311_69436(</code></p>
+<p>根据前面所学的<a class="link" href="https://www.retr0.xyz/p/6.3-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E7%AC%A6%E4%B8%B2/"  target="_blank" rel="noopener"
+    >6.3 数据容器：字符串</a>中2.2 节字符串的替换，我们这里使用replace()函数处理</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">us_data</span> <span class="o">=</span> <span class="n">us_data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;jsonp_1629344292311_69436(&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来的结尾不能也用replace()，因为在文件中可能有多处出现了<code>);</code>，会出现多处替换的情况，因此我们使用字符串的切片，详见<a class="link" href="https://www.retr0.xyz/p/6.4-%E5%BA%8F%E5%88%97%E7%9A%84%E6%93%8D%E4%BD%9C%E5%88%87%E7%89%87/"  target="_blank" rel="noopener"
+    >6.4 序列的操作：切片</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">us_data</span> <span class="o">=</span> <span class="n">us_data</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>下面导入json模块将字符串转为字典</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl"><span class="n">us_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">us_data</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>下面回到浏览器，根据json视图一点点获取层级数据</p>
+<p><img src="https://free.picui.cn/free/2025/12/01/692ce14f64d1d.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">us_trend</span> <span class="o">=</span> <span class="n">us_dict</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;trend&#39;</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>目前剩下的结构</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">JSON
+</span></span><span class="line"><span class="cl">├─list(字典，格式为0:&#34;2.22&#34;,1:&#34;2.23&#34;)
+</span></span><span class="line"><span class="cl">└─updateDate
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>下面我们获取日期数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">us_x_data</span> <span class="o">=</span> <span class="n">us_trend</span><span class="p">[</span><span class="s1">&#39;updateDate&#39;</span><span class="p">][:</span><span class="mi">314</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后获取确诊数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">us_y_data</span> <span class="o">=</span> <span class="n">us_trend</span><span class="p">[</span><span class="s1">&#39;list&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">][:</span><span class="mi">314</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最后构建图表</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 导包，导入Line功能构建折线图对象</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pyecharts.charts</span> <span class="kn">import</span> <span class="n">Line</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 得到折线图对象</span>
+</span></span><span class="line"><span class="cl"><span class="n">line</span> <span class="o">=</span> <span class="n">Line</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 添加x轴数据</span>
+</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">add_xaxis</span><span class="p">(</span><span class="n">us_x_data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 添加y轴数据</span>
+</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">add_yaxis</span><span class="p">(</span><span class="s2">&#34;确诊人数&#34;</span><span class="p">,</span> <span class="n">us_y_data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 生成图表</span>
+</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="单国完整版">单国完整版
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pyecharts.charts</span> <span class="kn">import</span> <span class="n">Line</span>
+</span></span><span class="line"><span class="cl"><span class="n">usdoc</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;T:/美国.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">us_data</span> <span class="o">=</span> <span class="n">usdoc</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">us_data</span> <span class="o">=</span> <span class="n">us_data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;jsonp_1629344292311_69436(&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">us_data</span> <span class="o">=</span> <span class="n">us_data</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">us_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">us_data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">us_trend</span> <span class="o">=</span> <span class="n">us_dict</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;trend&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">us_x_data</span> <span class="o">=</span> <span class="n">us_trend</span><span class="p">[</span><span class="s1">&#39;updateDate&#39;</span><span class="p">][:</span><span class="mi">314</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">us_y_data</span> <span class="o">=</span> <span class="n">us_trend</span><span class="p">[</span><span class="s1">&#39;list&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">][:</span><span class="mi">314</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">line</span> <span class="o">=</span> <span class="n">Line</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">add_xaxis</span><span class="p">(</span><span class="n">us_x_data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">add_yaxis</span><span class="p">(</span><span class="s2">&#34;确诊人数&#34;</span><span class="p">,</span> <span class="n">us_y_data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://free.picui.cn/free/2025/12/01/692ce159a5ab4.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h3 id="终极版成品">终极版(成品)
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pyecharts.charts</span> <span class="kn">import</span> <span class="n">Line</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pyecharts.options</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">usdoc</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;T:/美国.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">indoc</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;T:/印度.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">jpdoc</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;T:/日本.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">us_data</span> <span class="o">=</span> <span class="n">usdoc</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">in_data</span> <span class="o">=</span> <span class="n">indoc</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">jp_data</span> <span class="o">=</span> <span class="n">jpdoc</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">us_data</span> <span class="o">=</span> <span class="n">us_data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;jsonp_1629344292311_69436(&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">in_data</span> <span class="o">=</span> <span class="n">in_data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;jsonp_1629350745930_63180(&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">jp_data</span> <span class="o">=</span> <span class="n">jp_data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;jsonp_1629350871167_29498(&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">us_data</span> <span class="o">=</span> <span class="n">us_data</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">in_data</span> <span class="o">=</span> <span class="n">in_data</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">jp_data</span> <span class="o">=</span> <span class="n">jp_data</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">us_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">us_data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">in_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">in_data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">jp_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">jp_data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">us_trend</span> <span class="o">=</span> <span class="n">us_dict</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;trend&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">in_trend</span> <span class="o">=</span> <span class="n">in_dict</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;trend&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">jp_trend</span> <span class="o">=</span> <span class="n">jp_dict</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;trend&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">us_x_data</span> <span class="o">=</span> <span class="n">us_trend</span><span class="p">[</span><span class="s1">&#39;updateDate&#39;</span><span class="p">][:</span><span class="mi">314</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">us_y_data</span> <span class="o">=</span> <span class="n">us_trend</span><span class="p">[</span><span class="s1">&#39;list&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">][:</span><span class="mi">314</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">in_y_data</span> <span class="o">=</span> <span class="n">in_trend</span><span class="p">[</span><span class="s1">&#39;list&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">][:</span><span class="mi">314</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">jp_y_data</span> <span class="o">=</span> <span class="n">jp_trend</span><span class="p">[</span><span class="s1">&#39;list&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">][:</span><span class="mi">314</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">line</span> <span class="o">=</span> <span class="n">Line</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">add_xaxis</span><span class="p">(</span><span class="n">us_x_data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">add_yaxis</span><span class="p">(</span><span class="s2">&#34;美国确诊&#34;</span><span class="p">,</span> <span class="n">us_y_data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">add_yaxis</span><span class="p">(</span><span class="s2">&#34;印度确诊&#34;</span><span class="p">,</span> <span class="n">in_y_data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">add_yaxis</span><span class="p">(</span><span class="s2">&#34;日本确诊&#34;</span><span class="p">,</span> <span class="n">jp_y_data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">set_global_opts</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">title_opts</span><span class="o">=</span><span class="n">TitleOpts</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&#34;2020年美印日确诊人数趋势&#34;</span><span class="p">,</span><span class="n">pos_left</span><span class="o">=</span><span class="s2">&#34;center&#34;</span><span class="p">,</span><span class="n">pos_top</span><span class="o">=</span><span class="s2">&#34;1%&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 参数title设置标题文字，pos_left设置横向位置，pos_bottom设置距离底部位置</span>
+</span></span><span class="line"><span class="cl">    <span class="n">legend_opts</span><span class="o">=</span><span class="n">LegendOpts</span><span class="p">(</span><span class="n">is_show</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 设置图例是否显示</span>
+</span></span><span class="line"><span class="cl">    <span class="n">toolbox_opts</span><span class="o">=</span><span class="n">ToolboxOpts</span><span class="p">(</span><span class="n">is_show</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 设置工具箱是否显示</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://free.picui.cn/free/2025/12/01/692ce14f8e08e.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+<div class="math-katex"></div>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/10.2-%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86json-%E6%A0%BC%E5%BC%8F%E5%92%8C-pyecharts-%E5%85%A5%E9%97%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">10.2 前置知识：json 格式和 pyecharts 入门</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/10.1-%E7%BB%83%E4%B9%A0%E5%BA%8F/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">10.1 练习：序</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/9.3-%E5%8C%85/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">9.3 包</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/9.2-%E6%A8%A1%E5%9D%97/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">9.2 模块</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/9.1-%E5%BC%82%E5%B8%B8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">9.1 异常</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+        <div class="comment-container mt-8"></div>
+        
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="makabaka11/makabaka11.github.io"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Retr0
+    </section>
+    
+    <section class="powerby">
+        
+            Powered by ctOS <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+
+                <script src="/js/APlayer.min.js"></script>
+                <script src="/js/Meting.min.js"></script>
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.eaf1211e4c7db355f37ceea53df13700e1b77fbcc3cfe8c1c1f69e4468a752e1.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+
+<script>
+    var pjax = new Pjax({
+        selectors: [".main-container"]
+    });
+</script>
+
+
+<script src=https://www.retr0.xyz/js/topbar.min.js></script>
+
+
+
+<script>
+function initUtterances() {
+    const isArticle = document.querySelector('.article-page') && document.querySelector('.article-content');
+    if (!isArticle) return;
+
+    const oldScript = document.querySelector('script[src^="https://utteranc.es/client.js"]');
+    if (oldScript) oldScript.remove();
+
+    const container = document.querySelector('.comment-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    let script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'makabaka11/makabaka11.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+    container.appendChild(script);
+}
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    if (!window.pjax || !window.pjax.state) initUtterances();
+});
+</script>
+
+
+<script>
+pjax._handleResponse = pjax.handleResponse;
+pjax.handleResponse = function(responseText, request, href, options) {
+    if (request.responseText.match("<html")) {
+        if (responseText) {
+            let newDom = new DOMParser().parseFromString(responseText, 'text/html');
+            document.body.setAttribute("class", newDom.body.className);
+        }
+        pjax._handleResponse(responseText, request, href, options);
+    }
+};
+</script>
+
+
+<script>
+topbar.config({
+    barColors: {
+        '0': 'rgba(255, 255, 255, 1)',
+        '1.0': 'rgba(255, 183, 197, 1)'
+    }
+});
+
+document.addEventListener('pjax:send', () => topbar.show());
+
+document.addEventListener('pjax:complete', () => {
+    window.Stack.init();
+    topbar.hide();
+    setTimeout(initUtterances, 0);
+    updateViewCount();
+    renderKaTeX();
+    initPhotoSwipeFromDOM('.article-content');   
+    initLive2D();                                
+});
+</script>
+
+
+<script>
+function updateViewCount() {
+    const viewCountEl = document.getElementById('vercount_value_page_pv');
+    if (!viewCountEl) return;
+
+    viewCountEl.textContent = 'loading...';
+    const url = 'https://cn.vercount.one/js';
+
+    const old = document.querySelector(`script[src="${url}"]`);
+    if (old) old.remove();
+
+    const s = document.createElement('script');
+    s.src = url;
+    s.defer = true;
+    document.head.appendChild(s);
+
+    showHideView();
+}
+
+function showHideView() {
+    const viewCounts = document.querySelectorAll("#viewCount");
+    const isArticle = document.querySelector(".article-page");
+    viewCounts.forEach(ele => ele.style.display = isArticle ? 'block' : 'none');
+}
+</script>
+
+
+<script>
+async function renderKaTeX() {
+    let katex = document.querySelector(".math-katex");
+    if (!katex) return;
+
+    while (typeof renderMathInElement !== 'function') {
+        await new Promise(r => setTimeout(r, 500));
+    }
+
+    const content = document.querySelector('.article-content') || document.body;
+    renderMathInElement(content, {
+        delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true }
+        ],
+        ignoredClasses: ["gist"]
+    });
+}
+</script>
+
+
+<div id="particles-js"></div>
+
+<script src=https://www.retr0.xyz/background/particles.min.js></script>
+<script>
+particlesJS.load('particles-js',
+    "https://www.retr0.xyz/background/particlesjs-config.json",
+    () => console.log('particles.js loaded')
+);
+</script>
+
+<style>
+#particles-js {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: -1;
+}
+</style>
+
+<script>
+
+function initPhotoSwipeFromDOM(selector) {
+    if (!window.PhotoSwipe) return;
+
+    const containers = document.querySelectorAll(selector);
+    if (!containers.length) return;
+
+    containers.forEach(container => {
+        const images = container.querySelectorAll('img');
+
+        images.forEach((img, index) => {
+
+            
+            function getImageSize() {
+                return new Promise(resolve => {
+                    if (img.complete && img.naturalWidth) {
+                        resolve({
+                            w: img.naturalWidth,
+                            h: img.naturalHeight
+                        });
+                    } else {
+                        const tmp = new Image();
+                        tmp.src = img.src || img.getAttribute("data-src");
+                        tmp.onload = () => resolve({ w: tmp.width, h: tmp.height });
+                    }
+                });
+            }
+
+            img.style.cursor = "zoom-in";
+
+            
+            img.addEventListener("click", async (e) => {
+                e.preventDefault();
+
+                const size = await getImageSize();
+                const pswpEl = document.querySelector('.pswp');
+
+                const items = Array.from(images).map(i => ({
+                    src: i.src || i.getAttribute("data-src"),
+                    msrc: i.src,
+                    w: i.naturalWidth || 800,
+                    h: i.naturalHeight || 600,
+                }));
+
+                items[index].w = size.w;
+                items[index].h = size.h;
+
+                const gallery = new PhotoSwipe(pswpEl, PhotoSwipeUI_Default, items, {
+                    index,
+                    history: false
+                });
+
+                
+                
+                
+                enablePhotoSwipeWebShare(gallery);
+
+                gallery.init();
+            });
+        });
+    });
+}
+
+
+
+
+
+function enablePhotoSwipeWebShare(gallery) {
+    gallery.listen('shareLinkClick', function(shareButtonData, e) {
+        e.preventDefault();
+
+        const item = gallery.currItem;
+
+        if (navigator.share) {
+            navigator.share({
+                title: document.title,
+                text: '给你分享一张图片：',
+                url: item.src
+            }).catch(err => console.log("分享失败：", err));
+
+            return false; 
+        }
+
+        
+        return true;
+    });
+}
+</script>
+
+
+
+<script>
+
+
+window._live2d_loaded = window._live2d_loaded || false;
+window._live2d_initialized = window._live2d_initialized || false;
+
+
+function loadLive2DAssetsOnce(cdnPath) {
+    if (window._live2d_loaded) return Promise.resolve();
+
+    window._live2d_loaded = true;
+
+    return Promise.all([
+        loadRes(cdnPath + "waifu.css", "css"),
+        loadRes(cdnPath + "Core/live2dcubismcore.js", "js"),
+        loadRes(cdnPath + "live2d-sdk.js", "js"),
+        loadRes(cdnPath + "waifu-tips.js", "js")
+    ]);
+}
+
+
+function initLive2DWidgetOnce(cdnPath) {
+
+    if (window._live2d_initialized) return;
+
+    
+    const old = document.querySelector("#waifu");
+    if (old) old.remove();
+
+    window._live2d_initialized = true;
+
+    initWidget({
+        waifuPath: cdnPath + "waifu-tips.json",
+        cdnPath: cdnPath + "Resources/",
+        tools: ["hitokoto", "asteroids", "express", "switch-model", "switch-texture", "photo", "info", "quit"],
+        dragEnable: true,
+        dragDirection: ["x", "y"],
+        switchType: "order"
+    });
+
+    console.log("[Live2D] Widget initialized.");
+}
+
+
+function loadRes(url, type) {
+    return new Promise((resolve) => {
+        let tag;
+        if (type === "css") {
+            tag = document.createElement("link");
+            tag.rel = "stylesheet";
+            tag.href = url;
+        } else {
+            tag = document.createElement("script");
+            tag.src = url;
+        }
+        tag.onload = resolve;
+        document.head.appendChild(tag);
+    });
+}
+
+
+function initLive2D() {
+    if (screen.width < 768) return;
+
+    const cdnPath = "https://www.retr0.xyz/blog-live2d/";
+
+    loadLive2DAssetsOnce(cdnPath)
+        .then(() => initLive2DWidgetOnce(cdnPath));
+}
+
+initLive2D();  
+
+
+document.addEventListener("pjax:complete", () => {
+    initLive2D(); 
+});
+</script>
+
+
+        
+
+<meting-js
+  server="netease"
+  type="playlist"
+  id="14477349320"
+  fixed="true"
+  bottom="20px"
+  right="20px"
+  autoplay="false"
+  width="300px"
+></meting-js>
+
+
+<script>
+  let apInstance = null;
+  const currentPlaylistId = "14477349320";
+  const STORAGE_KEY = "playInfo";
+
+  
+  const checkInstanceInterval = setInterval(() => {
+    const aplayerElement = document.querySelector('.aplayer');
+    if (aplayerElement && aplayerElement.aplayer) {
+      apInstance = aplayerElement.aplayer;
+      clearInterval(checkInstanceInterval);
+      console.log("Hugo 中获取 APlayer 实例成功");
+      initPlayerEvents();
+      return;
+    }
+
+    if (window.APlayer && window.APlayer.instances && window.APlayer.instances.length > 0) {
+      apInstance = window.APlayer.instances[0];
+      clearInterval(checkInstanceInterval);
+      console.log("从全局列表获取实例");
+      initPlayerEvents();
+      return;
+    }
+
+    console.log("Hugo 中等待 APlayer 实例...");
+  }, 300);
+
+  function initPlayerEvents() {
+    if (!apInstance) return;
+
+    
+    window.addEventListener('beforeunload', savePlayState);
+    document.addEventListener('visibilitychange', savePlayState);
+
+    
+    apInstance.on('list:loaded', restorePlayState);
+  }
+
+  function savePlayState() {
+    if (!apInstance) return;
+    const playInfo = {
+      playlistId: currentPlaylistId,
+      index: apInstance.list.index,
+      currentTime: apInstance.audio.currentTime,
+      paused: apInstance.paused
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(playInfo));
+  }
+
+  function restorePlayState() {
+    const savedInfo = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!savedInfo || savedInfo.playlistId !== currentPlaylistId) return;
+
+    if (savedInfo.index < apInstance.list.songs.length) {
+      apInstance.list.switch(savedInfo.index);
+      apInstance.once('canplay', () => {
+        apInstance.seek(savedInfo.currentTime);
+        if (!savedInfo.paused) {
+          apInstance.play().catch(() => {
+            apInstance.notice("点击继续播放", 3000);
+          });
+        }
+      });
+    }
+  }
+
+  
+  document.addEventListener('click', () => {
+    if (apInstance && !apInstance.paused) {
+      apInstance.play().catch(() => {});
+    }
+  }, { once: true });
+</script>
+    </body>
+</html>
