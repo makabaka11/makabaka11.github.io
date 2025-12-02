@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="核心命令（Core Commands） 命令 描述 ? 帮助菜单 background 将当前会话转入后台 bg background 的别名 bgkill 终止后台运行的 Meterpreter 脚本 bglist 列出所有运行中的后台脚本 bgrun 以后台线程模式执行 Meterpreter 脚本 channel 显示或控制活跃的通道信息 close 关闭通道 detach 分离 Meterpreter 会话（适用于 http/https 传输） disable_unicode_encoding 禁用 Unicode 字符串编码 enable_unicode_encoding 启用 Unicode 字符串编码 exit 终止 Meterpreter 会话 get_timeouts 获取当前会话的超时时间配置 guid 获取会话的 GUID（全局唯一标识符） help 帮助菜单 info 显示 Post 模块的详细信息 irb 在当前会话中打开交互式 Ruby shell load 加载一个或多个 Meterpreter 扩展模块 machine_id 获取会话关联主机的 MSF 标识符 migrate 将 Meterpreter 服务端迁移到其他进程 pivot 管理跳板监听（内网穿透相关） pry 在当前会话中打开 Pry 调试器 quit 终止 Meterpreter 会话（同 exit） read 从通道读取数据 resource 执行文件中存储的命令序列 run 执行 Meterpreter 脚本或 Post 模块 secure （重新）协商会话的 TLV 数据包加密 sessions 快速切换到另一个会话 set_timeouts 设置当前会话的超时时间配置 sleep 强制 Meterpreter 静默，之后重新建立会话 ssl_verify 修改 SSL 证书验证设置 transport 管理会话传输机制（如 http/https/tcp） use &ldquo;load&rdquo; 的废弃别名（不推荐使用） uuid 获取当前会话的 UUID（通用唯一标识符） write 向通道写入数据 脱钩命令（Unhook Commands） 命令 描述 unhook_pe 解除当前进程的钩子（对抗反病毒检测） 权限提升命令（Priv: Elevate Commands） 命令 描述 getsystem 尝试将权限提升至本地系统权限（SYSTEM） 密码数据库命令（Priv: Password database Commands） 命令 描述 hashdump 导出 SAM 数据库内容（获取系统哈希值） 时间戳篡改命令（Priv: Timestomp Commands） 命令 描述 timestomp 操纵文件的 MACE 属性（修改创建/访问/修改时间） 文件系统命令（Stdapi: File system Commands） 命令 描述 cat 读取文件内容并显示到屏幕 cd 切换目录 checksum 获取文件的校验和（如 MD5/SHA） cp 复制源文件到目标路径 del 删除指定文件 dir 列出文件（ls 的别名） download 下载文件或目录到本地 edit 编辑文件 getlwd 显示本地工作目录（lpwd 的别名） getwd 显示远程工作目录 lcat 读取本地文件内容并显示到屏幕 lcd 切换本地工作目录 ldir 列出本地文件（lls 的别名） lls 列出本地文件 lmkdir 在本地创建新目录 lpwd 显示本地工作目录 ls 列出远程文件 mkdir 在远程创建新目录 mv 移动/重命名文件/目录 pwd 显示远程工作目录（同 getwd） rm 删除指定文件（同 del） rmdir 删除目录 search 搜索远程文件 show_mount 列出所有挂载点/逻辑驱动器 upload 上传本地文件或目录到远程 网络命令（Stdapi: Networking Commands） 命令 描述 arp 显示主机的 ARP 缓存表 getproxy 显示当前代理配置 ifconfig 显示网络接口信息（类 Unix 系统） ipconfig 显示网络接口信息（Windows 系统） netstat 显示网络连接状态（TCP/UDP 端口） portfwd 将本地端口转发到远程服务（端口转发） resolve 在目标主机上解析主机名（DNS 查询） route 查看和修改路由表 系统命令（Stdapi: System Commands） 命令 描述 clearev 清除系统事件日志 drop_token 放弃当前活跃的模拟令牌 execute 执行系统命令 getenv 获取一个或多个环境变量的值 getpid 获取当前 Meterpreter 进程 ID getprivs 尝试启用当前进程可用的所有权限 getsid 获取 Meterpreter 服务端运行用户的 SID getuid 获取 Meterpreter 服务端运行的用户名 kill 终止指定进程 localtime 显示目标系统的本地日期和时间 pgrep 按进程名过滤进程 pkill 按进程名终止进程 ps 列出所有运行中的进程 reboot 重启远程计算机 reg 操作远程注册表（查询/修改/删除键值） rev2self 在远程主机上调用 RevertToSelf()（放弃模拟身份） shell 获取系统命令行 shell（如 cmd/bash） shutdown 关闭远程计算机 steal_token 尝试从目标进程窃取模拟令牌（权限窃取） suspend 暂停或恢复指定进程 sysinfo 获取远程系统信息（如操作系统版本、硬件配置） 用户界面命令（Stdapi: User interface Commands） 命令 描述 enumdesktops 列出所有可访问的桌面和窗口站 getdesktop 获取当前 Meterpreter 附着的桌面 idletime 返回远程用户的空闲时间（秒） keyboard_send 发送键盘输入（模拟按键） keyevent 发送键盘事件（如按下/释放快捷键） keyscan_dump 导出键盘记录缓存（获取已捕获的按键） keyscan_start 开始捕获键盘输入（键盘记录） keyscan_stop 停止捕获键盘输入 mouse 发送鼠标事件（模拟点击/移动） screenshare 实时监控远程用户桌面 screenshot 截取交互式桌面的屏幕截图 setdesktop 切换 Meterpreter 当前附着的桌面 uictl 控制部分用户界面组件（如禁用键盘/鼠标） 摄像头命令（Stdapi: Webcam Commands） 命令 描述 record_mic 从默认麦克风录制 X 秒音频 webcam_chat 启动视频聊天（需远程主机支持） webcam_list 列出所有可用的摄像头 webcam_snap 从指定摄像头拍摄快照（拍照） webcam_stream 播放指定摄像头的实时视频流 音频输出命令（Stdapi: Audio Output Commands） 命令 描述 play 在目标系统上播放波形音频文件（.wav 格式） 补充说明 术语规范： 保持网络安全领域通用译法（如 hashdump 译为“导出 SAM 数据库”而非字面翻译，pivot 译为“跳板监听”符合内网渗透场景） 保留命令原文（如 meterpreter、TLV、SID 等专有名词不翻译） 区分本地/远程操作（前缀 l 表示本地，如 lcd=本地切换目录，cd=远程切换目录） 使用提示： 如需查看某个命令的详细用法，执行 &lt;命令&gt; -h 或 help &lt;命令&gt;（例：portfwd -h） 部分命令依赖系统环境（如 ifconfig 适用于 Linux/Mac，ipconfig 适用于 Windows） 权限相关命令（如 getsystem、hashdump）需要管理员权限才能正常执行 ">
+<title>Meterpreter 命令手册（中文）</title>
+
+<link rel='canonical' href='https://www.retr0.xyz/p/meterpreter-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C%E4%B8%AD%E6%96%87/'>
+
+<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="Meterpreter 命令手册（中文）">
+<meta property='og:description' content="核心命令（Core Commands） 命令 描述 ? 帮助菜单 background 将当前会话转入后台 bg background 的别名 bgkill 终止后台运行的 Meterpreter 脚本 bglist 列出所有运行中的后台脚本 bgrun 以后台线程模式执行 Meterpreter 脚本 channel 显示或控制活跃的通道信息 close 关闭通道 detach 分离 Meterpreter 会话（适用于 http/https 传输） disable_unicode_encoding 禁用 Unicode 字符串编码 enable_unicode_encoding 启用 Unicode 字符串编码 exit 终止 Meterpreter 会话 get_timeouts 获取当前会话的超时时间配置 guid 获取会话的 GUID（全局唯一标识符） help 帮助菜单 info 显示 Post 模块的详细信息 irb 在当前会话中打开交互式 Ruby shell load 加载一个或多个 Meterpreter 扩展模块 machine_id 获取会话关联主机的 MSF 标识符 migrate 将 Meterpreter 服务端迁移到其他进程 pivot 管理跳板监听（内网穿透相关） pry 在当前会话中打开 Pry 调试器 quit 终止 Meterpreter 会话（同 exit） read 从通道读取数据 resource 执行文件中存储的命令序列 run 执行 Meterpreter 脚本或 Post 模块 secure （重新）协商会话的 TLV 数据包加密 sessions 快速切换到另一个会话 set_timeouts 设置当前会话的超时时间配置 sleep 强制 Meterpreter 静默，之后重新建立会话 ssl_verify 修改 SSL 证书验证设置 transport 管理会话传输机制（如 http/https/tcp） use &ldquo;load&rdquo; 的废弃别名（不推荐使用） uuid 获取当前会话的 UUID（通用唯一标识符） write 向通道写入数据 脱钩命令（Unhook Commands） 命令 描述 unhook_pe 解除当前进程的钩子（对抗反病毒检测） 权限提升命令（Priv: Elevate Commands） 命令 描述 getsystem 尝试将权限提升至本地系统权限（SYSTEM） 密码数据库命令（Priv: Password database Commands） 命令 描述 hashdump 导出 SAM 数据库内容（获取系统哈希值） 时间戳篡改命令（Priv: Timestomp Commands） 命令 描述 timestomp 操纵文件的 MACE 属性（修改创建/访问/修改时间） 文件系统命令（Stdapi: File system Commands） 命令 描述 cat 读取文件内容并显示到屏幕 cd 切换目录 checksum 获取文件的校验和（如 MD5/SHA） cp 复制源文件到目标路径 del 删除指定文件 dir 列出文件（ls 的别名） download 下载文件或目录到本地 edit 编辑文件 getlwd 显示本地工作目录（lpwd 的别名） getwd 显示远程工作目录 lcat 读取本地文件内容并显示到屏幕 lcd 切换本地工作目录 ldir 列出本地文件（lls 的别名） lls 列出本地文件 lmkdir 在本地创建新目录 lpwd 显示本地工作目录 ls 列出远程文件 mkdir 在远程创建新目录 mv 移动/重命名文件/目录 pwd 显示远程工作目录（同 getwd） rm 删除指定文件（同 del） rmdir 删除目录 search 搜索远程文件 show_mount 列出所有挂载点/逻辑驱动器 upload 上传本地文件或目录到远程 网络命令（Stdapi: Networking Commands） 命令 描述 arp 显示主机的 ARP 缓存表 getproxy 显示当前代理配置 ifconfig 显示网络接口信息（类 Unix 系统） ipconfig 显示网络接口信息（Windows 系统） netstat 显示网络连接状态（TCP/UDP 端口） portfwd 将本地端口转发到远程服务（端口转发） resolve 在目标主机上解析主机名（DNS 查询） route 查看和修改路由表 系统命令（Stdapi: System Commands） 命令 描述 clearev 清除系统事件日志 drop_token 放弃当前活跃的模拟令牌 execute 执行系统命令 getenv 获取一个或多个环境变量的值 getpid 获取当前 Meterpreter 进程 ID getprivs 尝试启用当前进程可用的所有权限 getsid 获取 Meterpreter 服务端运行用户的 SID getuid 获取 Meterpreter 服务端运行的用户名 kill 终止指定进程 localtime 显示目标系统的本地日期和时间 pgrep 按进程名过滤进程 pkill 按进程名终止进程 ps 列出所有运行中的进程 reboot 重启远程计算机 reg 操作远程注册表（查询/修改/删除键值） rev2self 在远程主机上调用 RevertToSelf()（放弃模拟身份） shell 获取系统命令行 shell（如 cmd/bash） shutdown 关闭远程计算机 steal_token 尝试从目标进程窃取模拟令牌（权限窃取） suspend 暂停或恢复指定进程 sysinfo 获取远程系统信息（如操作系统版本、硬件配置） 用户界面命令（Stdapi: User interface Commands） 命令 描述 enumdesktops 列出所有可访问的桌面和窗口站 getdesktop 获取当前 Meterpreter 附着的桌面 idletime 返回远程用户的空闲时间（秒） keyboard_send 发送键盘输入（模拟按键） keyevent 发送键盘事件（如按下/释放快捷键） keyscan_dump 导出键盘记录缓存（获取已捕获的按键） keyscan_start 开始捕获键盘输入（键盘记录） keyscan_stop 停止捕获键盘输入 mouse 发送鼠标事件（模拟点击/移动） screenshare 实时监控远程用户桌面 screenshot 截取交互式桌面的屏幕截图 setdesktop 切换 Meterpreter 当前附着的桌面 uictl 控制部分用户界面组件（如禁用键盘/鼠标） 摄像头命令（Stdapi: Webcam Commands） 命令 描述 record_mic 从默认麦克风录制 X 秒音频 webcam_chat 启动视频聊天（需远程主机支持） webcam_list 列出所有可用的摄像头 webcam_snap 从指定摄像头拍摄快照（拍照） webcam_stream 播放指定摄像头的实时视频流 音频输出命令（Stdapi: Audio Output Commands） 命令 描述 play 在目标系统上播放波形音频文件（.wav 格式） 补充说明 术语规范： 保持网络安全领域通用译法（如 hashdump 译为“导出 SAM 数据库”而非字面翻译，pivot 译为“跳板监听”符合内网渗透场景） 保留命令原文（如 meterpreter、TLV、SID 等专有名词不翻译） 区分本地/远程操作（前缀 l 表示本地，如 lcd=本地切换目录，cd=远程切换目录） 使用提示： 如需查看某个命令的详细用法，执行 &lt;命令&gt; -h 或 help &lt;命令&gt;（例：portfwd -h） 部分命令依赖系统环境（如 ifconfig 适用于 Linux/Mac，ipconfig 适用于 Windows） 权限相关命令（如 getsystem、hashdump）需要管理员权限才能正常执行 ">
+<meta property='og:url' content='https://www.retr0.xyz/p/meterpreter-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C%E4%B8%AD%E6%96%87/'>
+<meta property='og:site_name' content='Retr0的小窝'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-02T16:59:31&#43;08:00'/><meta property='article:modified_time' content='2025-12-02T16:59:31&#43;08:00'/>
+<meta name="twitter:title" content="Meterpreter 命令手册（中文）">
+<meta name="twitter:description" content="核心命令（Core Commands） 命令 描述 ? 帮助菜单 background 将当前会话转入后台 bg background 的别名 bgkill 终止后台运行的 Meterpreter 脚本 bglist 列出所有运行中的后台脚本 bgrun 以后台线程模式执行 Meterpreter 脚本 channel 显示或控制活跃的通道信息 close 关闭通道 detach 分离 Meterpreter 会话（适用于 http/https 传输） disable_unicode_encoding 禁用 Unicode 字符串编码 enable_unicode_encoding 启用 Unicode 字符串编码 exit 终止 Meterpreter 会话 get_timeouts 获取当前会话的超时时间配置 guid 获取会话的 GUID（全局唯一标识符） help 帮助菜单 info 显示 Post 模块的详细信息 irb 在当前会话中打开交互式 Ruby shell load 加载一个或多个 Meterpreter 扩展模块 machine_id 获取会话关联主机的 MSF 标识符 migrate 将 Meterpreter 服务端迁移到其他进程 pivot 管理跳板监听（内网穿透相关） pry 在当前会话中打开 Pry 调试器 quit 终止 Meterpreter 会话（同 exit） read 从通道读取数据 resource 执行文件中存储的命令序列 run 执行 Meterpreter 脚本或 Post 模块 secure （重新）协商会话的 TLV 数据包加密 sessions 快速切换到另一个会话 set_timeouts 设置当前会话的超时时间配置 sleep 强制 Meterpreter 静默，之后重新建立会话 ssl_verify 修改 SSL 证书验证设置 transport 管理会话传输机制（如 http/https/tcp） use &ldquo;load&rdquo; 的废弃别名（不推荐使用） uuid 获取当前会话的 UUID（通用唯一标识符） write 向通道写入数据 脱钩命令（Unhook Commands） 命令 描述 unhook_pe 解除当前进程的钩子（对抗反病毒检测） 权限提升命令（Priv: Elevate Commands） 命令 描述 getsystem 尝试将权限提升至本地系统权限（SYSTEM） 密码数据库命令（Priv: Password database Commands） 命令 描述 hashdump 导出 SAM 数据库内容（获取系统哈希值） 时间戳篡改命令（Priv: Timestomp Commands） 命令 描述 timestomp 操纵文件的 MACE 属性（修改创建/访问/修改时间） 文件系统命令（Stdapi: File system Commands） 命令 描述 cat 读取文件内容并显示到屏幕 cd 切换目录 checksum 获取文件的校验和（如 MD5/SHA） cp 复制源文件到目标路径 del 删除指定文件 dir 列出文件（ls 的别名） download 下载文件或目录到本地 edit 编辑文件 getlwd 显示本地工作目录（lpwd 的别名） getwd 显示远程工作目录 lcat 读取本地文件内容并显示到屏幕 lcd 切换本地工作目录 ldir 列出本地文件（lls 的别名） lls 列出本地文件 lmkdir 在本地创建新目录 lpwd 显示本地工作目录 ls 列出远程文件 mkdir 在远程创建新目录 mv 移动/重命名文件/目录 pwd 显示远程工作目录（同 getwd） rm 删除指定文件（同 del） rmdir 删除目录 search 搜索远程文件 show_mount 列出所有挂载点/逻辑驱动器 upload 上传本地文件或目录到远程 网络命令（Stdapi: Networking Commands） 命令 描述 arp 显示主机的 ARP 缓存表 getproxy 显示当前代理配置 ifconfig 显示网络接口信息（类 Unix 系统） ipconfig 显示网络接口信息（Windows 系统） netstat 显示网络连接状态（TCP/UDP 端口） portfwd 将本地端口转发到远程服务（端口转发） resolve 在目标主机上解析主机名（DNS 查询） route 查看和修改路由表 系统命令（Stdapi: System Commands） 命令 描述 clearev 清除系统事件日志 drop_token 放弃当前活跃的模拟令牌 execute 执行系统命令 getenv 获取一个或多个环境变量的值 getpid 获取当前 Meterpreter 进程 ID getprivs 尝试启用当前进程可用的所有权限 getsid 获取 Meterpreter 服务端运行用户的 SID getuid 获取 Meterpreter 服务端运行的用户名 kill 终止指定进程 localtime 显示目标系统的本地日期和时间 pgrep 按进程名过滤进程 pkill 按进程名终止进程 ps 列出所有运行中的进程 reboot 重启远程计算机 reg 操作远程注册表（查询/修改/删除键值） rev2self 在远程主机上调用 RevertToSelf()（放弃模拟身份） shell 获取系统命令行 shell（如 cmd/bash） shutdown 关闭远程计算机 steal_token 尝试从目标进程窃取模拟令牌（权限窃取） suspend 暂停或恢复指定进程 sysinfo 获取远程系统信息（如操作系统版本、硬件配置） 用户界面命令（Stdapi: User interface Commands） 命令 描述 enumdesktops 列出所有可访问的桌面和窗口站 getdesktop 获取当前 Meterpreter 附着的桌面 idletime 返回远程用户的空闲时间（秒） keyboard_send 发送键盘输入（模拟按键） keyevent 发送键盘事件（如按下/释放快捷键） keyscan_dump 导出键盘记录缓存（获取已捕获的按键） keyscan_start 开始捕获键盘输入（键盘记录） keyscan_stop 停止捕获键盘输入 mouse 发送鼠标事件（模拟点击/移动） screenshare 实时监控远程用户桌面 screenshot 截取交互式桌面的屏幕截图 setdesktop 切换 Meterpreter 当前附着的桌面 uictl 控制部分用户界面组件（如禁用键盘/鼠标） 摄像头命令（Stdapi: Webcam Commands） 命令 描述 record_mic 从默认麦克风录制 X 秒音频 webcam_chat 启动视频聊天（需远程主机支持） webcam_list 列出所有可用的摄像头 webcam_snap 从指定摄像头拍摄快照（拍照） webcam_stream 播放指定摄像头的实时视频流 音频输出命令（Stdapi: Audio Output Commands） 命令 描述 play 在目标系统上播放波形音频文件（.wav 格式） 补充说明 术语规范： 保持网络安全领域通用译法（如 hashdump 译为“导出 SAM 数据库”而非字面翻译，pivot 译为“跳板监听”符合内网渗透场景） 保留命令原文（如 meterpreter、TLV、SID 等专有名词不翻译） 区分本地/远程操作（前缀 l 表示本地，如 lcd=本地切换目录，cd=远程切换目录） 使用提示： 如需查看某个命令的详细用法，执行 &lt;命令&gt; -h 或 help &lt;命令&gt;（例：portfwd -h） 部分命令依赖系统环境（如 ifconfig 适用于 Linux/Mac，ipconfig 适用于 Windows） 权限相关命令（如 getsystem、hashdump）需要管理员权限才能正常执行 ">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+        <link rel="stylesheet" href="/css/APlayer.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_dda478d092d7a4a0.gif" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🥶</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Retr0的小窝</a></h1>
+            <h2 class="site-description">多冷啊，我在东北玩泥巴~</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/349466985'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:ded000@qq.com'
+                        target="_blank"
+                        title="email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/makabaka11'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://t.me/ded0000'
+                        target="_blank"
+                        title="Telegram"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页 | Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E-about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于 | About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/message/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-message"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 9h8" /><path d="M8 13h6" /><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" /></svg>
+                
+                <span>留言板 | Msg Board</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索 | Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>技术链接 | Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#核心命令core-commands">核心命令（Core Commands）</a></li>
+        <li><a href="#脱钩命令unhook-commands">脱钩命令（Unhook Commands）</a></li>
+        <li><a href="#权限提升命令priv-elevate-commands">权限提升命令（Priv: Elevate Commands）</a></li>
+        <li><a href="#密码数据库命令priv-password-database-commands">密码数据库命令（Priv: Password database Commands）</a></li>
+        <li><a href="#时间戳篡改命令priv-timestomp-commands">时间戳篡改命令（Priv: Timestomp Commands）</a></li>
+        <li><a href="#文件系统命令stdapi-file-system-commands">文件系统命令（Stdapi: File system Commands）</a></li>
+        <li><a href="#网络命令stdapi-networking-commands">网络命令（Stdapi: Networking Commands）</a></li>
+        <li><a href="#系统命令stdapi-system-commands">系统命令（Stdapi: System Commands）</a></li>
+        <li><a href="#用户界面命令stdapi-user-interface-commands">用户界面命令（Stdapi: User interface Commands）</a></li>
+        <li><a href="#摄像头命令stdapi-webcam-commands">摄像头命令（Stdapi: Webcam Commands）</a></li>
+        <li><a href="#音频输出命令stdapi-audio-output-commands">音频输出命令（Stdapi: Audio Output Commands）</a></li>
+        <li><a href="#补充说明">补充说明</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BD%91%E5%AE%89/" style="background-color: #BEBDBD; color: #fff;">
+                网安
+            </a>
+        
+            <a href="/categories/%E9%80%9F%E6%9F%A5/" >
+                速查
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/meterpreter-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C%E4%B8%AD%E6%96%87/">Meterpreter 命令手册（中文）</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+     
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-02</time>
+            </div>
+        
+
+        
+
+        
+        <div id="viewCount">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="核心命令core-commands">核心命令（Core Commands）
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>?</td>
+          <td>帮助菜单</td>
+      </tr>
+      <tr>
+          <td>background</td>
+          <td>将当前会话转入后台</td>
+      </tr>
+      <tr>
+          <td>bg</td>
+          <td>background 的别名</td>
+      </tr>
+      <tr>
+          <td>bgkill</td>
+          <td>终止后台运行的 Meterpreter 脚本</td>
+      </tr>
+      <tr>
+          <td>bglist</td>
+          <td>列出所有运行中的后台脚本</td>
+      </tr>
+      <tr>
+          <td>bgrun</td>
+          <td>以后台线程模式执行 Meterpreter 脚本</td>
+      </tr>
+      <tr>
+          <td>channel</td>
+          <td>显示或控制活跃的通道信息</td>
+      </tr>
+      <tr>
+          <td>close</td>
+          <td>关闭通道</td>
+      </tr>
+      <tr>
+          <td>detach</td>
+          <td>分离 Meterpreter 会话（适用于 http/https 传输）</td>
+      </tr>
+      <tr>
+          <td>disable_unicode_encoding</td>
+          <td>禁用 Unicode 字符串编码</td>
+      </tr>
+      <tr>
+          <td>enable_unicode_encoding</td>
+          <td>启用 Unicode 字符串编码</td>
+      </tr>
+      <tr>
+          <td>exit</td>
+          <td>终止 Meterpreter 会话</td>
+      </tr>
+      <tr>
+          <td>get_timeouts</td>
+          <td>获取当前会话的超时时间配置</td>
+      </tr>
+      <tr>
+          <td>guid</td>
+          <td>获取会话的 GUID（全局唯一标识符）</td>
+      </tr>
+      <tr>
+          <td>help</td>
+          <td>帮助菜单</td>
+      </tr>
+      <tr>
+          <td>info</td>
+          <td>显示 Post 模块的详细信息</td>
+      </tr>
+      <tr>
+          <td>irb</td>
+          <td>在当前会话中打开交互式 Ruby shell</td>
+      </tr>
+      <tr>
+          <td>load</td>
+          <td>加载一个或多个 Meterpreter 扩展模块</td>
+      </tr>
+      <tr>
+          <td>machine_id</td>
+          <td>获取会话关联主机的 MSF 标识符</td>
+      </tr>
+      <tr>
+          <td>migrate</td>
+          <td>将 Meterpreter 服务端迁移到其他进程</td>
+      </tr>
+      <tr>
+          <td>pivot</td>
+          <td>管理跳板监听（内网穿透相关）</td>
+      </tr>
+      <tr>
+          <td>pry</td>
+          <td>在当前会话中打开 Pry 调试器</td>
+      </tr>
+      <tr>
+          <td>quit</td>
+          <td>终止 Meterpreter 会话（同 exit）</td>
+      </tr>
+      <tr>
+          <td>read</td>
+          <td>从通道读取数据</td>
+      </tr>
+      <tr>
+          <td>resource</td>
+          <td>执行文件中存储的命令序列</td>
+      </tr>
+      <tr>
+          <td>run</td>
+          <td>执行 Meterpreter 脚本或 Post 模块</td>
+      </tr>
+      <tr>
+          <td>secure</td>
+          <td>（重新）协商会话的 TLV 数据包加密</td>
+      </tr>
+      <tr>
+          <td>sessions</td>
+          <td>快速切换到另一个会话</td>
+      </tr>
+      <tr>
+          <td>set_timeouts</td>
+          <td>设置当前会话的超时时间配置</td>
+      </tr>
+      <tr>
+          <td>sleep</td>
+          <td>强制 Meterpreter 静默，之后重新建立会话</td>
+      </tr>
+      <tr>
+          <td>ssl_verify</td>
+          <td>修改 SSL 证书验证设置</td>
+      </tr>
+      <tr>
+          <td>transport</td>
+          <td>管理会话传输机制（如 http/https/tcp）</td>
+      </tr>
+      <tr>
+          <td>use</td>
+          <td>&ldquo;load&rdquo; 的废弃别名（不推荐使用）</td>
+      </tr>
+      <tr>
+          <td>uuid</td>
+          <td>获取当前会话的 UUID（通用唯一标识符）</td>
+      </tr>
+      <tr>
+          <td>write</td>
+          <td>向通道写入数据</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="脱钩命令unhook-commands">脱钩命令（Unhook Commands）
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>unhook_pe</td>
+          <td>解除当前进程的钩子（对抗反病毒检测）</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="权限提升命令priv-elevate-commands">权限提升命令（Priv: Elevate Commands）
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>getsystem</td>
+          <td>尝试将权限提升至本地系统权限（SYSTEM）</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="密码数据库命令priv-password-database-commands">密码数据库命令（Priv: Password database Commands）
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>hashdump</td>
+          <td>导出 SAM 数据库内容（获取系统哈希值）</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="时间戳篡改命令priv-timestomp-commands">时间戳篡改命令（Priv: Timestomp Commands）
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>timestomp</td>
+          <td>操纵文件的 MACE 属性（修改创建/访问/修改时间）</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="文件系统命令stdapi-file-system-commands">文件系统命令（Stdapi: File system Commands）
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>cat</td>
+          <td>读取文件内容并显示到屏幕</td>
+      </tr>
+      <tr>
+          <td>cd</td>
+          <td>切换目录</td>
+      </tr>
+      <tr>
+          <td>checksum</td>
+          <td>获取文件的校验和（如 MD5/SHA）</td>
+      </tr>
+      <tr>
+          <td>cp</td>
+          <td>复制源文件到目标路径</td>
+      </tr>
+      <tr>
+          <td>del</td>
+          <td>删除指定文件</td>
+      </tr>
+      <tr>
+          <td>dir</td>
+          <td>列出文件（ls 的别名）</td>
+      </tr>
+      <tr>
+          <td>download</td>
+          <td>下载文件或目录到本地</td>
+      </tr>
+      <tr>
+          <td>edit</td>
+          <td>编辑文件</td>
+      </tr>
+      <tr>
+          <td>getlwd</td>
+          <td>显示本地工作目录（lpwd 的别名）</td>
+      </tr>
+      <tr>
+          <td>getwd</td>
+          <td>显示远程工作目录</td>
+      </tr>
+      <tr>
+          <td>lcat</td>
+          <td>读取本地文件内容并显示到屏幕</td>
+      </tr>
+      <tr>
+          <td>lcd</td>
+          <td>切换本地工作目录</td>
+      </tr>
+      <tr>
+          <td>ldir</td>
+          <td>列出本地文件（lls 的别名）</td>
+      </tr>
+      <tr>
+          <td>lls</td>
+          <td>列出本地文件</td>
+      </tr>
+      <tr>
+          <td>lmkdir</td>
+          <td>在本地创建新目录</td>
+      </tr>
+      <tr>
+          <td>lpwd</td>
+          <td>显示本地工作目录</td>
+      </tr>
+      <tr>
+          <td>ls</td>
+          <td>列出远程文件</td>
+      </tr>
+      <tr>
+          <td>mkdir</td>
+          <td>在远程创建新目录</td>
+      </tr>
+      <tr>
+          <td>mv</td>
+          <td>移动/重命名文件/目录</td>
+      </tr>
+      <tr>
+          <td>pwd</td>
+          <td>显示远程工作目录（同 getwd）</td>
+      </tr>
+      <tr>
+          <td>rm</td>
+          <td>删除指定文件（同 del）</td>
+      </tr>
+      <tr>
+          <td>rmdir</td>
+          <td>删除目录</td>
+      </tr>
+      <tr>
+          <td>search</td>
+          <td>搜索远程文件</td>
+      </tr>
+      <tr>
+          <td>show_mount</td>
+          <td>列出所有挂载点/逻辑驱动器</td>
+      </tr>
+      <tr>
+          <td>upload</td>
+          <td>上传本地文件或目录到远程</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="网络命令stdapi-networking-commands">网络命令（Stdapi: Networking Commands）
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>arp</td>
+          <td>显示主机的 ARP 缓存表</td>
+      </tr>
+      <tr>
+          <td>getproxy</td>
+          <td>显示当前代理配置</td>
+      </tr>
+      <tr>
+          <td>ifconfig</td>
+          <td>显示网络接口信息（类 Unix 系统）</td>
+      </tr>
+      <tr>
+          <td>ipconfig</td>
+          <td>显示网络接口信息（Windows 系统）</td>
+      </tr>
+      <tr>
+          <td>netstat</td>
+          <td>显示网络连接状态（TCP/UDP 端口）</td>
+      </tr>
+      <tr>
+          <td>portfwd</td>
+          <td>将本地端口转发到远程服务（端口转发）</td>
+      </tr>
+      <tr>
+          <td>resolve</td>
+          <td>在目标主机上解析主机名（DNS 查询）</td>
+      </tr>
+      <tr>
+          <td>route</td>
+          <td>查看和修改路由表</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="系统命令stdapi-system-commands">系统命令（Stdapi: System Commands）
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>clearev</td>
+          <td>清除系统事件日志</td>
+      </tr>
+      <tr>
+          <td>drop_token</td>
+          <td>放弃当前活跃的模拟令牌</td>
+      </tr>
+      <tr>
+          <td>execute</td>
+          <td>执行系统命令</td>
+      </tr>
+      <tr>
+          <td>getenv</td>
+          <td>获取一个或多个环境变量的值</td>
+      </tr>
+      <tr>
+          <td>getpid</td>
+          <td>获取当前 Meterpreter 进程 ID</td>
+      </tr>
+      <tr>
+          <td>getprivs</td>
+          <td>尝试启用当前进程可用的所有权限</td>
+      </tr>
+      <tr>
+          <td>getsid</td>
+          <td>获取 Meterpreter 服务端运行用户的 SID</td>
+      </tr>
+      <tr>
+          <td>getuid</td>
+          <td>获取 Meterpreter 服务端运行的用户名</td>
+      </tr>
+      <tr>
+          <td>kill</td>
+          <td>终止指定进程</td>
+      </tr>
+      <tr>
+          <td>localtime</td>
+          <td>显示目标系统的本地日期和时间</td>
+      </tr>
+      <tr>
+          <td>pgrep</td>
+          <td>按进程名过滤进程</td>
+      </tr>
+      <tr>
+          <td>pkill</td>
+          <td>按进程名终止进程</td>
+      </tr>
+      <tr>
+          <td>ps</td>
+          <td>列出所有运行中的进程</td>
+      </tr>
+      <tr>
+          <td>reboot</td>
+          <td>重启远程计算机</td>
+      </tr>
+      <tr>
+          <td>reg</td>
+          <td>操作远程注册表（查询/修改/删除键值）</td>
+      </tr>
+      <tr>
+          <td>rev2self</td>
+          <td>在远程主机上调用 RevertToSelf()（放弃模拟身份）</td>
+      </tr>
+      <tr>
+          <td>shell</td>
+          <td>获取系统命令行 shell（如 cmd/bash）</td>
+      </tr>
+      <tr>
+          <td>shutdown</td>
+          <td>关闭远程计算机</td>
+      </tr>
+      <tr>
+          <td>steal_token</td>
+          <td>尝试从目标进程窃取模拟令牌（权限窃取）</td>
+      </tr>
+      <tr>
+          <td>suspend</td>
+          <td>暂停或恢复指定进程</td>
+      </tr>
+      <tr>
+          <td>sysinfo</td>
+          <td>获取远程系统信息（如操作系统版本、硬件配置）</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="用户界面命令stdapi-user-interface-commands">用户界面命令（Stdapi: User interface Commands）
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>enumdesktops</td>
+          <td>列出所有可访问的桌面和窗口站</td>
+      </tr>
+      <tr>
+          <td>getdesktop</td>
+          <td>获取当前 Meterpreter 附着的桌面</td>
+      </tr>
+      <tr>
+          <td>idletime</td>
+          <td>返回远程用户的空闲时间（秒）</td>
+      </tr>
+      <tr>
+          <td>keyboard_send</td>
+          <td>发送键盘输入（模拟按键）</td>
+      </tr>
+      <tr>
+          <td>keyevent</td>
+          <td>发送键盘事件（如按下/释放快捷键）</td>
+      </tr>
+      <tr>
+          <td>keyscan_dump</td>
+          <td>导出键盘记录缓存（获取已捕获的按键）</td>
+      </tr>
+      <tr>
+          <td>keyscan_start</td>
+          <td>开始捕获键盘输入（键盘记录）</td>
+      </tr>
+      <tr>
+          <td>keyscan_stop</td>
+          <td>停止捕获键盘输入</td>
+      </tr>
+      <tr>
+          <td>mouse</td>
+          <td>发送鼠标事件（模拟点击/移动）</td>
+      </tr>
+      <tr>
+          <td>screenshare</td>
+          <td>实时监控远程用户桌面</td>
+      </tr>
+      <tr>
+          <td>screenshot</td>
+          <td>截取交互式桌面的屏幕截图</td>
+      </tr>
+      <tr>
+          <td>setdesktop</td>
+          <td>切换 Meterpreter 当前附着的桌面</td>
+      </tr>
+      <tr>
+          <td>uictl</td>
+          <td>控制部分用户界面组件（如禁用键盘/鼠标）</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="摄像头命令stdapi-webcam-commands">摄像头命令（Stdapi: Webcam Commands）
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>record_mic</td>
+          <td>从默认麦克风录制 X 秒音频</td>
+      </tr>
+      <tr>
+          <td>webcam_chat</td>
+          <td>启动视频聊天（需远程主机支持）</td>
+      </tr>
+      <tr>
+          <td>webcam_list</td>
+          <td>列出所有可用的摄像头</td>
+      </tr>
+      <tr>
+          <td>webcam_snap</td>
+          <td>从指定摄像头拍摄快照（拍照）</td>
+      </tr>
+      <tr>
+          <td>webcam_stream</td>
+          <td>播放指定摄像头的实时视频流</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="音频输出命令stdapi-audio-output-commands">音频输出命令（Stdapi: Audio Output Commands）
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>play</td>
+          <td>在目标系统上播放波形音频文件（.wav 格式）</td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<h3 id="补充说明">补充说明
+</h3><ol>
+<li><strong>术语规范</strong>：
+<ul>
+<li>保持网络安全领域通用译法（如 <code>hashdump</code> 译为“导出 SAM 数据库”而非字面翻译，<code>pivot</code> 译为“跳板监听”符合内网渗透场景）</li>
+<li>保留命令原文（如 <code>meterpreter</code>、<code>TLV</code>、<code>SID</code> 等专有名词不翻译）</li>
+<li>区分本地/远程操作（前缀 <code>l</code> 表示本地，如 <code>lcd</code>=本地切换目录，<code>cd</code>=远程切换目录）</li>
+</ul>
+</li>
+<li><strong>使用提示</strong>：
+<ul>
+<li>如需查看某个命令的详细用法，执行 <code>&lt;命令&gt; -h</code> 或 <code>help &lt;命令&gt;</code>（例：<code>portfwd -h</code>）</li>
+<li>部分命令依赖系统环境（如 <code>ifconfig</code> 适用于 Linux/Mac，<code>ipconfig</code> 适用于 Windows）</li>
+<li>权限相关命令（如 <code>getsystem</code>、<code>hashdump</code>）需要管理员权限才能正常执行</li>
+</ul>
+</li>
+</ol>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+<div class="math-katex"></div>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/1.6-%E5%85%B6%E4%BB%96%E5%9F%BA%E7%A1%80web%E6%BC%8F%E6%B4%9E%E4%BB%8B%E7%BB%8D/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.6 其他基础web漏洞介绍</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.5-mysql%E6%B3%A8%E5%85%A5%E5%88%9D%E6%AD%A5/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.5 mysql注入初步</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.4-php%E5%9F%BA%E7%A1%80%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%A4%E4%BA%92/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.4 php基础：用户交互与数据库交互</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/10.1-%E7%BB%83%E4%B9%A0%E5%BA%8F/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">10.1 练习：序</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.3-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.3 信息搜集工具的使用</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+        <div class="comment-container mt-8"></div>
+        
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="makabaka11/makabaka11.github.io"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Retr0
+    </section>
+    
+    <section class="powerby">
+        
+            Powered by ctOS <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+
+                <script src="/js/APlayer.min.js"></script>
+                <script src="/js/Meting.min.js"></script>
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.eaf1211e4c7db355f37ceea53df13700e1b77fbcc3cfe8c1c1f69e4468a752e1.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+
+<script>
+    var pjax = new Pjax({
+        selectors: [".main-container"]
+    });
+</script>
+
+
+<script src=https://www.retr0.xyz/js/topbar.min.js></script>
+
+
+
+<script>
+function initUtterances() {
+    const isArticle = document.querySelector('.article-page') && document.querySelector('.article-content');
+    if (!isArticle) return;
+
+    const oldScript = document.querySelector('script[src^="https://utteranc.es/client.js"]');
+    if (oldScript) oldScript.remove();
+
+    const container = document.querySelector('.comment-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    let script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'makabaka11/makabaka11.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+    container.appendChild(script);
+}
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    if (!window.pjax || !window.pjax.state) initUtterances();
+});
+</script>
+
+
+<script>
+pjax._handleResponse = pjax.handleResponse;
+pjax.handleResponse = function(responseText, request, href, options) {
+    if (request.responseText.match("<html")) {
+        if (responseText) {
+            let newDom = new DOMParser().parseFromString(responseText, 'text/html');
+            document.body.setAttribute("class", newDom.body.className);
+        }
+        pjax._handleResponse(responseText, request, href, options);
+    }
+};
+</script>
+
+
+<script>
+topbar.config({
+    barColors: {
+        '0': 'rgba(255, 255, 255, 1)',
+        '1.0': 'rgba(255, 183, 197, 1)'
+    }
+});
+
+document.addEventListener('pjax:send', () => topbar.show());
+
+document.addEventListener('pjax:complete', () => {
+    window.Stack.init();
+    topbar.hide();
+    setTimeout(initUtterances, 0);
+    updateViewCount();
+    renderKaTeX();
+    initPhotoSwipeFromDOM('.article-content');   
+    initLive2D();                                
+});
+</script>
+
+
+<script>
+function updateViewCount() {
+    const viewCountEl = document.getElementById('vercount_value_page_pv');
+    if (!viewCountEl) return;
+
+    viewCountEl.textContent = 'loading...';
+    const url = 'https://cn.vercount.one/js';
+
+    const old = document.querySelector(`script[src="${url}"]`);
+    if (old) old.remove();
+
+    const s = document.createElement('script');
+    s.src = url;
+    s.defer = true;
+    document.head.appendChild(s);
+
+    showHideView();
+}
+
+function showHideView() {
+    const viewCounts = document.querySelectorAll("#viewCount");
+    const isArticle = document.querySelector(".article-page");
+    viewCounts.forEach(ele => ele.style.display = isArticle ? 'block' : 'none');
+}
+</script>
+
+
+<script>
+async function renderKaTeX() {
+    let katex = document.querySelector(".math-katex");
+    if (!katex) return;
+
+    while (typeof renderMathInElement !== 'function') {
+        await new Promise(r => setTimeout(r, 500));
+    }
+
+    const content = document.querySelector('.article-content') || document.body;
+    renderMathInElement(content, {
+        delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true }
+        ],
+        ignoredClasses: ["gist"]
+    });
+}
+</script>
+
+
+<div id="particles-js"></div>
+
+<script src=https://www.retr0.xyz/background/particles.min.js></script>
+<script>
+particlesJS.load('particles-js',
+    "https://www.retr0.xyz/background/particlesjs-config.json",
+    () => console.log('particles.js loaded')
+);
+</script>
+
+<style>
+#particles-js {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: -1;
+}
+</style>
+
+<script>
+
+function initPhotoSwipeFromDOM(selector) {
+    if (!window.PhotoSwipe) return;
+
+    const containers = document.querySelectorAll(selector);
+    if (!containers.length) return;
+
+    containers.forEach(container => {
+        const images = container.querySelectorAll('img');
+
+        images.forEach((img, index) => {
+
+            
+            function getImageSize() {
+                return new Promise(resolve => {
+                    if (img.complete && img.naturalWidth) {
+                        resolve({
+                            w: img.naturalWidth,
+                            h: img.naturalHeight
+                        });
+                    } else {
+                        const tmp = new Image();
+                        tmp.src = img.src || img.getAttribute("data-src");
+                        tmp.onload = () => resolve({ w: tmp.width, h: tmp.height });
+                    }
+                });
+            }
+
+            img.style.cursor = "zoom-in";
+
+            
+            img.addEventListener("click", async (e) => {
+                e.preventDefault();
+
+                const size = await getImageSize();
+                const pswpEl = document.querySelector('.pswp');
+
+                const items = Array.from(images).map(i => ({
+                    src: i.src || i.getAttribute("data-src"),
+                    msrc: i.src,
+                    w: i.naturalWidth || 800,
+                    h: i.naturalHeight || 600,
+                }));
+
+                items[index].w = size.w;
+                items[index].h = size.h;
+
+                const gallery = new PhotoSwipe(pswpEl, PhotoSwipeUI_Default, items, {
+                    index,
+                    history: false
+                });
+
+                
+                
+                
+                enablePhotoSwipeWebShare(gallery);
+
+                gallery.init();
+            });
+        });
+    });
+}
+
+
+
+
+
+function enablePhotoSwipeWebShare(gallery) {
+    gallery.listen('shareLinkClick', function(shareButtonData, e) {
+        e.preventDefault();
+
+        const item = gallery.currItem;
+
+        if (navigator.share) {
+            navigator.share({
+                title: document.title,
+                text: '给你分享一张图片：',
+                url: item.src
+            }).catch(err => console.log("分享失败：", err));
+
+            return false; 
+        }
+
+        
+        return true;
+    });
+}
+</script>
+
+
+
+<script>
+
+
+window._live2d_loaded = window._live2d_loaded || false;
+window._live2d_initialized = window._live2d_initialized || false;
+
+
+function loadLive2DAssetsOnce(cdnPath) {
+    if (window._live2d_loaded) return Promise.resolve();
+
+    window._live2d_loaded = true;
+
+    return Promise.all([
+        loadRes(cdnPath + "waifu.css", "css"),
+        loadRes(cdnPath + "Core/live2dcubismcore.js", "js"),
+        loadRes(cdnPath + "live2d-sdk.js", "js"),
+        loadRes(cdnPath + "waifu-tips.js", "js")
+    ]);
+}
+
+
+function initLive2DWidgetOnce(cdnPath) {
+
+    if (window._live2d_initialized) return;
+
+    
+    const old = document.querySelector("#waifu");
+    if (old) old.remove();
+
+    window._live2d_initialized = true;
+
+    initWidget({
+        waifuPath: cdnPath + "waifu-tips.json",
+        cdnPath: cdnPath + "Resources/",
+        tools: ["hitokoto", "asteroids", "express", "switch-model", "switch-texture", "photo", "info", "quit"],
+        dragEnable: true,
+        dragDirection: ["x", "y"],
+        switchType: "order"
+    });
+
+    console.log("[Live2D] Widget initialized.");
+}
+
+
+function loadRes(url, type) {
+    return new Promise((resolve) => {
+        let tag;
+        if (type === "css") {
+            tag = document.createElement("link");
+            tag.rel = "stylesheet";
+            tag.href = url;
+        } else {
+            tag = document.createElement("script");
+            tag.src = url;
+        }
+        tag.onload = resolve;
+        document.head.appendChild(tag);
+    });
+}
+
+
+function initLive2D() {
+    if (screen.width < 768) return;
+
+    const cdnPath = "https://www.retr0.xyz/blog-live2d/";
+
+    loadLive2DAssetsOnce(cdnPath)
+        .then(() => initLive2DWidgetOnce(cdnPath));
+}
+
+initLive2D();  
+
+
+document.addEventListener("pjax:complete", () => {
+    initLive2D(); 
+});
+</script>
+
+
+        
+
+<meting-js
+  server="netease"
+  type="playlist"
+  id="14477349320"
+  fixed="true"
+  bottom="20px"
+  right="20px"
+  autoplay="false"
+  width="300px"
+></meting-js>
+
+
+<script>
+  let apInstance = null;
+  const currentPlaylistId = "14477349320";
+  const STORAGE_KEY = "playInfo";
+
+  
+  const checkInstanceInterval = setInterval(() => {
+    const aplayerElement = document.querySelector('.aplayer');
+    if (aplayerElement && aplayerElement.aplayer) {
+      apInstance = aplayerElement.aplayer;
+      clearInterval(checkInstanceInterval);
+      console.log("Hugo 中获取 APlayer 实例成功");
+      initPlayerEvents();
+      return;
+    }
+
+    if (window.APlayer && window.APlayer.instances && window.APlayer.instances.length > 0) {
+      apInstance = window.APlayer.instances[0];
+      clearInterval(checkInstanceInterval);
+      console.log("从全局列表获取实例");
+      initPlayerEvents();
+      return;
+    }
+
+    console.log("Hugo 中等待 APlayer 实例...");
+  }, 300);
+
+  function initPlayerEvents() {
+    if (!apInstance) return;
+
+    
+    window.addEventListener('beforeunload', savePlayState);
+    document.addEventListener('visibilitychange', savePlayState);
+
+    
+    apInstance.on('list:loaded', restorePlayState);
+  }
+
+  function savePlayState() {
+    if (!apInstance) return;
+    const playInfo = {
+      playlistId: currentPlaylistId,
+      index: apInstance.list.index,
+      currentTime: apInstance.audio.currentTime,
+      paused: apInstance.paused
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(playInfo));
+  }
+
+  function restorePlayState() {
+    const savedInfo = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!savedInfo || savedInfo.playlistId !== currentPlaylistId) return;
+
+    if (savedInfo.index < apInstance.list.songs.length) {
+      apInstance.list.switch(savedInfo.index);
+      apInstance.once('canplay', () => {
+        apInstance.seek(savedInfo.currentTime);
+        if (!savedInfo.paused) {
+          apInstance.play().catch(() => {
+            apInstance.notice("点击继续播放", 3000);
+          });
+        }
+      });
+    }
+  }
+
+  
+  document.addEventListener('click', () => {
+    if (apInstance && !apInstance.paused) {
+      apInstance.play().catch(() => {});
+    }
+  }, { once: true });
+</script>
+    </body>
+</html>
