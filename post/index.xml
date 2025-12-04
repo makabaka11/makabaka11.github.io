@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Wed, 03 Dec 2025 18:25:08 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 04 Dec 2025 22:10:13 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>恰到好处的补完—《轻音少女》观后感</title>
         <link>https://www.retr0.xyz/p/%E6%81%B0%E5%88%B0%E5%A5%BD%E5%A4%84%E7%9A%84%E8%A1%A5%E5%AE%8C%E8%BD%BB%E9%9F%B3%E5%B0%91%E5%A5%B3%E8%A7%82%E5%90%8E%E6%84%9F/</link>
         <pubDate>Sat, 01 Nov 2025 09:58:38 +0800</pubDate>
@@ -311,6 +311,264 @@
     &gt;AriaNgGUI&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;PC端下载器:&lt;a class=&#34;link&#34; href=&#34;https://motrix.app/zh-CN/about&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Motrix&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>1.8 操作系统权限及密码破解</title>
+        <link>https://www.retr0.xyz/p/1.8-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%9D%83%E9%99%90%E5%8F%8A%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/</link>
+        <pubDate>Thu, 04 Dec 2025 22:10:13 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/1.8-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%9D%83%E9%99%90%E5%8F%8A%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/</guid>
+        <description>&lt;h2 id=&#34;系统权限&#34;&gt;系统权限
+&lt;/h2&gt;&lt;h3 id=&#34;windows&#34;&gt;Windows
+&lt;/h3&gt;&lt;p&gt;最高：SYSTEM&lt;/p&gt;
+&lt;p&gt;用户最高:Administrator&lt;/p&gt;
+&lt;p&gt;others&lt;/p&gt;
+&lt;h3 id=&#34;linux&#34;&gt;Linux
+&lt;/h3&gt;&lt;p&gt;最高：root&lt;/p&gt;
+&lt;p&gt;其他都是普通&lt;/p&gt;
+&lt;h3 id=&#34;cpu权限&#34;&gt;CPU权限
+&lt;/h3&gt;&lt;p&gt;OS（操作系统）&lt;/p&gt;
+&lt;p&gt;ring0（驱动程序）&lt;/p&gt;
+&lt;p&gt;ring3（大多数其他软件）&lt;/p&gt;
+&lt;h2 id=&#34;目标信息搜集&#34;&gt;目标信息搜集
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;以下命令均在meterpreter &amp;gt;上执行&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;系统信息&#34;&gt;系统信息
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;run post/windows/gather/checkvm&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;检查目标是否是虚拟机&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;run post/windows/gather/enum_services&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;查看目标系统上运行的服务（例如有VM tools必为虚拟机）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;run post/windows/gather/enum_applications&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;查看目标系统上安装的软件&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;run post/windows/gather/dumplinks&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;查看目标系统上最近的操作&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;run post/windows/gather/enum_shares&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;查看是否开启了共享&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;run post/windows/gather/enum_patches&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;查看目标安装了那些补丁&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;run winenum&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;查看环境变量&lt;/p&gt;
+&lt;h3 id=&#34;数据嗅探和wireshark的使用&#34;&gt;数据嗅探和wireshark的使用
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;注意：&lt;/strong&gt; 首先执行&lt;code&gt;load sniffer&lt;/code&gt;加载sniffer模块&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sniffer_interfaces&lt;/code&gt;		查看对方网卡（判断是否启用dhcp:true大概率启用）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sniffer_start [网卡编号]&lt;/code&gt;	开始嗅探指定网卡&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sniffer_start [网卡编号]&lt;/code&gt;	停止嗅探指定网卡&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sniffer_dump [网卡编号] [路径及文件名]&lt;/code&gt;		将嗅探到的数据保存到指定文件中&lt;/p&gt;
+&lt;p&gt;例如：&lt;code&gt;sniffer_dump 2 /home/kali/Desktop/123.cap&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;过滤器的使用&#34;&gt;过滤器的使用
+&lt;/h4&gt;&lt;p&gt;点击打开保存的文件，可以在过滤器中输入&lt;code&gt;ip.src_host==[ip地址]&lt;/code&gt;来过滤目标发出的数据包&lt;/p&gt;
+&lt;p&gt;在过滤器中输入&lt;code&gt;ip.dst_host==[ip地址]&lt;/code&gt;来过滤返回的数据包&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;!(ip.src_host==[ip地址])&lt;/code&gt;		过滤除了某个ip以外的所有数据包&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;tcp&lt;/code&gt; 或&lt;code&gt;udp&lt;/code&gt;等	只查看某种协议的数据包&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;组合使用：&lt;/strong&gt; &lt;code&gt;ip.src_host==[ip地址] &amp;amp;&amp;amp; tcp&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;其余自行摸索&lt;/p&gt;
+&lt;h4 id=&#34;常见网络协议&#34;&gt;常见网络协议
+&lt;/h4&gt;&lt;p&gt;以下是网络通信中最常见的协议分类整理，包含 &lt;strong&gt;协议名称、中文名、核心作用&lt;/strong&gt; 及关键补充说明，按功能场景分组便于理解：&lt;/p&gt;
+&lt;h5 id=&#34;核心传输层协议负责端到端数据传输&#34;&gt;核心传输层协议（负责端到端数据传输）
+&lt;/h5&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;协议名称&lt;/th&gt;
+          &lt;th&gt;中文名&lt;/th&gt;
+          &lt;th&gt;核心作用&lt;/th&gt;
+          &lt;th&gt;关键特点&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;TCP&lt;/td&gt;
+          &lt;td&gt;传输控制协议&lt;/td&gt;
+          &lt;td&gt;提供可靠、面向连接的字节流传输&lt;/td&gt;
+          &lt;td&gt;三次握手建立连接、四次挥手断开、重传机制（保证数据不丢失/不重复），适用于文件传输、网页加载等场景&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;UDP&lt;/td&gt;
+          &lt;td&gt;用户数据报协议&lt;/td&gt;
+          &lt;td&gt;提供无连接、不可靠的数据包传输&lt;/td&gt;
+          &lt;td&gt;无握手过程、低延迟，适用于视频通话、游戏、直播等对实时性要求高于可靠性的场景&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h5 id=&#34;网络层协议负责路由与寻址&#34;&gt;网络层协议（负责路由与寻址）
+&lt;/h5&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;协议名称&lt;/th&gt;
+          &lt;th&gt;中文名&lt;/th&gt;
+          &lt;th&gt;核心作用&lt;/th&gt;
+          &lt;th&gt;关键特点&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;IP&lt;/td&gt;
+          &lt;td&gt;网际协议&lt;/td&gt;
+          &lt;td&gt;定义数据包格式，实现跨网络设备的寻址与转发&lt;/td&gt;
+          &lt;td&gt;TCP/UDP 的底层支撑，仅负责“送达”，不保证可靠性（IPv4 是目前主流，IPv6 逐步普及）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;ICMP&lt;/td&gt;
+          &lt;td&gt;互联网控制消息协议&lt;/td&gt;
+          &lt;td&gt;用于网络设备间的差错报告与状态查询&lt;/td&gt;
+          &lt;td&gt;常见场景：ping 命令（检测主机可达性）、 traceroute（追踪路由路径）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;ARP&lt;/td&gt;
+          &lt;td&gt;地址解析协议&lt;/td&gt;
+          &lt;td&gt;将 IP 地址转换为物理地址（MAC 地址）&lt;/td&gt;
+          &lt;td&gt;局域网内通信必需，解决“知道对方 IP 但不知道硬件地址”的问题&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RARP&lt;/td&gt;
+          &lt;td&gt;反向地址解析协议&lt;/td&gt;
+          &lt;td&gt;将 MAC 地址转换为 IP 地址&lt;/td&gt;
+          &lt;td&gt;适用于无 DHCP 服务器的场景（如早期无盘工作站）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;IGMP&lt;/td&gt;
+          &lt;td&gt;互联网组管理协议&lt;/td&gt;
+          &lt;td&gt;用于主机加入/退出多播组&lt;/td&gt;
+          &lt;td&gt;支持视频会议、组播直播等“一对多”通信场景&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h5 id=&#34;应用层协议直接面向用户业务&#34;&gt;应用层协议（直接面向用户业务）
+&lt;/h5&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;协议名称&lt;/th&gt;
+          &lt;th&gt;中文名&lt;/th&gt;
+          &lt;th&gt;核心作用&lt;/th&gt;
+          &lt;th&gt;关键特点&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;DNS&lt;/td&gt;
+          &lt;td&gt;域名系统协议&lt;/td&gt;
+          &lt;td&gt;将域名（如 &lt;a class=&#34;link&#34; href=&#34;http://www.baidu.com%ef%bc%89%e8%a7%a3%e6%9e%90%e4%b8%ba&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;www.baidu.com）解析为&lt;/a&gt; IP 地址&lt;/td&gt;
+          &lt;td&gt;解决“记 IP 难”的问题，是互联网访问的“地址簿”&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;HTTP&lt;/td&gt;
+          &lt;td&gt;超文本传输协议&lt;/td&gt;
+          &lt;td&gt;用于 Web 浏览器与服务器之间的网页传输&lt;/td&gt;
+          &lt;td&gt;明文传输（不安全），默认端口 80，支撑普通网页访问&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;HTTPS&lt;/td&gt;
+          &lt;td&gt;安全超文本传输协议&lt;/td&gt;
+          &lt;td&gt;HTTP + TLS/SSL 加密，实现安全的网页传输&lt;/td&gt;
+          &lt;td&gt;加密数据（防窃听/篡改），默认端口 443，用于支付、登录等敏感场景&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;FTP&lt;/td&gt;
+          &lt;td&gt;文件传输协议&lt;/td&gt;
+          &lt;td&gt;用于客户端与服务器之间的文件上传/下载&lt;/td&gt;
+          &lt;td&gt;明文传输，默认端口 21（控制）+ 20（数据），适用于非敏感文件传输&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;SFTP&lt;/td&gt;
+          &lt;td&gt;SSH 文件传输协议&lt;/td&gt;
+          &lt;td&gt;基于 SSH 加密的文件传输协议&lt;/td&gt;
+          &lt;td&gt;加密传输（替代 FTP），默认端口 22，安全性更高&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;SSH&lt;/td&gt;
+          &lt;td&gt;安全外壳协议&lt;/td&gt;
+          &lt;td&gt;远程登录服务器并执行命令&lt;/td&gt;
+          &lt;td&gt;加密传输（替代 Telnet），默认端口 22，是服务器管理的核心协议&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Telnet&lt;/td&gt;
+          &lt;td&gt;远程终端协议&lt;/td&gt;
+          &lt;td&gt;远程登录服务器（明文传输）&lt;/td&gt;
+          &lt;td&gt;无加密（不安全），默认端口 23，仅用于测试或非敏感环境&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;SMTP&lt;/td&gt;
+          &lt;td&gt;简单邮件传输协议&lt;/td&gt;
+          &lt;td&gt;用于发送电子邮件（服务器到服务器）&lt;/td&gt;
+          &lt;td&gt;默认端口 25（明文）/ 465（SSL 加密），支撑邮件发送功能&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;POP3&lt;/td&gt;
+          &lt;td&gt;邮局协议版本 3&lt;/td&gt;
+          &lt;td&gt;用于接收电子邮件（客户端到服务器）&lt;/td&gt;
+          &lt;td&gt;下载邮件到本地，默认端口 110（明文）/ 995（SSL 加密）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;IMAP4&lt;/td&gt;
+          &lt;td&gt;互联网邮件访问协议版本 4&lt;/td&gt;
+          &lt;td&gt;接收电子邮件（支持邮件同步）&lt;/td&gt;
+          &lt;td&gt;可在多设备同步邮件状态（已读/未读），默认端口 143（明文）/ 993（SSL 加密）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;NTP&lt;/td&gt;
+          &lt;td&gt;网络时间协议&lt;/td&gt;
+          &lt;td&gt;实现网络设备间的时间同步&lt;/td&gt;
+          &lt;td&gt;保证服务器、终端等设备时间一致，默认端口 123（UDP）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;DHCP&lt;/td&gt;
+          &lt;td&gt;动态主机配置协议&lt;/td&gt;
+          &lt;td&gt;自动为客户端分配 IP 地址、子网掩码等网络参数&lt;/td&gt;
+          &lt;td&gt;无需手动设置 IP，适用于局域网（如家庭、公司网络）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;SNMP&lt;/td&gt;
+          &lt;td&gt;简单网络管理协议&lt;/td&gt;
+          &lt;td&gt;监控和管理网络设备（路由器、交换机等）&lt;/td&gt;
+          &lt;td&gt;收集设备状态（如流量、负载），默认端口 161（UDP）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;TFTP&lt;/td&gt;
+          &lt;td&gt;简单文件传输协议&lt;/td&gt;
+          &lt;td&gt;轻量级文件传输（无认证）&lt;/td&gt;
+          &lt;td&gt;仅支持简单上传/下载，无权限验证，默认端口 69（UDP），适用于设备固件升级&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h5 id=&#34;其他常用协议特殊功能场景&#34;&gt;其他常用协议（特殊功能场景）
+&lt;/h5&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;协议名称&lt;/th&gt;
+          &lt;th&gt;中文名&lt;/th&gt;
+          &lt;th&gt;核心作用&lt;/th&gt;
+          &lt;th&gt;关键特点&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;PPPoE&lt;/td&gt;
+          &lt;td&gt;基于以太网的点对点协议&lt;/td&gt;
+          &lt;td&gt;用于宽带拨号上网（如电信、联通家庭宽带）&lt;/td&gt;
+          &lt;td&gt;实现“账号+密码”认证，建立互联网连接&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;L2TP&lt;/td&gt;
+          &lt;td&gt;第二层隧道协议&lt;/td&gt;
+          &lt;td&gt;与 IPsec 配合实现 VPN 连接&lt;/td&gt;
+          &lt;td&gt;用于远程办公访问公司内网，默认端口 1701&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;IPSec&lt;/td&gt;
+          &lt;td&gt;IP 安全协议&lt;/td&gt;
+          &lt;td&gt;为 IP 数据包提供加密、认证服务&lt;/td&gt;
+          &lt;td&gt;常用于 VPN 加密（如 L2TP/IPSec、IKEv2），保障跨网传输安全&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MQTT&lt;/td&gt;
+          &lt;td&gt;消息队列遥测传输协议&lt;/td&gt;
+          &lt;td&gt;轻量级物联网（IoT）设备通信协议&lt;/td&gt;
+          &lt;td&gt;低带宽、低功耗，适用于传感器、智能家居设备的数据传输&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 </description>
         </item>
         <item>
