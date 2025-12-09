@@ -320,7 +320,7 @@
         
         <guid>https://www.retr0.xyz/p/1.10-linux%E6%8F%90%E6%9D%83%E5%92%8C%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/</guid>
         <description>&lt;blockquote&gt;
-&lt;p&gt;第一部分中将会使用到kali攻击机和linux靶机（在资源库的&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;安全靶场类中linsec.ova中下载&lt;/font&gt;）&lt;/p&gt;
+&lt;p&gt;第一部分中将会使用到kali攻击机和linux靶机（在资源库的安全靶场类中linsec.ova中下载）&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;其中，靶机默认用户名：bob，密码：secret（账户权限：普通）&lt;/p&gt;
 &lt;p&gt;为了方便操作，我们使用攻击机对靶机进行ssh连接：&lt;/p&gt;
