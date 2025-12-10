@@ -1848,7 +1848,7 @@ $$&lt;h4 id=&#34;核心特点-3&#34;&gt;核心特点
   &gt;&lt;/iframe&gt;
 &lt;/div&gt;
 &lt;h2 id=&#34;文件的读取操作&#34;&gt;文件的读取操作
-&lt;/h2&gt;&lt;h3 id=&#34;open打开函数&#34;&gt;&lt;font style=&#34;color:rgb(28, 31, 35);&#34;&gt;open()打开函数&lt;/font&gt;
+&lt;/h2&gt;&lt;h3 id=&#34;open打开函数&#34;&gt;open()打开函数
 &lt;/h3&gt;&lt;p&gt;使用open函数，可以打开一个已经存在的文件，或者创建一个新文件，语法如下&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;open(name,mode,encoding)&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;name：是要打开的目标文件名的字符串（可以包含文件所在的具体路径）&lt;/p&gt;
@@ -1880,11 +1880,11 @@ $$&lt;h4 id=&#34;核心特点-3&#34;&gt;核心特点
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td&gt;w&lt;/td&gt;
-          &lt;td&gt;打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;原有内容会被删除&lt;/font&gt;&lt;/strong&gt;。&lt;/td&gt;
+          &lt;td&gt;打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;原有内容会被删除&lt;/font&gt;&lt;/strong&gt; 。&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td&gt;a&lt;/td&gt;
-          &lt;td&gt;打开一个文件用于追加。如果该文件已存在，&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;新的内容会被写道已有内容之后&lt;/font&gt;&lt;/strong&gt;。如果该文件**&lt;font style=&#34;color:#DF2A3F;&#34;&gt;不存在，创建新文件&lt;/font&gt;**进行写入。&lt;/td&gt;
+          &lt;td&gt;打开一个文件用于追加。如果该文件已存在，&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;新的内容会被写道已有内容之后&lt;/font&gt;&lt;/strong&gt;。如果该文件 &lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;不存在，创建新文件&lt;/font&gt;&lt;/strong&gt; 进行写入。&lt;/td&gt;
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -1907,7 +1907,7 @@ $$&lt;h4 id=&#34;核心特点-3&#34;&gt;核心特点
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;readlines方法&#34;&gt;readlines()方法
-&lt;/h3&gt;&lt;p&gt;readlines可以按照行的方式把整个文件中的内容进行一次性读取，并且返回的是一个列表，其中返回的是一个**&lt;font style=&#34;color:#DF2A3F;&#34;&gt;列表&lt;/font&gt;**，其中每一行的数据为一个元素。&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;readlines可以按照行的方式把整个文件中的内容进行一次性读取，并且返回的是一个列表，其中返回的是一个 &lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;列表&lt;/font&gt;&lt;/strong&gt; ，其中每一行的数据为一个元素。&lt;/p&gt;
 &lt;p&gt;示例：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
