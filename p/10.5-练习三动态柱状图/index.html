@@ -2,16 +2,16 @@
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="基础柱状图 通过 Bar 构建基础柱状图\n快速上手 Quickstart：\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 from pyecharts.charts import Bar from pyecharts.options import * # 构建柱状图对象 bar = Bar() # 添加x轴数据 bar.add_xaxis([&#34;中国&#34;,&#34;美国&#34;,&#34;英国&#34;]) # 添加y轴数据 bar.add_yaxis(&#34;GDP&#34;,[30,20,10], label_opts=LabelOpts(position=&#34;right&#34;)) # 反转xy轴 bar.reversal_axis() # 绘图 bar.render(&#34;基础柱状图.html&#34;) 基础时间线柱状图 前置知识 Timelime()&ndash;时间线 柱状图描述的是分类数据,回答的是每一个分类中『有多少?』这个问题. 这是柱状图的主要特点,同时柱状图很难动态的描述一个趋势性的数据. 这里pyecharts为我们提供了一种解决方案-时间线\n如果说一个Bar、Line对象是一张图表的话,时间线就是创建一个一维的x轴,轴上每一个点就是一个图表对象\n快速上手：创建时间线\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 from pyecharts.charts import Bar,Timeline from pyecharts.options import * bar1 = Bar() bar1.add_xaxis([&#34;中国&#34;,&#34;美国&#34;,&#34;英国&#34;]) bar1.add_yaxis(&#34;GPD&#34;,[30,20,10],label_opts=LabelOpts(position=&#34;right&#34;)) bar1.reversal_axis() bar2 = Bar() bar2.add_xaxis([&#34;中国&#34;,&#34;美国&#34;,&#34;英国&#34;]) bar2.add_yaxis(&#34;GPD&#34;,[50,30,20],label_opts=LabelOpts(position=&#34;right&#34;)) bar2.reversal_axis() # 创建时间线对象 timeline = Timeline() # timeline对象添加bar柱状图 timeline.add(bar1,&#34;2021年GDP&#34;) timeline.add(bar2,&#34;2022年GDP&#34;) # 通过时间线绘图 timeline.render(&#34;基础柱状图-时间线.html&#34;) 自动播放 1 2 3 4 5 6 7 # 设置自动播放 timeline.add_schema( play_interval=1000,\t# 自动播放的时间间隔 is_timeline_show=True,\t# 是否在自动播放时显示时间线 is_auto_play=True,\t# 是否自动播放 is_loop_play=True\t# 是否循环自动播放 ) 主题（颜色）设置 1 2 3 4 from pyecharts.globals import ThemeType # 创建时间线对象，注意代码位置在创建时间线对象之后，向时间线添加bar之前 timeline = Timeline({&#34;theme&#34;:ThemeType.LIGHT}) 主题代码一览：\n">
-<title></title>
+<title>10.5 练习三：动态柱状图</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/p/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/10.5-%E7%BB%83%E4%B9%A0%E4%B8%89%E5%8A%A8%E6%80%81%E6%9F%B1%E7%8A%B6%E5%9B%BE/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="">
+<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="10.5 练习三：动态柱状图">
 <meta property='og:description' content="基础柱状图 通过 Bar 构建基础柱状图\n快速上手 Quickstart：\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 from pyecharts.charts import Bar from pyecharts.options import * # 构建柱状图对象 bar = Bar() # 添加x轴数据 bar.add_xaxis([&#34;中国&#34;,&#34;美国&#34;,&#34;英国&#34;]) # 添加y轴数据 bar.add_yaxis(&#34;GDP&#34;,[30,20,10], label_opts=LabelOpts(position=&#34;right&#34;)) # 反转xy轴 bar.reversal_axis() # 绘图 bar.render(&#34;基础柱状图.html&#34;) 基础时间线柱状图 前置知识 Timelime()&ndash;时间线 柱状图描述的是分类数据,回答的是每一个分类中『有多少?』这个问题. 这是柱状图的主要特点,同时柱状图很难动态的描述一个趋势性的数据. 这里pyecharts为我们提供了一种解决方案-时间线\n如果说一个Bar、Line对象是一张图表的话,时间线就是创建一个一维的x轴,轴上每一个点就是一个图表对象\n快速上手：创建时间线\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 from pyecharts.charts import Bar,Timeline from pyecharts.options import * bar1 = Bar() bar1.add_xaxis([&#34;中国&#34;,&#34;美国&#34;,&#34;英国&#34;]) bar1.add_yaxis(&#34;GPD&#34;,[30,20,10],label_opts=LabelOpts(position=&#34;right&#34;)) bar1.reversal_axis() bar2 = Bar() bar2.add_xaxis([&#34;中国&#34;,&#34;美国&#34;,&#34;英国&#34;]) bar2.add_yaxis(&#34;GPD&#34;,[50,30,20],label_opts=LabelOpts(position=&#34;right&#34;)) bar2.reversal_axis() # 创建时间线对象 timeline = Timeline() # timeline对象添加bar柱状图 timeline.add(bar1,&#34;2021年GDP&#34;) timeline.add(bar2,&#34;2022年GDP&#34;) # 通过时间线绘图 timeline.render(&#34;基础柱状图-时间线.html&#34;) 自动播放 1 2 3 4 5 6 7 # 设置自动播放 timeline.add_schema( play_interval=1000,\t# 自动播放的时间间隔 is_timeline_show=True,\t# 是否在自动播放时显示时间线 is_auto_play=True,\t# 是否自动播放 is_loop_play=True\t# 是否循环自动播放 ) 主题（颜色）设置 1 2 3 4 from pyecharts.globals import ThemeType # 创建时间线对象，注意代码位置在创建时间线对象之后，向时间线添加bar之前 timeline = Timeline({&#34;theme&#34;:ThemeType.LIGHT}) 主题代码一览：\n">
-<meta property='og:url' content='https://www.retr0.xyz/p/'>
+<meta property='og:url' content='https://www.retr0.xyz/p/10.5-%E7%BB%83%E4%B9%A0%E4%B8%89%E5%8A%A8%E6%80%81%E6%9F%B1%E7%8A%B6%E5%9B%BE/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' />
-<meta name="twitter:title" content="">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-10T18:14:35&#43;08:00'/><meta property='article:modified_time' content='2025-12-10T18:14:35&#43;08:00'/>
+<meta name="twitter:title" content="10.5 练习三：动态柱状图">
 <meta name="twitter:description" content="基础柱状图 通过 Bar 构建基础柱状图\n快速上手 Quickstart：\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 from pyecharts.charts import Bar from pyecharts.options import * # 构建柱状图对象 bar = Bar() # 添加x轴数据 bar.add_xaxis([&#34;中国&#34;,&#34;美国&#34;,&#34;英国&#34;]) # 添加y轴数据 bar.add_yaxis(&#34;GDP&#34;,[30,20,10], label_opts=LabelOpts(position=&#34;right&#34;)) # 反转xy轴 bar.reversal_axis() # 绘图 bar.render(&#34;基础柱状图.html&#34;) 基础时间线柱状图 前置知识 Timelime()&ndash;时间线 柱状图描述的是分类数据,回答的是每一个分类中『有多少?』这个问题. 这是柱状图的主要特点,同时柱状图很难动态的描述一个趋势性的数据. 这里pyecharts为我们提供了一种解决方案-时间线\n如果说一个Bar、Line对象是一张图表的话,时间线就是创建一个一维的x轴,轴上每一个点就是一个图表对象\n快速上手：创建时间线\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 from pyecharts.charts import Bar,Timeline from pyecharts.options import * bar1 = Bar() bar1.add_xaxis([&#34;中国&#34;,&#34;美国&#34;,&#34;英国&#34;]) bar1.add_yaxis(&#34;GPD&#34;,[30,20,10],label_opts=LabelOpts(position=&#34;right&#34;)) bar1.reversal_axis() bar2 = Bar() bar2.add_xaxis([&#34;中国&#34;,&#34;美国&#34;,&#34;英国&#34;]) bar2.add_yaxis(&#34;GPD&#34;,[50,30,20],label_opts=LabelOpts(position=&#34;right&#34;)) bar2.reversal_axis() # 创建时间线对象 timeline = Timeline() # timeline对象添加bar柱状图 timeline.add(bar1,&#34;2021年GDP&#34;) timeline.add(bar2,&#34;2022年GDP&#34;) # 通过时间线绘图 timeline.render(&#34;基础柱状图-时间线.html&#34;) 自动播放 1 2 3 4 5 6 7 # 设置自动播放 timeline.add_schema( play_interval=1000,\t# 自动播放的时间间隔 is_timeline_show=True,\t# 是否在自动播放时显示时间线 is_auto_play=True,\t# 是否自动播放 is_loop_play=True\t# 是否循环自动播放 ) 主题（颜色）设置 1 2 3 4 from pyecharts.globals import ThemeType # 创建时间线对象，注意代码位置在创建时间线对象之后，向时间线添加bar之前 timeline = Timeline({&#34;theme&#34;:ThemeType.LIGHT}) 主题代码一览：\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
@@ -355,10 +355,18 @@
 
     <div class="article-details">
     
+    <header class="article-category">
+        
+            <a href="/categories/python/" style="background-color: #2A87D8; color: #fff;">
+                Python
+            </a>
+        
+    </header>
+    
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/"></a>
+            <a href="/p/10.5-%E7%BB%83%E4%B9%A0%E4%B8%89%E5%8A%A8%E6%80%81%E6%9F%B1%E7%8A%B6%E5%9B%BE/">10.5 练习三：动态柱状图</a>
         </h2>
     
         
@@ -369,6 +377,19 @@
      
     
     <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-10</time>
+            </div>
         
 
         
@@ -980,6 +1001,80 @@
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/10.4-%E7%BB%83%E4%B9%A0%E4%BA%8C%E5%9C%B0%E5%9B%BE/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">10.4 练习二：地图</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/10.3-%E7%BB%83%E4%B9%A0%E4%B8%80%E6%8A%98%E7%BA%BF%E5%9B%BE/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">10.3 练习一：折线图</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/10.2-%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86json-%E6%A0%BC%E5%BC%8F%E5%92%8C-pyecharts-%E5%85%A5%E9%97%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">10.2 前置知识：json 格式和 pyecharts 入门</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/10.1-%E7%BB%83%E4%B9%A0%E5%BA%8F/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">10.1 练习：序</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/9.3-%E5%8C%85/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">9.3 包</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     
