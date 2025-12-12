@@ -687,6 +687,25 @@ function showHideView() {
 }
 </script>
 
+<script>
+    function showHideView() {
+        
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+
+
 
 <script>
 async function renderKaTeX() {
@@ -1029,8 +1048,7 @@ document.addEventListener("pjax:complete", () => {
       return;
     }
 
-    console.log("Hugo 中等待 APlayer 实例...");
-  }, 300);
+
 
   function initPlayerEvents() {
     if (!apInstance) return;
