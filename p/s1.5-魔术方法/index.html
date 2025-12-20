@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 上一节中我们学习的__init__构造方法，是Python类内置的方法之一。\n这些内置的类方法，各自有各自特殊的功能，这些内置方法我们便称之为：魔术方法\nPython当中有很多魔术方法，本篇中只讲解几种常用的。\n__str__字符串方法 当我们尝试直接print某个对象时，例如：\n1 2 3 4 5 6 7 8 9 10 11 class db: def __init__(self,host,uid,pwd): self.host = host self.uid = uid self.pwd = pwd data1 = db(&#39;192.168.0.1&#39;,&#39;root&#39;,&#39;toor&#39;) print(data1)\t# 输出 &lt;__main__.db object at 0x000001EECBC68AD0&gt; print(str(data1)) # 输出 &lt;__main__.db object at 0x000001EECBC68AD0&gt; 很显然，这并不是我们想要的，所以我们可以使用__str__方法\n1 2 3 4 5 6 7 8 9 10 11 12 class db: def __init__(self,host,uid,pwd): self.host = host self.uid = uid self.pwd = pwd def __str__(self): return f&#34;db类对象，host:{self.host},uid:{self.uid},pwd:{self.pwd}&#34; data1 = db(&#39;192.168.0.1&#39;,&#39;root&#39;,&#39;toor&#39;) print(data1)\t# 输出 db类对象，host:192.168.0.1,uid:root,pwd:toor print(str(data1)) # 输出 db类对象，host:192.168.0.1,uid:root,pwd:toor 很显然，我们可以由此看出，__str__方法的功能就是自定义print某个对象时输出的语句模板。\n">
 <title>S1.5 魔术方法</title>
@@ -647,6 +647,19 @@
             
                 
 <article class="">
+    <a href="/p/s1.6-%E5%B0%81%E8%A3%85/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">S1.6 封装</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
     <a href="/p/s1.4-%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95/">
         
         
@@ -692,19 +705,6 @@
 
         <div class="article-details">
             <h2 class="article-title">S1.1 初识对象</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/10.5-%E7%BB%83%E4%B9%A0%E4%B8%89%E5%8A%A8%E6%80%81%E6%9F%B1%E7%8A%B6%E5%9B%BE/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">10.5 练习三：动态柱状图</h2>
         </div>
     </a>
 </article>

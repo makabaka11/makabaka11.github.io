@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="学习php的基础语法，如何与用户及数据库交互，以及命令行直接操作数据库。">
 <title>1.4 php基础：用户交互与数据库交互</title>
@@ -491,15 +491,15 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 定义一个简单的变量
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$age</span> <span class="o">=</span> <span class="mi">18</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$age</span> <span class="o">=</span> <span class="mi">18</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// if判断：如果$age大于等于18，执行花括号里的代码
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nv">$age</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nv">$age</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;你已经成年啦！&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 再补一个if-else的简单例子
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$score</span> <span class="o">=</span> <span class="mi">59</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$score</span> <span class="o">=</span> <span class="mi">59</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nv">$score</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;考试及格啦！&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -548,13 +548,13 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 初始化计数器
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// while循环：只要$i小于等于5，就执行循环体
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">while</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;当前数字是：</span><span class="si">{</span><span class="nv">$i</span><span class="si">}</span><span class="s2">&lt;br/&gt;&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 计数器自增（必须写，否则会无限循环！）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nv">$i</span><span class="o">++</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nv">$i</span><span class="o">++</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
 </span></span></span></code></pre></td></tr></table>
@@ -679,15 +679,15 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 1. 配置连接
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$servername</span> <span class="o">=</span> <span class="s2">&#34;localhost&#34;</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$servername</span> <span class="o">=</span> <span class="s2">&#34;localhost&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$username</span> <span class="o">=</span> <span class="s2">&#34;root&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$password</span> <span class="o">=</span> <span class="s2">&#34;root&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$dbname</span> <span class="o">=</span> <span class="s2">&#34;test&#34;</span><span class="p">;</span>		<span class="c1">//数据库库名
 </span></span></span><span class="line"><span class="cl"><span class="c1">// 2. 创建链接
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$conn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mysqli</span><span class="p">(</span><span class="nv">$servername</span><span class="p">,</span><span class="nv">$username</span><span class="p">,</span><span class="nv">$password</span><span class="p">,</span><span class="nv">$dbname</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$conn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mysqli</span><span class="p">(</span><span class="nv">$servername</span><span class="p">,</span><span class="nv">$username</span><span class="p">,</span><span class="nv">$password</span><span class="p">,</span><span class="nv">$dbname</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 3. 检测连接
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">connect_error</span><span class="p">){</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">connect_error</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="k">die</span><span class="p">(</span><span class="s2">&#34;连接失败&#34;</span><span class="o">.</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">connect_error</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
@@ -731,34 +731,34 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 1. 配置连接
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$servername</span> <span class="o">=</span> <span class="s2">&#34;localhost&#34;</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$servername</span> <span class="o">=</span> <span class="s2">&#34;localhost&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$username</span> <span class="o">=</span> <span class="s2">&#34;root&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$password</span> <span class="o">=</span> <span class="s2">&#34;root&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$dbname</span> <span class="o">=</span> <span class="s2">&#34;test&#34;</span><span class="p">;</span>		<span class="c1">//数据库库名
 </span></span></span><span class="line"><span class="cl"><span class="c1">// 2. 创建链接（使用mysqli函数按格式填写所需参数）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$conn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mysqli</span><span class="p">(</span><span class="nv">$servername</span><span class="p">,</span><span class="nv">$username</span><span class="p">,</span><span class="nv">$password</span><span class="p">,</span><span class="nv">$dbname</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$conn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mysqli</span><span class="p">(</span><span class="nv">$servername</span><span class="p">,</span><span class="nv">$username</span><span class="p">,</span><span class="nv">$password</span><span class="p">,</span><span class="nv">$dbname</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 3. 检测连接
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">connect_error</span><span class="p">){</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">connect_error</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="k">die</span><span class="p">(</span><span class="s2">&#34;连接失败&#34;</span><span class="o">.</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">connect_error</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 数据库查询语句================================================================
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//准备一条数据库语句
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$sql</span> <span class="o">=</span> <span class="s2">&#34;select * from db1 where id &lt; 3&#34;</span><span class="p">;</span> <span class="c1">// 这里相当于把查询指令赋值给$sql
+</span></span></span><span class="line"><span class="cl"><span class="nv">$sql</span> <span class="o">=</span> <span class="s2">&#34;select * from db1 where id &lt; 3&#34;</span><span class="p">;</span> <span class="c1">// 这里相当于把查询指令赋值给$sql
 </span></span></span><span class="line"><span class="cl"><span class="c1">// 执行sql语句并返回给变量
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$result</span> <span class="o">=</span> <span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="nv">$sql</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$result</span> <span class="o">=</span> <span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="nv">$sql</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 判断result里是否有东西
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="nv">$result</span><span class="o">-&gt;</span><span class="na">num_rows</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>	<span class="c1">// $result-&gt;num_rows获取结果集中的行数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// 输出数据
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">while</span><span class="p">(</span><span class="nv">$row</span> <span class="o">=</span> <span class="nv">$result</span><span class="o">-&gt;</span><span class="na">fetch_assoc</span><span class="p">()){</span>	<span class="c1">// 每次从结果集中读取一行数据，并以关联数组形式返回
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">echo</span> <span class="nv">$row</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="s1">&#39;-----&#39;</span><span class="o">.</span><span class="nv">$row</span><span class="p">[</span><span class="s1">&#39;uid&#39;</span><span class="p">]</span><span class="o">.</span><span class="s1">&#39;-----&#39;</span><span class="o">.</span><span class="nv">$row</span><span class="p">[</span><span class="s1">&#39;job&#39;</span><span class="p">]</span><span class="o">.</span><span class="s1">&#39;&lt;br/&gt;&#39;</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nv">$result</span><span class="o">-&gt;</span><span class="na">num_rows</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>	<span class="c1">// $result-&gt;num_rows获取结果集中的行数
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// 输出数据
+</span></span></span><span class="line"><span class="cl">  <span class="k">while</span><span class="p">(</span><span class="nv">$row</span> <span class="o">=</span> <span class="nv">$result</span><span class="o">-&gt;</span><span class="na">fetch_assoc</span><span class="p">()){</span>	<span class="c1">// 每次从结果集中读取一行数据，并以关联数组形式返回
+</span></span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="nv">$row</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="s1">&#39;-----&#39;</span><span class="o">.</span><span class="nv">$row</span><span class="p">[</span><span class="s1">&#39;uid&#39;</span><span class="p">]</span><span class="o">.</span><span class="s1">&#39;-----&#39;</span><span class="o">.</span><span class="nv">$row</span><span class="p">[</span><span class="s1">&#39;job&#39;</span><span class="p">]</span><span class="o">.</span><span class="s1">&#39;&lt;br/&gt;&#39;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span><span class="k">else</span><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;无结果&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">close</span><span class="p">();</span>	<span class="c1">// 关闭数据库
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">?&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>特别的，这里使用的sql语句格式为<code>&quot;select * from 数据表名 where 筛选条件&quot;</code></p>
@@ -794,29 +794,29 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 1. 配置连接
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$servername</span> <span class="o">=</span> <span class="s2">&#34;localhost&#34;</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$servername</span> <span class="o">=</span> <span class="s2">&#34;localhost&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$username</span> <span class="o">=</span> <span class="s2">&#34;root&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$password</span> <span class="o">=</span> <span class="s2">&#34;root&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$dbname</span> <span class="o">=</span> <span class="s2">&#34;test&#34;</span><span class="p">;</span>		<span class="c1">//数据库库名
 </span></span></span><span class="line"><span class="cl"><span class="c1">// 2. 创建链接（使用mysqli函数按格式填写所需参数）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$conn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mysqli</span><span class="p">(</span><span class="nv">$servername</span><span class="p">,</span><span class="nv">$username</span><span class="p">,</span><span class="nv">$password</span><span class="p">,</span><span class="nv">$dbname</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$conn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mysqli</span><span class="p">(</span><span class="nv">$servername</span><span class="p">,</span><span class="nv">$username</span><span class="p">,</span><span class="nv">$password</span><span class="p">,</span><span class="nv">$dbname</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 3. 检测连接
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">connect_error</span><span class="p">){</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">connect_error</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="k">die</span><span class="p">(</span><span class="s2">&#34;连接失败&#34;</span><span class="o">.</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">connect_error</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 数据库增语句==============================================================
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//准备一条数据库语句
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$sql</span> <span class="o">=</span> <span class="s2">&#34;insert into db1(uid,pwd,job) values(&#39;u5&#39;,&#39;666&#39;,&#39;driver&#39;)&#34;</span><span class="p">;</span> <span class="c1">// 这里相当于把增加指令赋值给$sql
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$sql</span> <span class="o">=</span> <span class="s2">&#34;insert into db1(uid,pwd,job) values(&#39;u5&#39;,&#39;666&#39;,&#39;driver&#39;)&#34;</span><span class="p">;</span> <span class="c1">// 这里相当于把增加指令赋值给$sql
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="nv">$sql</span><span class="p">)</span><span class="o">===</span><span class="k">true</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;新纪录插入成功&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span><span class="k">else</span><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;插入失败&#34;</span><span class="o">.</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">close</span><span class="p">();</span>	<span class="c1">// 关闭数据库
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">?&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>特别的，这里使用的sql语句格式为:</p>
@@ -853,21 +853,21 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 1. 配置连接
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$servername</span> <span class="o">=</span> <span class="s2">&#34;localhost&#34;</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$servername</span> <span class="o">=</span> <span class="s2">&#34;localhost&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$username</span> <span class="o">=</span> <span class="s2">&#34;root&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$password</span> <span class="o">=</span> <span class="s2">&#34;root&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$dbname</span> <span class="o">=</span> <span class="s2">&#34;test&#34;</span><span class="p">;</span>		<span class="c1">//数据库库名
 </span></span></span><span class="line"><span class="cl"><span class="c1">// 2. 创建链接（使用mysqli函数按格式填写所需参数）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$conn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mysqli</span><span class="p">(</span><span class="nv">$servername</span><span class="p">,</span><span class="nv">$username</span><span class="p">,</span><span class="nv">$password</span><span class="p">,</span><span class="nv">$dbname</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$conn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mysqli</span><span class="p">(</span><span class="nv">$servername</span><span class="p">,</span><span class="nv">$username</span><span class="p">,</span><span class="nv">$password</span><span class="p">,</span><span class="nv">$dbname</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 3. 检测连接
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">connect_error</span><span class="p">){</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">connect_error</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="k">die</span><span class="p">(</span><span class="s2">&#34;连接失败&#34;</span><span class="o">.</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">connect_error</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 数据库修改语句==============================================================
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//准备一条数据库语句
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$sql</span> <span class="o">=</span> <span class="s2">&#34;update db1 set pwd=&#39;mima&#39; where uid=&#39;u2&#39;&#34;</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$sql</span> <span class="o">=</span> <span class="s2">&#34;update db1 set pwd=&#39;mima&#39; where uid=&#39;u2&#39;&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="nv">$sql</span><span class="p">)</span><span class="o">===</span><span class="k">true</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;修改成功&#34;</span>
@@ -875,7 +875,7 @@
 </span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;修改失败&#34;</span><span class="o">.</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">close</span><span class="p">();</span>	<span class="c1">// 关闭数据库
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">?&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>特别的，这里使用的sql语句格式为:</p>
@@ -913,21 +913,21 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 1. 配置连接
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$servername</span> <span class="o">=</span> <span class="s2">&#34;localhost&#34;</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$servername</span> <span class="o">=</span> <span class="s2">&#34;localhost&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$username</span> <span class="o">=</span> <span class="s2">&#34;root&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$password</span> <span class="o">=</span> <span class="s2">&#34;root&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$dbname</span> <span class="o">=</span> <span class="s2">&#34;test&#34;</span><span class="p">;</span>		<span class="c1">//数据库库名
 </span></span></span><span class="line"><span class="cl"><span class="c1">// 2. 创建链接（使用mysqli函数按格式填写所需参数）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$conn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mysqli</span><span class="p">(</span><span class="nv">$servername</span><span class="p">,</span><span class="nv">$username</span><span class="p">,</span><span class="nv">$password</span><span class="p">,</span><span class="nv">$dbname</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$conn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mysqli</span><span class="p">(</span><span class="nv">$servername</span><span class="p">,</span><span class="nv">$username</span><span class="p">,</span><span class="nv">$password</span><span class="p">,</span><span class="nv">$dbname</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 3. 检测连接
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">connect_error</span><span class="p">){</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">connect_error</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="k">die</span><span class="p">(</span><span class="s2">&#34;连接失败&#34;</span><span class="o">.</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">connect_error</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 数据库删除语句==============================================================
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//准备一条数据库语句
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$sql</span> <span class="o">=</span> <span class="s2">&#34;delete from db1 where uid=u4&#34;</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$sql</span> <span class="o">=</span> <span class="s2">&#34;delete from db1 where uid=u4&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="nv">$sql</span><span class="p">)</span><span class="o">===</span><span class="k">true</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;删除成功&#34;</span>
@@ -935,7 +935,7 @@
 </span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;删除失败&#34;</span><span class="o">.</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">close</span><span class="p">();</span>	<span class="c1">// 关闭数据库
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">?&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>特别的，这里使用的sql语句格式为:</p>
@@ -1007,7 +1007,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$user_input</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">];</span> <span class="c1">// 假设用户输入：4 or 1=1
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$sql</span> <span class="o">=</span> <span class="s2">&#34;select * from db1 where id &lt; </span><span class="si">$user_input</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$sql</span> <span class="o">=</span> <span class="s2">&#34;select * from db1 where id &lt; </span><span class="si">$user_input</span><span class="s2">&#34;</span><span class="p">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -1104,30 +1104,30 @@
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 1. 配置连接
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$servername</span> <span class="o">=</span> <span class="s2">&#34;localhost&#34;</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$servername</span> <span class="o">=</span> <span class="s2">&#34;localhost&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$username</span> <span class="o">=</span> <span class="s2">&#34;root&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$password</span> <span class="o">=</span> <span class="s2">&#34;root&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$dbname</span> <span class="o">=</span> <span class="s2">&#34;test&#34;</span><span class="p">;</span>		<span class="c1">//数据库库名
 </span></span></span><span class="line"><span class="cl"><span class="c1">// 2. 创建链接（使用mysqli函数按格式填写所需参数）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$conn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mysqli</span><span class="p">(</span><span class="nv">$servername</span><span class="p">,</span><span class="nv">$username</span><span class="p">,</span><span class="nv">$password</span><span class="p">,</span><span class="nv">$dbname</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$conn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mysqli</span><span class="p">(</span><span class="nv">$servername</span><span class="p">,</span><span class="nv">$username</span><span class="p">,</span><span class="nv">$password</span><span class="p">,</span><span class="nv">$dbname</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 3. 检测连接
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">connect_error</span><span class="p">){</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">connect_error</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="k">die</span><span class="p">(</span><span class="s2">&#34;连接失败&#34;</span><span class="o">.</span><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">connect_error</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 数据库查询语句
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$userinput</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">];</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$userinput</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl"><span class="c1">//准备一条数据库语句
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$sql</span> <span class="o">=</span> <span class="s2">&#34;select * from db1 where id &lt;= </span><span class="si">$userinput</span><span class="s2">&#34;</span><span class="p">;</span> <span class="c1">// 这里相当于把查询指令赋值给$sql
+</span></span></span><span class="line"><span class="cl"><span class="nv">$sql</span> <span class="o">=</span> <span class="s2">&#34;select * from db1 where id &lt;= </span><span class="si">$userinput</span><span class="s2">&#34;</span><span class="p">;</span> <span class="c1">// 这里相当于把查询指令赋值给$sql
 </span></span></span><span class="line"><span class="cl"><span class="c1">// 执行sql语句并返回给变量
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$result</span> <span class="o">=</span> <span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="nv">$sql</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$result</span> <span class="o">=</span> <span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="nv">$sql</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 判断result里是否有东西
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="nv">$result</span><span class="o">-&gt;</span><span class="na">num_rows</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>	<span class="c1">// $result-&gt;num_rows获取结果集中的行数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// 输出数据====================================================================
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">echo</span> <span class="s2">&#34;&lt;table border=&#39;1&#39;&gt;&#34;</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nv">$result</span><span class="o">-&gt;</span><span class="na">num_rows</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>	<span class="c1">// $result-&gt;num_rows获取结果集中的行数
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// 输出数据====================================================================
+</span></span></span><span class="line"><span class="cl">  <span class="k">echo</span> <span class="s2">&#34;&lt;table border=&#39;1&#39;&gt;&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="k">echo</span> <span class="s2">&#34;&lt;tr&gt;&lt;th&gt;id&lt;/th&gt; &lt;th&gt;uid&lt;/th&gt; &lt;th&gt;job&lt;/th&gt;&lt;/tr&gt;&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="k">while</span><span class="p">(</span><span class="nv">$row</span> <span class="o">=</span> <span class="nv">$result</span><span class="o">-&gt;</span><span class="na">fetch_assoc</span><span class="p">()){</span>	<span class="c1">// 每次从结果集中读取一行数据，并以关联数组形式返回
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">echo</span> <span class="s2">&#34;&lt;tr&gt;&#34;</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">      <span class="k">echo</span> <span class="s2">&#34;&lt;tr&gt;&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      <span class="k">echo</span> <span class="s2">&#34;&lt;td&gt;&#34;</span><span class="o">.</span><span class="nv">$row</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="s2">&#34;&lt;/td&gt;&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      <span class="k">echo</span> <span class="s2">&#34;&lt;td&gt;&#34;</span><span class="o">.</span><span class="nv">$row</span><span class="p">[</span><span class="s1">&#39;uid&#39;</span><span class="p">]</span><span class="o">.</span><span class="s2">&#34;&lt;/td&gt;&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      <span class="k">echo</span> <span class="s2">&#34;&lt;td&gt;&#34;</span><span class="o">.</span><span class="nv">$row</span><span class="p">[</span><span class="s1">&#39;job&#39;</span><span class="p">]</span><span class="o">.</span><span class="s2">&#34;&lt;/td&gt;&#34;</span><span class="p">;</span>
@@ -1136,10 +1136,10 @@
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="k">echo</span> <span class="s2">&#34;&lt;/table&gt;&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span><span class="k">else</span><span class="p">{</span>	<span class="c1">//=======================================================================
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">echo</span> <span class="s2">&#34;无结果&#34;</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;无结果&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">close</span><span class="p">();</span>	<span class="c1">// 关闭数据库
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">?&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">&lt;/body&gt;
 </span></span></span><span class="line"><span class="cl"><span class="err">&lt;/html&gt;
 </span></span></span></code></pre></td></tr></table>

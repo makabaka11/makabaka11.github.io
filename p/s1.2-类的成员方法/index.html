@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="类的定义和使用 前情回顾 在上一节，我们学习了可以用类去封装属性，并基于类创建出一个个的对象来使用，然而实际上类还可以用来封装方法：\n1 2 3 4 class 类名称: 类的属性\t# 类的属性，即定义在类中的变量（成员变量） 类的行为 # 类的行为，即定义在类中的函数（成员方法） 示例：\n1 2 3 4 5 6 7 8 9 10 class Student: name = None age = None def hi(self): print(f&#34;大家好，我是{self.name}&#34;) ########## stu = Student() stu.name = &#39;小明&#39; stu.hi() 从今以后，我们就要称定义在类内部的函数为 方法 了。\n成员方法的定义语法 有些人肯定要问了：“上面的方法的代码里为什么有个self？”\n这就关系到它的定义语法了：\n1 2 def 方法名(self,形参1,形参2,......形参n): 方法体 可以看到,在方法定义的参数列表中,有一个：self 关键字\nself 关键字是成员方法定义的时候，必须填写的。\n它用来表示类对象自身的意思 当我们使用类对象调用方法的是,self会自动被python传入 在方法内部，想要访问类的成员变量，必须使用self（见上方示例） 注意：self关键字虽然在参数列表中，但是传参的时候可以忽略\n例如：\n1 2 3 4 5 6 7 8 9 10 11 12 13 class Student: name = None age = None def hi(self): print(f&#34;大家好，我是{self.name}&#34;) def hello(self,msg): print(f&#39;hello,大家好，{msg}&#39;) ###### stu = Student() stu.name = &#39;小王&#39; stu.hi() stu.hello(&#39;很高兴认识大家&#39;)\t# 可以看到此处传参只传给了msg，不用理会self ">
 <title>S1.2 类的成员方法</title>
@@ -558,6 +558,19 @@
             
                 
 <article class="">
+    <a href="/p/s1.6-%E5%B0%81%E8%A3%85/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">S1.6 封装</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
     <a href="/p/s1.5-%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/">
         
         
@@ -603,19 +616,6 @@
 
         <div class="article-details">
             <h2 class="article-title">S1.1 初识对象</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/10.5-%E7%BB%83%E4%B9%A0%E4%B8%89%E5%8A%A8%E6%80%81%E6%9F%B1%E7%8A%B6%E5%9B%BE/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">10.5 练习三：动态柱状图</h2>
         </div>
     </a>
 </article>

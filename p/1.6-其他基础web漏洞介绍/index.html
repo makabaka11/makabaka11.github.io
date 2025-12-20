@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="了解如何使用暴力破解，命令执行漏洞和XSS漏洞">
 <title>1.6 其他基础web漏洞介绍</title>
@@ -509,7 +509,7 @@ Windows IP 配置
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1">// Set blacklist
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nv">$substitutions</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nv">$substitutions</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">        <span class="s1">&#39;&amp;&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="s1">&#39;;&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="s1">&#39;| &#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
@@ -522,7 +522,7 @@ Windows IP 配置
 </span></span><span class="line"><span class="cl">    <span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// Remove any of the charactars in the array (blacklist).
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nv">$target</span> <span class="o">=</span> <span class="nx">str_replace</span><span class="p">(</span> <span class="nx">array_keys</span><span class="p">(</span> <span class="nv">$substitutions</span> <span class="p">),</span> <span class="nv">$substitutions</span><span class="p">,</span> <span class="nv">$target</span> <span class="p">);</span> 
+</span></span></span><span class="line"><span class="cl">    <span class="nv">$target</span> <span class="o">=</span> <span class="nx">str_replace</span><span class="p">(</span> <span class="nx">array_keys</span><span class="p">(</span> <span class="nv">$substitutions</span> <span class="p">),</span> <span class="nv">$substitutions</span><span class="p">,</span> <span class="nv">$target</span> <span class="p">);</span> 
 </span></span></code></pre></td></tr></table>
 </div>
 </div><details class="lake-collapse"><summary id="u2313980e"><strong><span class="ne-text">补充3(点击展开)：</span></strong></summary><p id="u5ff13468" class="ne-p"><span class="ne-text">str_replace的用法：str_replace(&quot;要换的字符串&quot;,&quot;替换为&quot;,作用于哪个变量)，例如：</span></p><pre data-language="php" id="EylAn" class="ne-codeblock language-php"><code>&lt;?php

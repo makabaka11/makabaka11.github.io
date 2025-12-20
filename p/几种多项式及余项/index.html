@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 多项式+余项=公式\n一、泰勒多项式（Taylor Polynomial） 定义 设函数$ f(x) $在点$ x = a $处$ n $阶可导，则以$ x = a $为中心的$ n $次泰勒多项式为： $$ P_n(x) = f(a) + f'(a)(x - a) + \\frac{f''(a)}{2!}(x - a)^2 + \\cdots + \\frac{f^{(n)}(a)}{n!}(x - a)^n $$核心特点 本质：用$ f(x) $在$ x = a $处的函数值及各阶导数值，构造多项式逼近$ f(x) $； 局部性：在$ a $的邻域内逼近效果好，阶数$ n $越高，逼近越精确。 二、麦克劳林多项式（Maclaurin Polynomial） 定义 泰勒多项式的特殊情况——当中心$ a = 0 $时，$ n $次麦克劳林多项式为： $$ P_n(x) = f(0) + f'(0)x + \\frac{f''(0)}{2!}x^2 + \\cdots + \\frac{f^{(n)}(0)}{n!}x^n $$核心特点 简化形式：无需考虑$ (x - a) $项，直接以$ x $的幂次展开； 适用场景：$ f(x) $在$ x = 0 $处易求各阶导数（如$ e^x $、$ \\sin x $、$ \\cos x $等）。 三、拉格朗日余项（Lagrange Remainder） 定义 泰勒公式中，$ f(x) $与泰勒多项式$ P_n(x) $的误差（定量余项），表达式为： ">
 <title>几种多项式及余项</title>

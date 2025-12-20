@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="判断n阶方阵A是否可逆，核心看以下快速等价条件（满足其一即可，优先选前2个最便捷）：\n行列式非零：$|A| \\neq 0$（直接计算行列式，最快上手）； 矩阵满秩：秩$r(A) = n$（通过初等行变换看是否能化为单位矩阵）； 齐次方程组$AX = 0$只有零解； 行/列向量组线性无关； 存在方阵B，使得$AB = BA = I$（I为单位矩阵）。 ">
 <title>快速判断矩阵是否可逆</title>

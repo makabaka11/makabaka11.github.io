@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="json 数据格式 什么是json JSON是一种轻量级的数据交互格式。可以按照JSON指定的格式去组织和封装数据 JSON本质上是一个带有特定格式的字符串 主要功能： json就是一种在各个编程语言中流通的数据格式，负责不同编程语言中的数据传递和交互。\njson有什么用 各种编程语言存储数据的容器不尽相同，在Python中有字典dict这样的数据类型，而其它语言可能没有对应的字典。 为了让不同的语言都能够相互通用的互相传递数据，JSON就是一种非常良好的中转数据格式。如下图，以Python和C语言互传数据为例：\njson格式数据转化 json格式的数据要求很严格，如下面所示：\n1 2 3 4 5 # json数据的格式可以是(类字典)： {&#34;name&#34;:&#34;admin&#34;,&#34;age&#34;:18} # 也可以是(类列表嵌套字典)： [{&#34;name&#34;:&#34;admin&#34;,&#34;age&#34;:18},{&#34;name&#34;:&#34;root&#34;,&#34;age&#34;:16},{&#34;name&#34;:&#34;retr0&#34;,&#34;age&#34;:20}] Python数据和json数据的相互转化 1 2 3 4 5 6 7 8 9 10 11 12 13 14 # 导入json模块 import json # 准备符合json格式要求的python数据 data = [{&#34;name&#34;:&#34;张三&#34;,&#34;age&#34;:16},{&#34;name&#34;:&#34;李四&#34;,&#34;age&#34;:20}] # 通过json.dumps(data)方法把python数据转化为了json数据 json1 = json.dumps(data) # 通过json.loads(json1)方法把json数据转化为了python数据 data1 = json.loads(json1) print(data,&#34;类型为&#34;,type(data)) print(json1,&#34;类型为&#34;,type(json1)) print(data1,&#34;类型为&#34;,type(data1)) 注意： 中文内容在转换为json时会出现编码问题，因此需要在json.dumps()中添加参数ensure_ascii=False，如下所示：\n">
 <title>10.2 前置知识：json 格式和 pyecharts 入门</title>
@@ -698,6 +698,19 @@
             
                 
 <article class="">
+    <a href="/p/s1.6-%E5%B0%81%E8%A3%85/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">S1.6 封装</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
     <a href="/p/s1.5-%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/">
         
         
@@ -743,19 +756,6 @@
 
         <div class="article-details">
             <h2 class="article-title">S1.2 类的成员方法</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/s1.1-%E5%88%9D%E8%AF%86%E5%AF%B9%E8%B1%A1/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">S1.1 初识对象</h2>
         </div>
     </a>
 </article>

