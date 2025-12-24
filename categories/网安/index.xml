@@ -7,7 +7,252 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Thu, 18 Dec 2025 22:46:46 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/%E7%BD%91%E5%AE%89/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 21 Dec 2025 12:41:39 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/%E7%BD%91%E5%AE%89/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>1.16 Linux应急响应</title>
+        <link>https://www.retr0.xyz/p/1.16-linux%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/</link>
+        <pubDate>Sun, 21 Dec 2025 12:41:39 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/1.16-linux%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/</guid>
+        <description>&lt;h2 id=&#34;常规命令操作&#34;&gt;常规命令操作
+&lt;/h2&gt;&lt;h3 id=&#34;查看流量大小&#34;&gt;查看流量大小
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;ifconfig&lt;/code&gt;查看RX packets（数据包数量）后面的数字是否异常多&lt;/p&gt;
+&lt;h3 id=&#34;进程查看&#34;&gt;进程查看
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;ps -aux&lt;/code&gt;或&lt;code&gt;ps-ef&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;功能：&lt;/strong&gt; 查看完整进程表&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;code&gt;top -c -o %CPU&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;参数解释：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-c&lt;/code&gt; 显示进程的命令行&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-p&lt;/code&gt; 显示进程的pid&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;code&gt;ps -eo pid,ppid,%mem,%cpu,cmd --sort=-%cpu | head -n 5&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;功能：&lt;/strong&gt; 输出占用前5的进程&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;code&gt;lsof -i -PnR&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;功能：&lt;/strong&gt; 查看网络通信情况&lt;/p&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;&lt;code&gt;ps aux | grep [指定pid]&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;功能：&lt;/strong&gt; 寻找指定pid对应的进程&lt;/p&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;&lt;code&gt;lsof -p [指定pid]&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;功能：&lt;/strong&gt; 查看指定pid的进程打开了哪些文件&lt;/p&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;&lt;code&gt;lsof [文件路径及名称]&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;功能：&lt;/strong&gt; 查看谁在占用某个文件&lt;/p&gt;
+&lt;ol start=&#34;7&#34;&gt;
+&lt;li&gt;&lt;strong&gt;功能：&lt;/strong&gt; 查看隐藏进程&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ps -ef &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; awk &lt;span class=&#34;s1&#34;&gt;&amp;#39;{print}&amp;#39;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; sort -n &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; uniq &amp;gt;1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ls /proc &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;sort -n &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;uniq &amp;gt;2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;diff &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;8&#34;&gt;
+&lt;li&gt;&lt;code&gt;md5sum [文件路径及名称]&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;功能：&lt;/strong&gt; 计算文件的MD5值&lt;/p&gt;
+&lt;h2 id=&#34;特定安全事件的处置&#34;&gt;特定安全事件的处置
+&lt;/h2&gt;&lt;h3 id=&#34;webshell查杀&#34;&gt;webshell查杀
+&lt;/h3&gt;&lt;p&gt;在线使用：&lt;a class=&#34;link&#34; href=&#34;https://n.shellpub.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;SHELLPUB.COM在线查杀&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;病毒rootkit查杀&#34;&gt;病毒/rootkit查杀
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;chkrootkit功能:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;检测是否被植入后门、木马、rootkit&lt;/li&gt;
+&lt;li&gt;检测系统命令是否正常&lt;/li&gt;
+&lt;li&gt;检测登录日志&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;使用方法:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;wget ftp://ftp.pangeia.com.br/pub/seg/pac/chkrootkit.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;tar zxvf
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;chkrootkit.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; chkrootkit-0.52
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;make sense
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;编译完成没有报错的话执行检查&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;./chkrootkit&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;综合查杀工具&#34;&gt;综合查杀工具
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xmirror.cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;悬镜安全-DevSecOps数字供应链安全开拓者&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;rkhunter工具&#34;&gt;rkhunter工具
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;rkhunter功能:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;系统命令(Binary)检测,包括MD5校验&lt;/li&gt;
+&lt;li&gt;Rootkit检测&lt;/li&gt;
+&lt;li&gt;本机敏感目录、系统配置、服务及套间异常检测&lt;/li&gt;
+&lt;li&gt;三方应用版本检测&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;使用方法:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Wget https://nchc.dl.sourceforge.net/project/rkhunter/rkhunter/1.4.4/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;rkhunter-1.4.4.tar.gz tar -zxvf rkhunter-1.4.4.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; rkhunter-1.4.4
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;./installer.sh --install
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;rkhunter -c
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;注：&lt;/font&gt;&lt;/strong&gt; &lt;font style=&#34;color:#DF2A3F;&#34;&gt;通常情况下Linux的恶意程序处置，靠人工解决。&lt;/font&gt;&lt;/p&gt;
+&lt;h2 id=&#34;网络行为分析&#34;&gt;网络行为分析
+&lt;/h2&gt;&lt;h3 id=&#34;系统信息&#34;&gt;系统信息
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;who&lt;/code&gt; 查看当前登录的账户&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;uname -a&lt;/code&gt; 查看系统信息&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;netst -ano&lt;/code&gt;	查看网络和端口情况&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;netstat -utnpl&lt;/code&gt;	简单查看端口及使用端口的进程&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;lsof -i :[端口号]&lt;/code&gt; 查看进程和端口的对应关系&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;arp -a&lt;/code&gt; 查看arp表（查看mac地址是否有重复）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ls -l /proc/[pid]/exe&lt;/code&gt;或&lt;code&gt;file /proc/[pid]/exe&lt;/code&gt; 查看某个pid对应的文件路径&lt;/p&gt;
+&lt;h3 id=&#34;使用iptables屏蔽ip&#34;&gt;使用iptables屏蔽ip
+&lt;/h3&gt;&lt;p&gt;阻止数据包传入（入站规则）：&lt;code&gt;iptables -A INPUT -s [ip地址] -j DROP&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;阻止数据包传出（出站规则）：&lt;code&gt;iptables -A OUTPUT -d [ip地址] -j DROP&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;如果把&lt;code&gt;DROP&lt;/code&gt;都改为&lt;code&gt;ACCEPT&lt;/code&gt;就是只允许某个ip的通信（白名单）&lt;/p&gt;
+&lt;p&gt;清理所有的已设置的规则：&lt;code&gt;iptables -F&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;拓展：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;用iptables封锁和x.com的域名通信&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;iptables -I INPUT -ptcp --dport 80 -m string --string &amp;quot;x.com&amp;quot; --algo bm -j DROP&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;启动项排查&#34;&gt;启动项排查
+&lt;/h2&gt;&lt;h3 id=&#34;启动项存在的路径&#34;&gt;启动项存在的路径
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/etc/init.d/&lt;/code&gt;	（服务的启动脚本）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/etc/xinetd.d&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;查看rclocal文件&#34;&gt;查看rc.local文件
+&lt;/h3&gt;&lt;p&gt;可能存在于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/etc/init.d/rc.local&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/etc/rc.d/rc[0-6].d/&lt;/code&gt;（文件夹里放的是指向&lt;code&gt;init.d&lt;/code&gt;的链接，0-6的数字指的是启动优先级）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/etc/profile.d/&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;计划任务排查&#34;&gt;计划任务排查
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;crontab -l&lt;/code&gt;查看计划任务&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;crontab -r&lt;/code&gt;删除计划任务&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;crontab -e&lt;/code&gt;使用编辑器编辑计划任务&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;拓展：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;计划任务可能具体存放的位置：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/etc/crontab&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/var/spool/cron/[用户名]&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/var/spool/cron/*&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/var/spool/anacron/*&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/etc/crontab/*&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/etc/cron.d/*&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/etc/cron.时间/* &lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;服务排查&#34;&gt;服务排查
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;cat /etc/services&lt;/code&gt;	查看网络服务&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;拓展：端口的分配&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;1-1024 系统保留，只能root使用&lt;/p&gt;
+&lt;p&gt;1025-4999 客户端程序自由分配&lt;/p&gt;
+&lt;p&gt;5000-65535 服务器端程序自由分配&lt;/p&gt;
+&lt;h2 id=&#34;服务自动启动&#34;&gt;服务自动启动
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;命令语法：&lt;/strong&gt; &lt;code&gt;chkconfig --level [运行级别] [服务名] [on/off]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;运行级别解释：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;0 - 关机&lt;/p&gt;
+&lt;p&gt;1- 单用户模式&lt;/p&gt;
+&lt;p&gt;2- 无网络连接的多用户命令行模式&lt;/p&gt;
+&lt;p&gt;3 - 有网络连接的多用户命令行模式&lt;/p&gt;
+&lt;p&gt;4 - 不可用&lt;/p&gt;
+&lt;p&gt;5 - 图形界面多用户模式&lt;/p&gt;
+&lt;p&gt;6 - 重启&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;例如：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;chkconfig --level 2345 httpd on&lt;/code&gt;也可写作&lt;code&gt;chkconfig httpd on&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;chkconfig --list&lt;/code&gt;	查看服务自启动状态&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;chkconfig --del&lt;/code&gt;		删除相关服务&lt;/p&gt;
+&lt;h2 id=&#34;文件检查&#34;&gt;文件检查
+&lt;/h2&gt;&lt;h3 id=&#34;webshell后门可以通过sftp复制出来&#34;&gt;webshell后门可以通过sftp复制出来
+&lt;/h3&gt;&lt;h3 id=&#34;敏感目录文件分析&#34;&gt;敏感目录文件分析
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;/etc/init.d&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;/usr/bin&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;/usr/sbin&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;文件属性分析&#34;&gt;文件属性分析
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;ls -alt&lt;/code&gt;	按修改时间排序&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;file [文件名及其路径]&lt;/code&gt;	检查文件类型&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;find / *.xxx -perm 4777&lt;/code&gt;	特殊权限文件查找&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ls -al /tmp | grep &amp;quot;Feb 10&amp;quot;&lt;/code&gt;	查看二月十号变更的隐藏文件（筛选用）&lt;/p&gt;
+&lt;h3 id=&#34;敏感目录&#34;&gt;敏感目录
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/tmp
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/root
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/bin
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/bin
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/sbin
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/sbin
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;文件的高级查找&#34;&gt;文件的高级查找
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;find [路径] -uid 0 -print&lt;/code&gt;	查找特权文件&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;find [路径] -size +10000k -print&lt;/code&gt;	查找大于10000k的文件&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;find  [路径] -name &amp;quot;...&amp;quot; -print&lt;/code&gt;	查找文件名为&amp;hellip;的文件&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;md5sum -b [文件]&lt;/code&gt;计算MD5&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;whereis [文件名]&lt;/code&gt; 查找文件路径&lt;/p&gt;
+&lt;h3 id=&#34;检查账号&#34;&gt;检查账号
+&lt;/h3&gt;&lt;h4 id=&#34;账户本身检查&#34;&gt;账户本身检查
+&lt;/h4&gt;&lt;p&gt;&lt;code&gt;w&lt;/code&gt;	查看所有登录用户及系统状态&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;cat /etc/passwd&lt;/code&gt;或&lt;code&gt;less /etc passwd&lt;/code&gt;用户信息文件&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ls -l /etc/passwd&lt;/code&gt; 查看上面文件的修改时间&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;cat /etc/shadow&lt;/code&gt; 用户密码&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;usermod -L [用户名]&lt;/code&gt;	禁用账户（不能登录）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;usermod -U [用户名]&lt;/code&gt;	启用账户&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;userdel -r [用户名]&lt;/code&gt;	删除账户&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;userdel  [用户名]&lt;/code&gt;	删除账户并删除其对应/home目录&lt;/p&gt;
+&lt;h4 id=&#34;用户登录检查&#34;&gt;用户登录检查
+&lt;/h4&gt;&lt;p&gt;&lt;code&gt;last&lt;/code&gt;	用户登录检查（数据源&lt;code&gt;/var/log/wtmp&lt;/code&gt;和&lt;code&gt;/var/log/btmp&lt;/code&gt;）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;lastb&lt;/code&gt;	上次登录失败（数据源&lt;code&gt;/var/log/btmp&lt;/code&gt;）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;lastlog&lt;/code&gt;上次登录成功（数据源&lt;code&gt;/var/log/lastlog&lt;/code&gt;）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;last -x reboot&lt;/code&gt;	上次重启&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;last -x shutdown&lt;/code&gt;上次关机&lt;/p&gt;
+&lt;p&gt;（数据源&lt;code&gt;/var/log/lastlog&lt;/code&gt;和&lt;code&gt;/var/log/secure&lt;/code&gt;）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;/var/log/message&lt;/code&gt;	存储的认证信息，可以追踪恶意用户登录行为&lt;/p&gt;
+&lt;h2 id=&#34;历史命令&#34;&gt;历史命令
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;history&lt;/code&gt;	查看历史命令&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;history -c&lt;/code&gt;	清除历史命令&lt;/p&gt;
+&lt;h2 id=&#34;日志分析&#34;&gt;日志分析
+&lt;/h2&gt;&lt;p&gt;默认日志&lt;code&gt;/var/log/&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;more /etc/rsyslog.conf&lt;/code&gt;	查看日志情况&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>1.15 DOS补充和Win应急响应</title>
         <link>https://www.retr0.xyz/p/1.15-dos%E8%A1%A5%E5%85%85%E5%92%8Cwin%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/</link>
         <pubDate>Thu, 18 Dec 2025 22:46:46 +0800</pubDate>
@@ -218,9 +463,16 @@
 &lt;p&gt;也可以在mmc或者此电脑的管理中查看计划任务&lt;/p&gt;
 &lt;h3 id=&#34;特定事件痕迹&#34;&gt;特定事件痕迹
 &lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;挖矿程序&lt;/li&gt;
-&lt;li&gt;勒索病毒&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;挖矿程序&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;勒索病毒&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
+&lt;h3 id=&#34;使用工具windows-kernel-explorer&#34;&gt;使用工具：Windows Kernel Explorer
+&lt;/h3&gt;&lt;p&gt;下载地址：&lt;a class=&#34;link&#34; href=&#34;https://github.com/AxtMueller/Windows-Kernel-Explorer/tree/master/binaries&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AxtMueller/Windows-Kernel-Explorer&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
         <item>

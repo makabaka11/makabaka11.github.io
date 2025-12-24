@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="常规命令操作 查看流量大小 ifconfig查看RX packets（数据包数量）后面的数字是否异常多\n进程查看 ps -aux或ps-ef 功能： 查看完整进程表\ntop -c -o %CPU 参数解释：\n-c 显示进程的命令行\n-p 显示进程的pid\nps -eo pid,ppid,%mem,%cpu,cmd --sort=-%cpu | head -n 5 功能： 输出占用前5的进程\nlsof -i -PnR 功能： 查看网络通信情况\nps aux | grep [指定pid] 功能： 寻找指定pid对应的进程\nlsof -p [指定pid] 功能： 查看指定pid的进程打开了哪些文件\nlsof [文件路径及名称] 功能： 查看谁在占用某个文件\n功能： 查看隐藏进程 1 2 3 ps -ef | awk &#39;{print}&#39; | sort -n | uniq &gt;1 ls /proc |sort -n |uniq &gt;2 diff 1 2 md5sum [文件路径及名称] 功能： 计算文件的MD5值\n">
+<title>1.16 Linux应急响应</title>
+
+<link rel='canonical' href='https://www.retr0.xyz/p/1.16-linux%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/'>
+
+<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="1.16 Linux应急响应">
+<meta property='og:description' content="常规命令操作 查看流量大小 ifconfig查看RX packets（数据包数量）后面的数字是否异常多\n进程查看 ps -aux或ps-ef 功能： 查看完整进程表\ntop -c -o %CPU 参数解释：\n-c 显示进程的命令行\n-p 显示进程的pid\nps -eo pid,ppid,%mem,%cpu,cmd --sort=-%cpu | head -n 5 功能： 输出占用前5的进程\nlsof -i -PnR 功能： 查看网络通信情况\nps aux | grep [指定pid] 功能： 寻找指定pid对应的进程\nlsof -p [指定pid] 功能： 查看指定pid的进程打开了哪些文件\nlsof [文件路径及名称] 功能： 查看谁在占用某个文件\n功能： 查看隐藏进程 1 2 3 ps -ef | awk &#39;{print}&#39; | sort -n | uniq &gt;1 ls /proc |sort -n |uniq &gt;2 diff 1 2 md5sum [文件路径及名称] 功能： 计算文件的MD5值\n">
+<meta property='og:url' content='https://www.retr0.xyz/p/1.16-linux%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/'>
+<meta property='og:site_name' content='Retr0的小窝'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-21T12:41:39&#43;08:00'/><meta property='article:modified_time' content='2025-12-21T12:41:39&#43;08:00'/>
+<meta name="twitter:title" content="1.16 Linux应急响应">
+<meta name="twitter:description" content="常规命令操作 查看流量大小 ifconfig查看RX packets（数据包数量）后面的数字是否异常多\n进程查看 ps -aux或ps-ef 功能： 查看完整进程表\ntop -c -o %CPU 参数解释：\n-c 显示进程的命令行\n-p 显示进程的pid\nps -eo pid,ppid,%mem,%cpu,cmd --sort=-%cpu | head -n 5 功能： 输出占用前5的进程\nlsof -i -PnR 功能： 查看网络通信情况\nps aux | grep [指定pid] 功能： 寻找指定pid对应的进程\nlsof -p [指定pid] 功能： 查看指定pid的进程打开了哪些文件\nlsof [文件路径及名称] 功能： 查看谁在占用某个文件\n功能： 查看隐藏进程 1 2 3 ps -ef | awk &#39;{print}&#39; | sort -n | uniq &gt;1 ls /proc |sort -n |uniq &gt;2 diff 1 2 md5sum [文件路径及名称] 功能： 计算文件的MD5值\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+        <link rel="stylesheet" href="/css/APlayer.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_918ed7c4aecb3d05.gif" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">😭</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Retr0的小窝</a></h1>
+            <h2 class="site-description">警报：期末周袭来！</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/349466985'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:ded000@qq.com'
+                        target="_blank"
+                        title="email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/makabaka11'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.retr0.xyz/index.xml'
+                        target="_blank"
+                        title="RSS"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-rss"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M4 4a16 16 0 0 1 16 16" /><path d="M4 11a9 9 0 0 1 9 9" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://t.me/ded0000'
+                        target="_blank"
+                        title="Telegram"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页 | Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E-about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于 | About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/message/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-message"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 9h8" /><path d="M8 13h6" /><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" /></svg>
+                
+                <span>留言板 | Msg Board</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索 | Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>技术链接 | Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#常规命令操作">常规命令操作</a>
+      <ol>
+        <li><a href="#查看流量大小">查看流量大小</a></li>
+        <li><a href="#进程查看">进程查看</a></li>
+      </ol>
+    </li>
+    <li><a href="#特定安全事件的处置">特定安全事件的处置</a>
+      <ol>
+        <li><a href="#webshell查杀">webshell查杀</a></li>
+        <li><a href="#病毒rootkit查杀">病毒/rootkit查杀</a></li>
+        <li><a href="#综合查杀工具">综合查杀工具</a></li>
+        <li><a href="#rkhunter工具">rkhunter工具</a></li>
+      </ol>
+    </li>
+    <li><a href="#网络行为分析">网络行为分析</a>
+      <ol>
+        <li><a href="#系统信息">系统信息</a></li>
+        <li><a href="#使用iptables屏蔽ip">使用iptables屏蔽ip</a></li>
+      </ol>
+    </li>
+    <li><a href="#启动项排查">启动项排查</a>
+      <ol>
+        <li><a href="#启动项存在的路径">启动项存在的路径</a></li>
+        <li><a href="#查看rclocal文件">查看rc.local文件</a></li>
+      </ol>
+    </li>
+    <li><a href="#计划任务排查">计划任务排查</a></li>
+    <li><a href="#服务排查">服务排查</a></li>
+    <li><a href="#服务自动启动">服务自动启动</a></li>
+    <li><a href="#文件检查">文件检查</a>
+      <ol>
+        <li><a href="#webshell后门可以通过sftp复制出来">webshell后门可以通过sftp复制出来</a></li>
+        <li><a href="#敏感目录文件分析">敏感目录文件分析</a></li>
+        <li><a href="#文件属性分析">文件属性分析</a></li>
+        <li><a href="#敏感目录">敏感目录</a></li>
+        <li><a href="#文件的高级查找">文件的高级查找</a></li>
+        <li><a href="#检查账号">检查账号</a>
+          <ol>
+            <li><a href="#账户本身检查">账户本身检查</a></li>
+            <li><a href="#用户登录检查">用户登录检查</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#历史命令">历史命令</a></li>
+    <li><a href="#日志分析">日志分析</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BD%91%E5%AE%89/" style="background-color: #BEBDBD; color: #fff;">
+                网安
+            </a>
+        
+            <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%BE%AE%E4%B8%93%E4%B8%9A/" >
+                渗透测试微专业
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/1.16-linux%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">1.16 Linux应急响应</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+     
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-21</time>
+            </div>
+        
+
+        
+
+        
+        <div id="viewCount">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="常规命令操作">常规命令操作
+</h2><h3 id="查看流量大小">查看流量大小
+</h3><p><code>ifconfig</code>查看RX packets（数据包数量）后面的数字是否异常多</p>
+<h3 id="进程查看">进程查看
+</h3><ol>
+<li><code>ps -aux</code>或<code>ps-ef</code></li>
+</ol>
+<p><strong>功能：</strong> 查看完整进程表</p>
+<ol start="2">
+<li><code>top -c -o %CPU</code></li>
+</ol>
+<p><strong>参数解释：</strong></p>
+<p><code>-c</code> 显示进程的命令行</p>
+<p><code>-p</code> 显示进程的pid</p>
+<ol start="2">
+<li><code>ps -eo pid,ppid,%mem,%cpu,cmd --sort=-%cpu | head -n 5</code></li>
+</ol>
+<p><strong>功能：</strong> 输出占用前5的进程</p>
+<ol start="3">
+<li><code>lsof -i -PnR</code></li>
+</ol>
+<p><strong>功能：</strong> 查看网络通信情况</p>
+<ol start="4">
+<li><code>ps aux | grep [指定pid]</code></li>
+</ol>
+<p><strong>功能：</strong> 寻找指定pid对应的进程</p>
+<ol start="5">
+<li><code>lsof -p [指定pid]</code></li>
+</ol>
+<p><strong>功能：</strong> 查看指定pid的进程打开了哪些文件</p>
+<ol start="6">
+<li><code>lsof [文件路径及名称]</code></li>
+</ol>
+<p><strong>功能：</strong> 查看谁在占用某个文件</p>
+<ol start="7">
+<li><strong>功能：</strong> 查看隐藏进程</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ps -ef <span class="p">|</span> awk <span class="s1">&#39;{print}&#39;</span> <span class="p">|</span> sort -n <span class="p">|</span> uniq &gt;1
+</span></span><span class="line"><span class="cl">ls /proc <span class="p">|</span>sort -n <span class="p">|</span>uniq &gt;2
+</span></span><span class="line"><span class="cl">diff <span class="m">1</span> <span class="m">2</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="8">
+<li><code>md5sum [文件路径及名称]</code></li>
+</ol>
+<p><strong>功能：</strong> 计算文件的MD5值</p>
+<h2 id="特定安全事件的处置">特定安全事件的处置
+</h2><h3 id="webshell查杀">webshell查杀
+</h3><p>在线使用：<a class="link" href="https://n.shellpub.com/"  target="_blank" rel="noopener"
+    >SHELLPUB.COM在线查杀</a></p>
+<h3 id="病毒rootkit查杀">病毒/rootkit查杀
+</h3><p><strong>chkrootkit功能:</strong></p>
+<ul>
+<li>检测是否被植入后门、木马、rootkit</li>
+<li>检测系统命令是否正常</li>
+<li>检测登录日志</li>
+</ul>
+<p><strong>使用方法:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget ftp://ftp.pangeia.com.br/pub/seg/pac/chkrootkit.tar.gz
+</span></span><span class="line"><span class="cl">tar zxvf
+</span></span><span class="line"><span class="cl">chkrootkit.tar.gz
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> chkrootkit-0.52
+</span></span><span class="line"><span class="cl">make sense
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>编译完成没有报错的话执行检查</p>
+<p><code>./chkrootkit</code></p>
+<h3 id="综合查杀工具">综合查杀工具
+</h3><p><a class="link" href="https://www.xmirror.cn/"  target="_blank" rel="noopener"
+    >悬镜安全-DevSecOps数字供应链安全开拓者</a></p>
+<h3 id="rkhunter工具">rkhunter工具
+</h3><p><strong>rkhunter功能:</strong></p>
+<ul>
+<li>系统命令(Binary)检测,包括MD5校验</li>
+<li>Rootkit检测</li>
+<li>本机敏感目录、系统配置、服务及套间异常检测</li>
+<li>三方应用版本检测</li>
+</ul>
+<p><strong>使用方法:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Wget https://nchc.dl.sourceforge.net/project/rkhunter/rkhunter/1.4.4/
+</span></span><span class="line"><span class="cl">rkhunter-1.4.4.tar.gz tar -zxvf rkhunter-1.4.4.tar.gz
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> rkhunter-1.4.4
+</span></span><span class="line"><span class="cl">./installer.sh --install
+</span></span><span class="line"><span class="cl">rkhunter -c
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong><font style="color:#DF2A3F;">注：</font></strong> <font style="color:#DF2A3F;">通常情况下Linux的恶意程序处置，靠人工解决。</font></p>
+<h2 id="网络行为分析">网络行为分析
+</h2><h3 id="系统信息">系统信息
+</h3><p><code>who</code> 查看当前登录的账户</p>
+<p><code>uname -a</code> 查看系统信息</p>
+<p><code>netst -ano</code>	查看网络和端口情况</p>
+<p><code>netstat -utnpl</code>	简单查看端口及使用端口的进程</p>
+<p><code>lsof -i :[端口号]</code> 查看进程和端口的对应关系</p>
+<p><code>arp -a</code> 查看arp表（查看mac地址是否有重复）</p>
+<p><code>ls -l /proc/[pid]/exe</code>或<code>file /proc/[pid]/exe</code> 查看某个pid对应的文件路径</p>
+<h3 id="使用iptables屏蔽ip">使用iptables屏蔽ip
+</h3><p>阻止数据包传入（入站规则）：<code>iptables -A INPUT -s [ip地址] -j DROP</code></p>
+<p>阻止数据包传出（出站规则）：<code>iptables -A OUTPUT -d [ip地址] -j DROP</code></p>
+<p>如果把<code>DROP</code>都改为<code>ACCEPT</code>就是只允许某个ip的通信（白名单）</p>
+<p>清理所有的已设置的规则：<code>iptables -F</code></p>
+<p><strong>拓展：</strong></p>
+<p>用iptables封锁和x.com的域名通信</p>
+<p><code>iptables -I INPUT -ptcp --dport 80 -m string --string &quot;x.com&quot; --algo bm -j DROP</code></p>
+<h2 id="启动项排查">启动项排查
+</h2><h3 id="启动项存在的路径">启动项存在的路径
+</h3><ul>
+<li><code>/etc/init.d/</code>	（服务的启动脚本）</li>
+<li><code>/etc/xinetd.d</code></li>
+</ul>
+<h3 id="查看rclocal文件">查看rc.local文件
+</h3><p>可能存在于：</p>
+<ul>
+<li><code>/etc/init.d/rc.local</code></li>
+<li><code>/etc/rc.d/rc[0-6].d/</code>（文件夹里放的是指向<code>init.d</code>的链接，0-6的数字指的是启动优先级）</li>
+<li><code>/etc/profile.d/</code></li>
+</ul>
+<h2 id="计划任务排查">计划任务排查
+</h2><p><code>crontab -l</code>查看计划任务</p>
+<p><code>crontab -r</code>删除计划任务</p>
+<p><code>crontab -e</code>使用编辑器编辑计划任务</p>
+<p><strong>拓展：</strong></p>
+<p>计划任务可能具体存放的位置：</p>
+<ul>
+<li><code>/etc/crontab</code></li>
+<li><code>/var/spool/cron/[用户名]</code></li>
+<li><code>/var/spool/cron/*</code></li>
+<li><code>/var/spool/anacron/*</code></li>
+<li><code>/etc/crontab/*</code></li>
+<li><code>/etc/cron.d/*</code></li>
+<li><code>/etc/cron.时间/* </code></li>
+</ul>
+<h2 id="服务排查">服务排查
+</h2><p><code>cat /etc/services</code>	查看网络服务</p>
+<p><strong>拓展：端口的分配</strong></p>
+<p>1-1024 系统保留，只能root使用</p>
+<p>1025-4999 客户端程序自由分配</p>
+<p>5000-65535 服务器端程序自由分配</p>
+<h2 id="服务自动启动">服务自动启动
+</h2><p><strong>命令语法：</strong> <code>chkconfig --level [运行级别] [服务名] [on/off]</code></p>
+<p><strong>运行级别解释：</strong></p>
+<p>0 - 关机</p>
+<p>1- 单用户模式</p>
+<p>2- 无网络连接的多用户命令行模式</p>
+<p>3 - 有网络连接的多用户命令行模式</p>
+<p>4 - 不可用</p>
+<p>5 - 图形界面多用户模式</p>
+<p>6 - 重启</p>
+<p><strong>例如：</strong></p>
+<p><code>chkconfig --level 2345 httpd on</code>也可写作<code>chkconfig httpd on</code></p>
+<p><code>chkconfig --list</code>	查看服务自启动状态</p>
+<p><code>chkconfig --del</code>		删除相关服务</p>
+<h2 id="文件检查">文件检查
+</h2><h3 id="webshell后门可以通过sftp复制出来">webshell后门可以通过sftp复制出来
+</h3><h3 id="敏感目录文件分析">敏感目录文件分析
+</h3><p><code>/etc/init.d</code></p>
+<p><code>/usr/bin</code></p>
+<p><code>/usr/sbin</code></p>
+<h3 id="文件属性分析">文件属性分析
+</h3><p><code>ls -alt</code>	按修改时间排序</p>
+<p><code>file [文件名及其路径]</code>	检查文件类型</p>
+<p><code>find / *.xxx -perm 4777</code>	特殊权限文件查找</p>
+<p><code>ls -al /tmp | grep &quot;Feb 10&quot;</code>	查看二月十号变更的隐藏文件（筛选用）</p>
+<h3 id="敏感目录">敏感目录
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">/tmp
+</span></span><span class="line"><span class="cl">/root
+</span></span><span class="line"><span class="cl">/bin
+</span></span><span class="line"><span class="cl">/usr/bin
+</span></span><span class="line"><span class="cl">/usr/sbin
+</span></span><span class="line"><span class="cl">/sbin
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="文件的高级查找">文件的高级查找
+</h3><p><code>find [路径] -uid 0 -print</code>	查找特权文件</p>
+<p><code>find [路径] -size +10000k -print</code>	查找大于10000k的文件</p>
+<p><code>find  [路径] -name &quot;...&quot; -print</code>	查找文件名为&hellip;的文件</p>
+<p><code>md5sum -b [文件]</code>计算MD5</p>
+<p><code>whereis [文件名]</code> 查找文件路径</p>
+<h3 id="检查账号">检查账号
+</h3><h4 id="账户本身检查">账户本身检查
+</h4><p><code>w</code>	查看所有登录用户及系统状态</p>
+<p><code>cat /etc/passwd</code>或<code>less /etc passwd</code>用户信息文件</p>
+<p><code>ls -l /etc/passwd</code> 查看上面文件的修改时间</p>
+<p><code>cat /etc/shadow</code> 用户密码</p>
+<p><code>usermod -L [用户名]</code>	禁用账户（不能登录）</p>
+<p><code>usermod -U [用户名]</code>	启用账户</p>
+<p><code>userdel -r [用户名]</code>	删除账户</p>
+<p><code>userdel  [用户名]</code>	删除账户并删除其对应/home目录</p>
+<h4 id="用户登录检查">用户登录检查
+</h4><p><code>last</code>	用户登录检查（数据源<code>/var/log/wtmp</code>和<code>/var/log/btmp</code>）</p>
+<p><code>lastb</code>	上次登录失败（数据源<code>/var/log/btmp</code>）</p>
+<p><code>lastlog</code>上次登录成功（数据源<code>/var/log/lastlog</code>）</p>
+<p><code>last -x reboot</code>	上次重启</p>
+<p><code>last -x shutdown</code>上次关机</p>
+<p>（数据源<code>/var/log/lastlog</code>和<code>/var/log/secure</code>）</p>
+<p><code>/var/log/message</code>	存储的认证信息，可以追踪恶意用户登录行为</p>
+<h2 id="历史命令">历史命令
+</h2><p><code>history</code>	查看历史命令</p>
+<p><code>history -c</code>	清除历史命令</p>
+<h2 id="日志分析">日志分析
+</h2><p>默认日志<code>/var/log/</code></p>
+<p><code>more /etc/rsyslog.conf</code>	查看日志情况</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+<div class="math-katex"></div>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/1.15-dos%E8%A1%A5%E5%85%85%E5%92%8Cwin%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.15 DOS补充和Win应急响应</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.14-%E8%87%AA%E5%90%AF%E5%8A%A8%E5%92%8Cdos%E6%94%BB%E5%87%BB%E5%88%9D%E6%AD%A5/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.14 自启动和DOS攻击初步</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.13-%E6%9B%B4%E5%A4%9A%E6%9C%A8%E9%A9%AC%E7%A8%8B%E5%BA%8F/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.13  更多木马程序</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.12-%E8%BF%9B%E9%98%B6%E5%90%8E%E9%97%A8%E6%93%8D%E4%BD%9C/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.12 进阶后门操作</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.11-linux%E6%8F%90%E6%9D%83%E7%BB%AD%E5%92%8C%E9%92%93%E9%B1%BC%E7%BD%91%E7%AB%99/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.11 Linux提权(续)和钓鱼网站</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+        <div class="comment-container mt-8"></div>
+        
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="makabaka11/makabaka11.github.io"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Retr0
+    </section>
+    
+    <section class="powerby">
+        
+            Powered by ctOS <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+
+                <script src="/js/APlayer.min.js"></script>
+                <script src="/js/Meting.min.js"></script>
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.eaf1211e4c7db355f37ceea53df13700e1b77fbcc3cfe8c1c1f69e4468a752e1.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+
+<script>
+    var pjax = new Pjax({
+        selectors: [".main-container"]
+    });
+</script>
+
+
+<script src=https://www.retr0.xyz/js/topbar.min.js></script>
+
+
+
+<script>
+function initUtterances() {
+    const isArticle = document.querySelector('.article-page') && document.querySelector('.article-content');
+    if (!isArticle) return;
+
+    const oldScript = document.querySelector('script[src^="https://utteranc.es/client.js"]');
+    if (oldScript) oldScript.remove();
+
+    const container = document.querySelector('.comment-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    let script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'makabaka11/makabaka11.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+    container.appendChild(script);
+}
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    if (!window.pjax || !window.pjax.state) initUtterances();
+});
+</script>
+
+
+<script>
+pjax._handleResponse = pjax.handleResponse;
+pjax.handleResponse = function(responseText, request, href, options) {
+    if (request.responseText.match("<html")) {
+        if (responseText) {
+            let newDom = new DOMParser().parseFromString(responseText, 'text/html');
+            document.body.setAttribute("class", newDom.body.className);
+        }
+        pjax._handleResponse(responseText, request, href, options);
+    }
+};
+</script>
+
+
+<script>
+topbar.config({
+    barColors: {
+        '0': 'rgba(255, 255, 255, 1)',
+        '1.0': 'rgba(255, 183, 197, 1)'
+    }
+});
+
+document.addEventListener('pjax:send', () => topbar.show());
+
+document.addEventListener('pjax:complete', () => {
+    window.Stack.init();
+    topbar.hide();
+    setTimeout(initUtterances, 0);
+    updateViewCount();
+    renderKaTeX();
+    initPhotoSwipeFromDOM('.article-content');   
+    initLive2D();                                
+});
+</script>
+
+
+<script>
+function updateViewCount() {
+    const viewCountEl = document.getElementById('vercount_value_page_pv');
+    if (!viewCountEl) return;
+
+    viewCountEl.textContent = 'loading...';
+    const url = 'https://cn.vercount.one/js';
+
+    const old = document.querySelector(`script[src="${url}"]`);
+    if (old) old.remove();
+
+    const s = document.createElement('script');
+    s.src = url;
+    s.defer = true;
+    document.head.appendChild(s);
+
+    showHideView();
+}
+
+function showHideView() {
+    const viewCounts = document.querySelectorAll("#viewCount");
+    const isArticle = document.querySelector(".article-page");
+    viewCounts.forEach(ele => ele.style.display = isArticle ? 'block' : 'none');
+}
+</script>
+
+<script>
+    function showHideView() {
+        
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+
+
+
+<script>
+async function renderKaTeX() {
+    let katex = document.querySelector(".math-katex");
+    if (!katex) return;
+
+    while (typeof renderMathInElement !== 'function') {
+        await new Promise(r => setTimeout(r, 500));
+    }
+
+    const content = document.querySelector('.article-content') || document.body;
+    renderMathInElement(content, {
+        delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true }
+        ],
+        ignoredClasses: ["gist"]
+    });
+}
+</script>
+
+
+<div id="particles-js"></div>
+
+<script src=https://www.retr0.xyz/background/particles.min.js></script>
+<script>
+particlesJS.load('particles-js',
+    "https://www.retr0.xyz/background/particlesjs-config.json",
+    () => console.log('particles.js loaded')
+);
+</script>
+
+<style>
+#particles-js {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: -1;
+}
+</style>
+
+<script>
+
+function initPhotoSwipeFromDOM(selector) {
+    if (!window.PhotoSwipe) return;
+
+    const containers = document.querySelectorAll(selector);
+    if (!containers.length) return;
+
+    containers.forEach(container => {
+        const images = container.querySelectorAll('img');
+
+        images.forEach((img, index) => {
+
+            
+            function getImageSize() {
+                return new Promise(resolve => {
+                    if (img.complete && img.naturalWidth) {
+                        resolve({
+                            w: img.naturalWidth,
+                            h: img.naturalHeight
+                        });
+                    } else {
+                        const tmp = new Image();
+                        tmp.src = img.src || img.getAttribute("data-src");
+                        tmp.onload = () => resolve({ w: tmp.width, h: tmp.height });
+                    }
+                });
+            }
+
+            img.style.cursor = "zoom-in";
+
+            
+            img.addEventListener("click", async (e) => {
+                e.preventDefault();
+
+                const size = await getImageSize();
+                const pswpEl = document.querySelector('.pswp');
+
+                const items = Array.from(images).map(i => ({
+                    src: i.src || i.getAttribute("data-src"),
+                    msrc: i.src,
+                    w: i.naturalWidth || 800,
+                    h: i.naturalHeight || 600,
+                }));
+
+                items[index].w = size.w;
+                items[index].h = size.h;
+
+                const gallery = new PhotoSwipe(pswpEl, PhotoSwipeUI_Default, items, {
+                    index,
+                    history: false
+                });
+
+                
+                
+                
+                enablePhotoSwipeWebShare(gallery);
+
+                gallery.init();
+            });
+        });
+    });
+}
+
+
+
+
+
+function enablePhotoSwipeWebShare(gallery) {
+    gallery.listen('shareLinkClick', function(shareButtonData, e) {
+        e.preventDefault();
+
+        const item = gallery.currItem;
+
+        if (navigator.share) {
+            navigator.share({
+                title: document.title,
+                text: '给你分享一张图片：',
+                url: item.src
+            }).catch(err => console.log("分享失败：", err));
+
+            return false; 
+        }
+
+        
+        return true;
+    });
+}
+</script>
+
+
+
+<script>
+
+
+window._live2d_loaded = window._live2d_loaded || false;
+window._live2d_initialized = window._live2d_initialized || false;
+
+
+function loadLive2DAssetsOnce(cdnPath) {
+    if (window._live2d_loaded) return Promise.resolve();
+
+    window._live2d_loaded = true;
+
+    return Promise.all([
+        loadRes(cdnPath + "waifu.css", "css"),
+        loadRes(cdnPath + "Core/live2dcubismcore.js", "js"),
+        loadRes(cdnPath + "live2d-sdk.js", "js"),
+        loadRes(cdnPath + "waifu-tips.js", "js")
+    ]);
+}
+
+
+function initLive2DWidgetOnce(cdnPath) {
+
+    if (window._live2d_initialized) return;
+
+    
+    const old = document.querySelector("#waifu");
+    if (old) old.remove();
+
+    window._live2d_initialized = true;
+
+    initWidget({
+        waifuPath: cdnPath + "waifu-tips.json",
+        cdnPath: cdnPath + "Resources/",
+        tools: ["hitokoto", "asteroids", "express", "switch-model", "switch-texture", "photo", "info", "quit"],
+        dragEnable: true,
+        dragDirection: ["x", "y"],
+        switchType: "order"
+    });
+
+    console.log("[Live2D] Widget initialized.");
+}
+
+
+function loadRes(url, type) {
+    return new Promise((resolve) => {
+        let tag;
+        if (type === "css") {
+            tag = document.createElement("link");
+            tag.rel = "stylesheet";
+            tag.href = url;
+        } else {
+            tag = document.createElement("script");
+            tag.src = url;
+        }
+        tag.onload = resolve;
+        document.head.appendChild(tag);
+    });
+}
+
+
+function initLive2D() {
+    if (screen.width < 768) return;
+
+    const cdnPath = "https://www.retr0.xyz/blog-live2d/";
+
+    loadLive2DAssetsOnce(cdnPath)
+        .then(() => initLive2DWidgetOnce(cdnPath));
+}
+
+initLive2D();  
+
+
+document.addEventListener("pjax:complete", () => {
+    initLive2D(); 
+});
+</script>
+
+
+<style>
+    .highlight {
+         
+        max-height: 400px;
+        overflow: hidden;
+        position: relative;  
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .code-more-btn {
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: #f0f0f5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .code-more-img {
+        cursor: pointer !important;
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+</style>
+
+<script>
+  function initCodeMoreBox() {
+    let codeBlocks = document.querySelectorAll(".highlight");
+    if (!codeBlocks) {
+      return;
+    }
+    codeBlocks.forEach(codeBlock => {
+      
+      const existingBox = codeBlock.querySelector('.code-more-box');
+      if (existingBox) existingBox.remove();
+
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+        return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.addEventListener('click', () => {
+        codeBlock.classList.add('code-show');
+        codeMoreBox.style.display = 'none';
+        
+        window.dispatchEvent(new Event('resize'))
+      })
+      
+      let img = document.createElement('img');
+      img.classList.add('code-more-img');
+      img.src = "https://www.retr0.xyz/icons/codeMore.png"
+      
+      codeMoreBtn.appendChild(img);
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox)
+    })
+  }
+  
+  initCodeMoreBox();
+  
+  
+  document.addEventListener('pjax:complete', () => {
+    initCodeMoreBox();
+  });
+</script>
+
+        
+
+<meting-js
+  server="netease"
+  type="playlist"
+  id="14477349320"
+  fixed="true"
+  bottom="20px"
+  right="20px"
+  autoplay="false"
+  width="300px"
+></meting-js>
+
+
+<script>
+  let apInstance = null;
+  const currentPlaylistId = "14477349320";
+  const STORAGE_KEY = "playInfo";
+
+  
+  const checkInstanceInterval = setInterval(() => {
+    const aplayerElement = document.querySelector('.aplayer');
+    if (aplayerElement && aplayerElement.aplayer) {
+      apInstance = aplayerElement.aplayer;
+      clearInterval(checkInstanceInterval);
+      console.log("Hugo 中获取 APlayer 实例成功");
+      initPlayerEvents();
+      return;
+    }
+
+    if (window.APlayer && window.APlayer.instances && window.APlayer.instances.length > 0) {
+      apInstance = window.APlayer.instances[0];
+      clearInterval(checkInstanceInterval);
+      console.log("从全局列表获取实例");
+      initPlayerEvents();
+      return;
+    }
+
+
+
+  function initPlayerEvents() {
+    if (!apInstance) return;
+
+    
+    window.addEventListener('beforeunload', savePlayState);
+    document.addEventListener('visibilitychange', savePlayState);
+
+    
+    apInstance.on('list:loaded', restorePlayState);
+  }
+
+  function savePlayState() {
+    if (!apInstance) return;
+    const playInfo = {
+      playlistId: currentPlaylistId,
+      index: apInstance.list.index,
+      currentTime: apInstance.audio.currentTime,
+      paused: apInstance.paused
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(playInfo));
+  }
+
+  function restorePlayState() {
+    const savedInfo = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!savedInfo || savedInfo.playlistId !== currentPlaylistId) return;
+
+    if (savedInfo.index < apInstance.list.songs.length) {
+      apInstance.list.switch(savedInfo.index);
+      apInstance.once('canplay', () => {
+        apInstance.seek(savedInfo.currentTime);
+        if (!savedInfo.paused) {
+          apInstance.play().catch(() => {
+            apInstance.notice("点击继续播放", 3000);
+          });
+        }
+      });
+    }
+  }
+
+  
+  document.addEventListener('click', () => {
+    if (apInstance && !apInstance.paused) {
+      apInstance.play().catch(() => {});
+    }
+  }, { once: true });
+</script>
+    </body>
+</html>
