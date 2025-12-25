@@ -321,6 +321,18 @@
   <ol>
     <li><a href="#概念导入单继承">概念导入：单继承</a></li>
     <li><a href="#多继承">多继承</a></li>
+    <li><a href="#复写父类成员和调用父类成员">复写父类成员和调用父类成员</a>
+      <ol>
+        <li><a href="#复写">复写</a></li>
+        <li><a href="#调用父类成员">调用父类成员</a>
+          <ol>
+            <li><a href="#方式一">方式一</a></li>
+            <li><a href="#方式二">方式二</a></li>
+            <li><a href="#quickstart">Quickstart</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -511,7 +523,97 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong><font style="color:#df2a3f;">注：通过下方的测试可以看出虽然最终的MiPhone类中有两个producer成员，但是最终是以继承的第一个Phone类为准的，这说明继承时按照从左到右的顺序优先。</font></strong></p>
-
+<h2 id="复写父类成员和调用父类成员">复写父类成员和调用父类成员
+</h2><h3 id="复写">复写
+</h3><p>前面我们学习了如何在父类已有的成员的基础上增加成员，但是如果我们对于之前的成员不满意要怎么修改呢？这就是复写的概念。</p>
+<p><strong>即：在子类中重新定义同名的属性或方法即可。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">e_car_v1</span><span class="p">:</span>		<span class="c1"># 第一代新能源车</span>
+</span></span><span class="line"><span class="cl">    <span class="n">battery</span> <span class="o">=</span> <span class="s1">&#39;v1.0&#39;</span> 	<span class="c1"># 第一代电池组</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">power_recycle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;已启用动能回收&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">e_car_v2</span><span class="p">(</span><span class="n">e_car_v1</span><span class="p">):</span>	<span class="c1"># 第二代新能源车</span>
+</span></span><span class="line"><span class="cl">    <span class="n">battery</span> <span class="o">=</span> <span class="s1">&#39;v2.0&#39;</span>	<span class="c1"># 第二代电池组</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ai_computer</span> <span class="o">=</span> <span class="kc">None</span> 	<span class="c1"># 智能车机</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">autodrive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;已启用自动驾驶&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">####测试####</span>
+</span></span><span class="line"><span class="cl"><span class="n">car</span> <span class="o">=</span> <span class="n">e_car_v2</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">e_car_v2</span><span class="o">.</span><span class="n">battery</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="调用父类成员">调用父类成员
+</h3><p>一旦我们复写了父类成员，那么类对象调用成员的时候就会调用复写后的新成员</p>
+<p>如果需要使用被复写的父类的成员，就需要特殊的调用方式：</p>
+<h4 id="方式一">方式一
+</h4><ul>
+<li>调用父类成员（不需要借助对象）</li>
+</ul>
+<p>使用成员变量：<code>父类名.成员变量</code></p>
+<p>使用成员方法：<code>父类名.成员方法(self,示例参数)</code></p>
+<h4 id="方式二">方式二
+</h4><ul>
+<li>使用super()调用父类成员（要将其写在子类的方法内，借助对象执行）</li>
+</ul>
+<p>使用成员变量：<code>super().成员变量</code></p>
+<p>使用成员方法：<code>super().成员方法()</code></p>
+<h4 id="quickstart">Quickstart
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">e_car_v1</span><span class="p">:</span>		<span class="c1"># 第一代新能源车</span>
+</span></span><span class="line"><span class="cl">    <span class="n">battery</span> <span class="o">=</span> <span class="s1">&#39;v1.0&#39;</span> 	<span class="c1"># 第一代电池组</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">power_recycle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;已启用动能回收&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">e_car_v2</span><span class="p">(</span><span class="n">e_car_v1</span><span class="p">):</span>	<span class="c1"># 第二代新能源车</span>
+</span></span><span class="line"><span class="cl">    <span class="n">battery</span> <span class="o">=</span> <span class="s1">&#39;v2.0&#39;</span>	<span class="c1"># 第二代电池组</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ai_computer</span> <span class="o">=</span> <span class="kc">None</span> 	<span class="c1"># 智能车机</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">autodrive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;已启用自动驾驶&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">last_battery</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">battery</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">####测试####</span>
+</span></span><span class="line"><span class="cl"><span class="n">car</span> <span class="o">=</span> <span class="n">e_car_v2</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">e_car_v1</span><span class="o">.</span><span class="n">battery</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">car</span><span class="o">.</span><span class="n">last_battery</span><span class="p">()</span>	
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
 
