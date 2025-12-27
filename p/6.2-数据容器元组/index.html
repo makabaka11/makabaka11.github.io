@@ -868,7 +868,6 @@
 })();
 </script>
 
-
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 
 <script>
@@ -1300,15 +1299,46 @@ document.addEventListener("pjax:complete", () => {
 
 
 <script>
+
+
+window.__articlePlayers = window.__articlePlayers || [];
+
+
+
+function getGlobalMetingPlayer() {
+    return window.__globalMetingPlayer || null;
+}
+
+
+
+function pauseGlobalMeting() {
+    const p = getGlobalMetingPlayer();
+    if (p && !p.audio.paused) {
+        p.pause();
+        console.log('[APlayer] Pause global Meting');
+    }
+}
+
+
+
+function pauseArticlePlayers() {
+    window.__articlePlayers.forEach(p => {
+        if (p && !p.audio.paused) {
+            p.pause();
+        }
+    });
+}
+
+
+
 function initAPlayers() {
     if (typeof APlayer === "undefined") return;
 
-    document.querySelectorAll('.aplayer').forEach(el => {
-        
+    document.querySelectorAll('.aplayer-article').forEach(el => {
         if (el.dataset.loaded === "true") return;
         el.dataset.loaded = "true";
 
-        new APlayer({
+        const ap = new APlayer({
             container: el,
             fixed: false,
             autoplay: false,
@@ -1316,7 +1346,7 @@ function initAPlayers() {
             order: 'list',
             preload: 'metadata',
             volume: 0.7,
-            mutex: true,
+            mutex: false, 
             audio: [{
                 name: el.dataset.title || 'Unknown',
                 artist: el.dataset.artist || '',
@@ -1324,95 +1354,169 @@ function initAPlayers() {
                 cover: el.dataset.cover || ''
             }]
         });
+
+        
+        ap.on('play', () => {
+            
+            pauseGlobalMeting();
+
+            
+            window.__articlePlayers.forEach(other => {
+                if (other !== ap && !other.audio.paused) {
+                    other.pause();
+                }
+            });
+
+    console.log('[APlayer] Switch article track');
+});
+
+
+        window.__articlePlayers.push(ap);
     });
 }
+
+
+
+function bindMetingMutex() {
+    const p = getGlobalMetingPlayer();
+    if (!p || p.__mutexBound) return;
+
+    p.__mutexBound = true;
+
+    
+    p.on('play', () => {
+        pauseArticlePlayers();
+    });
+
+    console.log('[Meting] Mutex bound');
+}
+
+
+
+function initAllPlayers() {
+    initAPlayers();
+    bindMetingMutex();
+}
+
+
+
+document.addEventListener("DOMContentLoaded", initAllPlayers);
+document.addEventListener("pjax:complete", initAllPlayers);
 </script>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-    initAPlayers();
-});
 
-document.addEventListener("pjax:complete", () => {
-    initAPlayers();
+
+function destroyArticlePlayers() {
+    if (!window.__articlePlayers || window.__articlePlayers.length === 0) return;
+
+    window.__articlePlayers.forEach(ap => {
+        try {
+            if (!ap.audio.paused) {
+                ap.pause();
+            }
+            ap.destroy(); 
+        } catch (e) {
+            console.warn('[APlayer] destroy failed', e);
+        }
+    });
+
+    window.__articlePlayers = [];
+    console.log('[APlayer] Article players destroyed');
+}
+
+
+
+document.addEventListener('pjax:send', () => {
+    destroyArticlePlayers();
 });
 </script>
+
+
 
 
 
         
 
+
 <meting-js
+  id="14477349320"
   server="netease"
   type="playlist"
-  id="14477349320"
   fixed="true"
   bottom="20px"
   right="20px"
   autoplay="false"
   width="300px"
-></meting-js>
-
+  preload="metadata"
+  mutex="false">
+</meting-js>
 
 <script>
-  let apInstance = null;
-  const currentPlaylistId = "14477349320";
-  const STORAGE_KEY = "playInfo";
+(function () {
 
   
-  const checkInstanceInterval = setInterval(() => {
-    const aplayerElement = document.querySelector('.aplayer');
-    if (aplayerElement && aplayerElement.aplayer) {
-      apInstance = aplayerElement.aplayer;
-      clearInterval(checkInstanceInterval);
-      console.log("Hugo 中获取 APlayer 实例成功");
-      initPlayerEvents();
-      return;
-    }
+  if (window.__global_meting_initialized) return;
+  window.__global_meting_initialized = true;
 
-    if (window.APlayer && window.APlayer.instances && window.APlayer.instances.length > 0) {
-      apInstance = window.APlayer.instances[0];
-      clearInterval(checkInstanceInterval);
-      console.log("从全局列表获取实例");
-      initPlayerEvents();
-      return;
-    }
+  const STORAGE_KEY = "playInfo";
+  const PLAYLIST_ID = "14477349320";
 
-
-
-  function initPlayerEvents() {
-    if (!apInstance) return;
+  function initGlobalMeting() {
+    const meting = document.querySelector('meting-js');
+    if (!meting) return;
 
     
-    window.addEventListener('beforeunload', savePlayState);
-    document.addEventListener('visibilitychange', savePlayState);
+    meting.addEventListener('aplayer-loaded', () => {
+      const ap = meting.aplayer;
+      if (!ap) return;
 
-    
-    apInstance.on('list:loaded', restorePlayState);
+      
+      window.__globalMetingPlayer = ap;
+      console.log('[Meting] Global APlayer ready');
+
+      bindPlayerEvents(ap);
+      restorePlayState(ap);
+    }, { once: true });
   }
 
-  function savePlayState() {
-    if (!apInstance) return;
-    const playInfo = {
-      playlistId: currentPlaylistId,
-      index: apInstance.list.index,
-      currentTime: apInstance.audio.currentTime,
-      paused: apInstance.paused
+  function bindPlayerEvents(ap) {
+    
+    const save = () => savePlayState(ap);
+
+    window.addEventListener('beforeunload', save);
+    document.addEventListener('visibilitychange', save);
+
+    
+    ap.on('play', () => {
+      document.dispatchEvent(new CustomEvent('global-player-play'));
+    });
+  }
+
+  function savePlayState(ap) {
+    if (!ap || !ap.list || !ap.audio) return;
+
+    const data = {
+      playlistId: PLAYLIST_ID,
+      index: ap.list.index,
+      currentTime: ap.audio.currentTime,
+      paused: ap.paused
     };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(playInfo));
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   }
 
-  function restorePlayState() {
-    const savedInfo = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    if (!savedInfo || savedInfo.playlistId !== currentPlaylistId) return;
+  function restorePlayState(ap) {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!data || data.playlistId !== PLAYLIST_ID) return;
 
-    if (savedInfo.index < apInstance.list.songs.length) {
-      apInstance.list.switch(savedInfo.index);
-      apInstance.once('canplay', () => {
-        apInstance.seek(savedInfo.currentTime);
-        if (!savedInfo.paused) {
-          apInstance.play().catch(() => {
-            apInstance.notice("点击继续播放", 3000);
+    if (data.index < ap.list.songs.length) {
+      ap.list.switch(data.index);
+      ap.once('canplay', () => {
+        ap.seek(data.currentTime || 0);
+        if (!data.paused) {
+          ap.play().catch(() => {
+            ap.notice("点击继续播放", 3000);
           });
         }
       });
@@ -1420,11 +1524,14 @@ document.addEventListener("pjax:complete", () => {
   }
 
   
-  document.addEventListener('click', () => {
-    if (apInstance && !apInstance.paused) {
-      apInstance.play().catch(() => {});
-    }
-  }, { once: true });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGlobalMeting);
+  } else {
+    initGlobalMeting();
+  }
+
+})();
 </script>
+
     </body>
 </html>
