@@ -774,6 +774,21 @@ $$<h4 id="核心特点-3">核心特点
 </script>
 
 
+<script>
+(function () {
+    const url = new URL(window.location.href);
+
+    
+    if (url.searchParams.has('utterances')) {
+
+        
+        
+        window.location.replace(window.location.pathname);
+    }
+})();
+</script>
+
+
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 
 <script>

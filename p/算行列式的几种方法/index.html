@@ -853,6 +853,21 @@ $$D_n = \begin{vmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & a_{22} & \
 </script>
 
 
+<script>
+(function () {
+    const url = new URL(window.location.href);
+
+    
+    if (url.searchParams.has('utterances')) {
+
+        
+        
+        window.location.replace(window.location.pathname);
+    }
+})();
+</script>
+
+
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 
 <script>

@@ -1169,6 +1169,21 @@ SHA256：24d004a104d4d54034dbcffc2a4b19a11f39008a575aa614ea04703480b1022c</p>
 </script>
 
 
+<script>
+(function () {
+    const url = new URL(window.location.href);
+
+    
+    if (url.searchParams.has('utterances')) {
+
+        
+        
+        window.location.replace(window.location.pathname);
+    }
+})();
+</script>
+
+
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 
 <script>
