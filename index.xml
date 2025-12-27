@@ -195,30 +195,13 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
         
         <guid>https://www.retr0.xyz/p/mga2025%E4%B8%AA%E4%BA%BA%E5%B9%B4%E5%BA%A6%E6%B8%B8%E6%88%8F%E7%B1%B3%E5%A1%94miside/</guid>
         <description>&lt;img src="https://free.picui.cn/free/2025/12/27/694f70bd8121c.jpg" alt="Featured image of post [MGA]2025个人年度游戏——《米塔MiSide》" /&gt;&lt;p&gt;颁奖音乐走起：&lt;/p&gt;
-&lt;div id=&#34;aplayer1&#34;&gt;&lt;/div&gt;
-&lt;script&gt;
-(function () {
-    const el = document.getElementById(&#39;aplayer1&#39;);
-    if (!el || el.dataset.loaded) return;
-    el.dataset.loaded = &#34;true&#34;;
-    new APlayer({
-        container: el,
-        fixed: false,
-        autoplay: false,
-        loop: &#39;&#39;,
-        order: &#39;list&#39;,
-        preload: &#39;auto&#39;,
-        volume: 0.7,
-        mutex: true,
-        audio: [{
-            name: &#39;All For Love&#39;,
-            artist: &#39;Tungevaag &amp; Raaban&#39;,
-            url: &#39;/music/All For Love - Tungevaag &amp; Raaban.mp3&#39;,
-            cover: &#39;/music/cover/Tungevaag &amp; Raaban - All For Love.jpg&#39;
-        }]
-    });
-})();
-&lt;/script&gt;
+&lt;div
+  class=&#34;aplayer&#34;
+  data-title=&#34;All For Love&#34;
+  data-artist=&#34;Tungevaag &amp; Raaban&#34;
+  data-src=&#34;https://www.retr0.xyz/music/All For Love - Tungevaag &amp; Raaban.mp3&#34;
+  data-cover=&#34;/music/cover/Tungevaag &amp; Raaban - All For Love.jpg&#34;&gt;
+&lt;/div&gt;
 &lt;blockquote&gt;
 &lt;p&gt;又陷入电子 ED 了吗？还在每天固定的枯燥竞技游戏中感到无聊吗？换换口味吧！&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -284,80 +267,29 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;/h4&gt;&lt;p&gt;俗话说，音乐无国界&lt;/p&gt;
 &lt;p&gt;米塔用它独特的富有节奏感而又柔和的音乐再一次为自己拿下了加分，话不多说，我们来听上几段：&lt;/p&gt;
 &lt;p&gt;主菜单&lt;/p&gt;
-&lt;div id=&#34;aplayer2&#34;&gt;&lt;/div&gt;
-&lt;script&gt;
-(function () {
-    const el = document.getElementById(&#39;aplayer2&#39;);
-    if (!el || el.dataset.loaded) return;
-    el.dataset.loaded = &#34;true&#34;;
-    new APlayer({
-        container: el,
-        fixed: false,
-        autoplay: false,
-        loop: &#39;&#39;,
-        order: &#39;list&#39;,
-        preload: &#39;auto&#39;,
-        volume: 0.7,
-        mutex: true,
-        audio: [{
-            name: &#39;MusicMenu&#39;,
-            artist: &#39;MakenCat&#39;,
-            url: &#39;/music/MusicMenu - MakenCat.mp3&#39;,
-            cover: &#39;/music/cover/mita.jpg&#39;
-        }]
-    });
-})();
-&lt;/script&gt;
+&lt;div
+  class=&#34;aplayer&#34;
+  data-title=&#34;MusicMenu&#34;
+  data-artist=&#34;MakenCat&#34;
+  data-src=&#34;https://www.retr0.xyz/music/MusicMenu - MakenCat.mp3&#34;
+  data-cover=&#34;/music/cover/mita.jpg&#34;&gt;
+&lt;/div&gt;
 &lt;p&gt;循环走廊&lt;/p&gt;
-&lt;div id=&#34;aplayer3&#34;&gt;&lt;/div&gt;
-&lt;script&gt;
-(function () {
-    const el = document.getElementById(&#39;aplayer3&#39;);
-    if (!el || el.dataset.loaded) return;
-    el.dataset.loaded = &#34;true&#34;;
-    new APlayer({
-        container: el,
-        fixed: false,
-        autoplay: false,
-        loop: &#39;&#39;,
-        order: &#39;list&#39;,
-        preload: &#39;auto&#39;,
-        volume: 0.7,
-        mutex: true,
-        audio: [{
-            name: &#39;LoopRoom&#39;,
-            artist: &#39;MakenCat&#39;,
-            url: &#39;/music/LoopRoom - MakenCat.mp3&#39;,
-            cover: &#39;/music/cover/mita.jpg&#39;
-        }]
-    });
-})();
-&lt;/script&gt;
-米拉（个人最爱）
-&lt;div id=&#34;aplayer4&#34;&gt;&lt;/div&gt;
-&lt;script&gt;
-(function () {
-    const el = document.getElementById(&#39;aplayer4&#39;);
-    if (!el || el.dataset.loaded) return;
-    el.dataset.loaded = &#34;true&#34;;
-    new APlayer({
-        container: el,
-        fixed: false,
-        autoplay: false,
-        loop: &#39;&#39;,
-        order: &#39;list&#39;,
-        preload: &#39;auto&#39;,
-        volume: 0.7,
-        mutex: true,
-        audio: [{
-            name: &#39;Mila&#39;,
-            artist: &#39;MakenCat&#39;,
-            url: &#39;/music/Mila - MakenCat.mp3&#39;,
-            cover: &#39;/music/cover/mita.jpg&#39;
-        }]
-    });
-})();
-&lt;/script&gt;
+&lt;div
+  class=&#34;aplayer&#34;
+  data-title=&#34;LoopRoom&#34;
+  data-artist=&#34;MakenCat&#34;
+  data-src=&#34;https://www.retr0.xyz/music/LoopRoom - MakenCat.mp3&#34;
+  data-cover=&#34;/music/cover/mita.jpg&#34;&gt;
+&lt;/div&gt;
+&lt;p&gt;米拉（个人最爱）&lt;/p&gt;
+&lt;div
+  class=&#34;aplayer&#34;
+  data-title=&#34;Mila&#34;
+  data-artist=&#34;MakenCat&#34;
+  data-src=&#34;https://www.retr0.xyz/music/Mila - MakenCat.mp3&#34;
+  data-cover=&#34;/music/cover/mita.jpg&#34;&gt;
+&lt;/div&gt;
 &lt;p&gt;米塔的音乐就是这样，柔和、温馨却又深远，仿佛即将有危机到来。&lt;/p&gt;
 &lt;h4 id=&#34;-情绪密度极高&#34;&gt;• 情绪密度极高
 &lt;/h4&gt;&lt;p&gt;创新性的悬空字幕设计让你在看字幕时必须看向米塔（虽然如果不看过去就会变成普通字幕），并且当你不知道接下来如何做时，制作人都贴心的设置了自动触发的对话，使得米塔会主动来帮助你。&lt;/p&gt;

@@ -1453,6 +1453,48 @@ document.addEventListener("pjax:complete", () => {
   });
 </script>
 
+
+<script>
+function initAPlayers() {
+    if (typeof APlayer === "undefined") return;
+
+    document.querySelectorAll('.aplayer').forEach(el => {
+        
+        if (el.dataset.loaded === "true") return;
+        el.dataset.loaded = "true";
+
+        new APlayer({
+            container: el,
+            fixed: false,
+            autoplay: false,
+            loop: 'none',
+            order: 'list',
+            preload: 'metadata',
+            volume: 0.7,
+            mutex: true,
+            audio: [{
+                name: el.dataset.title || 'Unknown',
+                artist: el.dataset.artist || '',
+                url: el.dataset.src,
+                cover: el.dataset.cover || ''
+            }]
+        });
+    });
+}
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    initAPlayers();
+});
+
+document.addEventListener("pjax:complete", () => {
+    initAPlayers();
+});
+</script>
+
+
+
         
 
 <meting-js

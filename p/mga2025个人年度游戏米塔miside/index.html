@@ -425,30 +425,13 @@
     
     
     <p>颁奖音乐走起：</p>
-<div id="aplayer1"></div>
-<script>
-(function () {
-    const el = document.getElementById('aplayer1');
-    if (!el || el.dataset.loaded) return;
-    el.dataset.loaded = "true";
-    new APlayer({
-        container: el,
-        fixed: false,
-        autoplay: false,
-        loop: '',
-        order: 'list',
-        preload: 'auto',
-        volume: 0.7,
-        mutex: true,
-        audio: [{
-            name: 'All For Love',
-            artist: 'Tungevaag & Raaban',
-            url: '/music/All For Love - Tungevaag & Raaban.mp3',
-            cover: '/music/cover/Tungevaag & Raaban - All For Love.jpg'
-        }]
-    });
-})();
-</script>
+<div
+  class="aplayer"
+  data-title="All For Love"
+  data-artist="Tungevaag & Raaban"
+  data-src="/music/All For Love - Tungevaag & Raaban.mp3"
+  data-cover="/music/cover/Tungevaag & Raaban - All For Love.jpg">
+</div>
 <blockquote>
 <p>又陷入电子 ED 了吗？还在每天固定的枯燥竞技游戏中感到无聊吗？换换口味吧！</p>
 </blockquote>
@@ -514,80 +497,29 @@
 </h4><p>俗话说，音乐无国界</p>
 <p>米塔用它独特的富有节奏感而又柔和的音乐再一次为自己拿下了加分，话不多说，我们来听上几段：</p>
 <p>主菜单</p>
-<div id="aplayer2"></div>
-<script>
-(function () {
-    const el = document.getElementById('aplayer2');
-    if (!el || el.dataset.loaded) return;
-    el.dataset.loaded = "true";
-    new APlayer({
-        container: el,
-        fixed: false,
-        autoplay: false,
-        loop: '',
-        order: 'list',
-        preload: 'auto',
-        volume: 0.7,
-        mutex: true,
-        audio: [{
-            name: 'MusicMenu',
-            artist: 'MakenCat',
-            url: '/music/MusicMenu - MakenCat.mp3',
-            cover: '/music/cover/mita.jpg'
-        }]
-    });
-})();
-</script>
+<div
+  class="aplayer"
+  data-title="MusicMenu"
+  data-artist="MakenCat"
+  data-src="/music/MusicMenu - MakenCat.mp3"
+  data-cover="/music/cover/mita.jpg">
+</div>
 <p>循环走廊</p>
-<div id="aplayer3"></div>
-<script>
-(function () {
-    const el = document.getElementById('aplayer3');
-    if (!el || el.dataset.loaded) return;
-    el.dataset.loaded = "true";
-    new APlayer({
-        container: el,
-        fixed: false,
-        autoplay: false,
-        loop: '',
-        order: 'list',
-        preload: 'auto',
-        volume: 0.7,
-        mutex: true,
-        audio: [{
-            name: 'LoopRoom',
-            artist: 'MakenCat',
-            url: '/music/LoopRoom - MakenCat.mp3',
-            cover: '/music/cover/mita.jpg'
-        }]
-    });
-})();
-</script>
-米拉（个人最爱）
-<div id="aplayer4"></div>
-<script>
-(function () {
-    const el = document.getElementById('aplayer4');
-    if (!el || el.dataset.loaded) return;
-    el.dataset.loaded = "true";
-    new APlayer({
-        container: el,
-        fixed: false,
-        autoplay: false,
-        loop: '',
-        order: 'list',
-        preload: 'auto',
-        volume: 0.7,
-        mutex: true,
-        audio: [{
-            name: 'Mila',
-            artist: 'MakenCat',
-            url: '/music/Mila - MakenCat.mp3',
-            cover: '/music/cover/mita.jpg'
-        }]
-    });
-})();
-</script>
+<div
+  class="aplayer"
+  data-title="LoopRoom"
+  data-artist="MakenCat"
+  data-src="/music/LoopRoom - MakenCat.mp3"
+  data-cover="/music/cover/mita.jpg">
+</div>
+<p>米拉（个人最爱）</p>
+<div
+  class="aplayer"
+  data-title="Mila"
+  data-artist="MakenCat"
+  data-src="/music/Mila - MakenCat.mp3"
+  data-cover="/music/cover/mita.jpg">
+</div>
 <p>米塔的音乐就是这样，柔和、温馨却又深远，仿佛即将有危机到来。</p>
 <h4 id="-情绪密度极高">• 情绪密度极高
 </h4><p>创新性的悬空字幕设计让你在看字幕时必须看向米塔（虽然如果不看过去就会变成普通字幕），并且当你不知道接下来如何做时，制作人都贴心的设置了自动触发的对话，使得米塔会主动来帮助你。</p>
@@ -1425,6 +1357,48 @@ document.addEventListener("pjax:complete", () => {
     initCodeMoreBox();
   });
 </script>
+
+
+<script>
+function initAPlayers() {
+    if (typeof APlayer === "undefined") return;
+
+    document.querySelectorAll('.aplayer').forEach(el => {
+        
+        if (el.dataset.loaded === "true") return;
+        el.dataset.loaded = "true";
+
+        new APlayer({
+            container: el,
+            fixed: false,
+            autoplay: false,
+            loop: 'none',
+            order: 'list',
+            preload: 'metadata',
+            volume: 0.7,
+            mutex: true,
+            audio: [{
+                name: el.dataset.title || 'Unknown',
+                artist: el.dataset.artist || '',
+                url: el.dataset.src,
+                cover: el.dataset.cover || ''
+            }]
+        });
+    });
+}
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    initAPlayers();
+});
+
+document.addEventListener("pjax:complete", () => {
+    initAPlayers();
+});
+</script>
+
+
 
         
 
