@@ -125,70 +125,6 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 </description>
         </item>
         <item>
-        <title>主流网盘解析,满速下载 ,(百度,夸克,迅雷,阿里)</title>
-        <link>https://www.retr0.xyz/p/%E4%B8%BB%E6%B5%81%E7%BD%91%E7%9B%98%E8%A7%A3%E6%9E%90%E6%BB%A1%E9%80%9F%E4%B8%8B%E8%BD%BD-%E7%99%BE%E5%BA%A6%E5%A4%B8%E5%85%8B%E8%BF%85%E9%9B%B7%E9%98%BF%E9%87%8C/</link>
-        <pubDate>Sat, 08 Nov 2025 20:57:28 +0800</pubDate>
-        
-        <guid>https://www.retr0.xyz/p/%E4%B8%BB%E6%B5%81%E7%BD%91%E7%9B%98%E8%A7%A3%E6%9E%90%E6%BB%A1%E9%80%9F%E4%B8%8B%E8%BD%BD-%E7%99%BE%E5%BA%A6%E5%A4%B8%E5%85%8B%E8%BF%85%E9%9B%B7%E9%98%BF%E9%87%8C/</guid>
-        <description>&lt;table&gt;
-  &lt;thead&gt;
-      &lt;tr&gt;
-          &lt;th&gt;网盘&lt;/th&gt;
-          &lt;th&gt;地址&lt;/th&gt;
-          &lt;th&gt;使用说明&lt;/th&gt;
-      &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-      &lt;tr&gt;
-          &lt;td&gt;百度&lt;/td&gt;
-          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://analysis.icy6.cn/user/parse&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Vite App&lt;/a&gt;&lt;/td&gt;
-          &lt;td&gt;无使用条件,解析50个文件,大小限制 &lt;strong&gt;&lt;font style=&#34;color:rgb(133, 0, 255);;&#34;&gt;10TB&lt;/font&gt;&lt;/strong&gt; 内(每日刷新)&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;百度&lt;/td&gt;
-          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://bw.01233.xyz&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;百度网盘资源搜索&lt;/a&gt;&lt;/td&gt;
-          &lt;td&gt;因成本问题,该站点已经停止运行&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;百度&lt;/td&gt;
-          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://bw.01233.xyz&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;百度网盘资源搜索&lt;/a&gt;&lt;/td&gt;
-          &lt;td&gt;需要获取解析密码,解析20个文件,大小限制 &lt;strong&gt;&lt;font style=&#34;color:rgb(133, 0, 255);&#34;&gt;30GB&lt;/font&gt;&lt;/strong&gt; 内(每日刷新)&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;夸克&lt;/td&gt;
-          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://kdown.moiu.cn/quark-free/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Kdown - 夸克网盘解析 Free版本&lt;/a&gt;&lt;/td&gt;
-          &lt;td&gt;需要获取解析密码,无数量限制,无大小限制&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;阿里&lt;/td&gt;
-          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://bw.01233.xyz/alipan&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://bw.01233.xyz/alipan&lt;/a&gt;&lt;/td&gt;
-          &lt;td&gt;寄了&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;百度&lt;/td&gt;
-          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://kdown.moiu.cn/free/#/index&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;KDown-Free - 百度网盘解析工具&lt;/a&gt;&lt;/td&gt;
-          &lt;td&gt;需要获取解析密码,无数量限制,无大小限制&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;迅雷&lt;/td&gt;
-          &lt;td&gt;客户端破解&lt;/td&gt;
-          &lt;td&gt;因被投诉,已删除下架&lt;/td&gt;
-      &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;安卓端下载器:&lt;a class=&#34;link&#34; href=&#34;https://zxxxx.lanzoul.com/idBjb34k55pi&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;AriaNgGUI&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;PC端下载器:&lt;a class=&#34;link&#34; href=&#34;https://motrix.app/zh-CN/about&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Motrix&lt;/a&gt;&lt;/p&gt;
-</description>
-        </item>
-        <item>
         <title>[MGA]2025个人年度游戏——《米塔MiSide》</title>
         <link>https://www.retr0.xyz/p/mga2025%E4%B8%AA%E4%BA%BA%E5%B9%B4%E5%BA%A6%E6%B8%B8%E6%88%8F%E7%B1%B3%E5%A1%94miside/</link>
         <pubDate>Sat, 27 Dec 2025 13:36:26 +0800</pubDate>
@@ -263,15 +199,48 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 	
 	
 &gt;&lt;/p&gt;
+&lt;h4 id=&#34;-情绪密度极高&#34;&gt;• 情绪密度极高
+&lt;/h4&gt;&lt;p&gt;创新性的悬空字幕设计让你在看字幕时必须看向米塔（虽然如果不看过去就会变成普通字幕），并且当你不知道接下来如何做时，制作人都贴心的设置了自动触发的对话，使得米塔会主动来帮助你。&lt;/p&gt;
+&lt;p&gt;《米塔》不是一款单纯的走路看剧情游戏，它在游戏中实际上还穿插了许多小游戏（例如跳舞机、互抡锤子、格斗、赛车、FPS），并且大都是米塔在和你一起玩，这样的演出方式无疑是快速让玩家了解米塔的好方法，同时也为后面的剧情做好了感情的铺垫。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2025/12/28/6950cd7476cd6.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这也是它在恋爱游戏方面的一大成功。&lt;/p&gt;
+&lt;h4 id=&#34;-剧情环环相扣&#34;&gt;• 剧情环环相扣
+&lt;/h4&gt;&lt;p&gt;有人会问：“我以前从来没玩过恐怖游戏，我真的能接受吗？”&lt;/p&gt;
+&lt;p&gt;制作人显然已经考虑到了这一点，在每次紧张刺激的场景之后紧接着便是另一个温馨而美妙的场景，例如：在一段逃离失败之作的一二三木头人剧情中，当你终于最后推开一扇门后会发现自己竟然来到了一个夜晚场景下的米塔的卧室，房间满是星空灯的图案，而床上正有一个身着睡衣的米塔在呼呼大睡。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2025/12/27/694f6ec709681.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;类似的从极度危险猛地转到温馨而柔和的场景的情况在《米塔》中还有很多，那就等着你们去自行体验了。&lt;/p&gt;
+&lt;p&gt;此外，巧妙的场景切换亦是十分出彩，例如当你按下某个按钮后你会发现你变成了2D形象，一段剧情后游戏界面突然被疯狂米塔入侵，接下来你在逃走后画面向后拉出，这是你猛地发现刚才的画面其实是在另一个米塔的电脑屏幕里。&lt;/p&gt;
 &lt;h4 id=&#34;-掺了冰一般的音乐&#34;&gt;• 掺了冰一般的音乐
 &lt;/h4&gt;&lt;p&gt;俗话说，音乐无国界&lt;/p&gt;
 &lt;p&gt;《米塔》用它独特的富有节奏感而又柔和的音乐再一次为自己拿下了加分，话不多说，我们来听上几段：&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;主菜单&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;主菜单(正常)&lt;/strong&gt;&lt;/p&gt;
 &lt;div
   class=&#34;aplayer-article&#34;
   data-title=&#34;MusicMenu&#34;
   data-artist=&#34;MakenCat&#34;
   data-src=&#34;https://www.retr0.xyz/music/MusicMenu - MakenCat.mp3&#34;
+  data-cover=&#34;/music/cover/mita.jpg&#34;&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;主菜单(圣诞节)&lt;/strong&gt;&lt;/p&gt;
+&lt;div
+  class=&#34;aplayer-article&#34;
+  data-title=&#34;Christmas Music Menu&#34;
+  data-artist=&#34;MakenCat&#34;
+  data-src=&#34;https://www.retr0.xyz/music/Christmas Music Menu - MakenCat.mp3&#34;
   data-cover=&#34;/music/cover/mita.jpg&#34;&gt;
 &lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;循环走廊&lt;/strong&gt;&lt;/p&gt;
@@ -291,23 +260,6 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
   data-cover=&#34;/music/cover/mita.jpg&#34;&gt;
 &lt;/div&gt;
 &lt;p&gt;《米塔》的音乐就是这样，柔和、温馨却又深远，仿佛即将有危机到来。&lt;/p&gt;
-&lt;h4 id=&#34;-情绪密度极高&#34;&gt;• 情绪密度极高
-&lt;/h4&gt;&lt;p&gt;创新性的悬空字幕设计让你在看字幕时必须看向米塔（虽然如果不看过去就会变成普通字幕），并且当你不知道接下来如何做时，制作人都贴心的设置了自动触发的对话，使得米塔会主动来帮助你。&lt;/p&gt;
-&lt;p&gt;《米塔》不是一款单纯的走路看剧情游戏，它在游戏中实际上还穿插了许多小游戏（例如跳舞机、互抡锤子、格斗、赛车、FPS），并且大都是米塔在和你一起玩，这样的演出方式无疑是快速让玩家了解米塔的好方法，同时也为后面的剧情做好了感情的铺垫。&lt;/p&gt;
-&lt;p&gt;这也是它在恋爱游戏方面的一大成功。&lt;/p&gt;
-&lt;h4 id=&#34;-剧情环环相扣&#34;&gt;• 剧情环环相扣
-&lt;/h4&gt;&lt;p&gt;有人会问：“我以前从来没玩过恐怖游戏，我真的能接受吗？”&lt;/p&gt;
-&lt;p&gt;制作人显然已经考虑到了这一点，在每次紧张刺激的场景之后紧接着便是另一个温馨而美妙的场景，例如：在一段逃离失败之作的一二三木头人剧情中，当你终于最后推开一扇门后会发现自己竟然来到了一个夜晚场景下的米塔的卧室，房间满是星空灯的图案，而床上正有一个身着睡衣的米塔在呼呼大睡。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2025/12/27/694f6ec709681.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;类似的从极度危险猛地转到温馨而柔和的场景的情况在《米塔》中还有很多，那就等着你们去自行体验了。&lt;/p&gt;
-&lt;p&gt;此外，巧妙的场景切换亦是十分出彩，例如当你按下某个按钮后你会发现你变成了2D形象，一段剧情后游戏界面突然被疯狂米塔入侵，接下来你在逃走后画面向后拉出，这是你猛地发现刚才的画面其实是在另一个米塔的电脑屏幕里。&lt;/p&gt;
 &lt;h4 id=&#34;-通关后的后劲很大&#34;&gt;• 通关后的后劲很大
 &lt;/h4&gt;&lt;p&gt;不同与其他meta游戏选择打破第四面墙，《米塔》则采取了另一种截然相反的路线：&lt;strong&gt;把玩家拉进第四面墙&lt;/strong&gt;，从头到尾的感受都是你进入米塔的世界中而不是米塔进入了你的世界。&lt;/p&gt;
 &lt;p&gt;随着你在米塔的世界中不断深入，世界观也不断展开，在这个在过程中，你的认知会随着剧情的演出反转反转再反转，这样的手法的确让许多玩家直到最后一刻才猛然镜像，不过也造成了很多人的意难平。&lt;/p&gt;
@@ -382,6 +334,70 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;p&gt;此外，官方已确认将于2026年推出和平模式(he)，让我们拭目以待。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;关键词：#微恐、#梦核、#心理向、#二次元、#氛围感、#meta 、#恋爱&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;以上就是本年度的&lt;strong&gt;个人年度游戏[MGA]&lt;/strong&gt;，我们来年再见！&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>主流网盘解析,满速下载 ,(百度,夸克,迅雷,阿里)</title>
+        <link>https://www.retr0.xyz/p/%E4%B8%BB%E6%B5%81%E7%BD%91%E7%9B%98%E8%A7%A3%E6%9E%90%E6%BB%A1%E9%80%9F%E4%B8%8B%E8%BD%BD-%E7%99%BE%E5%BA%A6%E5%A4%B8%E5%85%8B%E8%BF%85%E9%9B%B7%E9%98%BF%E9%87%8C/</link>
+        <pubDate>Sat, 08 Nov 2025 20:57:28 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/%E4%B8%BB%E6%B5%81%E7%BD%91%E7%9B%98%E8%A7%A3%E6%9E%90%E6%BB%A1%E9%80%9F%E4%B8%8B%E8%BD%BD-%E7%99%BE%E5%BA%A6%E5%A4%B8%E5%85%8B%E8%BF%85%E9%9B%B7%E9%98%BF%E9%87%8C/</guid>
+        <description>&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;网盘&lt;/th&gt;
+          &lt;th&gt;地址&lt;/th&gt;
+          &lt;th&gt;使用说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;百度&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://analysis.icy6.cn/user/parse&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Vite App&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;无使用条件,解析50个文件,大小限制 &lt;strong&gt;&lt;font style=&#34;color:rgb(133, 0, 255);;&#34;&gt;10TB&lt;/font&gt;&lt;/strong&gt; 内(每日刷新)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;百度&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://bw.01233.xyz&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;百度网盘资源搜索&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;因成本问题,该站点已经停止运行&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;百度&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://bw.01233.xyz&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;百度网盘资源搜索&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;需要获取解析密码,解析20个文件,大小限制 &lt;strong&gt;&lt;font style=&#34;color:rgb(133, 0, 255);&#34;&gt;30GB&lt;/font&gt;&lt;/strong&gt; 内(每日刷新)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;夸克&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://kdown.moiu.cn/quark-free/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Kdown - 夸克网盘解析 Free版本&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;需要获取解析密码,无数量限制,无大小限制&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;阿里&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://bw.01233.xyz/alipan&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://bw.01233.xyz/alipan&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;寄了&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;百度&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://kdown.moiu.cn/free/#/index&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;KDown-Free - 百度网盘解析工具&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;需要获取解析密码,无数量限制,无大小限制&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;迅雷&lt;/td&gt;
+          &lt;td&gt;客户端破解&lt;/td&gt;
+          &lt;td&gt;因被投诉,已删除下架&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;安卓端下载器:&lt;a class=&#34;link&#34; href=&#34;https://zxxxx.lanzoul.com/idBjb34k55pi&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AriaNgGUI&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;PC端下载器:&lt;a class=&#34;link&#34; href=&#34;https://motrix.app/zh-CN/about&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Motrix&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
