@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="数据准备 资料获取 接下来的几个练习所用数据都在这里，请自行下载：\n链接: https://pan.baidu.com/s/1b5ZZ5cVyS-9_06tql4tNFw 提取码: i3i6\n分析文件 我们任选一个文件打开分析（此处以美国.txt为例）\n文件大致为jsonp_1629344292311_69436({&quot;status&quot;:0,&quot;msg&quot;:&quot;success&quot; 。。。。。。32695,271457,169842]}]}}]});\n发现此文件内容并不完全符合json格式，存在以下两点问题：\n开头的花括号前多出来了jsonp_1629344292311_69436(部分 结尾多了出了括号和分号); 接下来为例便于查看json的层级结构，我们打开工具网站：JSON在线视图查看器(Online JSON Viewer)将上面文本中间去头去尾符合正确json格式的部分复制到左面的输入框，点击格式化按钮，这时右面已经出现了便于查看的结构树，如图：\n也可以参考下面给出的省略版：\n总体可以看出其中，&ldquo;update&quot;中和下面的&quot;data&quot;中的数据应该具有对应关系\n开始操作 为了方便演示，将三个国家分开操作，因此可以将任务总共分为下面几步：\n打开并读取文件 去掉不合json规范的开头 去掉不合json规范的结尾 json转python字典 获取trend key 获取日期数据，用于x轴，取2020年（到314下标结束） 获取确诊数据，用于y轴，取2020年（到314下标结束） 生成图表 分块演示 以美国.txt为例。\n1 2 3 # 打开并读取文件 usdoc = open(&#39;T:/美国.txt&#39;,&#39;r&#39;,encoding=&#39;UTF-8&#39;) us_data = usdoc.read() 打开美国.txt文件查看发现开头要删除的内容为：jsonp_1629344292311_69436(\n根据前面所学的6.3 数据容器：字符串中2.2 节字符串的替换，我们这里使用replace()函数处理\n1 us_data = us_data.replace(&#39;jsonp_1629344292311_69436(&#39;,&#39;&#39;) 接下来的结尾不能也用replace()，因为在文件中可能有多处出现了);，会出现多处替换的情况，因此我们使用字符串的切片，详见6.4 序列的操作：切片\n1 us_data = us_data[:-2] 下面导入json模块将字符串转为字典\n1 2 import json us_dict = json.loads(us_data) 下面回到浏览器，根据json视图一点点获取层级数据\n1 us_trend = us_dict[&#39;data&#39;][0][&#39;trend&#39;] 目前剩下的结构\n1 2 3 JSON ├─list(字典，格式为0:&#34;2.22&#34;,1:&#34;2.23&#34;) └─updateDate 下面我们获取日期数据\n">
-<title>10.3 练习一：折线图</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="类型注解 Why&amp;What 为什么要使用类型注解 当我们调用random模块中的randint方法时，将光标置于括号中查看提示会显示 显然它的意思是说我们要传入一个整数int参数\n但当我们自己定义一个函数时，提示却只告诉我们任何参数any，如果这个函数是用来进行特定操作的话就容易弄错传参类型， 什么是类型注解 Python在3.5版本的时候引入了类型注解，以方便静态类型检查工具,IDE等第三方工具。\n**类型注解：**在代码中涉及数据交互的地方,提供数据类型的注解（显式的说明）。\n主要功能：\n帮助第三方IDE工具（如PyCharm）对代码进行类型推断，协助做代码提示 帮助开发者自身对变量进行类型注释 支持：\n变量的类型注解 函数（方法）形参列表和返回值的类型注解 类型注解注释一个提高代码可读性的备注，写错了也不影响程序的实际运行。\n变量的类型注解 基础语法：变量:类型\n基础数据类型注解 1 2 3 4 name: str = &#39;小明&#39; age: int = 10 if_student: bool = True average_money: float = 10.445 基础数据类型注解 1 2 3 class Student: pass stu: Student = Student() 基础容器类型注解（简易） 简易版就是只注解容器的类型\n1 2 3 4 5 my_list:list = [1,2,3] my_tuple:tuple = (1,2,3) my_set:set = {1,2,3} my_dict:dict = {&#39;retr0&#39;:123} my_str:str = &#39;retr0&#39; 基础容器类型注解（详细） 1 2 3 4 my_list:list[int] = [1,2,3] my_tuple:tuple[str,int,boll] = (&#39;retr0&#39;,1,True) my_set:set[int] = {1,2,3} my_dict:dict[str,int] = {&#39;retr0&#39;:123} 详细注解需要注解容器内部元素的类型，并且注意：\n">
+<title>S1.8 类型注解</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/p/10.3-%E7%BB%83%E4%B9%A0%E4%B8%80%E6%8A%98%E7%BA%BF%E5%9B%BE/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/s1.8-%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="10.3 练习一：折线图">
-<meta property='og:description' content="数据准备 资料获取 接下来的几个练习所用数据都在这里，请自行下载：\n链接: https://pan.baidu.com/s/1b5ZZ5cVyS-9_06tql4tNFw 提取码: i3i6\n分析文件 我们任选一个文件打开分析（此处以美国.txt为例）\n文件大致为jsonp_1629344292311_69436({&quot;status&quot;:0,&quot;msg&quot;:&quot;success&quot; 。。。。。。32695,271457,169842]}]}}]});\n发现此文件内容并不完全符合json格式，存在以下两点问题：\n开头的花括号前多出来了jsonp_1629344292311_69436(部分 结尾多了出了括号和分号); 接下来为例便于查看json的层级结构，我们打开工具网站：JSON在线视图查看器(Online JSON Viewer)将上面文本中间去头去尾符合正确json格式的部分复制到左面的输入框，点击格式化按钮，这时右面已经出现了便于查看的结构树，如图：\n也可以参考下面给出的省略版：\n总体可以看出其中，&ldquo;update&quot;中和下面的&quot;data&quot;中的数据应该具有对应关系\n开始操作 为了方便演示，将三个国家分开操作，因此可以将任务总共分为下面几步：\n打开并读取文件 去掉不合json规范的开头 去掉不合json规范的结尾 json转python字典 获取trend key 获取日期数据，用于x轴，取2020年（到314下标结束） 获取确诊数据，用于y轴，取2020年（到314下标结束） 生成图表 分块演示 以美国.txt为例。\n1 2 3 # 打开并读取文件 usdoc = open(&#39;T:/美国.txt&#39;,&#39;r&#39;,encoding=&#39;UTF-8&#39;) us_data = usdoc.read() 打开美国.txt文件查看发现开头要删除的内容为：jsonp_1629344292311_69436(\n根据前面所学的6.3 数据容器：字符串中2.2 节字符串的替换，我们这里使用replace()函数处理\n1 us_data = us_data.replace(&#39;jsonp_1629344292311_69436(&#39;,&#39;&#39;) 接下来的结尾不能也用replace()，因为在文件中可能有多处出现了);，会出现多处替换的情况，因此我们使用字符串的切片，详见6.4 序列的操作：切片\n1 us_data = us_data[:-2] 下面导入json模块将字符串转为字典\n1 2 import json us_dict = json.loads(us_data) 下面回到浏览器，根据json视图一点点获取层级数据\n1 us_trend = us_dict[&#39;data&#39;][0][&#39;trend&#39;] 目前剩下的结构\n1 2 3 JSON ├─list(字典，格式为0:&#34;2.22&#34;,1:&#34;2.23&#34;) └─updateDate 下面我们获取日期数据\n">
-<meta property='og:url' content='https://www.retr0.xyz/p/10.3-%E7%BB%83%E4%B9%A0%E4%B8%80%E6%8A%98%E7%BA%BF%E5%9B%BE/'>
+<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="S1.8 类型注解">
+<meta property='og:description' content="类型注解 Why&amp;What 为什么要使用类型注解 当我们调用random模块中的randint方法时，将光标置于括号中查看提示会显示 显然它的意思是说我们要传入一个整数int参数\n但当我们自己定义一个函数时，提示却只告诉我们任何参数any，如果这个函数是用来进行特定操作的话就容易弄错传参类型， 什么是类型注解 Python在3.5版本的时候引入了类型注解，以方便静态类型检查工具,IDE等第三方工具。\n**类型注解：**在代码中涉及数据交互的地方,提供数据类型的注解（显式的说明）。\n主要功能：\n帮助第三方IDE工具（如PyCharm）对代码进行类型推断，协助做代码提示 帮助开发者自身对变量进行类型注释 支持：\n变量的类型注解 函数（方法）形参列表和返回值的类型注解 类型注解注释一个提高代码可读性的备注，写错了也不影响程序的实际运行。\n变量的类型注解 基础语法：变量:类型\n基础数据类型注解 1 2 3 4 name: str = &#39;小明&#39; age: int = 10 if_student: bool = True average_money: float = 10.445 基础数据类型注解 1 2 3 class Student: pass stu: Student = Student() 基础容器类型注解（简易） 简易版就是只注解容器的类型\n1 2 3 4 5 my_list:list = [1,2,3] my_tuple:tuple = (1,2,3) my_set:set = {1,2,3} my_dict:dict = {&#39;retr0&#39;:123} my_str:str = &#39;retr0&#39; 基础容器类型注解（详细） 1 2 3 4 my_list:list[int] = [1,2,3] my_tuple:tuple[str,int,boll] = (&#39;retr0&#39;,1,True) my_set:set[int] = {1,2,3} my_dict:dict[str,int] = {&#39;retr0&#39;:123} 详细注解需要注解容器内部元素的类型，并且注意：\n">
+<meta property='og:url' content='https://www.retr0.xyz/p/s1.8-%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-01T08:35:56&#43;08:00'/><meta property='article:modified_time' content='2025-12-01T08:35:56&#43;08:00'/>
-<meta name="twitter:title" content="10.3 练习一：折线图">
-<meta name="twitter:description" content="数据准备 资料获取 接下来的几个练习所用数据都在这里，请自行下载：\n链接: https://pan.baidu.com/s/1b5ZZ5cVyS-9_06tql4tNFw 提取码: i3i6\n分析文件 我们任选一个文件打开分析（此处以美国.txt为例）\n文件大致为jsonp_1629344292311_69436({&quot;status&quot;:0,&quot;msg&quot;:&quot;success&quot; 。。。。。。32695,271457,169842]}]}}]});\n发现此文件内容并不完全符合json格式，存在以下两点问题：\n开头的花括号前多出来了jsonp_1629344292311_69436(部分 结尾多了出了括号和分号); 接下来为例便于查看json的层级结构，我们打开工具网站：JSON在线视图查看器(Online JSON Viewer)将上面文本中间去头去尾符合正确json格式的部分复制到左面的输入框，点击格式化按钮，这时右面已经出现了便于查看的结构树，如图：\n也可以参考下面给出的省略版：\n总体可以看出其中，&ldquo;update&quot;中和下面的&quot;data&quot;中的数据应该具有对应关系\n开始操作 为了方便演示，将三个国家分开操作，因此可以将任务总共分为下面几步：\n打开并读取文件 去掉不合json规范的开头 去掉不合json规范的结尾 json转python字典 获取trend key 获取日期数据，用于x轴，取2020年（到314下标结束） 获取确诊数据，用于y轴，取2020年（到314下标结束） 生成图表 分块演示 以美国.txt为例。\n1 2 3 # 打开并读取文件 usdoc = open(&#39;T:/美国.txt&#39;,&#39;r&#39;,encoding=&#39;UTF-8&#39;) us_data = usdoc.read() 打开美国.txt文件查看发现开头要删除的内容为：jsonp_1629344292311_69436(\n根据前面所学的6.3 数据容器：字符串中2.2 节字符串的替换，我们这里使用replace()函数处理\n1 us_data = us_data.replace(&#39;jsonp_1629344292311_69436(&#39;,&#39;&#39;) 接下来的结尾不能也用replace()，因为在文件中可能有多处出现了);，会出现多处替换的情况，因此我们使用字符串的切片，详见6.4 序列的操作：切片\n1 us_data = us_data[:-2] 下面导入json模块将字符串转为字典\n1 2 import json us_dict = json.loads(us_data) 下面回到浏览器，根据json视图一点点获取层级数据\n1 us_trend = us_dict[&#39;data&#39;][0][&#39;trend&#39;] 目前剩下的结构\n1 2 3 JSON ├─list(字典，格式为0:&#34;2.22&#34;,1:&#34;2.23&#34;) └─updateDate 下面我们获取日期数据\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-29T22:14:54&#43;08:00'/><meta property='article:modified_time' content='2025-12-29T22:14:54&#43;08:00'/>
+<meta name="twitter:title" content="S1.8 类型注解">
+<meta name="twitter:description" content="类型注解 Why&amp;What 为什么要使用类型注解 当我们调用random模块中的randint方法时，将光标置于括号中查看提示会显示 显然它的意思是说我们要传入一个整数int参数\n但当我们自己定义一个函数时，提示却只告诉我们任何参数any，如果这个函数是用来进行特定操作的话就容易弄错传参类型， 什么是类型注解 Python在3.5版本的时候引入了类型注解，以方便静态类型检查工具,IDE等第三方工具。\n**类型注解：**在代码中涉及数据交互的地方,提供数据类型的注解（显式的说明）。\n主要功能：\n帮助第三方IDE工具（如PyCharm）对代码进行类型推断，协助做代码提示 帮助开发者自身对变量进行类型注释 支持：\n变量的类型注解 函数（方法）形参列表和返回值的类型注解 类型注解注释一个提高代码可读性的备注，写错了也不影响程序的实际运行。\n变量的类型注解 基础语法：变量:类型\n基础数据类型注解 1 2 3 4 name: str = &#39;小明&#39; age: int = 10 if_student: bool = True average_money: float = 10.445 基础数据类型注解 1 2 3 class Student: pass stu: Student = Student() 基础容器类型注解（简易） 简易版就是只注解容器的类型\n1 2 3 4 5 my_list:list = [1,2,3] my_tuple:tuple = (1,2,3) my_set:set = {1,2,3} my_dict:dict = {&#39;retr0&#39;:123} my_str:str = &#39;retr0&#39; 基础容器类型注解（详细） 1 2 3 4 my_list:list[int] = [1,2,3] my_tuple:tuple[str,int,boll] = (&#39;retr0&#39;,1,True) my_set:set[int] = {1,2,3} my_dict:dict[str,int] = {&#39;retr0&#39;:123} 详细注解需要注解容器内部元素的类型，并且注意：\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -319,17 +319,36 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#数据准备">数据准备</a>
+    <li><a href="#类型注解-whywhat">类型注解 Why&amp;What</a>
       <ol>
-        <li><a href="#资料获取">资料获取</a></li>
-        <li><a href="#分析文件">分析文件</a></li>
+        <li><a href="#为什么要使用类型注解">为什么要使用类型注解</a></li>
+        <li><a href="#什么是类型注解">什么是类型注解</a></li>
       </ol>
     </li>
-    <li><a href="#开始操作">开始操作</a>
+    <li><a href="#变量的类型注解">变量的类型注解</a>
       <ol>
-        <li><a href="#分块演示">分块演示</a></li>
-        <li><a href="#单国完整版">单国完整版</a></li>
-        <li><a href="#终极版成品">终极版(成品)</a></li>
+        <li><a href="#基础数据类型注解">基础数据类型注解</a></li>
+        <li><a href="#基础数据类型注解-1">基础数据类型注解</a></li>
+        <li><a href="#基础容器类型注解简易">基础容器类型注解（简易）</a></li>
+        <li><a href="#基础容器类型注解详细">基础容器类型注解（详细）</a></li>
+        <li><a href="#其他语法格式">其他语法格式</a></li>
+      </ol>
+    </li>
+    <li><a href="#函数和方法的类型注解">函数和方法的类型注解</a>
+      <ol>
+        <li><a href="#函数方法的类型注解--形参注解">函数（方法）的类型注解 — 形参注解</a></li>
+        <li><a href="#函数方法的类型注解--返回值注解">函数（方法）的类型注解 — 返回值注解</a></li>
+      </ol>
+    </li>
+    <li><a href="#union联合类型注解">Union联合类型注解</a>
+      <ol>
+        <li><a href="#为什么要有union类型注解">为什么要有Union类型注解？</a></li>
+        <li><a href="#使用方法">使用方法</a>
+          <ol>
+            <li><a href="#演示变量注解">演示：变量注解</a></li>
+            <li><a href="#演示返回值注解">演示：返回值注解</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
   </ol>
@@ -359,7 +378,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/10.3-%E7%BB%83%E4%B9%A0%E4%B8%80%E6%8A%98%E7%BA%BF%E5%9B%BE/">10.3 练习一：折线图</a>
+            <a href="/p/s1.8-%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3/">S1.8 类型注解</a>
         </h2>
     
         
@@ -381,7 +400,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-01</time>
+                <time class="article-time--published">2025-12-29</time>
             </div>
         
 
@@ -404,310 +423,238 @@
     <section class="article-content">
     
     
-    <h2 id="数据准备">数据准备
-</h2><h3 id="资料获取">资料获取
-</h3><p>接下来的几个练习所用数据都在这里，请自行下载：</p>
-<p>链接: <a class="link" href="https://pan.baidu.com/s/1b5ZZ5cVyS-9_06tql4tNFw"  target="_blank" rel="noopener"
-    >https://pan.baidu.com/s/1b5ZZ5cVyS-9_06tql4tNFw</a> 提取码: i3i6</p>
-<h3 id="分析文件">分析文件
-</h3><p>我们任选一个文件打开分析（此处以美国.txt为例）</p>
-<p>文件大致为<code>jsonp_1629344292311_69436({&quot;status&quot;:0,&quot;msg&quot;:&quot;success&quot; 。。。。。。32695,271457,169842]}]}}]});</code></p>
-<p>发现此文件内容并不完全符合json格式，存在以下两点问题：</p>
-<ul>
-<li>开头的花括号前多出来了<code>jsonp_1629344292311_69436(</code>部分</li>
-<li>结尾多了出了括号和分号<code>);</code></li>
-</ul>
-<p>接下来为例便于查看json的层级结构，我们打开工具网站：<a class="link" href="https://www.bejson.com/jsonviewernew/"  target="_blank" rel="noopener"
-    >JSON在线视图查看器(Online JSON Viewer)</a>将上面文本中间去头去尾符合正确json格式的部分复制到左面的输入框，点击格式化按钮，这时右面已经出现了便于查看的结构树，如图：</p>
-<p><img src="https://free.picui.cn/free/2025/12/01/692ce14f64d1d.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<p>也可以参考下面给出的省略版：</p>
-<p><img src="https://free.picui.cn/free/2025/12/01/692ce159a55de.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<p>总体可以看出其中，&ldquo;update&quot;中和下面的&quot;data&quot;中的数据应该具有对应关系</p>
-<h2 id="开始操作">开始操作
-</h2><p>为了方便演示，将三个国家分开操作，因此可以将任务总共分为下面几步：</p>
-<ol>
-<li>打开并读取文件</li>
-<li>去掉不合json规范的开头</li>
-<li>去掉不合json规范的结尾</li>
-<li>json转python字典</li>
-<li>获取trend key</li>
-<li>获取日期数据，用于x轴，取2020年（到314下标结束）</li>
-<li>获取确诊数据，用于y轴，取2020年（到314下标结束）</li>
-<li>生成图表</li>
+    <h2 id="类型注解-whywhat">类型注解 Why&amp;What
+</h2><h3 id="为什么要使用类型注解">为什么要使用类型注解
+</h3><ol>
+<li>当我们调用random模块中的randint方法时，将光标置于括号中查看提示会显示</li>
 </ol>
-<hr>
-<h3 id="分块演示">分块演示
-</h3><p>以<code>美国.txt</code>为例。</p>
-<div class="highlight"><div class="chroma">
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/61753668/1766845257142-cb943502-01be-4d81-9e28-3e6780033a6f.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>显然它的意思是说我们要传入一个整数<code>int</code>参数</p>
+<ol start="2">
+<li>但当我们自己定义一个函数时，提示却只告诉我们任何参数<code>any</code>，如果这个函数是用来进行特定操作的话就容易弄错传参类型，</li>
+</ol>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/61753668/1766845460809-aa576ebe-f961-4e78-9d00-244a4351f2a1.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h3 id="什么是类型注解">什么是类型注解
+</h3><p>Python在3.5版本的时候引入了类型注解，以方便静态类型检查工具,IDE等第三方工具。</p>
+<p>**类型注解：**在代码中涉及数据交互的地方,提供数据类型的注解（显式的说明）。</p>
+<p><strong>主要功能：</strong></p>
+<ul>
+<li>帮助第三方IDE工具（如PyCharm）对代码进行类型推断，协助做代码提示</li>
+<li>帮助开发者自身对变量进行类型注释</li>
+</ul>
+<p><strong>支持：</strong></p>
+<ul>
+<li>变量的类型注解</li>
+<li>函数（方法）形参列表和返回值的类型注解</li>
+</ul>
+<p><strong><u><font style="color:#DF2A3F;">类型注解注释一个提高代码可读性的备注，写错了也不影响程序的实际运行。</font></u></strong></p>
+<h2 id="变量的类型注解">变量的类型注解
+</h2><p><strong>基础语法：</strong><code>变量:类型</code></p>
+<h3 id="基础数据类型注解">基础数据类型注解
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;小明&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">age</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl"><span class="n">if_student</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl"><span class="n">average_money</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">10.445</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="基础数据类型注解-1">基础数据类型注解
+</h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 打开并读取文件</span>
-</span></span><span class="line"><span class="cl"><span class="n">usdoc</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;T:/美国.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">us_data</span> <span class="o">=</span> <span class="n">usdoc</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Student</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">pass</span>
+</span></span><span class="line"><span class="cl"><span class="n">stu</span><span class="p">:</span> <span class="n">Student</span> <span class="o">=</span> <span class="n">Student</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>打开<code>美国.txt</code>文件查看发现开头要删除的内容为：<code>jsonp_1629344292311_69436(</code></p>
-<p>根据前面所学的<a class="link" href="https://www.retr0.xyz/p/6.3-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E7%AC%A6%E4%B8%B2/"  target="_blank" rel="noopener"
-    >6.3 数据容器：字符串</a>中2.2 节字符串的替换，我们这里使用replace()函数处理</p>
+</div><h3 id="基础容器类型注解简易">基础容器类型注解（简易）
+</h3><p>简易版就是只注解容器的类型</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">us_data</span> <span class="o">=</span> <span class="n">us_data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;jsonp_1629344292311_69436(&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">my_list</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">my_tuple</span><span class="p">:</span><span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">my_set</span><span class="p">:</span><span class="nb">set</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">my_dict</span><span class="p">:</span><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;retr0&#39;</span><span class="p">:</span><span class="mi">123</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">my_str</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;retr0&#39;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>接下来的结尾不能也用replace()，因为在文件中可能有多处出现了<code>);</code>，会出现多处替换的情况，因此我们使用字符串的切片，详见<a class="link" href="https://www.retr0.xyz/p/6.4-%E5%BA%8F%E5%88%97%E7%9A%84%E6%93%8D%E4%BD%9C%E5%88%87%E7%89%87/"  target="_blank" rel="noopener"
-    >6.4 序列的操作：切片</a></p>
+</div><h3 id="基础容器类型注解详细">基础容器类型注解（详细）
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">my_list</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">my_tuple</span><span class="p">:</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="n">boll</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;retr0&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">my_set</span><span class="p">:</span><span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">my_dict</span><span class="p">:</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;retr0&#39;</span><span class="p">:</span><span class="mi">123</span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>详细注解需要注解容器内部元素的类型，并且注意：</p>
+<ul>
+<li>元组类型设置详细注解，需要将每一个元素都标记出来</li>
+<li>字典类型设置详细注解，需要两个类型，第一个是key第二个是value</li>
+</ul>
+<h3 id="其他语法格式">其他语法格式
+</h3><p>还有一种注解方法就是在对应行的注释中进行类型注解，语法：<code># type:类型</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">us_data</span> <span class="o">=</span> <span class="n">us_data</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>	<span class="c1"># type:int</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 指返回的结果是整数</span>
+</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>		<span class="c1"># type:dict[str,int]</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 指返回的结果是字典</span>
+</span></span><span class="line"><span class="cl"><span class="n">c</span> <span class="o">=</span> <span class="n">func</span><span class="p">()</span>					<span class="c1"># type:Student</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 指返回的结果是Student的类对象</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>下面导入json模块将字符串转为字典</p>
+</div><p>并且实际上一般情况下我们不用特别对变量进行注解（毕竟我们也能一眼看出来到底是什么数据类型），真正需要注解的就是像上面这种的隐式变量，因为我们无法直接看出其数据类型。</p>
+<h2 id="函数和方法的类型注解">函数和方法的类型注解
+</h2><h3 id="函数方法的类型注解--形参注解">函数（方法）的类型注解 — 形参注解
+</h3><p><strong>语法：</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
-</span></span><span class="line"><span class="cl"><span class="n">us_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">us_data</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">函数方法名</span><span class="p">(</span><span class="n">形参名</span><span class="err">：</span><span class="n">类型</span><span class="err">，</span><span class="n">形参名</span><span class="err">：</span><span class="n">类型</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">示例语句</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>下面回到浏览器，根据json视图一点点获取层级数据</p>
-<p><img src="https://free.picui.cn/free/2025/12/01/692ce14f64d1d.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
+</div><p><strong>QuickStart：</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">us_trend</span> <span class="o">=</span> <span class="n">us_dict</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;trend&#39;</span><span class="p">]</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span><span class="n">y</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">data</span><span class="p">:</span><span class="nb">list</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">pass</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>目前剩下的结构</p>
+</div><h3 id="函数方法的类型注解--返回值注解">函数（方法）的类型注解 — 返回值注解
+</h3><p><strong>语法：</strong></p>
 <div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">函数方法名</span><span class="p">(</span><span class="n">形参名</span><span class="err">：</span><span class="n">类型</span><span class="err">，</span><span class="n">形参名</span><span class="err">：</span><span class="n">类型</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">返回值类型</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">示例语句</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>QuickStart：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span><span class="n">y</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">data</span><span class="p">:</span><span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">data</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="union联合类型注解">Union联合类型注解
+</h2><h3 id="为什么要有union类型注解">为什么要有Union类型注解？
+</h3><p>如果数据容器是下面这样的，你还好进行一般注解吗？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;retr0&#39;</span><span class="p">,</span><span class="s1">&#39;hello&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">my_dict</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;retr0&#39;</span><span class="p">,</span><span class="s1">&#39;age&#39;</span><span class="p">:</span><span class="mi">18</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="使用方法">使用方法
+</h3><p>首先导入Union包<code>from typing import Union</code></p>
+<p><strong>语法：</strong><code>Union[类型,类型,......,类型]</code></p>
+<h4 id="演示变量注解">演示：变量注解
+</h4><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">JSON
-</span></span><span class="line"><span class="cl">├─list(字典，格式为0:&#34;2.22&#34;,1:&#34;2.23&#34;)
-</span></span><span class="line"><span class="cl">└─updateDate
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+</span></span><span class="line"><span class="cl"><span class="n">my_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;retr0&#39;</span><span class="p">,</span><span class="s1">&#39;hello&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">my_dict</span><span class="p">:</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;retr0&#39;</span><span class="p">,</span><span class="s1">&#39;age&#39;</span><span class="p">:</span><span class="mi">18</span><span class="p">]</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>下面我们获取日期数据</p>
-<div class="highlight"><div class="chroma">
+</div><h4 id="演示返回值注解">演示：返回值注解
+</h4><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">us_x_data</span> <span class="o">=</span> <span class="n">us_trend</span><span class="p">[</span><span class="s1">&#39;updateDate&#39;</span><span class="p">][:</span><span class="mi">314</span><span class="p">]</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">data</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">str</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">pass</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>然后获取确诊数据</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">us_y_data</span> <span class="o">=</span> <span class="n">us_trend</span><span class="p">[</span><span class="s1">&#39;list&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">][:</span><span class="mi">314</span><span class="p">]</span>
-</span></span></code></pre></td></tr></table>
 </div>
-</div><p>最后构建图表</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 导包，导入Line功能构建折线图对象</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pyecharts.charts</span> <span class="kn">import</span> <span class="n">Line</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 得到折线图对象</span>
-</span></span><span class="line"><span class="cl"><span class="n">line</span> <span class="o">=</span> <span class="n">Line</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 添加x轴数据</span>
-</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">add_xaxis</span><span class="p">(</span><span class="n">us_x_data</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 添加y轴数据</span>
-</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">add_yaxis</span><span class="p">(</span><span class="s2">&#34;确诊人数&#34;</span><span class="p">,</span> <span class="n">us_y_data</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 生成图表</span>
-</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="单国完整版">单国完整版
-</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pyecharts.charts</span> <span class="kn">import</span> <span class="n">Line</span>
-</span></span><span class="line"><span class="cl"><span class="n">usdoc</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;T:/美国.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">us_data</span> <span class="o">=</span> <span class="n">usdoc</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="n">us_data</span> <span class="o">=</span> <span class="n">us_data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;jsonp_1629344292311_69436(&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">us_data</span> <span class="o">=</span> <span class="n">us_data</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">us_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">us_data</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">us_trend</span> <span class="o">=</span> <span class="n">us_dict</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;trend&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">us_x_data</span> <span class="o">=</span> <span class="n">us_trend</span><span class="p">[</span><span class="s1">&#39;updateDate&#39;</span><span class="p">][:</span><span class="mi">314</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">us_y_data</span> <span class="o">=</span> <span class="n">us_trend</span><span class="p">[</span><span class="s1">&#39;list&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">][:</span><span class="mi">314</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">line</span> <span class="o">=</span> <span class="n">Line</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">add_xaxis</span><span class="p">(</span><span class="n">us_x_data</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">add_yaxis</span><span class="p">(</span><span class="s2">&#34;确诊人数&#34;</span><span class="p">,</span> <span class="n">us_y_data</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><img src="https://free.picui.cn/free/2025/12/01/692ce159a5ab4.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<h3 id="终极版成品">终极版(成品)
-</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pyecharts.charts</span> <span class="kn">import</span> <span class="n">Line</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pyecharts.options</span> <span class="kn">import</span> <span class="o">*</span>
-</span></span><span class="line"><span class="cl"><span class="n">usdoc</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;T:/美国.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">indoc</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;T:/印度.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">jpdoc</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;T:/日本.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">us_data</span> <span class="o">=</span> <span class="n">usdoc</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="n">in_data</span> <span class="o">=</span> <span class="n">indoc</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="n">jp_data</span> <span class="o">=</span> <span class="n">jpdoc</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="n">us_data</span> <span class="o">=</span> <span class="n">us_data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;jsonp_1629344292311_69436(&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">in_data</span> <span class="o">=</span> <span class="n">in_data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;jsonp_1629350745930_63180(&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">jp_data</span> <span class="o">=</span> <span class="n">jp_data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;jsonp_1629350871167_29498(&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">us_data</span> <span class="o">=</span> <span class="n">us_data</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">in_data</span> <span class="o">=</span> <span class="n">in_data</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">jp_data</span> <span class="o">=</span> <span class="n">jp_data</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">us_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">us_data</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">in_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">in_data</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">jp_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">jp_data</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">us_trend</span> <span class="o">=</span> <span class="n">us_dict</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;trend&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">in_trend</span> <span class="o">=</span> <span class="n">in_dict</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;trend&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">jp_trend</span> <span class="o">=</span> <span class="n">jp_dict</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;trend&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">us_x_data</span> <span class="o">=</span> <span class="n">us_trend</span><span class="p">[</span><span class="s1">&#39;updateDate&#39;</span><span class="p">][:</span><span class="mi">314</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">us_y_data</span> <span class="o">=</span> <span class="n">us_trend</span><span class="p">[</span><span class="s1">&#39;list&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">][:</span><span class="mi">314</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">in_y_data</span> <span class="o">=</span> <span class="n">in_trend</span><span class="p">[</span><span class="s1">&#39;list&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">][:</span><span class="mi">314</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">jp_y_data</span> <span class="o">=</span> <span class="n">jp_trend</span><span class="p">[</span><span class="s1">&#39;list&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">][:</span><span class="mi">314</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">line</span> <span class="o">=</span> <span class="n">Line</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">add_xaxis</span><span class="p">(</span><span class="n">us_x_data</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">add_yaxis</span><span class="p">(</span><span class="s2">&#34;美国确诊&#34;</span><span class="p">,</span> <span class="n">us_y_data</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">add_yaxis</span><span class="p">(</span><span class="s2">&#34;印度确诊&#34;</span><span class="p">,</span> <span class="n">in_y_data</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">add_yaxis</span><span class="p">(</span><span class="s2">&#34;日本确诊&#34;</span><span class="p">,</span> <span class="n">jp_y_data</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">set_global_opts</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="n">title_opts</span><span class="o">=</span><span class="n">TitleOpts</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&#34;2020年美印日确诊人数趋势&#34;</span><span class="p">,</span><span class="n">pos_left</span><span class="o">=</span><span class="s2">&#34;center&#34;</span><span class="p">,</span><span class="n">pos_top</span><span class="o">=</span><span class="s2">&#34;1%&#34;</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 参数title设置标题文字，pos_left设置横向位置，pos_bottom设置距离底部位置</span>
-</span></span><span class="line"><span class="cl">    <span class="n">legend_opts</span><span class="o">=</span><span class="n">LegendOpts</span><span class="p">(</span><span class="n">is_show</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 设置图例是否显示</span>
-</span></span><span class="line"><span class="cl">    <span class="n">toolbox_opts</span><span class="o">=</span><span class="n">ToolboxOpts</span><span class="p">(</span><span class="n">is_show</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 设置工具箱是否显示</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><img src="https://free.picui.cn/free/2025/12/01/692ce14f8e08e.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-
 </section>
 
 
@@ -769,19 +716,6 @@
             
                 
 <article class="">
-    <a href="/p/s1.8-%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">S1.8 类型注解</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
     <a href="/p/s1.7-%E7%BB%A7%E6%89%BF/">
         
         
@@ -827,6 +761,19 @@
 
         <div class="article-details">
             <h2 class="article-title">S1.4 构造方法</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/s1.3-%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">S1.3 类和对象</h2>
         </div>
     </a>
 </article>
