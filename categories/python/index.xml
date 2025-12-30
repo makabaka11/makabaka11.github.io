@@ -42,7 +42,7 @@
 &gt;&lt;/p&gt;
 &lt;h3 id=&#34;什么是类型注解&#34;&gt;什么是类型注解
 &lt;/h3&gt;&lt;p&gt;Python在3.5版本的时候引入了类型注解，以方便静态类型检查工具,IDE等第三方工具。&lt;/p&gt;
-&lt;p&gt;**类型注解：**在代码中涉及数据交互的地方,提供数据类型的注解（显式的说明）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;类型注解：&lt;/strong&gt; 在代码中涉及数据交互的地方,提供数据类型的注解（显式的说明）。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;主要功能：&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;帮助第三方IDE工具（如PyCharm）对代码进行类型推断，协助做代码提示&lt;/li&gt;
