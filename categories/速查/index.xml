@@ -2404,7 +2404,7 @@ $$&lt;h4 id=&#34;核心特点-3&#34;&gt;核心特点
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;字典的嵌套&#34;&gt;字典的嵌套
-&lt;/h3&gt;&lt;p&gt;字典的Key和Value可以是任意数据类型**&lt;font style=&#34;color:#DF2A3F;&#34;&gt;（Key不可以是字典）&lt;/font&gt;**&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;字典的Key和Value可以是任意数据类型 &lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;（Key不可以是字典）&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;使用例：使用字典记录学生及其成绩&lt;/p&gt;
 &lt;table&gt;
   &lt;thead&gt;
