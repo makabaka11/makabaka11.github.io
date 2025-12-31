@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="多态（基础） 多态，指的是：多种状态，即完成某个行为时，使用不同的对象会得到不同的状态。\n示例：\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 class Animal: def speak(self): pass class Dog(Animal): def speak(self): print(&#39;汪汪汪&#39;) class Cat(Animal): def speak(self): print(&#39;喵喵喵&#39;) def make_noise(animal:Animal):\t# 专门定义一个函数用来在传入不同参数时调用相应的对象 animal.speak() dog = Dog() cat = Cat() make_noise(dog) make_noise(cat) 从上面的示例我们可以看出，所谓多态其实就是专门定义一个函数用来在传入不同参数时调用相应的对象，\n并且其通常作用在继承关系上，这样可以做到：\n函数（方法）形参声明接收父类对象（注解用父类是因为父类一般是统称） 实际传入父类的子类对象进行工作 最终实现同一行为，不同状态 抽象类（接口） 有人可能要问，为什么上面示例代码中父类Animal的speak方法，是空实现pass\n这种设计的含义是：\n父类用来确定有哪些方法**（名称）** 具体的方法实现**（内容）**，由子类决定 这种写法，就叫做抽象类（也可以称之为接口）\n**抽象类：**含有抽象方法的类称之为抽象类\n**抽象方法：**方法体是空实现的pass称之为抽象方法\n抽象类就好比定义一个标准，包含了一些抽象的方法，要求子类必须实现，例如：\n1 2 3 4 5 6 7 class AC:\t# 空调标准 def coll_wind(self):\t# 制冷 pass def hot_wind(self):\t# 制热 pass def swing(self):\t# 摆风 pass 接下来不同的厂家用各自的方法去实现这些标准：\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="多态（基础） 多态，指的是：多种状态，即完成某个行为时，使用不同的对象会得到不同的状态。\n示例：\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 class Animal: def speak(self): pass class Dog(Animal): def speak(self): print(&#39;汪汪汪&#39;) class Cat(Animal): def speak(self): print(&#39;喵喵喵&#39;) def make_noise(animal:Animal):\t# 专门定义一个函数用来在传入不同参数时调用相应的对象 animal.speak() dog = Dog() cat = Cat() make_noise(dog) make_noise(cat) 从上面的示例我们可以看出，所谓多态其实就是专门定义一个函数用来在传入不同参数时调用相应的对象，\n并且其通常作用在继承关系上，这样可以做到：\n函数（方法）形参声明接收父类对象（注解用父类是因为父类一般是统称） 实际传入父类的子类对象进行工作 最终实现同一行为，不同状态 抽象类（接口） 有人可能要问，为什么上面示例代码中父类Animal的speak方法，是空实现pass\n这种设计的含义是：\n父类用来确定有哪些方法 （名称） 具体的方法实现 （内容） ，由子类决定 这种写法，就叫做抽象类（也可以称之为接口）\n抽象类： 含有抽象方法的类称之为抽象类\n抽象方法： 方法体是空实现的pass称之为抽象方法\n抽象类就好比定义一个标准，包含了一些抽象的方法，要求子类必须实现，例如：\n">
 <title>S1.9 多态</title>
 
 <link rel='canonical' href='https://www.retr0.xyz/p/s1.9-%E5%A4%9A%E6%80%81/'>
 
 <link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="S1.9 多态">
-<meta property='og:description' content="多态（基础） 多态，指的是：多种状态，即完成某个行为时，使用不同的对象会得到不同的状态。\n示例：\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 class Animal: def speak(self): pass class Dog(Animal): def speak(self): print(&#39;汪汪汪&#39;) class Cat(Animal): def speak(self): print(&#39;喵喵喵&#39;) def make_noise(animal:Animal):\t# 专门定义一个函数用来在传入不同参数时调用相应的对象 animal.speak() dog = Dog() cat = Cat() make_noise(dog) make_noise(cat) 从上面的示例我们可以看出，所谓多态其实就是专门定义一个函数用来在传入不同参数时调用相应的对象，\n并且其通常作用在继承关系上，这样可以做到：\n函数（方法）形参声明接收父类对象（注解用父类是因为父类一般是统称） 实际传入父类的子类对象进行工作 最终实现同一行为，不同状态 抽象类（接口） 有人可能要问，为什么上面示例代码中父类Animal的speak方法，是空实现pass\n这种设计的含义是：\n父类用来确定有哪些方法**（名称）** 具体的方法实现**（内容）**，由子类决定 这种写法，就叫做抽象类（也可以称之为接口）\n**抽象类：**含有抽象方法的类称之为抽象类\n**抽象方法：**方法体是空实现的pass称之为抽象方法\n抽象类就好比定义一个标准，包含了一些抽象的方法，要求子类必须实现，例如：\n1 2 3 4 5 6 7 class AC:\t# 空调标准 def coll_wind(self):\t# 制冷 pass def hot_wind(self):\t# 制热 pass def swing(self):\t# 摆风 pass 接下来不同的厂家用各自的方法去实现这些标准：\n">
+<meta property='og:description' content="多态（基础） 多态，指的是：多种状态，即完成某个行为时，使用不同的对象会得到不同的状态。\n示例：\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 class Animal: def speak(self): pass class Dog(Animal): def speak(self): print(&#39;汪汪汪&#39;) class Cat(Animal): def speak(self): print(&#39;喵喵喵&#39;) def make_noise(animal:Animal):\t# 专门定义一个函数用来在传入不同参数时调用相应的对象 animal.speak() dog = Dog() cat = Cat() make_noise(dog) make_noise(cat) 从上面的示例我们可以看出，所谓多态其实就是专门定义一个函数用来在传入不同参数时调用相应的对象，\n并且其通常作用在继承关系上，这样可以做到：\n函数（方法）形参声明接收父类对象（注解用父类是因为父类一般是统称） 实际传入父类的子类对象进行工作 最终实现同一行为，不同状态 抽象类（接口） 有人可能要问，为什么上面示例代码中父类Animal的speak方法，是空实现pass\n这种设计的含义是：\n父类用来确定有哪些方法 （名称） 具体的方法实现 （内容） ，由子类决定 这种写法，就叫做抽象类（也可以称之为接口）\n抽象类： 含有抽象方法的类称之为抽象类\n抽象方法： 方法体是空实现的pass称之为抽象方法\n抽象类就好比定义一个标准，包含了一些抽象的方法，要求子类必须实现，例如：\n">
 <meta property='og:url' content='https://www.retr0.xyz/p/s1.9-%E5%A4%9A%E6%80%81/'>
 <meta property='og:site_name' content='Retr0的小窝'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-30T22:49:32&#43;08:00'/><meta property='article:modified_time' content='2025-12-30T22:49:32&#43;08:00'/>
 <meta name="twitter:title" content="S1.9 多态">
-<meta name="twitter:description" content="多态（基础） 多态，指的是：多种状态，即完成某个行为时，使用不同的对象会得到不同的状态。\n示例：\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 class Animal: def speak(self): pass class Dog(Animal): def speak(self): print(&#39;汪汪汪&#39;) class Cat(Animal): def speak(self): print(&#39;喵喵喵&#39;) def make_noise(animal:Animal):\t# 专门定义一个函数用来在传入不同参数时调用相应的对象 animal.speak() dog = Dog() cat = Cat() make_noise(dog) make_noise(cat) 从上面的示例我们可以看出，所谓多态其实就是专门定义一个函数用来在传入不同参数时调用相应的对象，\n并且其通常作用在继承关系上，这样可以做到：\n函数（方法）形参声明接收父类对象（注解用父类是因为父类一般是统称） 实际传入父类的子类对象进行工作 最终实现同一行为，不同状态 抽象类（接口） 有人可能要问，为什么上面示例代码中父类Animal的speak方法，是空实现pass\n这种设计的含义是：\n父类用来确定有哪些方法**（名称）** 具体的方法实现**（内容）**，由子类决定 这种写法，就叫做抽象类（也可以称之为接口）\n**抽象类：**含有抽象方法的类称之为抽象类\n**抽象方法：**方法体是空实现的pass称之为抽象方法\n抽象类就好比定义一个标准，包含了一些抽象的方法，要求子类必须实现，例如：\n1 2 3 4 5 6 7 class AC:\t# 空调标准 def coll_wind(self):\t# 制冷 pass def hot_wind(self):\t# 制热 pass def swing(self):\t# 摆风 pass 接下来不同的厂家用各自的方法去实现这些标准：\n">
+<meta name="twitter:description" content="多态（基础） 多态，指的是：多种状态，即完成某个行为时，使用不同的对象会得到不同的状态。\n示例：\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 class Animal: def speak(self): pass class Dog(Animal): def speak(self): print(&#39;汪汪汪&#39;) class Cat(Animal): def speak(self): print(&#39;喵喵喵&#39;) def make_noise(animal:Animal):\t# 专门定义一个函数用来在传入不同参数时调用相应的对象 animal.speak() dog = Dog() cat = Cat() make_noise(dog) make_noise(cat) 从上面的示例我们可以看出，所谓多态其实就是专门定义一个函数用来在传入不同参数时调用相应的对象，\n并且其通常作用在继承关系上，这样可以做到：\n函数（方法）形参声明接收父类对象（注解用父类是因为父类一般是统称） 实际传入父类的子类对象进行工作 最终实现同一行为，不同状态 抽象类（接口） 有人可能要问，为什么上面示例代码中父类Animal的speak方法，是空实现pass\n这种设计的含义是：\n父类用来确定有哪些方法 （名称） 具体的方法实现 （内容） ，由子类决定 这种写法，就叫做抽象类（也可以称之为接口）\n抽象类： 含有抽象方法的类称之为抽象类\n抽象方法： 方法体是空实现的pass称之为抽象方法\n抽象类就好比定义一个标准，包含了一些抽象的方法，要求子类必须实现，例如：\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -455,12 +455,12 @@
 </h3><p>有人可能要问，为什么上面示例代码中父类Animal的speak方法，是空实现<code>pass</code></p>
 <p>这种设计的含义是：</p>
 <ul>
-<li>父类用来确定有哪些方法**（名称）**</li>
-<li>具体的方法实现**（内容）**，由子类决定</li>
+<li>父类用来确定有哪些方法 <strong>（名称）</strong></li>
+<li>具体的方法实现 <strong>（内容）</strong> ，由子类决定</li>
 </ul>
 <p>这种写法，就叫做抽象类（也可以称之为接口）</p>
-<p>**抽象类：**含有抽象方法的类称之为抽象类</p>
-<p>**抽象方法：**方法体是空实现的<code>pass</code>称之为抽象方法</p>
+<p><strong>抽象类：</strong> 含有抽象方法的类称之为抽象类</p>
+<p><strong>抽象方法：</strong> 方法体是空实现的<code>pass</code>称之为抽象方法</p>
 <hr>
 <p>抽象类就好比定义一个标准，包含了一些抽象的方法，要求子类必须实现，例如：</p>
 <div class="highlight"><div class="chroma">
