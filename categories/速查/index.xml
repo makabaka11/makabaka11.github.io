@@ -2623,7 +2623,7 @@ $$&lt;h4 id=&#34;核心特点-3&#34;&gt;核心特点
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;集合的常用操作&#34;&gt;集合的常用操作
-&lt;/h2&gt;&lt;p&gt;因为集合是无序的，所以集合**&lt;font style=&#34;color:#DF2A3F;&#34;&gt;不支持下标索引&lt;/font&gt;**，但是集合是可以修改的&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;因为集合是无序的，所以集合 &lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;不支持下标索引&lt;/font&gt;&lt;/strong&gt; ，但是集合是可以修改的&lt;/p&gt;
 &lt;h3 id=&#34;添加新元素-add&#34;&gt;添加新元素 add
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
