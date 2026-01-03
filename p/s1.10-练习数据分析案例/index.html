@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="json 数据格式 什么是json JSON是一种轻量级的数据交互格式。可以按照JSON指定的格式去组织和封装数据 JSON本质上是一个带有特定格式的字符串 主要功能： json就是一种在各个编程语言中流通的数据格式，负责不同编程语言中的数据传递和交互。\njson有什么用 各种编程语言存储数据的容器不尽相同，在Python中有字典dict这样的数据类型，而其它语言可能没有对应的字典。 为了让不同的语言都能够相互通用的互相传递数据，JSON就是一种非常良好的中转数据格式。如下图，以Python和C语言互传数据为例：\njson格式数据转化 json格式的数据要求很严格，如下面所示：\n1 2 3 4 5 # json数据的格式可以是(类字典)： {&#34;name&#34;:&#34;admin&#34;,&#34;age&#34;:18} # 也可以是(类列表嵌套字典)： [{&#34;name&#34;:&#34;admin&#34;,&#34;age&#34;:18},{&#34;name&#34;:&#34;root&#34;,&#34;age&#34;:16},{&#34;name&#34;:&#34;retr0&#34;,&#34;age&#34;:20}] Python数据和json数据的相互转化 1 2 3 4 5 6 7 8 9 10 11 12 13 14 # 导入json模块 import json # 准备符合json格式要求的python数据 data = [{&#34;name&#34;:&#34;张三&#34;,&#34;age&#34;:16},{&#34;name&#34;:&#34;李四&#34;,&#34;age&#34;:20}] # 通过json.dumps(data)方法把python数据转化为了json数据 json1 = json.dumps(data) # 通过json.loads(json1)方法把json数据转化为了python数据 data1 = json.loads(json1) print(data,&#34;类型为&#34;,type(data)) print(json1,&#34;类型为&#34;,type(json1)) print(data1,&#34;类型为&#34;,type(data1)) 注意： 中文内容在转换为json时会出现编码问题，因此需要在json.dumps()中添加参数ensure_ascii=False，如下所示：\n">
-<title>10.2 前置知识：json 格式和 pyecharts 入门</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 本次练习中使用的文件位于：https://pan.baidu.com/s/1xpTMQtKizhUwEGI3mC9NZQ?pwd=cfc5\n任务简报 任务要求：\n某公司有两份数据文件，现需要对其进行分析处理，计算**每日的销售额**并以柱状图表的形式进行展示。\n我们打开两份文件：\n一月份数据是普通文本，使用逗号分割数据记录，从前到后分别是：日期，订单id，销售额，销售省份 二月份数据是JSON数据，同样包含（日期，订单id，销售额，销售省份） 简单分析可得，实现方法就是找到同一天的所有销售金额并且相加，具体需求就是：\n读取数据 ➡️ 设计FileReader类 封装数据对象 ➡️ 设计数据封装类 计算数据对象 ➡️ 对对象进行逻辑计算 pyecharts绘图 ➡️ 以面向对象思想重新认知pyecharts 文件读取 新建一个文件夹作为整个项目的文件夹，此处以数据案例分析为例。\n从技术层面上我们有几个步骤：\n设计一个类，可以完成数据的封装 设计一个抽象类（方便处理两种不同形式的文件），定义文件读取的相关功能，并使用子类实现具体功能 读取文件，生产数据对象 进行数据需求的逻辑计算（计算每一天的销售额） 通过PyEcharts进行图形绘制 数据封装 创建data_define.py文件，输入：\n1 2 3 4 5 6 7 8 9 class Record: def __init__(self,date,order_id,money,province): self.date = date\t# 订单日期 self.order_id = order_id\t# 订单ID self.money = money\t# 订单金额 self.province = province\t# 销售省份 def __str__(self):\t# 使用魔术方法规范输出内容方便测试 return f&#39;{self.date} {self.order_id} {self.money} {self.province}&#39; 文件读取 接着进行第二部，创建文件file_define.py\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 import json from data_define import Record class FileReader: def read_data(self) -&gt; list[Record]: # 读取文件的数据，读到的每一条数据都转换为Record对象，将它们都封装到list内返回 pass class TXTReader(FileReader): def __init__(self, path): self.path = path # 定义成员变量记录文件路径 def read_data(self) -&gt; list[Record]: f = open(self.path, &#39;r&#39;, encoding=&#39;UTF-8&#39;) record_list:list[Record] = [] for line in f.readlines(): line = line.strip() # 去掉输出内容中的回车换行符\\n，方便操作 data_list = line.split(&#39;,&#39;) record = Record(data_list[0], data_list[1], int(data_list[2]), data_list[3]) record_list.append(record) f.close() return record_list class JsonReader(FileReader): def __init__(self, path): self.path = path def read_data(self) -&gt; list[Record]: f = open(self.path, &#39;r&#39;, encoding=&#39;UTF-8&#39;) record_list:list[Record] = [] for line in f.readlines(): data_dict = json.loads(line) record = Record(data_dict[&#39;date&#39;],data_dict[&#39;order_id&#39;],data_dict[&#39;money&#39;],data_dict[&#39;province&#39;]) record_list.append(record) f.close() return record_list if __name__ == &#39;__main__&#39;: # 文件内测试 txtreader = TXTReader(&#39;T:/2011年1月销售数据.txt&#39;) jsonreader = JsonReader(&#39;T:/2011年2月销售数据JSON.txt&#39;) list1 = txtreader.read_data() list2 = jsonreader.read_data() for l in list1: print(l) for l in list2: print(l) 数据计算 创建main.py主文件，输入下面的核心计算代码\n">
+<title>S1.10 练习：数据分析案例</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/p/10.2-%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86json-%E6%A0%BC%E5%BC%8F%E5%92%8C-pyecharts-%E5%85%A5%E9%97%A8/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/s1.10-%E7%BB%83%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="10.2 前置知识：json 格式和 pyecharts 入门">
-<meta property='og:description' content="json 数据格式 什么是json JSON是一种轻量级的数据交互格式。可以按照JSON指定的格式去组织和封装数据 JSON本质上是一个带有特定格式的字符串 主要功能： json就是一种在各个编程语言中流通的数据格式，负责不同编程语言中的数据传递和交互。\njson有什么用 各种编程语言存储数据的容器不尽相同，在Python中有字典dict这样的数据类型，而其它语言可能没有对应的字典。 为了让不同的语言都能够相互通用的互相传递数据，JSON就是一种非常良好的中转数据格式。如下图，以Python和C语言互传数据为例：\njson格式数据转化 json格式的数据要求很严格，如下面所示：\n1 2 3 4 5 # json数据的格式可以是(类字典)： {&#34;name&#34;:&#34;admin&#34;,&#34;age&#34;:18} # 也可以是(类列表嵌套字典)： [{&#34;name&#34;:&#34;admin&#34;,&#34;age&#34;:18},{&#34;name&#34;:&#34;root&#34;,&#34;age&#34;:16},{&#34;name&#34;:&#34;retr0&#34;,&#34;age&#34;:20}] Python数据和json数据的相互转化 1 2 3 4 5 6 7 8 9 10 11 12 13 14 # 导入json模块 import json # 准备符合json格式要求的python数据 data = [{&#34;name&#34;:&#34;张三&#34;,&#34;age&#34;:16},{&#34;name&#34;:&#34;李四&#34;,&#34;age&#34;:20}] # 通过json.dumps(data)方法把python数据转化为了json数据 json1 = json.dumps(data) # 通过json.loads(json1)方法把json数据转化为了python数据 data1 = json.loads(json1) print(data,&#34;类型为&#34;,type(data)) print(json1,&#34;类型为&#34;,type(json1)) print(data1,&#34;类型为&#34;,type(data1)) 注意： 中文内容在转换为json时会出现编码问题，因此需要在json.dumps()中添加参数ensure_ascii=False，如下所示：\n">
-<meta property='og:url' content='https://www.retr0.xyz/p/10.2-%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86json-%E6%A0%BC%E5%BC%8F%E5%92%8C-pyecharts-%E5%85%A5%E9%97%A8/'>
+<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="S1.10 练习：数据分析案例">
+<meta property='og:description' content=" 本次练习中使用的文件位于：https://pan.baidu.com/s/1xpTMQtKizhUwEGI3mC9NZQ?pwd=cfc5\n任务简报 任务要求：\n某公司有两份数据文件，现需要对其进行分析处理，计算**每日的销售额**并以柱状图表的形式进行展示。\n我们打开两份文件：\n一月份数据是普通文本，使用逗号分割数据记录，从前到后分别是：日期，订单id，销售额，销售省份 二月份数据是JSON数据，同样包含（日期，订单id，销售额，销售省份） 简单分析可得，实现方法就是找到同一天的所有销售金额并且相加，具体需求就是：\n读取数据 ➡️ 设计FileReader类 封装数据对象 ➡️ 设计数据封装类 计算数据对象 ➡️ 对对象进行逻辑计算 pyecharts绘图 ➡️ 以面向对象思想重新认知pyecharts 文件读取 新建一个文件夹作为整个项目的文件夹，此处以数据案例分析为例。\n从技术层面上我们有几个步骤：\n设计一个类，可以完成数据的封装 设计一个抽象类（方便处理两种不同形式的文件），定义文件读取的相关功能，并使用子类实现具体功能 读取文件，生产数据对象 进行数据需求的逻辑计算（计算每一天的销售额） 通过PyEcharts进行图形绘制 数据封装 创建data_define.py文件，输入：\n1 2 3 4 5 6 7 8 9 class Record: def __init__(self,date,order_id,money,province): self.date = date\t# 订单日期 self.order_id = order_id\t# 订单ID self.money = money\t# 订单金额 self.province = province\t# 销售省份 def __str__(self):\t# 使用魔术方法规范输出内容方便测试 return f&#39;{self.date} {self.order_id} {self.money} {self.province}&#39; 文件读取 接着进行第二部，创建文件file_define.py\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 import json from data_define import Record class FileReader: def read_data(self) -&gt; list[Record]: # 读取文件的数据，读到的每一条数据都转换为Record对象，将它们都封装到list内返回 pass class TXTReader(FileReader): def __init__(self, path): self.path = path # 定义成员变量记录文件路径 def read_data(self) -&gt; list[Record]: f = open(self.path, &#39;r&#39;, encoding=&#39;UTF-8&#39;) record_list:list[Record] = [] for line in f.readlines(): line = line.strip() # 去掉输出内容中的回车换行符\\n，方便操作 data_list = line.split(&#39;,&#39;) record = Record(data_list[0], data_list[1], int(data_list[2]), data_list[3]) record_list.append(record) f.close() return record_list class JsonReader(FileReader): def __init__(self, path): self.path = path def read_data(self) -&gt; list[Record]: f = open(self.path, &#39;r&#39;, encoding=&#39;UTF-8&#39;) record_list:list[Record] = [] for line in f.readlines(): data_dict = json.loads(line) record = Record(data_dict[&#39;date&#39;],data_dict[&#39;order_id&#39;],data_dict[&#39;money&#39;],data_dict[&#39;province&#39;]) record_list.append(record) f.close() return record_list if __name__ == &#39;__main__&#39;: # 文件内测试 txtreader = TXTReader(&#39;T:/2011年1月销售数据.txt&#39;) jsonreader = JsonReader(&#39;T:/2011年2月销售数据JSON.txt&#39;) list1 = txtreader.read_data() list2 = jsonreader.read_data() for l in list1: print(l) for l in list2: print(l) 数据计算 创建main.py主文件，输入下面的核心计算代码\n">
+<meta property='og:url' content='https://www.retr0.xyz/p/s1.10-%E7%BB%83%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-01T08:35:11&#43;08:00'/><meta property='article:modified_time' content='2025-12-01T08:35:11&#43;08:00'/>
-<meta name="twitter:title" content="10.2 前置知识：json 格式和 pyecharts 入门">
-<meta name="twitter:description" content="json 数据格式 什么是json JSON是一种轻量级的数据交互格式。可以按照JSON指定的格式去组织和封装数据 JSON本质上是一个带有特定格式的字符串 主要功能： json就是一种在各个编程语言中流通的数据格式，负责不同编程语言中的数据传递和交互。\njson有什么用 各种编程语言存储数据的容器不尽相同，在Python中有字典dict这样的数据类型，而其它语言可能没有对应的字典。 为了让不同的语言都能够相互通用的互相传递数据，JSON就是一种非常良好的中转数据格式。如下图，以Python和C语言互传数据为例：\njson格式数据转化 json格式的数据要求很严格，如下面所示：\n1 2 3 4 5 # json数据的格式可以是(类字典)： {&#34;name&#34;:&#34;admin&#34;,&#34;age&#34;:18} # 也可以是(类列表嵌套字典)： [{&#34;name&#34;:&#34;admin&#34;,&#34;age&#34;:18},{&#34;name&#34;:&#34;root&#34;,&#34;age&#34;:16},{&#34;name&#34;:&#34;retr0&#34;,&#34;age&#34;:20}] Python数据和json数据的相互转化 1 2 3 4 5 6 7 8 9 10 11 12 13 14 # 导入json模块 import json # 准备符合json格式要求的python数据 data = [{&#34;name&#34;:&#34;张三&#34;,&#34;age&#34;:16},{&#34;name&#34;:&#34;李四&#34;,&#34;age&#34;:20}] # 通过json.dumps(data)方法把python数据转化为了json数据 json1 = json.dumps(data) # 通过json.loads(json1)方法把json数据转化为了python数据 data1 = json.loads(json1) print(data,&#34;类型为&#34;,type(data)) print(json1,&#34;类型为&#34;,type(json1)) print(data1,&#34;类型为&#34;,type(data1)) 注意： 中文内容在转换为json时会出现编码问题，因此需要在json.dumps()中添加参数ensure_ascii=False，如下所示：\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-03T19:45:15&#43;08:00'/><meta property='article:modified_time' content='2026-01-03T19:45:15&#43;08:00'/>
+<meta name="twitter:title" content="S1.10 练习：数据分析案例">
+<meta name="twitter:description" content=" 本次练习中使用的文件位于：https://pan.baidu.com/s/1xpTMQtKizhUwEGI3mC9NZQ?pwd=cfc5\n任务简报 任务要求：\n某公司有两份数据文件，现需要对其进行分析处理，计算**每日的销售额**并以柱状图表的形式进行展示。\n我们打开两份文件：\n一月份数据是普通文本，使用逗号分割数据记录，从前到后分别是：日期，订单id，销售额，销售省份 二月份数据是JSON数据，同样包含（日期，订单id，销售额，销售省份） 简单分析可得，实现方法就是找到同一天的所有销售金额并且相加，具体需求就是：\n读取数据 ➡️ 设计FileReader类 封装数据对象 ➡️ 设计数据封装类 计算数据对象 ➡️ 对对象进行逻辑计算 pyecharts绘图 ➡️ 以面向对象思想重新认知pyecharts 文件读取 新建一个文件夹作为整个项目的文件夹，此处以数据案例分析为例。\n从技术层面上我们有几个步骤：\n设计一个类，可以完成数据的封装 设计一个抽象类（方便处理两种不同形式的文件），定义文件读取的相关功能，并使用子类实现具体功能 读取文件，生产数据对象 进行数据需求的逻辑计算（计算每一天的销售额） 通过PyEcharts进行图形绘制 数据封装 创建data_define.py文件，输入：\n1 2 3 4 5 6 7 8 9 class Record: def __init__(self,date,order_id,money,province): self.date = date\t# 订单日期 self.order_id = order_id\t# 订单ID self.money = money\t# 订单金额 self.province = province\t# 销售省份 def __str__(self):\t# 使用魔术方法规范输出内容方便测试 return f&#39;{self.date} {self.order_id} {self.money} {self.province}&#39; 文件读取 接着进行第二部，创建文件file_define.py\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 import json from data_define import Record class FileReader: def read_data(self) -&gt; list[Record]: # 读取文件的数据，读到的每一条数据都转换为Record对象，将它们都封装到list内返回 pass class TXTReader(FileReader): def __init__(self, path): self.path = path # 定义成员变量记录文件路径 def read_data(self) -&gt; list[Record]: f = open(self.path, &#39;r&#39;, encoding=&#39;UTF-8&#39;) record_list:list[Record] = [] for line in f.readlines(): line = line.strip() # 去掉输出内容中的回车换行符\\n，方便操作 data_list = line.split(&#39;,&#39;) record = Record(data_list[0], data_list[1], int(data_list[2]), data_list[3]) record_list.append(record) f.close() return record_list class JsonReader(FileReader): def __init__(self, path): self.path = path def read_data(self) -&gt; list[Record]: f = open(self.path, &#39;r&#39;, encoding=&#39;UTF-8&#39;) record_list:list[Record] = [] for line in f.readlines(): data_dict = json.loads(line) record = Record(data_dict[&#39;date&#39;],data_dict[&#39;order_id&#39;],data_dict[&#39;money&#39;],data_dict[&#39;province&#39;]) record_list.append(record) f.close() return record_list if __name__ == &#39;__main__&#39;: # 文件内测试 txtreader = TXTReader(&#39;T:/2011年1月销售数据.txt&#39;) jsonreader = JsonReader(&#39;T:/2011年2月销售数据JSON.txt&#39;) list1 = txtreader.read_data() list2 = jsonreader.read_data() for l in list1: print(l) for l in list2: print(l) 数据计算 创建main.py主文件，输入下面的核心计算代码\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -319,26 +319,13 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#json-数据格式">json 数据格式</a>
+    <li><a href="#任务简报">任务简报</a></li>
+    <li><a href="#文件读取">文件读取</a>
       <ol>
-        <li>
-          <ol>
-            <li><a href="#什么是json">什么是json</a></li>
-            <li><a href="#json有什么用">json有什么用</a></li>
-            <li><a href="#json格式数据转化">json格式数据转化</a></li>
-            <li><a href="#python数据和json数据的相互转化">Python数据和json数据的相互转化</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#pyecharts-入门">pyecharts 入门</a>
-      <ol>
-        <li>
-          <ol>
-            <li><a href="#基础折线图">基础折线图</a></li>
-            <li><a href="#全局配置">全局配置</a></li>
-          </ol>
-        </li>
+        <li><a href="#数据封装">数据封装</a></li>
+        <li><a href="#文件读取-1">文件读取</a></li>
+        <li><a href="#数据计算">数据计算</a></li>
+        <li><a href="#可视化开发">可视化开发</a></li>
       </ol>
     </li>
   </ol>
@@ -368,7 +355,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/10.2-%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86json-%E6%A0%BC%E5%BC%8F%E5%92%8C-pyecharts-%E5%85%A5%E9%97%A8/">10.2 前置知识：json 格式和 pyecharts 入门</a>
+            <a href="/p/s1.10-%E7%BB%83%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/">S1.10 练习：数据分析案例</a>
         </h2>
     
         
@@ -390,7 +377,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-01</time>
+                <time class="article-time--published">2026-01-03</time>
             </div>
         
 
@@ -413,19 +400,14 @@
     <section class="article-content">
     
     
-    <h2 id="json-数据格式">json 数据格式
-</h2><h4 id="什么是json">什么是json
-</h4><ul>
-<li>JSON是一种轻量级的数据交互格式。可以按照JSON指定的格式去组织和封装数据</li>
-<li>JSON本质上是一个带有特定格式的字符串</li>
-</ul>
-<p><strong><font style="color:#DF2A3F;">主要功能：</font></strong> json就是一种在各个编程语言中流通的数据格式，负责不同编程语言中的数据传递和交互。</p>
-<h4 id="json有什么用">json有什么用
-</h4><ul>
-<li>各种编程语言存储数据的容器不尽相同，在Python中有字典dict这样的数据类型，而其它语言可能没有对应的字典。</li>
-</ul>
-<p>为了让不同的语言都能够相互通用的互相传递数据，JSON就是一种非常良好的中转数据格式。如下图，以Python和C语言互传数据为例：</p>
-<p><img src="https://free.picui.cn/free/2025/12/01/692ce14f895c6.png"
+    <blockquote>
+<p>本次练习中使用的文件位于：<a class="link" href="https://pan.baidu.com/s/1xpTMQtKizhUwEGI3mC9NZQ?pwd=cfc5"  target="_blank" rel="noopener"
+    >https://pan.baidu.com/s/1xpTMQtKizhUwEGI3mC9NZQ?pwd=cfc5</a></p>
+</blockquote>
+<h2 id="任务简报">任务简报
+</h2><p><strong>任务要求：</strong></p>
+<p>某公司有两份数据文件，现需要对其进行分析处理，计算**<font style="color:#DF2A3F;">每日的销售额</font>**并以柱状图表的形式进行展示。</p>
+<p><img src="https://free.picui.cn/free/2026/01/03/6959009451085.png"
 	
 	
 	
@@ -433,8 +415,48 @@
 	
 	
 ></p>
-<h4 id="json格式数据转化">json格式数据转化
-</h4><p>json格式的数据要求很严格，如下面所示：</p>
+<p>我们打开两份文件：</p>
+<p><img src="https://free.picui.cn/free/2026/01/03/69590095177ca.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ul>
+<li>一月份数据是普通文本，使用逗号分割数据记录，从前到后分别是：日期，订单id，销售额，销售省份</li>
+</ul>
+<p><img src="https://free.picui.cn/free/2026/01/03/6959009560167.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ul>
+<li>二月份数据是JSON数据，同样包含（日期，订单id，销售额，销售省份）</li>
+</ul>
+<p>简单分析可得，实现方法就是找到同一天的所有销售金额并且相加，<strong>具体需求</strong>就是：</p>
+<ol>
+<li>读取数据 ➡️ 设计FileReader类</li>
+<li>封装数据对象 ➡️ 设计数据封装类</li>
+<li>计算数据对象 ➡️ 对对象进行逻辑计算</li>
+<li>pyecharts绘图 ➡️ 以面向对象思想重新认知pyecharts</li>
+</ol>
+<h2 id="文件读取">文件读取
+</h2><p>新建一个文件夹作为整个项目的文件夹，此处以<code>数据案例分析</code>为例。</p>
+<p>从技术层面上我们有几个步骤：</p>
+<ol>
+<li>设计一个类，可以完成数据的封装</li>
+<li>设计一个抽象类（方便处理两种不同形式的文件），定义文件读取的相关功能，并使用子类实现具体功能</li>
+<li>读取文件，生产数据对象</li>
+<li>进行数据需求的逻辑计算（计算每一天的销售额）</li>
+<li>通过PyEcharts进行图形绘制</li>
+</ol>
+<h3 id="数据封装">数据封装
+</h3><p>创建<code>data_define.py</code>文件，输入：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -442,17 +464,26 @@
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="err">#</span> <span class="err">json数据的格式可以是(类字典)：</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;name&#34;</span><span class="p">:</span><span class="s2">&#34;admin&#34;</span><span class="p">,</span><span class="nt">&#34;age&#34;</span><span class="p">:</span><span class="mi">18</span><span class="p">}</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Record</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">date</span><span class="p">,</span><span class="n">order_id</span><span class="p">,</span><span class="n">money</span><span class="p">,</span><span class="n">province</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="n">date</span>		    <span class="c1"># 订单日期</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">order_id</span> <span class="o">=</span> <span class="n">order_id</span>	<span class="c1"># 订单ID</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">money</span> <span class="o">=</span> <span class="n">money</span>			<span class="c1"># 订单金额</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">province</span> <span class="o">=</span> <span class="n">province</span>	<span class="c1"># 销售省份</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="err">也可以是(类列表嵌套字典)：</span>
-</span></span><span class="line"><span class="cl"><span class="p">[{</span><span class="nt">&#34;name&#34;</span><span class="p">:</span><span class="s2">&#34;admin&#34;</span><span class="p">,</span><span class="nt">&#34;age&#34;</span><span class="p">:</span><span class="mi">18</span><span class="p">},{</span><span class="nt">&#34;name&#34;</span><span class="p">:</span><span class="s2">&#34;root&#34;</span><span class="p">,</span><span class="nt">&#34;age&#34;</span><span class="p">:</span><span class="mi">16</span><span class="p">},{</span><span class="nt">&#34;name&#34;</span><span class="p">:</span><span class="s2">&#34;retr0&#34;</span><span class="p">,</span><span class="nt">&#34;age&#34;</span><span class="p">:</span><span class="mi">20</span><span class="p">}]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>		<span class="c1"># 使用魔术方法规范输出内容方便测试</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">date</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">order_id</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">money</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">province</span><span class="si">}</span><span class="s1">&#39;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="python数据和json数据的相互转化">Python数据和json数据的相互转化
-</h4><div class="highlight"><div class="chroma">
+</div><h3 id="文件读取-1">文件读取
+</h3><p>接着进行第二部，创建文件<code>file_define.py</code></p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -468,119 +499,88 @@
 </span><span class="lnt">12
 </span><span class="lnt">13
 </span><span class="lnt">14
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 导入json模块</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 准备符合json格式要求的python数据</span>
-</span></span><span class="line"><span class="cl"><span class="n">data</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&#34;name&#34;</span><span class="p">:</span><span class="s2">&#34;张三&#34;</span><span class="p">,</span><span class="s2">&#34;age&#34;</span><span class="p">:</span><span class="mi">16</span><span class="p">},{</span><span class="s2">&#34;name&#34;</span><span class="p">:</span><span class="s2">&#34;李四&#34;</span><span class="p">,</span><span class="s2">&#34;age&#34;</span><span class="p">:</span><span class="mi">20</span><span class="p">}]</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 通过json.dumps(data)方法把python数据转化为了json数据</span>
-</span></span><span class="line"><span class="cl"><span class="n">json1</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> 
-</span></span><span class="line"><span class="cl"><span class="c1"># 通过json.loads(json1)方法把json数据转化为了python数据</span>
-</span></span><span class="line"><span class="cl"><span class="n">data1</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="s2">&#34;类型为&#34;</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">json1</span><span class="p">,</span><span class="s2">&#34;类型为&#34;</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">json1</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">data1</span><span class="p">,</span><span class="s2">&#34;类型为&#34;</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">data1</span><span class="p">))</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong><font style="color:#DF2A3F;">注意：</font></strong> 中文内容在转换为json时会出现编码问题，因此需要在<code>json.dumps()</code>中添加参数<code>ensure_ascii=False</code>，如下所示：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
-</span></span><span class="line"><span class="cl"><span class="n">data</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&#34;name&#34;</span><span class="p">:</span><span class="s2">&#34;张三&#34;</span><span class="p">,</span><span class="s2">&#34;age&#34;</span><span class="p">:</span><span class="mi">16</span><span class="p">},{</span><span class="s2">&#34;name&#34;</span><span class="p">:</span><span class="s2">&#34;李四&#34;</span><span class="p">,</span><span class="s2">&#34;age&#34;</span><span class="p">:</span><span class="mi">20</span><span class="p">}]</span>
-</span></span><span class="line"><span class="cl"><span class="n">json1</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> 
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">json1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">data_define</span> <span class="kn">import</span> <span class="n">Record</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FileReader</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">read_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Record</span><span class="p">]:</span>    <span class="c1"># 读取文件的数据，读到的每一条数据都转换为Record对象，将它们都封装到list内返回</span>
+</span></span><span class="line"><span class="cl">        <span class="k">pass</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TXTReader</span><span class="p">(</span><span class="n">FileReader</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>        <span class="c1"># 定义成员变量记录文件路径</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">read_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Record</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">record_list</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="n">Record</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>     <span class="c1"># 去掉输出内容中的回车换行符\n，方便操作</span>
+</span></span><span class="line"><span class="cl">            <span class="n">data_list</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">record</span> <span class="o">=</span> <span class="n">Record</span><span class="p">(</span><span class="n">data_list</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">data_list</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">int</span><span class="p">(</span><span class="n">data_list</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">data_list</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">record_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">record_list</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">JsonReader</span><span class="p">(</span><span class="n">FileReader</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">read_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Record</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">record_list</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="n">Record</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">            <span class="n">data_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">record</span> <span class="o">=</span> <span class="n">Record</span><span class="p">(</span><span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span><span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;order_id&#39;</span><span class="p">],</span><span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;money&#39;</span><span class="p">],</span><span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;province&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">record_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">record_list</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>      <span class="c1"># 文件内测试</span>
+</span></span><span class="line"><span class="cl">    <span class="n">txtreader</span> <span class="o">=</span> <span class="n">TXTReader</span><span class="p">(</span><span class="s1">&#39;T:/2011年1月销售数据.txt&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">jsonreader</span> <span class="o">=</span> <span class="n">JsonReader</span><span class="p">(</span><span class="s1">&#39;T:/2011年2月销售数据JSON.txt&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">list1</span> <span class="o">=</span> <span class="n">txtreader</span><span class="o">.</span><span class="n">read_data</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">list2</span> <span class="o">=</span> <span class="n">jsonreader</span><span class="o">.</span><span class="n">read_data</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">list1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">list2</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="pyecharts-入门">pyecharts 入门
-</h2><h4 id="基础折线图">基础折线图
-</h4><p>Quickstart：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 导包，导入Line功能构建折线图对象</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pyecharts.charts</span> <span class="kn">import</span> <span class="n">Line</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 得到折线图对象</span>
-</span></span><span class="line"><span class="cl"><span class="n">line</span> <span class="o">=</span> <span class="n">Line</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 添加x轴数据</span>
-</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">add_xaxis</span><span class="p">([</span><span class="s2">&#34;中国&#34;</span><span class="p">,</span><span class="s2">&#34;美国&#34;</span><span class="p">,</span><span class="s2">&#34;英国&#34;</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 添加y轴数据</span>
-</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">add_yaxis</span><span class="p">(</span><span class="s2">&#34;GDP&#34;</span><span class="p">,[</span><span class="mi">30</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 生成图表</span>
-</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>输出了文件<code>render.html</code>我们打开，如图所示：</p>
-<p><img src="https://free.picui.cn/free/2025/12/01/692ce14f7ba19.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<h4 id="全局配置">全局配置
-</h4><blockquote>
-<p>通过全局配置我们可以修改图标的标题，图例，工具箱，视觉映射，鼠标悬浮提示框，区域缩放等配置项</p>
-<p>设置全局配置项<code>set_global_opts</code>来设置</p>
-</blockquote>
-<p>所以我们要额外导入<strong>pyecharts</strong>的一个方法&quot;options&quot;</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pyecharts.options</span> <span class="kn">import</span> <span class="o">*</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>例如：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">set_global_opts</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="n">title_opts</span><span class="o">=</span><span class="n">TitleOpts</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&#34;GDP展示&#34;</span><span class="p">,</span><span class="n">pos_left</span><span class="o">=</span><span class="s2">&#34;center&#34;</span><span class="p">,</span><span class="n">pos_bottom</span><span class="o">=</span><span class="s2">&#34;1%&#34;</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 参数title设置标题文字，pos_left设置横向位置，pos_bottom设置距离底部位置</span>
-</span></span><span class="line"><span class="cl">    <span class="n">legend_opts</span><span class="o">=</span><span class="n">LegendOpts</span><span class="p">(</span><span class="n">is_show</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 设置图例是否显示</span>
-</span></span><span class="line"><span class="cl">    <span class="n">toolbox_opts</span><span class="o">=</span><span class="n">ToolboxOpts</span><span class="p">(</span><span class="n">is_show</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 设置工具箱是否显示</span>
-</span></span><span class="line"><span class="cl">    <span class="n">visualmap_opts</span><span class="o">=</span><span class="n">VisualMapOpts</span><span class="p">(</span><span class="n">is_show</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>此处仅展示部分，更多请查看官方文档<a class="link" href="https://pyecharts.org/#/zh-cn/global_options"  target="_blank" rel="noopener"
-    >全局配置项 - pyecharts - Python Echarts Plotting Library built with love.</a></p>
-<p>现在我们将上面的两部分代码整合起来：</p>
+</div><h3 id="数据计算">数据计算
+</h3><p>创建<code>main.py</code>主文件，输入下面的核心计算代码</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -605,38 +605,107 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pyecharts.charts</span> <span class="kn">import</span> <span class="n">Line</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pyecharts.options</span> <span class="kn">import</span> <span class="o">*</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 得到折线图对象</span>
-</span></span><span class="line"><span class="cl"><span class="n">line</span> <span class="o">=</span> <span class="n">Line</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 添加x轴数据</span>
-</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">add_xaxis</span><span class="p">([</span><span class="s2">&#34;中国&#34;</span><span class="p">,</span><span class="s2">&#34;美国&#34;</span><span class="p">,</span><span class="s2">&#34;英国&#34;</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 添加y轴数据</span>
-</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">add_yaxis</span><span class="p">(</span><span class="s2">&#34;GDP&#34;</span><span class="p">,[</span><span class="mi">30</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">file_define</span> <span class="kn">import</span> <span class="n">FileReader</span><span class="p">,</span><span class="n">TXTReader</span><span class="p">,</span><span class="n">JsonReader</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">data_define</span> <span class="kn">import</span> <span class="n">Record</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">set_global_opts</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="n">title_opts</span><span class="o">=</span><span class="n">TitleOpts</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&#34;GDP展示&#34;</span><span class="p">,</span><span class="n">pos_left</span><span class="o">=</span><span class="s2">&#34;center&#34;</span><span class="p">,</span><span class="n">pos_bottom</span><span class="o">=</span><span class="s2">&#34;1%&#34;</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 参数title设置标题文字，pos_left设置横向位置，pos_bottom设置距离底部位置</span>
-</span></span><span class="line"><span class="cl">    <span class="n">legend_opts</span><span class="o">=</span><span class="n">LegendOpts</span><span class="p">(</span><span class="n">is_show</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 设置图例是否显示</span>
-</span></span><span class="line"><span class="cl">    <span class="n">toolbox_opts</span><span class="o">=</span><span class="n">ToolboxOpts</span><span class="p">(</span><span class="n">is_show</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 设置工具箱是否显示</span>
-</span></span><span class="line"><span class="cl">    <span class="n">visualmap_opts</span><span class="o">=</span><span class="n">VisualMapOpts</span><span class="p">(</span><span class="n">is_show</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 生成图表</span>
-</span></span><span class="line"><span class="cl"><span class="n">line</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">text_file_reader</span> <span class="o">=</span> <span class="n">TXTReader</span><span class="p">(</span><span class="s2">&#34;T:/2011年1月销售数据.txt&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">jsonReader</span> <span class="o">=</span> <span class="n">JsonReader</span><span class="p">(</span><span class="s2">&#34;T:/2011年2月销售数据JSON.txt&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">jan_data</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="n">Record</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_file_reader</span><span class="o">.</span><span class="n">read_data</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">feb_data</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="n">Record</span><span class="p">]</span> <span class="o">=</span> <span class="n">jsonReader</span><span class="o">.</span><span class="n">read_data</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 将两个月的数据合并为1个list来存储</span>
+</span></span><span class="line"><span class="cl"><span class="n">all_data</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="n">Record</span><span class="p">]</span> <span class="o">=</span> <span class="n">jan_data</span> <span class="o">+</span> <span class="n">feb_data</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 数据计算核心</span>
+</span></span><span class="line"><span class="cl"><span class="n">data_dict</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">all_data</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">record</span><span class="o">.</span><span class="n">date</span> <span class="ow">in</span> <span class="n">data_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 当前已有记录表，则与旧记录直接相加</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data_dict</span><span class="p">[</span><span class="n">record</span><span class="o">.</span><span class="n">date</span><span class="p">]</span> <span class="o">+=</span> <span class="n">record</span><span class="o">.</span><span class="n">money</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data_dict</span><span class="p">[</span><span class="n">record</span><span class="o">.</span><span class="n">date</span><span class="p">]</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">money</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">data_dict</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>结果如下：</p>
-<p><img src="https://free.picui.cn/free/2025/12/01/692ce14f48611.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-
+</div><h3 id="可视化开发">可视化开发
+</h3><p>可视化我们依旧使用pyecharts模块，这里我们修改<code>main.py</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">cProfile</span> <span class="kn">import</span> <span class="n">label</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">file_define</span> <span class="kn">import</span> <span class="n">FileReader</span><span class="p">,</span><span class="n">TXTReader</span><span class="p">,</span><span class="n">JsonReader</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">data_define</span> <span class="kn">import</span> <span class="n">Record</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;新增内容：导包&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pyecharts.charts</span> <span class="kn">import</span> <span class="n">Bar</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pyecharts.options</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pyecharts.globals</span> <span class="kn">import</span> <span class="n">ThemeType</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">text_file_reader</span> <span class="o">=</span> <span class="n">TXTReader</span><span class="p">(</span><span class="s2">&#34;T:/2011年1月销售数据.txt&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">jsonReader</span> <span class="o">=</span> <span class="n">JsonReader</span><span class="p">(</span><span class="s2">&#34;T:/2011年2月销售数据JSON.txt&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">jan_data</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="n">Record</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_file_reader</span><span class="o">.</span><span class="n">read_data</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">feb_data</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="n">Record</span><span class="p">]</span> <span class="o">=</span> <span class="n">jsonReader</span><span class="o">.</span><span class="n">read_data</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 将两个月的数据合并为1个list来存储</span>
+</span></span><span class="line"><span class="cl"><span class="n">all_data</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="n">Record</span><span class="p">]</span> <span class="o">=</span> <span class="n">jan_data</span> <span class="o">+</span> <span class="n">feb_data</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 数据计算核心</span>
+</span></span><span class="line"><span class="cl"><span class="n">data_dict</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">all_data</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">record</span><span class="o">.</span><span class="n">date</span> <span class="ow">in</span> <span class="n">data_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 当前已有记录表，则与旧记录直接相加</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data_dict</span><span class="p">[</span><span class="n">record</span><span class="o">.</span><span class="n">date</span><span class="p">]</span> <span class="o">+=</span> <span class="n">record</span><span class="o">.</span><span class="n">money</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data_dict</span><span class="p">[</span><span class="n">record</span><span class="o">.</span><span class="n">date</span><span class="p">]</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">money</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 可视化图标开发</span>
+</span></span><span class="line"><span class="cl"><span class="n">bar</span> <span class="o">=</span> <span class="n">Bar</span><span class="p">(</span><span class="n">init_opts</span><span class="o">=</span><span class="n">InitOpts</span><span class="p">(</span><span class="n">theme</span><span class="o">=</span><span class="n">ThemeType</span><span class="o">.</span><span class="n">LIGHT</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">bar</span><span class="o">.</span><span class="n">add_xaxis</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">data_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>   <span class="c1"># 添加x轴数据</span>
+</span></span><span class="line"><span class="cl"><span class="n">bar</span><span class="o">.</span><span class="n">add_yaxis</span><span class="p">(</span><span class="s2">&#34;销售额&#34;</span><span class="p">,</span><span class="nb">list</span><span class="p">(</span><span class="n">data_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="n">label_opts</span><span class="o">=</span><span class="n">LabelOpts</span><span class="p">(</span><span class="n">is_show</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>  <span class="c1"># 添加y轴数据和视觉优化</span>
+</span></span><span class="line"><span class="cl"><span class="n">bar</span><span class="o">.</span><span class="n">set_global_opts</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">title_opts</span><span class="o">=</span><span class="n">TitleOpts</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&#34;每日销售额&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">bar</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s1">&#39;每日销售额柱状图.html&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
 
@@ -698,19 +767,6 @@
             
                 
 <article class="">
-    <a href="/p/s1.10-%E7%BB%83%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">S1.10 练习：数据分析案例</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
     <a href="/p/s1.9-%E5%A4%9A%E6%80%81/">
         
         
@@ -756,6 +812,19 @@
 
         <div class="article-details">
             <h2 class="article-title">S1.6 封装</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/s1.5-%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">S1.5 魔术方法</h2>
         </div>
     </a>
 </article>
