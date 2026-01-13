@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="人生苦短，我选Python">
-<title>Category: Python - Pager 5 - Retr0的小窝</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="jieba不是街霸">
+<title>11.4 jieba库</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/categories/python/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/11.4-jieba%E5%BA%93/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="Category: Python - Retr0的小窝">
-<meta property='og:description' content="人生苦短，我选Python">
-<meta property='og:url' content='https://www.retr0.xyz/categories/python/'>
+<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="11.4 jieba库">
+<meta property='og:description' content="jieba不是街霸">
+<meta property='og:url' content='https://www.retr0.xyz/p/11.4-jieba%E5%BA%93/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-01-13T21:01:28&#43;08:00 '/><meta property='og:image' content='https://www.retr0.xyz/categories/python/python.webp' />
-<meta name="twitter:title" content="Category: Python - Retr0的小窝">
-<meta name="twitter:description" content="人生苦短，我选Python"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://www.retr0.xyz/categories/python/python.webp' /><link rel="alternate" type="application/rss&#43;xml" href="https://www.retr0.xyz/categories/python/index.xml">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-13T21:01:28&#43;08:00'/><meta property='article:modified_time' content='2026-01-13T21:01:28&#43;08:00'/>
+<meta name="twitter:title" content="11.4 jieba库">
+<meta name="twitter:description" content="jieba不是街霸">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -21,7 +20,9 @@
         <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     </head>
-    <body class="">
+    <body class="
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -299,69 +300,10 @@
     <aside class="sidebar right-sidebar sticky">
         
             
-                <form action="/search/" class="search-form widget" >
-        <p>
-            <label>搜索</label>
-            <input name="keyword" required placeholder="输入关键词..." />
-        
-            <button title="搜索">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-            </button>
-        </p>
-    </form>
-            
-        
-            
-                <section class="widget archives">
+                
+    <section class="widget archives">
         <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">归档</h2>
-
-        
-        
-        
-        
-        
-        <div class="widget-archive--list">
-            <div class="archives-year">
-                    <a href="/archives/#2026">
-                        
-                            <span class="year">2026</span>
-                            <span class="count">7</span>
-                        
-                    </a> 
-                </div>
-            <div class="archives-year">
-                    <a href="/archives/#2025">
-                        
-                            <span class="year">2025</span>
-                            <span class="count">81</span>
-                        
-                    </a> 
-                </div>
-            
-        </div>
-    </section>
-            
-        
-            
-                <section class="widget tagCloud">
-    <div class="widget-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <line x1="5" y1="9" x2="19" y2="9" />
   <line x1="5" y1="15" x2="19" y2="15" />
@@ -371,53 +313,25 @@
 
 
 
-    </div>
-    <h2 class="widget-title section-title">分类</h2>
-
-    <div class="tagCloud-tags">
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
         
-            <a href="/categories/python/" class="font_size_33">
-                Python
-            </a>
-        
-            <a href="/categories/%E7%BD%91%E5%AE%89/" class="font_size_18">
-                网安
-            </a>
-        
-            <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%BE%AE%E4%B8%93%E4%B8%9A/" class="font_size_16">
-                渗透测试微专业
-            </a>
-        
-            <a href="/categories/%E6%B8%B8%E6%88%8F/" class="font_size_10">
-                游戏
-            </a>
-        
-            <a href="/categories/%E9%80%9F%E6%9F%A5/" class="font_size_9">
-                速查
-            </a>
-        
-            <a href="/categories/%E8%AF%BE%E5%A0%82%E5%B0%8F%E8%AE%B0/" class="font_size_8">
-                课堂小记
-            </a>
-        
-            <a href="/categories/%E6%9D%82%E9%A1%B9/" class="font_size_5">
-                杂项
-            </a>
-        
-            <a href="/categories/kali/" class="font_size_4">
-                Kali
-            </a>
-        
-            <a href="/categories/anime/" class="font_size_3">
-                Anime
-            </a>
-        
-            <a href="/categories/%E5%BD%B1%E8%A7%86/" class="font_size_3">
-                影视
-            </a>
-        
-    </div>
-</section>
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#常用函数">常用函数</a></li>
+    <li><a href="#用法示例">用法示例</a>
+      <ol>
+        <li><a href="#精确模式">精确模式</a></li>
+        <li><a href="#全模式">全模式</a></li>
+        <li><a href="#搜索引擎模式">搜索引擎模式</a></li>
+        <li><a href="#词典添加新词">词典添加新词</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
 
             
         
@@ -425,121 +339,367 @@
 
 
             <main class="main full-width">
-    <header>
-        <h3 class="section-title">
-            
-                Categories
-            
-        </h3>
+    <article class="main-article">
+    <header class="article-header">
 
-        <div class="section-card">
-            <div class="section-details">
-                <h3 class="section-count">33 个页面</h3>
-                <h1 class="section-term">Python</h1>
-                
-                    <h2 class="section-description">人生苦短，我选Python</h2>
-                
-            </div>
-                <div class="section-image">
-                    <img src="/categories/python/python_hu_73731ffeea5f6e0e.webp" 
-                            width="120"
-                            height="120" 
-                            loading="lazy">
-                    
-                </div>
-            
-        </div>
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/python/" style="background-color: #2A87D8; color: #fff;">
+                Python
+            </a>
+        
     </header>
     
-    <section class="article-list--compact">
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/11.4-jieba%E5%BA%93/">11.4 jieba库</a>
+        </h2>
+    
         
-            <article>
-    <a href="/p/6.5-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E9%9B%86%E5%90%88/">
-        <div class="article-details">
-            <h2 class="article-title">6.5 数据容器：集合</h2>
-            <footer class="article-time">
-                <time datetime='2025-11-06T22:30:30&#43;08:00'>2025-11-06</time>
-            </footer>
+        <h3 class="article-subtitle">
+            jieba不是街霸
+        </h3>
+        
+    </div>
+
+    
+    
+     
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-01-13</time>
+            </div>
+        
+
+        
+
+        
+        <div id="viewCount">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
         </div>
-    </a>
-</article>
-        
-            <article>
-    <a href="/p/6.4-%E5%BA%8F%E5%88%97%E7%9A%84%E6%93%8D%E4%BD%9C%E5%88%87%E7%89%87/">
-        <div class="article-details">
-            <h2 class="article-title">6.4 序列的操作：切片</h2>
-            <footer class="article-time">
-                <time datetime='2025-11-05T18:17:46&#43;08:00'>2025-11-05</time>
-            </footer>
-        </div>
-    </a>
-</article>
-        
-            <article>
-    <a href="/p/6.3-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%AD%97%E7%AC%A6%E4%B8%B2/">
-        <div class="article-details">
-            <h2 class="article-title">6.3 数据容器：字符串</h2>
-            <footer class="article-time">
-                <time datetime='2025-11-04T17:45:08&#43;08:00'>2025-11-04</time>
-            </footer>
-        </div>
-    </a>
-</article>
-        
-            <article>
-    <a href="/p/6.2-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%85%83%E7%BB%84/">
-        <div class="article-details">
-            <h2 class="article-title">6.2 数据容器：元组</h2>
-            <footer class="article-time">
-                <time datetime='2025-11-03T18:14:15&#43;08:00'>2025-11-03</time>
-            </footer>
-        </div>
-    </a>
-</article>
-        
-            <article>
-    <a href="/p/6.1-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%88%97%E8%A1%A8/">
-        <div class="article-details">
-            <h2 class="article-title">6.1 数据容器：列表</h2>
-            <footer class="article-time">
-                <time datetime='2025-11-02T22:54:24&#43;08:00'>2025-11-02</time>
-            </footer>
-        </div>
-    </a>
-</article>
-        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <blockquote>
+<p>Jieba是Python中广泛使用的中文分词工具，支持多种分词模式、自定义词典、关键词提取等功能，适用于自然语言处理任务。</p>
+</blockquote>
+<h2 id="常用函数">常用函数
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>函数名</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>lcut(s)</code></td>
+          <td>精确模式，返回一个列表类型</td>
+      </tr>
+      <tr>
+          <td><code>lcut(s, cut_all=True)</code></td>
+          <td>全模式，返回一个列表类型</td>
+      </tr>
+      <tr>
+          <td><code>lcut_for_search(s)</code></td>
+          <td>搜索引擎模式，返回一个列表类型</td>
+      </tr>
+      <tr>
+          <td><code>add_word(w)</code></td>
+          <td>向分词词典中增加新词 w</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="用法示例">用法示例
+</h2><h3 id="精确模式">精确模式
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">jieba</span> <span class="k">as</span> <span class="nn">j</span>
+</span></span><span class="line"><span class="cl"><span class="n">ls</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">lcut</span><span class="p">(</span><span class="s1">&#39;毕业并不代表着结束,今后我们仍然是朋友&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 输出：[&#39;毕业&#39;, &#39;并&#39;, &#39;不&#39;, &#39;代表&#39;, &#39;着&#39;, &#39;结束&#39;, &#39;,&#39;, &#39;今后&#39;, &#39;我们&#39;, &#39;仍然&#39;, &#39;是&#39;, &#39;朋友&#39;]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>精确模式下 jieba 会按照字典对输入的文本进行处理，并将完整的语句分割为若干字词，添加到一个列表中。</p>
+<h3 id="全模式">全模式
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">jieba</span> <span class="k">as</span> <span class="nn">j</span>
+</span></span><span class="line"><span class="cl"><span class="n">ls</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">lcut</span><span class="p">(</span><span class="s1">&#39;欢迎报考南京信息工程大学&#39;</span><span class="p">,</span><span class="n">cut_all</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 输出：[&#39;欢迎&#39;, &#39;报考&#39;, &#39;南京&#39;, &#39;信息&#39;, &#39;信息工程&#39;, &#39;工程&#39;, &#39;大学&#39;]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>全模式下 jieba 会按照字典对输入的文本进行处理，只要有匹配的字词就添加到列表中，所以会有重复的部分。</p>
+<h3 id="搜索引擎模式">搜索引擎模式
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">jieba</span> <span class="k">as</span> <span class="nn">j</span>
+</span></span><span class="line"><span class="cl"><span class="n">ls</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">lcut_for_search</span><span class="p">(</span><span class="s1">&#39;国家计算机二级考试Python学科&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 输出：[&#39;国家&#39;, &#39;计算&#39;, &#39;算机&#39;, &#39;计算机&#39;, &#39;二级&#39;, &#39;考试&#39;, &#39;Python&#39;, &#39;学科&#39;]</span>
+</span></span><span class="line"><span class="cl"><span class="n">ls</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">lcut</span><span class="p">(</span><span class="s1">&#39;国家计算机二级考试Python学科&#39;</span><span class="p">,</span><span class="n">cut_all</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 输出：[&#39;国家&#39;, &#39;家计&#39;, &#39;计算&#39;, &#39;计算机&#39;, &#39;算机&#39;, &#39;二级&#39;, &#39;考试&#39;, &#39;Python&#39;, &#39;学科&#39;]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过与全模式对比可知搜索引擎模式是把全模式执行后的一些长词进一步分割。</p>
+<h3 id="词典添加新词">词典添加新词
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">jieba</span> <span class="k">as</span> <span class="nn">j</span>
+</span></span><span class="line"><span class="cl"><span class="n">ls</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">lcut</span><span class="p">(</span><span class="s1">&#39;小华为了派蒙恬去守长城&#39;</span><span class="p">,</span><span class="n">cut_all</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 输出：[&#39;小&#39;, &#39;华为&#39;, &#39;为了&#39;, &#39;派&#39;, &#39;蒙恬&#39;, &#39;去&#39;, &#39;守&#39;, &#39;长城&#39;]</span>
+</span></span><span class="line"><span class="cl"><span class="n">j</span><span class="o">.</span><span class="n">add_word</span><span class="p">(</span><span class="s1">&#39;小华&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">j</span><span class="o">.</span><span class="n">add_word</span><span class="p">(</span><span class="s1">&#39;为了&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">j</span><span class="o">.</span><span class="n">add_word</span><span class="p">(</span><span class="s1">&#39;派蒙&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ls</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">lcut</span><span class="p">(</span><span class="s1">&#39;小华为了派蒙恬去守长城&#39;</span><span class="p">,</span><span class="n">cut_all</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 输出：[&#39;小华&#39;, &#39;华为&#39;, &#39;为了&#39;, &#39;派蒙&#39;, &#39;蒙恬&#39;, &#39;去&#39;, &#39;守&#39;, &#39;长城&#39;]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
     </section>
-    <nav class='pagination'>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+<div class="math-katex"></div>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/11.3-random%E5%BA%93/">
         
         
 
-        
-            
-                    <a class='page-link' href='/categories/python/'>1</a>
-                
-            
-            
-                    
-                        
-                        <span class='page-link dots'>&hellip;</span>
-                    
-                
-            
-            
-                    
-                
-            
-            
-                    <a class='page-link' href='/categories/python/page/4/'>4</a>
-                
-            
-            
-                <span class='page-link current'>5</span>
-                
-            
-    </nav>
+        <div class="article-details">
+            <h2 class="article-title">11.3 random库</h2>
+        </div>
+    </a>
+</article>
 
-<footer class="site-footer">
+            
+                
+<article class="">
+    <a href="/p/11.2-turtle%E5%BA%93%E7%BB%98%E5%9B%BE/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">11.2 turtle库绘图</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/11.1-format%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">11.1 format格式化输出</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/s1.10-%E7%BB%83%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">S1.10 练习：数据分析案例</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/s1.9-%E5%A4%9A%E6%80%81/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">S1.9 多态</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+        <div class="comment-container mt-8"></div>
+        
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="makabaka11/makabaka11.github.io"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
     <section class="copyright">
         &copy; 
         
@@ -556,6 +716,84 @@
     </section>
 </footer>
 
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
 
 
                 <script src="/js/APlayer.min.js"></script>
