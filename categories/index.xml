@@ -7,7 +7,15 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Wed, 14 Jan 2026 13:49:25 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 15 Jan 2026 20:05:19 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>影视</title>
+        <link>https://www.retr0.xyz/categories/%E5%BD%B1%E8%A7%86/</link>
+        <pubDate>Thu, 15 Jan 2026 20:05:19 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/categories/%E5%BD%B1%E8%A7%86/</guid>
+        <description>&lt;img src="https://files.nowre.com/articles/2022/12/oppenheimer.jpeg" alt="Featured image of post 影视" /&gt;</description>
+        </item>
+        <item>
         <title>Python</title>
         <link>https://www.retr0.xyz/categories/python/</link>
         <pubDate>Wed, 14 Jan 2026 13:49:25 +0800</pubDate>
@@ -22,14 +30,6 @@
         
         <guid>https://www.retr0.xyz/categories/anime/</guid>
         <description>&lt;img src="https://www.retr0.xyz/categories/anime/IMG_20250821_133541.png" alt="Featured image of post Anime" /&gt;</description>
-        </item>
-        <item>
-        <title>影视</title>
-        <link>https://www.retr0.xyz/categories/%E5%BD%B1%E8%A7%86/</link>
-        <pubDate>Mon, 12 Jan 2026 21:52:35 +0800</pubDate>
-        
-        <guid>https://www.retr0.xyz/categories/%E5%BD%B1%E8%A7%86/</guid>
-        <description>&lt;img src="https://files.nowre.com/articles/2022/12/oppenheimer.jpeg" alt="Featured image of post 影视" /&gt;</description>
         </item>
         <item>
         <title>游戏</title>
