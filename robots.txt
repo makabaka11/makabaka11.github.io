@@ -1,0 +1,18 @@
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: *
+Allow: /
+
+Disallow: /resources/
+Disallow: /themes/
+Disallow: /tmp/
+Disallow: /vendor/
+
+Disallow: /404.html
+Disallow: /draft/
+
+Sitemap: https://retr0.xyz/sitemap.xml
