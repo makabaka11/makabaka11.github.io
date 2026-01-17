@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="基于页游的前端分析 Google小恐龙 链接：T-Rex 在线版的chrome恐龙游戏\nF12打开开发者模式，选择控制台Console，输入：\n关闭GameOver判定：&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;Runner.prototype.gameOver = function(){}&lt;/font&gt;\n调整速度：&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;Runner.instance_.setSpeed(1000);&lt;/font&gt;\n2048 链接：2048\nF12打开开发者模式，选择应用程序Application\n在本地存储Local Storage中可以看到存储在本地的游戏数据，例如：\n1 {&#34;grid&#34;:{&#34;size&#34;:4,&#34;cells&#34;:[[null,null,null,{&#34;position&#34;:{&#34;x&#34;:0,&#34;y&#34;:3},&#34;value&#34;:2}],[null,null,null,null],[{&#34;position&#34;:{&#34;x&#34;:2,&#34;y&#34;:0},&#34;value&#34;:4},null,null,null],[null,null,null,null]]},&#34;score&#34;:0,&#34;over&#34;:false,&#34;won&#34;:false,&#34;keepPlaying&#34;:false} 通过修改即可改变棋盘中的数字。\n数独 链接：数独游戏 – 信息安全教学示例（随机题目）\n右键检查源代码可以发现网页生成题目并渲染的逻辑。\n1 2 3 4 5 6 7 8 9 10 11 12 const { puzzle, solution } = generatePuzzle(); //创建一个style（css）放到网页里命名为secretStyle const secretStyle = document.createElement(&#39;style&#39;); //secretStyle的css里放题目答案，不予显示 secretStyle.textContent = `body::before{content:&#34;${solution.join(&#39;&#39;)}&#34;;display:none}`; //网页头部增加答案 document.head.appendChild(secretStyle); //右键，查看源码看的是网页真实源码，不渲染 //elements里面是实时渲染的网页 最终在F12开发者模式的元素Elements中发现第二个&lt;style&gt;中有题目答案：\n">
+<title>1.17 页游作弊和信息搜集</title>
+
+<link rel='canonical' href='https://www.retr0.xyz/p/1.17-%E9%A1%B5%E6%B8%B8%E4%BD%9C%E5%BC%8A%E5%92%8C%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/'>
+
+<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="1.17 页游作弊和信息搜集">
+<meta property='og:description' content="基于页游的前端分析 Google小恐龙 链接：T-Rex 在线版的chrome恐龙游戏\nF12打开开发者模式，选择控制台Console，输入：\n关闭GameOver判定：&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;Runner.prototype.gameOver = function(){}&lt;/font&gt;\n调整速度：&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;Runner.instance_.setSpeed(1000);&lt;/font&gt;\n2048 链接：2048\nF12打开开发者模式，选择应用程序Application\n在本地存储Local Storage中可以看到存储在本地的游戏数据，例如：\n1 {&#34;grid&#34;:{&#34;size&#34;:4,&#34;cells&#34;:[[null,null,null,{&#34;position&#34;:{&#34;x&#34;:0,&#34;y&#34;:3},&#34;value&#34;:2}],[null,null,null,null],[{&#34;position&#34;:{&#34;x&#34;:2,&#34;y&#34;:0},&#34;value&#34;:4},null,null,null],[null,null,null,null]]},&#34;score&#34;:0,&#34;over&#34;:false,&#34;won&#34;:false,&#34;keepPlaying&#34;:false} 通过修改即可改变棋盘中的数字。\n数独 链接：数独游戏 – 信息安全教学示例（随机题目）\n右键检查源代码可以发现网页生成题目并渲染的逻辑。\n1 2 3 4 5 6 7 8 9 10 11 12 const { puzzle, solution } = generatePuzzle(); //创建一个style（css）放到网页里命名为secretStyle const secretStyle = document.createElement(&#39;style&#39;); //secretStyle的css里放题目答案，不予显示 secretStyle.textContent = `body::before{content:&#34;${solution.join(&#39;&#39;)}&#34;;display:none}`; //网页头部增加答案 document.head.appendChild(secretStyle); //右键，查看源码看的是网页真实源码，不渲染 //elements里面是实时渲染的网页 最终在F12开发者模式的元素Elements中发现第二个&lt;style&gt;中有题目答案：\n">
+<meta property='og:url' content='https://www.retr0.xyz/p/1.17-%E9%A1%B5%E6%B8%B8%E4%BD%9C%E5%BC%8A%E5%92%8C%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/'>
+<meta property='og:site_name' content='Retr0的小窝'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-17T20:36:48&#43;08:00'/><meta property='article:modified_time' content='2026-01-17T20:36:48&#43;08:00'/>
+<meta name="twitter:title" content="1.17 页游作弊和信息搜集">
+<meta name="twitter:description" content="基于页游的前端分析 Google小恐龙 链接：T-Rex 在线版的chrome恐龙游戏\nF12打开开发者模式，选择控制台Console，输入：\n关闭GameOver判定：&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;Runner.prototype.gameOver = function(){}&lt;/font&gt;\n调整速度：&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;Runner.instance_.setSpeed(1000);&lt;/font&gt;\n2048 链接：2048\nF12打开开发者模式，选择应用程序Application\n在本地存储Local Storage中可以看到存储在本地的游戏数据，例如：\n1 {&#34;grid&#34;:{&#34;size&#34;:4,&#34;cells&#34;:[[null,null,null,{&#34;position&#34;:{&#34;x&#34;:0,&#34;y&#34;:3},&#34;value&#34;:2}],[null,null,null,null],[{&#34;position&#34;:{&#34;x&#34;:2,&#34;y&#34;:0},&#34;value&#34;:4},null,null,null],[null,null,null,null]]},&#34;score&#34;:0,&#34;over&#34;:false,&#34;won&#34;:false,&#34;keepPlaying&#34;:false} 通过修改即可改变棋盘中的数字。\n数独 链接：数独游戏 – 信息安全教学示例（随机题目）\n右键检查源代码可以发现网页生成题目并渲染的逻辑。\n1 2 3 4 5 6 7 8 9 10 11 12 const { puzzle, solution } = generatePuzzle(); //创建一个style（css）放到网页里命名为secretStyle const secretStyle = document.createElement(&#39;style&#39;); //secretStyle的css里放题目答案，不予显示 secretStyle.textContent = `body::before{content:&#34;${solution.join(&#39;&#39;)}&#34;;display:none}`; //网页头部增加答案 document.head.appendChild(secretStyle); //右键，查看源码看的是网页真实源码，不渲染 //elements里面是实时渲染的网页 最终在F12开发者模式的元素Elements中发现第二个&lt;style&gt;中有题目答案：\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+        <link rel="stylesheet" href="/css/APlayer.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_918ed7c4aecb3d05.gif" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🥳</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Retr0的小窝</a></h1>
+            <h2 class="site-description">我们安全了……暂时的</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/349466985'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:ded000@retr0.xyz'
+                        target="_blank"
+                        title="email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/makabaka11'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.retr0.xyz/index.xml'
+                        target="_blank"
+                        title="RSS"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-rss"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M4 4a16 16 0 0 1 16 16" /><path d="M4 11a9 9 0 0 1 9 9" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://t.me/ded0000'
+                        target="_blank"
+                        title="Telegram"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页 | Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E-about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于 | About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/message/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-message"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 9h8" /><path d="M8 13h6" /><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" /></svg>
+                
+                <span>留言板 | Msg Board</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索 | Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>技术链接 | Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#基于页游的前端分析">基于页游的前端分析</a>
+      <ol>
+        <li><a href="#google小恐龙">Google小恐龙</a></li>
+        <li><a href="#2048">2048</a></li>
+        <li><a href="#数独">数独</a></li>
+        <li><a href="#flappybird">flappybird</a></li>
+        <li><a href="#塔防">塔防</a></li>
+        <li><a href="#扫雷">扫雷</a></li>
+        <li><a href="#俄罗斯方块">俄罗斯方块</a></li>
+        <li><a href="#打砖块">打砖块</a></li>
+        <li><a href="#贪吃蛇">贪吃蛇</a></li>
+      </ol>
+    </li>
+    <li><a href="#查找真ip">查找真IP</a></li>
+    <li><a href="#网络空间搜索引擎">网络空间搜索引擎</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/26%E5%AF%92%E5%81%87%E9%9B%86%E8%AE%AD/" >
+                26寒假集训
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/1.17-%E9%A1%B5%E6%B8%B8%E4%BD%9C%E5%BC%8A%E5%92%8C%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/">1.17 页游作弊和信息搜集</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+     
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-01-17</time>
+            </div>
+        
+
+        
+
+        
+        <div id="viewCount">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="基于页游的前端分析">基于页游的前端分析
+</h2><h3 id="google小恐龙">Google小恐龙
+</h3><p><strong>链接：</strong><a class="link" href="https://www.hhtjim.com/wp-content/uploads/2017/02/T-RexGame.html"  target="_blank" rel="noopener"
+    >T-Rex 在线版的chrome恐龙游戏</a></p>
+<p><code>F12</code>打开开发者模式，选择控制台Console，输入：</p>
+<p><font style="color:rgb(0, 0, 0);">关闭GameOver判定：</font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;Runner.prototype.gameOver = function(){}&lt;/font&gt;</code></p>
+<p><font style="color:rgb(0, 0, 0);">调整速度：</font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;Runner.instance_.setSpeed(1000);&lt;/font&gt;</code></p>
+<h3 id="2048"><font style="color:rgb(0, 0, 0);">2048</font>
+</h3><p><strong>链接：</strong><a class="link" href="http://game.huayunsys.com/2048/"  target="_blank" rel="noopener"
+    >2048</a></p>
+<p><code>F12</code>打开开发者模式，选择应用程序Application</p>
+<p>在本地存储Local Storage中可以看到存储在本地的游戏数据，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">{</span><span class="s2">&#34;grid&#34;</span>:<span class="o">{</span><span class="s2">&#34;size&#34;</span>:4,<span class="s2">&#34;cells&#34;</span>:<span class="o">[[</span>null,null,null,<span class="o">{</span><span class="s2">&#34;position&#34;</span>:<span class="o">{</span><span class="s2">&#34;x&#34;</span>:0,<span class="s2">&#34;y&#34;</span>:3<span class="o">}</span>,<span class="s2">&#34;value&#34;</span>:2<span class="o">}]</span>,<span class="o">[</span>null,null,null,null<span class="o">]</span>,<span class="o">[{</span><span class="s2">&#34;position&#34;</span>:<span class="o">{</span><span class="s2">&#34;x&#34;</span>:2,<span class="s2">&#34;y&#34;</span>:0<span class="o">}</span>,<span class="s2">&#34;value&#34;</span>:4<span class="o">}</span>,null,null,null<span class="o">]</span>,<span class="o">[</span>null,null,null,null<span class="o">]]}</span>,<span class="s2">&#34;score&#34;</span>:0,<span class="s2">&#34;over&#34;</span>:false,<span class="s2">&#34;won&#34;</span>:false,<span class="s2">&#34;keepPlaying&#34;</span>:false<span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过修改即可改变棋盘中的数字。</p>
+<h3 id="数独">数独
+</h3><p><strong>链接：</strong><a class="link" href="https://game.huayunsys.com/shudu/"  target="_blank" rel="noopener"
+    >数独游戏 – 信息安全教学示例（随机题目）</a></p>
+<p>右键检查源代码可以发现网页生成题目并渲染的逻辑。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">const <span class="o">{</span> puzzle, solution <span class="o">}</span> <span class="o">=</span> generatePuzzle<span class="o">()</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">//创建一个style（css）放到网页里命名为secretStyle
+</span></span><span class="line"><span class="cl">const <span class="nv">secretStyle</span> <span class="o">=</span> document.createElement<span class="o">(</span><span class="s1">&#39;style&#39;</span><span class="o">)</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">//secretStyle的css里放题目答案，不予显示
+</span></span><span class="line"><span class="cl">secretStyle.textContent <span class="o">=</span> <span class="sb">`</span>body::before<span class="o">{</span>content:<span class="s2">&#34;</span><span class="si">${</span><span class="nv">solution</span><span class="p">.join(</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">;</span>display:none<span class="o">}</span><span class="sb">`</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">//网页头部增加答案
+</span></span><span class="line"><span class="cl">document.head.appendChild<span class="o">(</span>secretStyle<span class="o">)</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">//右键，查看源码看的是网页真实源码，不渲染
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">//elements里面是实时渲染的网页
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最终在<code>F12</code>开发者模式的元素Elements中发现第二个<code>&lt;style&gt;</code>中有题目答案：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">body::before<span class="o">{</span>content:<span class="s2">&#34;789145263364729851215386479821593647576418932493672185957861324632954718148237596&#34;</span><span class="p">;</span>display:none<span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>所以我们打开控制台执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">//显示body::before的答案
+</span></span><span class="line"><span class="cl">const <span class="nv">hidden</span> <span class="o">=</span> getComputedStyle<span class="o">(</span>document.body,<span class="s1">&#39;::before&#39;</span><span class="o">)</span>.content.replace<span class="o">(</span>/<span class="se">\&#34;</span>/g,<span class="s1">&#39;&#39;</span><span class="o">)</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">const <span class="nv">digits</span> <span class="o">=</span> hidden.split<span class="o">(</span><span class="s1">&#39;&#39;</span><span class="o">)</span>.map<span class="o">(</span>Number<span class="o">)</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">console.log<span class="o">(</span>digits<span class="o">)</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">//让答案显示在棋盘上
+</span></span><span class="line"><span class="cl">document.querySelectorAll<span class="o">(</span><span class="s1">&#39;.cell&#39;</span><span class="o">)</span>.forEach<span class="o">((</span>cell,i<span class="o">)=</span>&gt;<span class="o">{</span>  
+</span></span><span class="line"><span class="cl">     <span class="k">if</span><span class="o">(</span>!cell.disabled<span class="o">)</span> cell.value <span class="o">=</span> digits<span class="o">[</span>i<span class="o">]</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">   <span class="o">})</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="flappybird">flappybird
+</h3><p><strong>链接：</strong><a class="link" href="http://game.huayunsys.com/flappybird/"  target="_blank" rel="noopener"
+    >Floppy Bird</a></p>
+<p><code>F12</code>打开开发者模式，选择控制台Console，输入：</p>
+<p><font style="color:rgb(0, 0, 0);">展示当前窗口的所有参数 </font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;console.log(window)&lt;/font&gt;</code></p>
+<p><strong><font style="color:rgb(0, 0, 0);">参考：</font></strong><font style="color:rgb(0, 0, 0);"></font></p>
+<p><font style="color:rgb(0, 0, 0);">调整重力 </font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;gravity = 0.01&lt;/font&gt;</code></p>
+<p><font style="color:rgb(0, 0, 0);">管道间距（依然有攻击判定） </font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;flyArea = 100&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);"> </font></p>
+<p><font style="color:rgb(0, 0, 0);">鸟跳的多高 </font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;jump = -4.6&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);"> </font></p>
+<p><font style="color:rgb(0, 0, 0);">管道真实高度 </font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;pipeheight = 200&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);"> </font></p>
+<p><font style="color:rgb(0, 0, 0);">修改best的分数 </font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;highscore = 999&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);"> </font></p>
+<p><font style="color:rgb(0, 0, 0);">玩家死亡 </font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;playerDead = function(){}&lt;/font&gt;</code></p>
+<h3 id="塔防"><font style="color:rgb(0, 0, 0);">塔防</font>
+</h3><p><strong>链接：</strong><a class="link" href="http://game.huayunsys.com/towerdefense/"  target="_blank" rel="noopener"
+    >HTML5 Tower Defense</a></p>
+<p>右键检查源代码，<font style="color:rgb(0, 0, 0);">发现游戏算法引入</font></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">&lt;script <span class="nv">type</span><span class="o">=</span><span class="s2">&#34;text/javascript&#34;</span> <span class="nv">src</span><span class="o">=</span><span class="s2">&#34;td-pkg-zh-min.js?_t=1293962401.7&#34;</span>&gt;&lt;/script&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>打开<code>td-pkg-zh-min.js</code>文件，<font style="color:rgb(0, 0, 0);">发现设计师有提到</font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;cheat success!&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">推测是设计师留下的秘籍。</font></p>
+<p><font style="color:rgb(0, 0, 0);">进一步找到</font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;_TD.cheat=&quot;money+&quot;&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">，推测出后面是要写内容的。</font></p>
+<p><font style="color:rgb(0, 0, 0);">在控制台输入</font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;_TD.cheat=&quot;money+&quot;&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">，发现金钱增加。</font></p>
+<h3 id="扫雷"><font style="color:rgb(0, 0, 0);">扫雷</font>
+</h3><p><strong>链接：</strong><a class="link" href="https://game.huayunsys.com/saolei/"  target="_blank" rel="noopener"
+    >经典扫雷 (教学版)</a></p>
+<p>右键检查源代码，发现整个棋盘为<code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;grid&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">二维数组，二维数组内部嵌入字典，字典里面有isMine判断是不是地雷</font></p>
+<p><font style="color:rgb(0, 0, 0);">因此在控制台使用输入下面的代码：</font></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">grid</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">row</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">row</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">cell</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">cell</span><span class="p">.</span><span class="nx">isMine</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 直接修改 DOM 样式
+</span></span></span><span class="line"><span class="cl">            <span class="nx">cell</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><font style="color:rgb(0, 0, 0);"></font></p>
+<h3 id="俄罗斯方块"><font style="color:rgb(0, 0, 0);">俄罗斯方块</font>
+</h3><p><strong>链接：</strong><a class="link" href="https://game.huayunsys.com/eluosifangkuai/"  target="_blank" rel="noopener"
+    >Tetris: Cyberpunk Edition</a></p>
+<p>**目标：**修改所有下落方块变为&quot;L&quot;形</p>
+<p>右键检查源代码，发现生成下一个方块所用的随机函数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">createPiece</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;I&#39;</span><span class="p">)</span> <span class="k">return</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]];</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;L&#39;</span><span class="p">)</span> <span class="k">return</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]];</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;J&#39;</span><span class="p">)</span> <span class="k">return</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">]];</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;O&#39;</span><span class="p">)</span> <span class="k">return</span> <span class="p">[[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">]];</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;Z&#39;</span><span class="p">)</span> <span class="k">return</span> <span class="p">[[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]];</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;S&#39;</span><span class="p">)</span> <span class="k">return</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">],[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]];</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;T&#39;</span><span class="p">)</span> <span class="k">return</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]];</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><font style="color:rgb(0, 0, 0);">因此需要修改上面的函数，去掉所有if，直接return&quot;I&quot;时的结果，</font></p>
+<p><font style="color:rgb(0, 0, 0);">接下来</font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;console.log(window)&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">查看网页参数，发现createPiece为Tetris的一个子参数，所以调用时要写全参数名为</font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;Tetris.createPiece&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">，</font></p>
+<p><font style="color:rgb(0, 0, 0);">在控制台输入下面代码将参数修改，注意使用</font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;=&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">将参数赋值：</font></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">Tetris</span><span class="p">.</span><span class="nx">createPiece</span><span class="o">=</span><span class="kd">function</span><span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="打砖块">打砖块
+</h3><p><strong>链接：</strong><a class="link" href="https://game.huayunsys.com/dazhuankuai/"  target="_blank" rel="noopener"
+    >CYBER ARKANOID 3077</a></p>
+<p><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;console.log(window)&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">查看网页参数</font></p>
+<p><strong><font style="color:rgb(0, 0, 0);">思路一：</font></strong><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;Game.paddle.width = 800;&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">修改挡板宽度</font></p>
+<p><strong><font style="color:rgb(0, 0, 0);">思路二：</font></strong><font style="color:rgb(0, 0, 0);">每10ms获取一次球的x坐标，并设置挡板坐标中心始终对准小球</font></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">setInterval</span><span class="p">(()=&gt;{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Game</span><span class="p">.</span><span class="nx">paddle</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">Game</span><span class="p">.</span><span class="nx">ball</span><span class="p">.</span><span class="nx">x</span> <span class="o">-</span> <span class="nx">Game</span><span class="p">.</span><span class="nx">paddle</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span><span class="mi">10</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="贪吃蛇">贪吃蛇
+</h3><p><strong>链接：</strong><a class="link" href="http://game.huayunsys.com/tanchishe/"  target="_blank" rel="noopener"
+    >贪吃蛇 (自动加速版)</a></p>
+<p>使用AI生成的外挂代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 1. 备份原函数
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">SnakeGame</span><span class="p">.</span><span class="nx">originalUpdate</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">SnakeGame</span><span class="p">.</span><span class="nx">originalUpdate</span> <span class="o">=</span> <span class="nx">SnakeGame</span><span class="p">.</span><span class="nx">update</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// --- 辅助函数：泛洪算法 (计算某一点周围有多少空地) ---
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 这是一个简化版 BFS (广度优先搜索)
+</span></span></span><span class="line"><span class="cl"><span class="nx">SnakeGame</span><span class="p">.</span><span class="nx">countFreeSpace</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">startX</span><span class="p">,</span> <span class="nx">startY</span><span class="p">,</span> <span class="nx">maxCheck</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">queue</span> <span class="o">=</span> <span class="p">[{</span><span class="nx">x</span><span class="o">:</span> <span class="nx">startX</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">startY</span><span class="p">}];</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">visited</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Set</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">visited</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">startX</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span> <span class="o">+</span> <span class="nx">startY</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 为了性能，我们不需要计算整个地图，只要空间大于蛇的长度就认为安全
+</span></span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="nx">queue</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">count</span> <span class="o">&lt;</span> <span class="nx">maxCheck</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">shift</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">count</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nx">dirs</span> <span class="o">=</span> <span class="p">[{</span><span class="nx">x</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span> <span class="nx">y</span><span class="o">:-</span><span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span><span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="nx">x</span><span class="o">:-</span><span class="mi">1</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span><span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span><span class="mi">0</span><span class="p">}];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">d</span> <span class="k">of</span> <span class="nx">dirs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nx">nx</span> <span class="o">=</span> <span class="nx">p</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">d</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nx">ny</span> <span class="o">=</span> <span class="nx">p</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">d</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">nx</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span> <span class="o">+</span> <span class="nx">ny</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">// 检查边界
+</span></span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nx">nx</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="nx">nx</span> <span class="o">&gt;=</span> <span class="k">this</span><span class="p">.</span><span class="nx">tileCount</span> <span class="o">||</span> <span class="nx">ny</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="nx">ny</span> <span class="o">&gt;=</span> <span class="k">this</span><span class="p">.</span><span class="nx">tileCount</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="c1">// 检查是否撞到蛇身 (注意：这里要模拟蛇尾移动后的状态，简单起见直接用当前身体)
+</span></span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nx">isBody</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">bodyPart</span> <span class="k">of</span> <span class="k">this</span><span class="p">.</span><span class="nx">snake</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="nx">bodyPart</span><span class="p">.</span><span class="nx">x</span> <span class="o">===</span> <span class="nx">nx</span> <span class="o">&amp;&amp;</span> <span class="nx">bodyPart</span><span class="p">.</span><span class="nx">y</span> <span class="o">===</span> <span class="nx">ny</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">isBody</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">                    <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isBody</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">visited</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">visited</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">queue</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">x</span><span class="o">:</span> <span class="nx">nx</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">ny</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 2. 重写更新逻辑
+</span></span></span><span class="line"><span class="cl"><span class="nx">SnakeGame</span><span class="p">.</span><span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">head</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">snake</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">food</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">food</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">moves</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 第一步：获取所有不立刻撞死的方向 ---
+</span></span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">validMoves</span> <span class="o">=</span> <span class="nx">moves</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">move</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nx">nextPos</span> <span class="o">=</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="nx">head</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">move</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">head</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">move</span><span class="p">.</span><span class="nx">y</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 撞墙/撞自己检测
+</span></span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">checkCollision</span><span class="p">(</span><span class="nx">nextPos</span><span class="p">))</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 反向掉头检测
+</span></span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">move</span><span class="p">.</span><span class="nx">x</span> <span class="o">===</span> <span class="o">-</span><span class="k">this</span><span class="p">.</span><span class="nx">velocity</span><span class="p">.</span><span class="nx">x</span> <span class="o">&amp;&amp;</span> <span class="nx">move</span><span class="p">.</span><span class="nx">y</span> <span class="o">===</span> <span class="o">-</span><span class="k">this</span><span class="p">.</span><span class="nx">velocity</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 第二步：给每个方向打分 ---
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 评分标准：距离食物越近越好，但前提是空间必须足够
+</span></span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">bestMove</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">maxSpace</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">minDist</span> <span class="o">=</span> <span class="kc">Infinity</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果没有可行方向，就只能等死了，保持原速
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">validMoves</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 遍历所有可行方向
+</span></span></span><span class="line"><span class="cl">        <span class="nx">validMoves</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">move</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nx">nextPos</span> <span class="o">=</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="nx">head</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">move</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">head</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">move</span><span class="p">.</span><span class="nx">y</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="c1">// 1. 计算该方向的“生存空间”
+</span></span></span><span class="line"><span class="cl">            <span class="c1">// 我们只需要检测空间是否大于蛇的长度。如果空间 &gt; 蛇长，说明进去后能转得开
+</span></span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nx">space</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">countFreeSpace</span><span class="p">(</span><span class="nx">nextPos</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">nextPos</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">snake</span><span class="p">.</span><span class="nx">length</span> <span class="o">+</span> <span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="c1">// 2. 计算距离食物的距离
+</span></span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nx">dist</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nx">nextPos</span><span class="p">.</span><span class="nx">x</span> <span class="o">-</span> <span class="nx">food</span><span class="p">.</span><span class="nx">x</span><span class="p">)</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nx">nextPos</span><span class="p">.</span><span class="nx">y</span> <span class="o">-</span> <span class="nx">food</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="nx">move</span><span class="p">.</span><span class="nx">score</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">move</span><span class="p">.</span><span class="nx">space</span> <span class="o">=</span> <span class="nx">space</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">move</span><span class="p">.</span><span class="nx">dist</span> <span class="o">=</span> <span class="nx">dist</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// --- 决策逻辑 ---
+</span></span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 策略 A: 优先找“空间充足”且“距离最近”的路
+</span></span></span><span class="line"><span class="cl">        <span class="c1">// 过滤掉那些空间极其狭窄的死胡同 (空间 &lt; 蛇身长度)
+</span></span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nx">safeMoves</span> <span class="o">=</span> <span class="nx">validMoves</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">m</span> <span class="p">=&gt;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">space</span> <span class="o">&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">snake</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">safeMoves</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 如果有安全的路，选离食物最近的
+</span></span></span><span class="line"><span class="cl">            <span class="nx">safeMoves</span><span class="p">.</span><span class="nx">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">a</span><span class="p">.</span><span class="nx">dist</span> <span class="o">-</span> <span class="nx">b</span><span class="p">.</span><span class="nx">dist</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">bestMove</span> <span class="o">=</span> <span class="nx">safeMoves</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 策略 B: 如果所有路都是死胡同（或者空间都不够），
+</span></span></span><span class="line"><span class="cl">            <span class="c1">// 此时不要管食物了！选一个空间最大的方向苟延残喘，等待尾巴空出位置。
+</span></span></span><span class="line"><span class="cl">            <span class="nx">validMoves</span><span class="p">.</span><span class="nx">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">space</span> <span class="o">-</span> <span class="nx">a</span><span class="p">.</span><span class="nx">space</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">bestMove</span> <span class="o">=</span> <span class="nx">validMoves</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">velocity</span> <span class="o">=</span> <span class="nx">bestMove</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 执行原始逻辑
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">originalUpdate</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="查找真ip">查找真IP
+</h2><p>**CDN功能：**缓存和保护网站</p>
+<p>因为cdn服务架构简单，所以几乎绝对防御，但是防不住ddos</p>
+<p>如何绕过cdn？</p>
+<p><a class="link" href="http://cdn.chinaz.com/"  target="_blank" rel="noopener"
+    >http://cdn.chinaz.com/</a></p>
+<p><a class="link" href="https://ping.chinaz.com/"  target="_blank" rel="noopener"
+    >https://ping.chinaz.com/</a></p>
+<p>如果目标网站出现的ip都是不一样，说明使用了cdn</p>
+<p>考虑使用冷门ip，因为这些第三世界国家可能没有cdn</p>
+<hr>
+<p><strong>dns查询</strong></p>
+<p><a class="link" href="https://dnsdb.io/zh-cn/"  target="_blank" rel="noopener"
+    >https://dnsdb.io/zh-cn/</a></p>
+<p>微步在线</p>
+<p><a class="link" href="https://x.threatbook.cn/"  target="_blank" rel="noopener"
+    >https://x.threatbook.cn/</a></p>
+<p><strong>dns和ip查询</strong></p>
+<p><a class="link" href="http://viewdns.info/"  target="_blank" rel="noopener"
+    >http://viewdns.info/</a></p>
+<p><code>tracert www.cctv.com</code></p>
+<p>追踪去目标经历了多少跳，把数据包ttl调整为1，2，3，4.。。。。。直到目标位置，此时可以看到每个处理这个数据包的路由器ip地址是什么</p>
+<p>中途会发现有的路由器不给你显示ip地址（骨干路由器，做了ip屏蔽不给外人显示ip）</p>
+<p>ping人的时候<code>TTL=64</code> TTL指time to live</p>
+<p>使用邮件，pop3 smtp有概率可以看到cdn背后的目标</p>
+<p>点击显示邮件原文绕过cloudflare</p>
+<p><strong>全网扫ip</strong></p>
+<p><a class="link" href="https://github.com/superfish9/hackcdn"  target="_blank" rel="noopener"
+    >https://github.com/superfish9/hackcdn</a></p>
+<p><a class="link" href="https://github.com/boy-hack/w8fuckcdn"  target="_blank" rel="noopener"
+    >https://github.com/boy-hack/w8fuckcdn</a></p>
+<p><strong>host修改</strong></p>
+<p>确定目标本尊ip之后，需要修改自己电脑的host文件才能正确攻击</p>
+<p><code>C:\Windows\System32\drivers\etc\hosts</code></p>
+<p>电脑解析ip地址优先解析hosts文件</p>
+<h2 id="网络空间搜索引擎">网络空间搜索引擎
+</h2><p><a class="link" href="https://fofa.info/"  target="_blank" rel="noopener"
+    >https://fofa.info/</a></p>
+<p><code>body=&quot;发送验证码&quot; &amp;&amp; country=&quot;CN&quot;</code></p>
+<p>查找网页中包含“发送验证码”，且位于中国的网站</p>
+<p><code>app=&quot;CCTV-Cameras&quot;</code></p>
+<p>查找监控摄像头，根据找到的目标特征，去搜索默认密码</p>
+<p><code>port=&quot;80&quot;</code></p>
+<p>只搜索某个端口</p>
+<p><code>region=&quot;Zhejiang&quot; &amp;&amp; host=&quot;gov.cn&quot; &amp;&amp; city=&quot;Hangzhou&quot;</code></p>
+<p>限定地区进行信息搜集</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+<div class="math-katex"></div>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+        <div class="comment-container mt-8"></div>
+        
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="makabaka11/makabaka11.github.io"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2026 Retr0
+    </section>
+    
+    <section class="powerby">
+        
+            Powered by ctOS <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+
+                <script src="/js/APlayer.min.js"></script>
+                <script src="/js/Meting.min.js"></script>
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.eaf1211e4c7db355f37ceea53df13700e1b77fbcc3cfe8c1c1f69e4468a752e1.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+
+<script>
+(function () {
+    const url = new URL(window.location.href);
+
+    
+    if (url.searchParams.has('utterances')) {
+
+        
+        
+        window.location.replace(window.location.pathname);
+    }
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+
+<script>
+    var pjax = new Pjax({
+        selectors: [".main-container"]
+    });
+</script>
+
+
+<script src=https://www.retr0.xyz/js/topbar.min.js></script>
+
+
+
+<script>
+function initUtterances() {
+    const isArticle = document.querySelector('.article-page') && document.querySelector('.article-content');
+    if (!isArticle) return;
+
+    const oldScript = document.querySelector('script[src^="https://utteranc.es/client.js"]');
+    if (oldScript) oldScript.remove();
+
+    const container = document.querySelector('.comment-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    let script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'makabaka11/makabaka11.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+    container.appendChild(script);
+}
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    if (!window.pjax || !window.pjax.state) initUtterances();
+});
+</script>
+
+
+<script>
+pjax._handleResponse = pjax.handleResponse;
+pjax.handleResponse = function(responseText, request, href, options) {
+    if (request.responseText.match("<html")) {
+        if (responseText) {
+            let newDom = new DOMParser().parseFromString(responseText, 'text/html');
+            document.body.setAttribute("class", newDom.body.className);
+        }
+        pjax._handleResponse(responseText, request, href, options);
+    }
+};
+</script>
+
+
+<script>
+topbar.config({
+    barColors: {
+        '0': 'rgba(255, 255, 255, 1)',
+        '1.0': 'rgba(255, 183, 197, 1)'
+    }
+});
+
+document.addEventListener('pjax:send', () => topbar.show());
+
+document.addEventListener('pjax:complete', () => {
+    window.Stack.init();
+    topbar.hide();
+    setTimeout(initUtterances, 0);
+    updateViewCount();
+    renderKaTeX();
+    initPhotoSwipeFromDOM('.article-content');   
+    initLive2D();                                
+});
+</script>
+
+
+<script>
+function updateViewCount() {
+    const viewCountEl = document.getElementById('vercount_value_page_pv');
+    if (!viewCountEl) return;
+
+    viewCountEl.textContent = 'loading...';
+    const url = 'https://cn.vercount.one/js';
+
+    const old = document.querySelector(`script[src="${url}"]`);
+    if (old) old.remove();
+
+    const s = document.createElement('script');
+    s.src = url;
+    s.defer = true;
+    document.head.appendChild(s);
+
+    showHideView();
+}
+
+function showHideView() {
+    const viewCounts = document.querySelectorAll("#viewCount");
+    const isArticle = document.querySelector(".article-page");
+    viewCounts.forEach(ele => ele.style.display = isArticle ? 'block' : 'none');
+}
+</script>
+
+<script>
+    function showHideView() {
+        
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+
+
+
+<script>
+async function renderKaTeX() {
+    let katex = document.querySelector(".math-katex");
+    if (!katex) return;
+
+    while (typeof renderMathInElement !== 'function') {
+        await new Promise(r => setTimeout(r, 500));
+    }
+
+    const content = document.querySelector('.article-content') || document.body;
+    renderMathInElement(content, {
+        delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true }
+        ],
+        ignoredClasses: ["gist"]
+    });
+}
+</script>
+
+
+<div id="particles-js"></div>
+
+<script src=https://www.retr0.xyz/background/particles.min.js></script>
+<script>
+particlesJS.load('particles-js',
+    "https://www.retr0.xyz/background/particlesjs-config.json",
+    () => console.log('particles.js loaded')
+);
+</script>
+
+<style>
+#particles-js {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: -1;
+}
+</style>
+
+<script>
+
+function initPhotoSwipeFromDOM(selector) {
+    if (!window.PhotoSwipe) return;
+
+    const containers = document.querySelectorAll(selector);
+    if (!containers.length) return;
+
+    containers.forEach(container => {
+        const images = container.querySelectorAll('img');
+
+        images.forEach((img, index) => {
+
+            
+            function getImageSize() {
+                return new Promise(resolve => {
+                    if (img.complete && img.naturalWidth) {
+                        resolve({
+                            w: img.naturalWidth,
+                            h: img.naturalHeight
+                        });
+                    } else {
+                        const tmp = new Image();
+                        tmp.src = img.src || img.getAttribute("data-src");
+                        tmp.onload = () => resolve({ w: tmp.width, h: tmp.height });
+                    }
+                });
+            }
+
+            img.style.cursor = "zoom-in";
+
+            
+            img.addEventListener("click", async (e) => {
+                e.preventDefault();
+
+                const size = await getImageSize();
+                const pswpEl = document.querySelector('.pswp');
+
+                const items = Array.from(images).map(i => ({
+                    src: i.src || i.getAttribute("data-src"),
+                    msrc: i.src,
+                    w: i.naturalWidth || 800,
+                    h: i.naturalHeight || 600,
+                }));
+
+                items[index].w = size.w;
+                items[index].h = size.h;
+
+                const gallery = new PhotoSwipe(pswpEl, PhotoSwipeUI_Default, items, {
+                    index,
+                    history: false
+                });
+
+                
+                
+                
+                enablePhotoSwipeWebShare(gallery);
+
+                gallery.init();
+            });
+        });
+    });
+}
+
+
+
+
+
+function enablePhotoSwipeWebShare(gallery) {
+    gallery.listen('shareLinkClick', function(shareButtonData, e) {
+        e.preventDefault();
+
+        const item = gallery.currItem;
+
+        if (navigator.share) {
+            navigator.share({
+                title: document.title,
+                text: '给你分享一张图片：',
+                url: item.src
+            }).catch(err => console.log("分享失败：", err));
+
+            return false; 
+        }
+
+        
+        return true;
+    });
+}
+</script>
+
+
+
+<script>
+
+
+window._live2d_loaded = window._live2d_loaded || false;
+window._live2d_initialized = window._live2d_initialized || false;
+
+
+function loadLive2DAssetsOnce(cdnPath) {
+    if (window._live2d_loaded) return Promise.resolve();
+
+    window._live2d_loaded = true;
+
+    return Promise.all([
+        loadRes(cdnPath + "waifu.css", "css"),
+        loadRes(cdnPath + "Core/live2dcubismcore.js", "js"),
+        loadRes(cdnPath + "live2d-sdk.js", "js"),
+        loadRes(cdnPath + "waifu-tips.js", "js")
+    ]);
+}
+
+
+function initLive2DWidgetOnce(cdnPath) {
+
+    if (window._live2d_initialized) return;
+
+    
+    const old = document.querySelector("#waifu");
+    if (old) old.remove();
+
+    window._live2d_initialized = true;
+
+    initWidget({
+        waifuPath: cdnPath + "waifu-tips.json",
+        cdnPath: cdnPath + "Resources/",
+        tools: ["hitokoto", "asteroids", "express", "switch-model", "switch-texture", "photo", "info", "quit"],
+        dragEnable: true,
+        dragDirection: ["x", "y"],
+        switchType: "order"
+    });
+
+    console.log("[Live2D] Widget initialized.");
+}
+
+
+function loadRes(url, type) {
+    return new Promise((resolve) => {
+        let tag;
+        if (type === "css") {
+            tag = document.createElement("link");
+            tag.rel = "stylesheet";
+            tag.href = url;
+        } else {
+            tag = document.createElement("script");
+            tag.src = url;
+        }
+        tag.onload = resolve;
+        document.head.appendChild(tag);
+    });
+}
+
+
+function initLive2D() {
+    if (screen.width < 768) return;
+
+    const cdnPath = "https://www.retr0.xyz/blog-live2d/";
+
+    loadLive2DAssetsOnce(cdnPath)
+        .then(() => initLive2DWidgetOnce(cdnPath));
+}
+
+initLive2D();  
+
+
+document.addEventListener("pjax:complete", () => {
+    initLive2D(); 
+});
+</script>
+
+
+<style>
+    .highlight {
+         
+        max-height: 400px;
+        overflow: hidden;
+        position: relative;  
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .code-more-btn {
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: #f0f0f5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .code-more-img {
+        cursor: pointer !important;
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+</style>
+
+<script>
+  function initCodeMoreBox() {
+    let codeBlocks = document.querySelectorAll(".highlight");
+    if (!codeBlocks) {
+      return;
+    }
+    codeBlocks.forEach(codeBlock => {
+      
+      const existingBox = codeBlock.querySelector('.code-more-box');
+      if (existingBox) existingBox.remove();
+
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+        return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.addEventListener('click', () => {
+        codeBlock.classList.add('code-show');
+        codeMoreBox.style.display = 'none';
+        
+        window.dispatchEvent(new Event('resize'))
+      })
+      
+      let img = document.createElement('img');
+      img.classList.add('code-more-img');
+      img.src = "https://www.retr0.xyz/icons/codeMore.png"
+      
+      codeMoreBtn.appendChild(img);
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox)
+    })
+  }
+  
+  initCodeMoreBox();
+  
+  
+  document.addEventListener('pjax:complete', () => {
+    initCodeMoreBox();
+  });
+</script>
+
+
+<script>
+
+
+window.__articlePlayers = window.__articlePlayers || [];
+
+
+
+function getGlobalMetingPlayer() {
+    return window.__globalMetingPlayer || null;
+}
+
+
+
+function pauseGlobalMeting() {
+    const p = getGlobalMetingPlayer();
+    if (p && !p.audio.paused) {
+        p.pause();
+        console.log('[APlayer] Pause global Meting');
+    }
+}
+
+
+
+function pauseArticlePlayers() {
+    window.__articlePlayers.forEach(p => {
+        if (p && !p.audio.paused) {
+            p.pause();
+        }
+    });
+}
+
+
+
+function initAPlayers() {
+    if (typeof APlayer === "undefined") return;
+
+    document.querySelectorAll('.aplayer-article').forEach(el => {
+        if (el.dataset.loaded === "true") return;
+        el.dataset.loaded = "true";
+
+        const ap = new APlayer({
+            container: el,
+            fixed: false,
+            autoplay: false,
+            loop: 'none',
+            order: 'list',
+            preload: 'metadata',
+            volume: 0.7,
+            mutex: false, 
+            audio: [{
+                name: el.dataset.title || 'Unknown',
+                artist: el.dataset.artist || '',
+                url: el.dataset.src,
+                cover: el.dataset.cover || ''
+            }]
+        });
+
+        
+        ap.on('play', () => {
+            
+            pauseGlobalMeting();
+
+            
+            window.__articlePlayers.forEach(other => {
+                if (other !== ap && !other.audio.paused) {
+                    other.pause();
+                }
+            });
+
+    console.log('[APlayer] Switch article track');
+});
+
+
+        window.__articlePlayers.push(ap);
+    });
+}
+
+
+
+function bindMetingMutex() {
+    const p = getGlobalMetingPlayer();
+    if (!p || p.__mutexBound) return;
+
+    p.__mutexBound = true;
+
+    
+    p.on('play', () => {
+        pauseArticlePlayers();
+    });
+
+    console.log('[Meting] Mutex bound');
+}
+
+
+
+function initAllPlayers() {
+    initAPlayers();
+    bindMetingMutex();
+}
+
+
+
+document.addEventListener("DOMContentLoaded", initAllPlayers);
+document.addEventListener("pjax:complete", initAllPlayers);
+</script>
+
+<script>
+
+
+function destroyArticlePlayers() {
+    if (!window.__articlePlayers || window.__articlePlayers.length === 0) return;
+
+    window.__articlePlayers.forEach(ap => {
+        try {
+            if (!ap.audio.paused) {
+                ap.pause();
+            }
+            ap.destroy(); 
+        } catch (e) {
+            console.warn('[APlayer] destroy failed', e);
+        }
+    });
+
+    window.__articlePlayers = [];
+    console.log('[APlayer] Article players destroyed');
+}
+
+
+
+document.addEventListener('pjax:send', () => {
+    destroyArticlePlayers();
+});
+</script>
+
+
+
+
+
+
+
+        
+
+
+<meting-js
+  id="14477349320"
+  server="netease"
+  type="playlist"
+  fixed="true"
+  bottom="20px"
+  right="20px"
+  autoplay="false"
+  width="300px"
+  preload="metadata"
+  mutex="false">
+</meting-js>
+
+<script>
+(function () {
+
+  
+  if (window.__global_meting_initialized) return;
+  window.__global_meting_initialized = true;
+
+  const STORAGE_KEY = "playInfo";
+  const PLAYLIST_ID = "14477349320";
+
+  function initGlobalMeting() {
+    const meting = document.querySelector('meting-js');
+    if (!meting) return;
+
+    
+    meting.addEventListener('aplayer-loaded', () => {
+      const ap = meting.aplayer;
+      if (!ap) return;
+
+      
+      window.__globalMetingPlayer = ap;
+      console.log('[Meting] Global APlayer ready');
+
+      bindPlayerEvents(ap);
+      restorePlayState(ap);
+    }, { once: true });
+  }
+
+  function bindPlayerEvents(ap) {
+    
+    const save = () => savePlayState(ap);
+
+    window.addEventListener('beforeunload', save);
+    document.addEventListener('visibilitychange', save);
+
+    
+    ap.on('play', () => {
+      document.dispatchEvent(new CustomEvent('global-player-play'));
+    });
+  }
+
+  function savePlayState(ap) {
+    if (!ap || !ap.list || !ap.audio) return;
+
+    const data = {
+      playlistId: PLAYLIST_ID,
+      index: ap.list.index,
+      currentTime: ap.audio.currentTime,
+      paused: ap.paused
+    };
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function restorePlayState(ap) {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!data || data.playlistId !== PLAYLIST_ID) return;
+
+    if (data.index < ap.list.songs.length) {
+      ap.list.switch(data.index);
+      ap.once('canplay', () => {
+        ap.seek(data.currentTime || 0);
+        if (!data.paused) {
+          ap.play().catch(() => {
+            ap.notice("点击继续播放", 3000);
+          });
+        }
+      });
+    }
+  }
+
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGlobalMeting);
+  } else {
+    initGlobalMeting();
+  }
+
+})();
+</script>
+
+    </body>
+</html>
