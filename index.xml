@@ -135,9 +135,9 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;链接：&lt;/strong&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.hhtjim.com/wp-content/uploads/2017/02/T-RexGame.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;T-Rex 在线版的chrome恐龙游戏&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;F12&lt;/code&gt;打开开发者模式，选择控制台Console，输入：&lt;/p&gt;
-&lt;p&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;关闭GameOver判定：&lt;/font&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:rgb(0, 0, 0);&amp;quot;&amp;gt;Runner.prototype.gameOver = function(){}&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;调整速度：&lt;/font&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:rgb(0, 0, 0);&amp;quot;&amp;gt;Runner.instance_.setSpeed(1000);&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id=&#34;2048&#34;&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;2048&lt;/font&gt;
+&lt;p&gt;关闭GameOver判定：&lt;code&gt;Runner.prototype.gameOver = function(){}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;调整速度：&lt;code&gt;Runner.instance_.setSpeed(1000);&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2048&#34;&gt;2048
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;链接：&lt;/strong&gt;&lt;a class=&#34;link&#34; href=&#34;http://game.huayunsys.com/2048/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;2048&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;F12&lt;/code&gt;打开开发者模式，选择应用程序Application&lt;/p&gt;
@@ -223,18 +223,18 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;链接：&lt;/strong&gt;&lt;a class=&#34;link&#34; href=&#34;http://game.huayunsys.com/flappybird/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Floppy Bird&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;F12&lt;/code&gt;打开开发者模式，选择控制台Console，输入：&lt;/p&gt;
-&lt;p&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;展示当前窗口的所有参数 &lt;/font&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:rgb(0, 0, 0);&amp;quot;&amp;gt;console.log(window)&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;参考：&lt;/font&gt;&lt;/strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;调整重力 &lt;/font&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:rgb(0, 0, 0);&amp;quot;&amp;gt;gravity = 0.01&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;管道间距（依然有攻击判定） &lt;/font&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:rgb(0, 0, 0);&amp;quot;&amp;gt;flyArea = 100&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt; &lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;鸟跳的多高 &lt;/font&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:rgb(0, 0, 0);&amp;quot;&amp;gt;jump = -4.6&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt; &lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;管道真实高度 &lt;/font&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:rgb(0, 0, 0);&amp;quot;&amp;gt;pipeheight = 200&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt; &lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;修改best的分数 &lt;/font&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:rgb(0, 0, 0);&amp;quot;&amp;gt;highscore = 999&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt; &lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;玩家死亡 &lt;/font&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:rgb(0, 0, 0);&amp;quot;&amp;gt;playerDead = function(){}&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id=&#34;塔防&#34;&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;塔防&lt;/font&gt;
+&lt;p&gt;展示当前窗口的所有参数 &lt;code&gt;console.log(window)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参考：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;调整重力 &lt;code&gt;gravity = 0.01&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;管道间距（依然有攻击判定） &lt;code&gt;flyArea = 100&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;鸟跳的多高 &lt;code&gt;jump = -4.6&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;管道真实高度 &lt;code&gt;pipeheight = 200&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;修改best的分数 &lt;code&gt;highscore = 999&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;玩家死亡 &lt;code&gt;playerDead = function(){}&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;塔防&#34;&gt;塔防
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;链接：&lt;/strong&gt;&lt;a class=&#34;link&#34; href=&#34;http://game.huayunsys.com/towerdefense/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;HTML5 Tower Defense&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;右键检查源代码，&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;发现游戏算法引入&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;右键检查源代码，发现游戏算法引入&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -243,14 +243,14 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;script &lt;span class=&#34;nv&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;text/javascript&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;td-pkg-zh-min.js?_t=1293962401.7&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/script&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;打开&lt;code&gt;td-pkg-zh-min.js&lt;/code&gt;文件，&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;发现设计师有提到&lt;/font&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:rgb(0, 0, 0);&amp;quot;&amp;gt;cheat success!&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;推测是设计师留下的秘籍。&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;进一步找到&lt;/font&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:rgb(0, 0, 0);&amp;quot;&amp;gt;_TD.cheat=&amp;quot;money+&amp;quot;&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;，推测出后面是要写内容的。&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;在控制台输入&lt;/font&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:rgb(0, 0, 0);&amp;quot;&amp;gt;_TD.cheat=&amp;quot;money+&amp;quot;&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;，发现金钱增加。&lt;/font&gt;&lt;/p&gt;
-&lt;h3 id=&#34;扫雷&#34;&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;扫雷&lt;/font&gt;
+&lt;/div&gt;&lt;p&gt;打开&lt;code&gt;td-pkg-zh-min.js&lt;/code&gt;文件，发现设计师有提到&lt;code&gt;cheat success!&lt;/code&gt;推测是设计师留下的秘籍。&lt;/p&gt;
+&lt;p&gt;进一步找到&lt;code&gt;_TD.cheat=&amp;quot;money+&amp;quot;&lt;/code&gt;，推测出后面是要写内容的。&lt;/p&gt;
+&lt;p&gt;在控制台输入&lt;code&gt;_TD.cheat=&amp;quot;money+&amp;quot;&lt;/code&gt;，发现金钱增加。&lt;/p&gt;
+&lt;h3 id=&#34;扫雷&#34;&gt;扫雷
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;链接：&lt;/strong&gt;&lt;a class=&#34;link&#34; href=&#34;https://game.huayunsys.com/saolei/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;经典扫雷 (教学版)&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;右键检查源代码，发现整个棋盘为&lt;code&gt;&amp;lt;font style=&amp;quot;color:rgb(0, 0, 0);&amp;quot;&amp;gt;grid&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;二维数组，二维数组内部嵌入字典，字典里面有isMine判断是不是地雷&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;因此在控制台使用输入下面的代码：&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;右键检查源代码，发现整个棋盘为&lt;code&gt;grid&lt;/code&gt;二维数组，二维数组内部嵌入字典，字典里面有isMine判断是不是地雷&lt;/p&gt;
+&lt;p&gt;因此在控制台使用输入下面的代码：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -273,11 +273,10 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;h3 id=&#34;俄罗斯方块&#34;&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;俄罗斯方块&lt;/font&gt;
+&lt;/div&gt;&lt;h3 id=&#34;俄罗斯方块&#34;&gt;俄罗斯方块
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;链接：&lt;/strong&gt;&lt;a class=&#34;link&#34; href=&#34;https://game.huayunsys.com/eluosifangkuai/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Tetris: Cyberpunk Edition&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;**目标：**修改所有下落方块变为&amp;quot;L&amp;quot;形&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;目标：&lt;/strong&gt; 修改所有下落方块变为&amp;quot;L&amp;quot;形&lt;/p&gt;
 &lt;p&gt;右键检查源代码，发现生成下一个方块所用的随机函数：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -303,9 +302,9 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;因此需要修改上面的函数，去掉所有if，直接return&amp;quot;I&amp;quot;时的结果，&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;接下来&lt;/font&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:rgb(0, 0, 0);&amp;quot;&amp;gt;console.log(window)&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;查看网页参数，发现createPiece为Tetris的一个子参数，所以调用时要写全参数名为&lt;/font&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:rgb(0, 0, 0);&amp;quot;&amp;gt;Tetris.createPiece&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;，&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;在控制台输入下面代码将参数修改，注意使用&lt;/font&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:rgb(0, 0, 0);&amp;quot;&amp;gt;=&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;将参数赋值：&lt;/font&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;因此需要修改上面的函数，去掉所有if，直接return&amp;quot;I&amp;quot;时的结果，&lt;/p&gt;
+&lt;p&gt;接下来&lt;code&gt;console.log(window)&lt;/code&gt;查看网页参数，发现createPiece为Tetris的一个子参数，所以调用时要写全参数名为&lt;code&gt;Tetris.createPiece&lt;/code&gt;，&lt;/p&gt;
+&lt;p&gt;在控制台输入下面代码将参数修改，注意使用&lt;code&gt;=&lt;/code&gt;将参数赋值：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -321,9 +320,9 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;/div&gt;&lt;h3 id=&#34;打砖块&#34;&gt;打砖块
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;链接：&lt;/strong&gt;&lt;a class=&#34;link&#34; href=&#34;https://game.huayunsys.com/dazhuankuai/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;CYBER ARKANOID 3077&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:rgb(0, 0, 0);&amp;quot;&amp;gt;console.log(window)&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;查看网页参数&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;思路一：&lt;/font&gt;&lt;/strong&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:rgb(0, 0, 0);&amp;quot;&amp;gt;Game.paddle.width = 800;&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;修改挡板宽度&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;思路二：&lt;/font&gt;&lt;/strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;每10ms获取一次球的x坐标，并设置挡板坐标中心始终对准小球&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;console.log(window)&lt;/code&gt;查看网页参数&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;思路一：&lt;/strong&gt;&lt;code&gt;Game.paddle.width = 800;&lt;/code&gt;修改挡板宽度&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;思路二：&lt;/strong&gt; 每10ms获取一次球的x坐标，并设置挡板坐标中心始终对准小球&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -571,7 +570,7 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;查找真ip&#34;&gt;查找真IP
-&lt;/h2&gt;&lt;p&gt;**CDN功能：**缓存和保护网站&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;CDN功能：&lt;/strong&gt; 缓存和保护网站&lt;/p&gt;
 &lt;p&gt;因为cdn服务架构简单，所以几乎绝对防御，但是防不住ddos&lt;/p&gt;
 &lt;p&gt;如何绕过cdn？&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://cdn.chinaz.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;

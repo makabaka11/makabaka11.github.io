@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="基于页游的前端分析 Google小恐龙 链接：T-Rex 在线版的chrome恐龙游戏\nF12打开开发者模式，选择控制台Console，输入：\n关闭GameOver判定：&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;Runner.prototype.gameOver = function(){}&lt;/font&gt;\n调整速度：&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;Runner.instance_.setSpeed(1000);&lt;/font&gt;\n2048 链接：2048\nF12打开开发者模式，选择应用程序Application\n在本地存储Local Storage中可以看到存储在本地的游戏数据，例如：\n1 {&#34;grid&#34;:{&#34;size&#34;:4,&#34;cells&#34;:[[null,null,null,{&#34;position&#34;:{&#34;x&#34;:0,&#34;y&#34;:3},&#34;value&#34;:2}],[null,null,null,null],[{&#34;position&#34;:{&#34;x&#34;:2,&#34;y&#34;:0},&#34;value&#34;:4},null,null,null],[null,null,null,null]]},&#34;score&#34;:0,&#34;over&#34;:false,&#34;won&#34;:false,&#34;keepPlaying&#34;:false} 通过修改即可改变棋盘中的数字。\n数独 链接：数独游戏 – 信息安全教学示例（随机题目）\n右键检查源代码可以发现网页生成题目并渲染的逻辑。\n1 2 3 4 5 6 7 8 9 10 11 12 const { puzzle, solution } = generatePuzzle(); //创建一个style（css）放到网页里命名为secretStyle const secretStyle = document.createElement(&#39;style&#39;); //secretStyle的css里放题目答案，不予显示 secretStyle.textContent = `body::before{content:&#34;${solution.join(&#39;&#39;)}&#34;;display:none}`; //网页头部增加答案 document.head.appendChild(secretStyle); //右键，查看源码看的是网页真实源码，不渲染 //elements里面是实时渲染的网页 最终在F12开发者模式的元素Elements中发现第二个&lt;style&gt;中有题目答案：\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="基于页游的前端分析 Google小恐龙 链接：T-Rex 在线版的chrome恐龙游戏\nF12打开开发者模式，选择控制台Console，输入：\n关闭GameOver判定：Runner.prototype.gameOver = function(){}\n调整速度：Runner.instance_.setSpeed(1000);\n2048 链接：2048\nF12打开开发者模式，选择应用程序Application\n在本地存储Local Storage中可以看到存储在本地的游戏数据，例如：\n1 {&#34;grid&#34;:{&#34;size&#34;:4,&#34;cells&#34;:[[null,null,null,{&#34;position&#34;:{&#34;x&#34;:0,&#34;y&#34;:3},&#34;value&#34;:2}],[null,null,null,null],[{&#34;position&#34;:{&#34;x&#34;:2,&#34;y&#34;:0},&#34;value&#34;:4},null,null,null],[null,null,null,null]]},&#34;score&#34;:0,&#34;over&#34;:false,&#34;won&#34;:false,&#34;keepPlaying&#34;:false} 通过修改即可改变棋盘中的数字。\n数独 链接：数独游戏 – 信息安全教学示例（随机题目）\n右键检查源代码可以发现网页生成题目并渲染的逻辑。\n1 2 3 4 5 6 7 8 9 10 11 12 const { puzzle, solution } = generatePuzzle(); //创建一个style（css）放到网页里命名为secretStyle const secretStyle = document.createElement(&#39;style&#39;); //secretStyle的css里放题目答案，不予显示 secretStyle.textContent = `body::before{content:&#34;${solution.join(&#39;&#39;)}&#34;;display:none}`; //网页头部增加答案 document.head.appendChild(secretStyle); //右键，查看源码看的是网页真实源码，不渲染 //elements里面是实时渲染的网页 最终在F12开发者模式的元素Elements中发现第二个&lt;style&gt;中有题目答案：\n1 body::before{content:&#34;789145263364729851215386479821593647576418932493672185957861324632954718148237596&#34;;display:none} 所以我们打开控制台执行：\n1 2 3 4 5 6 7 8 9 //显示body::before的答案 const hidden = getComputedStyle(document.body,&#39;::before&#39;).content.replace(/\\&#34;/g,&#39;&#39;); const digits = hidden.split(&#39;&#39;).map(Number); console.log(digits); //让答案显示在棋盘上 document.querySelectorAll(&#39;.cell&#39;).forEach((cell,i)=&gt;{ if(!cell.disabled) cell.value = digits[i]; }); flappybird 链接：Floppy Bird\n">
 <title>1.17 页游作弊和信息搜集</title>
 
 <link rel='canonical' href='https://www.retr0.xyz/p/1.17-%E9%A1%B5%E6%B8%B8%E4%BD%9C%E5%BC%8A%E5%92%8C%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/'>
 
 <link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="1.17 页游作弊和信息搜集">
-<meta property='og:description' content="基于页游的前端分析 Google小恐龙 链接：T-Rex 在线版的chrome恐龙游戏\nF12打开开发者模式，选择控制台Console，输入：\n关闭GameOver判定：&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;Runner.prototype.gameOver = function(){}&lt;/font&gt;\n调整速度：&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;Runner.instance_.setSpeed(1000);&lt;/font&gt;\n2048 链接：2048\nF12打开开发者模式，选择应用程序Application\n在本地存储Local Storage中可以看到存储在本地的游戏数据，例如：\n1 {&#34;grid&#34;:{&#34;size&#34;:4,&#34;cells&#34;:[[null,null,null,{&#34;position&#34;:{&#34;x&#34;:0,&#34;y&#34;:3},&#34;value&#34;:2}],[null,null,null,null],[{&#34;position&#34;:{&#34;x&#34;:2,&#34;y&#34;:0},&#34;value&#34;:4},null,null,null],[null,null,null,null]]},&#34;score&#34;:0,&#34;over&#34;:false,&#34;won&#34;:false,&#34;keepPlaying&#34;:false} 通过修改即可改变棋盘中的数字。\n数独 链接：数独游戏 – 信息安全教学示例（随机题目）\n右键检查源代码可以发现网页生成题目并渲染的逻辑。\n1 2 3 4 5 6 7 8 9 10 11 12 const { puzzle, solution } = generatePuzzle(); //创建一个style（css）放到网页里命名为secretStyle const secretStyle = document.createElement(&#39;style&#39;); //secretStyle的css里放题目答案，不予显示 secretStyle.textContent = `body::before{content:&#34;${solution.join(&#39;&#39;)}&#34;;display:none}`; //网页头部增加答案 document.head.appendChild(secretStyle); //右键，查看源码看的是网页真实源码，不渲染 //elements里面是实时渲染的网页 最终在F12开发者模式的元素Elements中发现第二个&lt;style&gt;中有题目答案：\n">
+<meta property='og:description' content="基于页游的前端分析 Google小恐龙 链接：T-Rex 在线版的chrome恐龙游戏\nF12打开开发者模式，选择控制台Console，输入：\n关闭GameOver判定：Runner.prototype.gameOver = function(){}\n调整速度：Runner.instance_.setSpeed(1000);\n2048 链接：2048\nF12打开开发者模式，选择应用程序Application\n在本地存储Local Storage中可以看到存储在本地的游戏数据，例如：\n1 {&#34;grid&#34;:{&#34;size&#34;:4,&#34;cells&#34;:[[null,null,null,{&#34;position&#34;:{&#34;x&#34;:0,&#34;y&#34;:3},&#34;value&#34;:2}],[null,null,null,null],[{&#34;position&#34;:{&#34;x&#34;:2,&#34;y&#34;:0},&#34;value&#34;:4},null,null,null],[null,null,null,null]]},&#34;score&#34;:0,&#34;over&#34;:false,&#34;won&#34;:false,&#34;keepPlaying&#34;:false} 通过修改即可改变棋盘中的数字。\n数独 链接：数独游戏 – 信息安全教学示例（随机题目）\n右键检查源代码可以发现网页生成题目并渲染的逻辑。\n1 2 3 4 5 6 7 8 9 10 11 12 const { puzzle, solution } = generatePuzzle(); //创建一个style（css）放到网页里命名为secretStyle const secretStyle = document.createElement(&#39;style&#39;); //secretStyle的css里放题目答案，不予显示 secretStyle.textContent = `body::before{content:&#34;${solution.join(&#39;&#39;)}&#34;;display:none}`; //网页头部增加答案 document.head.appendChild(secretStyle); //右键，查看源码看的是网页真实源码，不渲染 //elements里面是实时渲染的网页 最终在F12开发者模式的元素Elements中发现第二个&lt;style&gt;中有题目答案：\n1 body::before{content:&#34;789145263364729851215386479821593647576418932493672185957861324632954718148237596&#34;;display:none} 所以我们打开控制台执行：\n1 2 3 4 5 6 7 8 9 //显示body::before的答案 const hidden = getComputedStyle(document.body,&#39;::before&#39;).content.replace(/\\&#34;/g,&#39;&#39;); const digits = hidden.split(&#39;&#39;).map(Number); console.log(digits); //让答案显示在棋盘上 document.querySelectorAll(&#39;.cell&#39;).forEach((cell,i)=&gt;{ if(!cell.disabled) cell.value = digits[i]; }); flappybird 链接：Floppy Bird\n">
 <meta property='og:url' content='https://www.retr0.xyz/p/1.17-%E9%A1%B5%E6%B8%B8%E4%BD%9C%E5%BC%8A%E5%92%8C%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/'>
 <meta property='og:site_name' content='Retr0的小窝'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-17T20:36:48&#43;08:00'/><meta property='article:modified_time' content='2026-01-17T20:36:48&#43;08:00'/>
 <meta name="twitter:title" content="1.17 页游作弊和信息搜集">
-<meta name="twitter:description" content="基于页游的前端分析 Google小恐龙 链接：T-Rex 在线版的chrome恐龙游戏\nF12打开开发者模式，选择控制台Console，输入：\n关闭GameOver判定：&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;Runner.prototype.gameOver = function(){}&lt;/font&gt;\n调整速度：&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;Runner.instance_.setSpeed(1000);&lt;/font&gt;\n2048 链接：2048\nF12打开开发者模式，选择应用程序Application\n在本地存储Local Storage中可以看到存储在本地的游戏数据，例如：\n1 {&#34;grid&#34;:{&#34;size&#34;:4,&#34;cells&#34;:[[null,null,null,{&#34;position&#34;:{&#34;x&#34;:0,&#34;y&#34;:3},&#34;value&#34;:2}],[null,null,null,null],[{&#34;position&#34;:{&#34;x&#34;:2,&#34;y&#34;:0},&#34;value&#34;:4},null,null,null],[null,null,null,null]]},&#34;score&#34;:0,&#34;over&#34;:false,&#34;won&#34;:false,&#34;keepPlaying&#34;:false} 通过修改即可改变棋盘中的数字。\n数独 链接：数独游戏 – 信息安全教学示例（随机题目）\n右键检查源代码可以发现网页生成题目并渲染的逻辑。\n1 2 3 4 5 6 7 8 9 10 11 12 const { puzzle, solution } = generatePuzzle(); //创建一个style（css）放到网页里命名为secretStyle const secretStyle = document.createElement(&#39;style&#39;); //secretStyle的css里放题目答案，不予显示 secretStyle.textContent = `body::before{content:&#34;${solution.join(&#39;&#39;)}&#34;;display:none}`; //网页头部增加答案 document.head.appendChild(secretStyle); //右键，查看源码看的是网页真实源码，不渲染 //elements里面是实时渲染的网页 最终在F12开发者模式的元素Elements中发现第二个&lt;style&gt;中有题目答案：\n">
+<meta name="twitter:description" content="基于页游的前端分析 Google小恐龙 链接：T-Rex 在线版的chrome恐龙游戏\nF12打开开发者模式，选择控制台Console，输入：\n关闭GameOver判定：Runner.prototype.gameOver = function(){}\n调整速度：Runner.instance_.setSpeed(1000);\n2048 链接：2048\nF12打开开发者模式，选择应用程序Application\n在本地存储Local Storage中可以看到存储在本地的游戏数据，例如：\n1 {&#34;grid&#34;:{&#34;size&#34;:4,&#34;cells&#34;:[[null,null,null,{&#34;position&#34;:{&#34;x&#34;:0,&#34;y&#34;:3},&#34;value&#34;:2}],[null,null,null,null],[{&#34;position&#34;:{&#34;x&#34;:2,&#34;y&#34;:0},&#34;value&#34;:4},null,null,null],[null,null,null,null]]},&#34;score&#34;:0,&#34;over&#34;:false,&#34;won&#34;:false,&#34;keepPlaying&#34;:false} 通过修改即可改变棋盘中的数字。\n数独 链接：数独游戏 – 信息安全教学示例（随机题目）\n右键检查源代码可以发现网页生成题目并渲染的逻辑。\n1 2 3 4 5 6 7 8 9 10 11 12 const { puzzle, solution } = generatePuzzle(); //创建一个style（css）放到网页里命名为secretStyle const secretStyle = document.createElement(&#39;style&#39;); //secretStyle的css里放题目答案，不予显示 secretStyle.textContent = `body::before{content:&#34;${solution.join(&#39;&#39;)}&#34;;display:none}`; //网页头部增加答案 document.head.appendChild(secretStyle); //右键，查看源码看的是网页真实源码，不渲染 //elements里面是实时渲染的网页 最终在F12开发者模式的元素Elements中发现第二个&lt;style&gt;中有题目答案：\n1 body::before{content:&#34;789145263364729851215386479821593647576418932493672185957861324632954718148237596&#34;;display:none} 所以我们打开控制台执行：\n1 2 3 4 5 6 7 8 9 //显示body::before的答案 const hidden = getComputedStyle(document.body,&#39;::before&#39;).content.replace(/\\&#34;/g,&#39;&#39;); const digits = hidden.split(&#39;&#39;).map(Number); console.log(digits); //让答案显示在棋盘上 document.querySelectorAll(&#39;.cell&#39;).forEach((cell,i)=&gt;{ if(!cell.disabled) cell.value = digits[i]; }); flappybird 链接：Floppy Bird\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -415,9 +415,9 @@
 </h3><p><strong>链接：</strong><a class="link" href="https://www.hhtjim.com/wp-content/uploads/2017/02/T-RexGame.html"  target="_blank" rel="noopener"
     >T-Rex 在线版的chrome恐龙游戏</a></p>
 <p><code>F12</code>打开开发者模式，选择控制台Console，输入：</p>
-<p><font style="color:rgb(0, 0, 0);">关闭GameOver判定：</font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;Runner.prototype.gameOver = function(){}&lt;/font&gt;</code></p>
-<p><font style="color:rgb(0, 0, 0);">调整速度：</font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;Runner.instance_.setSpeed(1000);&lt;/font&gt;</code></p>
-<h3 id="2048"><font style="color:rgb(0, 0, 0);">2048</font>
+<p>关闭GameOver判定：<code>Runner.prototype.gameOver = function(){}</code></p>
+<p>调整速度：<code>Runner.instance_.setSpeed(1000);</code></p>
+<h3 id="2048">2048
 </h3><p><strong>链接：</strong><a class="link" href="http://game.huayunsys.com/2048/"  target="_blank" rel="noopener"
     >2048</a></p>
 <p><code>F12</code>打开开发者模式，选择应用程序Application</p>
@@ -503,18 +503,18 @@
 </h3><p><strong>链接：</strong><a class="link" href="http://game.huayunsys.com/flappybird/"  target="_blank" rel="noopener"
     >Floppy Bird</a></p>
 <p><code>F12</code>打开开发者模式，选择控制台Console，输入：</p>
-<p><font style="color:rgb(0, 0, 0);">展示当前窗口的所有参数 </font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;console.log(window)&lt;/font&gt;</code></p>
-<p><strong><font style="color:rgb(0, 0, 0);">参考：</font></strong><font style="color:rgb(0, 0, 0);"></font></p>
-<p><font style="color:rgb(0, 0, 0);">调整重力 </font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;gravity = 0.01&lt;/font&gt;</code></p>
-<p><font style="color:rgb(0, 0, 0);">管道间距（依然有攻击判定） </font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;flyArea = 100&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);"> </font></p>
-<p><font style="color:rgb(0, 0, 0);">鸟跳的多高 </font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;jump = -4.6&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);"> </font></p>
-<p><font style="color:rgb(0, 0, 0);">管道真实高度 </font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;pipeheight = 200&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);"> </font></p>
-<p><font style="color:rgb(0, 0, 0);">修改best的分数 </font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;highscore = 999&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);"> </font></p>
-<p><font style="color:rgb(0, 0, 0);">玩家死亡 </font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;playerDead = function(){}&lt;/font&gt;</code></p>
-<h3 id="塔防"><font style="color:rgb(0, 0, 0);">塔防</font>
+<p>展示当前窗口的所有参数 <code>console.log(window)</code></p>
+<p><strong>参考：</strong></p>
+<p>调整重力 <code>gravity = 0.01</code></p>
+<p>管道间距（依然有攻击判定） <code>flyArea = 100</code></p>
+<p>鸟跳的多高 <code>jump = -4.6</code></p>
+<p>管道真实高度 <code>pipeheight = 200</code></p>
+<p>修改best的分数 <code>highscore = 999</code></p>
+<p>玩家死亡 <code>playerDead = function(){}</code></p>
+<h3 id="塔防">塔防
 </h3><p><strong>链接：</strong><a class="link" href="http://game.huayunsys.com/towerdefense/"  target="_blank" rel="noopener"
     >HTML5 Tower Defense</a></p>
-<p>右键检查源代码，<font style="color:rgb(0, 0, 0);">发现游戏算法引入</font></p>
+<p>右键检查源代码，发现游戏算法引入</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -523,14 +523,14 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">&lt;script <span class="nv">type</span><span class="o">=</span><span class="s2">&#34;text/javascript&#34;</span> <span class="nv">src</span><span class="o">=</span><span class="s2">&#34;td-pkg-zh-min.js?_t=1293962401.7&#34;</span>&gt;&lt;/script&gt;
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>打开<code>td-pkg-zh-min.js</code>文件，<font style="color:rgb(0, 0, 0);">发现设计师有提到</font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;cheat success!&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">推测是设计师留下的秘籍。</font></p>
-<p><font style="color:rgb(0, 0, 0);">进一步找到</font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;_TD.cheat=&quot;money+&quot;&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">，推测出后面是要写内容的。</font></p>
-<p><font style="color:rgb(0, 0, 0);">在控制台输入</font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;_TD.cheat=&quot;money+&quot;&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">，发现金钱增加。</font></p>
-<h3 id="扫雷"><font style="color:rgb(0, 0, 0);">扫雷</font>
+</div><p>打开<code>td-pkg-zh-min.js</code>文件，发现设计师有提到<code>cheat success!</code>推测是设计师留下的秘籍。</p>
+<p>进一步找到<code>_TD.cheat=&quot;money+&quot;</code>，推测出后面是要写内容的。</p>
+<p>在控制台输入<code>_TD.cheat=&quot;money+&quot;</code>，发现金钱增加。</p>
+<h3 id="扫雷">扫雷
 </h3><p><strong>链接：</strong><a class="link" href="https://game.huayunsys.com/saolei/"  target="_blank" rel="noopener"
     >经典扫雷 (教学版)</a></p>
-<p>右键检查源代码，发现整个棋盘为<code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;grid&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">二维数组，二维数组内部嵌入字典，字典里面有isMine判断是不是地雷</font></p>
-<p><font style="color:rgb(0, 0, 0);">因此在控制台使用输入下面的代码：</font></p>
+<p>右键检查源代码，发现整个棋盘为<code>grid</code>二维数组，二维数组内部嵌入字典，字典里面有isMine判断是不是地雷</p>
+<p>因此在控制台使用输入下面的代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -553,11 +553,10 @@
 </span></span><span class="line"><span class="cl"><span class="p">});</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><font style="color:rgb(0, 0, 0);"></font></p>
-<h3 id="俄罗斯方块"><font style="color:rgb(0, 0, 0);">俄罗斯方块</font>
+</div><h3 id="俄罗斯方块">俄罗斯方块
 </h3><p><strong>链接：</strong><a class="link" href="https://game.huayunsys.com/eluosifangkuai/"  target="_blank" rel="noopener"
     >Tetris: Cyberpunk Edition</a></p>
-<p>**目标：**修改所有下落方块变为&quot;L&quot;形</p>
+<p><strong>目标：</strong> 修改所有下落方块变为&quot;L&quot;形</p>
 <p>右键检查源代码，发现生成下一个方块所用的随机函数：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -583,9 +582,9 @@
 </span></span><span class="line"><span class="cl"><span class="p">},</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><font style="color:rgb(0, 0, 0);">因此需要修改上面的函数，去掉所有if，直接return&quot;I&quot;时的结果，</font></p>
-<p><font style="color:rgb(0, 0, 0);">接下来</font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;console.log(window)&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">查看网页参数，发现createPiece为Tetris的一个子参数，所以调用时要写全参数名为</font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;Tetris.createPiece&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">，</font></p>
-<p><font style="color:rgb(0, 0, 0);">在控制台输入下面代码将参数修改，注意使用</font><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;=&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">将参数赋值：</font></p>
+</div><p>因此需要修改上面的函数，去掉所有if，直接return&quot;I&quot;时的结果，</p>
+<p>接下来<code>console.log(window)</code>查看网页参数，发现createPiece为Tetris的一个子参数，所以调用时要写全参数名为<code>Tetris.createPiece</code>，</p>
+<p>在控制台输入下面代码将参数修改，注意使用<code>=</code>将参数赋值：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -601,9 +600,9 @@
 </div><h3 id="打砖块">打砖块
 </h3><p><strong>链接：</strong><a class="link" href="https://game.huayunsys.com/dazhuankuai/"  target="_blank" rel="noopener"
     >CYBER ARKANOID 3077</a></p>
-<p><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;console.log(window)&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">查看网页参数</font></p>
-<p><strong><font style="color:rgb(0, 0, 0);">思路一：</font></strong><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;Game.paddle.width = 800;&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">修改挡板宽度</font></p>
-<p><strong><font style="color:rgb(0, 0, 0);">思路二：</font></strong><font style="color:rgb(0, 0, 0);">每10ms获取一次球的x坐标，并设置挡板坐标中心始终对准小球</font></p>
+<p><code>console.log(window)</code>查看网页参数</p>
+<p><strong>思路一：</strong><code>Game.paddle.width = 800;</code>修改挡板宽度</p>
+<p><strong>思路二：</strong> 每10ms获取一次球的x坐标，并设置挡板坐标中心始终对准小球</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -851,7 +850,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="查找真ip">查找真IP
-</h2><p>**CDN功能：**缓存和保护网站</p>
+</h2><p><strong>CDN功能：</strong> 缓存和保护网站</p>
 <p>因为cdn服务架构简单，所以几乎绝对防御，但是防不住ddos</p>
 <p>如何绕过cdn？</p>
 <p><a class="link" href="http://cdn.chinaz.com/"  target="_blank" rel="noopener"
