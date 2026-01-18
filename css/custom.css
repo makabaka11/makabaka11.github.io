@@ -1,0 +1,37 @@
+/* 1. 定义顺时针旋转360度的动画 */
+@keyframes socialIconRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 2. 定位社交按钮（精准匹配你的HTML结构） */
+.menu-social li a {
+  /* 核心：确保旋转中心在图标正中间（必加） */
+  transform-origin: center center;
+  /* 让动画过渡更丝滑，避免卡顿 */
+  transition: all 0.2s ease;
+  /* 可选：防止hover时位置偏移 */
+  display: inline-block;
+}
+
+/* 3. 鼠标悬停触发旋转动画 */
+.menu-social li a:hover {
+  /* 动画参数：动画名 | 时长 | 缓动效果 | 执行1次 */
+  animation: socialIconRotate 0.8s ease-in-out 1;
+  /* 可选：悬停时轻微放大，增强视觉效果（可删除） */
+  transform: scale(1.1);
+  /* 可选：修改图标颜色（比如B站粉色），适配品牌色 */
+  color: #fb7299;
+}
+
+/* 可选：如果想让SVG图标本身旋转（而非a标签），补充这个选择器 */
+.menu-social li a svg {
+  transform-origin: center center;
+}
+.menu-social li a:hover svg {
+  animation: socialIconRotate 0.8s ease-in-out 1;
+}
