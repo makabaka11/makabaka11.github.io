@@ -2047,18 +2047,51 @@ document.addEventListener('pjax:send', () => {
 
 
 <script>
-    let s1 = '2025-10-26'; 
-    s1 = new Date(s1.replace(/-/g, "/"));
-    let s2 = new Date();
-    let timeDifference = s2.getTime() - s1.getTime();
+let runningTimeTimer = null;
 
-    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+function updateRunningTime() {
+    const el = document.getElementById('runningdays');
+    if (!el) return;
 
-    let result = days + "天" + hours + "小时" + minutes + "分钟";
-    document.getElementById('runningdays').innerHTML = result;
+    let start = '2025-10-26 00:00:00'; 
+    start = new Date(start.replace(/-/g, "/"));
+    const now = new Date();
+
+    const diff = Math.floor((now.getTime() - start.getTime()) / 1000);
+
+    const days = Math.floor(diff / (24 * 3600));
+    const hours = Math.floor((diff % (24 * 3600)) / 3600);
+    const minutes = Math.floor((diff % 3600) / 60);
+    const seconds = diff % 60;
+
+    el.textContent =
+        `${days}天${hours}小时${minutes}分钟${seconds}秒`;
+}
+
+function initRunningTime() {
+    
+    updateRunningTime();
+
+    
+    if (runningTimeTimer) {
+        clearInterval(runningTimeTimer);
+    }
+
+    runningTimeTimer = setInterval(updateRunningTime, 1000);
+}
+
+ 
+document.addEventListener('DOMContentLoaded', () => {
+    initRunningTime();
+});
+
+ 
+document.addEventListener('pjax:complete', () => {
+    initRunningTime();
+});
 </script>
+
+
 
 
 
