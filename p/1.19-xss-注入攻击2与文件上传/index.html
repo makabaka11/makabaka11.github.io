@@ -356,6 +356,11 @@
             <li><a href="#pass-1100结束符-get版">Pass-11（<code>%00</code>结束符-GET版）</a></li>
             <li><a href="#pass-1200结束符-post版">Pass-12（<code>%00</code>结束符-POST版）</a></li>
             <li><a href="#pass-131415制作木马图">Pass-13/14/15（制作木马图）</a></li>
+            <li><a href="#pass-16二次渲染">Pass-16（二次渲染）</a></li>
+            <li><a href="#pass-1718条件竞争">Pass-17/18（条件竞争）</a></li>
+            <li><a href="#pass-1900结束符-post版进阶">Pass-19（<code>%00</code>结束符-POST版进阶）</a></li>
+            <li><a href="#pass-20数组绕过检查">Pass-20（数组绕过检查）</a></li>
+            <li><a href="#拓展">拓展</a></li>
           </ol>
         </li>
       </ol>
@@ -986,8 +991,8 @@
 </div>
 </div><p>发现第二题获取文件保存路径时使用POST方法，我们还是用上面那招</p>
 <p><strong>注入方法：</strong> 本地修改木马文件名为<code>vi.jpg</code>，抓包修改路径为<code>save_path=../upload/vi.php%00</code>，框选<code>%00</code>，右键，依次点击，Convert-selection、URL、URL-decode</p>
-<p><strong>原理：</strong><font style="color:rgb(0, 0, 0);">GET会自动进行解码，而POST不会自动进行解码，所以需要手工解码</font></p>
-<h4 id="pass-131415制作木马图"><font style="color:rgb(0, 0, 0);">Pass-13/14/15（制作木马图）</font>
+<p><strong>原理：</strong> GET会自动进行解码，而POST不会自动进行解码，所以需要手工解码</p>
+<h4 id="pass-131415制作木马图">Pass-13/14/15（制作木马图）
 </h4><ol>
 <li><strong>Pass-13：</strong></li>
 </ol>
@@ -1171,8 +1176,360 @@
 <li><strong>Pass-15：</strong></li>
 </ol>
 <p>与<strong>Pass-14</strong>操作完全相同。</p>
-<hr>
-<p style="font-size:36px;"><b>未完待续</b></p>
+<h4 id="pass-16二次渲染">Pass-16（二次渲染）
+</h4><p><strong>查看源码</strong>发现程序对图片进行了二次渲染。</p>
+<p><strong>注入方法：<strong>使用系统自带画图软件画一个简单的图片，以<code>.gif</code>格式保存。将图片直接上传，将网页上展示的图片下载下来，使用十六进制编辑器查看两者之间没有发生改变的位置，复制php中的一句话木马</strong>（注意记住语句的字数长度）</strong>，在刚才画的图中找一个没有发生变化的位置，选择字数相同的长度替换为一句话木马，保存后将图片木马上传，同样使用文件包含漏洞打开。</p>
+<h4 id="pass-1718条件竞争">Pass-17/18（条件竞争）
+</h4><ol>
+<li><strong>Pass-17</strong></li>
+</ol>
+<p><strong>查看源码：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$is_upload</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$msg</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;submit&#39;</span><span class="p">])){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$ext_arr</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;jpg&#39;</span><span class="p">,</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="s1">&#39;gif&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$file_name</span> <span class="o">=</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s1">&#39;upload_file&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$temp_file</span> <span class="o">=</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s1">&#39;upload_file&#39;</span><span class="p">][</span><span class="s1">&#39;tmp_name&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$file_ext</span> <span class="o">=</span> <span class="nx">substr</span><span class="p">(</span><span class="nv">$file_name</span><span class="p">,</span><span class="nx">strrpos</span><span class="p">(</span><span class="nv">$file_name</span><span class="p">,</span><span class="s2">&#34;.&#34;</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$upload_file</span> <span class="o">=</span> <span class="nx">UPLOAD_PATH</span> <span class="o">.</span> <span class="s1">&#39;/&#39;</span> <span class="o">.</span> <span class="nv">$file_name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nx">move_uploaded_file</span><span class="p">(</span><span class="nv">$temp_file</span><span class="p">,</span> <span class="nv">$upload_file</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="nx">in_array</span><span class="p">(</span><span class="nv">$file_ext</span><span class="p">,</span><span class="nv">$ext_arr</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">             <span class="nv">$img_path</span> <span class="o">=</span> <span class="nx">UPLOAD_PATH</span> <span class="o">.</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span> <span class="nx">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">99</span><span class="p">)</span><span class="o">.</span><span class="nx">date</span><span class="p">(</span><span class="s2">&#34;YmdHis&#34;</span><span class="p">)</span><span class="o">.</span><span class="s2">&#34;.&#34;</span><span class="o">.</span><span class="nv">$file_ext</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">             <span class="nx">rename</span><span class="p">(</span><span class="nv">$upload_file</span><span class="p">,</span> <span class="nv">$img_path</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">             <span class="nv">$is_upload</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$msg</span> <span class="o">=</span> <span class="s2">&#34;只允许上传.jpg|.png|.gif类型文件！&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">unlink</span><span class="p">(</span><span class="nv">$upload_file</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$msg</span> <span class="o">=</span> <span class="s1">&#39;上传出错！&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里存在逻辑漏洞，是接收上传的文件再去判断是否合规，因此我们上传的文件会存在一段时间（虽然很短），但是如果我们用多线程一直去上传呢？</p>
+<p><strong>注入方法：</strong> 直接上传php木马同时抓包，send to intruder，选一个无关紧要的地方，payload 选numbers 1-9999，线程开20</p>
+<p><strong>原理：</strong> 损耗服务器资源，让他删不过来</p>
+<ol start="2">
+<li><strong>Pass-18</strong></li>
+</ol>
+<blockquote>
+<p>作者代码有问题，打开myupload.php，103行，改为<code>$this-&gt;cls_upload_dir = $dir.'/';</code></p>
+</blockquote>
+<p><strong>查看源码</strong>发现仅靠服务端靠后缀名白名单对上传的文件进行检查，并且还有自动改名的机制。</p>
+<p><strong>注入方法：</strong> 这里我们利用php的一个漏洞，将php木马 <strong>加上</strong> 一个后缀<code>.7z</code>，<code>php.7z</code>的木马同时抓包，接着方法同 <strong>Pass-17</strong></p>
+<p><strong>原理：</strong><code>x.php.7z</code>会被当作php执行，php发现7z，zip，rar会尝试解压，损耗服务器资源，总有一个时候来不及改名，从而直接访问。</p>
+<h4 id="pass-1900结束符-post版进阶">Pass-19（<code>%00</code>结束符-POST版进阶）
+</h4><p><strong>查看源码：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$is_upload</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$msg</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;submit&#39;</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">file_exists</span><span class="p">(</span><span class="nx">UPLOAD_PATH</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$deny_ext</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s2">&#34;php&#34;</span><span class="p">,</span><span class="s2">&#34;php5&#34;</span><span class="p">,</span><span class="s2">&#34;php4&#34;</span><span class="p">,</span><span class="s2">&#34;php3&#34;</span><span class="p">,</span><span class="s2">&#34;php2&#34;</span><span class="p">,</span><span class="s2">&#34;html&#34;</span><span class="p">,</span><span class="s2">&#34;htm&#34;</span><span class="p">,</span><span class="s2">&#34;phtml&#34;</span><span class="p">,</span><span class="s2">&#34;pht&#34;</span><span class="p">,</span><span class="s2">&#34;jsp&#34;</span><span class="p">,</span><span class="s2">&#34;jspa&#34;</span><span class="p">,</span><span class="s2">&#34;jspx&#34;</span><span class="p">,</span><span class="s2">&#34;jsw&#34;</span><span class="p">,</span><span class="s2">&#34;jsv&#34;</span><span class="p">,</span><span class="s2">&#34;jspf&#34;</span><span class="p">,</span><span class="s2">&#34;jtml&#34;</span><span class="p">,</span><span class="s2">&#34;asp&#34;</span><span class="p">,</span><span class="s2">&#34;aspx&#34;</span><span class="p">,</span><span class="s2">&#34;asa&#34;</span><span class="p">,</span><span class="s2">&#34;asax&#34;</span><span class="p">,</span><span class="s2">&#34;ascx&#34;</span><span class="p">,</span><span class="s2">&#34;ashx&#34;</span><span class="p">,</span><span class="s2">&#34;asmx&#34;</span><span class="p">,</span><span class="s2">&#34;cer&#34;</span><span class="p">,</span><span class="s2">&#34;swf&#34;</span><span class="p">,</span><span class="s2">&#34;htaccess&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nv">$file_name</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;save_name&#39;</span><span class="p">];</span>	<span class="c1">//通过POST获取保存的文件名
+</span></span></span><span class="line"><span class="cl">        <span class="nv">$file_ext</span> <span class="o">=</span> <span class="nx">pathinfo</span><span class="p">(</span><span class="nv">$file_name</span><span class="p">,</span><span class="nx">PATHINFO_EXTENSION</span><span class="p">);</span>	<span class="c1">//重要：调用从文件名中获取后缀名的功能
+</span></span></span><span class="line"><span class="cl">        <span class="c1">//因为这里仅将文件名当作字符串所以不会识别截断符，并且识别到的后缀名是
+</span></span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">in_array</span><span class="p">(</span><span class="nv">$file_ext</span><span class="p">,</span><span class="nv">$deny_ext</span><span class="p">))</span> <span class="p">{</span>	<span class="c1">//根据获取的后缀名进行白名单检测
+</span></span></span><span class="line"><span class="cl">            <span class="nv">$temp_file</span> <span class="o">=</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s1">&#39;upload_file&#39;</span><span class="p">][</span><span class="s1">&#39;tmp_name&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$img_path</span> <span class="o">=</span> <span class="nx">UPLOAD_PATH</span> <span class="o">.</span> <span class="s1">&#39;/&#39;</span> <span class="o">.</span><span class="nv">$file_name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nx">move_uploaded_file</span><span class="p">(</span><span class="nv">$temp_file</span><span class="p">,</span> <span class="nv">$img_path</span><span class="p">))</span> <span class="p">{</span>	<span class="c1">//截断发生处，从而无法校验合规性 
+</span></span></span><span class="line"><span class="cl">                <span class="nv">$is_upload</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$msg</span> <span class="o">=</span> <span class="s1">&#39;上传出错！&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$msg</span> <span class="o">=</span> <span class="s1">&#39;禁止保存为该类型文件！&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$msg</span> <span class="o">=</span> <span class="nx">UPLOAD_PATH</span> <span class="o">.</span> <span class="s1">&#39;文件夹不存在,请手工创建！&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>注入方法：</strong> burp抓包，保存名修改为<code>vi.php%00.jpg</code>，<code>%00</code>进行URL-decode，文件名部分需要<code>.jpg</code>用来通过审核</p>
+<h4 id="pass-20数组绕过检查">Pass-20（数组绕过检查）
+</h4><p><strong>查看源码(解释版)：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$is_upload</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$msg</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="s1">&#39;upload_file&#39;</span><span class="p">])){</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//检查MIME
+</span></span></span><span class="line"><span class="cl">    <span class="nv">$allow_type</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;image/jpeg&#39;</span><span class="p">,</span><span class="s1">&#39;image/png&#39;</span><span class="p">,</span><span class="s1">&#39;image/gif&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//检查文件类型
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">in_array</span><span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="s1">&#39;upload_file&#39;</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">],</span><span class="nv">$allow_type</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$msg</span> <span class="o">=</span> <span class="s2">&#34;禁止上传该类型文件!&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//检查文件名
+</span></span></span><span class="line"><span class="cl">        <span class="c1">//判断save_name是否为空，如果为空就用文件名，如果不为空就使用save_name
+</span></span></span><span class="line"><span class="cl">        <span class="nv">$file</span> <span class="o">=</span> <span class="k">empty</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;save_name&#39;</span><span class="p">])</span> <span class="o">?</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s1">&#39;upload_file&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">:</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;save_name&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//判断$file是否为数组
+</span></span></span><span class="line"><span class="cl">        <span class="c1">//如果我直接传入数组 $file[0]=&#39;haha.php&#39;   $file[2]=&#39;jpg&#39;
+</span></span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">is_array</span><span class="p">(</span><span class="nv">$file</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//$file=haha.jpg ---&gt; $file[0]=&#39;haha&#39;; $file[1]=&#39;jpg&#39;;
+</span></span></span><span class="line"><span class="cl">            <span class="nv">$file</span> <span class="o">=</span> <span class="nx">explode</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="nx">strtolower</span><span class="p">(</span><span class="nv">$file</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//$ext = &#39;jpg&#39;;
+</span></span></span><span class="line"><span class="cl">        <span class="c1">// jpg
+</span></span></span><span class="line"><span class="cl">        <span class="nv">$ext</span> <span class="o">=</span> <span class="nx">end</span><span class="p">(</span><span class="nv">$file</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$allow_suffix</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;jpg&#39;</span><span class="p">,</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="s1">&#39;gif&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//判断$ext在不在白名单里
+</span></span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">in_array</span><span class="p">(</span><span class="nv">$ext</span><span class="p">,</span> <span class="nv">$allow_suffix</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$msg</span> <span class="o">=</span> <span class="s2">&#34;禁止上传该后缀文件!&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//    				haha.php            .            $file[1]
+</span></span></span><span class="line"><span class="cl">            <span class="nv">$file_name</span> <span class="o">=</span> <span class="nx">reset</span><span class="p">(</span><span class="nv">$file</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;.&#39;</span> <span class="o">.</span> <span class="nv">$file</span><span class="p">[</span><span class="nx">count</span><span class="p">(</span><span class="nv">$file</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$temp_file</span> <span class="o">=</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s1">&#39;upload_file&#39;</span><span class="p">][</span><span class="s1">&#39;tmp_name&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$img_path</span> <span class="o">=</span> <span class="nx">UPLOAD_PATH</span> <span class="o">.</span> <span class="s1">&#39;/&#39;</span> <span class="o">.</span><span class="nv">$file_name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nx">move_uploaded_file</span><span class="p">(</span><span class="nv">$temp_file</span><span class="p">,</span> <span class="nv">$img_path</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$msg</span> <span class="o">=</span> <span class="s2">&#34;文件上传成功！&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$is_upload</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$msg</span> <span class="o">=</span> <span class="s2">&#34;文件上传失败！&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$msg</span> <span class="o">=</span> <span class="s2">&#34;请选择要上传的文件！&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到漏洞存在于如果传入的<code>save_name</code>是数组,那么就可以避开自动从文件名获取后缀名.</p>
+<p>并且接下来的过程中是取数组的第一个元素为文件名称,最后一个为后缀名,那么我们可以传入一个数组<code>[x.php,,jpg]</code></p>
+<p><strong>注入方法:</strong> 上传同时抓包,先修改MIME为<code>image/jpeg</code>,接下来修改<code>save_name</code>部分为(例):</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">-----------------------------</span><span class="mi">306962433823754</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Content</span><span class="o">-</span><span class="nx">Disposition</span><span class="o">:</span> <span class="nx">form</span><span class="o">-</span><span class="nx">data</span><span class="p">;</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&#34;save_name[0]&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">upload</span><span class="o">-</span><span class="mf">20.</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="o">-----------------------------</span><span class="mi">306962433823754</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Content</span><span class="o">-</span><span class="nx">Disposition</span><span class="o">:</span> <span class="nx">form</span><span class="o">-</span><span class="nx">data</span><span class="p">;</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&#34;save_name[2]&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">jpg</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>原理:</strong> php的数组是一一对应的索引概念,不一定要是连续的,所以我们只传入了第0、2号元素,1号不存在,因此数组内只有两个元素(<code>count($file)=2</code>),且访问1号元素时返回为空(<code>NULL</code>)。</p>
+<h4 id="拓展">拓展
+</h4><p><strong>本地搭建：</strong></p>
+<ol>
+<li>前端：创建<code>upload.html</code></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;./test1.php&#34;</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;POST&#34;</span> <span class="na">enctype</span><span class="o">=</span><span class="s">&#34;multipart/form-data&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&#34;file&#34;</span><span class="p">&gt;</span>文件名<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;file&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;file&#34;</span> <span class="p">/&gt;&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;提交&#34;</span><span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>后端：创建<code>test1.php</code></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;submit&#39;</span><span class="p">])){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$temp_file</span> <span class="o">=</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">][</span><span class="s1">&#39;tmp_name&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//取出文件名
+</span></span></span><span class="line"><span class="cl">    <span class="nv">$filename1</span> <span class="o">=</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//定义一个随机数
+</span></span></span><span class="line"><span class="cl">    <span class="nv">$number</span> <span class="o">=</span> <span class="nx">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">9999</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$filename2</span> <span class="o">=</span> <span class="nv">$filename1</span><span class="o">.</span><span class="nv">$number</span><span class="p">;</span>	<span class="c1">//原文件名和随机数拼接
+</span></span></span><span class="line"><span class="cl">    <span class="nv">$filename3</span> <span class="o">=</span> <span class="nx">md5</span><span class="p">(</span><span class="nv">$filename2</span><span class="p">);</span>			<span class="c1">//将拼接后的内容MD5加密
+</span></span></span><span class="line"><span class="cl">    <span class="nv">$filename4</span> <span class="o">=</span> <span class="nv">$filename3</span><span class="o">.</span><span class="s1">&#39;.php&#39;</span><span class="p">;</span>		<span class="c1">//加密后的内容加上.php后缀
+</span></span></span><span class="line"><span class="cl">    <span class="nv">$img_path</span> <span class="o">=</span> <span class="s2">&#34;./pic/&#34;</span><span class="o">.</span><span class="nv">$filename4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nx">move_uploaded_file</span><span class="p">(</span><span class="nv">$temp_file</span><span class="p">,</span><span class="nv">$img_path</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">echo</span> <span class="s1">&#39;success upload&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">echo</span> <span class="s1">&#39;fail&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>在目录下创建<code>pic</code>文件夹</li>
+</ol>
+<p><strong>任务：</strong> 上传木马php后，想办法访问到存在于pic中的木马程序。</p>
+<p><strong>方法：</strong> 正常上传木马php，在地址栏中访问<code>http://localhost/test/pic/test.php</code>这时会提示404，因为文件名不对，接下来我们启动抓包然后刷新一下这个网页，抓取到了请求。选中数据包第一行的文件名，提交到暴力破解。将假文件名选为爆破位点，像这样：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">GET /test/pic/§test§.php HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: localhost
+</span></span><span class="line"><span class="cl">User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0
+</span></span><span class="line"><span class="cl">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+</span></span><span class="line"><span class="cl">Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3
+</span></span><span class="line"><span class="cl">DNT: 1
+</span></span><span class="line"><span class="cl">Connection: close
+</span></span><span class="line"><span class="cl">Upgrade-Insecure-Requests: 1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在payloads中设置类别为numbers，1000-9999步长为1，下面的Payload Processing先选Add Prefix填写上传的原文件名，再选Hash-MD5，开启攻击。</p>
+<p><strong>原理：</strong> 本质就是根据源代码对文件名的处理过程在burp suite中复现这一过程。</p>
 
 </section>
 
@@ -1235,6 +1592,19 @@
             
                 
 <article class="">
+    <a href="/p/1.20-webshell-%E5%85%8D%E6%9D%80%E5%92%8C%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.20 Webshell 免杀和正则表达式</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
     <a href="/p/1.18-xss%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/">
         
         
@@ -1280,19 +1650,6 @@
 
         <div class="article-details">
             <h2 class="article-title">1.15 DOS补充和Win应急响应</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/1.14-%E8%87%AA%E5%90%AF%E5%8A%A8%E5%92%8Cdos%E6%94%BB%E5%87%BB%E5%88%9D%E6%AD%A5/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">1.14 自启动和DOS攻击初步</h2>
         </div>
     </a>
 </article>
