@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="引入：面向对象编程的三大特性 面向对象编程，是许多编程语言都支持的一种编程思想。\n简单理解就是：基于模板（类）去创建实体（对象），使用对象完成功能开发。\n面向对象编程包含3大主要特性：\n封装 继承 多态 本小节将围绕封装展开讲解。\n正片开始 封装 封装表示的是将现实世界事物的：\n属性 行为 封装到类中，描述为:\n成员变量 成员方法 从而完成程序对现实世界事物的描述。\n对用户隐藏的属性和行为 现实世界中的事物，有属性和行为。\n但不代表这些属性和行为都是开放给用户使用的。\n以手机为例：\n私有成员 类中也提供了类似的方法来隐藏部分不对用户公开的成员，称之为定义 私有成员\n私有成员变量：变量名以__开头（2个下划线） 私有成员方法：方法名以__开头（2个下划线） QuickStart:\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 class Phone: IMEI = None\t# 序列号 producer = None\t# 厂商 __current_voltage = None\t# 当前电压（私有成员变量） def call_by_5g(self): print(&#34;5g通话已开启&#34;) def __keep_single_core(self):\t# 私有成员方法 print(&#34;让CPU以单核模式运行以节省电量&#34;) phone1 = Phone() print(phone1.__current_voltage)\t# 报错 phone1.__keep_single_core()\t# 也会报错 私有成员虽然无法直接被类对象使用，但是可以被其他的成员使用。\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="引入：面向对象编程的三大特性 面向对象编程，是许多编程语言都支持的一种编程思想。\n简单理解就是：基于模板（类）去创建实体（对象），使用对象完成功能开发。\n面向对象编程包含3大主要特性：\n">
 <title>S1.6 封装</title>
 
 <link rel='canonical' href='https://www.retr0.xyz/p/s1.6-%E5%B0%81%E8%A3%85/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="S1.6 封装">
-<meta property='og:description' content="引入：面向对象编程的三大特性 面向对象编程，是许多编程语言都支持的一种编程思想。\n简单理解就是：基于模板（类）去创建实体（对象），使用对象完成功能开发。\n面向对象编程包含3大主要特性：\n封装 继承 多态 本小节将围绕封装展开讲解。\n正片开始 封装 封装表示的是将现实世界事物的：\n属性 行为 封装到类中，描述为:\n成员变量 成员方法 从而完成程序对现实世界事物的描述。\n对用户隐藏的属性和行为 现实世界中的事物，有属性和行为。\n但不代表这些属性和行为都是开放给用户使用的。\n以手机为例：\n私有成员 类中也提供了类似的方法来隐藏部分不对用户公开的成员，称之为定义 私有成员\n私有成员变量：变量名以__开头（2个下划线） 私有成员方法：方法名以__开头（2个下划线） QuickStart:\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 class Phone: IMEI = None\t# 序列号 producer = None\t# 厂商 __current_voltage = None\t# 当前电压（私有成员变量） def call_by_5g(self): print(&#34;5g通话已开启&#34;) def __keep_single_core(self):\t# 私有成员方法 print(&#34;让CPU以单核模式运行以节省电量&#34;) phone1 = Phone() print(phone1.__current_voltage)\t# 报错 phone1.__keep_single_core()\t# 也会报错 私有成员虽然无法直接被类对象使用，但是可以被其他的成员使用。\n">
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="S1.6 封装">
+<meta property='og:description' content="引入：面向对象编程的三大特性 面向对象编程，是许多编程语言都支持的一种编程思想。\n简单理解就是：基于模板（类）去创建实体（对象），使用对象完成功能开发。\n面向对象编程包含3大主要特性：\n">
 <meta property='og:url' content='https://www.retr0.xyz/p/s1.6-%E5%B0%81%E8%A3%85/'>
 <meta property='og:site_name' content='Retr0的小窝'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-20T22:13:51&#43;08:00'/><meta property='article:modified_time' content='2025-12-20T22:13:51&#43;08:00'/>
 <meta name="twitter:title" content="S1.6 封装">
-<meta name="twitter:description" content="引入：面向对象编程的三大特性 面向对象编程，是许多编程语言都支持的一种编程思想。\n简单理解就是：基于模板（类）去创建实体（对象），使用对象完成功能开发。\n面向对象编程包含3大主要特性：\n封装 继承 多态 本小节将围绕封装展开讲解。\n正片开始 封装 封装表示的是将现实世界事物的：\n属性 行为 封装到类中，描述为:\n成员变量 成员方法 从而完成程序对现实世界事物的描述。\n对用户隐藏的属性和行为 现实世界中的事物，有属性和行为。\n但不代表这些属性和行为都是开放给用户使用的。\n以手机为例：\n私有成员 类中也提供了类似的方法来隐藏部分不对用户公开的成员，称之为定义 私有成员\n私有成员变量：变量名以__开头（2个下划线） 私有成员方法：方法名以__开头（2个下划线） QuickStart:\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 class Phone: IMEI = None\t# 序列号 producer = None\t# 厂商 __current_voltage = None\t# 当前电压（私有成员变量） def call_by_5g(self): print(&#34;5g通话已开启&#34;) def __keep_single_core(self):\t# 私有成员方法 print(&#34;让CPU以单核模式运行以节省电量&#34;) phone1 = Phone() print(phone1.__current_voltage)\t# 报错 phone1.__keep_single_core()\t# 也会报错 私有成员虽然无法直接被类对象使用，但是可以被其他的成员使用。\n">
+<meta name="twitter:description" content="引入：面向对象编程的三大特性 面向对象编程，是许多编程语言都支持的一种编程思想。\n简单理解就是：基于模板（类）去创建实体（对象），使用对象完成功能开发。\n面向对象编程包含3大主要特性：\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -704,11 +704,228 @@
     <section class="copyright">
         &copy; 
         
-            2024 - 
+            2025 - 
         
         2026 Retr0
     </section>
     
+    <section class="running-time">
+    已存在于互联网
+    <span id="runningdays" class="running-days"></span>
+    </section>
+    
+    <section class="totalcount">
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        发表了95篇文章 · 
+        总计131.27k字
+    </section>
+
+
     <section class="powerby">
         
             Powered by ctOS <br/>
@@ -1396,6 +1613,21 @@ function destroyArticlePlayers() {
 document.addEventListener('pjax:send', () => {
     destroyArticlePlayers();
 });
+</script>
+
+
+<script>
+    let s1 = '2025-10-26'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    document.getElementById('runningdays').innerHTML = result;
 </script>
 
 

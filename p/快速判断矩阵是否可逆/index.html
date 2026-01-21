@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://www.retr0.xyz/p/%E5%BF%AB%E9%80%9F%E5%88%A4%E6%96%AD%E7%9F%A9%E9%98%B5%E6%98%AF%E5%90%A6%E5%8F%AF%E9%80%86/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="快速判断矩阵是否可逆">
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="快速判断矩阵是否可逆">
 <meta property='og:description' content="判断n阶方阵A是否可逆，核心看以下快速等价条件（满足其一即可，优先选前2个最便捷）：\n行列式非零：$|A| \\neq 0$（直接计算行列式，最快上手）； 矩阵满秩：秩$r(A) = n$（通过初等行变换看是否能化为单位矩阵）； 齐次方程组$AX = 0$只有零解； 行/列向量组线性无关； 存在方阵B，使得$AB = BA = I$（I为单位矩阵）。 ">
 <meta property='og:url' content='https://www.retr0.xyz/p/%E5%BF%AB%E9%80%9F%E5%88%A4%E6%96%AD%E7%9F%A9%E9%98%B5%E6%98%AF%E5%90%A6%E5%8F%AF%E9%80%86/'>
 <meta property='og:site_name' content='Retr0的小窝'>
@@ -560,11 +560,228 @@
     <section class="copyright">
         &copy; 
         
-            2024 - 
+            2025 - 
         
         2026 Retr0
     </section>
     
+    <section class="running-time">
+    已存在于互联网
+    <span id="runningdays" class="running-days"></span>
+    </section>
+    
+    <section class="totalcount">
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        发表了95篇文章 · 
+        总计131.27k字
+    </section>
+
+
     <section class="powerby">
         
             Powered by ctOS <br/>
@@ -1252,6 +1469,21 @@ function destroyArticlePlayers() {
 document.addEventListener('pjax:send', () => {
     destroyArticlePlayers();
 });
+</script>
+
+
+<script>
+    let s1 = '2025-10-26'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    document.getElementById('runningdays').innerHTML = result;
 </script>
 
 

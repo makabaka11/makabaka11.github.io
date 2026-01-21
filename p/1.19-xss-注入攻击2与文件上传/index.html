@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://www.retr0.xyz/p/1.19-xss-%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB2%E4%B8%8E%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="1.19 XSS 注入攻击2与文件上传">
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="1.19 XSS 注入攻击2与文件上传">
 <meta property='og:description' content="XSS挑战题 打开XSS挑战靶场：欢迎来到XSS挑战\n这里给出前11题答案和部分题目的思路。\nLevel 1 1 &lt;script&gt;alert(1)&lt;/script&gt; Level 2 1 &lt;input name=keyword value=&#34; x&#34;&gt;&lt;script&gt;alert(1)&lt;/script&gt; &#34;&gt; Level 3 1 &lt;input name=keyword value=&#39; x&#39; onmouseover=&#39;alert(1) &#39;&gt; Level 4 1 &lt;input name=keyword value=&#34; x&#34; onclick=&#34;alert(1) &#34;&gt; Level 5 1 &lt;input name=keyword value=&#34; x&#34;&gt;&lt;a href=&#34;javascript:alert(1)&#34;&gt;恭喜你&lt;/a&gt;// &#34;&gt; Level 6 1 &lt;input name=keyword value=&#34; x&#34;&gt;&lt;a hREf=&#34;javascript:alert(1)&#34;&gt;恭喜你&lt;/a&gt;// &#34;&gt; Level 7 1 &lt;input name=keyword value=&#34; x&#34;&gt;&lt;a hRhREfEf=&#34;javascrscriptipt:alert(1)&#34;&gt;恭喜你&lt;/a&gt;// &#34;&gt; Level 8 1 2 3 javascript:alert(1) href后面会自动翻译unicode编码，不一定每一次都要直接用地址栏进行get请求 javasc&amp;#114;&amp;#105;pt:alert(1) 发现某一语句被过滤时要善用：\n">
 <meta property='og:url' content='https://www.retr0.xyz/p/1.19-xss-%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB2%E4%B8%8E%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/'>
 <meta property='og:site_name' content='Retr0的小窝'>
@@ -1717,11 +1717,228 @@
     <section class="copyright">
         &copy; 
         
-            2024 - 
+            2025 - 
         
         2026 Retr0
     </section>
     
+    <section class="running-time">
+    已存在于互联网
+    <span id="runningdays" class="running-days"></span>
+    </section>
+    
+    <section class="totalcount">
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        发表了95篇文章 · 
+        总计131.27k字
+    </section>
+
+
     <section class="powerby">
         
             Powered by ctOS <br/>
@@ -2409,6 +2626,21 @@ function destroyArticlePlayers() {
 document.addEventListener('pjax:send', () => {
     destroyArticlePlayers();
 });
+</script>
+
+
+<script>
+    let s1 = '2025-10-26'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    document.getElementById('runningdays').innerHTML = result;
 </script>
 
 

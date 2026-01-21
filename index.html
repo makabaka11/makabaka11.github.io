@@ -7,7 +7,7 @@
 
 <link rel='canonical' href='https://www.retr0.xyz/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="Retr0的小窝">
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="Retr0的小窝">
 <meta property='og:description' content="我们安全了……暂时的">
 <meta property='og:url' content='https://www.retr0.xyz/'>
 <meta property='og:site_name' content='Retr0的小窝'>
@@ -428,6 +428,17 @@
     
     
     
+    
+    
+    <div class="welcome">
+    <p style="font-size: 2rem; text-align: center; font-weight: bold">
+        <span class="handshake">👋</span>
+        <span class="jump-text1" > Welcome</span>
+        <span class="jump-text2"> To </span>
+        <span class="jump-text3" style="color:#e99312">R</span><span class="jump-text4" style="color:#e99312">e</span><span class="jump-text5" style="color:#e99312">t</span><span class="jump-text6" style="color:#e99312">r</span><span class="jump-text7" style="color:#e99312">0</span><span class="jump-text8" style="color:#e99312">'s</span>
+        <span class="jump-text9" style="color:#e99312">Blog</span>
+    </p>
+    </div>
     
 
     <section class="article-list">
@@ -1023,11 +1034,228 @@
     <section class="copyright">
         &copy; 
         
-            2024 - 
+            2025 - 
         
         2026 Retr0
     </section>
     
+    <section class="running-time">
+    已存在于互联网
+    <span id="runningdays" class="running-days"></span>
+    </section>
+    
+    <section class="totalcount">
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        发表了95篇文章 · 
+        总计131.27k字
+    </section>
+
+
     <section class="powerby">
         
             Powered by ctOS <br/>
@@ -1636,6 +1864,21 @@ function destroyArticlePlayers() {
 document.addEventListener('pjax:send', () => {
     destroyArticlePlayers();
 });
+</script>
+
+
+<script>
+    let s1 = '2025-10-26'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    document.getElementById('runningdays').innerHTML = result;
 </script>
 
 

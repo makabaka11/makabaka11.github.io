@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://www.retr0.xyz/p/meterpreter-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C%E4%B8%AD%E6%96%87/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="Meterpreter 命令手册（中文）">
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="Meterpreter 命令手册（中文）">
 <meta property='og:description' content="核心命令（Core Commands） 命令 描述 ? 帮助菜单 background 将当前会话转入后台 bg background 的别名 bgkill 终止后台运行的 Meterpreter 脚本 bglist 列出所有运行中的后台脚本 bgrun 以后台线程模式执行 Meterpreter 脚本 channel 显示或控制活跃的通道信息 close 关闭通道 detach 分离 Meterpreter 会话（适用于 http/https 传输） disable_unicode_encoding 禁用 Unicode 字符串编码 enable_unicode_encoding 启用 Unicode 字符串编码 exit 终止 Meterpreter 会话 get_timeouts 获取当前会话的超时时间配置 guid 获取会话的 GUID（全局唯一标识符） help 帮助菜单 info 显示 Post 模块的详细信息 irb 在当前会话中打开交互式 Ruby shell load 加载一个或多个 Meterpreter 扩展模块 machine_id 获取会话关联主机的 MSF 标识符 migrate 将 Meterpreter 服务端迁移到其他进程 pivot 管理跳板监听（内网穿透相关） pry 在当前会话中打开 Pry 调试器 quit 终止 Meterpreter 会话（同 exit） read 从通道读取数据 resource 执行文件中存储的命令序列 run 执行 Meterpreter 脚本或 Post 模块 secure （重新）协商会话的 TLV 数据包加密 sessions 快速切换到另一个会话 set_timeouts 设置当前会话的超时时间配置 sleep 强制 Meterpreter 静默，之后重新建立会话 ssl_verify 修改 SSL 证书验证设置 transport 管理会话传输机制（如 http/https/tcp） use &ldquo;load&rdquo; 的废弃别名（不推荐使用） uuid 获取当前会话的 UUID（通用唯一标识符） write 向通道写入数据 脱钩命令（Unhook Commands） 命令 描述 unhook_pe 解除当前进程的钩子（对抗反病毒检测） 权限提升命令（Priv: Elevate Commands） 命令 描述 getsystem 尝试将权限提升至本地系统权限（SYSTEM） 密码数据库命令（Priv: Password database Commands） 命令 描述 hashdump 导出 SAM 数据库内容（获取系统哈希值） 时间戳篡改命令（Priv: Timestomp Commands） 命令 描述 timestomp 操纵文件的 MACE 属性（修改创建/访问/修改时间） 文件系统命令（Stdapi: File system Commands） 命令 描述 cat 读取文件内容并显示到屏幕 cd 切换目录 checksum 获取文件的校验和（如 MD5/SHA） cp 复制源文件到目标路径 del 删除指定文件 dir 列出文件（ls 的别名） download 下载文件或目录到本地 edit 编辑文件 getlwd 显示本地工作目录（lpwd 的别名） getwd 显示远程工作目录 lcat 读取本地文件内容并显示到屏幕 lcd 切换本地工作目录 ldir 列出本地文件（lls 的别名） lls 列出本地文件 lmkdir 在本地创建新目录 lpwd 显示本地工作目录 ls 列出远程文件 mkdir 在远程创建新目录 mv 移动/重命名文件/目录 pwd 显示远程工作目录（同 getwd） rm 删除指定文件（同 del） rmdir 删除目录 search 搜索远程文件 show_mount 列出所有挂载点/逻辑驱动器 upload 上传本地文件或目录到远程 网络命令（Stdapi: Networking Commands） 命令 描述 arp 显示主机的 ARP 缓存表 getproxy 显示当前代理配置 ifconfig 显示网络接口信息（类 Unix 系统） ipconfig 显示网络接口信息（Windows 系统） netstat 显示网络连接状态（TCP/UDP 端口） portfwd 将本地端口转发到远程服务（端口转发） resolve 在目标主机上解析主机名（DNS 查询） route 查看和修改路由表 系统命令（Stdapi: System Commands） 命令 描述 clearev 清除系统事件日志 drop_token 放弃当前活跃的模拟令牌 execute 执行系统命令 getenv 获取一个或多个环境变量的值 getpid 获取当前 Meterpreter 进程 ID getprivs 尝试启用当前进程可用的所有权限 getsid 获取 Meterpreter 服务端运行用户的 SID getuid 获取 Meterpreter 服务端运行的用户名 kill 终止指定进程 localtime 显示目标系统的本地日期和时间 pgrep 按进程名过滤进程 pkill 按进程名终止进程 ps 列出所有运行中的进程 reboot 重启远程计算机 reg 操作远程注册表（查询/修改/删除键值） rev2self 在远程主机上调用 RevertToSelf()（放弃模拟身份） shell 获取系统命令行 shell（如 cmd/bash） shutdown 关闭远程计算机 steal_token 尝试从目标进程窃取模拟令牌（权限窃取） suspend 暂停或恢复指定进程 sysinfo 获取远程系统信息（如操作系统版本、硬件配置） 用户界面命令（Stdapi: User interface Commands） 命令 描述 enumdesktops 列出所有可访问的桌面和窗口站 getdesktop 获取当前 Meterpreter 附着的桌面 idletime 返回远程用户的空闲时间（秒） keyboard_send 发送键盘输入（模拟按键） keyevent 发送键盘事件（如按下/释放快捷键） keyscan_dump 导出键盘记录缓存（获取已捕获的按键） keyscan_start 开始捕获键盘输入（键盘记录） keyscan_stop 停止捕获键盘输入 mouse 发送鼠标事件（模拟点击/移动） screenshare 实时监控远程用户桌面 screenshot 截取交互式桌面的屏幕截图 setdesktop 切换 Meterpreter 当前附着的桌面 uictl 控制部分用户界面组件（如禁用键盘/鼠标） 摄像头命令（Stdapi: Webcam Commands） 命令 描述 record_mic 从默认麦克风录制 X 秒音频 webcam_chat 启动视频聊天（需远程主机支持） webcam_list 列出所有可用的摄像头 webcam_snap 从指定摄像头拍摄快照（拍照） webcam_stream 播放指定摄像头的实时视频流 音频输出命令（Stdapi: Audio Output Commands） 命令 描述 play 在目标系统上播放波形音频文件（.wav 格式） 补充说明 术语规范： 保持网络安全领域通用译法（如 hashdump 译为“导出 SAM 数据库”而非字面翻译，pivot 译为“跳板监听”符合内网渗透场景） 保留命令原文（如 meterpreter、TLV、SID 等专有名词不翻译） 区分本地/远程操作（前缀 l 表示本地，如 lcd=本地切换目录，cd=远程切换目录） 使用提示： 如需查看某个命令的详细用法，执行 &lt;命令&gt; -h 或 help &lt;命令&gt;（例：portfwd -h） 部分命令依赖系统环境（如 ifconfig 适用于 Linux/Mac，ipconfig 适用于 Windows） 权限相关命令（如 getsystem、hashdump）需要管理员权限才能正常执行 ">
 <meta property='og:url' content='https://www.retr0.xyz/p/meterpreter-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C%E4%B8%AD%E6%96%87/'>
 <meta property='og:site_name' content='Retr0的小窝'>
@@ -1185,11 +1185,228 @@
     <section class="copyright">
         &copy; 
         
-            2024 - 
+            2025 - 
         
         2026 Retr0
     </section>
     
+    <section class="running-time">
+    已存在于互联网
+    <span id="runningdays" class="running-days"></span>
+    </section>
+    
+    <section class="totalcount">
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        发表了95篇文章 · 
+        总计131.27k字
+    </section>
+
+
     <section class="powerby">
         
             Powered by ctOS <br/>
@@ -1877,6 +2094,21 @@ function destroyArticlePlayers() {
 document.addEventListener('pjax:send', () => {
     destroyArticlePlayers();
 });
+</script>
+
+
+<script>
+    let s1 = '2025-10-26'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    document.getElementById('runningdays').innerHTML = result;
 </script>
 
 

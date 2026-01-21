@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="基本语法 函数名 描述 seed(a = None) 初始化随机数种子，默认值为当前系统时间 random() 生成一个[0.0，1.0)之间的随机小数 randint(a,b) 生成一个[a，b]之间的整数 getrandbits(k) 生成一个 k 比特长度的随机整数 randrange(start,stop,step) 生成一个[start， stop)之间以 step(可省，默认是1) 为步长的随机整数 uniform(a, b) 生成一个[a，b]之间的随机小数 choice(seq) 从序列类型（例如列表）中随机返回一个元素 shuffle(seq) 将原序列类型中元素随机排列打乱 sample(pop, k) 从 pop 中随机选取 k 个元素，以列表类型返回 用法解释 种子的作用 seed(a = None)可以在生成随机数之前设定一个种子（相当于设定了算法），因此当种子相同时产生的随机数也相同，例如：\n1 2 3 4 5 6 7 8 9 10 import random as r r.seed(23) print(r.random())\t# 输出：0.9248652516259452 print(r.random())\t# 输出：0.9486057779931771 print(r.random())\t# 输出：0.8924333440485793 r.seed(23) print(r.random())\t# 输出：0.9248652516259452 print(r.random())\t# 输出：0.9486057779931771 print(r.random())\t# 输出：0.8924333440485793 列表相关 1 2 3 4 5 6 import random as r ls = [1,2,3,4,5,6] print(r.choice(ls)) r.shuffle(ls) print(ls) print(r.sample(ls,3)) ">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="基本语法 函数名 描述 seed(a = None) 初始化随机数种子，默认值为当前系统时间 random() 生成一个[0.0，1.0)之间的随机小数 randint(a,b) 生成一个[a，b]之间的整数 getrandbits(k) 生成一个 k 比特长度的随机整数 randrange(start,stop,step) 生成一个[start， stop)之间以 step(可省，默认是1) 为步长的随机整数 uniform(a, b) 生成一个[a，b]之间的随机小数 choice(seq) 从序列类型（例如列表）中随机返回一个元素 shuffle(seq) 将原序列类型中元素随机排列打乱 sample(pop, k) 从 pop 中随机选取 k 个元素，以列表类型返回 用法解释 种子的作用 seed(a = None)可以在生成随机数之前设定一个种子（相当于设定了算法），因此当种子相同时产生的随机数也相同，例如：\n">
 <title>11.3 random库</title>
 
 <link rel='canonical' href='https://www.retr0.xyz/p/11.3-random%E5%BA%93/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="11.3 random库">
-<meta property='og:description' content="基本语法 函数名 描述 seed(a = None) 初始化随机数种子，默认值为当前系统时间 random() 生成一个[0.0，1.0)之间的随机小数 randint(a,b) 生成一个[a，b]之间的整数 getrandbits(k) 生成一个 k 比特长度的随机整数 randrange(start,stop,step) 生成一个[start， stop)之间以 step(可省，默认是1) 为步长的随机整数 uniform(a, b) 生成一个[a，b]之间的随机小数 choice(seq) 从序列类型（例如列表）中随机返回一个元素 shuffle(seq) 将原序列类型中元素随机排列打乱 sample(pop, k) 从 pop 中随机选取 k 个元素，以列表类型返回 用法解释 种子的作用 seed(a = None)可以在生成随机数之前设定一个种子（相当于设定了算法），因此当种子相同时产生的随机数也相同，例如：\n1 2 3 4 5 6 7 8 9 10 import random as r r.seed(23) print(r.random())\t# 输出：0.9248652516259452 print(r.random())\t# 输出：0.9486057779931771 print(r.random())\t# 输出：0.8924333440485793 r.seed(23) print(r.random())\t# 输出：0.9248652516259452 print(r.random())\t# 输出：0.9486057779931771 print(r.random())\t# 输出：0.8924333440485793 列表相关 1 2 3 4 5 6 import random as r ls = [1,2,3,4,5,6] print(r.choice(ls)) r.shuffle(ls) print(ls) print(r.sample(ls,3)) ">
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="11.3 random库">
+<meta property='og:description' content="基本语法 函数名 描述 seed(a = None) 初始化随机数种子，默认值为当前系统时间 random() 生成一个[0.0，1.0)之间的随机小数 randint(a,b) 生成一个[a，b]之间的整数 getrandbits(k) 生成一个 k 比特长度的随机整数 randrange(start,stop,step) 生成一个[start， stop)之间以 step(可省，默认是1) 为步长的随机整数 uniform(a, b) 生成一个[a，b]之间的随机小数 choice(seq) 从序列类型（例如列表）中随机返回一个元素 shuffle(seq) 将原序列类型中元素随机排列打乱 sample(pop, k) 从 pop 中随机选取 k 个元素，以列表类型返回 用法解释 种子的作用 seed(a = None)可以在生成随机数之前设定一个种子（相当于设定了算法），因此当种子相同时产生的随机数也相同，例如：\n">
 <meta property='og:url' content='https://www.retr0.xyz/p/11.3-random%E5%BA%93/'>
 <meta property='og:site_name' content='Retr0的小窝'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-12T10:30:34&#43;08:00'/><meta property='article:modified_time' content='2026-01-12T10:30:34&#43;08:00'/>
 <meta name="twitter:title" content="11.3 random库">
-<meta name="twitter:description" content="基本语法 函数名 描述 seed(a = None) 初始化随机数种子，默认值为当前系统时间 random() 生成一个[0.0，1.0)之间的随机小数 randint(a,b) 生成一个[a，b]之间的整数 getrandbits(k) 生成一个 k 比特长度的随机整数 randrange(start,stop,step) 生成一个[start， stop)之间以 step(可省，默认是1) 为步长的随机整数 uniform(a, b) 生成一个[a，b]之间的随机小数 choice(seq) 从序列类型（例如列表）中随机返回一个元素 shuffle(seq) 将原序列类型中元素随机排列打乱 sample(pop, k) 从 pop 中随机选取 k 个元素，以列表类型返回 用法解释 种子的作用 seed(a = None)可以在生成随机数之前设定一个种子（相当于设定了算法），因此当种子相同时产生的随机数也相同，例如：\n1 2 3 4 5 6 7 8 9 10 import random as r r.seed(23) print(r.random())\t# 输出：0.9248652516259452 print(r.random())\t# 输出：0.9486057779931771 print(r.random())\t# 输出：0.8924333440485793 r.seed(23) print(r.random())\t# 输出：0.9248652516259452 print(r.random())\t# 输出：0.9486057779931771 print(r.random())\t# 输出：0.8924333440485793 列表相关 1 2 3 4 5 6 import random as r ls = [1,2,3,4,5,6] print(r.choice(ls)) r.shuffle(ls) print(ls) print(r.sample(ls,3)) ">
+<meta name="twitter:description" content="基本语法 函数名 描述 seed(a = None) 初始化随机数种子，默认值为当前系统时间 random() 生成一个[0.0，1.0)之间的随机小数 randint(a,b) 生成一个[a，b]之间的整数 getrandbits(k) 生成一个 k 比特长度的随机整数 randrange(start,stop,step) 生成一个[start， stop)之间以 step(可省，默认是1) 为步长的随机整数 uniform(a, b) 生成一个[a，b]之间的随机小数 choice(seq) 从序列类型（例如列表）中随机返回一个元素 shuffle(seq) 将原序列类型中元素随机排列打乱 sample(pop, k) 从 pop 中随机选取 k 个元素，以列表类型返回 用法解释 种子的作用 seed(a = None)可以在生成随机数之前设定一个种子（相当于设定了算法），因此当种子相同时产生的随机数也相同，例如：\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -680,11 +680,228 @@
     <section class="copyright">
         &copy; 
         
-            2024 - 
+            2025 - 
         
         2026 Retr0
     </section>
     
+    <section class="running-time">
+    已存在于互联网
+    <span id="runningdays" class="running-days"></span>
+    </section>
+    
+    <section class="totalcount">
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        发表了95篇文章 · 
+        总计131.27k字
+    </section>
+
+
     <section class="powerby">
         
             Powered by ctOS <br/>
@@ -1372,6 +1589,21 @@ function destroyArticlePlayers() {
 document.addEventListener('pjax:send', () => {
     destroyArticlePlayers();
 });
+</script>
+
+
+<script>
+    let s1 = '2025-10-26'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    document.getElementById('runningdays').innerHTML = result;
 </script>
 
 

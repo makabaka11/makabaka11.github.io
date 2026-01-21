@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="基于页游的前端分析 Google小恐龙 链接：T-Rex 在线版的chrome恐龙游戏\nF12打开开发者模式，选择控制台Console，输入：\n关闭GameOver判定：Runner.prototype.gameOver = function(){}\n调整速度：Runner.instance_.setSpeed(1000);\n2048 链接：2048\nF12打开开发者模式，选择应用程序Application\n在本地存储Local Storage中可以看到存储在本地的游戏数据，例如：\n1 {&#34;grid&#34;:{&#34;size&#34;:4,&#34;cells&#34;:[[null,null,null,{&#34;position&#34;:{&#34;x&#34;:0,&#34;y&#34;:3},&#34;value&#34;:2}],[null,null,null,null],[{&#34;position&#34;:{&#34;x&#34;:2,&#34;y&#34;:0},&#34;value&#34;:4},null,null,null],[null,null,null,null]]},&#34;score&#34;:0,&#34;over&#34;:false,&#34;won&#34;:false,&#34;keepPlaying&#34;:false} 通过修改即可改变棋盘中的数字。\n数独 链接：数独游戏 – 信息安全教学示例（随机题目）\n右键检查源代码可以发现网页生成题目并渲染的逻辑。\n1 2 3 4 5 6 7 8 9 10 11 12 const { puzzle, solution } = generatePuzzle(); //创建一个style（css）放到网页里命名为secretStyle const secretStyle = document.createElement(&#39;style&#39;); //secretStyle的css里放题目答案，不予显示 secretStyle.textContent = `body::before{content:&#34;${solution.join(&#39;&#39;)}&#34;;display:none}`; //网页头部增加答案 document.head.appendChild(secretStyle); //右键，查看源码看的是网页真实源码，不渲染 //elements里面是实时渲染的网页 最终在F12开发者模式的元素Elements中发现第二个&lt;style&gt;中有题目答案：\n1 body::before{content:&#34;789145263364729851215386479821593647576418932493672185957861324632954718148237596&#34;;display:none} 所以我们打开控制台执行：\n1 2 3 4 5 6 7 8 9 //显示body::before的答案 const hidden = getComputedStyle(document.body,&#39;::before&#39;).content.replace(/\\&#34;/g,&#39;&#39;); const digits = hidden.split(&#39;&#39;).map(Number); console.log(digits); //让答案显示在棋盘上 document.querySelectorAll(&#39;.cell&#39;).forEach((cell,i)=&gt;{ if(!cell.disabled) cell.value = digits[i]; }); flappybird 链接：Floppy Bird\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="基于页游的前端分析 Google小恐龙 链接：T-Rex 在线版的chrome恐龙游戏\nF12打开开发者模式，选择控制台Console，输入：\n关闭GameOver判定：Runner.prototype.gameOver = function(){}\n">
 <title>1.17 页游作弊和信息搜集</title>
 
 <link rel='canonical' href='https://www.retr0.xyz/p/1.17-%E9%A1%B5%E6%B8%B8%E4%BD%9C%E5%BC%8A%E5%92%8C%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="1.17 页游作弊和信息搜集">
-<meta property='og:description' content="基于页游的前端分析 Google小恐龙 链接：T-Rex 在线版的chrome恐龙游戏\nF12打开开发者模式，选择控制台Console，输入：\n关闭GameOver判定：Runner.prototype.gameOver = function(){}\n调整速度：Runner.instance_.setSpeed(1000);\n2048 链接：2048\nF12打开开发者模式，选择应用程序Application\n在本地存储Local Storage中可以看到存储在本地的游戏数据，例如：\n1 {&#34;grid&#34;:{&#34;size&#34;:4,&#34;cells&#34;:[[null,null,null,{&#34;position&#34;:{&#34;x&#34;:0,&#34;y&#34;:3},&#34;value&#34;:2}],[null,null,null,null],[{&#34;position&#34;:{&#34;x&#34;:2,&#34;y&#34;:0},&#34;value&#34;:4},null,null,null],[null,null,null,null]]},&#34;score&#34;:0,&#34;over&#34;:false,&#34;won&#34;:false,&#34;keepPlaying&#34;:false} 通过修改即可改变棋盘中的数字。\n数独 链接：数独游戏 – 信息安全教学示例（随机题目）\n右键检查源代码可以发现网页生成题目并渲染的逻辑。\n1 2 3 4 5 6 7 8 9 10 11 12 const { puzzle, solution } = generatePuzzle(); //创建一个style（css）放到网页里命名为secretStyle const secretStyle = document.createElement(&#39;style&#39;); //secretStyle的css里放题目答案，不予显示 secretStyle.textContent = `body::before{content:&#34;${solution.join(&#39;&#39;)}&#34;;display:none}`; //网页头部增加答案 document.head.appendChild(secretStyle); //右键，查看源码看的是网页真实源码，不渲染 //elements里面是实时渲染的网页 最终在F12开发者模式的元素Elements中发现第二个&lt;style&gt;中有题目答案：\n1 body::before{content:&#34;789145263364729851215386479821593647576418932493672185957861324632954718148237596&#34;;display:none} 所以我们打开控制台执行：\n1 2 3 4 5 6 7 8 9 //显示body::before的答案 const hidden = getComputedStyle(document.body,&#39;::before&#39;).content.replace(/\\&#34;/g,&#39;&#39;); const digits = hidden.split(&#39;&#39;).map(Number); console.log(digits); //让答案显示在棋盘上 document.querySelectorAll(&#39;.cell&#39;).forEach((cell,i)=&gt;{ if(!cell.disabled) cell.value = digits[i]; }); flappybird 链接：Floppy Bird\n">
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="1.17 页游作弊和信息搜集">
+<meta property='og:description' content="基于页游的前端分析 Google小恐龙 链接：T-Rex 在线版的chrome恐龙游戏\nF12打开开发者模式，选择控制台Console，输入：\n关闭GameOver判定：Runner.prototype.gameOver = function(){}\n">
 <meta property='og:url' content='https://www.retr0.xyz/p/1.17-%E9%A1%B5%E6%B8%B8%E4%BD%9C%E5%BC%8A%E5%92%8C%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/'>
 <meta property='og:site_name' content='Retr0的小窝'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-17T20:36:48&#43;08:00'/><meta property='article:modified_time' content='2026-01-17T20:36:48&#43;08:00'/>
 <meta name="twitter:title" content="1.17 页游作弊和信息搜集">
-<meta name="twitter:description" content="基于页游的前端分析 Google小恐龙 链接：T-Rex 在线版的chrome恐龙游戏\nF12打开开发者模式，选择控制台Console，输入：\n关闭GameOver判定：Runner.prototype.gameOver = function(){}\n调整速度：Runner.instance_.setSpeed(1000);\n2048 链接：2048\nF12打开开发者模式，选择应用程序Application\n在本地存储Local Storage中可以看到存储在本地的游戏数据，例如：\n1 {&#34;grid&#34;:{&#34;size&#34;:4,&#34;cells&#34;:[[null,null,null,{&#34;position&#34;:{&#34;x&#34;:0,&#34;y&#34;:3},&#34;value&#34;:2}],[null,null,null,null],[{&#34;position&#34;:{&#34;x&#34;:2,&#34;y&#34;:0},&#34;value&#34;:4},null,null,null],[null,null,null,null]]},&#34;score&#34;:0,&#34;over&#34;:false,&#34;won&#34;:false,&#34;keepPlaying&#34;:false} 通过修改即可改变棋盘中的数字。\n数独 链接：数独游戏 – 信息安全教学示例（随机题目）\n右键检查源代码可以发现网页生成题目并渲染的逻辑。\n1 2 3 4 5 6 7 8 9 10 11 12 const { puzzle, solution } = generatePuzzle(); //创建一个style（css）放到网页里命名为secretStyle const secretStyle = document.createElement(&#39;style&#39;); //secretStyle的css里放题目答案，不予显示 secretStyle.textContent = `body::before{content:&#34;${solution.join(&#39;&#39;)}&#34;;display:none}`; //网页头部增加答案 document.head.appendChild(secretStyle); //右键，查看源码看的是网页真实源码，不渲染 //elements里面是实时渲染的网页 最终在F12开发者模式的元素Elements中发现第二个&lt;style&gt;中有题目答案：\n1 body::before{content:&#34;789145263364729851215386479821593647576418932493672185957861324632954718148237596&#34;;display:none} 所以我们打开控制台执行：\n1 2 3 4 5 6 7 8 9 //显示body::before的答案 const hidden = getComputedStyle(document.body,&#39;::before&#39;).content.replace(/\\&#34;/g,&#39;&#39;); const digits = hidden.split(&#39;&#39;).map(Number); console.log(digits); //让答案显示在棋盘上 document.querySelectorAll(&#39;.cell&#39;).forEach((cell,i)=&gt;{ if(!cell.disabled) cell.value = digits[i]; }); flappybird 链接：Floppy Bird\n">
+<meta name="twitter:description" content="基于页游的前端分析 Google小恐龙 链接：T-Rex 在线版的chrome恐龙游戏\nF12打开开发者模式，选择控制台Console，输入：\n关闭GameOver判定：Runner.prototype.gameOver = function(){}\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -1082,11 +1082,228 @@
     <section class="copyright">
         &copy; 
         
-            2024 - 
+            2025 - 
         
         2026 Retr0
     </section>
     
+    <section class="running-time">
+    已存在于互联网
+    <span id="runningdays" class="running-days"></span>
+    </section>
+    
+    <section class="totalcount">
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        发表了95篇文章 · 
+        总计131.27k字
+    </section>
+
+
     <section class="powerby">
         
             Powered by ctOS <br/>
@@ -1774,6 +1991,21 @@ function destroyArticlePlayers() {
 document.addEventListener('pjax:send', () => {
     destroyArticlePlayers();
 });
+</script>
+
+
+<script>
+    let s1 = '2025-10-26'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    document.getElementById('runningdays').innerHTML = result;
 </script>
 
 

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="提权(续) 以下命令除非特别指出，均在ssh中执行\n寻找敏感的隐藏文件\n1 find / -name &#34;.*&#34; -type f -path &#34;/home/*&#34; -exec ls -al {} \\; 2&gt;/dev/null 有可能找到用户自己存储的明文密码，使用cat查看，再使用su [用户名]切换到对应权限\nSID提权 输入以下命令查看可以使用的命令\n1 find / -perm -4000 -type f -exec ls -al {} \\; 可以看到/usr/bin/xxd，接着使用下面的命令查看加密后的密码\n1 xxd /etc/shadow | xxd -r 复制其中root账户的全部内容（从root:到:::）保存为txt（以Desktop/pass.txt为例）\n接着使用破解工具 john 进行字典破解（字典可能打包了，需要手动解压一下）\n1 2 cd Desktop/ john pass.txt -w=/usr/share/wordlists/rockyou.txt NFS提权 注意：本小节的大部分命令在本机中执行\n扫描目标服务器端口\n1 nmap [目标ip] 发现对方可能开启了2049端口，接着查看对方挂载了哪些文件夹\n返回：/home/peter *\n1 showmount -e [目标ip] 接着我们在自己的系统上打开终端创建一个文件夹方便将对方的文件夹挂载到自己的系统上，具体操作如下 （需要使用root权限执行） ：\n1 2 3 4 5 cd /tmp mkdir nfs cd nfs mount -t nfs [对方ip]:[对方挂载的文件夹] /tmp/nfs/ ls -la # 查看里面有什么文件夹 接下来我们想要把自己的bash复制到这个这个挂载的文件夹里面去，从而实现提权，但是直接copy会提示 权限不够 （因为我们系统上的root在对方看来只是一个低权限的外人），所以我们要伪造一个和对方一模一样的账户 peter\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="提权(续) 以下命令除非特别指出，均在ssh中执行\n寻找敏感的隐藏文件\n1 find / -name &#34;.*&#34; -type f -path &#34;/home/*&#34; -exec ls -al {} \\; 2&gt;/dev/null 有可能找到用户自己存储的明文密码，使用cat查看，再使用su [用户名]切换到对应权限\n">
 <title>1.11 Linux提权(续)和钓鱼网站</title>
 
 <link rel='canonical' href='https://www.retr0.xyz/p/1.11-linux%E6%8F%90%E6%9D%83%E7%BB%AD%E5%92%8C%E9%92%93%E9%B1%BC%E7%BD%91%E7%AB%99/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="1.11 Linux提权(续)和钓鱼网站">
-<meta property='og:description' content="提权(续) 以下命令除非特别指出，均在ssh中执行\n寻找敏感的隐藏文件\n1 find / -name &#34;.*&#34; -type f -path &#34;/home/*&#34; -exec ls -al {} \\; 2&gt;/dev/null 有可能找到用户自己存储的明文密码，使用cat查看，再使用su [用户名]切换到对应权限\nSID提权 输入以下命令查看可以使用的命令\n1 find / -perm -4000 -type f -exec ls -al {} \\; 可以看到/usr/bin/xxd，接着使用下面的命令查看加密后的密码\n1 xxd /etc/shadow | xxd -r 复制其中root账户的全部内容（从root:到:::）保存为txt（以Desktop/pass.txt为例）\n接着使用破解工具 john 进行字典破解（字典可能打包了，需要手动解压一下）\n1 2 cd Desktop/ john pass.txt -w=/usr/share/wordlists/rockyou.txt NFS提权 注意：本小节的大部分命令在本机中执行\n扫描目标服务器端口\n1 nmap [目标ip] 发现对方可能开启了2049端口，接着查看对方挂载了哪些文件夹\n返回：/home/peter *\n1 showmount -e [目标ip] 接着我们在自己的系统上打开终端创建一个文件夹方便将对方的文件夹挂载到自己的系统上，具体操作如下 （需要使用root权限执行） ：\n1 2 3 4 5 cd /tmp mkdir nfs cd nfs mount -t nfs [对方ip]:[对方挂载的文件夹] /tmp/nfs/ ls -la # 查看里面有什么文件夹 接下来我们想要把自己的bash复制到这个这个挂载的文件夹里面去，从而实现提权，但是直接copy会提示 权限不够 （因为我们系统上的root在对方看来只是一个低权限的外人），所以我们要伪造一个和对方一模一样的账户 peter\n">
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="1.11 Linux提权(续)和钓鱼网站">
+<meta property='og:description' content="提权(续) 以下命令除非特别指出，均在ssh中执行\n寻找敏感的隐藏文件\n1 find / -name &#34;.*&#34; -type f -path &#34;/home/*&#34; -exec ls -al {} \\; 2&gt;/dev/null 有可能找到用户自己存储的明文密码，使用cat查看，再使用su [用户名]切换到对应权限\n">
 <meta property='og:url' content='https://www.retr0.xyz/p/1.11-linux%E6%8F%90%E6%9D%83%E7%BB%AD%E5%92%8C%E9%92%93%E9%B1%BC%E7%BD%91%E7%AB%99/'>
 <meta property='og:site_name' content='Retr0的小窝'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-11T14:32:18&#43;08:00'/><meta property='article:modified_time' content='2025-12-11T14:32:18&#43;08:00'/>
 <meta name="twitter:title" content="1.11 Linux提权(续)和钓鱼网站">
-<meta name="twitter:description" content="提权(续) 以下命令除非特别指出，均在ssh中执行\n寻找敏感的隐藏文件\n1 find / -name &#34;.*&#34; -type f -path &#34;/home/*&#34; -exec ls -al {} \\; 2&gt;/dev/null 有可能找到用户自己存储的明文密码，使用cat查看，再使用su [用户名]切换到对应权限\nSID提权 输入以下命令查看可以使用的命令\n1 find / -perm -4000 -type f -exec ls -al {} \\; 可以看到/usr/bin/xxd，接着使用下面的命令查看加密后的密码\n1 xxd /etc/shadow | xxd -r 复制其中root账户的全部内容（从root:到:::）保存为txt（以Desktop/pass.txt为例）\n接着使用破解工具 john 进行字典破解（字典可能打包了，需要手动解压一下）\n1 2 cd Desktop/ john pass.txt -w=/usr/share/wordlists/rockyou.txt NFS提权 注意：本小节的大部分命令在本机中执行\n扫描目标服务器端口\n1 nmap [目标ip] 发现对方可能开启了2049端口，接着查看对方挂载了哪些文件夹\n返回：/home/peter *\n1 showmount -e [目标ip] 接着我们在自己的系统上打开终端创建一个文件夹方便将对方的文件夹挂载到自己的系统上，具体操作如下 （需要使用root权限执行） ：\n1 2 3 4 5 cd /tmp mkdir nfs cd nfs mount -t nfs [对方ip]:[对方挂载的文件夹] /tmp/nfs/ ls -la # 查看里面有什么文件夹 接下来我们想要把自己的bash复制到这个这个挂载的文件夹里面去，从而实现提权，但是直接copy会提示 权限不够 （因为我们系统上的root在对方看来只是一个低权限的外人），所以我们要伪造一个和对方一模一样的账户 peter\n">
+<meta name="twitter:description" content="提权(续) 以下命令除非特别指出，均在ssh中执行\n寻找敏感的隐藏文件\n1 find / -name &#34;.*&#34; -type f -path &#34;/home/*&#34; -exec ls -al {} \\; 2&gt;/dev/null 有可能找到用户自己存储的明文密码，使用cat查看，再使用su [用户名]切换到对应权限\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -1217,11 +1217,228 @@
     <section class="copyright">
         &copy; 
         
-            2024 - 
+            2025 - 
         
         2026 Retr0
     </section>
     
+    <section class="running-time">
+    已存在于互联网
+    <span id="runningdays" class="running-days"></span>
+    </section>
+    
+    <section class="totalcount">
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        发表了95篇文章 · 
+        总计131.27k字
+    </section>
+
+
     <section class="powerby">
         
             Powered by ctOS <br/>
@@ -1909,6 +2126,21 @@ function destroyArticlePlayers() {
 document.addEventListener('pjax:send', () => {
     destroyArticlePlayers();
 });
+</script>
+
+
+<script>
+    let s1 = '2025-10-26'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    document.getElementById('runningdays').innerHTML = result;
 </script>
 
 

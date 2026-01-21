@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://www.retr0.xyz/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="矩阵的秩及其性质">
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="矩阵的秩及其性质">
 <meta property='og:description' content="一、矩阵的秩（核心定义） 矩阵的秩是最高阶非零子式的阶数，也等于矩阵行向量组/列向量组的“极大无关组个数”(通俗说：最多能找出多少个不互相“多余”的行/列)记为 $$r(A)$$。\n二、核心性质 非负性与有界性：$\\displaystyle 0 \\leq r(A) \\leq \\min{m, n}$（秩是0或正整数，不超过行数和列数）； 零矩阵专属：$\\displaystyle A = O \\iff r(A) = 0$（零矩阵秩为0，反之亦然）； 转置不变性：$\\displaystyle r(A^T) = r(A)$（矩阵与其转置秩相等）； 初等变换不变性：初等行/列变换后，矩阵秩不变； 和秩不等式：$\\displaystyle r(A + B) \\leq r(A) + r(B)$（两矩阵和的秩不超过各自秩的和）； 乘积秩不等式：$\\displaystyle r(AB) \\leq \\min{r(A), r(B)}$（两矩阵乘积的秩不超过任一矩阵的秩）； 可逆矩阵作用：$\\displaystyle r(PA) = r(AQ) = r(PAQ) = r(A)$（可逆矩阵左乘/右乘，秩不变）； 伴随矩阵秩关系： 若$\\displaystyle r(A) = n$，则$\\displaystyle r(A^*) = n$； 若$\\displaystyle r(A) = n-1$，则$\\displaystyle r(A^*) = 1$； 若$\\displaystyle r(A) &lt; n-1$，则$\\displaystyle r(A^*) = 0$； 分块矩阵秩：$\\displaystyle r\\begin{pmatrix} A &amp; O \\ O &amp; B \\end{pmatrix} = r(A) + r(B)$（对角分块矩阵的秩等于各块秩的和）。 ">
 <meta property='og:url' content='https://www.retr0.xyz/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/'>
 <meta property='og:site_name' content='Retr0的小窝'>
@@ -609,11 +609,228 @@ $$r(A)$$<p>。</p>
     <section class="copyright">
         &copy; 
         
-            2024 - 
+            2025 - 
         
         2026 Retr0
     </section>
     
+    <section class="running-time">
+    已存在于互联网
+    <span id="runningdays" class="running-days"></span>
+    </section>
+    
+    <section class="totalcount">
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        发表了95篇文章 · 
+        总计131.27k字
+    </section>
+
+
     <section class="powerby">
         
             Powered by ctOS <br/>
@@ -1301,6 +1518,21 @@ function destroyArticlePlayers() {
 document.addEventListener('pjax:send', () => {
     destroyArticlePlayers();
 });
+</script>
+
+
+<script>
+    let s1 = '2025-10-26'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    document.getElementById('runningdays').innerHTML = result;
 </script>
 
 

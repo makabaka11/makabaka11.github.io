@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="数据准备 资料获取 接下来的几个练习所用数据都在这里，请自行下载：\n链接: https://pan.baidu.com/s/1b5ZZ5cVyS-9_06tql4tNFw 提取码: i3i6\n分析文件 我们任选一个文件打开分析（此处以美国.txt为例）\n文件大致为jsonp_1629344292311_69436({&quot;status&quot;:0,&quot;msg&quot;:&quot;success&quot; 。。。。。。32695,271457,169842]}]}}]});\n发现此文件内容并不完全符合json格式，存在以下两点问题：\n开头的花括号前多出来了jsonp_1629344292311_69436(部分 结尾多了出了括号和分号); 接下来为例便于查看json的层级结构，我们打开工具网站：JSON在线视图查看器(Online JSON Viewer)将上面文本中间去头去尾符合正确json格式的部分复制到左面的输入框，点击格式化按钮，这时右面已经出现了便于查看的结构树，如图：\n也可以参考下面给出的省略版：\n总体可以看出其中，&ldquo;update&quot;中和下面的&quot;data&quot;中的数据应该具有对应关系\n开始操作 为了方便演示，将三个国家分开操作，因此可以将任务总共分为下面几步：\n打开并读取文件 去掉不合json规范的开头 去掉不合json规范的结尾 json转python字典 获取trend key 获取日期数据，用于x轴，取2020年（到314下标结束） 获取确诊数据，用于y轴，取2020年（到314下标结束） 生成图表 分块演示 以美国.txt为例。\n1 2 3 # 打开并读取文件 usdoc = open(&#39;T:/美国.txt&#39;,&#39;r&#39;,encoding=&#39;UTF-8&#39;) us_data = usdoc.read() 打开美国.txt文件查看发现开头要删除的内容为：jsonp_1629344292311_69436(\n根据前面所学的6.3 数据容器：字符串中2.2 节字符串的替换，我们这里使用replace()函数处理\n1 us_data = us_data.replace(&#39;jsonp_1629344292311_69436(&#39;,&#39;&#39;) 接下来的结尾不能也用replace()，因为在文件中可能有多处出现了);，会出现多处替换的情况，因此我们使用字符串的切片，详见6.4 序列的操作：切片\n1 us_data = us_data[:-2] 下面导入json模块将字符串转为字典\n1 2 import json us_dict = json.loads(us_data) 下面回到浏览器，根据json视图一点点获取层级数据\n1 us_trend = us_dict[&#39;data&#39;][0][&#39;trend&#39;] 目前剩下的结构\n1 2 3 JSON ├─list(字典，格式为0:&#34;2.22&#34;,1:&#34;2.23&#34;) └─updateDate 下面我们获取日期数据\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="数据准备 资料获取 接下来的几个练习所用数据都在这里，请自行下载：\n链接: https://pan.baidu.com/s/1b5ZZ5cVyS-9_06tql4tNFw 提取码: i3i6\n分析文件 我们任选一个文件打开分析（此处以美国.txt为例）\n文件大致为jsonp_1629344292311_69436({&quot;status&quot;:0,&quot;msg&quot;:&quot;success&quot; 。。。。。。32695,271457,169842]}]}}]});\n">
 <title>10.3 练习一：折线图</title>
 
 <link rel='canonical' href='https://www.retr0.xyz/p/10.3-%E7%BB%83%E4%B9%A0%E4%B8%80%E6%8A%98%E7%BA%BF%E5%9B%BE/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="10.3 练习一：折线图">
-<meta property='og:description' content="数据准备 资料获取 接下来的几个练习所用数据都在这里，请自行下载：\n链接: https://pan.baidu.com/s/1b5ZZ5cVyS-9_06tql4tNFw 提取码: i3i6\n分析文件 我们任选一个文件打开分析（此处以美国.txt为例）\n文件大致为jsonp_1629344292311_69436({&quot;status&quot;:0,&quot;msg&quot;:&quot;success&quot; 。。。。。。32695,271457,169842]}]}}]});\n发现此文件内容并不完全符合json格式，存在以下两点问题：\n开头的花括号前多出来了jsonp_1629344292311_69436(部分 结尾多了出了括号和分号); 接下来为例便于查看json的层级结构，我们打开工具网站：JSON在线视图查看器(Online JSON Viewer)将上面文本中间去头去尾符合正确json格式的部分复制到左面的输入框，点击格式化按钮，这时右面已经出现了便于查看的结构树，如图：\n也可以参考下面给出的省略版：\n总体可以看出其中，&ldquo;update&quot;中和下面的&quot;data&quot;中的数据应该具有对应关系\n开始操作 为了方便演示，将三个国家分开操作，因此可以将任务总共分为下面几步：\n打开并读取文件 去掉不合json规范的开头 去掉不合json规范的结尾 json转python字典 获取trend key 获取日期数据，用于x轴，取2020年（到314下标结束） 获取确诊数据，用于y轴，取2020年（到314下标结束） 生成图表 分块演示 以美国.txt为例。\n1 2 3 # 打开并读取文件 usdoc = open(&#39;T:/美国.txt&#39;,&#39;r&#39;,encoding=&#39;UTF-8&#39;) us_data = usdoc.read() 打开美国.txt文件查看发现开头要删除的内容为：jsonp_1629344292311_69436(\n根据前面所学的6.3 数据容器：字符串中2.2 节字符串的替换，我们这里使用replace()函数处理\n1 us_data = us_data.replace(&#39;jsonp_1629344292311_69436(&#39;,&#39;&#39;) 接下来的结尾不能也用replace()，因为在文件中可能有多处出现了);，会出现多处替换的情况，因此我们使用字符串的切片，详见6.4 序列的操作：切片\n1 us_data = us_data[:-2] 下面导入json模块将字符串转为字典\n1 2 import json us_dict = json.loads(us_data) 下面回到浏览器，根据json视图一点点获取层级数据\n1 us_trend = us_dict[&#39;data&#39;][0][&#39;trend&#39;] 目前剩下的结构\n1 2 3 JSON ├─list(字典，格式为0:&#34;2.22&#34;,1:&#34;2.23&#34;) └─updateDate 下面我们获取日期数据\n">
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="10.3 练习一：折线图">
+<meta property='og:description' content="数据准备 资料获取 接下来的几个练习所用数据都在这里，请自行下载：\n链接: https://pan.baidu.com/s/1b5ZZ5cVyS-9_06tql4tNFw 提取码: i3i6\n分析文件 我们任选一个文件打开分析（此处以美国.txt为例）\n文件大致为jsonp_1629344292311_69436({&quot;status&quot;:0,&quot;msg&quot;:&quot;success&quot; 。。。。。。32695,271457,169842]}]}}]});\n">
 <meta property='og:url' content='https://www.retr0.xyz/p/10.3-%E7%BB%83%E4%B9%A0%E4%B8%80%E6%8A%98%E7%BA%BF%E5%9B%BE/'>
 <meta property='og:site_name' content='Retr0的小窝'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-01T08:35:56&#43;08:00'/><meta property='article:modified_time' content='2025-12-01T08:35:56&#43;08:00'/>
 <meta name="twitter:title" content="10.3 练习一：折线图">
-<meta name="twitter:description" content="数据准备 资料获取 接下来的几个练习所用数据都在这里，请自行下载：\n链接: https://pan.baidu.com/s/1b5ZZ5cVyS-9_06tql4tNFw 提取码: i3i6\n分析文件 我们任选一个文件打开分析（此处以美国.txt为例）\n文件大致为jsonp_1629344292311_69436({&quot;status&quot;:0,&quot;msg&quot;:&quot;success&quot; 。。。。。。32695,271457,169842]}]}}]});\n发现此文件内容并不完全符合json格式，存在以下两点问题：\n开头的花括号前多出来了jsonp_1629344292311_69436(部分 结尾多了出了括号和分号); 接下来为例便于查看json的层级结构，我们打开工具网站：JSON在线视图查看器(Online JSON Viewer)将上面文本中间去头去尾符合正确json格式的部分复制到左面的输入框，点击格式化按钮，这时右面已经出现了便于查看的结构树，如图：\n也可以参考下面给出的省略版：\n总体可以看出其中，&ldquo;update&quot;中和下面的&quot;data&quot;中的数据应该具有对应关系\n开始操作 为了方便演示，将三个国家分开操作，因此可以将任务总共分为下面几步：\n打开并读取文件 去掉不合json规范的开头 去掉不合json规范的结尾 json转python字典 获取trend key 获取日期数据，用于x轴，取2020年（到314下标结束） 获取确诊数据，用于y轴，取2020年（到314下标结束） 生成图表 分块演示 以美国.txt为例。\n1 2 3 # 打开并读取文件 usdoc = open(&#39;T:/美国.txt&#39;,&#39;r&#39;,encoding=&#39;UTF-8&#39;) us_data = usdoc.read() 打开美国.txt文件查看发现开头要删除的内容为：jsonp_1629344292311_69436(\n根据前面所学的6.3 数据容器：字符串中2.2 节字符串的替换，我们这里使用replace()函数处理\n1 us_data = us_data.replace(&#39;jsonp_1629344292311_69436(&#39;,&#39;&#39;) 接下来的结尾不能也用replace()，因为在文件中可能有多处出现了);，会出现多处替换的情况，因此我们使用字符串的切片，详见6.4 序列的操作：切片\n1 us_data = us_data[:-2] 下面导入json模块将字符串转为字典\n1 2 import json us_dict = json.loads(us_data) 下面回到浏览器，根据json视图一点点获取层级数据\n1 us_trend = us_dict[&#39;data&#39;][0][&#39;trend&#39;] 目前剩下的结构\n1 2 3 JSON ├─list(字典，格式为0:&#34;2.22&#34;,1:&#34;2.23&#34;) └─updateDate 下面我们获取日期数据\n">
+<meta name="twitter:description" content="数据准备 资料获取 接下来的几个练习所用数据都在这里，请自行下载：\n链接: https://pan.baidu.com/s/1b5ZZ5cVyS-9_06tql4tNFw 提取码: i3i6\n分析文件 我们任选一个文件打开分析（此处以美国.txt为例）\n文件大致为jsonp_1629344292311_69436({&quot;status&quot;:0,&quot;msg&quot;:&quot;success&quot; 。。。。。。32695,271457,169842]}]}}]});\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -894,11 +894,228 @@
     <section class="copyright">
         &copy; 
         
-            2024 - 
+            2025 - 
         
         2026 Retr0
     </section>
     
+    <section class="running-time">
+    已存在于互联网
+    <span id="runningdays" class="running-days"></span>
+    </section>
+    
+    <section class="totalcount">
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        发表了95篇文章 · 
+        总计131.27k字
+    </section>
+
+
     <section class="powerby">
         
             Powered by ctOS <br/>
@@ -1586,6 +1803,21 @@ function destroyArticlePlayers() {
 document.addEventListener('pjax:send', () => {
     destroyArticlePlayers();
 });
+</script>
+
+
+<script>
+    let s1 = '2025-10-26'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    document.getElementById('runningdays').innerHTML = result;
 </script>
 
 

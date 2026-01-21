@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="前置知识 基础地图演示 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 from pyecharts.charts import Map from pyecharts.options import VisualMapOpts map = Map() data = [ (&#39;北京市&#39;,99), (&#39;上海市&#39;,199), (&#39;湖南省&#39;,299), (&#39;台湾省&#39;,199), (&#39;安徽省&#39;,299), (&#39;广州省&#39;,399), (&#39;湖北省&#39;,599) ] map.add(&#39;地图&#39;,data,&#39;china&#39;) map.render() 这样只实现了基础的数据导入，看起来地图还不够直观，所以我们使用全局设置\n1 2 3 4 5 6 7 8 9 10 11 12 13 map.set_global_opts( visualmap_opts=VisualMapOpts( is_show=True, is_piecewise=True, pieces=[ {&#34;min&#34;: 1, &#34;max&#34;: 9, &#34;label&#34;: &#34;1-9人&#34;, &#34;color&#34;: &#34;#CCFFFF&#34;}, {&#34;min&#34;: 10, &#34;max&#34;: 99, &#34;label&#34;: &#34;10-99人&#34;, &#34;color&#34;: &#34;#FFFF99&#34;}, {&#34;min&#34;: 100, &#34;max&#34;: 499, &#34;label&#34;: &#34;99-499人&#34;, &#34;color&#34;: &#34;#FF9966&#34;}, {&#34;min&#34;: 500, &#34;max&#34;: 999, &#34;label&#34;: &#34;499-999人&#34;, &#34;color&#34;: &#34;#FF6666&#34;}, {&#34;min&#34;: 1000, &#34;max&#34;: 9999, &#34;label&#34;: &#34;1000-9999人&#34;, &#34;color&#34;: &#34;#CC3333&#34;}, {&#34;min&#34;: 10000,&#34;label&#34;:&#34;10000以上&#34;,&#34;color&#34;:&#34;#990033&#34;} ]) ) 成果展示：\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="前置知识 基础地图演示 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 from pyecharts.charts import Map from pyecharts.options import VisualMapOpts map = Map() data = [ (&#39;北京市&#39;,99), (&#39;上海市&#39;,199), (&#39;湖南省&#39;,299), (&#39;台湾省&#39;,199), (&#39;安徽省&#39;,299), (&#39;广州省&#39;,399), (&#39;湖北省&#39;,599) ] map.add(&#39;地图&#39;,data,&#39;china&#39;) map.render() 这样只实现了基础的数据导入，看起来地图还不够直观，所以我们使用全局设置\n">
 <title>10.4 练习二：地图</title>
 
 <link rel='canonical' href='https://www.retr0.xyz/p/10.4-%E7%BB%83%E4%B9%A0%E4%BA%8C%E5%9C%B0%E5%9B%BE/'>
 
-<link rel="stylesheet" href="/scss/style.min.cdfea7edd08f20a450e32e39a442d404d324012e6a68d984ad7ca649217d9edf.css"><meta property='og:title' content="10.4 练习二：地图">
-<meta property='og:description' content="前置知识 基础地图演示 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 from pyecharts.charts import Map from pyecharts.options import VisualMapOpts map = Map() data = [ (&#39;北京市&#39;,99), (&#39;上海市&#39;,199), (&#39;湖南省&#39;,299), (&#39;台湾省&#39;,199), (&#39;安徽省&#39;,299), (&#39;广州省&#39;,399), (&#39;湖北省&#39;,599) ] map.add(&#39;地图&#39;,data,&#39;china&#39;) map.render() 这样只实现了基础的数据导入，看起来地图还不够直观，所以我们使用全局设置\n1 2 3 4 5 6 7 8 9 10 11 12 13 map.set_global_opts( visualmap_opts=VisualMapOpts( is_show=True, is_piecewise=True, pieces=[ {&#34;min&#34;: 1, &#34;max&#34;: 9, &#34;label&#34;: &#34;1-9人&#34;, &#34;color&#34;: &#34;#CCFFFF&#34;}, {&#34;min&#34;: 10, &#34;max&#34;: 99, &#34;label&#34;: &#34;10-99人&#34;, &#34;color&#34;: &#34;#FFFF99&#34;}, {&#34;min&#34;: 100, &#34;max&#34;: 499, &#34;label&#34;: &#34;99-499人&#34;, &#34;color&#34;: &#34;#FF9966&#34;}, {&#34;min&#34;: 500, &#34;max&#34;: 999, &#34;label&#34;: &#34;499-999人&#34;, &#34;color&#34;: &#34;#FF6666&#34;}, {&#34;min&#34;: 1000, &#34;max&#34;: 9999, &#34;label&#34;: &#34;1000-9999人&#34;, &#34;color&#34;: &#34;#CC3333&#34;}, {&#34;min&#34;: 10000,&#34;label&#34;:&#34;10000以上&#34;,&#34;color&#34;:&#34;#990033&#34;} ]) ) 成果展示：\n">
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="10.4 练习二：地图">
+<meta property='og:description' content="前置知识 基础地图演示 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 from pyecharts.charts import Map from pyecharts.options import VisualMapOpts map = Map() data = [ (&#39;北京市&#39;,99), (&#39;上海市&#39;,199), (&#39;湖南省&#39;,299), (&#39;台湾省&#39;,199), (&#39;安徽省&#39;,299), (&#39;广州省&#39;,399), (&#39;湖北省&#39;,599) ] map.add(&#39;地图&#39;,data,&#39;china&#39;) map.render() 这样只实现了基础的数据导入，看起来地图还不够直观，所以我们使用全局设置\n">
 <meta property='og:url' content='https://www.retr0.xyz/p/10.4-%E7%BB%83%E4%B9%A0%E4%BA%8C%E5%9C%B0%E5%9B%BE/'>
 <meta property='og:site_name' content='Retr0的小窝'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-03T18:25:08&#43;08:00'/><meta property='article:modified_time' content='2025-12-03T18:25:08&#43;08:00'/>
 <meta name="twitter:title" content="10.4 练习二：地图">
-<meta name="twitter:description" content="前置知识 基础地图演示 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 from pyecharts.charts import Map from pyecharts.options import VisualMapOpts map = Map() data = [ (&#39;北京市&#39;,99), (&#39;上海市&#39;,199), (&#39;湖南省&#39;,299), (&#39;台湾省&#39;,199), (&#39;安徽省&#39;,299), (&#39;广州省&#39;,399), (&#39;湖北省&#39;,599) ] map.add(&#39;地图&#39;,data,&#39;china&#39;) map.render() 这样只实现了基础的数据导入，看起来地图还不够直观，所以我们使用全局设置\n1 2 3 4 5 6 7 8 9 10 11 12 13 map.set_global_opts( visualmap_opts=VisualMapOpts( is_show=True, is_piecewise=True, pieces=[ {&#34;min&#34;: 1, &#34;max&#34;: 9, &#34;label&#34;: &#34;1-9人&#34;, &#34;color&#34;: &#34;#CCFFFF&#34;}, {&#34;min&#34;: 10, &#34;max&#34;: 99, &#34;label&#34;: &#34;10-99人&#34;, &#34;color&#34;: &#34;#FFFF99&#34;}, {&#34;min&#34;: 100, &#34;max&#34;: 499, &#34;label&#34;: &#34;99-499人&#34;, &#34;color&#34;: &#34;#FF9966&#34;}, {&#34;min&#34;: 500, &#34;max&#34;: 999, &#34;label&#34;: &#34;499-999人&#34;, &#34;color&#34;: &#34;#FF6666&#34;}, {&#34;min&#34;: 1000, &#34;max&#34;: 9999, &#34;label&#34;: &#34;1000-9999人&#34;, &#34;color&#34;: &#34;#CC3333&#34;}, {&#34;min&#34;: 10000,&#34;label&#34;:&#34;10000以上&#34;,&#34;color&#34;:&#34;#990033&#34;} ]) ) 成果展示：\n">
+<meta name="twitter:description" content="前置知识 基础地图演示 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 from pyecharts.charts import Map from pyecharts.options import VisualMapOpts map = Map() data = [ (&#39;北京市&#39;,99), (&#39;上海市&#39;,199), (&#39;湖南省&#39;,299), (&#39;台湾省&#39;,199), (&#39;安徽省&#39;,299), (&#39;广州省&#39;,399), (&#39;湖北省&#39;,599) ] map.add(&#39;地图&#39;,data,&#39;china&#39;) map.render() 这样只实现了基础的数据导入，看起来地图还不够直观，所以我们使用全局设置\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -952,11 +952,228 @@
     <section class="copyright">
         &copy; 
         
-            2024 - 
+            2025 - 
         
         2026 Retr0
     </section>
     
+    <section class="running-time">
+    已存在于互联网
+    <span id="runningdays" class="running-days"></span>
+    </section>
+    
+    <section class="totalcount">
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        发表了95篇文章 · 
+        总计131.27k字
+    </section>
+
+
     <section class="powerby">
         
             Powered by ctOS <br/>
@@ -1644,6 +1861,21 @@ function destroyArticlePlayers() {
 document.addEventListener('pjax:send', () => {
     destroyArticlePlayers();
 });
+</script>
+
+
+<script>
+    let s1 = '2025-10-26'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    document.getElementById('runningdays').innerHTML = result;
 </script>
 
 
