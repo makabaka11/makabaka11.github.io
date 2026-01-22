@@ -319,7 +319,7 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#手动注入">手动注入</a>
+    <li><a href="#手动注入order-by与联合查询注入">手动注入(ORDER BY与联合查询注入)</a>
       <ol>
         <li><a href="#step1破坏数据库语句">Step1：破坏数据库语句</a></li>
         <li><a href="#step2确定查询了多少个栏目">Step2：确定查询了多少个栏目</a></li>
@@ -422,7 +422,7 @@
     <section class="article-content">
     
     
-    <h2 id="手动注入">手动注入
+    <h2 id="手动注入order-by与联合查询注入">手动注入(ORDER BY与联合查询注入)
 </h2><p>以靶场<a class="link" href="http://sqlilabs.njhack.xyz/Less-1/index.php"  target="_blank" rel="noopener"
     >http://sqlilabs.njhack.xyz/Less-1/index.php</a>为例</p>
 <h3 id="step1破坏数据库语句">Step1：破坏数据库语句
@@ -522,7 +522,18 @@
 	
 	
 ></p>
-<h3 id="step2确定查询了多少个栏目">Step2：确定查询了多少个栏目
+<p><strong>后日谈：</strong> 也可以用永真或永假条件进行测试，即传入</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">OR 1=1	//永真
+</span></span><span class="line"><span class="cl">OR 1=2	//永假
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="step2确定查询了多少个栏目">Step2：确定查询了多少个栏目
 </h3><p>从现在开始我们要调用各种语法查询数据，<font style="color:#DF2A3F;">记住之后的语法全部都是插入在</font><code>2' {} --+</code><font style="color:#DF2A3F;">中的花括号位置！</font></p>
 <p>因为之前的语句中username,password栏目是猜测的，所以接下来要核实究竟有多少个栏目</p>
 <p>传入参数<code>2' order by [数字] --+</code>使用二分法查看</p>
@@ -1102,8 +1113,12 @@
         
             
         
-        发表了96篇文章 · 
-        总计131.94k字
+            
+        
+            
+        
+        发表了98篇文章 · 
+        总计139.79k字
     </section>
 
 

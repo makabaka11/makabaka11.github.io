@@ -2865,7 +2865,7 @@ echo $b;
         <pubDate>Fri, 28 Nov 2025 20:07:03 +0800</pubDate>
         
         <guid>https://www.retr0.xyz/p/1.5-mysql%E6%B3%A8%E5%85%A5%E5%88%9D%E6%AD%A5/</guid>
-        <description>&lt;h2 id=&#34;手动注入&#34;&gt;手动注入
+        <description>&lt;h2 id=&#34;手动注入order-by与联合查询注入&#34;&gt;手动注入(ORDER BY与联合查询注入)
 &lt;/h2&gt;&lt;p&gt;以靶场&lt;a class=&#34;link&#34; href=&#34;http://sqlilabs.njhack.xyz/Less-1/index.php&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;http://sqlilabs.njhack.xyz/Less-1/index.php&lt;/a&gt;为例&lt;/p&gt;
 &lt;h3 id=&#34;step1破坏数据库语句&#34;&gt;Step1：破坏数据库语句
@@ -2965,7 +2965,18 @@ echo $b;
 	
 	
 &gt;&lt;/p&gt;
-&lt;h3 id=&#34;step2确定查询了多少个栏目&#34;&gt;Step2：确定查询了多少个栏目
+&lt;p&gt;&lt;strong&gt;后日谈：&lt;/strong&gt; 也可以用永真或永假条件进行测试，即传入&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;OR 1=1	//永真
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;OR 1=2	//永假
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;step2确定查询了多少个栏目&#34;&gt;Step2：确定查询了多少个栏目
 &lt;/h3&gt;&lt;p&gt;从现在开始我们要调用各种语法查询数据，&lt;font style=&#34;color:#DF2A3F;&#34;&gt;记住之后的语法全部都是插入在&lt;/font&gt;&lt;code&gt;2&#39; {} --+&lt;/code&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;中的花括号位置！&lt;/font&gt;&lt;/p&gt;
 &lt;p&gt;因为之前的语句中username,password栏目是猜测的，所以接下来要核实究竟有多少个栏目&lt;/p&gt;
 &lt;p&gt;传入参数&lt;code&gt;2&#39; order by [数字] --+&lt;/code&gt;使用二分法查看&lt;/p&gt;

