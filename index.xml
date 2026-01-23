@@ -195,7 +195,7 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;li&gt;双写绕过&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;利用insertupdate和delete进行注入-&#34;&gt;利用insert、update和delete进行注入 &lt;strong&gt;[1]&lt;/strong&gt;
-&lt;/h2&gt;&lt;h3 id=&#34;思路简要说明&#34;&gt;&lt;font style=&#34;color:rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);&#34;&gt;思路简要说明&lt;/font&gt;
+&lt;/h2&gt;&lt;h3 id=&#34;思路简要说明&#34;&gt;思路简要说明
 &lt;/h3&gt;&lt;p&gt;&lt;code&gt;insert&lt;/code&gt;、&lt;code&gt;update&lt;/code&gt;、&lt;code&gt;delete&lt;/code&gt;注入的本质是&lt;strong&gt;参数未经过滤&lt;/strong&gt;，攻击者可在语句的关键位置插入恶意 SQL 片段，利用数据库执行特性获取敏感数据，核心常用方法为报错注入，具体应用场景如下：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;insert 注入&lt;/strong&gt;：在&lt;code&gt;insert into 表名(字段1,字段2) values(值1,值2)&lt;/code&gt;中，针对 “值 1”“值 2” 等参数构造恶意内容（如插入错误的函数调用、语法错误片段），触发数据库报错，通过错误提示回显数据库名、表名、字段名等信息。&lt;/li&gt;
@@ -312,10 +312,9 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;/h3&gt;&lt;p&gt;以&lt;code&gt;addslashes()&lt;/code&gt;函数为例，它的目的是根据预定义的字符（由服务端根据需要配置，例如单双引号）在你传的参数中检查是否存在这些预定义字符，如果有就在前面加上一个&lt;code&gt;\&lt;/code&gt;起到转义的作用。这样当你试图传入&lt;code&gt;?id=1&#39;&lt;/code&gt;时实际的参数为&lt;code&gt;?id=1\&#39;&lt;/code&gt;后面的引号失去了闭合作用。&lt;/p&gt;
 &lt;p&gt;但假如我们像下面这样传参：&lt;code&gt;?id=%df&#39;&lt;/code&gt;🤔&lt;/p&gt;
 &lt;p&gt;你先别急&lt;code&gt;%df&lt;/code&gt;是什么意思，但是你肯定知道&lt;code&gt;\&lt;/code&gt;的URL编码是&lt;code&gt;%5C&lt;/code&gt;，这样一来参数在程序内部就变成了&lt;code&gt;%df%5C&#39;&lt;/code&gt;，而&lt;code&gt;%df%5C&lt;/code&gt;实际上是[運]这个汉字的GBK编码，而MySQL会优先识别汉字的GBK编码**（前提是数据库本身就是GBK编码）**而忽略了转义符的存在，导致后面跟着的单引号仍然具有闭合作用。&lt;/p&gt;
-&lt;p&gt;具有相似性质的汉字还有这些：&lt;a class=&#34;link&#34; href=&#34;https://free.picui.cn/free/2026/01/23/69732dc1d6518.webp&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://free.picui.cn/free/2026/01/23/69732dc1d6518.webp&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;具有相似性质的汉字还有这些：&lt;/p&gt;
 &lt;!-- 这是一张图片，ocr 内容为： --&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.nlark.com/yuque/0/2026/webp/61753668/1769154090994-10ed85dc-904d-42d8-a534-b587c998d0c8.webp&#34;
+&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2026/01/23/69732dc1d6518.webp&#34;
 	
 	
 	
