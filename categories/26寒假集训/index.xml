@@ -135,8 +135,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;or&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;报错注入语句&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;or&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;strong&gt;其他报错注入语句请见&lt;/strong&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.retr0.xyz/p/1.22-sql%E6%B3%A8%E5%85%A5%E8%BF%9B%E9%98%B6/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;1.22 sql注入进阶&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;其他报错注入语句请见&lt;/strong&gt; &lt;a class=&#34;link&#34; href=&#34;https://www.retr0.xyz/p/1.22-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-2/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;1.22 SQL注入系列-2&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Insert:&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
