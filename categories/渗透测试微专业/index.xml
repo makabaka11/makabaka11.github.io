@@ -2860,11 +2860,11 @@ echo $b;
 </description>
         </item>
         <item>
-        <title>1.5 mysql注入初步</title>
-        <link>https://www.retr0.xyz/p/1.5-mysql%E6%B3%A8%E5%85%A5%E5%88%9D%E6%AD%A5/</link>
+        <title>1.5 SQL注入系列-1</title>
+        <link>https://www.retr0.xyz/p/1.5-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-1/</link>
         <pubDate>Fri, 28 Nov 2025 20:07:03 +0800</pubDate>
         
-        <guid>https://www.retr0.xyz/p/1.5-mysql%E6%B3%A8%E5%85%A5%E5%88%9D%E6%AD%A5/</guid>
+        <guid>https://www.retr0.xyz/p/1.5-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-1/</guid>
         <description>&lt;h2 id=&#34;手动注入order-by与联合查询注入&#34;&gt;手动注入(ORDER BY与联合查询注入)
 &lt;/h2&gt;&lt;p&gt;以靶场&lt;a class=&#34;link&#34; href=&#34;http://sqlilabs.njhack.xyz/Less-1/index.php&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;http://sqlilabs.njhack.xyz/Less-1/index.php&lt;/a&gt;为例&lt;/p&gt;
@@ -3073,6 +3073,8 @@ echo $b;
 	
 	
 &gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;后日谈：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;info-schema-article-fragment&#34; style=&#34;position:relative;padding:80px 20px;display:flex;justify-content:center;align-items:center;font-family:&#39;Microsoft YaHei&#39;,sans-serif;width:100%;box-sizing:border-box;&#34;&gt;&lt;style&gt;.info-schema-article-fragment .outer-container{display:flex;align-items:center;gap:50px;background-color:#f3e5f5;border:4px solid #6a11cb;border-radius:20px;padding:40px 50px;box-shadow:0 8px 16px rgba(106,17,203,0.2);}.info-schema-article-fragment .table-container{display:flex;flex-direction:column;align-items:center;gap:15px;background-color:#e0f7fa;border:3px solid #11cbbb;border-radius:15px;padding:25px 30px;min-width:220px;}.info-schema-article-fragment .table-container.columns{background-color:#e3f2fd;border-color:#118ab2;}.info-schema-article-fragment .table-title{color:#2d3436;font-size:16px;font-weight:bold;text-align:center;}.info-schema-article-fragment .fields-container{display:flex;flex-direction:column;gap:10px;width:100%;}.info-schema-article-fragment .field-node{background-color:#ffd166;color:#2d3436;padding:12px 15px;border-radius:10px;font-size:14px;text-align:center;box-shadow:0 2px 4px rgba(0,0,0,0.1);}.info-schema-article-fragment .field-node.special{background-color:#f8a4d8;}.info-schema-article-fragment .top-label{position:absolute;top:40px;left:50%;transform:translateX(-50%);color:#6a11cb;font-size:18px;font-weight:bold;}&lt;/style&gt;&lt;div class=&#34;top-label&#34;&gt;information_schema（MySQL元数据系统库）&lt;/div&gt;&lt;div class=&#34;outer-container&#34;&gt;&lt;div class=&#34;table-container tables&#34;&gt;&lt;div class=&#34;table-title&#34;&gt;tables 表&lt;br/&gt;(表元数据)&lt;/div&gt;&lt;div class=&#34;fields-container&#34;&gt;&lt;div class=&#34;field-node&#34;&gt;TABLE_SCHEMA&lt;br/&gt;表所属数据库名&lt;/div&gt;&lt;div class=&#34;field-node&#34;&gt;TABLE_NAME&lt;br/&gt;表名称&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;table-container columns&#34;&gt;&lt;div class=&#34;table-title&#34;&gt;columns 表&lt;br/&gt;(列元数据)&lt;/div&gt;&lt;div class=&#34;fields-container&#34;&gt;&lt;div class=&#34;field-node&#34;&gt;TABLE_SCHEMA&lt;br/&gt;字段所属数据库名&lt;/div&gt;&lt;div class=&#34;field-node&#34;&gt;TABLE_NAME&lt;br/&gt;字段所属表名&lt;/div&gt;&lt;div class=&#34;field-node special&#34;&gt;COLUMN_NAME&lt;br/&gt;字段名&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;hr&gt;
 &lt;p&gt;所以我们现在的需求就是去&lt;code&gt;information_schema.COLUMNS&lt;/code&gt;表中查找&lt;code&gt;COLUMN_NAME&lt;/code&gt;栏目来看看security里users这个表有哪些栏目，并且添加限定条件&lt;code&gt;TABLE_SCHEMA=&#39;security&#39; and TABLE_NAME=&#39;users&#39;&lt;/code&gt;整合需求得到以下参数&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;

