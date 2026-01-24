@@ -319,64 +319,60 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#注释符">注释符</a></li>
-    <li><a href="#like语句和转义字符">LIKE语句和转义字符</a>
+    <li><a href="#前置知识">前置知识</a>
       <ol>
-        <li><a href="#like语句">LIKE语句</a></li>
-        <li><a href="#转义字符对照表">转义字符对照表</a></li>
-      </ol>
-    </li>
-  </ol>
-
-  <ol>
-    <li><a href="#方法一xpath函数报错">方法一：XPath函数报错</a>
-      <ol>
-        <li><a href="#updatexml函数的定义">updatexml函数的定义</a></li>
-        <li><a href="#updatexml报错注入">updatexml报错注入</a></li>
-        <li><a href="#extractvalue函数">extractvalue()函数</a></li>
-      </ol>
-    </li>
-    <li><a href="#方法二count--group-by--floorrand2报错">方法二：count(*) + group by + floor(rand()*2)报错</a>
-      <ol>
-        <li><a href="#原理解释仅作了解">原理解释（仅作了解）</a>
+        <li><a href="#注释符">注释符</a></li>
+        <li><a href="#like语句和转义字符">LIKE语句和转义字符</a>
           <ol>
-            <li><a href="#前置知识-1"><strong>前置知识：</strong></a></li>
-            <li><a href="#按步骤还原报错过程">按步骤还原报错过程：</a></li>
-            <li><a href="#报错核心原因总结">报错核心原因总结</a></li>
+            <li><a href="#like语句">LIKE语句</a></li>
+            <li><a href="#转义字符对照表">转义字符对照表</a></li>
           </ol>
         </li>
-        <li><a href="#使用方法">使用方法</a></li>
       </ol>
     </li>
-  </ol>
-
-  <ol>
-    <li><a href="#核心函数">核心函数</a></li>
-  </ol>
-
-  <ol>
-    <li><a href="#小测验">小测验</a>
+    <li><a href="#order-by与联合查询注入">ORDER BY与联合查询注入</a></li>
+    <li><a href="#报错注入">报错注入</a>
       <ol>
-        <li><a href="#第一关">第一关</a></li>
-        <li><a href="#第二关">第二关</a></li>
-        <li><a href="#第三关">第三关</a></li>
-      </ol>
-    </li>
-  </ol>
-
-  <ol>
-    <li><a href="#基本概念">基本概念</a></li>
-    <li><a href="#漏洞原理">漏洞原理</a></li>
-    <li><a href="#常见注入点">常见注入点</a></li>
-    <li><a href="#使用sqlmap注入">使用sqlmap注入</a>
-      <ol>
-        <li><a href="#前置准备抓取目标-http-请求包">前置准备：抓取目标 HTTP 请求包</a></li>
-        <li><a href="#核心操作步骤">核心操作步骤</a>
+        <li><a href="#方法一xpath函数报错">方法一：XPath函数报错</a>
           <ol>
-            <li><a href="#基础命令检测-http-头注入漏洞">基础命令（检测 HTTP 头注入漏洞）</a></li>
-            <li><a href="#布尔盲注最常用">布尔盲注（最常用）</a></li>
-            <li><a href="#时间盲注无页面响应差异时">时间盲注（无页面响应差异时）</a></li>
-            <li><a href="#提取数据">提取数据</a></li>
+            <li><a href="#updatexml函数的定义">updatexml函数的定义</a></li>
+            <li><a href="#updatexml报错注入">updatexml报错注入</a></li>
+            <li><a href="#extractvalue函数">extractvalue()函数</a></li>
+          </ol>
+        </li>
+        <li><a href="#方法二count--group-by--floorrand2报错">方法二：count(*) + group by + floor(rand()*2)报错</a>
+          <ol>
+            <li><a href="#原理解释仅作了解">原理解释（仅作了解）</a></li>
+            <li><a href="#使用方法">使用方法</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#布尔型注入">布尔型注入</a>
+      <ol>
+        <li><a href="#核心函数">核心函数</a></li>
+      </ol>
+    </li>
+    <li><a href="#post型盲注">POST型盲注</a>
+      <ol>
+        <li><a href="#小测验">小测验</a>
+          <ol>
+            <li><a href="#第一关">第一关</a></li>
+            <li><a href="#第二关">第二关</a></li>
+            <li><a href="#第三关">第三关</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#http-头注盲注详解">HTTP 头注盲注详解</a>
+      <ol>
+        <li><a href="#基本概念">基本概念</a></li>
+        <li><a href="#漏洞原理">漏洞原理</a></li>
+        <li><a href="#常见注入点">常见注入点</a></li>
+        <li><a href="#使用sqlmap注入">使用sqlmap注入</a>
+          <ol>
+            <li><a href="#前置准备抓取目标-http-请求包">前置准备：抓取目标 HTTP 请求包</a></li>
+            <li><a href="#核心操作步骤">核心操作步骤</a></li>
           </ol>
         </li>
       </ol>
@@ -457,9 +453,9 @@
     <section class="article-content">
     
     
-    <h1 id="前置知识">前置知识
-</h1><h2 id="注释符">注释符
-</h2><ol>
+    <h2 id="前置知识">前置知识
+</h2><h3 id="注释符">注释符
+</h3><ol>
 <li>
 <p><code>--+</code>	(推荐使用)在GET请求中，<code>+</code> 会被解析为空格，常用于URL注入</p>
 </li>
@@ -471,9 +467,9 @@
 <p>在实践，当上面的注释符不可用时，还可以尝试<code>%00</code>或闭合的形式绕过</p>
 </li>
 </ol>
-<h2 id="like语句和转义字符">LIKE语句和转义字符
-</h2><h3 id="like语句">LIKE语句
-</h3><p>再MySQL中LIKE语句用于模糊查询，其基本格式就是</p>
+<h3 id="like语句和转义字符">LIKE语句和转义字符
+</h3><h4 id="like语句">LIKE语句
+</h4><p>再MySQL中LIKE语句用于模糊查询，其基本格式就是</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -493,8 +489,8 @@
 </div>
 </div><p>但是因为一些字符的特殊性导致like语句的参数并不全都是<code>'%\匹配目标%'</code>那么简单，</p>
 <p>例如你要查询含有<code>\</code>的数据，参数就要填<code>'%\\\\%'</code>，详情见下文。</p>
-<h3 id="转义字符对照表">转义字符对照表
-</h3><div class="table-wrapper"><table>
+<h4 id="转义字符对照表">转义字符对照表
+</h4><div class="table-wrapper"><table>
   <thead>
       <tr>
           <th><strong>转义序列</strong></th>
@@ -581,8 +577,8 @@
 <li>反斜杠只转义紧跟其后的一个字符，所以<code>\%</code>只会把后面的<code>%</code>转义为普通字符，不会影响其他字符。</li>
 <li>在 LIKE 中，反斜杠本身需要 <strong>双重转义</strong> （<code>\\\\</code>），因为 MySQL 会先解析一次<code>\\</code>为<code>\</code>，然后 LIKE 再解析一次<code>\\</code>为<code>\</code>，最终得到一个字面量<code>\</code>。</li>
 </ol>
-<h1 id="order-by与联合查询注入">ORDER BY与联合查询注入
-</h1><p>这一部分在之前的文章已有讲述，详见<a class="link" href="https://www.retr0.xyz/p/1.5-mysql%E6%B3%A8%E5%85%A5%E5%88%9D%E6%AD%A5/"  target="_blank" rel="noopener"
+<h2 id="order-by与联合查询注入">ORDER BY与联合查询注入
+</h2><p>这一部分在之前的文章已有讲述，详见<a class="link" href="https://www.retr0.xyz/p/1.5-mysql%E6%B3%A8%E5%85%A5%E5%88%9D%E6%AD%A5/"  target="_blank" rel="noopener"
     >1.5 mysql注入初步</a></p>
 <p>仅补充一下<strong>注入测试位置</strong></p>
 <!-- 这是一张图片，ocr 内容为： -->
@@ -594,8 +590,8 @@
 	
 	
 ></p>
-<h1 id="报错注入">报错注入
-</h1><blockquote>
+<h2 id="报错注入">报错注入
+</h2><blockquote>
 <p>报错注入指利用错误信息回显获取数据库内容</p>
 <p>适用于页面无法正常回显查询内容，但会详细显示查询过程的错误信息时，可通过构造特殊SQL语句触发错误，将想要查询的数据通过错误信息带出。</p>
 </blockquote>
@@ -608,9 +604,9 @@
 <pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">?id=1&#39; and (查询语句) --+
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="方法一xpath函数报错">方法一：XPath函数报错
-</h2><h3 id="updatexml函数的定义">updatexml函数的定义
-</h3><blockquote>
+</div><h3 id="方法一xpath函数报错">方法一：XPath函数报错
+</h3><h4 id="updatexml函数的定义">updatexml函数的定义
+</h4><blockquote>
 <p><code>updatexml()</code>函数用于修改XML文档中的节点。</p>
 </blockquote>
 <div class="highlight"><div class="chroma">
@@ -625,8 +621,8 @@
 <p>第二个参数<code>XPath_string</code>是指定需要更新的XML节点的XPath表达式。</p>
 <p>第三个参数<code>new_value</code>是新值，用于替换找到的符合条件的数据。</p>
 <p>如果<code>XPath_string</code>格式错误，MySQL会抛出一个XPath语法错误。</p>
-<h3 id="updatexml报错注入">updatexml报错注入
-</h3><div class="highlight"><div class="chroma">
+<h4 id="updatexml报错注入">updatexml报错注入
+</h4><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -700,8 +696,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>其中<code>updatexml()</code>是调用修改xml的功能，参数第一个和第三个随便填个数字（遵循其用法），第二个参数使用<code>concat()</code>函数拼接字符串，<code>concat()</code>的参数根据实际需要填写，个数不限，里面必须要有<code>0x7e</code>引起报错，结合查询参数，比如<code>datebase()</code>查数据库名，select语句(外面要加括号)查更详细内容。</p>
-<h3 id="extractvalue函数">extractvalue()函数
-</h3><p><code>extractvalue()</code>和<code>updatexml()</code>的用法基本一致，只不过<code>extractvalue()</code>只有两个参数，所以只需要删掉上面示例语句中<code>updatexml()</code>的第三个参数1就可以了。</p>
+<h4 id="extractvalue函数">extractvalue()函数
+</h4><p><code>extractvalue()</code>和<code>updatexml()</code>的用法基本一致，只不过<code>extractvalue()</code>只有两个参数，所以只需要删掉上面示例语句中<code>updatexml()</code>的第三个参数1就可以了。</p>
 <p><strong>例如：</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -711,10 +707,10 @@
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">extractvalue</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">concat</span><span class="p">(</span><span class="mi">0</span><span class="n">x7e</span><span class="p">,</span><span class="o">@@</span><span class="k">version</span><span class="p">,</span><span class="mi">0</span><span class="n">x7e</span><span class="p">))</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="方法二count--group-by--floorrand2报错">方法二：count(*) + group by + floor(rand()*2)报错
-</h2><h3 id="原理解释仅作了解">原理解释（仅作了解）
-</h3><h4 id="前置知识-1"><strong>前置知识：</strong>
-</h4><p><strong>1. <code>rand(0)</code> 的伪随机特性</strong></p>
+</div><h3 id="方法二count--group-by--floorrand2报错">方法二：count(*) + group by + floor(rand()*2)报错
+</h3><h4 id="原理解释仅作了解">原理解释（仅作了解）
+</h4><h5 id="前置知识-1"><strong>前置知识：</strong>
+</h5><p><strong>1. <code>rand(0)</code> 的伪随机特性</strong></p>
 <ul>
 <li><code>rand(seed)</code> 是 <strong>伪随机数生成函数</strong> ，当种子固定为<code>0</code>时，生成的随机数序列是<strong>完全固定的</strong> 。</li>
 <li>在<strong>同一个查询中</strong> ，多次调用<code>rand(0)</code>会生成连续的随机数（而非每次重置种子）。</li>
@@ -769,8 +765,8 @@
 <li>遍历结束后返回虚拟表结果。</li>
 </ol>
 <hr>
-<h4 id="按步骤还原报错过程">按步骤还原报错过程：
-</h4><p>假设<code>users</code>表有<strong>至少 3 行数据</strong> （触发报错的必要条件），我们逐行分析虚拟表的变化：</p>
+<h5 id="按步骤还原报错过程">按步骤还原报错过程：
+</h5><p>假设<code>users</code>表有<strong>至少 3 行数据</strong> （触发报错的必要条件），我们逐行分析虚拟表的变化：</p>
 <p><strong>初始化状态</strong> ，虚拟表为空：</p>
 <div class="table-wrapper"><table>
   <thead>
@@ -786,8 +782,8 @@
       </tr>
   </tbody>
 </table></div>
-<h5 id="步骤-1处理第-1-行数据">步骤 1：处理第 1 行数据
-</h5><ol>
+<h6 id="步骤-1处理第-1-行数据">步骤 1：处理第 1 行数据
+</h6><ol>
 <li><strong>计算分组键 x1</strong>（第 1 次调用<code>rand(0)</code>）：<code>floor(rand(0)*2) → 0</code>。</li>
 <li><strong>检查虚拟表</strong> ：没有<code>x=0</code>的行，需要插入新行。</li>
 <li><strong>再次计算分组键 x2</strong> （第 2 次调用<code>rand(0)</code>）：<code>floor(rand(0)*2) → 1</code>。</li>
@@ -808,8 +804,8 @@
       </tr>
   </tbody>
 </table></div>
-<h5 id="步骤-2处理第-2-行数据">步骤 2：处理第 2 行数据
-</h5><ol>
+<h6 id="步骤-2处理第-2-行数据">步骤 2：处理第 2 行数据
+</h6><ol>
 <li><strong>计算分组键 x1</strong> （第 3 次调用<code>rand(0)</code>）：<code>floor(rand(0)*2) → 1</code>。</li>
 <li><strong>检查虚拟表</strong> ：存在<code>x=1</code>的行，将<code>count</code>加 1 → <code>count=2</code>。</li>
 </ol>
@@ -828,8 +824,8 @@
       </tr>
   </tbody>
 </table></div>
-<h5 id="步骤-3处理第-3-行数据触发报错">步骤 3：处理第 3 行数据（触发报错‼️）
-</h5><ol>
+<h6 id="步骤-3处理第-3-行数据触发报错">步骤 3：处理第 3 行数据（触发报错‼️）
+</h6><ol>
 <li><strong>计算分组键 x1</strong> （第 4 次调用<code>rand(0)</code>）：<code>floor(rand(0)*2) → 0</code>。</li>
 <li><strong>检查虚拟表</strong> ：没有<code>x=0</code>的行，需要插入新行。</li>
 <li><strong>再次计算分组键 x2</strong> （第 5 次调用<code>rand(0)</code>）：<code>floor(rand(0)*2) → 1</code>。</li>
@@ -837,15 +833,15 @@
 <li><strong>报错触发</strong>：MySQL 抛出<code>&lt;font style=&quot;color:#DF2A3F;background-color:rgba(0, 0, 0, 0);&quot;&gt;ERROR 1062 (23000): Duplicate entry '1' for key 'group_key'&lt;/font&gt;</code>（重复键错误）。</li>
 </ol>
 <hr>
-<h4 id="报错核心原因总结">报错核心原因总结
-</h4><ol>
+<h5 id="报错核心原因总结">报错核心原因总结
+</h5><ol>
 <li><strong>双重计算分组键</strong> ：<code>GROUP BY</code>在插入新行时会再次计算分组键，导致<code>rand(0)</code>被额外调用一次。</li>
 <li><strong>固定序列冲突</strong> ：<code>rand(0)</code>的固定序列使得 “插入时计算的分组键” 与虚拟表中已存在的分组键重复。</li>
 <li><strong>唯一键约束</strong> ：虚拟表的分组键是唯一键，重复插入会触发主键冲突错误。</li>
 </ol>
 <p>补充：如果<code>users</code>表行数不足 3，可能不会报错（比如仅 2 行时，插入 1 次后后续行直接累加计数，无二次插入）。</p>
-<h3 id="使用方法">使用方法
-</h3><p><strong>示例payload：</strong></p>
+<h4 id="使用方法">使用方法
+</h4><p><strong>示例payload：</strong></p>
 <p><strong>爆当前数据库及表名：</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -873,13 +869,13 @@
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="w"> </span><span class="n">concat</span><span class="p">(</span><span class="mi">0</span><span class="n">x7e</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">concat</span><span class="p">(</span><span class="n">group_concat</span><span class="p">(</span><span class="err">字段名</span><span class="mi">1</span><span class="p">),</span><span class="mi">0</span><span class="n">x3a</span><span class="p">,</span><span class="w"> </span><span class="n">group_concat</span><span class="p">(</span><span class="err">字段名</span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">表名</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="n">x7e</span><span class="p">,</span><span class="w"> </span><span class="n">floor</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">tables</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">x</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h1 id="布尔型注入">布尔型注入
-</h1><blockquote>
+</div><h2 id="布尔型注入">布尔型注入
+</h2><blockquote>
 <p>构造不同的SQL语句，根据页面返回的真假状态（如页面正常显示、报错或空白）来逐位推断数据库信息。</p>
 <p>适合无错误回显但页面有明显差异的场景。</p>
 </blockquote>
-<h2 id="核心函数">核心函数
-</h2><ol>
+<h3 id="核心函数">核心函数
+</h3><ol>
 <li><strong>length() - 判断长度</strong></li>
 </ol>
 <div class="highlight"><div class="chroma">
@@ -924,8 +920,8 @@
 ></p>
 <p><strong><font style="color:rgba(229,160,76,0.76);">注意事项：</font></strong> 布尔型注入请求量大，易被WAF拦截。建议编写自动化脚本或使用SQLMap工具。</p>
 <p>总之，了解原理就行，碰到就用<code>sqlmap</code>，别折磨自己。</p>
-<h1 id="post型盲注">POST型盲注
-</h1><blockquote>
+<h2 id="post型盲注">POST型盲注
+</h2><blockquote>
 <p>之前我们接触的都是通过GET接收信息的类型，</p>
 <p>但还存在通过POST接收信息的，通常存在于登录窗口等页面上</p>
 <p>POST型盲注有这样几个特点</p>
@@ -945,9 +941,9 @@
 	
 	
 ></p>
-<h2 id="小测验">小测验
-</h2><h3 id="第一关">第一关
-</h3><p>访问<a class="link" href="https://www.wechall.net/challenge/training/mysql/auth_bypass1/index.php"  target="_blank" rel="noopener"
+<h3 id="小测验">小测验
+</h3><h4 id="第一关">第一关
+</h4><p>访问<a class="link" href="https://www.wechall.net/challenge/training/mysql/auth_bypass1/index.php"  target="_blank" rel="noopener"
     >[WeChall] Training: MySQL I</a></p>
 <p>在username一栏尝试闭合，发现<code>admin'</code>没有报错。</p>
 <p>查看源码：</p>
@@ -960,8 +956,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>所以可以用万能钥匙绕过密码检查，username填<code>admin' #</code>即可</p>
-<h3 id="第二关">第二关
-</h3><p>访问：<a class="link" href="https://www.wechall.net/challenge/training/mysql/auth_bypass2/index.php"  target="_blank" rel="noopener"
+<h4 id="第二关">第二关
+</h4><p>访问：<a class="link" href="https://www.wechall.net/challenge/training/mysql/auth_bypass2/index.php"  target="_blank" rel="noopener"
     >[WeChall] Training: MySQL II</a></p>
 <p>同样发现是单引号闭合。</p>
 <p>查看源码：</p>
@@ -1028,8 +1024,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>前面加<code>-</code>是为了引起报错，从而让后面的<code>union select</code>得以覆盖报错位。此外，使用<code>or 1=2</code>永假条件也可以强制报错。</p>
-<h3 id="第三关">第三关
-</h3><p>访问：<a class="link" href="https://www.wechall.net/challenge/no_escape/index.php"  target="_blank" rel="noopener"
+<h4 id="第三关">第三关
+</h4><p>访问：<a class="link" href="https://www.wechall.net/challenge/no_escape/index.php"  target="_blank" rel="noopener"
     >[WeChall] No Escape</a>，我们的任务是修改任意一个候选人的票数为111，且程序提到票数达到100时会重制，所以靠手点肯定是不行的。</p>
 <p>任意点击投票按钮发现网址后会跟着一个参数<code>?vote_for=xxx</code></p>
 <p><strong>查看源码(核心)：</strong></p>
@@ -1062,19 +1058,19 @@
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">?</span><span class="n">vote_for</span><span class="o">=</span><span class="n">wagenk</span><span class="o">`=</span><span class="mi">111</span><span class="o">%</span><span class="mi">20</span><span class="o">%</span><span class="mi">23</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h1 id="http-头注盲注详解">HTTP 头注盲注详解
-</h1><h2 id="基本概念">基本概念
-</h2><blockquote>
+</div><h2 id="http-头注盲注详解">HTTP 头注盲注详解
+</h2><h3 id="基本概念">基本概念
+</h3><blockquote>
 <p><strong>HTTP 头注盲注</strong>（HTTP Header Blind SQL Injection）是一种特殊的 SQL 注入攻击，攻击者通过篡改 HTTP 请求头部字段（如 User-Agent、Referer、Cookie、X-Forwarded-For 等），将恶意 SQL 代码注入到后端数据库查询中，同时由于应用程序不返回数据库错误信息或查询结果，只能通过页面响应差异（布尔值）或时间延迟来判断注入结果，从而逐位提取敏感数据的攻击方式。</p>
 </blockquote>
-<h2 id="漏洞原理">漏洞原理
-</h2><ul>
+<h3 id="漏洞原理">漏洞原理
+</h3><ul>
 <li>开发者将 HTTP 头信息直接写入数据库（如日志记录功能），未做过滤或转义处理</li>
 <li>典型场景：<code>insert into logs(username, ip, useragent) values('admin', '127.0.0.1', 'user-agent内容');</code></li>
 <li>全局过滤常只针对 GET/POST 参数，忽略 HTTP 头信息，导致绕过防御</li>
 </ul>
-<h2 id="常见注入点">常见注入点
-</h2><p>HTTP 头中可能存在注入漏洞的字段包括：</p>
+<h3 id="常见注入点">常见注入点
+</h3><p>HTTP 头中可能存在注入漏洞的字段包括：</p>
 <div class="table-wrapper"><table>
   <thead>
       <tr>
@@ -1116,9 +1112,9 @@
       </tr>
   </tbody>
 </table></div>
-<h2 id="使用sqlmap注入">使用sqlmap注入
-</h2><h3 id="前置准备抓取目标-http-请求包">前置准备：抓取目标 HTTP 请求包
-</h3><p>sqlmap 处理 HTTP 头注入时，最便捷的方式是先抓取完整的 HTTP 请求包并保存为文本文件（通常命名为<code>request.txt</code>）。</p>
+<h3 id="使用sqlmap注入">使用sqlmap注入
+</h3><h4 id="前置准备抓取目标-http-请求包">前置准备：抓取目标 HTTP 请求包
+</h4><p>sqlmap 处理 HTTP 头注入时，最便捷的方式是先抓取完整的 HTTP 请求包并保存为文本文件（通常命名为<code>request.txt</code>）。</p>
 <ul>
 <li><strong>抓包工具</strong> ：Burp Suite</li>
 <li><strong>抓包示例</strong> ：
@@ -1150,10 +1146,10 @@
 </span></span><span class="line"><span class="cl"><span class="n">Connection</span><span class="o">:</span> <span class="l">close</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="核心操作步骤">核心操作步骤
-</h3><p>sqlmap 针对 HTTP 头注盲注的核心逻辑是：指定请求文件 → 标记注入点 → 选择盲注类型 → 自动化检测 / 提取数据。</p>
-<h4 id="基础命令检测-http-头注入漏洞">基础命令（检测 HTTP 头注入漏洞）
-</h4><p><strong>指定单个 HTTP 头注入点</strong></p>
+</div><h4 id="核心操作步骤">核心操作步骤
+</h4><p>sqlmap 针对 HTTP 头注盲注的核心逻辑是：指定请求文件 → 标记注入点 → 选择盲注类型 → 自动化检测 / 提取数据。</p>
+<h5 id="基础命令检测-http-头注入漏洞">基础命令（检测 HTTP 头注入漏洞）
+</h5><p><strong>指定单个 HTTP 头注入点</strong></p>
 <p>以<code>User-Agent</code>头为例，在请求文件中找到<code>User-Agent</code>行，在需要注入的位置添加<code>*</code>标记注入点，再执行 sqlmap 命令：</p>
 <p><strong>修改后的 request.txt</strong> （关键：<code>User-Agent: *</code>）：</p>
 <div class="highlight"><div class="chroma">
@@ -1194,8 +1190,8 @@
 </ul>
 <hr>
 <p>如果 sqlmap 未自动识别盲注类型，可手动指定布尔盲注（B）或时间盲注（T）：</p>
-<h4 id="布尔盲注最常用">布尔盲注（最常用）
-</h4><div class="highlight"><div class="chroma">
+<h5 id="布尔盲注最常用">布尔盲注（最常用）
+</h5><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1205,8 +1201,8 @@
 </span></span><span class="line"><span class="cl">sqlmap -r request.txt -p User-Agent --technique B --dbms MySQL --batch -v <span class="m">1</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="时间盲注无页面响应差异时">时间盲注（无页面响应差异时）
-</h4><div class="highlight"><div class="chroma">
+</div><h5 id="时间盲注无页面响应差异时">时间盲注（无页面响应差异时）
+</h5><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1216,8 +1212,8 @@
 </span></span><span class="line"><span class="cl">sqlmap -r request.txt -p User-Agent --technique T --delay <span class="m">2</span> --time-sec <span class="m">5</span> --batch
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="提取数据">提取数据
-</h4><p>确认存在漏洞后，可通过在下面的基础命令上添加之前学习的参数提取数据库、表、字段、数据：</p>
+</div><h5 id="提取数据">提取数据
+</h5><p>确认存在漏洞后，可通过在下面的基础命令上添加之前学习的参数提取数据库、表、字段、数据：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1301,6 +1297,19 @@
             
                 
 <article class="">
+    <a href="/p/1.24-1-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E5%92%8C%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.24-1 文件包含漏洞和命令执行漏洞</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
     <a href="/p/1.23-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-3/">
         
         
@@ -1346,19 +1355,6 @@
 
         <div class="article-details">
             <h2 class="article-title">1.19 XSS 注入攻击2与文件上传</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/1.18-xss%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">1.18 XSS注入攻击</h2>
         </div>
     </a>
 </article>
@@ -1653,8 +1649,10 @@
         
             
         
-        发表了100篇文章 · 
-        总计142.72k字
+            
+        
+        发表了101篇文章 · 
+        总计145.49k字
     </section>
 
 
