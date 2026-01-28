@@ -335,6 +335,7 @@
         <li><a href="#for循环">for循环</a></li>
       </ol>
     </li>
+    <li><a href="#紧急考点补充zip函数">紧急考点补充：zip()函数</a></li>
   </ol>
 </nav>
         </div>
@@ -546,6 +547,27 @@
 </span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)):</span>
 </span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="紧急考点补充zip函数">紧急考点补充：zip()函数
+</h2><p>Python 中的 <code>zip()</code> 函数用于将多个可迭代对象作为参数，将每个对象中对应的元素打包成一个元组，然后返回这些元组组成的列表。如果传入的迭代器长度不一致，zip() 函数会以最短的迭代器长度为准，返回相同长度的列表。</p>
+<p>在 Python 3 中，为了节约内存，<code>zip()</code> 返回的是一个对象。如果需要展示列表，需要使用 ·list()· 函数进行转换。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">zipped</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># 返回一个对象</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">zipped</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">zipped</span><span class="p">))</span> <span class="c1"># 使用 list() 转换为列表</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 输出: [(1, 4), (2, 5), (3, 6)]</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
@@ -973,7 +995,7 @@
             
         
         发表了105篇文章 · 
-        总计161.38k字
+        总计161.84k字
     </section>
 
 

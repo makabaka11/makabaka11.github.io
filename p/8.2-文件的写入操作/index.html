@@ -326,6 +326,7 @@
       </ol>
     </li>
     <li><a href="#文件的追加写入">文件的追加写入</a></li>
+    <li><a href="#紧急补充二级考点使用-fwritejoinlis--n">紧急补充：二级考点：使用 f.write(&rsquo;,&rsquo;.join(lis) + &ldquo;\n&rdquo;)</a></li>
   </ol>
 </nav>
         </div>
@@ -475,10 +476,33 @@
 <li><strong><font style="color:#DF2A3F;">a模式，文件不存在会创建文件</font></strong></li>
 <li><strong><font style="color:#DF2A3F;">a模式，文件存在会在最后，追加写入文件</font></strong></li>
 </ul>
-<p><strong><font style="color:#DF2A3F;"></font></strong></p>
 <blockquote>
-<p><font style="background-color:#AD1A2B;">换行操作可以通过在写入内容中加入&rsquo;\n&rsquo; 实现</font></p>
+<p>换行操作可以通过在写入内容中加入&rsquo;\n&rsquo; 实现</p>
 </blockquote>
+<h2 id="紧急补充二级考点使用-fwritejoinlis--n">紧急补充：二级考点：使用 f.write(&rsquo;,&rsquo;.join(lis) + &ldquo;\n&rdquo;)
+</h2><p>在 Python 中，<code>f.write(','.join(lis) + &quot;\n&quot;)</code> 是一种将列表内容写入文件的常用方法。它将列表中的元素用逗号连接成字符串，并在末尾添加换行符，然后写入文件。</p>
+<p><strong>示例</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 定义一个列表</span>
+</span></span><span class="line"><span class="cl"><span class="n">lis</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;苹果&#34;</span><span class="p">,</span> <span class="s2">&#34;香蕉&#34;</span><span class="p">,</span> <span class="s2">&#34;橙子&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 打开文件以写入模式</span>
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;fruits.txt&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">   <span class="c1"># 将列表内容写入文件，每个元素用逗号分隔，末尾添加换行符</span>
+</span></span><span class="line"><span class="cl">   <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lis</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;数据已成功写入文件！&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行后文件内容：<code>苹果,香蕉,橙子</code></p>
 
 </section>
 
@@ -904,7 +928,7 @@
             
         
         发表了105篇文章 · 
-        总计161.38k字
+        总计161.84k字
     </section>
 
 
