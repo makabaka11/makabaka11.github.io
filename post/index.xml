@@ -747,7 +747,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;可见这就是打包后的文件。&lt;/p&gt;
 &lt;h2 id=&#34;参考文献&#34;&gt;参考文献
-&lt;/h2&gt;&lt;p&gt;[1] WRnan. 【Django入门】Django ORM的F对象和Q对象[EB/OL]. (2020-02-16)[2026-01-29]. &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/wrnan/p/12331564.html.&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/h2&gt;&lt;p&gt;[1] Pur3. 2018.5.5铁三数据赛（第三赛区） 复现[EB/OL]. (2020-02-16)[2026-01-29]. &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/wrnan/p/12331564.html.&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://www.cnblogs.com/wrnan/p/12331564.html.&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
@@ -18103,7 +18103,7 @@ echo $b;
 &lt;p&gt;&lt;code&gt;mv [被剪切的文件] [粘贴到（包括文件名）]&lt;/code&gt;	剪切文件（也可用于修改文件名）&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;rm [目标]&lt;/code&gt;		删除&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;rm -rf [目标]&lt;/code&gt;	全部强制删除&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;find [要砸那个地方查找] -name [查找的文件名]&lt;/code&gt;	查找文件&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;find [要在哪个地方查找] -name [查找的文件名]&lt;/code&gt;	查找文件&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;echo xxx&lt;/code&gt;		回响（单独使用是复读机）&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;echo xxx &amp;gt; 1.txt&lt;/code&gt;	创建名为1.txt的文件并写入xxx（有覆盖效果）&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;echo xxx &amp;gt;&amp;gt; 1.txt&lt;/code&gt;	向1.txt中追加xxx&lt;/p&gt;
