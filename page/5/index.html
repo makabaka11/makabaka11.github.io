@@ -1253,7 +1253,7 @@
             
         
         发表了106篇文章 · 
-        总计165.30k字
+        总计165.42k字
     </section>
 
 
@@ -1914,6 +1914,60 @@ document.addEventListener('pjax:complete', () => {
 </script>
 
 
+
+
+<script>
+  
+  let originalTitle = document.title; 
+  const leaveTip = "桥豆麻袋(#°Д°)";     
+  const backTip = "(*'▽`*)欢迎回来!";        
+  const recoverDelay = 2000;           
+  let visibilityChangeHandler = null;  
+  let titleRecoverTimer = null;        
+
+  
+  function initTitleSwitch() {
+    
+    if (visibilityChangeHandler) {
+      document.removeEventListener('visibilitychange', visibilityChangeHandler);
+    }
+
+    
+    originalTitle = document.title;
+
+    
+    visibilityChangeHandler = function() {
+      
+      clearTimeout(titleRecoverTimer);
+
+      if (document.hidden) {
+        
+        document.title = leaveTip;
+      } else {
+        
+        document.title = backTip;
+        
+        titleRecoverTimer = setTimeout(() => {
+          document.title = originalTitle;
+        }, recoverDelay);
+      }
+    };
+
+    
+    document.addEventListener('visibilitychange', visibilityChangeHandler);
+  }
+
+  
+  document.addEventListener('pjax:success', function() {
+    
+    initTitleSwitch();
+  });
+
+  
+  window.onload = function() {
+    initTitleSwitch();
+  };
+</script>
 
 
 

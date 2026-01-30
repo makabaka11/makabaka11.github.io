@@ -253,10 +253,51 @@
 &lt;/ol&gt;
 &lt;h3 id=&#34;分析流程&#34;&gt;分析流程
 &lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;统计-协议分级看看哪种类型流量最多，接下来主要看它&lt;/li&gt;
-&lt;li&gt;看看第一条的source是谁，谁就是黑客&lt;/li&gt;
-&lt;li&gt;使用类似&lt;code&gt;http &amp;amp;&amp;amp; ip.src==黑客IP&lt;/code&gt;的过滤语句进行过滤&lt;/li&gt;
-&lt;li&gt;对于可疑的数据包使用追踪HTTP流功能&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;统计-协议分级：确定重点分析的流量：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;常规流量：http&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;重点关注流量（出现且占比较大）：&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;https 找https解密密钥文件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;dns 成段数据 base64加密&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;telnet 明文&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;icmp data&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ftp 记录交互过程&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ftp-data 记录传递的文件数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;802.1x WiFi协议 爆破WiFi密码&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;看看第一条的source是谁，谁就是黑客：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;http &amp;amp;&amp;amp; ip.addr == 黑客IP&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;找比较特殊的流量数据：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;首先变化的流量&lt;/li&gt;
+&lt;li&gt;最后的流量&lt;/li&gt;
+&lt;li&gt;包含命令的流量&lt;/li&gt;
+&lt;li&gt;包含文件/数据的流量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;目标（基础）：&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -269,11 +310,11 @@
 &lt;/h4&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;题目（进阶）：&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;黑客攻击的第一个受害主机的网卡IP地址&lt;/li&gt;
-&lt;li&gt;黑客对URL的哪一个参数实施了SQL注入&lt;/li&gt;
-&lt;li&gt;第一个受害主机网站数据库的表前缀（加上下划线例如abc_）&lt;/li&gt;
-&lt;li&gt;第一个受害主机网站数据库的名字&lt;/li&gt;
-&lt;li&gt;Joomla后台管理员的密码是多少&lt;/li&gt;
+&lt;li&gt;黑客攻击的第一个受害主机的网卡&lt;strong&gt;IP地址&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;黑客对URL的哪一个 &lt;strong&gt;参数&lt;/strong&gt; 实施了SQL注入&lt;/li&gt;
+&lt;li&gt;第一个受害主机网站数据库的&lt;strong&gt;表前缀&lt;/strong&gt; （加上下划线例如abc_）&lt;/li&gt;
+&lt;li&gt;第一个受害主机网站数据库的&lt;strong&gt;名字&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Joomla后台管理员的&lt;strong&gt;密码&lt;/strong&gt; 是多少&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;确认了黑客为：&lt;code&gt;202.1.1.2&lt;/code&gt;&lt;/p&gt;
@@ -320,9 +361,9 @@
 &lt;/h4&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;题目（进阶）：&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;黑客第一次获得的php木马的密码是什么&lt;/li&gt;
-&lt;li&gt;黑客第二次上传php木马是什么时间&lt;/li&gt;
-&lt;li&gt;第二次上传的木马通过HTTP协议中的哪个头传递数据&lt;/li&gt;
+&lt;li&gt;黑客第一次获得的php木马的 &lt;strong&gt;密码&lt;/strong&gt; 是什么&lt;/li&gt;
+&lt;li&gt;黑客第二次上传php木马是什么&lt;strong&gt;时间&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;第二次上传的木马通过HTTP协议中的 &lt;strong&gt;哪个头&lt;/strong&gt; 传递数据&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;继续对黑客ip进行跟踪过滤（基于刚才的webshell是POST形式）：&lt;code&gt;ip.src == 202.1.1.2 &amp;amp;&amp;amp; ip.dst == 192.168.1.8 &amp;amp;&amp;amp; http.request.method == POST&lt;/code&gt;&lt;/p&gt;
@@ -535,8 +576,8 @@
 &lt;/h4&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;题目（进阶）：&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;内网主机的mysql用户名和请求连接的密码hash是多少(用户:密码hash)&lt;/li&gt;
-&lt;li&gt;php代理第一次被使用时最先连接了哪个IP地址&lt;/li&gt;
+&lt;li&gt;内网主机的mysql&lt;strong&gt;用户名&lt;/strong&gt; 和请求连接的&lt;strong&gt;密码hash&lt;/strong&gt; 是多少(用户:密码hash)&lt;/li&gt;
+&lt;li&gt;php代理第一次被使用时最先连接了哪个&lt;strong&gt;IP地址&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;在查看协议分级时发现存在mysql协议，于是过滤mysql协议流量：&lt;/p&gt;
@@ -575,8 +616,8 @@
 &lt;/blockquote&gt;
 &lt;p&gt;过滤：&lt;code&gt;(ip.addr == 202.1.1.2 || ip.addr == 192.168.1.8) &amp;amp;&amp;amp; http&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;发现使用/install/index.php进行ls的命令执行，但没有回显，猜测是否目标主机为windows而非linux&lt;/p&gt;
-&lt;p&gt;对于Windows获取目录下的文件列表用dir或ls命令，修改过滤：&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;(ip.addr == 202.1.1.2 || ip.addr == 192.168.1.8) &amp;amp;&amp;amp; http contains &amp;quot;dir&amp;quot;&lt;/code&gt;（这里因为ls追踪流失败了所以直接提供dir的过滤语句，感兴趣可以试试ls的）&lt;/p&gt;
+&lt;p&gt;对于Windows获取目录下的文件列表用dir而非ls命令，修改过滤：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;(ip.addr == 202.1.1.2 || ip.addr == 192.168.1.8) &amp;amp;&amp;amp; http contains &amp;quot;dir&amp;quot;&lt;/code&gt;（这里因为用ls追踪流失败了所以直接提供dir的过滤语句，感兴趣可以试试ls的，虽然反正也会失败）&lt;/p&gt;
 &lt;!-- 这是一张图片，ocr 内容为： --&gt;
 &lt;p&gt;&lt;img src=&#34;https://i.loli.net/2020/02/19/rdZqwAvsza4eyg3.png&#34;
 	
@@ -643,7 +684,7 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ip.dst == 192.168.2.20 &amp;amp;&amp;amp; http.request.method==POST
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;挨个使用base64解码包中的参数值（累死我了），发现：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;挨个使用base64解码包中的参数值（累死我了😵），发现：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -652,7 +693,7 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cd/d&amp;#34;C:\phpStudy\WWW\b2evolution\install\test\&amp;#34;&amp;amp;procdump.exe -accepteula -ma lspasss.dmp&amp;amp;echo [S]&amp;amp;cd&amp;amp;echo [E]
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;可见攻击者使用了procdump.exe进行打包&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;可见攻击者使用了procdump.exe生成内存转储文件&lt;/p&gt;
 &lt;p&gt;在最后一个包中解码参数值发现：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -662,9 +703,9 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;C:\phpStudy\WWW\b2evolution\install\test\lsass.exe_180208_185247.dmp
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;可见这就是打包后的文件。&lt;/p&gt;
-&lt;h2 id=&#34;参考文献&#34;&gt;参考文献
-&lt;/h2&gt;&lt;p&gt;[1] Pur3. 2018.5.5铁三数据赛（第三赛区） 复现[EB/OL]. (2020-02-16)[2026-01-29]. &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/wrnan/p/12331564.html.&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/div&gt;&lt;p&gt;可见这就是生成的文件（lsass.exe的内存转储文件含系统用户的明文密码等重要安全信息）。&lt;/p&gt;
+&lt;h2 id=&#34;参考文献-reference&#34;&gt;参考文献 Reference
+&lt;/h2&gt;&lt;p&gt;[1] Pur3. 2018.5.5铁三数据赛（第三赛区） 复现 [EB/OL]. (2020-02-16)[2026-01-29]. &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/wrnan/p/12331564.html.&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://www.cnblogs.com/wrnan/p/12331564.html.&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>

@@ -357,7 +357,7 @@
         </li>
       </ol>
     </li>
-    <li><a href="#参考文献">参考文献</a></li>
+    <li><a href="#参考文献-reference">参考文献 Reference</a></li>
   </ol>
 </nav>
         </div>
@@ -674,10 +674,51 @@
 </ol>
 <h3 id="分析流程">分析流程
 </h3><ol>
-<li>统计-协议分级看看哪种类型流量最多，接下来主要看它</li>
-<li>看看第一条的source是谁，谁就是黑客</li>
-<li>使用类似<code>http &amp;&amp; ip.src==黑客IP</code>的过滤语句进行过滤</li>
-<li>对于可疑的数据包使用追踪HTTP流功能</li>
+<li>
+<p><strong>统计-协议分级：确定重点分析的流量：</strong></p>
+<ul>
+<li>
+<p>常规流量：http</p>
+</li>
+<li>
+<p>重点关注流量（出现且占比较大）：</p>
+</li>
+<li>
+<p>https 找https解密密钥文件</p>
+</li>
+<li>
+<p>dns 成段数据 base64加密</p>
+</li>
+<li>
+<p>telnet 明文</p>
+</li>
+<li>
+<p>icmp data</p>
+</li>
+<li>
+<p>ftp 记录交互过程</p>
+</li>
+<li>
+<p>ftp-data 记录传递的文件数据</p>
+</li>
+<li>
+<p>802.1x WiFi协议 爆破WiFi密码</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>看看第一条的source是谁，谁就是黑客：</strong></p>
+<p><code>http &amp;&amp; ip.addr == 黑客IP</code></p>
+</li>
+<li>
+<p><strong>找比较特殊的流量数据：</strong></p>
+<ul>
+<li>首先变化的流量</li>
+<li>最后的流量</li>
+<li>包含命令的流量</li>
+<li>包含文件/数据的流量</li>
+</ul>
+</li>
 </ol>
 <p><strong>目标（基础）：</strong></p>
 <ul>
@@ -690,11 +731,11 @@
 </h4><blockquote>
 <p><strong>题目（进阶）：</strong></p>
 <ul>
-<li>黑客攻击的第一个受害主机的网卡IP地址</li>
-<li>黑客对URL的哪一个参数实施了SQL注入</li>
-<li>第一个受害主机网站数据库的表前缀（加上下划线例如abc_）</li>
-<li>第一个受害主机网站数据库的名字</li>
-<li>Joomla后台管理员的密码是多少</li>
+<li>黑客攻击的第一个受害主机的网卡<strong>IP地址</strong></li>
+<li>黑客对URL的哪一个 <strong>参数</strong> 实施了SQL注入</li>
+<li>第一个受害主机网站数据库的<strong>表前缀</strong> （加上下划线例如abc_）</li>
+<li>第一个受害主机网站数据库的<strong>名字</strong></li>
+<li>Joomla后台管理员的<strong>密码</strong> 是多少</li>
 </ul>
 </blockquote>
 <p>确认了黑客为：<code>202.1.1.2</code></p>
@@ -741,9 +782,9 @@
 </h4><blockquote>
 <p><strong>题目（进阶）：</strong></p>
 <ul>
-<li>黑客第一次获得的php木马的密码是什么</li>
-<li>黑客第二次上传php木马是什么时间</li>
-<li>第二次上传的木马通过HTTP协议中的哪个头传递数据</li>
+<li>黑客第一次获得的php木马的 <strong>密码</strong> 是什么</li>
+<li>黑客第二次上传php木马是什么<strong>时间</strong></li>
+<li>第二次上传的木马通过HTTP协议中的 <strong>哪个头</strong> 传递数据</li>
 </ul>
 </blockquote>
 <p>继续对黑客ip进行跟踪过滤（基于刚才的webshell是POST形式）：<code>ip.src == 202.1.1.2 &amp;&amp; ip.dst == 192.168.1.8 &amp;&amp; http.request.method == POST</code></p>
@@ -956,8 +997,8 @@
 </h4><blockquote>
 <p><strong>题目（进阶）：</strong></p>
 <ol>
-<li>内网主机的mysql用户名和请求连接的密码hash是多少(用户:密码hash)</li>
-<li>php代理第一次被使用时最先连接了哪个IP地址</li>
+<li>内网主机的mysql<strong>用户名</strong> 和请求连接的<strong>密码hash</strong> 是多少(用户:密码hash)</li>
+<li>php代理第一次被使用时最先连接了哪个<strong>IP地址</strong></li>
 </ol>
 </blockquote>
 <p>在查看协议分级时发现存在mysql协议，于是过滤mysql协议流量：</p>
@@ -996,8 +1037,8 @@
 </blockquote>
 <p>过滤：<code>(ip.addr == 202.1.1.2 || ip.addr == 192.168.1.8) &amp;&amp; http</code></p>
 <p>发现使用/install/index.php进行ls的命令执行，但没有回显，猜测是否目标主机为windows而非linux</p>
-<p>对于Windows获取目录下的文件列表用dir或ls命令，修改过滤：</p>
-<p><code>(ip.addr == 202.1.1.2 || ip.addr == 192.168.1.8) &amp;&amp; http contains &quot;dir&quot;</code>（这里因为ls追踪流失败了所以直接提供dir的过滤语句，感兴趣可以试试ls的）</p>
+<p>对于Windows获取目录下的文件列表用dir而非ls命令，修改过滤：</p>
+<p><code>(ip.addr == 202.1.1.2 || ip.addr == 192.168.1.8) &amp;&amp; http contains &quot;dir&quot;</code>（这里因为用ls追踪流失败了所以直接提供dir的过滤语句，感兴趣可以试试ls的，虽然反正也会失败）</p>
 <!-- 这是一张图片，ocr 内容为： -->
 <p><img src="https://i.loli.net/2020/02/19/rdZqwAvsza4eyg3.png"
 	
@@ -1064,7 +1105,7 @@
 <pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">ip.dst == 192.168.2.20 &amp;&amp; http.request.method==POST
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>挨个使用base64解码包中的参数值（累死我了），发现：</p>
+</div><p>挨个使用base64解码包中的参数值（累死我了😵），发现：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1073,7 +1114,7 @@
 <pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">cd/d&#34;C:\phpStudy\WWW\b2evolution\install\test\&#34;&amp;procdump.exe -accepteula -ma lspasss.dmp&amp;echo [S]&amp;cd&amp;echo [E]
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>可见攻击者使用了procdump.exe进行打包</p>
+</div><p>可见攻击者使用了procdump.exe生成内存转储文件</p>
 <p>在最后一个包中解码参数值发现：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1083,9 +1124,9 @@
 <pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">C:\phpStudy\WWW\b2evolution\install\test\lsass.exe_180208_185247.dmp
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>可见这就是打包后的文件。</p>
-<h2 id="参考文献">参考文献
-</h2><p>[1] Pur3. 2018.5.5铁三数据赛（第三赛区） 复现[EB/OL]. (2020-02-16)[2026-01-29]. <a class="link" href="https://www.cnblogs.com/wrnan/p/12331564.html."  target="_blank" rel="noopener"
+</div><p>可见这就是生成的文件（lsass.exe的内存转储文件含系统用户的明文密码等重要安全信息）。</p>
+<h2 id="参考文献-reference">参考文献 Reference
+</h2><p>[1] Pur3. 2018.5.5铁三数据赛（第三赛区） 复现 [EB/OL]. (2020-02-16)[2026-01-29]. <a class="link" href="https://www.cnblogs.com/wrnan/p/12331564.html."  target="_blank" rel="noopener"
     >https://www.cnblogs.com/wrnan/p/12331564.html.</a></p>
 
 </section>
@@ -1514,7 +1555,7 @@
             
         
         发表了106篇文章 · 
-        总计165.30k字
+        总计165.42k字
     </section>
 
 
@@ -2254,6 +2295,60 @@ document.addEventListener('pjax:complete', () => {
 </script>
 
 
+
+
+<script>
+  
+  let originalTitle = document.title; 
+  const leaveTip = "桥豆麻袋(#°Д°)";     
+  const backTip = "(*'▽`*)欢迎回来!";        
+  const recoverDelay = 2000;           
+  let visibilityChangeHandler = null;  
+  let titleRecoverTimer = null;        
+
+  
+  function initTitleSwitch() {
+    
+    if (visibilityChangeHandler) {
+      document.removeEventListener('visibilitychange', visibilityChangeHandler);
+    }
+
+    
+    originalTitle = document.title;
+
+    
+    visibilityChangeHandler = function() {
+      
+      clearTimeout(titleRecoverTimer);
+
+      if (document.hidden) {
+        
+        document.title = leaveTip;
+      } else {
+        
+        document.title = backTip;
+        
+        titleRecoverTimer = setTimeout(() => {
+          document.title = originalTitle;
+        }, recoverDelay);
+      }
+    };
+
+    
+    document.addEventListener('visibilitychange', visibilityChangeHandler);
+  }
+
+  
+  document.addEventListener('pjax:success', function() {
+    
+    initTitleSwitch();
+  });
+
+  
+  window.onload = function() {
+    initTitleSwitch();
+  };
+</script>
 
 
 
