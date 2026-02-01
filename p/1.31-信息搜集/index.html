@@ -1,0 +1,2039 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 信息搜集都是挖漏洞的前置工作，信息搜集越充分对后续挖漏洞越有利\nsubfinder搜集子域名 查找一些简单命令写法\nsubfinder.exe -h\n查找某个网站的所有子域名\nsubfinder.exe -d nba.com（查找nba.com网站所有子域名）&mdash;&mdash;但是此方法容易被发现\n用代理查找某个网站的子域名\nsubfinder.exe -d nba.com -proxy http://xx.x.x.x:8080\n筛选查找，subfinder.exe -dL list.txt -f exclude.txt -m match.txt -o output.txt\n创建文件list.txt：存放所有你找到的网站\n创建文件exclude.txt：存放不需要查找域名的网站\n创建match.txt： 用来指定一个包含关键词 / 正则表达式的文件\n创建output.txt：结果输出到最后的文件夹里面\n需要判断哪些域名是活的（可以访问）\n将httpx里面的httpx.exe拖进subfinder文件夹\nhttpx和subfinder一起配合工作\nsubfinder -d nba.com | ./httpx -o hack.html -html -title\n">
+<title>1.31 信息搜集</title>
+
+<link rel='canonical' href='https://www.retr0.xyz/p/1.31-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/'>
+
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="1.31 信息搜集">
+<meta property='og:description' content=" 信息搜集都是挖漏洞的前置工作，信息搜集越充分对后续挖漏洞越有利\nsubfinder搜集子域名 查找一些简单命令写法\nsubfinder.exe -h\n查找某个网站的所有子域名\nsubfinder.exe -d nba.com（查找nba.com网站所有子域名）&mdash;&mdash;但是此方法容易被发现\n用代理查找某个网站的子域名\nsubfinder.exe -d nba.com -proxy http://xx.x.x.x:8080\n筛选查找，subfinder.exe -dL list.txt -f exclude.txt -m match.txt -o output.txt\n创建文件list.txt：存放所有你找到的网站\n创建文件exclude.txt：存放不需要查找域名的网站\n创建match.txt： 用来指定一个包含关键词 / 正则表达式的文件\n创建output.txt：结果输出到最后的文件夹里面\n需要判断哪些域名是活的（可以访问）\n将httpx里面的httpx.exe拖进subfinder文件夹\nhttpx和subfinder一起配合工作\nsubfinder -d nba.com | ./httpx -o hack.html -html -title\n">
+<meta property='og:url' content='https://www.retr0.xyz/p/1.31-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/'>
+<meta property='og:site_name' content='Retr0的小窝'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-31T19:32:25&#43;08:00'/><meta property='article:modified_time' content='2026-01-31T19:32:25&#43;08:00'/>
+<meta name="twitter:title" content="1.31 信息搜集">
+<meta name="twitter:description" content=" 信息搜集都是挖漏洞的前置工作，信息搜集越充分对后续挖漏洞越有利\nsubfinder搜集子域名 查找一些简单命令写法\nsubfinder.exe -h\n查找某个网站的所有子域名\nsubfinder.exe -d nba.com（查找nba.com网站所有子域名）&mdash;&mdash;但是此方法容易被发现\n用代理查找某个网站的子域名\nsubfinder.exe -d nba.com -proxy http://xx.x.x.x:8080\n筛选查找，subfinder.exe -dL list.txt -f exclude.txt -m match.txt -o output.txt\n创建文件list.txt：存放所有你找到的网站\n创建文件exclude.txt：存放不需要查找域名的网站\n创建match.txt： 用来指定一个包含关键词 / 正则表达式的文件\n创建output.txt：结果输出到最后的文件夹里面\n需要判断哪些域名是活的（可以访问）\n将httpx里面的httpx.exe拖进subfinder文件夹\nhttpx和subfinder一起配合工作\nsubfinder -d nba.com | ./httpx -o hack.html -html -title\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+        <link rel="stylesheet" href="/css/APlayer.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_918ed7c4aecb3d05.gif" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🥳</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Retr0的小窝</a></h1>
+            <h2 class="site-description">我们安全了……暂时的</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/349466985'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:ded000@retr0.xyz'
+                        target="_blank"
+                        title="email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/makabaka11'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.retr0.xyz/index.xml'
+                        target="_blank"
+                        title="RSS"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-rss"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M4 4a16 16 0 0 1 16 16" /><path d="M4 11a9 9 0 0 1 9 9" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://t.me/ded0000'
+                        target="_blank"
+                        title="Telegram"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页 | Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E-about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于 | About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/message/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-message"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 9h8" /><path d="M8 13h6" /><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" /></svg>
+                
+                <span>留言板 | Msg Board</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索 | Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>技术链接 | Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#subfinder搜集子域名">subfinder搜集子域名</a></li>
+    <li><a href="#fofa">fofa</a></li>
+    <li><a href="#工具xray_windows_amd64exe">工具xray_windows_amd64.exe</a>
+      <ol>
+        <li><a href="#基本用法1">基本用法1：</a></li>
+        <li><a href="#基本用法2burp和xray的联动">基本用法2：burp和xray的联动</a></li>
+      </ol>
+    </li>
+    <li><a href="#xray图形化界面的使用不用记命令的方法">xray图形化界面的使用（不用记命令的方法）</a></li>
+    <li><a href="#nuclei">nuclei</a>
+      <ol>
+        <li><a href="#准备工作">准备工作</a></li>
+        <li><a href="#多个目标批量">多个目标（批量）</a></li>
+        <li><a href="#nuclei-poc开发">nuclei-poc开发</a></li>
+      </ol>
+    </li>
+    <li><a href="#afrog">afrog</a></li>
+    <li><a href="#fiora">fiora</a></li>
+    <li><a href="#资产搜集">资产搜集</a>
+      <ol>
+        <li><a href="#ehole">Ehole</a></li>
+        <li><a href="#rad">rad</a></li>
+        <li><a href="#vulmap">vulmap</a></li>
+        <li><a href="#dddd">dddd</a></li>
+        <li><a href="#ghauri">ghauri</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BD%91%E5%AE%89/" style="background-color: #BEBDBD; color: #fff;">
+                网安
+            </a>
+        
+            <a href="/categories/26%E5%AF%92%E5%81%87%E9%9B%86%E8%AE%AD/" >
+                26寒假集训
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/1.31-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/">1.31 信息搜集</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+     
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-01-31 | 19:32</time>
+            </div>
+        
+
+        
+
+        
+        <div id="viewCount">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <blockquote>
+<p>信息搜集都是挖漏洞的前置工作，信息搜集越充分对后续挖漏洞越有利</p>
+</blockquote>
+<h2 id="subfinder搜集子域名">subfinder搜集子域名
+</h2><p>查找一些简单命令写法<br>
+<code>subfinder.exe -h</code><br>
+查找某个网站的所有子域名<br>
+<code>subfinder.exe -d nba.com</code>（查找nba.com网站所有子域名）&mdash;&mdash;但是此方法容易被发现<br>
+用代理查找某个网站的子域名<br>
+<code>subfinder.exe -d nba.com -proxy  http://xx.x.x.x:8080</code><br>
+筛选查找，<code>subfinder.exe -dL list.txt -f exclude.txt -m match.txt -o output.txt</code><br>
+创建文件list.txt：存放所有你找到的网站<br>
+创建文件exclude.txt：存放不需要查找域名的网站<br>
+创建match.txt： 用来指定一个包含关键词 / 正则表达式的文件<br>
+创建output.txt：结果输出到最后的文件夹里面<br>
+需要判断哪些域名是活的（可以访问）<br>
+将httpx里面的httpx.exe拖进subfinder文件夹<br>
+httpx和subfinder一起配合工作<br>
+<code>subfinder -d nba.com | ./httpx -o hack.html -html -title</code></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://free.picui.cn/free/2026/02/01/697f3ab49b914.webp"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h2 id="fofa">fofa
+</h2><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://free.picui.cn/free/2026/02/01/697f3ab51abee.webp"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>再导出查询的所有数据<br>
+后续可以用httpx检查活性</p>
+<h2 id="工具xray_windows_amd64exe">工具xray_windows_amd64.exe
+</h2><p><a class="link" href="http://testphp.vulnweb.com"  target="_blank" rel="noopener"
+    >http://testphp.vulnweb.com </a> 充满漏洞的网站，扫描这个网站</p>
+<h3 id="基本用法1">基本用法1：
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">xray_windows_amd64.exe webscan --basic-crawler http://testphp.vulnweb.com/ --html-output xx.html
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>会将最后扫出来的结果放在xx.html（相当于渗透测试报告）</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://free.picui.cn/free/2026/02/01/697f3ab57820d.webp"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h3 id="基本用法2burp和xray的联动">基本用法2：burp和xray的联动
+</h3><p>在xray目录底下打开cmd输入命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">xray_windows_amd64.exe webscan --listen 127.0.0.1:7777 --html-output burp.html
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>打开burpsuite添加监听端口：proxy settings&ndash;network&ndash;connections&ndash;add<br>
+如果以后不用就把勾去掉</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://free.picui.cn/free/2026/02/01/697f3ab55f15f.webp"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>设置完burp后在打开一个网站<br>
+在监听端口就能检测到网站的一些信息，然后你可以正常上网浏览此网站，xray会检测到一些网站可能存在的漏洞</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">xray_windows_amd64.exe webscan --url http://192.168.119.129:9000 扫描
+</span></span><span class="line"><span class="cl">poc扫描出来
+</span></span><span class="line"><span class="cl">xray_windows_amd64.exe webscan --url http://192.168.149.130:9000 --poc ./minio.yaml
+</span></span><span class="line"><span class="cl">xray_windows_amd64.exe -log-level debug webscan --url http://192.168.149.130:9000 --poc ./minio.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="xray图形化界面的使用不用记命令的方法">xray图形化界面的使用（不用记命令的方法）
+</h2><p>在一键日卫星打开xray<br>
+点击按钮选择，配置好</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://free.picui.cn/free/2026/02/01/697f3ab56c64e.webp"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>如果要配合burp使用就选择被动监听端口，因为是流量传递给burp，burp再传递给你，你才可以扫描<br>
+配置好后点击开始扫描就可以自动开始，结束会将结果以.html输出</p>
+<h2 id="nuclei">nuclei
+</h2><p>利用yaml文件扫描漏洞的程序</p>
+<h3 id="准备工作">准备工作
+</h3><p><code>nuclei.exe  -update-templates</code><br>
+单个目标<br>
+<code>nuclei.exe -target 192.168.119.129:9000</code><br>
+（vulfocus）</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://free.picui.cn/free/2026/02/01/697f3ab731f27.webp"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h3 id="多个目标批量">多个目标（批量）
+</h3><p><code>nuclei.exe -l list.txt</code><br>
+创建list.txt在里面写你需要扫描的网站</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://free.picui.cn/free/2026/02/01/697f3ab86b2e0.webp"
+	
+	
+	
+	loading="lazy"
+	
+	
+><br>
+<code>nuclei.exe -target 192.168.119.129 ：9000 -t ./minio/minio.yaml</code><br>
+指定poc扫描<br>
+<code>nuclei.exe -target 192.168.149.130:9000 -t ./minio/</code><br>
+指定批量poc扫描<br>
+<strong>matchers回包信息</strong></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://free.picui.cn/free/2026/02/01/697f3ab8c390b.webp"
+	
+	
+	
+	loading="lazy"
+	
+	
+>
+shiro<br>
+type:word<br>
+part:header<br>
+words:remember me???</p>
+<hr>
+<h3 id="nuclei-poc开发">nuclei-poc开发
+</h3><ol>
+<li>
+<p>开发环境：<br>
+Vscode+Yaml插件 <a class="link" href="https://code.visualstudio.com/"  target="_blank" rel="noopener"
+    >https://code.visualstudio.com/</a></p>
+</li>
+<li>
+<p>开发文档参考资料：<br>
+<a class="link" href="https://docs.nuclei.sh/template-guide/introduction"  target="_blank" rel="noopener"
+    >https://docs.nuclei.sh/template-guide/introduction</a><br>
+<a class="link" href="https://blog.csdn.net/qq_41315957/article/details/126594572"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/qq_41315957/article/details/126594572</a><br>
+<a class="link" href="https://blog.csdn.net/qq_41315957/article/details/126594670"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/qq_41315957/article/details/126594670</a><br>
+Poc开发-Yaml语法&amp;匹配提取 YAML是一种数据序列化语言，它的基本语法规则注意如下：</p>
+</li>
+</ol>
+<ul>
+<li>大小写敏感 -使用缩进表示层级关系 -缩进时不允许使用Tab键，只允许使用空格。</li>
+<li>缩进的空格数目不重要，只要相同层级的元素左侧对齐即可</li>
+</ul>
+<p><strong>Yaml Poc模版：</strong></p>
+<ol>
+<li>编号 id</li>
+<li>信息 info</li>
+<li>请求 http file tcp等</li>
+<li>匹配 matchers Interactsh</li>
+<li>提取 extractors</li>
+</ol>
+<p><strong>开发流程：</strong></p>
+<ol>
+<li>poc模版套用修改</li>
+<li>poc创建独立编号</li>
+<li>poc填入详细信息</li>
+<li>poc提交协议流程编写</li>
+<li>poc结果匹配模式判断</li>
+<li>poc结果提取模式判断</li>
+</ol>
+<p><strong>案例1：CVE-2023-28432 （匹配结果）</strong><br>
+<a class="link" href="https://github.com/vulhub/vulhub/blob/master/minio/CVE-2023-28432/README.zh-cn.md"  target="_blank" rel="noopener"
+    >https://github.com/vulhub/vulhub/blob/master/minio/CVE-2023-28432/README.zh-cn.md</a><br>
+使用docker-compose开启docker<br>
+浏览器打开<a class="link" href="http://192.168.87.146:9001/%e5%8f%af%e4%bb%a5%e8%ae%bf%e9%97%ae"  target="_blank" rel="noopener"
+    >http://192.168.87.146:9001/可以访问</a> 但是目标的api是在9000端口</p>
+<h2 id="afrog">afrog
+</h2><p>自带poc很少所以扫描出来很少</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">afrog -t http://testphp.vulnweb.com/ -o vulnweb.html
+</span></span><span class="line"><span class="cl">afrog -t http://testphp.vulnweb.com/ -P ./minio.yaml -o vulnweb.html
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="fiora">fiora
+</h2><p>为poc框架nuclei提供了图形界面，实现快速搜索、一键运行等功能<br>
+CNVD-2017-02833 fastjson 1.2.47<br>
+burp安装fiora插件 在history中，对该流量右键 send url to fiora 搜索fastjson 1.2.47，找到该条后右键run this poc<br>
+nuclei -t C:\Users\Administrator\nuclei-templates\http\vulnerabilities\fastjson\fastjson-1-2-47-rce.yaml -u <a class="link" href="http://192.168.213.129:55646/"  target="_blank" rel="noopener"
+    >http://192.168.213.129:55646/</a> -proxy <a class="link" href="http://127.0.0.1:8080"  target="_blank" rel="noopener"
+    >http://127.0.0.1:8080</a><br>
+注意：nuclei.exe复制到burp文件夹下</p>
+<h2 id="资产搜集">资产搜集
+</h2><p>优先攻子域名</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/webp/61753668/1769868457513-28c0f709-c1c7-449c-9b3f-eb1840b95aff.webp"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h3 id="ehole">Ehole
+</h3><p>Ehole_v0.0.1.exe finger -l 123.txt -json export.json</p>
+<h3 id="rad">rad
+</h3><p><code>rad -t http://4399.com</code><br>
+<code>rad_windows_amd64.exe -t http://4399.com -text 321.txt</code><br>
+<code>-t|--target|-u|--url</code>  指定目标网址<br>
+<code>--text</code>  以text形式输出<br>
+<code>--full</code>  导出完整请求<br>
+<code>--http-proxy</code>   添加代理<br>
+<code>--wait-login</code>   网站中存在登陆时使用</p>
+<hr>
+<p>与xray联动<br>
+<code>rad_windows_amd64.exe -t http://vulnweb.com  --http-proxy 127.0.0.1:7777</code><br>
+<code>xray_windows_amd64.exe webscan --listen 127.0.0.1:7777 --html-output 234.html</code></p>
+<h3 id="vulmap">vulmap
+</h3><p><code>python vulmap.py -u http://testphp.vulnweb.com</code><br>
+<code>python -m pip install -r requirements.txt</code></p>
+<h3 id="dddd">dddd
+</h3><p><code>dddd64.exe -t 192.168.213.0/24</code>   扫ip扫端口<br>
+<code>dddd64.exe -t http://192.168.213.129:43512/</code>  攻击网站</p>
+<h3 id="ghauri">ghauri
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python -m pip install -r requirements.txt
+</span></span><span class="line"><span class="cl">python setup.py install
+</span></span><span class="line"><span class="cl">ghauri -u <span class="s2">&#34;http://testphp.vulnweb.com/artists.php?artist=3&#34;</span>
+</span></span><span class="line"><span class="cl">ghauri -u <span class="s2">&#34;http://testphp.vulnweb.com/artists.php?artist=3&#34;</span> --skip-urlencode --dbs
+</span></span><span class="line"><span class="cl">ghauri -u <span class="s2">&#34;http://testphp.vulnweb.com/artists.php?artist=3&#34;</span> --skip-urlencode -D 库名  --tables
+</span></span><span class="line"><span class="cl">ghauri -u <span class="s2">&#34;http://testphp.vulnweb.com/artists.php?artist=3&#34;</span> --skip-urlencode -D 库名  -T 表名 --culumns
+</span></span><span class="line"><span class="cl">ghauri -u <span class="s2">&#34;http://testphp.vulnweb.com/artists.php?artist=3&#34;</span> --skip-urlencode -D 库名  -T 表名 -C 字段名 --dump
+</span></span><span class="line"><span class="cl">ghauri -u <span class="s2">&#34;http://testphp.vulnweb.com/artists.php?artist=3&#34;</span> --skip-urlencode --sql-shell
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+<div class="math-katex"></div>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/2.1-%E7%BB%BC%E5%90%88%E7%BB%83%E4%B9%A0/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2.1 综合练习</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.30-%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.30 漏洞挖掘</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.29-misc%E5%92%8C%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.29 misc和流量分析</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.27-arp%E6%AC%BA%E9%AA%97%E5%92%8Ccs%E7%9A%84%E4%BD%BF%E7%94%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.27 arp欺骗和CS的使用</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.26-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.26 漏洞复现</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+        <div class="comment-container mt-8"></div>
+        
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="makabaka11/makabaka11.github.io"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 Retr0
+    </section>
+    
+    <section class="running-time">
+    已存在于互联网
+    <span id="runningdays" class="running-days"></span>
+    </section>
+    
+    <section class="totalcount">
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        发表了109篇文章 · 
+        总计170.52k字
+    </section>
+
+
+    <section class="powerby">
+        
+            Powered by ctOS <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+
+                <script src="/js/APlayer.min.js"></script>
+                <script src="/js/Meting.min.js"></script>
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.eaf1211e4c7db355f37ceea53df13700e1b77fbcc3cfe8c1c1f69e4468a752e1.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<link rel="stylesheet" href="/css/custom.css">
+
+<script>
+(function () {
+    const url = new URL(window.location.href);
+
+    
+    if (url.searchParams.has('utterances')) {
+
+        
+        
+        window.location.replace(window.location.pathname);
+    }
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+
+<script>
+    var pjax = new Pjax({
+        selectors: [".main-container"]
+    });
+</script>
+
+
+<script src=https://www.retr0.xyz/js/topbar.min.js></script>
+
+
+
+<script>
+function initUtterances() {
+    const isArticle = document.querySelector('.article-page') && document.querySelector('.article-content');
+    if (!isArticle) return;
+
+    const oldScript = document.querySelector('script[src^="https://utteranc.es/client.js"]');
+    if (oldScript) oldScript.remove();
+
+    const container = document.querySelector('.comment-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    let script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'makabaka11/makabaka11.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+    container.appendChild(script);
+}
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    if (!window.pjax || !window.pjax.state) initUtterances();
+});
+</script>
+
+
+<script>
+pjax._handleResponse = pjax.handleResponse;
+pjax.handleResponse = function(responseText, request, href, options) {
+    if (request.responseText.match("<html")) {
+        if (responseText) {
+            let newDom = new DOMParser().parseFromString(responseText, 'text/html');
+            document.body.setAttribute("class", newDom.body.className);
+        }
+        pjax._handleResponse(responseText, request, href, options);
+    }
+};
+</script>
+
+
+<script>
+topbar.config({
+    barColors: {
+        '0': 'rgba(255, 255, 255, 1)',
+        '1.0': 'rgba(255, 183, 197, 1)'
+    }
+});
+
+document.addEventListener('pjax:send', () => topbar.show());
+
+document.addEventListener('pjax:complete', () => {
+    window.Stack.init();
+    topbar.hide();
+    setTimeout(initUtterances, 0);
+    updateViewCount();
+    renderKaTeX();
+    initPhotoSwipeFromDOM('.article-content');   
+    initLive2D();                                
+});
+</script>
+
+
+<script>
+function updateViewCount() {
+    const viewCountEl = document.getElementById('vercount_value_page_pv');
+    if (!viewCountEl) return;
+
+    viewCountEl.textContent = 'loading...';
+    const url = 'https://cn.vercount.one/js';
+
+    const old = document.querySelector(`script[src="${url}"]`);
+    if (old) old.remove();
+
+    const s = document.createElement('script');
+    s.src = url;
+    s.defer = true;
+    document.head.appendChild(s);
+
+    showHideView();
+}
+
+function showHideView() {
+    const viewCounts = document.querySelectorAll("#viewCount");
+    const isArticle = document.querySelector(".article-page");
+    viewCounts.forEach(ele => ele.style.display = isArticle ? 'block' : 'none');
+}
+</script>
+
+<script>
+    function showHideView() {
+        
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+
+
+
+<script>
+async function renderKaTeX() {
+    let katex = document.querySelector(".math-katex");
+    if (!katex) return;
+
+    while (typeof renderMathInElement !== 'function') {
+        await new Promise(r => setTimeout(r, 500));
+    }
+
+    const content = document.querySelector('.article-content') || document.body;
+    renderMathInElement(content, {
+        delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true }
+        ],
+        ignoredClasses: ["gist"]
+    });
+}
+</script>
+
+
+<div id="particles-js"></div>
+
+<script src=https://www.retr0.xyz/background/particles.min.js></script>
+<script>
+particlesJS.load('particles-js',
+    "https://www.retr0.xyz/background/particlesjs-config.json",
+    () => console.log('particles.js loaded')
+);
+</script>
+
+<style>
+#particles-js {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: -1;
+}
+</style>
+
+<script>
+
+function initPhotoSwipeFromDOM(selector) {
+    if (!window.PhotoSwipe) return;
+
+    const containers = document.querySelectorAll(selector);
+    if (!containers.length) return;
+
+    containers.forEach(container => {
+        const images = container.querySelectorAll('img');
+
+        images.forEach((img, index) => {
+
+            
+            function getImageSize() {
+                return new Promise(resolve => {
+                    if (img.complete && img.naturalWidth) {
+                        resolve({
+                            w: img.naturalWidth,
+                            h: img.naturalHeight
+                        });
+                    } else {
+                        const tmp = new Image();
+                        tmp.src = img.src || img.getAttribute("data-src");
+                        tmp.onload = () => resolve({ w: tmp.width, h: tmp.height });
+                    }
+                });
+            }
+
+            img.style.cursor = "zoom-in";
+
+            
+            img.addEventListener("click", async (e) => {
+                e.preventDefault();
+
+                const size = await getImageSize();
+                const pswpEl = document.querySelector('.pswp');
+
+                const items = Array.from(images).map(i => ({
+                    src: i.src || i.getAttribute("data-src"),
+                    msrc: i.src,
+                    w: i.naturalWidth || 800,
+                    h: i.naturalHeight || 600,
+                }));
+
+                items[index].w = size.w;
+                items[index].h = size.h;
+
+                const gallery = new PhotoSwipe(pswpEl, PhotoSwipeUI_Default, items, {
+                    index,
+                    history: false
+                });
+
+                
+                
+                
+                enablePhotoSwipeWebShare(gallery);
+
+                gallery.init();
+            });
+        });
+    });
+}
+
+
+
+
+
+function enablePhotoSwipeWebShare(gallery) {
+    gallery.listen('shareLinkClick', function(shareButtonData, e) {
+        e.preventDefault();
+
+        const item = gallery.currItem;
+
+        if (navigator.share) {
+            navigator.share({
+                title: document.title,
+                text: '给你分享一张图片：',
+                url: item.src
+            }).catch(err => console.log("分享失败：", err));
+
+            return false; 
+        }
+
+        
+        return true;
+    });
+}
+</script>
+
+
+
+<script>
+
+
+window._live2d_loaded = window._live2d_loaded || false;
+window._live2d_initialized = window._live2d_initialized || false;
+
+
+function loadLive2DAssetsOnce(cdnPath) {
+    if (window._live2d_loaded) return Promise.resolve();
+
+    window._live2d_loaded = true;
+
+    return Promise.all([
+        loadRes(cdnPath + "waifu.css", "css"),
+        loadRes(cdnPath + "Core/live2dcubismcore.js", "js"),
+        loadRes(cdnPath + "live2d-sdk.js", "js"),
+        loadRes(cdnPath + "waifu-tips.js", "js")
+    ]);
+}
+
+
+function initLive2DWidgetOnce(cdnPath) {
+
+    if (window._live2d_initialized) return;
+
+    
+    const old = document.querySelector("#waifu");
+    if (old) old.remove();
+
+    window._live2d_initialized = true;
+
+    initWidget({
+        waifuPath: cdnPath + "waifu-tips.json",
+        cdnPath: cdnPath + "Resources/",
+        tools: ["hitokoto", "asteroids", "express", "switch-model", "switch-texture", "photo", "info", "quit"],
+        dragEnable: true,
+        dragDirection: ["x", "y"],
+        switchType: "order"
+    });
+
+    console.log("[Live2D] Widget initialized.");
+}
+
+
+function loadRes(url, type) {
+    return new Promise((resolve) => {
+        let tag;
+        if (type === "css") {
+            tag = document.createElement("link");
+            tag.rel = "stylesheet";
+            tag.href = url;
+        } else {
+            tag = document.createElement("script");
+            tag.src = url;
+        }
+        tag.onload = resolve;
+        document.head.appendChild(tag);
+    });
+}
+
+
+function initLive2D() {
+    if (screen.width < 768) return;
+
+    const cdnPath = "https://www.retr0.xyz/blog-live2d/";
+
+    loadLive2DAssetsOnce(cdnPath)
+        .then(() => initLive2DWidgetOnce(cdnPath));
+}
+
+initLive2D();  
+
+
+document.addEventListener("pjax:complete", () => {
+    initLive2D(); 
+});
+</script>
+
+
+<style>
+    .highlight {
+         
+        max-height: 400px;
+        overflow: hidden;
+        position: relative;  
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .code-more-btn {
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: #f0f0f5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .code-more-img {
+        cursor: pointer !important;
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+</style>
+
+<script>
+  function initCodeMoreBox() {
+    let codeBlocks = document.querySelectorAll(".highlight");
+    if (!codeBlocks) {
+      return;
+    }
+    codeBlocks.forEach(codeBlock => {
+      
+      const existingBox = codeBlock.querySelector('.code-more-box');
+      if (existingBox) existingBox.remove();
+
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+        return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.addEventListener('click', () => {
+        codeBlock.classList.add('code-show');
+        codeMoreBox.style.display = 'none';
+        
+        window.dispatchEvent(new Event('resize'))
+      })
+      
+      let img = document.createElement('img');
+      img.classList.add('code-more-img');
+      img.src = "https://www.retr0.xyz/icons/codeMore.png"
+      
+      codeMoreBtn.appendChild(img);
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox)
+    })
+  }
+  
+  initCodeMoreBox();
+  
+  
+  document.addEventListener('pjax:complete', () => {
+    initCodeMoreBox();
+  });
+</script>
+
+
+<script>
+
+
+window.__articlePlayers = window.__articlePlayers || [];
+
+
+
+function getGlobalMetingPlayer() {
+    return window.__globalMetingPlayer || null;
+}
+
+
+
+function pauseGlobalMeting() {
+    const p = getGlobalMetingPlayer();
+    if (p && !p.audio.paused) {
+        p.pause();
+        console.log('[APlayer] Pause global Meting');
+    }
+}
+
+
+
+function pauseArticlePlayers() {
+    window.__articlePlayers.forEach(p => {
+        if (p && !p.audio.paused) {
+            p.pause();
+        }
+    });
+}
+
+
+
+function initAPlayers() {
+    if (typeof APlayer === "undefined") return;
+
+    document.querySelectorAll('.aplayer-article').forEach(el => {
+        if (el.dataset.loaded === "true") return;
+        el.dataset.loaded = "true";
+
+        const ap = new APlayer({
+            container: el,
+            fixed: false,
+            autoplay: false,
+            loop: 'none',
+            order: 'list',
+            preload: 'metadata',
+            volume: 0.7,
+            mutex: false, 
+            audio: [{
+                name: el.dataset.title || 'Unknown',
+                artist: el.dataset.artist || '',
+                url: el.dataset.src,
+                cover: el.dataset.cover || ''
+            }]
+        });
+
+        
+        ap.on('play', () => {
+            
+            pauseGlobalMeting();
+
+            
+            window.__articlePlayers.forEach(other => {
+                if (other !== ap && !other.audio.paused) {
+                    other.pause();
+                }
+            });
+
+    console.log('[APlayer] Switch article track');
+});
+
+
+        window.__articlePlayers.push(ap);
+    });
+}
+
+
+
+function bindMetingMutex() {
+    const p = getGlobalMetingPlayer();
+    if (!p || p.__mutexBound) return;
+
+    p.__mutexBound = true;
+
+    
+    p.on('play', () => {
+        pauseArticlePlayers();
+    });
+
+    console.log('[Meting] Mutex bound');
+}
+
+
+
+function initAllPlayers() {
+    initAPlayers();
+    bindMetingMutex();
+}
+
+
+
+document.addEventListener("DOMContentLoaded", initAllPlayers);
+document.addEventListener("pjax:complete", initAllPlayers);
+</script>
+
+<script>
+
+
+function destroyArticlePlayers() {
+    if (!window.__articlePlayers || window.__articlePlayers.length === 0) return;
+
+    window.__articlePlayers.forEach(ap => {
+        try {
+            if (!ap.audio.paused) {
+                ap.pause();
+            }
+            ap.destroy(); 
+        } catch (e) {
+            console.warn('[APlayer] destroy failed', e);
+        }
+    });
+
+    window.__articlePlayers = [];
+    console.log('[APlayer] Article players destroyed');
+}
+
+
+
+document.addEventListener('pjax:send', () => {
+    destroyArticlePlayers();
+});
+</script>
+
+
+<script>
+let runningTimeTimer = null;
+
+function updateRunningTime() {
+    const el = document.getElementById('runningdays');
+    if (!el) return;
+
+    let start = '2025-10-26 00:00:00'; 
+    start = new Date(start.replace(/-/g, "/"));
+    const now = new Date();
+
+    const diff = Math.floor((now.getTime() - start.getTime()) / 1000);
+
+    const days = Math.floor(diff / (24 * 3600));
+    const hours = Math.floor((diff % (24 * 3600)) / 3600);
+    const minutes = Math.floor((diff % 3600) / 60);
+    const seconds = diff % 60;
+
+    el.textContent =
+        `${days}天${hours}小时${minutes}分钟${seconds}秒`;
+}
+
+function initRunningTime() {
+    
+    updateRunningTime();
+
+    
+    if (runningTimeTimer) {
+        clearInterval(runningTimeTimer);
+    }
+
+    runningTimeTimer = setInterval(updateRunningTime, 1000);
+}
+
+ 
+document.addEventListener('DOMContentLoaded', () => {
+    initRunningTime();
+});
+
+ 
+document.addEventListener('pjax:complete', () => {
+    initRunningTime();
+});
+</script>
+
+
+
+
+<script>
+  
+  let originalTitle = document.title; 
+  const leaveTip = "桥豆麻袋(#°Д°)";     
+  const backTip = "(*'▽`*)欢迎回来!";        
+  const recoverDelay = 2000;           
+  let visibilityChangeHandler = null;  
+  let titleRecoverTimer = null;        
+
+  
+  function initTitleSwitch() {
+    
+    if (visibilityChangeHandler) {
+      document.removeEventListener('visibilitychange', visibilityChangeHandler);
+    }
+
+    
+    originalTitle = document.title;
+
+    
+    visibilityChangeHandler = function() {
+      
+      clearTimeout(titleRecoverTimer);
+
+      if (document.hidden) {
+        
+        document.title = leaveTip;
+      } else {
+        
+        document.title = backTip;
+        
+        titleRecoverTimer = setTimeout(() => {
+          document.title = originalTitle;
+        }, recoverDelay);
+      }
+    };
+
+    
+    document.addEventListener('visibilitychange', visibilityChangeHandler);
+  }
+
+  
+  document.addEventListener('pjax:success', function() {
+    
+    initTitleSwitch();
+  });
+
+  
+  window.onload = function() {
+    initTitleSwitch();
+  };
+</script>
+
+
+
+
+
+
+
+
+
+
+        
+
+
+<meting-js
+  id="14477349320"
+  server="netease"
+  type="playlist"
+  fixed="true"
+  bottom="20px"
+  right="20px"
+  autoplay="false"
+  width="300px"
+  preload="metadata"
+  mutex="false">
+</meting-js>
+
+<script>
+(function () {
+
+  
+  if (window.__global_meting_initialized) return;
+  window.__global_meting_initialized = true;
+
+  const STORAGE_KEY = "playInfo";
+  const PLAYLIST_ID = "14477349320";
+
+  function initGlobalMeting() {
+    const meting = document.querySelector('meting-js');
+    if (!meting) return;
+
+    
+    meting.addEventListener('aplayer-loaded', () => {
+      const ap = meting.aplayer;
+      if (!ap) return;
+
+      
+      window.__globalMetingPlayer = ap;
+      console.log('[Meting] Global APlayer ready');
+
+      bindPlayerEvents(ap);
+      restorePlayState(ap);
+    }, { once: true });
+  }
+
+  function bindPlayerEvents(ap) {
+    
+    const save = () => savePlayState(ap);
+
+    window.addEventListener('beforeunload', save);
+    document.addEventListener('visibilitychange', save);
+
+    
+    ap.on('play', () => {
+      document.dispatchEvent(new CustomEvent('global-player-play'));
+    });
+  }
+
+  function savePlayState(ap) {
+    if (!ap || !ap.list || !ap.audio) return;
+
+    const data = {
+      playlistId: PLAYLIST_ID,
+      index: ap.list.index,
+      currentTime: ap.audio.currentTime,
+      paused: ap.paused
+    };
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function restorePlayState(ap) {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!data || data.playlistId !== PLAYLIST_ID) return;
+
+    if (data.index < ap.list.songs.length) {
+      ap.list.switch(data.index);
+      ap.once('canplay', () => {
+        ap.seek(data.currentTime || 0);
+        if (!data.paused) {
+          ap.play().catch(() => {
+            ap.notice("点击继续播放", 3000);
+          });
+        }
+      });
+    }
+  }
+
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGlobalMeting);
+  } else {
+    initGlobalMeting();
+  }
+
+})();
+</script>
+
+    </body>
+</html>
