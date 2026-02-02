@@ -158,8 +158,15 @@ sam类文件属于用户管理文件&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;netscan&lt;/code&gt;
 查看网络记录&lt;/p&gt;
 &lt;h2 id=&#34;例题&#34;&gt;例题
-&lt;/h2&gt;&lt;h3 id=&#34;suspicion-进程取证&#34;&gt;Suspicion (进程取证)
-&lt;/h3&gt;&lt;p&gt;&lt;code&gt;volatility -f mem.vmem imageinfo&lt;/code&gt;&lt;/p&gt;
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;文件链接：&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1whj9cAeoTr6dPzOu0-8r5g?pwd=44nt&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1whj9cAeoTr6dPzOu0-8r5g?pwd=44nt&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;flag提交：&lt;a class=&#34;link&#34; href=&#34;https://labs.huayunsys.com/challenges&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://labs.huayunsys.com/challenges&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;suspicion-进程取证&#34;&gt;Suspicion (进程取证)
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;题目：&lt;/strong&gt; 在进程中获取目标信息，并且拿到进程中文件内容&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;volatility -f mem.vmem imageinfo&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;volatility -f mem.vmem --profile=WinXPSP2x86 pslist&lt;/code&gt;
 查看进程&lt;/p&gt;
 &lt;p&gt;发现TrueCrypt.exe，估计为加密工具pid为2012&lt;/p&gt;
@@ -173,7 +180,8 @@ sam类文件属于用户管理文件&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;PCTF{T2reCrypt_15_N07_S3cu2e}&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;unmount 卸载硬盘&lt;/p&gt;
 &lt;h3 id=&#34;win-xxxraw-操作系统取证&#34;&gt;WIN-xxx.raw (操作系统取证)
-&lt;/h3&gt;&lt;p&gt;本题要求获取操作系统用户名和密码，直接执行：&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;题目：&lt;/strong&gt; 获取目标操作系统中的用户密码信息&lt;/p&gt;
+&lt;p&gt;本题要求获取操作系统用户名和密码，直接执行：&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;volatility -f WIN-BU6IJ7FI9RU-20190927-152050.raw --profile Win7SP1x86_23418 hashdump&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;成功拿到cmd5加密后的用户名密码：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -186,7 +194,8 @@ sam类文件属于用户管理文件&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;放到cmd5上解密即可&lt;/p&gt;
 &lt;h3 id=&#34;memraw-用户行为取证&#34;&gt;mem.raw (用户行为取证)
-&lt;/h3&gt;&lt;p&gt;&lt;code&gt;volatility -f mem.raw imageinfo&lt;/code&gt;&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;题目：&lt;/strong&gt; 分析黑客在操作系统的行为&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;volatility -f mem.raw imageinfo&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;扫一下cmd：&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;volatility -f mem.raw --profile=Win7SP1x64 cmdscan&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;发现一条可疑的创建用户命令&lt;code&gt;net user mumuzi (ljmmz)ovo&lt;/code&gt;&lt;/p&gt;
@@ -197,7 +206,8 @@ sam类文件属于用户管理文件&lt;/p&gt;
 &lt;p&gt;导出文件到本地，修改为flag.zip，输入上面黑客提示的密码即可&lt;/p&gt;
 &lt;p&gt;拿到flag：&lt;code&gt;flag{ez_di_imp_1t_y0u_like?}&lt;/code&gt;&lt;/p&gt;
 &lt;h3 id=&#34;zyraw-浏览器历史记录取证&#34;&gt;zy.raw (浏览器历史记录取证)
-&lt;/h3&gt;&lt;p&gt;&lt;code&gt;volatility -f zy.raw imageinfo&lt;/code&gt;&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;题目：&lt;/strong&gt; 获取用户浏览器历史记录&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;volatility -f zy.raw imageinfo&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;volatility -f zy.raw --profile=WinXPSP2x86 iehistory&lt;/code&gt;
 获取历史记录可以发现flag.jpg hint.txt（虽然不知道为什么我扫不出来）&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;filescan | grep hint.txt&lt;/code&gt;&lt;/p&gt;
@@ -206,12 +216,13 @@ sam类文件属于用户管理文件&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;filescan | grep fl4g&lt;/code&gt;
 发现它桌面有个fl4g.zip&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;dumpfiles -Q 0x0000000002052028 -D ./&lt;/code&gt;
-改名之后下载
-发现2张图，jpg，png
-stegsolve先加载png，image combier再加载jpg，合成之后调整通道，发现二维码&lt;/p&gt;
+改名之后下载&lt;/p&gt;
+&lt;p&gt;发现2张图，jpg，png&lt;/p&gt;
+&lt;p&gt;stegsolve先加载png，image combier再加载jpg，合成之后调整通道，发现二维码&lt;/p&gt;
 &lt;p&gt;扫描二维码发现谐音提示（看半天看懂，气笑了）：氟徕格乃錵扩号欸必西弟亿艾虎锯錵扩号，即&lt;code&gt;flag{abcdefg}&lt;/code&gt;&lt;/p&gt;
 &lt;h3 id=&#34;memoryimg-内存密文取证&#34;&gt;memory.img (内存密文取证)
-&lt;/h3&gt;&lt;p&gt;&lt;code&gt;volatility -f memory.img imageinfo&lt;/code&gt;&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;题目：&lt;/strong&gt; 找到可疑内存进行取证+解密数据&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;volatility -f memory.img imageinfo&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;volatility -f memory.img --profile=Win2003SP1x86 pslist&lt;/code&gt;
 查看进程
 发现 DumpIt.exe pid 3660 1992&lt;/p&gt;

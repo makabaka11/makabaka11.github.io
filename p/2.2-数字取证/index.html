@@ -442,8 +442,15 @@ sam类文件属于用户管理文件</p>
 <p><code>netscan</code>
 查看网络记录</p>
 <h2 id="例题">例题
-</h2><h3 id="suspicion-进程取证">Suspicion (进程取证)
-</h3><p><code>volatility -f mem.vmem imageinfo</code></p>
+</h2><blockquote>
+<p>文件链接：<a class="link" href="https://pan.baidu.com/s/1whj9cAeoTr6dPzOu0-8r5g?pwd=44nt"  target="_blank" rel="noopener"
+    >https://pan.baidu.com/s/1whj9cAeoTr6dPzOu0-8r5g?pwd=44nt</a></p>
+<p>flag提交：<a class="link" href="https://labs.huayunsys.com/challenges"  target="_blank" rel="noopener"
+    >https://labs.huayunsys.com/challenges</a></p>
+</blockquote>
+<h3 id="suspicion-进程取证">Suspicion (进程取证)
+</h3><p><strong>题目：</strong> 在进程中获取目标信息，并且拿到进程中文件内容</p>
+<p><code>volatility -f mem.vmem imageinfo</code></p>
 <p><code>volatility -f mem.vmem --profile=WinXPSP2x86 pslist</code>
 查看进程</p>
 <p>发现TrueCrypt.exe，估计为加密工具pid为2012</p>
@@ -457,7 +464,8 @@ sam类文件属于用户管理文件</p>
 <p><code>PCTF{T2reCrypt_15_N07_S3cu2e}</code></p>
 <p>unmount 卸载硬盘</p>
 <h3 id="win-xxxraw-操作系统取证">WIN-xxx.raw (操作系统取证)
-</h3><p>本题要求获取操作系统用户名和密码，直接执行：</p>
+</h3><p><strong>题目：</strong> 获取目标操作系统中的用户密码信息</p>
+<p>本题要求获取操作系统用户名和密码，直接执行：</p>
 <p><code>volatility -f WIN-BU6IJ7FI9RU-20190927-152050.raw --profile Win7SP1x86_23418 hashdump</code></p>
 <p>成功拿到cmd5加密后的用户名密码：</p>
 <div class="highlight"><div class="chroma">
@@ -470,7 +478,8 @@ sam类文件属于用户管理文件</p>
 </div>
 </div><p>放到cmd5上解密即可</p>
 <h3 id="memraw-用户行为取证">mem.raw (用户行为取证)
-</h3><p><code>volatility -f mem.raw imageinfo</code></p>
+</h3><p><strong>题目：</strong> 分析黑客在操作系统的行为</p>
+<p><code>volatility -f mem.raw imageinfo</code></p>
 <p>扫一下cmd：</p>
 <p><code>volatility -f mem.raw --profile=Win7SP1x64 cmdscan</code></p>
 <p>发现一条可疑的创建用户命令<code>net user mumuzi (ljmmz)ovo</code></p>
@@ -481,7 +490,8 @@ sam类文件属于用户管理文件</p>
 <p>导出文件到本地，修改为flag.zip，输入上面黑客提示的密码即可</p>
 <p>拿到flag：<code>flag{ez_di_imp_1t_y0u_like?}</code></p>
 <h3 id="zyraw-浏览器历史记录取证">zy.raw (浏览器历史记录取证)
-</h3><p><code>volatility -f zy.raw imageinfo</code></p>
+</h3><p><strong>题目：</strong> 获取用户浏览器历史记录</p>
+<p><code>volatility -f zy.raw imageinfo</code></p>
 <p><code>volatility -f zy.raw --profile=WinXPSP2x86 iehistory</code>
 获取历史记录可以发现flag.jpg hint.txt（虽然不知道为什么我扫不出来）</p>
 <p><code>filescan | grep hint.txt</code></p>
@@ -490,12 +500,13 @@ sam类文件属于用户管理文件</p>
 <p><code>filescan | grep fl4g</code>
 发现它桌面有个fl4g.zip</p>
 <p><code>dumpfiles -Q 0x0000000002052028 -D ./</code>
-改名之后下载
-发现2张图，jpg，png
-stegsolve先加载png，image combier再加载jpg，合成之后调整通道，发现二维码</p>
+改名之后下载</p>
+<p>发现2张图，jpg，png</p>
+<p>stegsolve先加载png，image combier再加载jpg，合成之后调整通道，发现二维码</p>
 <p>扫描二维码发现谐音提示（看半天看懂，气笑了）：氟徕格乃錵扩号欸必西弟亿艾虎锯錵扩号，即<code>flag{abcdefg}</code></p>
 <h3 id="memoryimg-内存密文取证">memory.img (内存密文取证)
-</h3><p><code>volatility -f memory.img imageinfo</code></p>
+</h3><p><strong>题目：</strong> 找到可疑内存进行取证+解密数据</p>
+<p><code>volatility -f memory.img imageinfo</code></p>
 <p><code>volatility -f memory.img --profile=Win2003SP1x86 pslist</code>
 查看进程
 发现 DumpIt.exe pid 3660 1992</p>
@@ -1434,7 +1445,7 @@ stegsolve先加载png，image combier再加载jpg，合成之后调整通道，�
             
         
         发表了110篇文章 · 
-        总计174.72k字
+        总计174.92k字
     </section>
 
 
