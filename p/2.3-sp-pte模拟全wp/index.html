@@ -324,6 +324,7 @@
     <li><a href="#试题三文件包含">试题三：文件包含</a></li>
     <li><a href="#试题四反序列化">试题四：反序列化</a></li>
     <li><a href="#试题五失效的访问控制">试题五：失效的访问控制</a></li>
+    <li><a href="#目前发现的一些可能影响考试需要注意的点">目前发现的一些可能影响考试，需要注意的点</a></li>
     <li><a href="#参考文献">参考文献</a></li>
   </ol>
 </nav>
@@ -522,6 +523,13 @@
 ></p>
 <p>同理我们如法炮制把<code>Admin</code>先base64编码再URL编码得到<code>%59%57%52%74%61%57%34%3d</code>换回去就行了</p>
 <p>注意把前面的IsAdmin的值改为True，放包即可。</p>
+<h2 id="目前发现的一些可能影响考试需要注意的点">目前发现的一些可能影响考试，需要注意的点
+</h2><ol>
+<li>靶机关闭了文件扩展名显示，需要手动开启</li>
+<li>火狐默认没有配置代理127.0.0.1:8080的burp suite代理，需要手动配置，不然抓不了包</li>
+<li>没有发现phpstudy，遇到反序列化题目有源码可以借助文件上传/文件包含的题目跑一下</li>
+<li>可用的16进制编辑器有notepad++和ultra edit，后者的操作有点奇怪</li>
+</ol>
 <h2 id="参考文献">参考文献
 </h2><p>[1] Echo_200. CISP-PTE练习篇（基础题目五：失效的访问控制）[EB/OL]. (2023-01-31)[2026-02-03]. <a class="link" href="https://blog.csdn.net/wojiaoqwe/article/details/128816906"  target="_blank" rel="noopener"
     >https://blog.csdn.net/wojiaoqwe/article/details/128816906</a>.</p>
@@ -964,7 +972,7 @@
             
         
         发表了112篇文章 · 
-        总计177.39k字
+        总计177.56k字
     </section>
 
 
