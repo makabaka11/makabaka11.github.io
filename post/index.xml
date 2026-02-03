@@ -174,8 +174,8 @@ sam类文件属于用户管理文件&lt;/p&gt;
 &lt;h3 id=&#34;zyraw-浏览器历史记录取证&#34;&gt;zy.raw (浏览器历史记录取证)
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;题目：&lt;/strong&gt; 获取用户浏览器历史记录&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;volatility -f zy.raw imageinfo&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;volatility -f zy.raw --profile=WinXPSP2x86 iehistory&lt;/code&gt;
-获取历史记录可以发现flag.jpg hint.txt（虽然不知道为什么我扫不出来）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;volatility -f zy.raw --profile=WinXPSP2x86 iehistory&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;获取历史记录可以发现flag.jpg hint.txt（虽然不知道为什么我扫不出来）&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;filescan | grep hint.txt&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;dumpfiles -Q 0x0000000002456028 -D ./&lt;/code&gt;
 导出文件，改名，获取提示&lt;/p&gt;
@@ -201,8 +201,8 @@ sam类文件属于用户管理文件&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;memdump -p 1992 -D ./&lt;/code&gt;
 进程下载下来&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;foremost 1992.dmp&lt;/code&gt;
-对进程文件进行分解
-发现&lt;/p&gt;
+对进程文件进行分解&lt;/p&gt;
+&lt;p&gt;发现：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1

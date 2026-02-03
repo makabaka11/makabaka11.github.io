@@ -68,7 +68,7 @@
                 
                 </a>
                 
-                    <span class="emoji">🥳</span>
+                    <span class="emoji">😖</span>
                 
             </figure>
             
@@ -76,7 +76,7 @@
         
         <div class="site-meta">
             <h1 class="site-name"><a href="/">Retr0的小窝</a></h1>
-            <h2 class="site-description">我们安全了……暂时的</h2>
+            <h2 class="site-description">少女祈祷中……</h2>
         </div>
     </header><ol class="menu-social">
             
@@ -492,8 +492,8 @@ sam类文件属于用户管理文件</p>
 <h3 id="zyraw-浏览器历史记录取证">zy.raw (浏览器历史记录取证)
 </h3><p><strong>题目：</strong> 获取用户浏览器历史记录</p>
 <p><code>volatility -f zy.raw imageinfo</code></p>
-<p><code>volatility -f zy.raw --profile=WinXPSP2x86 iehistory</code>
-获取历史记录可以发现flag.jpg hint.txt（虽然不知道为什么我扫不出来）</p>
+<p><code>volatility -f zy.raw --profile=WinXPSP2x86 iehistory</code></p>
+<p>获取历史记录可以发现flag.jpg hint.txt（虽然不知道为什么我扫不出来）</p>
 <p><code>filescan | grep hint.txt</code></p>
 <p><code>dumpfiles -Q 0x0000000002456028 -D ./</code>
 导出文件，改名，获取提示</p>
@@ -519,8 +519,8 @@ sam类文件属于用户管理文件</p>
 <p><code>memdump -p 1992 -D ./</code>
 进程下载下来</p>
 <p><code>foremost 1992.dmp</code>
-对进程文件进行分解
-发现</p>
+对进程文件进行分解</p>
+<p>发现：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
