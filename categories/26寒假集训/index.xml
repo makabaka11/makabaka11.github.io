@@ -1231,8 +1231,9 @@ sam类文件属于用户管理文件&lt;/p&gt;
 &lt;/div&gt;&lt;h2 id=&#34;代码审计&#34;&gt;代码审计
 &lt;/h2&gt;&lt;p&gt;访问：&lt;a class=&#34;link&#34; href=&#34;http://dmsj1.njhack.xyz/#/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;http://dmsj1.njhack.xyz/#/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;解析：&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;看到页面上展示的源代码是获取传入的&lt;code&gt;cmd&lt;/code&gt;参数并使用exec执行，并且多余传入参数值有长度限制，可惜exec并不会直接输出代码执行的结果。&lt;/p&gt;
+&lt;h3 id=&#34;解析&#34;&gt;解析：
+&lt;/h3&gt;&lt;h4 id=&#34;思路一&#34;&gt;思路一：
+&lt;/h4&gt;&lt;p&gt;看到页面上展示的源代码是获取传入的&lt;code&gt;cmd&lt;/code&gt;参数并使用exec执行，并且多余传入参数值有长度限制，可惜exec并不会直接输出代码执行的结果。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -1252,6 +1253,10 @@ sam类文件属于用户管理文件&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;至此我们已经在当前目录创建了一个php文件并且陆续向其中写入了一句话木马（参数&lt;code&gt;z0&lt;/code&gt;）。&lt;/p&gt;
+&lt;h4 id=&#34;思路二&#34;&gt;思路二：
+&lt;/h4&gt;&lt;p&gt;直接传入参数：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;?cmd=ls ../ &amp;gt;&amp;gt; a.html &lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;接下来直接访问a.html这个文件就好啦。&lt;/p&gt;
 &lt;h2 id=&#34;反序列化&#34;&gt;反序列化
 &lt;/h2&gt;&lt;p&gt;自行部署：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;

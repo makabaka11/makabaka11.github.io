@@ -325,7 +325,16 @@
     <li><a href="#文件包含-3">文件包含-3</a></li>
     <li><a href="#命令执行-1">命令执行-1</a></li>
     <li><a href="#命令执行-2">命令执行-2</a></li>
-    <li><a href="#代码审计">代码审计</a></li>
+    <li><a href="#代码审计">代码审计</a>
+      <ol>
+        <li><a href="#解析">解析：</a>
+          <ol>
+            <li><a href="#思路一">思路一：</a></li>
+            <li><a href="#思路二">思路二：</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
     <li><a href="#反序列化">反序列化</a></li>
     <li><a href="#sql注入之insert注入">sql注入之insert注入</a></li>
   </ol>
@@ -665,8 +674,9 @@
 </div><h2 id="代码审计">代码审计
 </h2><p>访问：<a class="link" href="http://dmsj1.njhack.xyz/#/"  target="_blank" rel="noopener"
     >http://dmsj1.njhack.xyz/#/</a></p>
-<p><strong>解析：</strong></p>
-<p>看到页面上展示的源代码是获取传入的<code>cmd</code>参数并使用exec执行，并且多余传入参数值有长度限制，可惜exec并不会直接输出代码执行的结果。</p>
+<h3 id="解析">解析：
+</h3><h4 id="思路一">思路一：
+</h4><p>看到页面上展示的源代码是获取传入的<code>cmd</code>参数并使用exec执行，并且多余传入参数值有长度限制，可惜exec并不会直接输出代码执行的结果。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -686,6 +696,10 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>至此我们已经在当前目录创建了一个php文件并且陆续向其中写入了一句话木马（参数<code>z0</code>）。</p>
+<h4 id="思路二">思路二：
+</h4><p>直接传入参数：</p>
+<p><code>?cmd=ls ../ &gt;&gt; a.html </code></p>
+<p>接下来直接访问a.html这个文件就好啦。</p>
 <h2 id="反序列化">反序列化
 </h2><p>自行部署：</p>
 <div class="highlight"><div class="chroma">
@@ -1194,7 +1208,7 @@
             
         
         发表了113篇文章 · 
-        总计180.89k字
+        总计180.86k字
     </section>
 
 
