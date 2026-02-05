@@ -232,7 +232,7 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nmap -O --osscan-guess 192.168.80.155
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;也可以借助火狐的扩展插件：&lt;code&gt;&amp;lt;font style=&amp;quot;color:rgb(0, 0, 0);&amp;quot;&amp;gt;Wappalyzer&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;，效果相同。&lt;/font&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;也可以借助火狐的扩展插件：&lt;code&gt;Wappalyzer&lt;/code&gt;，效果相同。&lt;/p&gt;
 &lt;!-- 这是一张图片，ocr 内容为： --&gt;
 &lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/001.png&#34;
 	
@@ -410,7 +410,7 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;并且路径在&lt;code&gt;/home/flag4&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;进入该目录，读取flag：&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;进入该目录，读取flag：&lt;/p&gt;
 &lt;!-- 这是一张图片，ocr 内容为： --&gt;
 &lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.5/011.png&#34;
 	
@@ -722,7 +722,7 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;p&gt;&lt;strong&gt;可怜的老汤姆（Tom）总是追着杰瑞（Jerry）跑。也许他应该因为杰瑞给他造成的压力而提起诉讼（su）。&lt;/strong&gt;&lt;/p&gt;
 &lt;h3 id=&#34;flag4-1&#34;&gt;flag4
 &lt;/h3&gt;&lt;p&gt;由flag3提示暗示我们要提权，此处补充基于vi的rbash逃逸:&lt;/p&gt;
-&lt;p&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;先后输入回车：&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;先后输入回车：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
