@@ -4093,7 +4093,8 @@ echo $b;
 &lt;p&gt;&lt;code&gt;-P0&lt;/code&gt;	使用ip协议探测主机是否开启&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;-sU&lt;/code&gt;	使用UDP扫描&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;-p&lt;/code&gt;		指定扫描那些端口，例如&lt;code&gt;nmap -p 80,443,3380 192.168.1.0/24&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;-O&lt;/code&gt;		识别操作系统&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-O&lt;/code&gt;		识别操作系统，例如&lt;code&gt;nmap -O --osscan-guess 192.168.172.130&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-A&lt;/code&gt; 		强力模式，自动调用脚本获取最多信息，但也最慢&lt;/p&gt;
 &lt;h1 id=&#34;追加网络相关&#34;&gt;追加：网络相关
 &lt;/h1&gt;&lt;h2 id=&#34;tcp的三次握手与四次挥手&#34;&gt;TCP的三次握手与四次挥手
 &lt;/h2&gt;&lt;p&gt;TCP（Transmission Control Protocol，传输控制协议）是 &lt;strong&gt;面向连接、可靠的字节流协议&lt;/strong&gt;，其核心机制 “三次握手”（建立连接）和 “四次挥手”（释放连接）是保障数据可靠传输的基础。&lt;/p&gt;
