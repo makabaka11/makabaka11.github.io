@@ -555,15 +555,24 @@
 	
 ></p>
 <ol>
-<li><font style="color:rgb(0, 0, 0);">burp抓包，发送到intruder模式为pitch fork，把密码，和token做标记</font></li>
-<li><font style="color:rgb(0, 0, 0);">到payload中，payload2使用密码字典，</font></li>
-<li><strong><font style="color:rgb(0, 0, 0);">options</font></strong><font style="color:rgb(0, 0, 0);">中线程选择1，下面的</font><strong><font style="color:rgb(0, 0, 0);">grep extract</font></strong><font style="color:rgb(0, 0, 0);">（正则表达式），点</font><strong><font style="color:rgb(0, 0, 0);">add</font></strong><font style="color:rgb(0, 0, 0);">，</font><strong><font style="color:rgb(0, 0, 0);">Extract from regex group </font></strong><font style="color:rgb(0, 0, 0);">填入</font><code>&lt;input[^&gt;]*name=&quot;X-CSRF-Token&quot;[^&gt;]*value=&quot;([^&quot;]+)&quot;</code></li>
-</ol>
-<p>并勾选<strong>Case sensitive</strong> ，<strong>OK</strong></p>
-<ol start="4">
-<li><font style="color:rgb(0, 0, 0);">下面的</font><strong><font style="color:rgb(0, 0, 0);">redirections</font></strong><font style="color:rgb(0, 0, 0);">，点</font><strong><font style="color:rgb(0, 0, 0);">always</font></strong></li>
-<li><font style="color:rgb(0, 0, 0);">回到payload，选1，选择</font><strong><font style="color:rgb(0, 0, 0);">Recurisive grep</font></strong><font style="color:rgb(0, 0, 0);">，在下面的地方写上当前token的值</font></li>
-<li><font style="color:rgb(0, 0, 0);">记得把</font><strong><font style="color:rgb(0, 0, 0);">payload encoding</font></strong><font style="color:rgb(0, 0, 0);">的勾去掉，</font><strong><font style="color:rgb(0, 0, 0);">Start Attack</font></strong><font style="color:rgb(0, 0, 0);">.</font></li>
+<li>
+<p><font style="color:rgb(0, 0, 0);">burp抓包，发送到intruder模式为pitch fork，把密码，和token做标记</font></p>
+</li>
+<li>
+<p><font style="color:rgb(0, 0, 0);">到payload中，payload2使用密码字典，</font></p>
+</li>
+<li>
+<p><strong><font style="color:rgb(0, 0, 0);">options</font></strong><font style="color:rgb(0, 0, 0);">中线程选择1，下面的</font><strong><font style="color:rgb(0, 0, 0);">grep extract</font></strong><font style="color:rgb(0, 0, 0);">（正则表达式），点</font><strong><font style="color:rgb(0, 0, 0);">add</font></strong><font style="color:rgb(0, 0, 0);">，</font><strong><font style="color:rgb(0, 0, 0);">Extract from regex group </font></strong><font style="color:rgb(0, 0, 0);">填入</font><code>&lt;input[^&gt;]*name=&quot;X-CSRF-Token&quot;[^&gt;]*value=&quot;([^&quot;]+)&quot;</code>并勾选<strong>Case sensitive</strong> ，<strong>OK</strong></p>
+</li>
+<li>
+<p><font style="color:rgb(0, 0, 0);">下面的</font><strong><font style="color:rgb(0, 0, 0);">redirections</font></strong><font style="color:rgb(0, 0, 0);">，点</font><strong><font style="color:rgb(0, 0, 0);">always</font></strong></p>
+</li>
+<li>
+<p><font style="color:rgb(0, 0, 0);">回到payload，选1，选择</font><strong><font style="color:rgb(0, 0, 0);">Recurisive grep</font></strong><font style="color:rgb(0, 0, 0);">，在下面的地方写上当前token的值</font></p>
+</li>
+<li>
+<p><font style="color:rgb(0, 0, 0);">记得把</font><strong><font style="color:rgb(0, 0, 0);">payload encoding</font></strong><font style="color:rgb(0, 0, 0);">的勾去掉，</font><strong><font style="color:rgb(0, 0, 0);">Start Attack</font></strong><font style="color:rgb(0, 0, 0);">.</font></p>
+</li>
 </ol>
 <hr>
 <p>发现密码是<code>diana</code>，输入后成功进入后台：</p>
@@ -737,6 +746,19 @@
             
                 
 <article class="">
+    <a href="/p/2.6-3-%E7%BB%BC%E5%90%88%E7%AE%80%E5%8D%95-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2.6-3 综合简单 渗透测试报告</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
     <a href="/p/2.6-1-dc4%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/">
         
         
@@ -782,19 +804,6 @@
 
         <div class="article-details">
             <h2 class="article-title">2.3 代码审计</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/2.2-%E6%95%B0%E5%AD%97%E5%8F%96%E8%AF%81/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">2.2 数字取证</h2>
         </div>
     </a>
 </article>
@@ -1123,8 +1132,10 @@
         
             
         
-        发表了116篇文章 · 
-        总计187.49k字
+            
+        
+        发表了117篇文章 · 
+        总计188.25k字
     </section>
 
 

