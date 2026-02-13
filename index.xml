@@ -139,6 +139,24 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 	
 	
 &gt;&lt;/p&gt;
+&lt;p&gt;多说不便，不妨直接来欣赏一下片中一场live「世界第一公主殿下(ワールドイズマイン)」、「Ex-Otogibanashi」的原画面吧！&lt;/p&gt;
+
+  
+  
+
+
+&lt;div style=&#34;position: relative; width: 100%; padding-top: 56.25%;&#34;&gt;
+  
+  &lt;iframe 
+    src=&#34;https://player.bilibili.com/player.html?bvid=BV1X163BQEo8&amp;page=1&amp;high_quality=1&amp;danmaku=1&#34;
+    scrolling=&#34;no&#34; 
+    border=&#34;0&#34; 
+    frameborder=&#34;no&#34; 
+    framespacing=&#34;0&#34; 
+    allowfullscreen=&#34;true&#34;
+    style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34;
+  &gt;&lt;/iframe&gt;
+&lt;/div&gt;
 </description>
         </item>
         <item>
