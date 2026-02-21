@@ -85,6 +85,7 @@
 &lt;/h3&gt;&lt;h4 id=&#34;1-定义法&#34;&gt;1. 定义法
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;核心思路&lt;/strong&gt;：直接利用n阶行列式的定义（所有$n!$项的代数和），即：&lt;br&gt;
+
 $$|A| = \sum_{p_1p_2\cdots p_n} (-1)^{\tau(p_1p_2\cdots p_n)} a_{1p_1}a_{2p_2}\cdots a_{np_n}$$&lt;br&gt;
 其中$\tau$是排列$p_1p_2\cdots p_n$的逆序数。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：
@@ -98,9 +99,11 @@ $$|A| = \sum_{p_1p_2\cdots p_n} (-1)^{\tau(p_1p_2\cdots p_n)} a_{1p_1}a_{2p_2}\c
 &lt;h4 id=&#34;2-按行列展开法降阶法&#34;&gt;2. 按行（列）展开法（降阶法）
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;原理&lt;/strong&gt;：行列式等于它的任意一行(列)各元素与其对应的代数余子式乘积之和，即
+
 $$D=a_{i1}A_{i1}+a_{i2}A_{i3}+ \cdots +a_{in}A_{in}   
 (i=1,2, \cdots ,n) $$&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;核心思路&lt;/strong&gt;：利用行列式展开定理，将n阶行列式按某行（列）展开为n个n-1阶行列式的线性组合：&lt;br&gt;
+
 $$|A| = \sum_{j=1}^n a_{ij}A_{ij} \quad (\text{按第}i\text{行展开})$$&lt;br&gt;
 其中$A_{ij}=(-1)^{i+j}M_{ij}$（$M_{ij}$为余子式）。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：
@@ -114,6 +117,7 @@ $$|A| = \sum_{j=1}^n a_{ij}A_{ij} \quad (\text{按第}i\text{行展开})$$&lt;br
 &lt;h4 id=&#34;3-初等变换法化三角法&#34;&gt;3. 初等变换法（化三角法）
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;核心思路&lt;/strong&gt;：利用行列式的初等变换性质，将行列式化为&lt;strong&gt;上三角行列式&lt;/strong&gt;（主对角线下方全为0）或&lt;strong&gt;下三角行列式&lt;/strong&gt;（主对角线上方全为0），三角行列式的值=主对角线元素乘积：&lt;br&gt;
+
 $$\begin{vmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ 0 &amp; a_{22} &amp; \cdots &amp; a_{2n} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; a_{nn} \end{vmatrix} = a_{11}a_{22}\cdots a_{nn}$$&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：
 &lt;ul&gt;
@@ -133,6 +137,7 @@ $$\begin{vmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ 0 &amp; a_{22
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：三对角行列式（主对角线及相邻两条对角线非零，其余为0）：&lt;br&gt;
+
 $$D_n = \begin{vmatrix} a &amp; b &amp; &amp; \\ c &amp; a &amp; b &amp; \\ &amp; c &amp; a &amp; \ddots \\ &amp; &amp; \ddots &amp; \ddots &amp; b \\ &amp; &amp; &amp; c &amp; a \end{vmatrix}$$&lt;br&gt;
 展开后得递推关系$D_n = aD_{n-1} - bcD_{n-2}$，结合初始条件$D_1=a$、$D_2=a^2-bc$求解。&lt;/li&gt;
 &lt;/ul&gt;
@@ -161,24 +166,29 @@ $$D_n = \begin{vmatrix} a &amp; b &amp; &amp; \\ c &amp; a &amp; b &amp; \\ &amp
 &lt;h4 id=&#34;2-范德蒙德行列式vandermonde-determinant&#34;&gt;2. 范德蒙德行列式（Vandermonde Determinant）
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;结构特征&lt;/strong&gt;：第$i$行（或列）为变量$x_1,x_2,\cdots,x_n$的0到$n-1$次幂，形式如下：&lt;br&gt;
+
 $$V_n = \begin{vmatrix} 1 &amp; 1 &amp; \cdots &amp; 1 \\ x_1 &amp; x_2 &amp; \cdots &amp; x_n \\ x_1^2 &amp; x_2^2 &amp; \cdots &amp; x_n^2 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ x_1^{n-1} &amp; x_2^{n-1} &amp; \cdots &amp; x_n^{n-1} \end{vmatrix}$$&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：完全符合上述结构，或可通过转置、换行（列）调整为该结构（注意换行变号）。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;解法&lt;/strong&gt;：直接套用公式（所有变量两两差的乘积）：&lt;br&gt;
+
 $$V_n = \prod_{1 \leq j &lt; i \leq n} (x_i - x_j)$$&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;关键提醒&lt;/strong&gt;：若行列式是“列为幂次”，转置后仍为范德蒙德行列式（$|V_n^T|=|V_n|$）。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;3-爪型行列式星形行列式&#34;&gt;3. 爪型行列式（星形行列式）
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;结构特征&lt;/strong&gt;：主对角线有非零元素，仅第一行、第一列（或最后一行、最后一列）有非零元素，其余为0，形如“爪”：&lt;br&gt;
+
 $$D_n = \begin{vmatrix} a_0 &amp; b_1 &amp; b_2 &amp; \cdots &amp; b_n \\ c_1 &amp; a_1 &amp; 0 &amp; \cdots &amp; 0 \\ c_2 &amp; 0 &amp; a_2 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ c_n &amp; 0 &amp; 0 &amp; \cdots &amp; a_n \end{vmatrix} \quad (a_i \neq 0)$$&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：严格符合“主对角线+第一行+第一列”的爪形结构（无其他非零元素）。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;解法&lt;/strong&gt;：消去第一列（或第一行）的非零元素，化为对角行列式：&lt;br&gt;
 第$i$行（$i\geq2$）减去$\frac{c_i}{a_i} \times$第1行，得：&lt;br&gt;
+
 $$D_n = \begin{vmatrix} a_0 - \sum_{i=1}^n \frac{b_i c_i}{a_i} &amp; b_1 &amp; b_2 &amp; \cdots &amp; b_n \\ 0 &amp; a_1 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; 0 &amp; a_2 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; 0 &amp; \cdots &amp; a_n \end{vmatrix} = \left( a_0 - \sum_{i=1}^n \frac{b_i c_i}{a_i} \right) \prod_{i=1}^n a_i$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;4-箭型行列式特殊爪型&#34;&gt;4. 箭型行列式（特殊爪型）
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;结构特征&lt;/strong&gt;：仅第一行、最后一行、第一列、最后一列有非零元素，其余为0，形如“箭”：&lt;br&gt;
+
 $$D_n = \begin{vmatrix} a &amp; b &amp; &amp; &amp; c \\ d &amp; a_2 &amp; &amp; &amp; \\ &amp; &amp; a_3 &amp; &amp; \\ &amp; &amp; &amp; \ddots &amp; \\ e &amp; &amp; &amp; &amp; a_n \end{vmatrix} \quad (a_i \neq 0)$$&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：符合“四边非零、中间全零”的箭形结构。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;解法&lt;/strong&gt;：用第一列或最后一列的非零元素消去第一行、最后一行的非零元素，化为三角行列式。&lt;/li&gt;
@@ -202,6 +212,7 @@ $$D_n = \begin{vmatrix} a &amp; b &amp; &amp; &amp; c \\ d &amp; a_2 &amp; &amp;
 &lt;h4 id=&#34;6-hessenberg行列式&#34;&gt;6. Hessenberg行列式
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;结构特征&lt;/strong&gt;：上Hessenberg（主对角线下方仅一条非零元素带）或下Hessenberg（主对角线上方仅一条非零元素带）：&lt;br&gt;
+
 $$D_n = \begin{vmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\ &amp; a_{32} &amp; \cdots &amp; a_{3n} \\ &amp; &amp; \ddots &amp; \vdots \\ &amp; &amp; &amp; a_{nn} \end{vmatrix}$$&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：带状结构、非零元素集中在主对角线附近。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;解法&lt;/strong&gt;：按第一列（或最后一列）展开，建立递推关系求解。&lt;/li&gt;
@@ -321,6 +332,7 @@ $$
 &lt;li&gt;$A_{11} = (-1)^{1+1} \times 4 = 4$，$A_{12} = (-1)^{1+2} \times 3 = -3$&lt;/li&gt;
 &lt;li&gt;$A_{21} = (-1)^{2+1} \times 2 = -2$，$A_{22} = (-1)^{2+2} \times 1 = 1$
 因此，伴随矩阵：
+
 $$
   A^* = \begin{pmatrix} A_{11} &amp; A_{21} \\ A_{12} &amp; A_{22} \end{pmatrix} = \begin{pmatrix} 4 &amp; -2 \\ -3 &amp; 1 \end{pmatrix}
   $$&lt;/li&gt;
@@ -372,6 +384,7 @@ $$
 &lt;li&gt;第2行 = 第2行 - 2×第1行：$R_2 = R_2 - 2R_1$&lt;/li&gt;
 &lt;li&gt;第3行 = 第3行 + 3×第1行：$R_3 = R_3 + 3R_1$
 得到：
+
 $$
      \begin{pmatrix} 1 &amp; 0 &amp; 1 &amp; \vdots &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; -2 &amp; \vdots &amp; -2 &amp; 1 &amp; 0 \\ 0 &amp; 2 &amp; -2 &amp; \vdots &amp; 3 &amp; 0 &amp; 1 \end{pmatrix}
      $$&lt;/li&gt;
@@ -382,6 +395,7 @@ $$
 &lt;ul&gt;
 &lt;li&gt;第3行 = 第3行 - 2×第2行：$R_3 = R_3 - 2R_2$
 得到：
+
 $$
      \begin{pmatrix} 1 &amp; 0 &amp; 1 &amp; \vdots &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; -2 &amp; \vdots &amp; -2 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 2 &amp; \vdots &amp; 7 &amp; -2 &amp; 1 \end{pmatrix}
      $$&lt;/li&gt;
@@ -394,6 +408,7 @@ $$
 &lt;li&gt;第1行 = 第1行 - 1×第3行：$R_1 = R_1 - R_3$&lt;/li&gt;
 &lt;li&gt;第2行 = 第2行 + 2×第3行：$R_2 = R_2 + 2R_3$
 最终得到：
+
 $$
      \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; \vdots &amp; -\frac{5}{2} &amp; 1 &amp; -\frac{1}{2} \\ 0 &amp; 1 &amp; 0 &amp; \vdots &amp; 5 &amp; -1 &amp; 1 \\ 0 &amp; 0 &amp; 1 &amp; \vdots &amp; \frac{7}{2} &amp; -1 &amp; \frac{1}{2} \end{pmatrix}
      $$&lt;/li&gt;
