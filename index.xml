@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Tue, 24 Feb 2026 18:48:21 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 25 Feb 2026 23:23:53 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>留言板 | Msg Board</title>
         <link>https://www.retr0.xyz/message/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -119,6 +119,476 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;p&gt;纵使相逢应不识，尘满面，鬓如霜。&lt;/p&gt;
 &lt;p&gt;夜来幽梦忽还乡，小轩窗，正梳妆。相顾无言，惟有泪千行。&lt;/p&gt;
 &lt;p&gt;料得年年肠断处，明月夜，短松冈。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>【边做边记】基于树莓派&#43;Alist&#43;百度网盘的内网番剧存储服务器搭建</title>
+        <link>https://www.retr0.xyz/p/%E8%BE%B9%E5%81%9A%E8%BE%B9%E8%AE%B0%E5%9F%BA%E4%BA%8E%E6%A0%91%E8%8E%93%E6%B4%BE-alist-%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E7%9A%84%E5%86%85%E7%BD%91%E7%95%AA%E5%89%A7%E5%AD%98%E5%82%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/</link>
+        <pubDate>Wed, 25 Feb 2026 23:23:53 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/%E8%BE%B9%E5%81%9A%E8%BE%B9%E8%AE%B0%E5%9F%BA%E4%BA%8E%E6%A0%91%E8%8E%93%E6%B4%BE-alist-%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E7%9A%84%E5%86%85%E7%BD%91%E7%95%AA%E5%89%A7%E5%AD%98%E5%82%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/</guid>
+        <description>&lt;img src="https://www.retr0.xyz/post/%E6%9D%82%E9%A1%B9/img/RP/image.png" alt="Featured image of post 【边做边记】基于树莓派&#43;Alist&#43;百度网盘的内网番剧存储服务器搭建" /&gt;&lt;blockquote&gt;
+&lt;p&gt;在存储容器价格飞涨的当下，普通人仅为了存点电影番剧就破费买个NAS似乎代价变得太大（其实就是笔者没钱），所以就有了这个伪NAS项目的诞生。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;⚠️ &lt;strong&gt;&lt;font style=&#34;color:#DF2A3F;&#34;&gt;观前提示：本文涉及多种技术交叉配合，若您只是某方面有疑问，建议直接定位到相应部分阅读&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;物料清单&#34;&gt;物料清单
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;树莓派 Zero 2W开发板&lt;/li&gt;
+&lt;li&gt;TF卡（我的是三星128G）&lt;/li&gt;
+&lt;li&gt;树莓派用 5V2.5A 电源线&lt;/li&gt;
+&lt;li&gt;TF卡读卡器&lt;/li&gt;
+&lt;li&gt;腾达AC9路由器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;part-1-树莓派的系统安装和配置&#34;&gt;PART 1 树莓派的系统安装和配置
+&lt;/h2&gt;&lt;p&gt;这里笔者使用的树莓派是ZERO 2W型号，该型号满足内网运行Alist并传输蓝光视频已经绰绰有余。TF卡使用的是从旧手机上拆下来的前些年买的三星高速128GB卡，这张卡性能还是比较不错的。&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e6%9d%82%e9%a1%b9/img/RP/001.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;安装官方烧录工具-raspberry-pi-imager&#34;&gt;安装官方烧录工具 Raspberry Pi Imager
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;打开官网下载页：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.raspberrypi.com/software/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.raspberrypi.com/software/&lt;/a&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;下载对应系统版本（Windows/macOS/Linux）并安装。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;烧录tf卡&#34;&gt;烧录TF卡
+&lt;/h3&gt;&lt;p&gt;注：在烧录前记得备份卡内原文件&lt;/p&gt;
+&lt;p&gt;打开Raspberry Pi Imager&lt;/p&gt;
+&lt;p&gt;选择设备类型：&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e6%9d%82%e9%a1%b9/img/RP/002.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;选择目标系统：&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e6%9d%82%e9%a1%b9/img/RP/003.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;选择储存设备：&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e6%9d%82%e9%a1%b9/img/RP/004.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;接下来要预设一些系统信息，例如主机名，时间地区，账户 &lt;strong&gt;（一定要设）&lt;/strong&gt; 在此省略，&lt;/p&gt;
+&lt;p&gt;然后是WIFI信息，因为笔者此时是在家进行测试，有显示屏条件，可以很方便有线连接树莓派，但是如果转移到宿舍后将会很麻烦，所以为了方便转移，我先预设笔记本热点的SSID和密码，到时候把路由器的SSID和密码设置成和热点相同即可。&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e6%9d%82%e9%a1%b9/img/RP/005.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;SSH最好也打开，这样会大大方便我们管理。&lt;/p&gt;
+&lt;p&gt;最后一个Raspberry Pi Connect 就不用开了&lt;/p&gt;
+&lt;p&gt;确定后就自动开始写入了。&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e6%9d%82%e9%a1%b9/img/RP/006.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;树莓派的系统初步配置&#34;&gt;树莓派的系统初步配置
+&lt;/h3&gt;&lt;p&gt;把烧录完成的TF卡插到板子上，连好电源线和HDMI视频线，开机。&lt;/p&gt;
+&lt;h4 id=&#34;点亮取得控制权&#34;&gt;点亮（取得控制权）
+&lt;/h4&gt;&lt;p&gt;为防止有些人手头没有可用的显示器，下面给出两套连接方案：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;有显示器时：&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;将电源线插在PWR IN口，键鼠可用拓展坞或分线器插在USB口（具体是哪个口在电路板上有白色丝印标注），正常开机后配置WIFI连接&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;无显示器时&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;将烧录好的TF卡重新插回电脑，打开对应磁盘（如果没有显示可能需要到磁盘管理内分配一个磁盘）：打开 &lt;code&gt;network-config&lt;/code&gt;文件，将&lt;code&gt;optional:&lt;/code&gt;的值改为&lt;code&gt;false&lt;/code&gt;，例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;network:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  version: 2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  ethernets:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    eth0:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      dhcp4: true
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      dhcp6: true
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      optional: true
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  wifis:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    wlan0:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      dhcp4: true
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      regulatory-domain: &amp;#34;CN&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      access-points:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &amp;#34;Chiral Network&amp;#34;:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          password: &amp;#34;22de0aab58df7ec447e1ff9eaec470f1a142b90c6105e0e036a9bbc229c32266&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      optional: false
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;保存后将卡插回树莓派。&lt;/p&gt;
+&lt;p&gt;提前在设备上打开对应热点，频率一定选择&lt;strong&gt;2.4GHz&lt;/strong&gt;，开机后等待树莓派自动连接。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;总之连上网之后扫一下IP用Xshell等工具连接SSH即可。&lt;/p&gt;
+&lt;p&gt;接下来为了方便使用，我会进行换源以及配置VNC服务的操作，可以供您参考。&lt;/p&gt;
+&lt;h4 id=&#34;换源&#34;&gt;换源
+&lt;/h4&gt;&lt;p&gt;这里我们换阿里源&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;先改第一个文件：&lt;code&gt;/etc/apt/sources.list&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo nano /etc/apt/sources.list
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;把里面内容全部删掉，替换成这段：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb https://mirrors.aliyun.com/debian/ trixie main contrib non-free non-free-firmware
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb-src https://mirrors.aliyun.com/debian/ trixie main contrib non-free non-free-firmware
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb https://mirrors.aliyun.com/debian/ trixie-updates main contrib non-free non-free-firmware
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb-src https://mirrors.aliyun.com/debian/ trixie-updates main contrib non-free non-free-firmware
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb https://mirrors.aliyun.com/debian-security/ trixie-security main contrib non-free non-free-firmware
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb-src https://mirrors.aliyun.com/debian-security/ trixie-security main contrib non-free non-free-firmware
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;保存：&lt;code&gt;Ctrl+O&lt;/code&gt; → 回车 → &lt;code&gt;Ctrl+X&lt;/code&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;再改第二个文件：&lt;code&gt;/etc/apt/sources.list.d/raspi.list&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo nano /etc/apt/sources.list.d/raspi.list
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;内容全部删掉，替换成：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deb https://mirrors.aliyun.com/raspberrypi/ trixie main ui
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;保存退出。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt update
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;配置vnc远程桌面&#34;&gt;配置VNC远程桌面
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;安装VNC：&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt install realvnc-vnc-server realvnc-vnc-viewer -y
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;通过 raspi-config 启用 VNC（关键）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;树莓派的 VNC 需要在系统配置里手动开启，执行命令进入配置界面：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo raspi-config
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;按以下步骤操作（纯键盘操作，新手看仔细）：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;用&lt;strong&gt;上下方向键&lt;/strong&gt;选中 &lt;code&gt;3 Interface Options&lt;/code&gt;（接口选项）→ 按回车；&lt;/li&gt;
+&lt;li&gt;选中 &lt;code&gt;I3 VNC&lt;/code&gt; → 按回车；&lt;/li&gt;
+&lt;li&gt;系统会问 “Would you like the VNC server to be enabled?”，选 &lt;code&gt;Yes&lt;/code&gt; → 按回车；&lt;/li&gt;
+&lt;li&gt;看到提示 “VNC server is enabled” 后，按回车返回；&lt;/li&gt;
+&lt;li&gt;用&lt;strong&gt;Tab 键&lt;/strong&gt;切换到 &lt;code&gt;Finish&lt;/code&gt; → 按回车退出配置界面。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;strong&gt;设置 VNC 开机自启（确保重启后仍可用）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 启用 VNC 服务自启&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo systemctl &lt;span class=&#34;nb&#34;&gt;enable&lt;/span&gt; vncserver-x11-serviced
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 启动 VNC 服务&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo systemctl start vncserver-x11-serviced
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 检查服务状态（可选，确认是否运行）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo systemctl status vncserver-x11-serviced
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;输出里如果有 &lt;code&gt;active (running)&lt;/code&gt; 就说明服务正常启动了。&lt;/p&gt;
+&lt;p&gt;不过至此我们用VNC Viewer连接还并不能看到桌面，因为树莓派在不连接显示器时不会生成桌面，所以我们要配置虚拟桌面。&lt;/p&gt;
+&lt;p&gt;此外，为了方便，我们配置一下让我们连接实体显示器时能共享实际画面，无实体显示器连接时则生成虚拟桌面：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. 强制切回 X11&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;直接用命令设置，不用找菜单：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo raspi-config nonint do_wayland W1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;验证：&lt;code&gt;echo $XDG_SESSION_TYPE&lt;/code&gt;，输出应为 &lt;code&gt;X11&lt;/code&gt;。&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;开启桌面自动登录（无头时必须）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo raspi-config nonint do_boot_behaviour B4
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;（B4 = Desktop Autologin，保证无屏时能自动进入桌面）。&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;strong&gt;配置内核参数（有屏 / 无屏都稳定）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;编辑 cmdline.txt（新版用这个控制显示，替代旧版 config.txt 的部分功能）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo nano /boot/firmware/cmdline.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在&lt;strong&gt;同一行&lt;/strong&gt;的末尾添加（不要换行）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;video=HDMI-A-1:1920x1080M@60
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这行强制 1080p@60Hz，有显示器时用最佳分辨率，无显示器时生成虚拟屏。&lt;/p&gt;
+&lt;p&gt;保存：&lt;code&gt;Ctrl+O&lt;/code&gt; → 回车 → &lt;code&gt;Ctrl+X&lt;/code&gt;。&lt;/p&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;&lt;strong&gt;启用官方 VNC 服务&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo systemctl enable --now vncserver-x11-serviced
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;&lt;strong&gt;重启生效&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo reboot
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;至此，你已经可以顺利的在VNC Viewer中查看桌面了&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e6%9d%82%e9%a1%b9/img/RP/007.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;part-2-alist的安装和配置&#34;&gt;PART 2 Alist的安装和配置
+&lt;/h2&gt;&lt;h3 id=&#34;alist的安装&#34;&gt;Alist的安装
+&lt;/h3&gt;&lt;p&gt;为了方便复制粘贴命令行，我们依旧使用SSH进行操作&lt;/p&gt;
+&lt;p&gt;这里安装我们使用官方的一键脚本，不过要先提到root权限&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo su
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl -fsSL &lt;span class=&#34;s2&#34;&gt;&amp;#34;https://alistgo.com/v3.sh&amp;#34;&lt;/span&gt; -o v3.sh &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; bash v3.sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;执行后会弹出：&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e6%9d%82%e9%a1%b9/img/RP/008.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;输入&lt;strong&gt;1&lt;/strong&gt;回车，&lt;/p&gt;
+&lt;p&gt;安装完成后会弹出访问地址以及管理员初始密码，请自行保存：&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e6%9d%82%e9%a1%b9/img/RP/009.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;至此Alist已经安装完成&lt;/p&gt;
+&lt;h3 id=&#34;alist的配置&#34;&gt;Alist的配置
+&lt;/h3&gt;&lt;h4 id=&#34;账户配置&#34;&gt;账户配置
+&lt;/h4&gt;&lt;p&gt;使用刚才获取的管理员密码登录到Alist，点击下面的“管理”进入后台，&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e6%9d%82%e9%a1%b9/img/RP/010.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;首先将管理员密码更改一下&lt;/p&gt;
+&lt;h4 id=&#34;挂载百度网盘&#34;&gt;挂载百度网盘
+&lt;/h4&gt;&lt;p&gt;进入到后台管理的存储板块，点击添加，选择“百度网盘”&lt;/p&gt;
+&lt;p&gt;根据个人需求填写页面内容，其中刷新令牌请到&lt;a class=&#34;link&#34; href=&#34;https://openapi.baidu.com/oauth/2.0/authorize?response_type=code&amp;amp;client_id=hq9yQ9w9kR4YHj1kyYafLygVocobh7Sf&amp;amp;redirect_uri=https://alistgo.com/tool/baidu/callback&amp;amp;scope=basic,netdisk&amp;amp;qrcode=1&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;与百度连接&lt;/a&gt;获取&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e6%9d%82%e9%a1%b9/img/RP/011.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;为了实现视频在线播放，我们还要把Web 代理功能打开，WebDAV策略改为本地代理&lt;/p&gt;
+&lt;p&gt;根文件夹路径指的是你可以只挂百度网盘中的某个文件夹&lt;/p&gt;
+&lt;p&gt;因为这里只对百度网盘进行演示，如果您要挂载其他类型的网盘或有不懂的设置项建议查看官方文档：&lt;a class=&#34;link&#34; href=&#34;https://alistgo.com/zh/guide/drivers/common.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;通用项&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;开启webdav&#34;&gt;开启WebDAV
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;到角色板块中添加webdav角色，权限是webdav读取&lt;/li&gt;
+&lt;/ol&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e6%9d%82%e9%a1%b9/img/RP/012.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;到用户板块中添加用户名为webdav，角色选择刚才创建的webdav&lt;/li&gt;
+&lt;/ol&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e6%9d%82%e9%a1%b9/img/RP/013.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;part-3-媒体库的访问&#34;&gt;PART 3 媒体库的访问
+&lt;/h2&gt;&lt;p&gt;为了方便我们查看和管理番剧，建议使用IOS端的&lt;strong&gt;nipaplay&lt;/strong&gt;软件，在软件中点击添加媒体服务器，选择webdav格式，填写对应信息即可：&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e6%9d%82%e9%a1%b9/img/RP/014.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;接下来直接访问视频文件手动或者使用一键挂削功能即可。&lt;/p&gt;
+&lt;p&gt;附成品图：&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e6%9d%82%e9%a1%b9/img/RP/015.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;part-4-宿舍内网环境搭建&#34;&gt;PART 4 宿舍内网环境搭建
+&lt;/h2&gt;&lt;p&gt;鉴于我们勾槽的校园网开了AP隔离而且晚上12:00准时断网，因此要想持续稳定地访问媒体库，搭建宿舍自己的内网环境是必须的。&lt;/p&gt;
+&lt;p&gt;这里我们使用腾达AC9的 Client+AP 功能先桥接校园网再用无线形式开放内网，将两个网络设置为不同网段即可做到独立内网环境。&lt;/p&gt;
+&lt;p&gt;至于校园网的登录验证，应该先使用一个设备连接校园网并登录后设置路由器WAN口mac地址为刚才的设备相同，即可绕过校园网登陆检测。&lt;/p&gt;
+&lt;p&gt;但是因为笔者的路由器要开学一段时间才能寄到学校，所以上面的描述目前还是设想，让我们：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;To Be Continue &amp;ndash;&amp;gt;&lt;/strong&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -27858,6 +28328,14 @@ $$r(A)$$&lt;p&gt;。&lt;/p&gt;
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
         <guid>https://www.retr0.xyz/s/clannad/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>【边做边记】基于树莓派&#43;Alist&#43;百度网盘的内网番剧存储服务器搭建</title>
+        <link>https://www.retr0.xyz/s/rpalist/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://www.retr0.xyz/s/rpalist/</guid>
         <description></description>
         </item>
         <item>

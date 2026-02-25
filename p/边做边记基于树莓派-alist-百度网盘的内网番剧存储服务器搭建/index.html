@@ -1,0 +1,2274 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="一个没钱买NAS的人的灵机一动">
+<title>【边做边记】基于树莓派&#43;Alist&#43;百度网盘的内网番剧存储服务器搭建</title>
+
+<link rel='canonical' href='https://www.retr0.xyz/p/%E8%BE%B9%E5%81%9A%E8%BE%B9%E8%AE%B0%E5%9F%BA%E4%BA%8E%E6%A0%91%E8%8E%93%E6%B4%BE-alist-%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E7%9A%84%E5%86%85%E7%BD%91%E7%95%AA%E5%89%A7%E5%AD%98%E5%82%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/'>
+
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="【边做边记】基于树莓派+Alist+百度网盘的内网番剧存储服务器搭建">
+<meta property='og:description' content="一个没钱买NAS的人的灵机一动">
+<meta property='og:url' content='https://www.retr0.xyz/p/%E8%BE%B9%E5%81%9A%E8%BE%B9%E8%AE%B0%E5%9F%BA%E4%BA%8E%E6%A0%91%E8%8E%93%E6%B4%BE-alist-%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E7%9A%84%E5%86%85%E7%BD%91%E7%95%AA%E5%89%A7%E5%AD%98%E5%82%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/'>
+<meta property='og:site_name' content='Retr0的小窝'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-02-25T23:23:53&#43;08:00'/><meta property='article:modified_time' content='2026-02-25T23:23:53&#43;08:00'/><meta property='og:image' content='https://www.retr0.xyz/post/%E6%9D%82%E9%A1%B9/img/RP/image.png' />
+<meta name="twitter:title" content="【边做边记】基于树莓派+Alist+百度网盘的内网番剧存储服务器搭建">
+<meta name="twitter:description" content="一个没钱买NAS的人的灵机一动"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://www.retr0.xyz/post/%E6%9D%82%E9%A1%B9/img/RP/image.png' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+        <link rel="stylesheet" href="/css/APlayer.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_918ed7c4aecb3d05.gif" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🥳</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Retr0的小窝</a></h1>
+            <h2 class="site-description">新春快乐！</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/349466985'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:ded000@retr0.xyz'
+                        target="_blank"
+                        title="email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/makabaka11'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.retr0.xyz/index.xml'
+                        target="_blank"
+                        title="RSS"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-rss"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M4 4a16 16 0 0 1 16 16" /><path d="M4 11a9 9 0 0 1 9 9" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://t.me/ded0000'
+                        target="_blank"
+                        title="Telegram"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页 | Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E-about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于 | About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/message/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-message"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 9h8" /><path d="M8 13h6" /><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" /></svg>
+                
+                <span>留言板 | Msg Board</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索 | Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>技术链接 | Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#物料清单">物料清单</a></li>
+      </ol>
+    </li>
+    <li><a href="#part-1-树莓派的系统安装和配置">PART 1 树莓派的系统安装和配置</a>
+      <ol>
+        <li><a href="#安装官方烧录工具-raspberry-pi-imager">安装官方烧录工具 Raspberry Pi Imager</a></li>
+        <li><a href="#烧录tf卡">烧录TF卡</a></li>
+        <li><a href="#树莓派的系统初步配置">树莓派的系统初步配置</a>
+          <ol>
+            <li><a href="#点亮取得控制权">点亮（取得控制权）</a></li>
+            <li><a href="#换源">换源</a></li>
+            <li><a href="#配置vnc远程桌面">配置VNC远程桌面</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#part-2-alist的安装和配置">PART 2 Alist的安装和配置</a>
+      <ol>
+        <li><a href="#alist的安装">Alist的安装</a></li>
+        <li><a href="#alist的配置">Alist的配置</a>
+          <ol>
+            <li><a href="#账户配置">账户配置</a></li>
+            <li><a href="#挂载百度网盘">挂载百度网盘</a></li>
+            <li><a href="#开启webdav">开启WebDAV</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#part-3-媒体库的访问">PART 3 媒体库的访问</a></li>
+    <li><a href="#part-4-宿舍内网环境搭建">PART 4 宿舍内网环境搭建</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/%E8%BE%B9%E5%81%9A%E8%BE%B9%E8%AE%B0%E5%9F%BA%E4%BA%8E%E6%A0%91%E8%8E%93%E6%B4%BE-alist-%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E7%9A%84%E5%86%85%E7%BD%91%E7%95%AA%E5%89%A7%E5%AD%98%E5%82%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/">
+                
+                    <img src="/post/%e6%9d%82%e9%a1%b9/img/RP/image.png" loading="lazy" alt="Featured image of post 【边做边记】基于树莓派&#43;Alist&#43;百度网盘的内网番剧存储服务器搭建" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%9D%82%E9%A1%B9/" style="background-color: #40a070; color: #fff;">
+                杂项
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E8%BE%B9%E5%81%9A%E8%BE%B9%E8%AE%B0%E5%9F%BA%E4%BA%8E%E6%A0%91%E8%8E%93%E6%B4%BE-alist-%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E7%9A%84%E5%86%85%E7%BD%91%E7%95%AA%E5%89%A7%E5%AD%98%E5%82%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/">【边做边记】基于树莓派&#43;Alist&#43;百度网盘的内网番剧存储服务器搭建</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            一个没钱买NAS的人的灵机一动
+        </h3>
+        
+    </div>
+
+    
+    
+     
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-02-25 | 23:23</time>
+            </div>
+        
+
+        
+
+        
+        <div id="viewCount">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <blockquote>
+<p>在存储容器价格飞涨的当下，普通人仅为了存点电影番剧就破费买个NAS似乎代价变得太大（其实就是笔者没钱），所以就有了这个伪NAS项目的诞生。</p>
+</blockquote>
+<p>⚠️ <strong><font style="color:#DF2A3F;">观前提示：本文涉及多种技术交叉配合，若您只是某方面有疑问，建议直接定位到相应部分阅读</font></strong></p>
+<h3 id="物料清单">物料清单
+</h3><ul>
+<li>树莓派 Zero 2W开发板</li>
+<li>TF卡（我的是三星128G）</li>
+<li>树莓派用 5V2.5A 电源线</li>
+<li>TF卡读卡器</li>
+<li>腾达AC9路由器</li>
+</ul>
+<h2 id="part-1-树莓派的系统安装和配置">PART 1 树莓派的系统安装和配置
+</h2><p>这里笔者使用的树莓派是ZERO 2W型号，该型号满足内网运行Alist并传输蓝光视频已经绰绰有余。TF卡使用的是从旧手机上拆下来的前些年买的三星高速128GB卡，这张卡性能还是比较不错的。</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/%e6%9d%82%e9%a1%b9/img/RP/001.jpeg"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h3 id="安装官方烧录工具-raspberry-pi-imager">安装官方烧录工具 Raspberry Pi Imager
+</h3><ol>
+<li>打开官网下载页：</li>
+</ol>
+<p><a class="link" href="https://www.raspberrypi.com/software/"  target="_blank" rel="noopener"
+    >https://www.raspberrypi.com/software/</a></p>
+<ol start="2">
+<li>下载对应系统版本（Windows/macOS/Linux）并安装。</li>
+</ol>
+<h3 id="烧录tf卡">烧录TF卡
+</h3><p>注：在烧录前记得备份卡内原文件</p>
+<p>打开Raspberry Pi Imager</p>
+<p>选择设备类型：</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/%e6%9d%82%e9%a1%b9/img/RP/002.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>选择目标系统：</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/%e6%9d%82%e9%a1%b9/img/RP/003.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>选择储存设备：</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/%e6%9d%82%e9%a1%b9/img/RP/004.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>接下来要预设一些系统信息，例如主机名，时间地区，账户 <strong>（一定要设）</strong> 在此省略，</p>
+<p>然后是WIFI信息，因为笔者此时是在家进行测试，有显示屏条件，可以很方便有线连接树莓派，但是如果转移到宿舍后将会很麻烦，所以为了方便转移，我先预设笔记本热点的SSID和密码，到时候把路由器的SSID和密码设置成和热点相同即可。</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/%e6%9d%82%e9%a1%b9/img/RP/005.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>SSH最好也打开，这样会大大方便我们管理。</p>
+<p>最后一个Raspberry Pi Connect 就不用开了</p>
+<p>确定后就自动开始写入了。</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/%e6%9d%82%e9%a1%b9/img/RP/006.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h3 id="树莓派的系统初步配置">树莓派的系统初步配置
+</h3><p>把烧录完成的TF卡插到板子上，连好电源线和HDMI视频线，开机。</p>
+<h4 id="点亮取得控制权">点亮（取得控制权）
+</h4><p>为防止有些人手头没有可用的显示器，下面给出两套连接方案：</p>
+<ol>
+<li><strong>有显示器时：</strong></li>
+</ol>
+<p>将电源线插在PWR IN口，键鼠可用拓展坞或分线器插在USB口（具体是哪个口在电路板上有白色丝印标注），正常开机后配置WIFI连接</p>
+<ol start="2">
+<li><strong>无显示器时</strong></li>
+</ol>
+<p>将烧录好的TF卡重新插回电脑，打开对应磁盘（如果没有显示可能需要到磁盘管理内分配一个磁盘）：打开 <code>network-config</code>文件，将<code>optional:</code>的值改为<code>false</code>，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">network:
+</span></span><span class="line"><span class="cl">  version: 2
+</span></span><span class="line"><span class="cl">  ethernets:
+</span></span><span class="line"><span class="cl">    eth0:
+</span></span><span class="line"><span class="cl">      dhcp4: true
+</span></span><span class="line"><span class="cl">      dhcp6: true
+</span></span><span class="line"><span class="cl">      optional: true
+</span></span><span class="line"><span class="cl">  wifis:
+</span></span><span class="line"><span class="cl">    wlan0:
+</span></span><span class="line"><span class="cl">      dhcp4: true
+</span></span><span class="line"><span class="cl">      regulatory-domain: &#34;CN&#34;
+</span></span><span class="line"><span class="cl">      access-points:
+</span></span><span class="line"><span class="cl">        &#34;Chiral Network&#34;:
+</span></span><span class="line"><span class="cl">          password: &#34;22de0aab58df7ec447e1ff9eaec470f1a142b90c6105e0e036a9bbc229c32266&#34;
+</span></span><span class="line"><span class="cl">      optional: false
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>保存后将卡插回树莓派。</p>
+<p>提前在设备上打开对应热点，频率一定选择<strong>2.4GHz</strong>，开机后等待树莓派自动连接。</p>
+<hr>
+<p>总之连上网之后扫一下IP用Xshell等工具连接SSH即可。</p>
+<p>接下来为了方便使用，我会进行换源以及配置VNC服务的操作，可以供您参考。</p>
+<h4 id="换源">换源
+</h4><p>这里我们换阿里源</p>
+<ol>
+<li>先改第一个文件：<code>/etc/apt/sources.list</code></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nano /etc/apt/sources.list
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>把里面内容全部删掉，替换成这段：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">deb https://mirrors.aliyun.com/debian/ trixie main contrib non-free non-free-firmware
+</span></span><span class="line"><span class="cl">deb-src https://mirrors.aliyun.com/debian/ trixie main contrib non-free non-free-firmware
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">deb https://mirrors.aliyun.com/debian/ trixie-updates main contrib non-free non-free-firmware
+</span></span><span class="line"><span class="cl">deb-src https://mirrors.aliyun.com/debian/ trixie-updates main contrib non-free non-free-firmware
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">deb https://mirrors.aliyun.com/debian-security/ trixie-security main contrib non-free non-free-firmware
+</span></span><span class="line"><span class="cl">deb-src https://mirrors.aliyun.com/debian-security/ trixie-security main contrib non-free non-free-firmware
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>保存：<code>Ctrl+O</code> → 回车 → <code>Ctrl+X</code></p>
+<hr>
+<ol start="2">
+<li>再改第二个文件：<code>/etc/apt/sources.list.d/raspi.list</code></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nano /etc/apt/sources.list.d/raspi.list
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>内容全部删掉，替换成：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">deb https://mirrors.aliyun.com/raspberrypi/ trixie main ui
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>保存退出。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="配置vnc远程桌面">配置VNC远程桌面
+</h4><ol>
+<li><strong>安装VNC：</strong></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install realvnc-vnc-server realvnc-vnc-viewer -y
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li><strong>通过 raspi-config 启用 VNC（关键）</strong></li>
+</ol>
+<p>树莓派的 VNC 需要在系统配置里手动开启，执行命令进入配置界面：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo raspi-config
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>按以下步骤操作（纯键盘操作，新手看仔细）：</p>
+<ol>
+<li>用<strong>上下方向键</strong>选中 <code>3 Interface Options</code>（接口选项）→ 按回车；</li>
+<li>选中 <code>I3 VNC</code> → 按回车；</li>
+<li>系统会问 “Would you like the VNC server to be enabled?”，选 <code>Yes</code> → 按回车；</li>
+<li>看到提示 “VNC server is enabled” 后，按回车返回；</li>
+<li>用<strong>Tab 键</strong>切换到 <code>Finish</code> → 按回车退出配置界面。</li>
+</ol>
+<hr>
+<ol start="3">
+<li><strong>设置 VNC 开机自启（确保重启后仍可用）</strong></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 启用 VNC 服务自启</span>
+</span></span><span class="line"><span class="cl">sudo systemctl <span class="nb">enable</span> vncserver-x11-serviced
+</span></span><span class="line"><span class="cl"><span class="c1"># 启动 VNC 服务</span>
+</span></span><span class="line"><span class="cl">sudo systemctl start vncserver-x11-serviced
+</span></span><span class="line"><span class="cl"><span class="c1"># 检查服务状态（可选，确认是否运行）</span>
+</span></span><span class="line"><span class="cl">sudo systemctl status vncserver-x11-serviced
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输出里如果有 <code>active (running)</code> 就说明服务正常启动了。</p>
+<p>不过至此我们用VNC Viewer连接还并不能看到桌面，因为树莓派在不连接显示器时不会生成桌面，所以我们要配置虚拟桌面。</p>
+<p>此外，为了方便，我们配置一下让我们连接实体显示器时能共享实际画面，无实体显示器连接时则生成虚拟桌面：</p>
+<p><strong>1. 强制切回 X11</strong></p>
+<p>直接用命令设置，不用找菜单：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo raspi-config nonint do_wayland W1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>验证：<code>echo $XDG_SESSION_TYPE</code>，输出应为 <code>X11</code>。</p>
+<ol start="2">
+<li><strong>开启桌面自动登录（无头时必须）</strong></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo raspi-config nonint do_boot_behaviour B4
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>（B4 = Desktop Autologin，保证无屏时能自动进入桌面）。</p>
+<ol start="3">
+<li><strong>配置内核参数（有屏 / 无屏都稳定）</strong></li>
+</ol>
+<p>编辑 cmdline.txt（新版用这个控制显示，替代旧版 config.txt 的部分功能）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo nano /boot/firmware/cmdline.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在<strong>同一行</strong>的末尾添加（不要换行）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">video=HDMI-A-1:1920x1080M@60
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这行强制 1080p@60Hz，有显示器时用最佳分辨率，无显示器时生成虚拟屏。</p>
+<p>保存：<code>Ctrl+O</code> → 回车 → <code>Ctrl+X</code>。</p>
+<ol start="4">
+<li><strong>启用官方 VNC 服务</strong></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo systemctl enable --now vncserver-x11-serviced
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="5">
+<li><strong>重启生效</strong></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">sudo reboot
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>至此，你已经可以顺利的在VNC Viewer中查看桌面了</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/%e6%9d%82%e9%a1%b9/img/RP/007.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h2 id="part-2-alist的安装和配置">PART 2 Alist的安装和配置
+</h2><h3 id="alist的安装">Alist的安装
+</h3><p>为了方便复制粘贴命令行，我们依旧使用SSH进行操作</p>
+<p>这里安装我们使用官方的一键脚本，不过要先提到root权限</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo su
+</span></span><span class="line"><span class="cl">curl -fsSL <span class="s2">&#34;https://alistgo.com/v3.sh&#34;</span> -o v3.sh <span class="o">&amp;&amp;</span> bash v3.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>执行后会弹出：</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/%e6%9d%82%e9%a1%b9/img/RP/008.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>输入<strong>1</strong>回车，</p>
+<p>安装完成后会弹出访问地址以及管理员初始密码，请自行保存：</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/%e6%9d%82%e9%a1%b9/img/RP/009.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>至此Alist已经安装完成</p>
+<h3 id="alist的配置">Alist的配置
+</h3><h4 id="账户配置">账户配置
+</h4><p>使用刚才获取的管理员密码登录到Alist，点击下面的“管理”进入后台，</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/%e6%9d%82%e9%a1%b9/img/RP/010.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>首先将管理员密码更改一下</p>
+<h4 id="挂载百度网盘">挂载百度网盘
+</h4><p>进入到后台管理的存储板块，点击添加，选择“百度网盘”</p>
+<p>根据个人需求填写页面内容，其中刷新令牌请到<a class="link" href="https://openapi.baidu.com/oauth/2.0/authorize?response_type=code&amp;client_id=hq9yQ9w9kR4YHj1kyYafLygVocobh7Sf&amp;redirect_uri=https://alistgo.com/tool/baidu/callback&amp;scope=basic,netdisk&amp;qrcode=1"  target="_blank" rel="noopener"
+    >与百度连接</a>获取</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/%e6%9d%82%e9%a1%b9/img/RP/011.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>为了实现视频在线播放，我们还要把Web 代理功能打开，WebDAV策略改为本地代理</p>
+<p>根文件夹路径指的是你可以只挂百度网盘中的某个文件夹</p>
+<p>因为这里只对百度网盘进行演示，如果您要挂载其他类型的网盘或有不懂的设置项建议查看官方文档：<a class="link" href="https://alistgo.com/zh/guide/drivers/common.html"  target="_blank" rel="noopener"
+    >通用项</a></p>
+<h4 id="开启webdav">开启WebDAV
+</h4><ol>
+<li>到角色板块中添加webdav角色，权限是webdav读取</li>
+</ol>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/%e6%9d%82%e9%a1%b9/img/RP/012.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ol start="2">
+<li>到用户板块中添加用户名为webdav，角色选择刚才创建的webdav</li>
+</ol>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/%e6%9d%82%e9%a1%b9/img/RP/013.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h2 id="part-3-媒体库的访问">PART 3 媒体库的访问
+</h2><p>为了方便我们查看和管理番剧，建议使用IOS端的<strong>nipaplay</strong>软件，在软件中点击添加媒体服务器，选择webdav格式，填写对应信息即可：</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/%e6%9d%82%e9%a1%b9/img/RP/014.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>接下来直接访问视频文件手动或者使用一键挂削功能即可。</p>
+<p>附成品图：</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/%e6%9d%82%e9%a1%b9/img/RP/015.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h2 id="part-4-宿舍内网环境搭建">PART 4 宿舍内网环境搭建
+</h2><p>鉴于我们勾槽的校园网开了AP隔离而且晚上12:00准时断网，因此要想持续稳定地访问媒体库，搭建宿舍自己的内网环境是必须的。</p>
+<p>这里我们使用腾达AC9的 Client+AP 功能先桥接校园网再用无线形式开放内网，将两个网络设置为不同网段即可做到独立内网环境。</p>
+<p>至于校园网的登录验证，应该先使用一个设备连接校园网并登录后设置路由器WAN口mac地址为刚才的设备相同，即可绕过校园网登陆检测。</p>
+<p>但是因为笔者的路由器要开学一段时间才能寄到学校，所以上面的描述目前还是设想，让我们：</p>
+<p><strong>To Be Continue &ndash;&gt;</strong></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+<div class="math-katex"></div>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%E8%A3%85%E6%9C%BA%E6%B3%9540%E6%9D%A1-laws-for-computer-assembly/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">装机法40条 (Laws for Computer Assembly)</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E5%85%8D%E8%B4%B9%E4%BF%9D%E5%A7%86%E7%BA%A7%E6%95%99%E7%A8%8B%E5%9F%BA%E4%BA%8E%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E4%BA%91%E7%94%B5%E8%84%91%E7%9A%84%E5%85%A8%E8%87%AA%E5%8A%A8%E5%88%B7%E8%AF%BE%E5%B9%B3%E5%8F%B0/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://img1.dancihu.com/2023-10-31/a116a2e0-4624-8c67-900f-7e6165b9012f.jpg" loading="lazy" data-key="" data-hash="https://img1.dancihu.com/2023-10-31/a116a2e0-4624-8c67-900f-7e6165b9012f.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[免费]保姆级教程：基于云服务器/云电脑的全自动刷课平台</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E5%9B%9E%E5%BF%86%E5%8B%92%E7%B4%A2%E7%97%85%E6%AF%92wannacry%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://s.secrss.com/anquanneican/eba6dc46083f85d24ac9474fa735590a.jpg" loading="lazy" data-key="" data-hash="https://s.secrss.com/anquanneican/eba6dc46083f85d24ac9474fa735590a.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">回忆勒索病毒WannaCry：深度剖析</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E9%AD%94%E6%B3%95%E4%B8%8A%E7%BD%91/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">魔法上网</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+        <div class="comment-container mt-8"></div>
+        
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="makabaka11/makabaka11.github.io"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 Retr0
+    </section>
+    
+    <section class="running-time">
+    已存在于互联网
+    <span id="runningdays" class="running-days"></span>
+    </section>
+    
+    <section class="totalcount">
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        发表了125篇文章 · 
+        总计200.34k字
+    </section>
+
+
+    <section class="powerby">
+        
+            Powered by ctOS <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+
+                <script src="/js/APlayer.min.js"></script>
+                <script src="/js/Meting.min.js"></script>
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.eaf1211e4c7db355f37ceea53df13700e1b77fbcc3cfe8c1c1f69e4468a752e1.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<link rel="stylesheet" href="/css/custom.css">
+
+<script>
+(function () {
+    const url = new URL(window.location.href);
+
+    
+    if (url.searchParams.has('utterances')) {
+
+        
+        
+        window.location.replace(window.location.pathname);
+    }
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+
+<script>
+    var pjax = new Pjax({
+        selectors: [".main-container"]
+    });
+</script>
+
+
+<script src=https://www.retr0.xyz/js/topbar.min.js></script>
+
+
+
+<script>
+function initUtterances() {
+    const isArticle = document.querySelector('.article-page') && document.querySelector('.article-content');
+    if (!isArticle) return;
+
+    const oldScript = document.querySelector('script[src^="https://utteranc.es/client.js"]');
+    if (oldScript) oldScript.remove();
+
+    const container = document.querySelector('.comment-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    let script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'makabaka11/makabaka11.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+    container.appendChild(script);
+}
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    if (!window.pjax || !window.pjax.state) initUtterances();
+});
+</script>
+
+
+<script>
+pjax._handleResponse = pjax.handleResponse;
+pjax.handleResponse = function(responseText, request, href, options) {
+    if (request.responseText.match("<html")) {
+        if (responseText) {
+            let newDom = new DOMParser().parseFromString(responseText, 'text/html');
+            document.body.setAttribute("class", newDom.body.className);
+        }
+        pjax._handleResponse(responseText, request, href, options);
+    }
+};
+</script>
+
+
+<script>
+topbar.config({
+    barColors: {
+        '0': 'rgba(255, 255, 255, 1)',
+        '1.0': 'rgba(255, 183, 197, 1)'
+    }
+});
+
+document.addEventListener('pjax:send', () => topbar.show());
+
+document.addEventListener('pjax:complete', () => {
+    window.Stack.init();
+    topbar.hide();
+    setTimeout(initUtterances, 0);
+    updateViewCount();
+    renderKaTeX();
+    initPhotoSwipeFromDOM('.article-content');   
+    initLive2D();                                
+});
+</script>
+
+
+<script>
+function updateViewCount() {
+    const viewCountEl = document.getElementById('vercount_value_page_pv');
+    if (!viewCountEl) return;
+
+    viewCountEl.textContent = 'loading...';
+    const url = 'https://cn.vercount.one/js';
+
+    const old = document.querySelector(`script[src="${url}"]`);
+    if (old) old.remove();
+
+    const s = document.createElement('script');
+    s.src = url;
+    s.defer = true;
+    document.head.appendChild(s);
+
+    showHideView();
+}
+
+function showHideView() {
+    const viewCounts = document.querySelectorAll("#viewCount");
+    const isArticle = document.querySelector(".article-page");
+    viewCounts.forEach(ele => ele.style.display = isArticle ? 'block' : 'none');
+}
+</script>
+
+<script>
+    function showHideView() {
+        
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+
+
+
+<script>
+async function renderKaTeX() {
+    let katex = document.querySelector(".math-katex");
+    if (!katex) return;
+
+    while (typeof renderMathInElement !== 'function') {
+        await new Promise(r => setTimeout(r, 500));
+    }
+
+    const content = document.querySelector('.article-content') || document.body;
+    renderMathInElement(content, {
+        delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true }
+        ],
+        ignoredClasses: ["gist"]
+    });
+}
+</script>
+
+
+<div id="particles-js"></div>
+
+<script src=https://www.retr0.xyz/background/particles.min.js></script>
+<script>
+particlesJS.load('particles-js',
+    "https://www.retr0.xyz/background/particlesjs-config.json",
+    () => console.log('particles.js loaded')
+);
+</script>
+
+<style>
+#particles-js {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: -1;
+}
+</style>
+
+<script>
+
+function initPhotoSwipeFromDOM(selector) {
+    if (!window.PhotoSwipe) return;
+
+    const containers = document.querySelectorAll(selector);
+    if (!containers.length) return;
+
+    containers.forEach(container => {
+        const images = container.querySelectorAll('img');
+
+        images.forEach((img, index) => {
+
+            
+            function getImageSize() {
+                return new Promise(resolve => {
+                    if (img.complete && img.naturalWidth) {
+                        resolve({
+                            w: img.naturalWidth,
+                            h: img.naturalHeight
+                        });
+                    } else {
+                        const tmp = new Image();
+                        tmp.src = img.src || img.getAttribute("data-src");
+                        tmp.onload = () => resolve({ w: tmp.width, h: tmp.height });
+                    }
+                });
+            }
+
+            img.style.cursor = "zoom-in";
+
+            
+            img.addEventListener("click", async (e) => {
+                e.preventDefault();
+
+                const size = await getImageSize();
+                const pswpEl = document.querySelector('.pswp');
+
+                const items = Array.from(images).map(i => ({
+                    src: i.src || i.getAttribute("data-src"),
+                    msrc: i.src,
+                    w: i.naturalWidth || 800,
+                    h: i.naturalHeight || 600,
+                }));
+
+                items[index].w = size.w;
+                items[index].h = size.h;
+
+                const gallery = new PhotoSwipe(pswpEl, PhotoSwipeUI_Default, items, {
+                    index,
+                    history: false
+                });
+
+                
+                
+                
+                enablePhotoSwipeWebShare(gallery);
+
+                gallery.init();
+            });
+        });
+    });
+}
+
+
+
+
+
+function enablePhotoSwipeWebShare(gallery) {
+    gallery.listen('shareLinkClick', function(shareButtonData, e) {
+        e.preventDefault();
+
+        const item = gallery.currItem;
+
+        if (navigator.share) {
+            navigator.share({
+                title: document.title,
+                text: '给你分享一张图片：',
+                url: item.src
+            }).catch(err => console.log("分享失败：", err));
+
+            return false; 
+        }
+
+        
+        return true;
+    });
+}
+</script>
+
+
+
+<script>
+
+
+window._live2d_loaded = window._live2d_loaded || false;
+window._live2d_initialized = window._live2d_initialized || false;
+
+
+function loadLive2DAssetsOnce(cdnPath) {
+    if (window._live2d_loaded) return Promise.resolve();
+
+    window._live2d_loaded = true;
+
+    return Promise.all([
+        loadRes(cdnPath + "waifu.css", "css"),
+        loadRes(cdnPath + "Core/live2dcubismcore.js", "js"),
+        loadRes(cdnPath + "live2d-sdk.js", "js"),
+        loadRes(cdnPath + "waifu-tips.js", "js")
+    ]);
+}
+
+
+function initLive2DWidgetOnce(cdnPath) {
+
+    if (window._live2d_initialized) return;
+
+    
+    const old = document.querySelector("#waifu");
+    if (old) old.remove();
+
+    window._live2d_initialized = true;
+
+    initWidget({
+        waifuPath: cdnPath + "waifu-tips.json",
+        cdnPath: cdnPath + "Resources/",
+        tools: ["hitokoto", "asteroids", "express", "switch-model", "switch-texture", "photo", "info", "quit"],
+        dragEnable: true,
+        dragDirection: ["x", "y"],
+        switchType: "order"
+    });
+
+    console.log("[Live2D] Widget initialized.");
+}
+
+
+function loadRes(url, type) {
+    return new Promise((resolve) => {
+        let tag;
+        if (type === "css") {
+            tag = document.createElement("link");
+            tag.rel = "stylesheet";
+            tag.href = url;
+        } else {
+            tag = document.createElement("script");
+            tag.src = url;
+        }
+        tag.onload = resolve;
+        document.head.appendChild(tag);
+    });
+}
+
+
+function initLive2D() {
+    if (screen.width < 768) return;
+
+    const cdnPath = "https://www.retr0.xyz/blog-live2d/";
+
+    loadLive2DAssetsOnce(cdnPath)
+        .then(() => initLive2DWidgetOnce(cdnPath));
+}
+
+initLive2D();  
+
+
+document.addEventListener("pjax:complete", () => {
+    initLive2D(); 
+});
+</script>
+
+
+<style>
+    .highlight {
+         
+        max-height: 400px;
+        overflow: hidden;
+        position: relative;  
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .code-more-btn {
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: #f0f0f5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .code-more-img {
+        cursor: pointer !important;
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+</style>
+
+<script>
+  function initCodeMoreBox() {
+    let codeBlocks = document.querySelectorAll(".highlight");
+    if (!codeBlocks) {
+      return;
+    }
+    codeBlocks.forEach(codeBlock => {
+      
+      const existingBox = codeBlock.querySelector('.code-more-box');
+      if (existingBox) existingBox.remove();
+
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+        return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.addEventListener('click', () => {
+        codeBlock.classList.add('code-show');
+        codeMoreBox.style.display = 'none';
+        
+        window.dispatchEvent(new Event('resize'))
+      })
+      
+      let img = document.createElement('img');
+      img.classList.add('code-more-img');
+      img.src = "https://www.retr0.xyz/icons/codeMore.png"
+      
+      codeMoreBtn.appendChild(img);
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox)
+    })
+  }
+  
+  initCodeMoreBox();
+  
+  
+  document.addEventListener('pjax:complete', () => {
+    initCodeMoreBox();
+  });
+</script>
+
+
+<script>
+
+
+window.__articlePlayers = window.__articlePlayers || [];
+
+
+
+function getGlobalMetingPlayer() {
+    return window.__globalMetingPlayer || null;
+}
+
+
+
+function pauseGlobalMeting() {
+    const p = getGlobalMetingPlayer();
+    if (p && !p.audio.paused) {
+        p.pause();
+        console.log('[APlayer] Pause global Meting');
+    }
+}
+
+
+
+function pauseArticlePlayers() {
+    window.__articlePlayers.forEach(p => {
+        if (p && !p.audio.paused) {
+            p.pause();
+        }
+    });
+}
+
+
+
+function initAPlayers() {
+    if (typeof APlayer === "undefined") return;
+
+    document.querySelectorAll('.aplayer-article').forEach(el => {
+        if (el.dataset.loaded === "true") return;
+        el.dataset.loaded = "true";
+
+        const ap = new APlayer({
+            container: el,
+            fixed: false,
+            autoplay: false,
+            loop: 'none',
+            order: 'list',
+            preload: 'metadata',
+            volume: 0.7,
+            mutex: false, 
+            audio: [{
+                name: el.dataset.title || 'Unknown',
+                artist: el.dataset.artist || '',
+                url: el.dataset.src,
+                cover: el.dataset.cover || '',
+                lrc: el.dataset.lrc || '',
+            }]
+        });
+
+        
+        ap.on('play', () => {
+            
+            pauseGlobalMeting();
+
+            
+            window.__articlePlayers.forEach(other => {
+                if (other !== ap && !other.audio.paused) {
+                    other.pause();
+                }
+            });
+
+    console.log('[APlayer] Switch article track');
+});
+
+
+        window.__articlePlayers.push(ap);
+    });
+}
+
+
+
+function bindMetingMutex() {
+    const p = getGlobalMetingPlayer();
+    if (!p || p.__mutexBound) return;
+
+    p.__mutexBound = true;
+
+    
+    p.on('play', () => {
+        pauseArticlePlayers();
+    });
+
+    console.log('[Meting] Mutex bound');
+}
+
+
+
+function initAllPlayers() {
+    initAPlayers();
+    bindMetingMutex();
+}
+
+
+
+document.addEventListener("DOMContentLoaded", initAllPlayers);
+document.addEventListener("pjax:complete", initAllPlayers);
+</script>
+
+<script>
+
+
+function destroyArticlePlayers() {
+    if (!window.__articlePlayers || window.__articlePlayers.length === 0) return;
+
+    window.__articlePlayers.forEach(ap => {
+        try {
+            if (!ap.audio.paused) {
+                ap.pause();
+            }
+            ap.destroy(); 
+        } catch (e) {
+            console.warn('[APlayer] destroy failed', e);
+        }
+    });
+
+    window.__articlePlayers = [];
+    console.log('[APlayer] Article players destroyed');
+}
+
+
+
+document.addEventListener('pjax:send', () => {
+    destroyArticlePlayers();
+});
+</script>
+
+
+<script>
+let runningTimeTimer = null;
+
+function updateRunningTime() {
+    const el = document.getElementById('runningdays');
+    if (!el) return;
+
+    let start = '2025-10-26 00:00:00'; 
+    start = new Date(start.replace(/-/g, "/"));
+    const now = new Date();
+
+    const diff = Math.floor((now.getTime() - start.getTime()) / 1000);
+
+    const days = Math.floor(diff / (24 * 3600));
+    const hours = Math.floor((diff % (24 * 3600)) / 3600);
+    const minutes = Math.floor((diff % 3600) / 60);
+    const seconds = diff % 60;
+
+    el.textContent =
+        `${days}天${hours}小时${minutes}分钟${seconds}秒`;
+}
+
+function initRunningTime() {
+    
+    updateRunningTime();
+
+    
+    if (runningTimeTimer) {
+        clearInterval(runningTimeTimer);
+    }
+
+    runningTimeTimer = setInterval(updateRunningTime, 1000);
+}
+
+ 
+document.addEventListener('DOMContentLoaded', () => {
+    initRunningTime();
+});
+
+ 
+document.addEventListener('pjax:complete', () => {
+    initRunningTime();
+});
+</script>
+
+
+
+
+<script>
+  
+  let originalTitle = document.title; 
+  const leaveTip = "桥豆麻袋(#°Д°)";     
+  const backTip = "(*'▽`*)欢迎回来!";        
+  const recoverDelay = 2000;           
+  let visibilityChangeHandler = null;  
+  let titleRecoverTimer = null;        
+
+  
+  function initTitleSwitch() {
+    
+    if (visibilityChangeHandler) {
+      document.removeEventListener('visibilitychange', visibilityChangeHandler);
+    }
+
+    
+    originalTitle = document.title;
+
+    
+    visibilityChangeHandler = function() {
+      
+      clearTimeout(titleRecoverTimer);
+
+      if (document.hidden) {
+        
+        document.title = leaveTip;
+      } else {
+        
+        document.title = backTip;
+        
+        titleRecoverTimer = setTimeout(() => {
+          document.title = originalTitle;
+        }, recoverDelay);
+      }
+    };
+
+    
+    document.addEventListener('visibilitychange', visibilityChangeHandler);
+  }
+
+  
+  document.addEventListener('pjax:success', function() {
+    
+    initTitleSwitch();
+  });
+
+  
+  window.onload = function() {
+    initTitleSwitch();
+  };
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+<meting-js
+  id="14477349320"
+  server="netease"
+  type="playlist"
+  fixed="true"
+  bottom="20px"
+  right="20px"
+  autoplay="false"
+  width="300px"
+  preload="metadata"
+  mutex="false">
+</meting-js>
+
+<script>
+(function () {
+
+  
+  if (window.__global_meting_initialized) return;
+  window.__global_meting_initialized = true;
+
+  const STORAGE_KEY = "playInfo";
+  const PLAYLIST_ID = "14477349320";
+
+  function initGlobalMeting() {
+    const meting = document.querySelector('meting-js');
+    if (!meting) return;
+
+    
+    meting.addEventListener('aplayer-loaded', () => {
+      const ap = meting.aplayer;
+      if (!ap) return;
+
+      
+      window.__globalMetingPlayer = ap;
+      console.log('[Meting] Global APlayer ready');
+
+      bindPlayerEvents(ap);
+      restorePlayState(ap);
+    }, { once: true });
+  }
+
+  function bindPlayerEvents(ap) {
+    
+    const save = () => savePlayState(ap);
+
+    window.addEventListener('beforeunload', save);
+    document.addEventListener('visibilitychange', save);
+
+    
+    ap.on('play', () => {
+      document.dispatchEvent(new CustomEvent('global-player-play'));
+    });
+  }
+
+  function savePlayState(ap) {
+    if (!ap || !ap.list || !ap.audio) return;
+
+    const data = {
+      playlistId: PLAYLIST_ID,
+      index: ap.list.index,
+      currentTime: ap.audio.currentTime,
+      paused: ap.paused
+    };
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function restorePlayState(ap) {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!data || data.playlistId !== PLAYLIST_ID) return;
+
+    if (data.index < ap.list.songs.length) {
+      ap.list.switch(data.index);
+      ap.once('canplay', () => {
+        ap.seek(data.currentTime || 0);
+        if (!data.paused) {
+          ap.play().catch(() => {
+            ap.notice("点击继续播放", 3000);
+          });
+        }
+      });
+    }
+  }
+
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGlobalMeting);
+  } else {
+    initGlobalMeting();
+  }
+
+})();
+</script>
+
+    </body>
+</html>
