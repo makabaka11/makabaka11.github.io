@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="一、矩阵的秩（核心定义） 矩阵的秩是最高阶非零子式的阶数，也等于矩阵行向量组/列向量组的“极大无关组个数”(通俗说：最多能找出多少个不互相“多余”的行/列)记为 $$r(A)$$。\n二、核心性质 非负性与有界性：$\\displaystyle 0 \\leq r(A) \\leq \\min{m, n}$（秩是0或正整数，不超过行数和列数）； 零矩阵专属：$\\displaystyle A = O \\iff r(A) = 0$（零矩阵秩为0，反之亦然）； 转置不变性：$\\displaystyle r(A^T) = r(A)$（矩阵与其转置秩相等）； 初等变换不变性：初等行/列变换后，矩阵秩不变； 和秩不等式：$\\displaystyle r(A + B) \\leq r(A) + r(B)$（两矩阵和的秩不超过各自秩的和）； 乘积秩不等式：$\\displaystyle r(AB) \\leq \\min{r(A), r(B)}$（两矩阵乘积的秩不超过任一矩阵的秩）； 可逆矩阵作用：$\\displaystyle r(PA) = r(AQ) = r(PAQ) = r(A)$（可逆矩阵左乘/右乘，秩不变）； 伴随矩阵秩关系： 若$\\displaystyle r(A) = n$，则$\\displaystyle r(A^*) = n$； 若$\\displaystyle r(A) = n-1$，则$\\displaystyle r(A^*) = 1$； 若$\\displaystyle r(A) &lt; n-1$，则$\\displaystyle r(A^*) = 0$； 分块矩阵秩：$\\displaystyle r\\begin{pmatrix} A &amp; O \\ O &amp; B \\end{pmatrix} = r(A) + r(B)$（对角分块矩阵的秩等于各块秩的和）。 ">
-<title>矩阵的秩及其性质</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="binwalk 介绍 binwalk可以用于扫描文件中是否包含有隐藏文件并将其提取出来，常用指令如：\n扫描文件：\n1 binwalk abc.png 自动提取隐藏文件（提取字节流）：\n1 binwalk -e abc.png 自动提取指定格式文件（推荐）：\n">
+<title>2. 部分软件的使用</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/2.-%E9%83%A8%E5%88%86%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/'>
 
-<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="矩阵的秩及其性质">
-<meta property='og:description' content="一、矩阵的秩（核心定义） 矩阵的秩是最高阶非零子式的阶数，也等于矩阵行向量组/列向量组的“极大无关组个数”(通俗说：最多能找出多少个不互相“多余”的行/列)记为 $$r(A)$$。\n二、核心性质 非负性与有界性：$\\displaystyle 0 \\leq r(A) \\leq \\min{m, n}$（秩是0或正整数，不超过行数和列数）； 零矩阵专属：$\\displaystyle A = O \\iff r(A) = 0$（零矩阵秩为0，反之亦然）； 转置不变性：$\\displaystyle r(A^T) = r(A)$（矩阵与其转置秩相等）； 初等变换不变性：初等行/列变换后，矩阵秩不变； 和秩不等式：$\\displaystyle r(A + B) \\leq r(A) + r(B)$（两矩阵和的秩不超过各自秩的和）； 乘积秩不等式：$\\displaystyle r(AB) \\leq \\min{r(A), r(B)}$（两矩阵乘积的秩不超过任一矩阵的秩）； 可逆矩阵作用：$\\displaystyle r(PA) = r(AQ) = r(PAQ) = r(A)$（可逆矩阵左乘/右乘，秩不变）； 伴随矩阵秩关系： 若$\\displaystyle r(A) = n$，则$\\displaystyle r(A^*) = n$； 若$\\displaystyle r(A) = n-1$，则$\\displaystyle r(A^*) = 1$； 若$\\displaystyle r(A) &lt; n-1$，则$\\displaystyle r(A^*) = 0$； 分块矩阵秩：$\\displaystyle r\\begin{pmatrix} A &amp; O \\ O &amp; B \\end{pmatrix} = r(A) + r(B)$（对角分块矩阵的秩等于各块秩的和）。 ">
-<meta property='og:url' content='https://www.retr0.xyz/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/'>
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="2. 部分软件的使用">
+<meta property='og:description' content="binwalk 介绍 binwalk可以用于扫描文件中是否包含有隐藏文件并将其提取出来，常用指令如：\n扫描文件：\n1 binwalk abc.png 自动提取隐藏文件（提取字节流）：\n1 binwalk -e abc.png 自动提取指定格式文件（推荐）：\n">
+<meta property='og:url' content='https://www.retr0.xyz/p/2.-%E9%83%A8%E5%88%86%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-10-28T15:27:38&#43;08:00'/><meta property='article:modified_time' content='2025-10-28T15:27:38&#43;08:00'/>
-<meta name="twitter:title" content="矩阵的秩及其性质">
-<meta name="twitter:description" content="一、矩阵的秩（核心定义） 矩阵的秩是最高阶非零子式的阶数，也等于矩阵行向量组/列向量组的“极大无关组个数”(通俗说：最多能找出多少个不互相“多余”的行/列)记为 $$r(A)$$。\n二、核心性质 非负性与有界性：$\\displaystyle 0 \\leq r(A) \\leq \\min{m, n}$（秩是0或正整数，不超过行数和列数）； 零矩阵专属：$\\displaystyle A = O \\iff r(A) = 0$（零矩阵秩为0，反之亦然）； 转置不变性：$\\displaystyle r(A^T) = r(A)$（矩阵与其转置秩相等）； 初等变换不变性：初等行/列变换后，矩阵秩不变； 和秩不等式：$\\displaystyle r(A + B) \\leq r(A) + r(B)$（两矩阵和的秩不超过各自秩的和）； 乘积秩不等式：$\\displaystyle r(AB) \\leq \\min{r(A), r(B)}$（两矩阵乘积的秩不超过任一矩阵的秩）； 可逆矩阵作用：$\\displaystyle r(PA) = r(AQ) = r(PAQ) = r(A)$（可逆矩阵左乘/右乘，秩不变）； 伴随矩阵秩关系： 若$\\displaystyle r(A) = n$，则$\\displaystyle r(A^*) = n$； 若$\\displaystyle r(A) = n-1$，则$\\displaystyle r(A^*) = 1$； 若$\\displaystyle r(A) &lt; n-1$，则$\\displaystyle r(A^*) = 0$； 分块矩阵秩：$\\displaystyle r\\begin{pmatrix} A &amp; O \\ O &amp; B \\end{pmatrix} = r(A) + r(B)$（对角分块矩阵的秩等于各块秩的和）。 ">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-03-05T23:11:41&#43;08:00'/><meta property='article:modified_time' content='2026-03-05T23:11:41&#43;08:00'/>
+<meta name="twitter:title" content="2. 部分软件的使用">
+<meta name="twitter:description" content="binwalk 介绍 binwalk可以用于扫描文件中是否包含有隐藏文件并将其提取出来，常用指令如：\n扫描文件：\n1 binwalk abc.png 自动提取隐藏文件（提取字节流）：\n1 binwalk -e abc.png 自动提取指定格式文件（推荐）：\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -319,10 +319,39 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li>
+    <li><a href="#binwalk">binwalk</a>
       <ol>
-        <li><a href="#一矩阵的秩核心定义">一、矩阵的秩（核心定义）</a></li>
-        <li><a href="#二核心性质">二、核心性质</a></li>
+        <li><a href="#介绍">介绍</a></li>
+      </ol>
+    </li>
+    <li><a href="#foremost">foremost</a>
+      <ol>
+        <li><a href="#介绍-1">介绍</a></li>
+        <li><a href="#例题deskpng">例题：deskpng</a></li>
+      </ol>
+    </li>
+    <li><a href="#robot36">Robot36</a>
+      <ol>
+        <li><a href="#介绍-2">介绍</a></li>
+        <li><a href="#例题来自银河的信号">例题：来自银河的信号</a></li>
+      </ol>
+    </li>
+    <li><a href="#zipcracker">ZipCracker</a>
+      <ol>
+        <li><a href="#介绍-3">介绍</a></li>
+        <li><a href="#例题fakezip">例题：fakezip</a></li>
+      </ol>
+    </li>
+    <li><a href="#snowexe">SNOW.EXE</a>
+      <ol>
+        <li><a href="#介绍-4">介绍</a></li>
+        <li><a href="#例题雪">例题：雪</a></li>
+      </ol>
+    </li>
+    <li><a href="#隐形水印工具">隐形水印工具</a>
+      <ol>
+        <li><a href="#介绍-5">介绍</a></li>
+        <li><a href="#例题watermark">例题：watermark</a></li>
       </ol>
     </li>
   </ol>
@@ -343,12 +372,12 @@
     
     <header class="article-category">
         
-            <a href="/categories/%E9%80%9F%E6%9F%A5/" style="background-color: #40a070; color: #fff;">
-                速查
+            <a href="/categories/%E7%BD%91%E5%AE%89/" style="background-color: #BEBDBD; color: #fff;">
+                网安
             </a>
         
-            <a href="/categories/%E8%AF%BE%E5%A0%82%E5%B0%8F%E8%AE%B0/" style="background-color: #55bb8a; color: #fff;">
-                课堂小记
+            <a href="/categories/ctf/" >
+                CTF
             </a>
         
     </header>
@@ -356,7 +385,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8/">矩阵的秩及其性质</a>
+            <a href="/p/2.-%E9%83%A8%E5%88%86%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/">2. 部分软件的使用</a>
         </h2>
     
         
@@ -378,7 +407,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-10-28 | 15:27</time>
+                <time class="article-time--published">2026-03-05 | 23:11</time>
             </div>
         
 
@@ -401,27 +430,387 @@
     <section class="article-content">
     
     
-    <h3 id="一矩阵的秩核心定义">一、矩阵的秩（核心定义）
-</h3><p>矩阵的秩是<strong>最高阶非零子式的阶数</strong>，也等于矩阵行向量组/列向量组的“极大无关组个数”(通俗说：最多能找出多少个不互相“多余”的行/列)记为 </p>
-$$r(A)$$<p>。</p>
-<h3 id="二核心性质">二、核心性质
-</h3><ol>
-<li>非负性与有界性：$\displaystyle 0 \leq r(A) \leq \min{m, n}$（秩是0或正整数，不超过行数和列数）；</li>
-<li>零矩阵专属：$\displaystyle A = O \iff r(A) = 0$（零矩阵秩为0，反之亦然）；</li>
-<li>转置不变性：$\displaystyle r(A^T) = r(A)$（矩阵与其转置秩相等）；</li>
-<li>初等变换不变性：初等行/列变换后，矩阵秩不变；</li>
-<li>和秩不等式：$\displaystyle r(A + B) \leq r(A) + r(B)$（两矩阵和的秩不超过各自秩的和）；</li>
-<li>乘积秩不等式：$\displaystyle r(AB) \leq \min{r(A), r(B)}$（两矩阵乘积的秩不超过任一矩阵的秩）；</li>
-<li>可逆矩阵作用：$\displaystyle r(PA) = r(AQ) = r(PAQ) = r(A)$（可逆矩阵左乘/右乘，秩不变）；</li>
-<li>伴随矩阵秩关系：
-<ul>
-<li>若$\displaystyle r(A) = n$，则$\displaystyle r(A^*) = n$；</li>
-<li>若$\displaystyle r(A) = n-1$，则$\displaystyle r(A^*) = 1$；</li>
-<li>若$\displaystyle r(A) &lt; n-1$，则$\displaystyle r(A^*) = 0$；</li>
-</ul>
-</li>
-<li>分块矩阵秩：$\displaystyle r\begin{pmatrix} A &amp; O \ O &amp; B \end{pmatrix} = r(A) + r(B)$（对角分块矩阵的秩等于各块秩的和）。</li>
-</ol>
+    <h2 id="binwalk">binwalk
+</h2><h3 id="介绍">介绍
+</h3><p>binwalk可以用于扫描文件中是否包含有隐藏文件并将其提取出来，常用指令如：</p>
+<p><strong>扫描文件：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">binwalk abc.png
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>自动提取隐藏文件（提取字节流）：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">binwalk -e abc.png
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>自动提取指定格式文件（推荐）：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">binwalk -e abc.png --dd<span class="o">=</span><span class="s1">&#39;png&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="foremost">foremost
+</h2><h3 id="介绍-1">介绍
+</h3><p>相较于binwalk，foremost更注重于隐藏文件的提取，效果也更好一些，使用之前可能需要先使用<code>apt</code>进行安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install foremost
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>常用命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">putforemost file.bin -t png -o out
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中：<code>-i</code>指定输入文件，<code>-o</code>指定输出目录（必须是空目录），<code>-t</code>只提取指定类型</p>
+<h3 id="例题deskpng">例题：deskpng
+</h3><p>使用binwalk扫描确定包含有隐藏文件，遂使用foremost提取：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">foremost desk.png -t png -o out
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>得到flag为：<code>flag{your_journey_to_hacking_starts_here}</code></p>
+<h2 id="robot36">Robot36
+</h2><h3 id="介绍-2">介绍
+</h3><p>SSTV 慢扫描电视是一种图片转音频技术，常用在无线电等情境下，例如气象卫星向船只发送气象图等。</p>
+<p>建议使用手机版</p>
+<h3 id="例题来自银河的信号">例题：来自银河的信号
+</h3><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://free.picui.cn/free/2026/03/05/69a99c5a51420.jpg"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>目视得到字符串<code>f7liavga{1M_0105n_cC@okmei_nFge!s}</code></p>
+<p>对其进行栅栏密码解密，当每组字符数为17时可得flag为<code>flag{M00nc@ke_Fes7iva1_15_Coming!}</code></p>
+<p>可用下面的脚本跑一下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">rail_fence_by_rows</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">,</span> <span class="n">key_rows</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    按行数（传统栅栏密码）解密（锯齿形排列）
+</span></span></span><span class="line"><span class="cl"><span class="s2">    :param ciphertext: 密文字符串
+</span></span></span><span class="line"><span class="cl"><span class="s2">    :param key_rows: 行数/栏数
+</span></span></span><span class="line"><span class="cl"><span class="s2">    :return: 明文
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">ciphertext</span> <span class="ow">or</span> <span class="n">key_rows</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># 构建字符对应的行位置模板</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rail_pattern</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">current_row</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">direction</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># 1=向下，-1=向上</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rail_pattern</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_row</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">current_row</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">direction</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">current_row</span> <span class="o">==</span> <span class="n">key_rows</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">direction</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="n">current_row</span> <span class="o">+=</span> <span class="n">direction</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># 按行分组密文</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rows</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">key_rows</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">key_rows</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">count</span> <span class="o">=</span> <span class="n">rail_pattern</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rows</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">[</span><span class="n">idx</span><span class="p">:</span><span class="n">idx</span><span class="o">+</span><span class="n">count</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="n">idx</span> <span class="o">+=</span> <span class="n">count</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># 还原明文</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plaintext</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rail_pattern</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">plaintext</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rows</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">plaintext</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">rail_fence_by_group_length</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">,</span> <span class="n">group_length</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    按每组字数（分组长度）解密（在线工具常用）
+</span></span></span><span class="line"><span class="cl"><span class="s2">    :param ciphertext: 密文字符串
+</span></span></span><span class="line"><span class="cl"><span class="s2">    :param group_length: 每组的字符数（比如17）
+</span></span></span><span class="line"><span class="cl"><span class="s2">    :return: 明文
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">ciphertext</span> <span class="ow">or</span> <span class="n">group_length</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># 步骤1：将密文按group_length分组（最后一组不足则补位不影响核心）</span>
+</span></span><span class="line"><span class="cl">    <span class="n">groups</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">),</span> <span class="n">group_length</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">group</span> <span class="o">=</span> <span class="n">ciphertext</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">group_length</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># 步骤2：按列读取每组字符（核心逻辑）</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plaintext</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">max_group_len</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">)</span> <span class="k">if</span> <span class="n">groups</span> <span class="k">else</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_group_len</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="n">plaintext</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">plaintext</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">find_flag_universal</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    通用解密函数：同时尝试按行数、按每组字数解密，优先找flag开头结果
+</span></span></span><span class="line"><span class="cl"><span class="s2">    :param ciphertext: 密文字符串
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;待解密密文：</span><span class="si">{</span><span class="n">ciphertext</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;=&#34;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># 1. 尝试按每组字数解密（重点：17，同时遍历2-30）</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;【方式1：按每组字数解密（在线工具常用）】&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">match_found</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 优先试17（你提到的关键值）</span>
+</span></span><span class="line"><span class="cl">    <span class="n">res_17</span> <span class="o">=</span> <span class="n">rail_fence_by_group_length</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">,</span> <span class="mi">17</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">res_17</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">res_17</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&#34;flag&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;✅ 每组17字解密结果：</span><span class="si">{</span><span class="n">res_17</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">match_found</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;🔍 每组17字解密结果：</span><span class="si">{</span><span class="n">res_17</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># 遍历2-30组字数，找flag开头</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">match_found</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">🔍 遍历每组字数2-30（找flag开头）：&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">gl</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">31</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="n">rail_fence_by_group_length</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">,</span> <span class="n">gl</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">res</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&#34;flag&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;   每组</span><span class="si">{</span><span class="n">gl</span><span class="si">}</span><span class="s2">字：</span><span class="si">{</span><span class="n">res</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">match_found</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;=&#34;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 2. 尝试按行数（传统栅栏）解密（遍历2-30行）</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">match_found</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;【方式2：按传统栅栏行数解密】&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">31</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="n">rail_fence_by_rows</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">res</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&#34;flag&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;✅ 行数</span><span class="si">{</span><span class="n">row</span><span class="si">}</span><span class="s2">解密结果：</span><span class="si">{</span><span class="n">res</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">match_found</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># 最终结果提示</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">match_found</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;❌ 未找到以flag开头的解密结果&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">match_found</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 主程序入口</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 输入密文（请准确粘贴你要解密的内容）</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cipher_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;请输入需要解密的密文字符串：&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">cipher_input</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;❌ 输入不能为空！&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">find_flag_universal</span><span class="p">(</span><span class="n">cipher_input</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="zipcracker"><font style="color:rgb(0, 0, 0);">ZipCracker</font>
+</h2><h3 id="介绍-3">介绍
+</h3><p>ZipCracker是一个用python语言写的zip工具，集成了伪加密修复和字典爆破的功能，使用方法也很简单：</p>
+<p><strong>伪加密识别及修复：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python3 ZipCracker.py test01.zip
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>暴力破解-内置字典：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python3 ZipCracker.py test02.zip
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>暴力破解-自定义字典：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python3 ZipCracker.py test02.zip YourDict.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>项目地址：<a class="link" href="https://github.com/asaotomo/ZipCracker"  target="_blank" rel="noopener"
+    >GitHub - asaotomo/ZipCracke</a></p>
+<h3 id="例题fakezip">例题：fakezip
+</h3><p>在大部分情况下，目前的解压软件已经集成了伪加密修复功能，所以直接双击打开文件即可</p>
+<p>得到flag为<code>flag{39281de6-fe64-11ea-adc1-0242ac120002}</code></p>
+<h2 id="snowexe">SNOW.EXE
+</h2><h3 id="介绍-4">介绍
+</h3><p>snow是一种将内容转为ASSCI码并写在文件末尾的文本形式，由于这类文件用记事本打开后通常会有大段空格或空行，所以亦称为“空白隐写法”。而snow,exe则是针对这种隐写法的加解密工具，这里我们只介绍解密的使用方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">snow.exe -C -p 密码 解密文件.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="例题雪">例题：雪
+</h3><p>下载得到<code>snow123.txt</code>，因此猜测密码即为<code>snow123</code>，故执行命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">snow.exe -C -p snow123 snow123.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>得到flag为：<code>flag{welcome_to_yzu_ctf_adventure}</code></p>
+<h2 id="隐形水印工具">隐形水印工具
+</h2><h3 id="介绍-5">介绍
+</h3><p>这种隐写使用的是叫做“盲水印”的技术，可在不影响视觉观感的情况下给图片加上水印，通常用于资产保护。</p>
+<h3 id="例题watermark">例题：watermark
+</h3><p>在工具中打开图片即可</p>
+<p>得flag为：<code>flag{curiosity_is_the_key_to_success}</code></p>
+<p>不过一般情况下盲水印的题目会给两张图片，只不过这里的只给了一张图片并且没有隐藏文件包含，有点奇怪。</p>
 
 </section>
 
@@ -484,12 +873,12 @@ $$r(A)$$<p>。</p>
             
                 
 <article class="">
-    <a href="/p/%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%E5%88%A4%E6%96%AD%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%A7%A3%E7%9A%84%E6%83%85%E5%86%B5/">
+    <a href="/p/1.-ctf%E7%AE%80%E4%BB%8B%E5%92%8C%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4%E5%B0%BE/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">两种方法判断线性方程组解的情况</h2>
+            <h2 class="article-title">1. CTF简介和常见文件头尾</h2>
         </div>
     </a>
 </article>
@@ -497,12 +886,12 @@ $$r(A)$$<p>。</p>
             
                 
 <article class="">
-    <a href="/p/%E8%AF%81%E6%98%8E%E7%9F%A9%E9%98%B5%E7%AD%89%E4%BB%B7/">
+    <a href="/p/2.7-cisp-pte-%E6%A8%A1%E6%8B%9F%E4%BA%8C-%E5%85%A8wp/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">证明矩阵等价</h2>
+            <h2 class="article-title">2.7 CISP-PTE 模拟二 全WP</h2>
         </div>
     </a>
 </article>
@@ -510,12 +899,12 @@ $$r(A)$$<p>。</p>
             
                 
 <article class="">
-    <a href="/p/%E7%AE%97%E8%A1%8C%E5%88%97%E5%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/">
+    <a href="/p/2.6-3-%E7%BB%BC%E5%90%88%E7%AE%80%E5%8D%95-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">算行列式的几种方法</h2>
+            <h2 class="article-title">2.6-3 综合简单 渗透测试报告</h2>
         </div>
     </a>
 </article>
@@ -523,12 +912,12 @@ $$r(A)$$<p>。</p>
             
                 
 <article class="">
-    <a href="/p/%E5%87%A0%E7%A7%8D%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%8F%8A%E4%BD%99%E9%A1%B9/">
+    <a href="/p/2.6-2-ctf-%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">几种多项式及余项</h2>
+            <h2 class="article-title">2.6-2 ctf-命令注入 渗透测试报告</h2>
         </div>
     </a>
 </article>
@@ -536,12 +925,12 @@ $$r(A)$$<p>。</p>
             
                 
 <article class="">
-    <a href="/p/%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95%E6%B1%82%E9%80%86%E7%9F%A9%E9%98%B5/">
+    <a href="/p/2.6-1-dc4%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">几种方法求逆矩阵</h2>
+            <h2 class="article-title">2.6-1 DC4渗透测试报告</h2>
         </div>
     </a>
 </article>
@@ -878,20 +1267,8 @@ $$r(A)$$<p>。</p>
         
             
         
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-        发表了125篇文章 · 
-        总计200.34k字
+        发表了119篇文章 · 
+        总计196.90k字
     </section>
 
 
@@ -1239,9 +1616,6 @@ function initPhotoSwipeFromDOM(selector) {
                     index,
                     history: false
                 });
-
-                
-                
                 
                 enablePhotoSwipeWebShare(gallery);
 

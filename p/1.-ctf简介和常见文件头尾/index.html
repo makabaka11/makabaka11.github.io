@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="证明两个矩阵等价的核心方法（简要版） 矩阵等价的核心定义：设$A$、$B$为$m \\times n$同型矩阵，若存在$m$阶可逆矩阵$P$和$n$阶可逆矩阵$Q$，使得$PAQ = B$，则$A$与$B$等价。\n">
-<title>证明矩阵等价</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="CTF简介 CTF(Capture The Flag)一般译作“夺旗赛”，在网络安全领域中指网络安全技术人员之间进行技术竞技的一种比赛形式。通过各种攻击手法，获取服务器后寻找指定的字段，或者文件中某一个固定格式的字段，这个字段叫做Flag，其形式一般为Flag{xxxxxxxX}，提交到裁判机就可以得分。\n">
+<title>1. CTF简介和常见文件头尾</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/p/%E8%AF%81%E6%98%8E%E7%9F%A9%E9%98%B5%E7%AD%89%E4%BB%B7/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/1.-ctf%E7%AE%80%E4%BB%8B%E5%92%8C%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4%E5%B0%BE/'>
 
-<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="证明矩阵等价">
-<meta property='og:description' content="证明两个矩阵等价的核心方法（简要版） 矩阵等价的核心定义：设$A$、$B$为$m \\times n$同型矩阵，若存在$m$阶可逆矩阵$P$和$n$阶可逆矩阵$Q$，使得$PAQ = B$，则$A$与$B$等价。\n">
-<meta property='og:url' content='https://www.retr0.xyz/p/%E8%AF%81%E6%98%8E%E7%9F%A9%E9%98%B5%E7%AD%89%E4%BB%B7/'>
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="1. CTF简介和常见文件头尾">
+<meta property='og:description' content="CTF简介 CTF(Capture The Flag)一般译作“夺旗赛”，在网络安全领域中指网络安全技术人员之间进行技术竞技的一种比赛形式。通过各种攻击手法，获取服务器后寻找指定的字段，或者文件中某一个固定格式的字段，这个字段叫做Flag，其形式一般为Flag{xxxxxxxX}，提交到裁判机就可以得分。\n">
+<meta property='og:url' content='https://www.retr0.xyz/p/1.-ctf%E7%AE%80%E4%BB%8B%E5%92%8C%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4%E5%B0%BE/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-14T23:41:10&#43;08:00'/><meta property='article:modified_time' content='2025-11-14T23:41:10&#43;08:00'/>
-<meta name="twitter:title" content="证明矩阵等价">
-<meta name="twitter:description" content="证明两个矩阵等价的核心方法（简要版） 矩阵等价的核心定义：设$A$、$B$为$m \\times n$同型矩阵，若存在$m$阶可逆矩阵$P$和$n$阶可逆矩阵$Q$，使得$PAQ = B$，则$A$与$B$等价。\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-03-05T23:11:23&#43;08:00'/><meta property='article:modified_time' content='2026-03-05T23:11:23&#43;08:00'/>
+<meta name="twitter:title" content="1. CTF简介和常见文件头尾">
+<meta name="twitter:description" content="CTF简介 CTF(Capture The Flag)一般译作“夺旗赛”，在网络安全领域中指网络安全技术人员之间进行技术竞技的一种比赛形式。通过各种攻击手法，获取服务器后寻找指定的字段，或者文件中某一个固定格式的字段，这个字段叫做Flag，其形式一般为Flag{xxxxxxxX}，提交到裁判机就可以得分。\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -319,14 +319,30 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li>
+    <li><a href="#ctf简介">CTF简介</a>
       <ol>
-        <li><a href="#证明两个矩阵等价的核心方法简要版">证明两个矩阵等价的核心方法（简要版）</a>
+        <li><a href="#常见题型">常见题型</a>
           <ol>
-            <li><a href="#关键充要条件满足其一即可证明">关键充要条件（满足其一即可证明）</a></li>
-            <li><a href="#简要证明思路">简要证明思路</a></li>
+            <li><a href="#pwn漏洞利用">Pwn（漏洞利用）</a></li>
+            <li><a href="#reverse逆向工程">Reverse（逆向工程）</a></li>
+            <li><a href="#web网页安全">Web（网页安全）</a></li>
+            <li><a href="#crypto密码学">Crypto（密码学）</a></li>
+            <li><a href="#misc杂项">Misc（杂项）</a></li>
+            <li><a href="#blockchain区块链">Blockchain（区块链）</a></li>
+            <li><a href="#mobile移动安全">Mobile（移动安全）</a></li>
           </ol>
         </li>
+        <li><a href="#一些练习站">一些练习站</a></li>
+        <li><a href="#预制虚拟机">预制虚拟机</a></li>
+      </ol>
+    </li>
+    <li><a href="#常见文件头尾">常见文件头/尾</a>
+      <ol>
+        <li><a href="#图片类">图片类</a></li>
+        <li><a href="#压缩包">压缩包</a></li>
+        <li><a href="#文档--可执行">文档 / 可执行</a></li>
+        <li><a href="#音频--流量">音频 / 流量</a></li>
+        <li><a href="#常用文本--其他">常用文本 / 其他</a></li>
       </ol>
     </li>
   </ol>
@@ -347,12 +363,12 @@
     
     <header class="article-category">
         
-            <a href="/categories/%E9%80%9F%E6%9F%A5/" style="background-color: #40a070; color: #fff;">
-                速查
+            <a href="/categories/%E7%BD%91%E5%AE%89/" style="background-color: #BEBDBD; color: #fff;">
+                网安
             </a>
         
-            <a href="/categories/%E8%AF%BE%E5%A0%82%E5%B0%8F%E8%AE%B0/" style="background-color: #55bb8a; color: #fff;">
-                课堂小记
+            <a href="/categories/ctf/" >
+                CTF
             </a>
         
     </header>
@@ -360,7 +376,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E8%AF%81%E6%98%8E%E7%9F%A9%E9%98%B5%E7%AD%89%E4%BB%B7/">证明矩阵等价</a>
+            <a href="/p/1.-ctf%E7%AE%80%E4%BB%8B%E5%92%8C%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4%E5%B0%BE/">1. CTF简介和常见文件头尾</a>
         </h2>
     
         
@@ -382,7 +398,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-11-14 | 23:41</time>
+                <time class="article-time--published">2026-03-05 | 23:11</time>
             </div>
         
 
@@ -405,24 +421,162 @@
     <section class="article-content">
     
     
-    <h3 id="证明两个矩阵等价的核心方法简要版">证明两个矩阵等价的核心方法（简要版）
-</h3><p>矩阵等价的核心定义：设$A$、$B$为$m \times n$同型矩阵，若存在$m$阶可逆矩阵$P$和$n$阶可逆矩阵$Q$，使得$PAQ = B$，则$A$与$B$等价。</p>
-<h4 id="关键充要条件满足其一即可证明">关键充要条件（满足其一即可证明）
-</h4><ol>
-<li><strong>秩相等</strong>：$r(A) = r(B)$（最常用，无需构造可逆矩阵，计算秩即可）；</li>
-<li><strong>初等变换互化</strong>：$A$可通过有限次初等行/列变换化为$B$；</li>
-<li><strong>等价标准形相同</strong>：$A$和$B$的等价标准形均为$\begin{pmatrix} I_r &amp; O \ O &amp; O \end{pmatrix}$（$r$为秩，$I_r$为$r$阶单位矩阵）。</li>
-</ol>
-<h4 id="简要证明思路">简要证明思路
-</h4><ol>
-<li>先验证$A$与$B$是<strong>同型矩阵</strong>（行数、列数一致，否则必不等价）；</li>
-<li>任选上述充要条件验证：
+    <h2 id="ctf简介">CTF简介
+</h2><blockquote>
+<p>CTF(Capture The Flag)一般译作“夺旗赛”，在网络安全领域中指网络安全技术人员之间进行技术竞技的一种比赛形式。通过各种攻击手法，获取服务器后寻找指定的字段，或者文件中某一个固定格式的字段，这个字段叫做Flag，其形式一般为<code>Flag{xxxxxxxX}</code>，提交到裁判机就可以得分。</p>
+</blockquote>
+<h3 id="常见题型">常见题型
+</h3><h4 id="pwn漏洞利用">Pwn（漏洞利用）
+</h4><p><strong>关键词：栈溢出、ROP、shellcode、堆、权限提升</strong></p>
 <ul>
-<li>便捷法：计算$r(A)$和$r(B)$，若相等则等价；</li>
-<li>严谨法：通过初等变换将$A$化为$B$，或构造$P$、$Q$使$PAQ = B$。</li>
+<li>目标：<strong>攻击二进制程序</strong>，拿到服务器权限 / 读取 flag</li>
+<li>典型场景：
+<ul>
+<li>栈溢出覆盖返回地址</li>
+<li>格式化字符串漏洞</li>
+<li>UAF、double free 等堆漏洞</li>
+<li>绕过保护：ASLR、Canary、NX、PIE、RELRO</li>
 </ul>
 </li>
-</ol>
+<li>工具：pwntools、gdb-peda、IDA、objdump</li>
+</ul>
+<hr>
+<h4 id="reverse逆向工程">Reverse（逆向工程）
+</h4><p><strong>关键词：反汇编、脱壳、算法还原、混淆</strong></p>
+<ul>
+<li>目标：<strong>把二进制 / 程序变回逻辑</strong>，找到藏在里面的 flag</li>
+<li>典型任务：
+<ul>
+<li>看汇编，还原加密 / 校验算法</li>
+<li>脱壳、去混淆</li>
+<li>分析注册机、验证逻辑</li>
+</ul>
+</li>
+<li>工具：IDA Pro、Ghidra、x64dbg、OllyDbg</li>
+</ul>
+<hr>
+<h4 id="web网页安全">Web（网页安全）
+</h4><p><strong>关键词：SQL 注入、XSS、文件上传、RCE、SSRF</strong></p>
+<ul>
+<li>目标：<strong>攻击网站 / 服务器</strong>，拿到 flag</li>
+<li>最常考：
+<ul>
+<li>SQL 注入</li>
+<li>文件上传 getshell</li>
+<li>XSS 盗 cookie</li>
+<li>SSRF 打内网</li>
+<li>命令执行 / 代码执行</li>
+<li>文件包含、弱口令、目录遍历</li>
+</ul>
+</li>
+<li>工具：Burp Suite、sqlmap、dirsearch</li>
+</ul>
+<hr>
+<h4 id="crypto密码学">Crypto（密码学）
+</h4><p><strong>关键词：RSA、AES、异或、编码、古典密码</strong></p>
+<ul>
+<li>目标：<strong>破解加密 / 编码</strong>，还原明文</li>
+<li>常见题型：
+<ul>
+<li>各种编码：Base64、Hex、ASCII、摩斯</li>
+<li>古典密码：凯撒、维吉尼亚、栅栏</li>
+<li>简单异或、流密码误用</li>
+<li>RSA 小指数、共模、低加密指数、因数分解</li>
+</ul>
+</li>
+<li>工具：Python、CyberChef、openssl</li>
+</ul>
+<hr>
+<h4 id="misc杂项">Misc（杂项）
+</h4><p><strong>关键词：隐写、流量分析、压缩包、取证、脑洞</strong></p>
+<ul>
+<li>CTF 里<strong>最杂、最灵活</strong>的一类</li>
+<li>常见方向：
+<ul>
+<li><strong>隐写</strong>：图片 / 音频里藏信息（LSB 最常见）</li>
+<li><strong>流量分析</strong>：pcap 包找密码、flag</li>
+<li><strong>取证</strong>：日志、内存镜像、磁盘文件恢复</li>
+<li><strong>压缩包破解</strong>：伪加密、zip 明文攻击</li>
+<li>各种脑洞：二维码、脑电波、游戏外挂、编程小脚本</li>
+</ul>
+</li>
+<li>工具：Wireshark、StegSolve、binwalk、foremost</li>
+</ul>
+<hr>
+<h4 id="blockchain区块链">Blockchain（区块链）
+</h4><p><strong>关键词：Solidity、智能合约、重入、溢出</strong></p>
+<ul>
+<li>目标：<strong>攻击以太坊等智能合约</strong></li>
+<li>常见：
+<ul>
+<li>合约溢出、重入漏洞</li>
+<li>权限控制、逻辑漏洞</li>
+</ul>
+</li>
+<li>工具：Remix、web3.py</li>
+</ul>
+<hr>
+<h4 id="mobile移动安全">Mobile（移动安全）
+</h4><p><strong>关键词：安卓逆向、脱壳、Frida、so 层逆向</strong></p>
+<ul>
+<li>目标：<strong>搞安卓 /iOS APP</strong></li>
+<li>典型：
+<ul>
+<li>反编译 APK，改代码</li>
+<li>脱壳、Frida hook</li>
+<li>so 库逆向（类似 reverse + pwn）</li>
+</ul>
+</li>
+<li>工具：Apktool、Jadx、Frida、IDA</li>
+</ul>
+<h3 id="一些练习站">一些练习站
+</h3><p><a class="link" href="https://www.nssctf.cn/index"  target="_blank" rel="noopener"
+    >NSSCTF | 在线CTF平台</a><br>
+<a class="link" href="https://adworld.xctf.org.cn/home/index"  target="_blank" rel="noopener"
+    >攻防世界</a><br>
+<a class="link" href="https://buuoj.cn/login?next=%2Fuser%3F"  target="_blank" rel="noopener"
+    >BUUCTF在线评测</a><br>
+<a class="link" href="https://ctf.show/login?next=%2Fchallenges%3F"  target="_blank" rel="noopener"
+    >ctf.show</a><br>
+<a class="link" href="https://ctf.bugku.com/index.html"  target="_blank" rel="noopener"
+    >首页 - Bugku CTF平台</a><br>
+<a class="link" href="https://www.ichunqiu.com/competition"  target="_blank" rel="noopener"
+    >CTF大本营 - 网络安全竞赛服务平台-i春秋</a></p>
+<h3 id="预制虚拟机">预制虚拟机
+</h3><p>已预安装大部分所需工具：</p>
+<p><a class="link" href="https://pan.baidu.com/s/1S3Gc4DuCj7nbE3XH4n9jYg?pwd=7z65"  target="_blank" rel="noopener"
+    >https://pan.baidu.com/s/1S3Gc4DuCj7nbE3XH4n9jYg?pwd=7z65</a></p>
+<h2 id="常见文件头尾">常见文件头/尾
+</h2><h3 id="图片类">图片类
+</h3><ul>
+<li><strong>PNG</strong>头：<code>89 50 4E 47</code>尾：<code>49 45 4E 44 AE 42 60 82</code></li>
+<li><strong>JPG/JPEG</strong>头：<code>FF D8 FF</code>尾：<code>FF D9</code></li>
+<li><strong>GIF</strong>头：<code>47 49 46 38</code>（GIF89a/GIF87a）</li>
+<li><strong>BMP</strong>头：<code>42 4D</code></li>
+</ul>
+<h3 id="压缩包">压缩包
+</h3><ul>
+<li><strong>ZIP</strong>头：<code>50 4B 03 04</code>尾：<code>50 4B 05 06</code></li>
+<li><strong>RAR</strong>头：<code>52 61 72 21 1A 07 00</code>（RAR5 另一种）</li>
+<li><strong>7Z</strong>头：<code>37 7A BC AF 27 1C</code></li>
+</ul>
+<h3 id="文档--可执行">文档 / 可执行
+</h3><ul>
+<li>**ELF（Linux 程序）**头：<code>7F 45 4C 46</code></li>
+<li>**PE（Windows exe/dll）**头：<code>4D 5A 90 00</code>（MZ）</li>
+<li><strong>PDF</strong>头：<code>25 50 44 46</code>（%PDF）</li>
+</ul>
+<h3 id="音频--流量">音频 / 流量
+</h3><ul>
+<li><strong>WAV</strong>头：<code>52 49 46 46</code>（RIFF）</li>
+<li><strong>PCAP</strong>头：<code>D4 C3 B2 A1</code></li>
+<li><strong>PCAPNG</strong>头：<code>0A 0D 0D 0A</code></li>
+</ul>
+<h3 id="常用文本--其他">常用文本 / 其他
+</h3><ul>
+<li><strong>FFmpeg 伪文件</strong>头：<code>46 4F 52 4D</code>（FORM）</li>
+<li><strong>TXT / 无格式</strong>多为可见 ASCII，无固定头</li>
+</ul>
 
 </section>
 
@@ -485,12 +639,12 @@
             
                 
 <article class="">
-    <a href="/p/%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%E5%88%A4%E6%96%AD%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%A7%A3%E7%9A%84%E6%83%85%E5%86%B5/">
+    <a href="/p/2.-%E9%83%A8%E5%88%86%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">两种方法判断线性方程组解的情况</h2>
+            <h2 class="article-title">2. 部分软件的使用</h2>
         </div>
     </a>
 </article>
@@ -498,12 +652,12 @@
             
                 
 <article class="">
-    <a href="/p/%E7%AE%97%E8%A1%8C%E5%88%97%E5%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/">
+    <a href="/p/2.7-cisp-pte-%E6%A8%A1%E6%8B%9F%E4%BA%8C-%E5%85%A8wp/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">算行列式的几种方法</h2>
+            <h2 class="article-title">2.7 CISP-PTE 模拟二 全WP</h2>
         </div>
     </a>
 </article>
@@ -511,12 +665,12 @@
             
                 
 <article class="">
-    <a href="/p/%E5%87%A0%E7%A7%8D%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%8F%8A%E4%BD%99%E9%A1%B9/">
+    <a href="/p/2.6-3-%E7%BB%BC%E5%90%88%E7%AE%80%E5%8D%95-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">几种多项式及余项</h2>
+            <h2 class="article-title">2.6-3 综合简单 渗透测试报告</h2>
         </div>
     </a>
 </article>
@@ -524,12 +678,12 @@
             
                 
 <article class="">
-    <a href="/p/%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95%E6%B1%82%E9%80%86%E7%9F%A9%E9%98%B5/">
+    <a href="/p/2.6-2-ctf-%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">几种方法求逆矩阵</h2>
+            <h2 class="article-title">2.6-2 ctf-命令注入 渗透测试报告</h2>
         </div>
     </a>
 </article>
@@ -537,12 +691,12 @@
             
                 
 <article class="">
-    <a href="/p/%E4%B8%89%E4%B8%AA%E5%BE%AE%E5%88%86%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86/">
+    <a href="/p/2.6-1-dc4%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">三个微分中值定理</h2>
+            <h2 class="article-title">2.6-1 DC4渗透测试报告</h2>
         </div>
     </a>
 </article>
@@ -879,20 +1033,8 @@
         
             
         
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-        发表了125篇文章 · 
-        总计200.34k字
+        发表了119篇文章 · 
+        总计196.90k字
     </section>
 
 
@@ -1240,9 +1382,6 @@ function initPhotoSwipeFromDOM(selector) {
                     index,
                     history: false
                 });
-
-                
-                
                 
                 enablePhotoSwipeWebShare(gallery);
 
