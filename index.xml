@@ -591,7 +591,7 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;p&gt;收到路由器后把网线两端分别插在笔记本和路由器的WAN口，访问&lt;code&gt;192.168.0.1&lt;/code&gt;可以打开后台&lt;/p&gt;
 &lt;p&gt;首先按照向导设置无线网的名称和密码以及管理员密码，这里为了树莓派能直接访问，我们把名称和密码设成之前模拟测试时相同的形式。&lt;/p&gt;
 &lt;h3 id=&#34;配置桥接&#34;&gt;配置桥接
-&lt;/h3&gt;&lt;p&gt;打卡无线设置中的万能桥接模块，选择**热点信号放大（WISP）**后选择你的校园网即可。&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;打卡无线设置中的万能桥接模块，选择 &lt;strong&gt;热点信号放大（WISP）&lt;/strong&gt; 后选择你的校园网即可。&lt;/p&gt;
 &lt;!-- 这是一张图片，ocr 内容为： --&gt;
 &lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e6%9d%82%e9%a1%b9/img/RP/016.png&#34;
 	
@@ -951,7 +951,7 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;find_flag_universal&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cipher_input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;zipcracker&#34;&gt;&lt;font style=&#34;color:rgb(0, 0, 0);&#34;&gt;ZipCracker&lt;/font&gt;
+&lt;/div&gt;&lt;h2 id=&#34;zipcracker&#34;&gt;ZipCracker
 &lt;/h2&gt;&lt;h3 id=&#34;介绍-3&#34;&gt;介绍
 &lt;/h3&gt;&lt;p&gt;ZipCracker是一个用python语言写的zip工具，集成了伪加密修复和字典爆破的功能，使用方法也很简单：&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;伪加密识别及修复：&lt;/strong&gt;&lt;/p&gt;
