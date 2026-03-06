@@ -7,10 +7,10 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Wed, 25 Feb 2026 23:23:53 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/%E6%9D%82%E9%A1%B9/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 06 Mar 2026 19:28:02 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/%E6%9D%82%E9%A1%B9/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>【边做边记】基于树莓派&#43;Alist&#43;百度网盘的内网番剧存储服务器搭建</title>
         <link>https://www.retr0.xyz/p/%E8%BE%B9%E5%81%9A%E8%BE%B9%E8%AE%B0%E5%9F%BA%E4%BA%8E%E6%A0%91%E8%8E%93%E6%B4%BE-alist-%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E7%9A%84%E5%86%85%E7%BD%91%E7%95%AA%E5%89%A7%E5%AD%98%E5%82%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/</link>
-        <pubDate>Wed, 25 Feb 2026 23:23:53 +0800</pubDate>
+        <pubDate>Fri, 06 Mar 2026 19:28:02 +0800</pubDate>
         
         <guid>https://www.retr0.xyz/p/%E8%BE%B9%E5%81%9A%E8%BE%B9%E8%AE%B0%E5%9F%BA%E4%BA%8E%E6%A0%91%E8%8E%93%E6%B4%BE-alist-%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E7%9A%84%E5%86%85%E7%BD%91%E7%95%AA%E5%89%A7%E5%AD%98%E5%82%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/</guid>
         <description>&lt;img src="https://www.retr0.xyz/post/%E6%9D%82%E9%A1%B9/img/RP/image.png" alt="Featured image of post 【边做边记】基于树莓派&#43;Alist&#43;百度网盘的内网番剧存储服务器搭建" /&gt;&lt;blockquote&gt;
@@ -471,10 +471,47 @@
 &gt;&lt;/p&gt;
 &lt;h2 id=&#34;part-4-宿舍内网环境搭建&#34;&gt;PART 4 宿舍内网环境搭建
 &lt;/h2&gt;&lt;p&gt;鉴于我们勾槽的校园网开了AP隔离而且晚上12:00准时断网，因此要想持续稳定地访问媒体库，搭建宿舍自己的内网环境是必须的。&lt;/p&gt;
-&lt;p&gt;这里我们使用腾达AC9的 Client+AP 功能先桥接校园网再用无线形式开放内网，将两个网络设置为不同网段即可做到独立内网环境。&lt;/p&gt;
-&lt;p&gt;至于校园网的登录验证，应该先使用一个设备连接校园网并登录后设置路由器WAN口mac地址为刚才的设备相同，即可绕过校园网登陆检测。&lt;/p&gt;
-&lt;p&gt;但是因为笔者的路由器要开学一段时间才能寄到学校，所以上面的描述目前还是设想，让我们：&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;To Be Continue &amp;ndash;&amp;gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;3月6日更新&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;收到路由器后把网线两端分别插在笔记本和路由器的WAN口，访问&lt;code&gt;192.168.0.1&lt;/code&gt;可以打开后台&lt;/p&gt;
+&lt;p&gt;首先按照向导设置无线网的名称和密码以及管理员密码，这里为了树莓派能直接访问，我们把名称和密码设成之前模拟测试时相同的形式。&lt;/p&gt;
+&lt;h3 id=&#34;配置桥接&#34;&gt;配置桥接
+&lt;/h3&gt;&lt;p&gt;打卡无线设置中的万能桥接模块，选择**热点信号放大（WISP）**后选择你的校园网即可。&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e6%9d%82%e9%a1%b9/img/RP/016.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;稍后等路由器重启后用电脑访问网页应该会弹出你的校园网的登陆界面，正常登陆后路由器就成功连上外网了。&lt;/p&gt;
+&lt;h3 id=&#34;内网ip和mac绑定&#34;&gt;内网IP和Mac绑定
+&lt;/h3&gt;&lt;p&gt;作为一个影音服务器，我们当然希望树莓派的IP地址不要变化，所以我们要使用IP和Mac绑定功能。&lt;/p&gt;
+&lt;p&gt;我们选择&lt;strong&gt;系统设置&lt;/strong&gt;中的&lt;strong&gt;DHCP与静态IP绑定&lt;/strong&gt;，在里面找到树莓派的主机，点击右面的绑定图标即可。&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/post/%e6%9d%82%e9%a1%b9/img/RP/017.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;可选电脑上ip绑定域名&#34;&gt;（可选）电脑上IP绑定域名
+&lt;/h3&gt;&lt;p&gt;如果你害怕自己忘记树莓派的IP地址可以为配置一个域名。&lt;/p&gt;
+&lt;p&gt;修改hosts文件即可，例如在hosts最下方添加：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;192.168.0.140 rp.retr0.xyz
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;即可让本机以后在访问该域名时自动解析到树莓派的IP&lt;/p&gt;
 </description>
         </item>
         <item>

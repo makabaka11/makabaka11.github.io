@@ -10,7 +10,7 @@
 <meta property='og:description' content="一个没钱买NAS的人的灵机一动">
 <meta property='og:url' content='https://www.retr0.xyz/p/%E8%BE%B9%E5%81%9A%E8%BE%B9%E8%AE%B0%E5%9F%BA%E4%BA%8E%E6%A0%91%E8%8E%93%E6%B4%BE-alist-%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E7%9A%84%E5%86%85%E7%BD%91%E7%95%AA%E5%89%A7%E5%AD%98%E5%82%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-02-25T23:23:53&#43;08:00'/><meta property='article:modified_time' content='2026-02-25T23:23:53&#43;08:00'/><meta property='og:image' content='https://www.retr0.xyz/post/%E6%9D%82%E9%A1%B9/img/RP/image.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-03-06T19:28:02&#43;08:00'/><meta property='article:modified_time' content='2026-03-06T19:28:02&#43;08:00'/><meta property='og:image' content='https://www.retr0.xyz/post/%E6%9D%82%E9%A1%B9/img/RP/image.png' />
 <meta name="twitter:title" content="【边做边记】基于树莓派+Alist+百度网盘的内网番剧存储服务器搭建">
 <meta name="twitter:description" content="一个没钱买NAS的人的灵机一动"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://www.retr0.xyz/post/%E6%9D%82%E9%A1%B9/img/RP/image.png' />
@@ -351,7 +351,13 @@
       </ol>
     </li>
     <li><a href="#part-3-媒体库的访问">PART 3 媒体库的访问</a></li>
-    <li><a href="#part-4-宿舍内网环境搭建">PART 4 宿舍内网环境搭建</a></li>
+    <li><a href="#part-4-宿舍内网环境搭建">PART 4 宿舍内网环境搭建</a>
+      <ol>
+        <li><a href="#配置桥接">配置桥接</a></li>
+        <li><a href="#内网ip和mac绑定">内网IP和Mac绑定</a></li>
+        <li><a href="#可选电脑上ip绑定域名">（可选）电脑上IP绑定域名</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -413,7 +419,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2026-02-25 | 23:23</time>
+                <time class="article-time--published">2026-03-06 | 19:28</time>
             </div>
         
 
@@ -894,10 +900,47 @@
 ></p>
 <h2 id="part-4-宿舍内网环境搭建">PART 4 宿舍内网环境搭建
 </h2><p>鉴于我们勾槽的校园网开了AP隔离而且晚上12:00准时断网，因此要想持续稳定地访问媒体库，搭建宿舍自己的内网环境是必须的。</p>
-<p>这里我们使用腾达AC9的 Client+AP 功能先桥接校园网再用无线形式开放内网，将两个网络设置为不同网段即可做到独立内网环境。</p>
-<p>至于校园网的登录验证，应该先使用一个设备连接校园网并登录后设置路由器WAN口mac地址为刚才的设备相同，即可绕过校园网登陆检测。</p>
-<p>但是因为笔者的路由器要开学一段时间才能寄到学校，所以上面的描述目前还是设想，让我们：</p>
-<p><strong>To Be Continue &ndash;&gt;</strong></p>
+<blockquote>
+<p>3月6日更新</p>
+</blockquote>
+<p>收到路由器后把网线两端分别插在笔记本和路由器的WAN口，访问<code>192.168.0.1</code>可以打开后台</p>
+<p>首先按照向导设置无线网的名称和密码以及管理员密码，这里为了树莓派能直接访问，我们把名称和密码设成之前模拟测试时相同的形式。</p>
+<h3 id="配置桥接">配置桥接
+</h3><p>打卡无线设置中的万能桥接模块，选择**热点信号放大（WISP）**后选择你的校园网即可。</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/%e6%9d%82%e9%a1%b9/img/RP/016.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>稍后等路由器重启后用电脑访问网页应该会弹出你的校园网的登陆界面，正常登陆后路由器就成功连上外网了。</p>
+<h3 id="内网ip和mac绑定">内网IP和Mac绑定
+</h3><p>作为一个影音服务器，我们当然希望树莓派的IP地址不要变化，所以我们要使用IP和Mac绑定功能。</p>
+<p>我们选择<strong>系统设置</strong>中的<strong>DHCP与静态IP绑定</strong>，在里面找到树莓派的主机，点击右面的绑定图标即可。</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/%e6%9d%82%e9%a1%b9/img/RP/017.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h3 id="可选电脑上ip绑定域名">（可选）电脑上IP绑定域名
+</h3><p>如果你害怕自己忘记树莓派的IP地址可以为配置一个域名。</p>
+<p>修改hosts文件即可，例如在hosts最下方添加：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">192.168.0.140 rp.retr0.xyz
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>即可让本机以后在访问该域名时自动解析到树莓派的IP</p>
 
 </section>
 
@@ -1354,7 +1397,7 @@
             
         
         发表了119篇文章 · 
-        总计196.90k字
+        总计197.14k字
     </section>
 
 
