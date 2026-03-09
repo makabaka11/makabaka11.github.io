@@ -259,17 +259,19 @@ document.addEventListener(&#34;pjax:complete&#34;, function () {
 &lt;p&gt;&lt;code&gt;flag{teamwork_and_persistence_win}&lt;/code&gt;&lt;/p&gt;
 &lt;h3 id=&#34;掩码攻击&#34;&gt;掩码攻击
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;例题：小明的弱口令&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;依题意，密码是身份证号，前四位3201，后四位1024，使用ZipCracker.py，根据规律构造命令：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python ZipCracker.py flag.zip -m &lt;span class=&#34;s1&#34;&gt;&amp;#39;3201?d?d?d?d?d?d?d?d?d?d1024&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;跑亿会可得：&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;笔者的电脑正在发力，此处稍后更新&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;依题意，密码是身份证号，前四位3201，后四位1024，使用&lt;strong&gt;Advanced Archive Password Recovery&lt;/strong&gt;，根据规律设置掩码&lt;code&gt;3201??????????1024&lt;/code&gt;：&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2026/03/09/69aede03c1516.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;跑一会可得密码&lt;code&gt;320114201005181024&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;解压后发现txt内可见字符与下面的统计字符数不符，认为是零宽隐写，使用上面的网站破解：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag{discover_hidden_secrets_in_every_file}&lt;/code&gt;&lt;/p&gt;
 &lt;h2 id=&#34;图片隐写&#34;&gt;图片隐写
 &lt;/h2&gt;&lt;h3 id=&#34;编码末附加&#34;&gt;编码末附加
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;例题：misc1&lt;/strong&gt;&lt;/p&gt;

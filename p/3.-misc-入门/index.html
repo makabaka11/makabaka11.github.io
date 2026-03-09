@@ -566,17 +566,19 @@
 <p><code>flag{teamwork_and_persistence_win}</code></p>
 <h3 id="掩码攻击">掩码攻击
 </h3><p><strong>例题：小明的弱口令</strong></p>
-<p>依题意，密码是身份证号，前四位3201，后四位1024，使用ZipCracker.py，根据规律构造命令：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python ZipCracker.py flag.zip -m <span class="s1">&#39;3201?d?d?d?d?d?d?d?d?d?d1024&#39;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>跑亿会可得：</p>
-<p><code>笔者的电脑正在发力，此处稍后更新</code></p>
+<p>依题意，密码是身份证号，前四位3201，后四位1024，使用<strong>Advanced Archive Password Recovery</strong>，根据规律设置掩码<code>3201??????????1024</code>：</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://free.picui.cn/free/2026/03/09/69aede03c1516.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>跑一会可得密码<code>320114201005181024</code>：</p>
+<p>解压后发现txt内可见字符与下面的统计字符数不符，认为是零宽隐写，使用上面的网站破解：</p>
+<p><code>flag{discover_hidden_secrets_in_every_file}</code></p>
 <h2 id="图片隐写">图片隐写
 </h2><h3 id="编码末附加">编码末附加
 </h3><p><strong>例题：misc1</strong></p>
@@ -1098,7 +1100,7 @@
             
         
         发表了121篇文章 · 
-        总计199.57k字
+        总计199.64k字
     </section>
 
 
