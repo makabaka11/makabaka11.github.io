@@ -303,9 +303,9 @@
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.toolhelper.cn/SymmetricEncryption/DES&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://www.toolhelper.cn/SymmetricEncryption/DES&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;选择模式ECB，填充模式PKCS7，格式Hex&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;&amp;lt;font style=&amp;quot;color:rgb(0, 0, 0);&amp;quot;&amp;gt;flag{collaboration_creativity_and_coding}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag{collaboration_creativity_and_coding}&lt;/code&gt;&lt;/p&gt;
 &lt;h4 id=&#34;cbc模式&#34;&gt;CBC模式
-&lt;/h4&gt;&lt;p&gt;CBC 即 **Cipher Block Chaining 密码分组链接模式  **&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;CBC 即 **Cipher Block Chaining 密码分组链接模式 **&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;当前明文块 先和 前一个密文块 异或&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;再用 DES 加密&lt;/li&gt;
@@ -373,8 +373,8 @@ C = 5³ mod 187 = 125&lt;br&gt;
 M = 125¹⁰⁷ mod 187 = 5&lt;br&gt;
 成功还原！&lt;/p&gt;
 &lt;h4 id=&#34;dpdq泄露&#34;&gt;dpdq泄露
-&lt;/h4&gt;&lt;p&gt;**例题：dqdp泄露 **&lt;/p&gt;
-&lt;p&gt;打开上面给出的工具，进入IDE选项卡，在【脚本】中选择基础脚本-dpdp泄露.py&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;例题：dqdp泄露&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;打开上面给出的工具，进入IDE选项卡，在【脚本】中选择基础脚本-&lt;code&gt;dpdp泄露.py&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;更改脚本中的几个数值，然后右键运行即可。&lt;/p&gt;
 &lt;p&gt;即下面的脚本：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -449,7 +449,7 @@ M = 125¹⁰⁷ mod 187 = 5&lt;br&gt;
 &lt;p&gt;点击工具栏中的【常规】- &lt;strong&gt;(M)数字&amp;raquo;字符&lt;/strong&gt;，得到flag&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;flag{1f803313-8999-4ec3-abc6-907a10fde606}&lt;/code&gt;&lt;/p&gt;
 &lt;h4 id=&#34;共模攻击&#34;&gt;共模攻击
-&lt;/h4&gt;&lt;p&gt;打开上面给出的工具，进入IDE选项卡，在【脚本】中选择基础脚本-共模攻击.py&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;打开上面给出的工具，进入IDE选项卡，在【脚本】中选择基础脚本-&lt;code&gt;共模攻击.py&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;发现默认脚本数值与当前一致&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;也可以在RSA选项卡中填入已知的所有值，其中e1,e2都填在$ Public(E) $中，中间英文逗号隔开，c1,c2同理，选择【模式】- 共模攻击，得到明文M&lt;/p&gt;
