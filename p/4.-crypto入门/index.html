@@ -1,0 +1,2273 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="密码学概述 古典密码 单表替换加密 在单表替换加密中,所有的加密方式几乎都有一个共性,那就是明密文一一对应。\n在密文长度足够长的时候,可以使用词频分析进行破解。\n如:凯撒密码、埃特巴什码、仿射密码\n">
+<title>4. Crypto入门</title>
+
+<link rel='canonical' href='https://www.retr0.xyz/p/4.-crypto%E5%85%A5%E9%97%A8/'>
+
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="4. Crypto入门">
+<meta property='og:description' content="密码学概述 古典密码 单表替换加密 在单表替换加密中,所有的加密方式几乎都有一个共性,那就是明密文一一对应。\n在密文长度足够长的时候,可以使用词频分析进行破解。\n如:凯撒密码、埃特巴什码、仿射密码\n">
+<meta property='og:url' content='https://www.retr0.xyz/p/4.-crypto%E5%85%A5%E9%97%A8/'>
+<meta property='og:site_name' content='Retr0的小窝'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-03-12T21:21:12&#43;08:00'/><meta property='article:modified_time' content='2026-03-12T21:21:12&#43;08:00'/>
+<meta name="twitter:title" content="4. Crypto入门">
+<meta name="twitter:description" content="密码学概述 古典密码 单表替换加密 在单表替换加密中,所有的加密方式几乎都有一个共性,那就是明密文一一对应。\n在密文长度足够长的时候,可以使用词频分析进行破解。\n如:凯撒密码、埃特巴什码、仿射密码\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+        <link rel="stylesheet" href="/css/APlayer.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_918ed7c4aecb3d05.gif" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">😎</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Retr0的小窝</a></h1>
+            <h2 class="site-description">上工咯！</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/349466985'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:ded000@retr0.xyz'
+                        target="_blank"
+                        title="email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/makabaka11'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.retr0.xyz/index.xml'
+                        target="_blank"
+                        title="RSS"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-rss"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M4 4a16 16 0 0 1 16 16" /><path d="M4 11a9 9 0 0 1 9 9" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://t.me/ded0000'
+                        target="_blank"
+                        title="Telegram"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页 | Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E-about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于 | About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/message/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-message"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 9h8" /><path d="M8 13h6" /><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" /></svg>
+                
+                <span>留言板 | Msg Board</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索 | Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>技术链接 | Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#密码学概述">密码学概述</a>
+      <ol>
+        <li><a href="#古典密码">古典密码</a></li>
+        <li><a href="#现代密码">现代密码</a></li>
+      </ol>
+    </li>
+    <li><a href="#古典密码-1">古典密码</a>
+      <ol>
+        <li><a href="#base加密">base加密</a>
+          <ol>
+            <li><a href="#base64">base64</a></li>
+            <li><a href="#base32">base32</a></li>
+            <li><a href="#base16">base16</a></li>
+          </ol>
+        </li>
+        <li><a href="#凯撒密码">凯撒密码</a></li>
+        <li><a href="#维吉尼亚密码">维吉尼亚密码</a></li>
+        <li><a href="#摩斯密码">摩斯密码</a></li>
+        <li><a href="#培根密码">培根密码</a></li>
+      </ol>
+    </li>
+    <li><a href="#其他密码">其他密码</a>
+      <ol>
+        <li><a href="#base100">base100</a></li>
+        <li><a href="#核心价值观编码">核心价值观编码</a></li>
+        <li><a href="#与佛论禅">与佛论禅</a></li>
+        <li><a href="#盲文">盲文</a></li>
+        <li><a href="#手机键盘密码">手机键盘密码</a></li>
+        <li><a href="#电脑键盘密码">电脑键盘密码</a></li>
+        <li><a href="#古埃及象形文字">古埃及象形文字</a></li>
+        <li><a href="#提瓦特文">提瓦特文</a></li>
+        <li><a href="#标准银河文字">标准银河文字</a></li>
+        <li><a href="#颜文字aa编码">颜文字（AA编码）</a></li>
+        <li><a href="#brainfuck">Brainfuck</a></li>
+        <li><a href="#jsfuck">jsfuck</a></li>
+      </ol>
+    </li>
+    <li><a href="#现代密码-1">现代密码</a>
+      <ol>
+        <li><a href="#rc4">RC4</a></li>
+        <li><a href="#des">DES</a>
+          <ol>
+            <li><a href="#ecb模式">ECB模式</a></li>
+            <li><a href="#cbc模式">CBC模式</a></li>
+            <li><a href="#cfbofbctr模式">CFB/OFB/CTR模式</a></li>
+          </ol>
+        </li>
+        <li><a href="#aes">AES</a></li>
+        <li><a href="#rsa">RSA</a>
+          <ol>
+            <li><a href="#知识铺垫">知识铺垫</a></li>
+            <li><a href="#简单示例">简单示例</a></li>
+            <li><a href="#dpdq泄露">dpdq泄露</a></li>
+            <li><a href="#dp-泄露">dp 泄露</a></li>
+            <li><a href="#e与phi不互素">e与phi不互素</a></li>
+            <li><a href="#共模攻击">共模攻击</a></li>
+            <li><a href="#小e攻击">小e攻击</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BD%91%E5%AE%89/" style="background-color: #BEBDBD; color: #fff;">
+                网安
+            </a>
+        
+            <a href="/categories/ctf/" >
+                CTF
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/4.-crypto%E5%85%A5%E9%97%A8/">4. Crypto入门</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+     
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-03-12 | 21:21</time>
+            </div>
+        
+
+        
+
+        
+        <div id="viewCount">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="密码学概述">密码学概述
+</h2><h3 id="古典密码">古典密码
+</h3><ol>
+<li>单表替换加密</li>
+</ol>
+<p>在单表替换加密中,所有的加密方式几乎都有一个共性,那就是明密文一一对应。</p>
+<p>在密文长度足够长的时候,可以使用词频分析进行破解。</p>
+<p>如:凯撒密码、埃特巴什码、仿射密码</p>
+<ol start="2">
+<li>多表替换加密</li>
+</ol>
+<p>使用多个不同的字母表(替换表)来加密明文,从而增强安全性、抵抗频率分析攻击。</p>
+<p>如:维吉尼亚密码</p>
+<ol start="3">
+<li>奇奇怪怪的加密方式</li>
+</ol>
+<h3 id="现代密码">现代密码
+</h3><ol>
+<li>对称加密</li>
+</ol>
+<p>主要分为两种方式:</p>
+<p>分组密码,又称为块密码。(所谓块加密就是每次加密一块明文)</p>
+<p>序列密码,又称为流密码。(流密码的密钥派生自一个较短的密钥,派生算法通常为一个伪随机数生成算法。)</p>
+<p>以 <strong>DES,AES,RC4</strong> 为代表。</p>
+<ol start="2">
+<li>非对称加密</li>
+</ol>
+<p>以 <strong>RSA,ELGamal,椭圆曲线</strong>加密为代表。</p>
+<ol start="3">
+<li>哈希函数</li>
+</ol>
+<p>以 <strong>MD5,SHA-1,SHA-512</strong>等为代表。</p>
+<ol start="4">
+<li>数字签名</li>
+</ol>
+<p>以 <strong>RSA 签名,ELGamal 签名,DSA 签名</strong>为代表。</p>
+<h2 id="古典密码-1">古典密码
+</h2><h3 id="base加密">base加密
+</h3><h4 id="base64">base64
+</h4><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://free.picui.cn/free/2026/03/12/69b2bcb34acad.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>原理：把3个8位字节转为4个6位的字节，之后在6位的前面补两个0。</p>
+<p>当六位全为 1时:111111 对应 ascii 值 63</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">源文本:The
+</span></span><span class="line"><span class="cl">对应 ascii 码:84 104 101
+</span></span><span class="line"><span class="cl">8 位 binary :01010100 01101000 01100101
+</span></span><span class="line"><span class="cl">6 位 binary :010101 000110 100001 100101
+</span></span><span class="line"><span class="cl">高位补 0:00010101 00000110 00100001 00100101
+</span></span><span class="line"><span class="cl">对应 base64 码表:21 6 33 37
+</span></span><span class="line"><span class="cl">查表:VGhl
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通常使用在线网站进行base64加解密。</p>
+<p><a class="link" href="https://cyberchef.org/"  target="_blank" rel="noopener"
+    >https://cyberchef.org/</a></p>
+<p><strong>例题：base64、base64(2)</strong></p>
+<ol>
+<li>base64</li>
+</ol>
+<p><code>flag{do_you_know_base64_encode}</code></p>
+<ol start="2">
+<li>base64(2)</li>
+</ol>
+<p>需要使用题目所给的码表，填到cyberchef的Alphabet中即可</p>
+<p><code>flag{hello_world_base64!}</code></p>
+<h4 id="base32">base32
+</h4><p><strong>例题：base32</strong></p>
+<p><code>flag{hello_base32}</code></p>
+<h4 id="base16">base16
+</h4><p><strong>例题：base16</strong></p>
+<p><code>flag{easy0_b4sel6!}</code></p>
+<h3 id="凯撒密码">凯撒密码
+</h3><p>凯撒密码就是把字幕按照顺序移位，key就是移动的位数</p>
+<p><strong>例题：凯撒大帝</strong></p>
+<p>建议使用<a class="link" href="https://ctf.bugku.com/tool/caesar"  target="_blank" rel="noopener"
+    >https://ctf.bugku.com/tool/caesar</a>的枚举功能</p>
+<p><code>flag{normal_caesar}</code></p>
+<h3 id="维吉尼亚密码">维吉尼亚密码
+</h3><p>维吉尼亚密码（Vigenère Cipher）是一种经典的<strong>多表替换密码</strong>，通过动态改变凯撒移位量，大幅提升了古典密码的安全性。</p>
+<p>它本质是<strong>多个凯撒密码的组合</strong>：</p>
+<ul>
+<li>用一个<strong>密钥词</strong>（如 <code>LEMON</code>）控制每一位的移位量。</li>
+<li>每个密钥字母对应一个移位值（A=0, B=1, &hellip;, Z=25）。</li>
+<li>加密时，<strong>明文 + 密钥（模 26）</strong>；解密时，<strong>密文 − 密钥（模 26）</strong>。</li>
+</ul>
+<p><strong>加密步骤（示例）</strong></p>
+<p>以明文 <code>ATTACK</code>、密钥 <code>LEMON</code> 为例：</p>
+<ol>
+<li>对齐：密钥重复至与明文等长</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">明文：A T T A C K
+</span></span><span class="line"><span class="cl">密钥：L E M O N L
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>转数字（A=0）</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">明文：0 19 19 0 2 10
+</span></span><span class="line"><span class="cl">密钥：11 4 12 14 13 11
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>相加并模 26</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">0+11=11 → L
+</span></span><span class="line"><span class="cl">19+4=23 → X
+</span></span><span class="line"><span class="cl">19+12=31 mod26=5 → F
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>结果：密文 <code>LXFOPV</code></li>
+</ol>
+<p><strong>例题：Vigenere</strong></p>
+<p><a class="link" href="https://ctf.bugku.com/tool/vigenere"  target="_blank" rel="noopener"
+    >https://ctf.bugku.com/tool/vigenere</a></p>
+<p><code>flag{easy_Vigenere}</code></p>
+<h3 id="摩斯密码">摩斯密码
+</h3><p>应该没人不知道把，略</p>
+<h3 id="培根密码">培根密码
+</h3><p>培根密码常用两种不同元素代指二进制中的0和1，甚至可以是两种字体、字号、粗细、大小写等</p>
+<p><strong>例题：培根</strong></p>
+<p><code>flag{bacniancpher}</code></p>
+<h2 id="其他密码">其他密码
+</h2><h3 id="base100">base100
+</h3><p><a class="link" href="https://ctf.bugku.com/tool/base100"  target="_blank" rel="noopener"
+    >https://ctf.bugku.com/tool/base100</a></p>
+<p><strong>例题：一百</strong></p>
+<p><code>flag{b@se_loo}</code></p>
+<h3 id="核心价值观编码">核心价值观编码
+</h3><p><strong>例题：社会主义核心价值观</strong></p>
+<p><a class="link" href="https://ctf.bugku.com/tool/cvecode"  target="_blank" rel="noopener"
+    >https://ctf.bugku.com/tool/cvecode</a></p>
+<p><code>flag{hacking_is_a_journey_not_a_destination}</code></p>
+<h3 id="与佛论禅">与佛论禅
+</h3><p><strong>例题：与佛论禅</strong></p>
+<p><a class="link" href="https://my.chenyu.me/buddha/"  target="_blank" rel="noopener"
+    >https://my.chenyu.me/buddha/</a></p>
+<p><code>flag{stay_curious_and_keep_experimenting}</code></p>
+<h3 id="盲文">盲文
+</h3><p><a class="link" href="https://www.lddgo.net/common/braille"  target="_blank" rel="noopener"
+    >https://www.lddgo.net/common/braille</a></p>
+<h3 id="手机键盘密码">手机键盘密码
+</h3><p>通常以两个数字为一组，第一个数字是所在格子，第二个数字是在当前各自的第几个字母</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p>![]https://free.picui.cn/free/2026/03/12/69b2bcb183ac4.png)</p>
+<p>如 <code>23</code>指的是 C <code>61</code>指的是M</p>
+<h3 id="电脑键盘密码">电脑键盘密码
+</h3><p>通常是若干个字符为一组，实际明文指的是在键盘上被这些字符所包裹的那个字符，如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">wazxde		
+</span></span><span class="line"><span class="cl">S
+</span></span><span class="line"><span class="cl">4edft5
+</span></span><span class="line"><span class="cl">r
+</span></span><span class="line"><span class="cl">uhnmki
+</span></span><span class="line"><span class="cl">j
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="古埃及象形文字">古埃及象形文字
+</h3><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://free.picui.cn/free/2026/03/12/69b2bcb1b28ac.jpg"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h3 id="提瓦特文">提瓦特文
+</h3><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://free.picui.cn/free/2026/03/12/69b2bcb216609.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h3 id="标准银河文字">标准银河文字
+</h3><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://free.picui.cn/free/2026/03/12/69b2bcb218ee5.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h3 id="颜文字aa编码">颜文字（AA编码）
+</h3><p><strong>例题：颜文字</strong></p>
+<p><a class="link" href="http://www.hiencode.com/aaencode.html"  target="_blank" rel="noopener"
+    >http://www.hiencode.com/aaencode.html</a></p>
+<p><code>flag{js_da_fa_hao}</code></p>
+<h3 id="brainfuck">Brainfuck
+</h3><p><strong>例题：brainfuck</strong></p>
+<p><a class="link" href="https://ctf.bugku.com/tool/brainfuck"  target="_blank" rel="noopener"
+    >https://ctf.bugku.com/tool/brainfuck</a></p>
+<p><code>flag{99754106633f94d350db34d548d6091a}</code></p>
+<h3 id="jsfuck">jsfuck
+</h3><p><strong>例题：jsfuck</strong></p>
+<p><a class="link" href="http://www.hiencode.com/jsfuck.html"  target="_blank" rel="noopener"
+    >http://www.hiencode.com/jsfuck.html</a></p>
+<p><code>flag{3e8b4c45d}</code></p>
+<h2 id="现代密码-1">现代密码
+</h2><h3 id="rc4">RC4
+</h3><p>RC4 是一种<strong>流密码</strong>，属于<strong>对称加密算法</strong>，特点是<strong>极快、极简单、历史极长</strong>。</p>
+<ul>
+<li>用一个<strong>密钥</strong>生成一串<strong>伪随机密钥流</strong></li>
+<li>明文与密钥流做<strong>异或（XOR）</strong> 得到密文</li>
+<li>解密一模一样：密文再异或一次密钥流就还原</li>
+</ul>
+<p><strong>例题：RC4</strong></p>
+<p><a class="link" href="http://www.hiencode.com/rc4.html"  target="_blank" rel="noopener"
+    >http://www.hiencode.com/rc4.html</a></p>
+<p><code>flag{knowledge_gained_is_power_unlocked}</code></p>
+<h3 id="des">DES
+</h3><ul>
+<li>DES 是经典的<strong>分组密码</strong></li>
+<li>把明文<strong>每 64 位（8 字节）分成一组</strong></li>
+<li>用 <strong>56 位密钥</strong> 对每组做复杂的置换、代换（16 轮加密）</li>
+<li>输出也是 <strong>64 位一组的密文</strong></li>
+</ul>
+<h4 id="ecb模式">ECB模式
+</h4><p>ECB即 **Electronic CodeBook 电子密码本模式 **</p>
+<p><strong>规则：</strong></p>
+<ul>
+<li>把明文切成 <strong>64 位一组</strong></li>
+<li><strong>每组独立用 DES 加密</strong></li>
+<li>最后把密文组拼起来</li>
+</ul>
+<p>例如：</p>
+<p>明文：<code>AAAAAAAA BBBBBBBB AAAAAAAA</code></p>
+<p>用 DES+ECB 加密：</p>
+<ul>
+<li>第 1 组 <code>AAAAAAAA</code> → 密文 <code>X</code></li>
+<li>第 2 组 <code>BBBBBBBB</code> → 密文 <code>Y</code></li>
+<li>第 3 组 <code>AAAAAAAA</code> → 密文 <strong>还是 X</strong></li>
+</ul>
+<p>特点：<strong>相同明文块 → 相同密文块</strong></p>
+<p><strong>例题：DES</strong></p>
+<p><a class="link" href="https://www.toolhelper.cn/SymmetricEncryption/DES"  target="_blank" rel="noopener"
+    >https://www.toolhelper.cn/SymmetricEncryption/DES</a></p>
+<p>选择模式ECB，填充模式PKCS7，格式Hex</p>
+<p><code>&lt;font style=&quot;color:rgb(0, 0, 0);&quot;&gt;flag{collaboration_creativity_and_coding}</code></p>
+<h4 id="cbc模式">CBC模式
+</h4><p>CBC 即 **Cipher Block Chaining 密码分组链接模式  **</p>
+<ul>
+<li><strong>当前明文块 先和 前一个密文块 异或</strong></li>
+<li>再用 DES 加密</li>
+</ul>
+<p>因为每一组都<strong>依赖前一组（类似区块链）</strong>，</p>
+<p>所以：<strong>相同明文，在不同位置 → 密文一定不同</strong></p>
+<h4 id="cfbofbctr模式">CFB/OFB/CTR模式
+</h4><ul>
+<li><strong>CFB</strong>：流密码、<strong>串行、有错误传播</strong></li>
+<li><strong>OFB</strong>：流密码、<strong>无错误传播</strong></li>
+<li><strong>CTR</strong>：流密码、<strong>并行最快、现代最爱</strong></li>
+</ul>
+<h3 id="aes">AES
+</h3><p><strong>例题：AES</strong></p>
+<p><a class="link" href="https://www.toolhelper.cn/SymmetricEncryption/AES"  target="_blank" rel="noopener"
+    >https://www.toolhelper.cn/SymmetricEncryption/AES</a></p>
+<p>模式CFB，填充None，格式Hex</p>
+<p><code>flag{every_line_of_code_counts}</code></p>
+<h3 id="rsa">RSA
+</h3><p>RSA解密常用下面的工具进行：</p>
+<p><a class="link" href="https://pan.baidu.com/s/1sIcFvRvrPWpKVBA-r7b7EA?pwd=ruzh"  target="_blank" rel="noopener"
+    >https://pan.baidu.com/s/1sIcFvRvrPWpKVBA-r7b7EA?pwd=ruzh</a></p>
+<h4 id="知识铺垫">知识铺垫
+</h4><p>RSA 是<strong>非对称加密</strong>：</p>
+<ul>
+<li>有<strong>公钥</strong>（随便给别人）</li>
+<li>有<strong>私钥</strong>（自己藏好）</li>
+<li>用<strong>公钥加密 → 只能私钥解密</strong></li>
+<li>用<strong>私钥签名 → 只能公钥验证</strong></li>
+</ul>
+<p>安全来自：<strong>大数分解很难</strong>（两个大质数相乘容易，反过来拆很难）。</p>
+<hr>
+<p><strong>原理：</strong></p>
+<ol>
+<li>选<strong>两个不同质数 p、q</strong></li>
+<li>算 n = p × q</li>
+<li>算欧拉函数 φ(n) = (p-1)(q-1)</li>
+<li>选公钥指数 e：1 &lt;e &lt; φ(n)，且与 φ(n) <strong>互质</strong>（常用 e=65537）</li>
+<li>算私钥指数 d：d 是 e 在模 φ(n) 下的<strong>逆元</strong>即：(e × d) mod φ(n) = 1</li>
+</ol>
+<ul>
+<li><strong>公钥：(e, n)</strong></li>
+<li><strong>私钥：(d, n)</strong></li>
+</ul>
+<p>加密：$ C=M^emod\ n $</p>
+<p>解密：$ M=C^d mod\ n $</p>
+<h4 id="简单示例">简单示例
+</h4><p>我们用很小的质数演示：<br>
+<strong>① 选质数</strong><br>
+p = 11q = 17<br>
+<strong>② 算 n</strong><br>
+n = 11 × 17 = 187<br>
+<strong>③ 算 φ(n)</strong><br>
+φ(n) = (11-1)(17-1) = 10 × 16 = 160<br>
+<strong>④ 选 e</strong><br>
+e 要和 160 互质，随便选一个：e = 3（满足 gcd (3,160)=1）<br>
+<strong>⑤ 算 d</strong><br>
+求 d 使 (3×d) mod 160 = 1得：d = 107</p>
+<hr>
+<p><strong>加密 / 解密演示：</strong><br>
+设明文 M = 5（必须小于 n）<br>
+<strong>加密（公钥 3, 187）</strong><br>
+C = 5³ mod 187 = 125<br>
+<strong>解密（私钥 107, 187）</strong><br>
+M = 125¹⁰⁷ mod 187 = 5<br>
+成功还原！</p>
+<h4 id="dpdq泄露">dpdq泄露
+</h4><p>**例题：dqdp泄露 **</p>
+<p>打开上面给出的工具，进入IDE选项卡，在【脚本】中选择基础脚本-dpdp泄露.py</p>
+<p>更改脚本中的几个数值，然后右键运行即可。</p>
+<p>即下面的脚本：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">gmpy2</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">libnum</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="mi">8637633767257008567099653486541091171320491509433615447539162437911244175885667806398411790524083553445158113502227745206205327690939504032994699902053229</span>
+</span></span><span class="line"><span class="cl"><span class="n">q</span> <span class="o">=</span> <span class="mi">12640674973996472769176047937170883420927050821480010581593137135372473880595613737337630629752577346147039284030082593490776630572584959954205336880228469</span>
+</span></span><span class="line"><span class="cl"><span class="n">c</span> <span class="o">=</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">24722305403887382073567316467649080662631552905960229399079107995602154418176056335800638887527614164073530437657085079676157350205351945222989351316076486573599576041978339872265925062764318536089007310270278526159678937431903862892400747915525118983959970607934142974736675784325993445942031372107342103852</span>
+</span></span><span class="line"><span class="cl"><span class="n">dp</span> <span class="o">=</span> <span class="mi">6500795702216834621109042351193261530650043841056252930930949663358625016881832840728066026150264693076109354874099841380454881716097778307268116910582929</span>
+</span></span><span class="line"><span class="cl"><span class="n">dq</span> <span class="o">=</span> <span class="mi">783472263673553449019532580386470672380574033551303889137911760438881683674556098098256795673512201963002175438762767516968043599582527539160811120550041</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span> <span class="n">dq</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">InvQ</span> <span class="o">=</span> <span class="n">gmpy2</span><span class="o">.</span><span class="n">invert</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mp</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">dp</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mq</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">dq</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">m</span> <span class="o">=</span> <span class="p">(((</span><span class="n">mp</span> <span class="o">-</span> <span class="n">mq</span><span class="p">)</span> <span class="o">*</span> <span class="n">InvQ</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="n">q</span> <span class="o">+</span> <span class="n">mq</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">mp</span> <span class="o">-</span> <span class="n">mq</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">libnum</span><span class="o">.</span><span class="n">n2s</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="n">decrypt</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span> <span class="n">dq</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># m=pow(c,dp,p)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># m=pow(c,dq,q)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># #前提就是 m&lt;p,m&lt;q</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># print(libnum.n2s(m))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>noxCTF{W31c0m3_70_Ch1n470wn}</code></p>
+<h4 id="dp-泄露">dp 泄露
+</h4><p>打开工具</p>
+<p>填入已知的e、n、c</p>
+<p>右键选择<strong>分解模数（N）</strong>，在弹出的N分解工具中输入框填写N的值，点击下面的<strong>本地DB查询</strong>按钮</p>
+<p>将得到的p和q复制到左边的$ Prime(P,Q) $框中，只填写数值，中间用英文逗号隔开</p>
+<p>右键，<strong>计算私钥(D)</strong></p>
+<p>右键，<strong>计算明文(M)</strong></p>
+<p>点击工具栏中的【常规】- <strong>(M)数字&raquo;字符</strong>，得到flag</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://free.picui.cn/free/2026/03/12/69b2bcb25d353.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p><code>flag{wow_leaking_dp_breaks_rsa?_98924743502}</code></p>
+<h4 id="e与phi不互素">e与phi不互素
+</h4><p>打开工具</p>
+<p>填入已知的p,q,e,c</p>
+<p>选择【模式】- e Φ不互素，得到明文M</p>
+<p>点击工具栏中的【常规】- <strong>(M)数字&raquo;字符</strong>，得到flag</p>
+<p><code>flag{1f803313-8999-4ec3-abc6-907a10fde606}</code></p>
+<h4 id="共模攻击">共模攻击
+</h4><p>打开上面给出的工具，进入IDE选项卡，在【脚本】中选择基础脚本-共模攻击.py</p>
+<p>发现默认脚本数值与当前一致</p>
+<hr>
+<p>也可以在RSA选项卡中填入已知的所有值，其中e1,e2都填在$ Public(E) $中，中间英文逗号隔开，c1,c2同理，选择【模式】- 共模攻击，得到明文M</p>
+<p>点击工具栏中的【常规】- <strong>(M)数字&raquo;字符</strong>，得到flag</p>
+<p><code>flag{6ed4c74e022cb18c8039e96de93aa9ce}</code></p>
+<h4 id="小e攻击">小e攻击
+</h4><p>在RSA选项卡中填入已知的所有值，</p>
+<p>选择【模式】- 小e攻击，稍等程序计算，得到明文M</p>
+<p>点击工具栏中的【常规】- <strong>(M)数字&raquo;字符</strong>，得到flag</p>
+<p><code>flag{23d5e9dc-cb38-11ea-8d78-dca90498a2db}</code></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+<div class="math-katex"></div>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/3.-misc-%E5%85%A5%E9%97%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">3. Misc 入门</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/2.-%E9%83%A8%E5%88%86%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2. 部分软件的使用</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.-ctf%E7%AE%80%E4%BB%8B%E5%92%8C%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4%E5%B0%BE/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1. CTF简介和常见文件头尾</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/2.7-cisp-pte-%E6%A8%A1%E6%8B%9F%E4%BA%8C-%E5%85%A8wp/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2.7 CISP-PTE 模拟二 全WP</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/2.6-3-%E7%BB%BC%E5%90%88%E7%AE%80%E5%8D%95-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2.6-3 综合简单 渗透测试报告</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+        <div class="comment-container mt-8"></div>
+        
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="makabaka11/makabaka11.github.io"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 Retr0
+    </section>
+    
+    <section class="running-time">
+    已存在于互联网
+    <span id="runningdays" class="running-days"></span>
+    </section>
+    
+    <section class="totalcount">
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        发表了123篇文章 · 
+        总计203.37k字
+    </section>
+
+
+    <section class="powerby">
+        
+            Powered by ctOS <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+
+                <script src="/js/APlayer.min.js"></script>
+                <script src="/js/Meting.min.js"></script>
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.eaf1211e4c7db355f37ceea53df13700e1b77fbcc3cfe8c1c1f69e4468a752e1.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<link rel="stylesheet" href="/css/custom.css">
+
+<script>
+(function () {
+    const url = new URL(window.location.href);
+
+    
+    if (url.searchParams.has('utterances')) {
+
+        
+        
+        window.location.replace(window.location.pathname);
+    }
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+
+<script>
+    var pjax = new Pjax({
+        selectors: [".main-container"]
+    });
+</script>
+
+
+<script src=https://www.retr0.xyz/js/topbar.min.js></script>
+
+
+
+<script>
+function initUtterances() {
+    const isArticle = document.querySelector('.article-page') && document.querySelector('.article-content');
+    if (!isArticle) return;
+
+    const oldScript = document.querySelector('script[src^="https://utteranc.es/client.js"]');
+    if (oldScript) oldScript.remove();
+
+    const container = document.querySelector('.comment-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    let script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'makabaka11/makabaka11.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+    container.appendChild(script);
+}
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    if (!window.pjax || !window.pjax.state) initUtterances();
+});
+</script>
+
+
+<script>
+pjax._handleResponse = pjax.handleResponse;
+pjax.handleResponse = function(responseText, request, href, options) {
+    if (request.responseText.match("<html")) {
+        if (responseText) {
+            let newDom = new DOMParser().parseFromString(responseText, 'text/html');
+            document.body.setAttribute("class", newDom.body.className);
+        }
+        pjax._handleResponse(responseText, request, href, options);
+    }
+};
+</script>
+
+
+<script>
+topbar.config({
+    barColors: {
+        '0': 'rgba(255, 255, 255, 1)',
+        '1.0': 'rgba(255, 183, 197, 1)'
+    }
+});
+
+document.addEventListener('pjax:send', () => topbar.show());
+
+document.addEventListener('pjax:complete', () => {
+    window.Stack.init();
+    topbar.hide();
+    setTimeout(initUtterances, 0);
+    updateViewCount();
+    renderKaTeX();
+    initPhotoSwipeFromDOM('.article-content');   
+    initLive2D();                                
+});
+</script>
+
+
+<script>
+function updateViewCount() {
+    const viewCountEl = document.getElementById('vercount_value_page_pv');
+    if (!viewCountEl) return;
+
+    viewCountEl.textContent = 'loading...';
+    const url = 'https://cn.vercount.one/js';
+
+    const old = document.querySelector(`script[src="${url}"]`);
+    if (old) old.remove();
+
+    const s = document.createElement('script');
+    s.src = url;
+    s.defer = true;
+    document.head.appendChild(s);
+
+    showHideView();
+}
+
+function showHideView() {
+    const viewCounts = document.querySelectorAll("#viewCount");
+    const isArticle = document.querySelector(".article-page");
+    viewCounts.forEach(ele => ele.style.display = isArticle ? 'block' : 'none');
+}
+</script>
+
+<script>
+    function showHideView() {
+        
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+
+
+
+<script>
+async function renderKaTeX() {
+    let katex = document.querySelector(".math-katex");
+    if (!katex) return;
+
+    while (typeof renderMathInElement !== 'function') {
+        await new Promise(r => setTimeout(r, 500));
+    }
+
+    const content = document.querySelector('.article-content') || document.body;
+    renderMathInElement(content, {
+        delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true }
+        ],
+        ignoredClasses: ["gist"]
+    });
+}
+</script>
+
+
+<div id="particles-js"></div>
+
+<script src=https://www.retr0.xyz/background/particles.min.js></script>
+<script>
+particlesJS.load('particles-js',
+    "https://www.retr0.xyz/background/particlesjs-config.json",
+    () => console.log('particles.js loaded')
+);
+</script>
+
+<style>
+#particles-js {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: -1;
+}
+</style>
+
+<script>
+
+function initPhotoSwipeFromDOM(selector) {
+    if (!window.PhotoSwipe) return;
+
+    const containers = document.querySelectorAll(selector);
+    if (!containers.length) return;
+
+    containers.forEach(container => {
+        const images = container.querySelectorAll('img');
+
+        images.forEach((img, index) => {
+
+            
+            function getImageSize() {
+                return new Promise(resolve => {
+                    if (img.complete && img.naturalWidth) {
+                        resolve({
+                            w: img.naturalWidth,
+                            h: img.naturalHeight
+                        });
+                    } else {
+                        const tmp = new Image();
+                        tmp.src = img.src || img.getAttribute("data-src");
+                        tmp.onload = () => resolve({ w: tmp.width, h: tmp.height });
+                    }
+                });
+            }
+
+            img.style.cursor = "zoom-in";
+
+            
+            img.addEventListener("click", async (e) => {
+                e.preventDefault();
+
+                const size = await getImageSize();
+                const pswpEl = document.querySelector('.pswp');
+
+                const items = Array.from(images).map(i => ({
+                    src: i.src || i.getAttribute("data-src"),
+                    msrc: i.src,
+                    w: i.naturalWidth || 800,
+                    h: i.naturalHeight || 600,
+                }));
+
+                items[index].w = size.w;
+                items[index].h = size.h;
+
+                const gallery = new PhotoSwipe(pswpEl, PhotoSwipeUI_Default, items, {
+                    index,
+                    history: false
+                });
+                
+                enablePhotoSwipeWebShare(gallery);
+
+                gallery.init();
+            });
+        });
+    });
+}
+
+
+
+
+
+function enablePhotoSwipeWebShare(gallery) {
+    gallery.listen('shareLinkClick', function(shareButtonData, e) {
+        e.preventDefault();
+
+        const item = gallery.currItem;
+
+        if (navigator.share) {
+            navigator.share({
+                title: document.title,
+                text: '给你分享一张图片：',
+                url: item.src
+            }).catch(err => console.log("分享失败：", err));
+
+            return false; 
+        }
+
+        
+        return true;
+    });
+}
+</script>
+
+
+
+<script>
+
+
+window._live2d_loaded = window._live2d_loaded || false;
+window._live2d_initialized = window._live2d_initialized || false;
+
+
+function loadLive2DAssetsOnce(cdnPath) {
+    if (window._live2d_loaded) return Promise.resolve();
+
+    window._live2d_loaded = true;
+
+    return Promise.all([
+        loadRes(cdnPath + "waifu.css", "css"),
+        loadRes(cdnPath + "Core/live2dcubismcore.js", "js"),
+        loadRes(cdnPath + "live2d-sdk.js", "js"),
+        loadRes(cdnPath + "waifu-tips.js", "js")
+    ]);
+}
+
+
+function initLive2DWidgetOnce(cdnPath) {
+
+    if (window._live2d_initialized) return;
+
+    
+    const old = document.querySelector("#waifu");
+    if (old) old.remove();
+
+    window._live2d_initialized = true;
+
+    initWidget({
+        waifuPath: cdnPath + "waifu-tips.json",
+        cdnPath: cdnPath + "Resources/",
+        tools: ["hitokoto", "asteroids", "express", "switch-model", "switch-texture", "photo", "info", "quit"],
+        dragEnable: true,
+        dragDirection: ["x", "y"],
+        switchType: "order"
+    });
+
+    console.log("[Live2D] Widget initialized.");
+}
+
+
+function loadRes(url, type) {
+    return new Promise((resolve) => {
+        let tag;
+        if (type === "css") {
+            tag = document.createElement("link");
+            tag.rel = "stylesheet";
+            tag.href = url;
+        } else {
+            tag = document.createElement("script");
+            tag.src = url;
+        }
+        tag.onload = resolve;
+        document.head.appendChild(tag);
+    });
+}
+
+
+function initLive2D() {
+    if (screen.width < 768) return;
+
+    const cdnPath = "https://www.retr0.xyz/blog-live2d/";
+
+    loadLive2DAssetsOnce(cdnPath)
+        .then(() => initLive2DWidgetOnce(cdnPath));
+}
+
+initLive2D();  
+
+
+document.addEventListener("pjax:complete", () => {
+    initLive2D(); 
+});
+</script>
+
+
+<style>
+    .highlight {
+         
+        max-height: 400px;
+        overflow: hidden;
+        position: relative;  
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .code-more-btn {
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: #f0f0f5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .code-more-img {
+        cursor: pointer !important;
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+</style>
+
+<script>
+  function initCodeMoreBox() {
+    let codeBlocks = document.querySelectorAll(".highlight");
+    if (!codeBlocks) {
+      return;
+    }
+    codeBlocks.forEach(codeBlock => {
+      
+      const existingBox = codeBlock.querySelector('.code-more-box');
+      if (existingBox) existingBox.remove();
+
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+        return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.addEventListener('click', () => {
+        codeBlock.classList.add('code-show');
+        codeMoreBox.style.display = 'none';
+        
+        window.dispatchEvent(new Event('resize'))
+      })
+      
+      let img = document.createElement('img');
+      img.classList.add('code-more-img');
+      img.src = "https://www.retr0.xyz/icons/codeMore.png"
+      
+      codeMoreBtn.appendChild(img);
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox)
+    })
+  }
+  
+  initCodeMoreBox();
+  
+  
+  document.addEventListener('pjax:complete', () => {
+    initCodeMoreBox();
+  });
+</script>
+
+
+<script>
+
+
+window.__articlePlayers = window.__articlePlayers || [];
+
+
+
+function getGlobalMetingPlayer() {
+    return window.__globalMetingPlayer || null;
+}
+
+
+
+function pauseGlobalMeting() {
+    const p = getGlobalMetingPlayer();
+    if (p && !p.audio.paused) {
+        p.pause();
+        console.log('[APlayer] Pause global Meting');
+    }
+}
+
+
+
+function pauseArticlePlayers() {
+    window.__articlePlayers.forEach(p => {
+        if (p && !p.audio.paused) {
+            p.pause();
+        }
+    });
+}
+
+
+
+function initAPlayers() {
+    if (typeof APlayer === "undefined") return;
+
+    document.querySelectorAll('.aplayer-article').forEach(el => {
+        if (el.dataset.loaded === "true") return;
+        el.dataset.loaded = "true";
+
+        const ap = new APlayer({
+            container: el,
+            fixed: false,
+            autoplay: false,
+            loop: 'none',
+            order: 'list',
+            preload: 'metadata',
+            volume: 0.7,
+            mutex: false, 
+            audio: [{
+                name: el.dataset.title || 'Unknown',
+                artist: el.dataset.artist || '',
+                url: el.dataset.src,
+                cover: el.dataset.cover || '',
+                lrc: el.dataset.lrc || '',
+            }]
+        });
+
+        
+        ap.on('play', () => {
+            
+            pauseGlobalMeting();
+
+            
+            window.__articlePlayers.forEach(other => {
+                if (other !== ap && !other.audio.paused) {
+                    other.pause();
+                }
+            });
+
+    console.log('[APlayer] Switch article track');
+});
+
+
+        window.__articlePlayers.push(ap);
+    });
+}
+
+
+
+function bindMetingMutex() {
+    const p = getGlobalMetingPlayer();
+    if (!p || p.__mutexBound) return;
+
+    p.__mutexBound = true;
+
+    
+    p.on('play', () => {
+        pauseArticlePlayers();
+    });
+
+    console.log('[Meting] Mutex bound');
+}
+
+
+
+function initAllPlayers() {
+    initAPlayers();
+    bindMetingMutex();
+}
+
+
+
+document.addEventListener("DOMContentLoaded", initAllPlayers);
+document.addEventListener("pjax:complete", initAllPlayers);
+</script>
+
+<script>
+
+
+function destroyArticlePlayers() {
+    if (!window.__articlePlayers || window.__articlePlayers.length === 0) return;
+
+    window.__articlePlayers.forEach(ap => {
+        try {
+            if (!ap.audio.paused) {
+                ap.pause();
+            }
+            ap.destroy(); 
+        } catch (e) {
+            console.warn('[APlayer] destroy failed', e);
+        }
+    });
+
+    window.__articlePlayers = [];
+    console.log('[APlayer] Article players destroyed');
+}
+
+
+
+document.addEventListener('pjax:send', () => {
+    destroyArticlePlayers();
+});
+</script>
+
+
+<script>
+let runningTimeTimer = null;
+
+function updateRunningTime() {
+    const el = document.getElementById('runningdays');
+    if (!el) return;
+
+    let start = '2025-10-26 00:00:00'; 
+    start = new Date(start.replace(/-/g, "/"));
+    const now = new Date();
+
+    const diff = Math.floor((now.getTime() - start.getTime()) / 1000);
+
+    const days = Math.floor(diff / (24 * 3600));
+    const hours = Math.floor((diff % (24 * 3600)) / 3600);
+    const minutes = Math.floor((diff % 3600) / 60);
+    const seconds = diff % 60;
+
+    el.textContent =
+        `${days}天${hours}小时${minutes}分钟${seconds}秒`;
+}
+
+function initRunningTime() {
+    
+    updateRunningTime();
+
+    
+    if (runningTimeTimer) {
+        clearInterval(runningTimeTimer);
+    }
+
+    runningTimeTimer = setInterval(updateRunningTime, 1000);
+}
+
+ 
+document.addEventListener('DOMContentLoaded', () => {
+    initRunningTime();
+});
+
+ 
+document.addEventListener('pjax:complete', () => {
+    initRunningTime();
+});
+</script>
+
+
+
+
+<script>
+  
+  let originalTitle = document.title; 
+  const leaveTip = "桥豆麻袋(#°Д°)";     
+  const backTip = "(*'▽`*)欢迎回来!";        
+  const recoverDelay = 2000;           
+  let visibilityChangeHandler = null;  
+  let titleRecoverTimer = null;        
+
+  
+  function initTitleSwitch() {
+    
+    if (visibilityChangeHandler) {
+      document.removeEventListener('visibilitychange', visibilityChangeHandler);
+    }
+
+    
+    originalTitle = document.title;
+
+    
+    visibilityChangeHandler = function() {
+      
+      clearTimeout(titleRecoverTimer);
+
+      if (document.hidden) {
+        
+        document.title = leaveTip;
+      } else {
+        
+        document.title = backTip;
+        
+        titleRecoverTimer = setTimeout(() => {
+          document.title = originalTitle;
+        }, recoverDelay);
+      }
+    };
+
+    
+    document.addEventListener('visibilitychange', visibilityChangeHandler);
+  }
+
+  
+  document.addEventListener('pjax:success', function() {
+    
+    initTitleSwitch();
+  });
+
+  
+  window.onload = function() {
+    initTitleSwitch();
+  };
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+<meting-js
+  id="14477349320"
+  server="netease"
+  type="playlist"
+  fixed="true"
+  bottom="20px"
+  right="20px"
+  autoplay="false"
+  width="300px"
+  preload="metadata"
+  mutex="false">
+</meting-js>
+
+<script>
+(function () {
+
+  
+  if (window.__global_meting_initialized) return;
+  window.__global_meting_initialized = true;
+
+  const STORAGE_KEY = "playInfo";
+  const PLAYLIST_ID = "14477349320";
+
+  function initGlobalMeting() {
+    const meting = document.querySelector('meting-js');
+    if (!meting) return;
+
+    
+    meting.addEventListener('aplayer-loaded', () => {
+      const ap = meting.aplayer;
+      if (!ap) return;
+
+      
+      window.__globalMetingPlayer = ap;
+      console.log('[Meting] Global APlayer ready');
+
+      bindPlayerEvents(ap);
+      restorePlayState(ap);
+    }, { once: true });
+  }
+
+  function bindPlayerEvents(ap) {
+    
+    const save = () => savePlayState(ap);
+
+    window.addEventListener('beforeunload', save);
+    document.addEventListener('visibilitychange', save);
+
+    
+    ap.on('play', () => {
+      document.dispatchEvent(new CustomEvent('global-player-play'));
+    });
+  }
+
+  function savePlayState(ap) {
+    if (!ap || !ap.list || !ap.audio) return;
+
+    const data = {
+      playlistId: PLAYLIST_ID,
+      index: ap.list.index,
+      currentTime: ap.audio.currentTime,
+      paused: ap.paused
+    };
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function restorePlayState(ap) {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!data || data.playlistId !== PLAYLIST_ID) return;
+
+    if (data.index < ap.list.songs.length) {
+      ap.list.switch(data.index);
+      ap.once('canplay', () => {
+        ap.seek(data.currentTime || 0);
+        if (!data.paused) {
+          ap.play().catch(() => {
+            ap.notice("点击继续播放", 3000);
+          });
+        }
+      });
+    }
+  }
+
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGlobalMeting);
+  } else {
+    initGlobalMeting();
+  }
+
+})();
+</script>
+
+    </body>
+</html>
