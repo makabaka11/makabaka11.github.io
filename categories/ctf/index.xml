@@ -196,7 +196,14 @@
 &lt;h3 id=&#34;手机键盘密码&#34;&gt;手机键盘密码
 &lt;/h3&gt;&lt;p&gt;通常以两个数字为一组，第一个数字是所在格子，第二个数字是在当前各自的第几个字母&lt;/p&gt;
 &lt;!-- 这是一张图片，ocr 内容为： --&gt;
-&lt;p&gt;![]https://free.picui.cn/free/2026/03/12/69b2bcb183ac4.png)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://free.picui.cn/free/2026/03/12/69b2bcb183ac4.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
 &lt;p&gt;如 &lt;code&gt;23&lt;/code&gt;指的是 C &lt;code&gt;61&lt;/code&gt;指的是M&lt;/p&gt;
 &lt;h3 id=&#34;电脑键盘密码&#34;&gt;电脑键盘密码
 &lt;/h3&gt;&lt;p&gt;通常是若干个字符为一组，实际明文指的是在键盘上被这些字符所包裹的那个字符，如：&lt;/p&gt;
@@ -283,7 +290,7 @@
 &lt;li&gt;输出也是 &lt;strong&gt;64 位一组的密文&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;ecb模式&#34;&gt;ECB模式
-&lt;/h4&gt;&lt;p&gt;ECB即 **Electronic CodeBook 电子密码本模式 **&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;ECB即 &lt;strong&gt;Electronic CodeBook 电子密码本模式&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;规则：&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;把明文切成 &lt;strong&gt;64 位一组&lt;/strong&gt;&lt;/li&gt;
@@ -305,7 +312,7 @@
 &lt;p&gt;选择模式ECB，填充模式PKCS7，格式Hex&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;flag{collaboration_creativity_and_coding}&lt;/code&gt;&lt;/p&gt;
 &lt;h4 id=&#34;cbc模式&#34;&gt;CBC模式
-&lt;/h4&gt;&lt;p&gt;CBC 即 **Cipher Block Chaining 密码分组链接模式 **&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;CBC 即 &lt;strong&gt;Cipher Block Chaining 密码分组链接模式&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;当前明文块 先和 前一个密文块 异或&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;再用 DES 加密&lt;/li&gt;
