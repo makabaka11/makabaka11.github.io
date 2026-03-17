@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Keep on. Keeping on.">
-<title>[游戏短评]《死亡搁浅》8/10：打破传统的深度哲学大作</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Web 基础与工具使用 Web方向介绍 常见Web漏洞：\n信息泄露、暴力破解、SQL注入、RCE、文件包含、文件上传、反序列化、SSRF、SSTI、XSS、XEE、JWT、Node.JS原型链污染等.\n">
+<title>5. Web 入门</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/p/%E6%B8%B8%E6%88%8F%E7%9F%AD%E8%AF%84%E6%AD%BB%E4%BA%A1%E6%90%81%E6%B5%858/10%E6%89%93%E7%A0%B4%E4%BC%A0%E7%BB%9F%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%93%B2%E5%AD%A6%E5%A4%A7%E4%BD%9C/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/5.-web-%E5%85%A5%E9%97%A8/'>
 
-<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="[游戏短评]《死亡搁浅》8/10：打破传统的深度哲学大作">
-<meta property='og:description' content="Keep on. Keeping on.">
-<meta property='og:url' content='https://www.retr0.xyz/p/%E6%B8%B8%E6%88%8F%E7%9F%AD%E8%AF%84%E6%AD%BB%E4%BA%A1%E6%90%81%E6%B5%858/10%E6%89%93%E7%A0%B4%E4%BC%A0%E7%BB%9F%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%93%B2%E5%AD%A6%E5%A4%A7%E4%BD%9C/'>
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="5. Web 入门">
+<meta property='og:description' content="Web 基础与工具使用 Web方向介绍 常见Web漏洞：\n信息泄露、暴力破解、SQL注入、RCE、文件包含、文件上传、反序列化、SSRF、SSTI、XSS、XEE、JWT、Node.JS原型链污染等.\n">
+<meta property='og:url' content='https://www.retr0.xyz/p/5.-web-%E5%85%A5%E9%97%A8/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-02-21T23:02:23&#43;08:00'/><meta property='article:modified_time' content='2026-02-21T23:02:23&#43;08:00'/><meta property='og:image' content='https://free.picui.cn/free/2026/02/21/6999c8435d1b8.jpg' />
-<meta name="twitter:title" content="[游戏短评]《死亡搁浅》8/10：打破传统的深度哲学大作">
-<meta name="twitter:description" content="Keep on. Keeping on."><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://free.picui.cn/free/2026/02/21/6999c8435d1b8.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-03-18T07:31:53&#43;08:00'/><meta property='article:modified_time' content='2026-03-18T07:31:53&#43;08:00'/>
+<meta name="twitter:title" content="5. Web 入门">
+<meta name="twitter:description" content="Web 基础与工具使用 Web方向介绍 常见Web漏洞：\n信息泄露、暴力破解、SQL注入、RCE、文件包含、文件上传、反序列化、SSRF、SSTI、XSS、XEE、JWT、Node.JS原型链污染等.\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
         <link rel="stylesheet" href="/css/APlayer.min.css">
@@ -298,26 +297,69 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#web-基础与工具使用">Web 基础与工具使用</a>
+      <ol>
+        <li><a href="#web方向介绍">Web方向介绍</a></li>
+        <li><a href="#web常见术语">Web常见术语</a></li>
+        <li><a href="#需要准备的工具">需要准备的工具</a></li>
+      </ol>
+    </li>
+    <li><a href="#所用技术">所用技术</a></li>
+    <li><a href="#例题buuctf">例题（BUUCTF）</a>
+      <ol>
+        <li><a href="#havefun">Havefun</a></li>
+        <li><a href="#极客大挑战-2019http">[极客大挑战 2019]Http</a></li>
+        <li><a href="#actf2020-新生赛exec">[ACTF2020 新生赛]Exec</a></li>
+        <li><a href="#极客大挑战-2019knife">[极客大挑战 2019]Knife</a></li>
+        <li><a href="#hctf-2018admin">[HCTF 2018]admin</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
-    <article class="has-image main-article">
+    <article class="main-article">
     <header class="article-header">
-        <div class="article-image">
-            <a href="/p/%E6%B8%B8%E6%88%8F%E7%9F%AD%E8%AF%84%E6%AD%BB%E4%BA%A1%E6%90%81%E6%B5%858/10%E6%89%93%E7%A0%B4%E4%BC%A0%E7%BB%9F%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%93%B2%E5%AD%A6%E5%A4%A7%E4%BD%9C/">
-                
-                    <img src="https://free.picui.cn/free/2026/02/21/6999c8435d1b8.jpg" loading="lazy" alt="Featured image of post [游戏短评]《死亡搁浅》8/10：打破传统的深度哲学大作" />
-                
-            </a>
-        </div>
-    
 
     <div class="article-details">
     
     <header class="article-category">
         
-            <a href="/categories/%E6%B8%B8%E6%88%8F/" style="background-color: #FF7C01; color: #fff;">
-                游戏
+            <a href="/categories/%E7%BD%91%E5%AE%89/" style="background-color: #BEBDBD; color: #fff;">
+                网安
+            </a>
+        
+            <a href="/categories/ctf/" >
+                CTF
             </a>
         
     </header>
@@ -325,13 +367,9 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E6%B8%B8%E6%88%8F%E7%9F%AD%E8%AF%84%E6%AD%BB%E4%BA%A1%E6%90%81%E6%B5%858/10%E6%89%93%E7%A0%B4%E4%BC%A0%E7%BB%9F%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%93%B2%E5%AD%A6%E5%A4%A7%E4%BD%9C/">[游戏短评]《死亡搁浅》8/10：打破传统的深度哲学大作</a>
+            <a href="/p/5.-web-%E5%85%A5%E9%97%A8/">5. Web 入门</a>
         </h2>
     
-        
-        <h3 class="article-subtitle">
-            Keep on. Keeping on.
-        </h3>
         
     </div>
 
@@ -351,7 +389,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2026-02-21 | 23:02</time>
+                <time class="article-time--published">2026-03-18 | 07:31</time>
             </div>
         
 
@@ -374,34 +412,142 @@
     <section class="article-content">
     
     
-    <p>《死亡搁浅》讲的是山姆作为布里吉斯派送员，在死亡搁浅事件后的破碎末世里，以开罗尔网络为纽带，重新连接散落结点城、让割裂的人类社会再度相融的故事。我最初因小岛秀夫的鼎鼎大名被吸引，又恰逢 Epic 免费赠送，便就此开启了这场末世跋涉。它没有快节奏的爽感对抗，也没有传统开放世界的探索乐趣，仅凭独树一帜的 “送货” 核心玩法与充满哲思的叙事，把玩家拽入满是孤独与温情的末世，在极致的荒芜里，写尽 “连接” 这一主题的重量与温度。在当下这个处处充满割裂的时代，这场冒险更让我读懂了跨越距离的羁绊，也读懂了人类骨子里对彼此联结的深层渴望。</p>
-<p>而贯穿全程的 “连接”，绝非一句空洞的游戏主题。它从开篇山姆孤身跋涉的茫然，逐渐沉淀为贯穿整个冒险的精神锚点，而让我真正读懂这份内核的，是一次深陷 BT 沼泽的经历：当山姆被泥潭困住、BT 的威胁步步逼近时，沼泽中突然冒出数位无名派送员的身影，他们向我招手，还不断扔来物资帮我脱困，那一刻我便知道，这款游戏远非简单的 “送货” 那么简单。当我操控山姆扛着货物，在泥泞、暴雪与 BT 的威胁中踏出一条通路，将物资送到孤立无援的幸存者手中，将冰冷的结点城连入开罗尔网络时，这份 “连接” 便从游戏设定，变成了触手可及的善意与救赎，让这场看似枯燥的末世跋涉，超越了单纯的玩法体验，多了一份关乎人性的深刻与感动。</p>
-<p>游戏的玩法与叙事设计堪称独树一帜，将 “连接” 的内核与操作体验深度绑定。没有炫酷的武器，堆叠的货箱是山姆最坚实的装备；没有激烈的团战，与地形、时间雨、BT 的周旋是冒险的核心，每一次小心翼翼的跋涉、每一次护住货物的坚持，都是对 “连接” 的践行。更动人的是异步联机的设计，你看不见同处末世的其他玩家，却能在荒野中看见他们搭建的桥梁、铺设的滑索、留下的安全屋与鼓励指示牌，按下点赞键的瞬间，跨越时空的善意便完成了传递。这恰好照见了当下的现实：如今的世界，不管是国家之间的隔阂，还是人与人之间的疏离，割裂似乎成了常态，我们总在各自的生活里孤军奋战，却忘了人类本就是彼此联结的整体。小岛秀夫早已看透这份困境，也用游戏给出了答案：连接，从来不是面对面的喧嚣，而是跨越距离的彼此支撑，是哪怕素未谋面，也愿意为陌生人递上一份善意。扣去的 2 分，仅源于慢到极致的游戏节奏，对追求爽感的玩家而言堪称 “劝退”；后期重复的送货任务也难免让人产生疲惫，部分晦涩的剧情设定与冗长的播片，也让部分玩家难以沉浸其中，但这丝毫不影响它成为一款极具精神内核的划时代作品。</p>
-<p>归根结底，《死亡搁浅》之所以成为经典，恰是因为 “连接” 这份藏在末世里的人性微光 —— 它让看似枯燥的送货之旅，拥有了足以撼动人心的重量。而这一切动人的塑造，离不开制作人小岛秀夫对游戏表达的极致探索与大胆创新，打破了传统游戏的玩法边界，这也是为何小岛历来是游戏领域为人称道的领军人物。</p>
-<p>笔者通关于 2026 年 2 月 21 日 17 时 42 分，结档时长40h 46min。</p>
-<p><img src="https://free.picui.cn/free/2026/02/21/6999c843e3b72.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<p><strong>Music Time！</strong></p>
-<p>精美的游戏配乐亦是《死亡搁浅》的一大亮点，特别是当你翻过最后一个山头目的地映入眼帘时恰到好处响起的背景音乐为游戏绝佳的氛围感贡献巨大，而下面这首第一次响起的插曲《 <em>Don&rsquo;t Be So Serious</em> 》则是完美衬托了当时主角迷茫的心情，让我们一起欣赏一下吧！</p>
-<div class="aplayer-wrap">
-  <meting-js
-    server="netease"
-    type="song"
-    id="472045266"
-    fixed="false"
-    autoplay="false"
-    loop="none"
-    order="list"
-    preload="auto"
-    volume="0.7">
-  </meting-js>
-</div>
+    <h2 id="web-基础与工具使用">Web 基础与工具使用
+</h2><h3 id="web方向介绍">Web方向介绍
+</h3><p>常见Web漏洞：</p>
+<p><strong>信息泄露、暴力破解、SQL注入、RCE、文件包含、文件上传、反序列化、SSRF、SSTI、XSS、XEE、JWT、Node.JS原型链污染等.</strong></p>
+<h3 id="web常见术语">Web常见术语
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>术语</th>
+          <th>简介</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>协议(Protocol)</td>
+          <td>通信规则和标准，例如 HTTP(s)、FTP、TCP/IP 等</td>
+      </tr>
+      <tr>
+          <td>IP</td>
+          <td>网络中设备的唯一地址标识，用于定位主机</td>
+      </tr>
+      <tr>
+          <td>端口(Port)</td>
+          <td>标识主机上运行的具体服务的入口编号【HTTP:80，HTTPS:443】</td>
+      </tr>
+      <tr>
+          <td>URL</td>
+          <td>统一资源定位符，完整的网址/地址【包含协议、域名、IP、端口、路径、参数】</td>
+      </tr>
+      <tr>
+          <td>地址(Address)</td>
+          <td>广义称呼，可以是 IP 地址或域名</td>
+      </tr>
+      <tr>
+          <td>目录(Directory)</td>
+          <td>网站文件夹层级，如 /admin/，（目录/路径/访问级别）</td>
+      </tr>
+      <tr>
+          <td>路径(Path)</td>
+          <td>URL 中具体的资源位置，如 /images/logo.png</td>
+      </tr>
+      <tr>
+          <td>权限(Permission)</td>
+          <td>用户/进程对文件、目录或操作的访问控制（读/写/执行/访问级别）</td>
+      </tr>
+      <tr>
+          <td>文件(File)</td>
+          <td>网站的资源载体，如 index.php、config.yaml</td>
+      </tr>
+      <tr>
+          <td>请求方法（HTTP Method）</td>
+          <td>客户端与服务器交互的动作，如 GET【获取】、POST【提交】、PUT、DELETE 等</td>
+      </tr>
+      <tr>
+          <td>状态码(Status Code)</td>
+          <td>服务器对请求的响应标识，如 200 OK、403 Forbidden、404 Not Found、500 Internal Error</td>
+      </tr>
+      <tr>
+          <td>代理(Proxy)</td>
+          <td>转发请求的中间服务器，可用于隐藏身份、突破限制或流量转发</td>
+      </tr>
+      <tr>
+          <td>GET</td>
+          <td>一种请求方法，请求参数在 URL 查询字符串中，常用于获取数据</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>一种请求方法，请求参数在请求体中，常用于提交数据</td>
+      </tr>
+      <tr>
+          <td>Cookie</td>
+          <td>服务器写入客户端的小数据，用于会话保持、身份认证等</td>
+      </tr>
+      <tr>
+          <td>请求(Request)</td>
+          <td>客户端发送给服务器的消息，包含请求行、请求头、请求体</td>
+      </tr>
+      <tr>
+          <td>响应(Response)</td>
+          <td>服务器返回给客户端的消息，包含状态行、响应头、响应体</td>
+      </tr>
+      <tr>
+          <td>抓包(Packet Capture)</td>
+          <td>拦截并分析网络传输的数据包，常用工具 Burp Suite、Wireshark</td>
+      </tr>
+      <tr>
+          <td>内网(Intranet)</td>
+          <td>内部局域网，IP 多为 <code>10.*_.*_.*</code><em>、</em><code>172.16.*.*-172.31.*.*</code>、<code>192.168.*.*</code></td>
+      </tr>
+      <tr>
+          <td>外网(Internet)</td>
+          <td>公共互联网，能够被全球访问</td>
+      </tr>
+      <tr>
+          <td>EXP(Exploit)</td>
+          <td>用于<strong>利用漏洞</strong>的攻击脚本或方法，通常可直接获取敏感信息或权限</td>
+      </tr>
+      <tr>
+          <td>POC（Proof of Concept）</td>
+          <td>漏洞的<strong>概念验证</strong>，证明漏洞存在但不一定完全利用</td>
+      </tr>
+      <tr>
+          <td>WebShell</td>
+          <td>攻击者上传的恶意脚本文件，用于远程控制服务器如 PHP 一句话木马</td>
+      </tr>
+      <tr>
+          <td>GetShell</td>
+          <td>攻击者通过漏洞成功拿到 WebShell 的过程</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="需要准备的工具">需要准备的工具
+</h3><ol>
+<li>浏览器插件：HackBar，Zero-Omega</li>
+<li>抓包工具：BurpSuite</li>
+<li>工具箱：ONE-FOX集成工具箱</li>
+</ol>
+<p>因为大部分所用的技术在之前的文章中已有详细说明，所以这里仅作补充。</p>
+<h2 id="所用技术">所用技术
+</h2><p>大部分技术在此前的渗透测试相关文章中已有介绍，所以接下来仅对SSTI作一定补充。</p>
+<h2 id="例题buuctf">例题（BUUCTF）
+</h2><h3 id="havefun">Havefun
+</h3><p>右键查看源码发现有相关逻辑代码，回到页面向“cat”传参值为“dog”即可拿到flag</p>
+<h3 id="极客大挑战-2019http">[极客大挑战 2019]Http
+</h3><p>右键查看源代码，发现里面提到了<code>secret.php</code>，点击访问</p>
+<p>根据页面提示使用HackBar依次修改：Referer、User-Agent、X-Forward-For</p>
+<p>得到flag</p>
+<h3 id="actf2020-新生赛exec">[ACTF2020 新生赛]Exec
+</h3><p>基于ping的命令注入</p>
+<p><code>127.0.0.1; tac /flag</code></p>
+<h3 id="极客大挑战-2019knife">[极客大挑战 2019]Knife
+</h3><p>根据页面信息使用蚁剑链接webshell，在目标的根目录可以看到flag</p>
+<h3 id="hctf-2018admin">[HCTF 2018]admin
+</h3><p>在右上角找到登录入口，使用burpSuite抓包爆破出admin密码是<code>123</code></p>
+<p>登录后看到flag</p>
+
 </section>
 
 
@@ -462,95 +608,65 @@
         <div class="flex article-list--tile">
             
                 
-<article class="has-image">
-    <a href="/p/%E6%B8%B8%E6%88%8F%E7%9F%AD%E8%AF%84%E5%BD%B1%E5%AD%90%E5%B7%A5%E5%8E%827.5/10%E4%BA%BA%E7%94%9F%E7%9A%84%E5%AE%8F%E5%A4%A7%E5%91%BD%E9%A2%98%E4%B8%8E%E6%9C%AA%E5%AE%8C%E5%85%A8%E8%88%92%E5%B1%95%E7%9A%84%E7%94%BB%E5%8D%B7/">
+<article class="">
+    <a href="/p/5.1-web-%E4%B9%8Bpython%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5ssti/">
         
-        
-            <div class="article-image">
-                
-                    <img src="https://free.picui.cn/free/2026/03/07/69abb32a99f2b.png" loading="lazy" data-key="" data-hash="https://free.picui.cn/free/2026/03/07/69abb32a99f2b.png"/>
-                
-            </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">[游戏短评]《影子工厂》7.5/10：人生的宏大命题，与未完全舒展的画卷</h2>
+            <h2 class="article-title">5.1 Web 之Python模板注入SSTI</h2>
         </div>
     </a>
 </article>
 
             
                 
-<article class="has-image">
-    <a href="/p/%E6%B8%B8%E6%88%8F%E7%9F%AD%E8%AF%84%E5%AF%BB%E6%89%BE%E5%A4%A9%E5%A0%828.5/10%E5%B1%82%E5%B1%82%E6%B7%B1%E5%85%A5%E6%8E%A2%E5%AF%BB%E4%BD%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E5%86%85%E5%BF%83/">
+<article class="">
+    <a href="/p/4.-crypto%E5%85%A5%E9%97%A8/">
         
-        
-            <div class="article-image">
-                
-                    <img src="https://free.picui.cn/free/2026/02/24/699d82b6e5b34.jpg" loading="lazy" data-key="" data-hash="https://free.picui.cn/free/2026/02/24/699d82b6e5b34.jpg"/>
-                
-            </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">[游戏短评]《寻找天堂》8.5/10：层层深入，探寻你自己的内心</h2>
+            <h2 class="article-title">4. Crypto入门</h2>
         </div>
     </a>
 </article>
 
             
                 
-<article class="has-image">
-    <a href="/p/%E6%B8%B8%E6%88%8F%E6%97%A0%E8%AF%84%E8%AE%BA%E8%8D%92%E9%87%8E%E5%A4%A7%E9%95%96%E5%AE%A2%E6%95%91%E8%B5%8E210/10%E5%8D%8E%E4%B8%BD%E7%9A%84%E5%B7%A8%E5%9E%8B%E8%A5%BF%E9%83%A8%E5%8F%B2%E8%AF%97/">
+<article class="">
+    <a href="/p/3.-misc-%E5%85%A5%E9%97%A8/">
         
-        
-            <div class="article-image">
-                
-                    <img src="https://free.picui.cn/free/2026/02/16/6992f2f11fffe.jpg" loading="lazy" data-key="" data-hash="https://free.picui.cn/free/2026/02/16/6992f2f11fffe.jpg"/>
-                
-            </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">[游戏(无评论)]《荒野大镖客：救赎2》10/10：华丽的巨型西部史诗</h2>
+            <h2 class="article-title">3. Misc 入门</h2>
         </div>
     </a>
 </article>
 
             
                 
-<article class="has-image">
-    <a href="/p/%E6%B8%B8%E6%88%8F%E7%9F%AD%E8%AF%84to-the-moon-%E5%8E%BB%E6%9C%88%E7%90%838/10%E4%B8%80%E5%9C%BA%E6%89%A7%E5%BF%B5%E7%BC%96%E7%BB%87%E7%8B%AC%E7%AB%8B%E6%B8%B8%E6%88%8F%E5%8F%99%E4%BA%8B%E7%9A%84%E6%B8%A9%E6%83%85%E6%98%9F%E6%B2%B3/">
+<article class="">
+    <a href="/p/2.-%E9%83%A8%E5%88%86%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/">
         
-        
-            <div class="article-image">
-                
-                    <img src="https://free.picui.cn/free/2026/02/16/69927edf37f77.jpg" loading="lazy" data-key="" data-hash="https://free.picui.cn/free/2026/02/16/69927edf37f77.jpg"/>
-                
-            </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">[游戏短评]《To the moon 去月球》8/10：一场执念，编织独立游戏叙事的温情星河</h2>
+            <h2 class="article-title">2. 部分软件的使用</h2>
         </div>
     </a>
 </article>
 
             
                 
-<article class="has-image">
-    <a href="/p/%E6%B8%B8%E6%88%8F%E7%9F%AD%E8%AF%84%E6%B3%B0%E5%9D%A6%E9%99%A8%E8%90%BD29/10%E4%B8%80%E5%8F%A5%E6%8C%87%E4%BB%A4%E9%93%B8%E5%B0%B1-fps-%E5%8F%99%E4%BA%8B%E7%9A%84%E6%83%85%E6%84%9F%E4%B8%B0%E7%A2%91/">
+<article class="">
+    <a href="/p/1.-ctf%E7%AE%80%E4%BB%8B%E5%92%8C%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4%E5%B0%BE/">
         
-        
-            <div class="article-image">
-                
-                    <img src="https://free.picui.cn/free/2026/01/12/6964553eea4c1.jpg" loading="lazy" data-key="" data-hash="https://free.picui.cn/free/2026/01/12/6964553eea4c1.jpg"/>
-                
-            </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">[游戏短评]《泰坦陨落2》9/10：一句指令，铸就 FPS 叙事的情感丰碑</h2>
+            <h2 class="article-title">1. CTF简介和常见文件头尾</h2>
         </div>
     </a>
 </article>

