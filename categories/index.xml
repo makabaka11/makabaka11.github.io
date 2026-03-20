@@ -7,7 +7,23 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Wed, 18 Mar 2026 07:32:12 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 20 Mar 2026 20:26:59 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Anime</title>
+        <link>https://www.retr0.xyz/categories/anime/</link>
+        <pubDate>Fri, 20 Mar 2026 20:26:59 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/categories/anime/</guid>
+        <description>&lt;img src="https://www.retr0.xyz/categories/anime/IMG_20250821_133541.png" alt="Featured image of post Anime" /&gt;</description>
+        </item>
+        <item>
+        <title>影视</title>
+        <link>https://www.retr0.xyz/categories/%E5%BD%B1%E8%A7%86/</link>
+        <pubDate>Fri, 20 Mar 2026 20:26:59 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/categories/%E5%BD%B1%E8%A7%86/</guid>
+        <description>&lt;img src="https://files.nowre.com/articles/2022/12/oppenheimer.jpeg" alt="Featured image of post 影视" /&gt;</description>
+        </item>
+        <item>
         <title>CTF</title>
         <link>https://www.retr0.xyz/categories/ctf/</link>
         <pubDate>Wed, 18 Mar 2026 07:32:12 +0800</pubDate>
@@ -22,22 +38,6 @@
         
         <guid>https://www.retr0.xyz/categories/%E7%BD%91%E5%AE%89/</guid>
         <description>&lt;img src="https://www.retr0.xyz/categories/%E7%BD%91%E5%AE%89/wa.png" alt="Featured image of post 网安" /&gt;</description>
-        </item>
-        <item>
-        <title>Anime</title>
-        <link>https://www.retr0.xyz/categories/anime/</link>
-        <pubDate>Wed, 11 Mar 2026 18:07:19 +0800</pubDate>
-        
-        <guid>https://www.retr0.xyz/categories/anime/</guid>
-        <description>&lt;img src="https://www.retr0.xyz/categories/anime/IMG_20250821_133541.png" alt="Featured image of post Anime" /&gt;</description>
-        </item>
-        <item>
-        <title>影视</title>
-        <link>https://www.retr0.xyz/categories/%E5%BD%B1%E8%A7%86/</link>
-        <pubDate>Wed, 11 Mar 2026 18:07:19 +0800</pubDate>
-        
-        <guid>https://www.retr0.xyz/categories/%E5%BD%B1%E8%A7%86/</guid>
-        <description>&lt;img src="https://files.nowre.com/articles/2022/12/oppenheimer.jpeg" alt="Featured image of post 影视" /&gt;</description>
         </item>
         <item>
         <title>游戏</title>

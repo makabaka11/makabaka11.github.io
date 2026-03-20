@@ -842,12 +842,12 @@
   &lt;tbody&gt;
       &lt;tr&gt;
           &lt;td&gt;&lt;code&gt;request.form&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;从 **请求体(Body)**中解析表单数据&lt;/td&gt;
+          &lt;td&gt;从 &lt;strong&gt;请求体(Body)&lt;/strong&gt; 中解析表单数据&lt;/td&gt;
           &lt;td&gt;主要是 &lt;strong&gt;POST&lt;/strong&gt;&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td&gt;&lt;code&gt;request.args&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;从 &lt;strong&gt;URL 查询字符串&lt;/strong&gt;中获取参数&lt;/td&gt;
+          &lt;td&gt;从 &lt;strong&gt;URL 查询字符串&lt;/strong&gt; 中获取参数&lt;/td&gt;
           &lt;td&gt;主要是 &lt;strong&gt;GET&lt;/strong&gt;&lt;/td&gt;
       &lt;/tr&gt;
   &lt;/tbody&gt;
