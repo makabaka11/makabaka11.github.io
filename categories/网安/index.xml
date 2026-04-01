@@ -17,7 +17,7 @@
 &lt;p&gt;本次逆向的结果可能大概率对您没有任何用处，但是您也可以参考一下思路。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;前情提要&#34;&gt;前情提要
-&lt;/h2&gt;&lt;p&gt;话说我之前在宿舍里部署了路由器和番剧服务器，这路由器什么都好，可就是每天半夜校园网断网后第二天早上需要手动重新登陆，于是我就想写一个自动登录校园网的脚本，让每天凌晨的时候树莓派能自动执行脚本登录一下。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;话说我之前在宿舍里部署了路由器和番剧服务器，这路由器什么都好，可就是每天半夜校园网断网后第二天早上需要手动重新登录，于是我就想写一个自动登录校园网的脚本，让每天凌晨的时候树莓派能自动执行脚本登录一下。&lt;/p&gt;
 &lt;h2 id=&#34;实战经历&#34;&gt;实战经历
 &lt;/h2&gt;&lt;p&gt;首先观察登陆页面:&lt;/p&gt;
 &lt;!-- 这是一张图片，ocr 内容为： --&gt;
@@ -365,7 +365,7 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;按照惯例，分成这两部，抓个包先：&lt;/p&gt;
+&lt;p&gt;按照惯例，分成这两步，抓个包先：&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;登录.txt&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -487,8 +487,8 @@
 &lt;/div&gt;&lt;p&gt;可以看到里面多次提到了&lt;code&gt;Object(A.a)(参数1,参数2)&lt;/code&gt;和&lt;code&gt;Object(A.b)(参数1,参数2)&lt;/code&gt;的形式&lt;/p&gt;
 &lt;p&gt;并且大概可以推断出之前抓到登录中的channel就对应着&lt;code&gt;A.a(&amp;quot;_GET&amp;quot;, key)&lt;/code&gt;，而在选运营商中channel就变成了别的字符串。&lt;/p&gt;
 &lt;p&gt;所以接下来的目标很明朗，就是要找到这个&lt;code&gt;A.a()&lt;/code&gt;和&lt;code&gt;A.b()&lt;/code&gt;的源码，搞清楚它们究竟在做什么。&lt;/p&gt;
-&lt;p&gt;由于javascrip的逆天结构，一个函数背后会有其id，再根据id映射到源码，还有可能层层套娃，所以根本不是人看的，这里我们借助集成AI的IDE来完成这项工作，为了不浪费我的Codex额度，我使用国产免费的Trae。&lt;/p&gt;
-&lt;p&gt;在Trae打开到之前我们保存js脚本的文件夹，让ChatGPT给我们写一个prompt：&lt;/p&gt;
+&lt;p&gt;由于javascript的逆天结构，一个函数背后会有其id，再根据id映射到源码，还有可能层层套娃，所以根本不是人看的，这里我们借助集成AI的IDE来完成这项工作，为了不浪费我的Codex额度，我使用国产免费的Trae。&lt;/p&gt;
+&lt;p&gt;在Trae中打开到之前我们保存js脚本的文件夹，让ChatGPT给我们写一个prompt：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -1049,7 +1049,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;✅自动登录成功&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;然后再树莓派上设一个计划任务就可以愉快的使用了。&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;然后再在树莓派上设一个计划任务就可以愉快的使用了。&lt;/p&gt;
 &lt;h2 id=&#34;经验总结&#34;&gt;经验总结
 &lt;/h2&gt;&lt;p&gt;js这种不是给人看的东西一定要多用AI。&lt;/p&gt;
 </description>

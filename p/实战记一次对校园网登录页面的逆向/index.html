@@ -421,7 +421,7 @@
 <p>本次逆向的结果可能大概率对您没有任何用处，但是您也可以参考一下思路。</p>
 </blockquote>
 <h2 id="前情提要">前情提要
-</h2><p>话说我之前在宿舍里部署了路由器和番剧服务器，这路由器什么都好，可就是每天半夜校园网断网后第二天早上需要手动重新登陆，于是我就想写一个自动登录校园网的脚本，让每天凌晨的时候树莓派能自动执行脚本登录一下。</p>
+</h2><p>话说我之前在宿舍里部署了路由器和番剧服务器，这路由器什么都好，可就是每天半夜校园网断网后第二天早上需要手动重新登录，于是我就想写一个自动登录校园网的脚本，让每天凌晨的时候树莓派能自动执行脚本登录一下。</p>
 <h2 id="实战经历">实战经历
 </h2><p>首先观察登陆页面:</p>
 <!-- 这是一张图片，ocr 内容为： -->
@@ -769,7 +769,7 @@
 	
 	
 ></p>
-<p>按照惯例，分成这两部，抓个包先：</p>
+<p>按照惯例，分成这两步，抓个包先：</p>
 <p><code>登录.txt</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -891,8 +891,8 @@
 </div><p>可以看到里面多次提到了<code>Object(A.a)(参数1,参数2)</code>和<code>Object(A.b)(参数1,参数2)</code>的形式</p>
 <p>并且大概可以推断出之前抓到登录中的channel就对应着<code>A.a(&quot;_GET&quot;, key)</code>，而在选运营商中channel就变成了别的字符串。</p>
 <p>所以接下来的目标很明朗，就是要找到这个<code>A.a()</code>和<code>A.b()</code>的源码，搞清楚它们究竟在做什么。</p>
-<p>由于javascrip的逆天结构，一个函数背后会有其id，再根据id映射到源码，还有可能层层套娃，所以根本不是人看的，这里我们借助集成AI的IDE来完成这项工作，为了不浪费我的Codex额度，我使用国产免费的Trae。</p>
-<p>在Trae打开到之前我们保存js脚本的文件夹，让ChatGPT给我们写一个prompt：</p>
+<p>由于javascript的逆天结构，一个函数背后会有其id，再根据id映射到源码，还有可能层层套娃，所以根本不是人看的，这里我们借助集成AI的IDE来完成这项工作，为了不浪费我的Codex额度，我使用国产免费的Trae。</p>
+<p>在Trae中打开到之前我们保存js脚本的文件夹，让ChatGPT给我们写一个prompt：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1453,7 +1453,7 @@
 </span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;✅自动登录成功&#34;</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>然后再树莓派上设一个计划任务就可以愉快的使用了。</p>
+</div><p>然后再在树莓派上设一个计划任务就可以愉快的使用了。</p>
 <h2 id="经验总结">经验总结
 </h2><p>js这种不是给人看的东西一定要多用AI。</p>
 
@@ -1941,7 +1941,7 @@
             
         
         发表了128篇文章 · 
-        总计215.67k字
+        总计215.68k字
     </section>
 
     
