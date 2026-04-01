@@ -1,0 +1,2848 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="谁知道它诞生于一个离谱的需求呢">
+<title>【实战】记一次对校园网登录页面的逆向</title>
+
+<link rel='canonical' href='https://www.retr0.xyz/p/%E5%AE%9E%E6%88%98%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%AF%B9%E6%A0%A1%E5%9B%AD%E7%BD%91%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2%E7%9A%84%E9%80%86%E5%90%91/'>
+
+<link rel="stylesheet" href="/scss/style.min.5fd12437655247901ab9f71ac476ca2d4ee274fec9c42d5934d927322caff914.css"><meta property='og:title' content="【实战】记一次对校园网登录页面的逆向">
+<meta property='og:description' content="谁知道它诞生于一个离谱的需求呢">
+<meta property='og:url' content='https://www.retr0.xyz/p/%E5%AE%9E%E6%88%98%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%AF%B9%E6%A0%A1%E5%9B%AD%E7%BD%91%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2%E7%9A%84%E9%80%86%E5%90%91/'>
+<meta property='og:site_name' content='Retr0的小窝'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-04-01T21:23:40&#43;08:00'/><meta property='article:modified_time' content='2026-04-01T21:23:40&#43;08:00'/><meta property='og:image' content='https://www.retr0.xyz/post/%E6%9D%82%E9%A1%B9/img/nx1/001.png' />
+<meta name="twitter:title" content="【实战】记一次对校园网登录页面的逆向">
+<meta name="twitter:description" content="谁知道它诞生于一个离谱的需求呢"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://www.retr0.xyz/post/%E6%9D%82%E9%A1%B9/img/nx1/001.png' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+        <link rel="stylesheet" href="/css/APlayer.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_918ed7c4aecb3d05.gif" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤖</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Retr0的小窝</a></h1>
+            <h2 class="site-description">其实我是数字生命！</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/349466985'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:ded000@retr0.xyz'
+                        target="_blank"
+                        title="email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/makabaka11'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.retr0.xyz/index.xml'
+                        target="_blank"
+                        title="RSS"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-rss"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M4 4a16 16 0 0 1 16 16" /><path d="M4 11a9 9 0 0 1 9 9" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://t.me/ded0000'
+                        target="_blank"
+                        title="Telegram"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页 | Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E-about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于 | About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/message/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-message"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 9h8" /><path d="M8 13h6" /><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" /></svg>
+                
+                <span>留言板 | Msg Board</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索 | Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>技术链接 | Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#前情提要">前情提要</a></li>
+    <li><a href="#实战经历">实战经历</a>
+      <ol>
+        <li><a href="#验证码">验证码</a></li>
+        <li><a href="#登录校验">登录校验</a></li>
+        <li><a href="#验证猜想和编写脚本">验证猜想和编写脚本</a></li>
+      </ol>
+    </li>
+    <li><a href="#经验总结">经验总结</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/%E5%AE%9E%E6%88%98%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%AF%B9%E6%A0%A1%E5%9B%AD%E7%BD%91%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2%E7%9A%84%E9%80%86%E5%90%91/">
+                
+                    <img src="/post/%e6%9d%82%e9%a1%b9/img/nx1/001.png" loading="lazy" alt="Featured image of post 【实战】记一次对校园网登录页面的逆向" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BD%91%E5%AE%89/" style="background-color: #BEBDBD; color: #fff;">
+                网安
+            </a>
+        
+            <a href="/categories/%E6%9D%82%E9%A1%B9/" style="background-color: #40a070; color: #fff;">
+                杂项
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%AE%9E%E6%88%98%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%AF%B9%E6%A0%A1%E5%9B%AD%E7%BD%91%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2%E7%9A%84%E9%80%86%E5%90%91/">【实战】记一次对校园网登录页面的逆向</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            谁知道它诞生于一个离谱的需求呢
+        </h3>
+        
+    </div>
+
+    
+    
+     
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-04-01 | 21:23</time>
+            </div>
+        
+
+        
+
+        
+        <div id="viewCount">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <blockquote>
+<p>本次逆向的结果可能大概率对您没有任何用处，但是您也可以参考一下思路。</p>
+</blockquote>
+<h2 id="前情提要">前情提要
+</h2><p>话说我之前在宿舍里部署了路由器和番剧服务器，这路由器什么都好，可就是每天半夜校园网断网后第二天早上需要手动重新登陆，于是我就想写一个自动登录校园网的脚本，让每天凌晨的时候树莓派能自动执行脚本登录一下。</p>
+<h2 id="实战经历">实战经历
+</h2><p>首先观察登陆页面:</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/%e6%9d%82%e9%a1%b9/img/nx1/001.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>看到登录需要提供账密以及验证码，那么按照常规思路，账密肯定是在数据包中要发给后端的，因此首要的就是要过验证码这一关，果断启动Burpsuite抓个包。</p>
+<p>好消息，启动抓包后点击验证码刷新并没有受到影响，而bp也没有抓到包，这说明整个验证码的生成和校验过程是在前端进行的，因此我们大概率可以直接获取到当前验证码的值，甚至绕过验证码直接发包。</p>
+<h3 id="验证码">验证码
+</h3><p>不过包着好奇心，还是来了解一下验证码相关的逻辑：</p>
+<p>按<kbd>F12</kbd>打开开发人员模式。选择源代码，到js文件夹里把几个js文件都保存下来备用</p>
+<p>不过直接保存下来的话js文件只有一行，非常不利于分析，所以建议还是<strong>在本地新建同名文件，然后把浏览器里面格式化之后的js脚本内容复制粘贴一下</strong>。</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/%e6%9d%82%e9%a1%b9/img/nx1/002.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>我们在下面的搜索栏中搜索相关关键词，例如<code>vercode</code>，看到<code>app.5ee45fcc.js</code>这个文件里出现了很多次这个关键词，随便点进一个搜索结果：</p>
+<p>看到相关的代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl">            <span class="p">},</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">key</span><span class="o">:</span> <span class="s2">&#34;refresh&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">value</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="kd">var</span> <span class="nx">t</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">canvasId</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="p">(</span><span class="nx">t</span> <span class="o">&amp;&amp;</span> <span class="nx">t</span><span class="p">.</span><span class="nx">getContext</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="kd">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="nx">t</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s2">&#34;2d&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">n</span><span class="p">.</span><span class="nx">clearRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">t</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="nx">t</span><span class="p">.</span><span class="nx">height</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">n</span><span class="p">.</span><span class="nx">textBaseline</span> <span class="o">=</span> <span class="s2">&#34;middle&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">n</span><span class="p">.</span><span class="nx">fillStyle</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">randomColor</span><span class="p">(</span><span class="mi">180</span><span class="p">,</span> <span class="mi">240</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">n</span><span class="p">.</span><span class="nx">fillRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">height</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">code</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">o</span> <span class="o">&lt;</span> <span class="nx">e</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">o</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                            <span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">code</span> <span class="o">+=</span> <span class="nx">e</span><span class="p">[</span><span class="nx">o</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                            <span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">randomNum</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                              <span class="p">,</span> <span class="nx">i</span> <span class="o">=</span> <span class="p">(</span><span class="nx">r</span> <span class="o">=</span> <span class="p">(</span><span class="nx">n</span><span class="p">.</span><span class="nx">font</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span> <span class="s2">&#34;px &#34;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">fontFamily</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                            <span class="nx">n</span><span class="p">.</span><span class="nx">fillStyle</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">randomColor</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">160</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                            <span class="nx">n</span><span class="p">.</span><span class="nx">shadowColor</span> <span class="o">=</span> <span class="s2">&#34;rgba(0, 0, 0, 0.3)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                            <span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="nx">o</span> <span class="o">+</span> <span class="p">.</span><span class="mi">5</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">                            <span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                              <span class="p">,</span> <span class="nx">a</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">randomNum</span><span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                            <span class="nx">n</span><span class="p">.</span><span class="nx">save</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">                            <span class="nx">n</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span> <span class="nx">i</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                            <span class="nx">n</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">a</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="o">/</span> <span class="mi">180</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                            <span class="nx">n</span><span class="p">.</span><span class="nx">fillText</span><span class="p">(</span><span class="nx">e</span><span class="p">[</span><span class="nx">o</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                            <span class="nx">n</span><span class="p">.</span><span class="nx">restore</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">s</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="nx">s</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                            <span class="nx">n</span><span class="p">.</span><span class="nx">fillStyle</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">randomColor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                            <span class="nx">n</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">                            <span class="nx">n</span><span class="p">.</span><span class="nx">arc</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">randomNum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">),</span> <span class="k">this</span><span class="p">.</span><span class="nx">randomNum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">height</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                            <span class="nx">n</span><span class="p">.</span><span class="nx">fill</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">key</span><span class="o">:</span> <span class="s2">&#34;validate&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">value</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="nx">e</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">===</span> <span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">code</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">key</span><span class="o">:</span> <span class="s2">&#34;getAllNum&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">value</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="s2">&#34;0,1,2,3,4,5,6,7,8,9&#34;</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&#34;,&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">key</span><span class="o">:</span> <span class="s2">&#34;getAllLetter&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">value</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="s2">&#34;a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z&#34;</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&#34;,&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">key</span><span class="o">:</span> <span class="s2">&#34;randomNum&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">value</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">t</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="nx">t</span> <span class="o">-</span> <span class="nx">e</span><span class="p">)</span> <span class="o">+</span> <span class="nx">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">key</span><span class="o">:</span> <span class="s2">&#34;randomColor&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">value</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">t</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="kd">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">randomNum</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                      <span class="p">,</span> <span class="nx">o</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">randomNum</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">t</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">e</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">randomNum</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">t</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="s2">&#34;rgb(&#34;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">n</span><span class="p">,</span> <span class="s2">&#34;, &#34;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">o</span><span class="p">,</span> <span class="s2">&#34;, &#34;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="s2">&#34;)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}])</span> <span class="o">&amp;&amp;</span> <span class="nx">It</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span> <span class="nx">n</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">e</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)()</span>
+</span></span><span class="line"><span class="cl">          <span class="p">,</span> <span class="nx">Dt</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;sy-vercode&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">props</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">canvasId</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">require</span><span class="o">:</span> <span class="o">!</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">text</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">default</span><span class="o">:</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">data</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">verifyCode</span><span class="o">:</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">watch</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">text</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">handler</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="kd">var</span> <span class="nx">t</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">e</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">$nextTick</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                            <span class="nx">t</span><span class="p">.</span><span class="nx">verifyCode</span> <span class="o">||</span> <span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">verifyCode</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Ft</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">                                <span class="nx">id</span><span class="o">:</span> <span class="s2">&#34;auth_code&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                <span class="nx">canvasId</span><span class="o">:</span> <span class="nx">t</span><span class="p">.</span><span class="nx">canvasId</span>
+</span></span><span class="line"><span class="cl">                            <span class="p">})),</span>
+</span></span><span class="line"><span class="cl">                            <span class="nx">t</span><span class="p">.</span><span class="nx">verifyCode</span><span class="p">.</span><span class="nx">refresh</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">})</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">immediate</span><span class="o">:</span> <span class="o">!</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="p">,</span> <span class="nx">zt</span> <span class="o">=</span> <span class="p">(</span><span class="nx">n</span><span class="p">(</span><span class="s2">&#34;8767&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nx">Ze</span><span class="p">,</span> <span class="nx">et</span><span class="p">,</span> <span class="nx">j</span><span class="p">,</span> <span class="nx">We</span><span class="p">,</span> <span class="nx">Xe</span><span class="p">,</span> <span class="nx">Bt</span><span class="p">,</span> <span class="nx">Et</span><span class="p">,</span> <span class="nx">_t</span><span class="p">,</span> <span class="nx">St</span><span class="p">,</span> <span class="nb">Object</span><span class="p">(</span><span class="nx">T</span><span class="p">.</span><span class="nx">a</span><span class="p">)(</span><span class="nx">Dt</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="p">.</span><span class="nx">$createElement</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_self</span><span class="p">.</span><span class="nx">_c</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="p">.</span><span class="nx">_m</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span> <span class="p">[</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">var</span> <span class="nx">e</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$createElement</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">(</span><span class="nx">e</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_self</span><span class="p">.</span><span class="nx">_c</span> <span class="o">||</span> <span class="nx">e</span><span class="p">)(</span><span class="s2">&#34;div&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">staticClass</span><span class="o">:</span> <span class="s2">&#34;sy-vercode&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span> <span class="p">[</span><span class="nx">e</span><span class="p">(</span><span class="s2">&#34;div&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">attrs</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">id</span><span class="o">:</span> <span class="s2">&#34;auth_code&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">})])</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我肯定是不想看也看不懂的，所以交给AI分析，AI得出的结果是：</p>
+<ul>
+<li>值就在 <code>this.options.code</code> 里</li>
+<li>校验只发生在前端 <code>validate()</code></li>
+<li>后端大概率根本不验证验证码</li>
+</ul>
+<p><strong>核心：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">code</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">o</span> <span class="o">&lt;</span> <span class="nx">e</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">o</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">code</span> <span class="o">+=</span> <span class="nx">e</span><span class="p">[</span><span class="nx">o</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">n</span><span class="p">.</span><span class="nx">fillText</span><span class="p">(</span><span class="nx">e</span><span class="p">[</span><span class="nx">o</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>e</code> = 验证码字符数组</p>
+<p><code>this.options.code</code> = 最终验证码字符串</p>
+<p>canvas 只是“画出来”</p>
+<hr>
+<p><strong>再看：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">validate</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">e</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">===</span> <span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">code</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>校验逻辑：</p>
+<p>用户输入 vs <code>this.options.code</code></p>
+<p>完全在前端</p>
+<hr>
+<p><strong>再看 Vue：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">t</span><span class="p">.</span><span class="nx">verifyCode</span><span class="p">.</span><span class="nx">refresh</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>说明：</p>
+<ul>
+<li><code>e</code> 是验证码字符来源</li>
+<li><code>refresh()</code> 每次重新画图</li>
+<li><strong>code 是 refresh 时生成的</strong></li>
+</ul>
+<hr>
+<p>所以我们可以直接在控制台 Console 中执行下面的命令拿到验证码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;.sy-vercode&#39;</span><span class="p">).</span><span class="nx">__vue__</span><span class="p">.</span><span class="nx">verifyCode</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">code</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="登录校验">登录校验
+</h3><p>既然验证码肯定是不需要了，那么接下来就着手看看账密怎么解决。</p>
+<p>因为我们学校的校园网登录分为两步，</p>
+<ul>
+<li>第一步：输入账密和验证码（已知可绕过），点击登录</li>
+<li>第二步：在弹出的运营商列表中选择校园卡所属的运营商，如图：</li>
+</ul>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/%e6%9d%82%e9%a1%b9/img/nx1/003.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>按照惯例，分成这两部，抓个包先：</p>
+<p><code>登录.txt</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="nf">POST</span> <span class="nn">/api/v1/login</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</span></span><span class="line"><span class="cl"><span class="n">Host</span><span class="o">:</span> <span class="l">10.255.255.16</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content-Length</span><span class="o">:</span> <span class="l">279</span>
+</span></span><span class="line"><span class="cl"><span class="n">Access-Control-Allow-Origin</span><span class="o">:</span> <span class="l">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">User-Agent</span><span class="o">:</span> <span class="l">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept</span><span class="o">:</span> <span class="l">application/json, text/plain, */*</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content-Type</span><span class="o">:</span> <span class="l">application/json;charset=UTF-8</span>
+</span></span><span class="line"><span class="cl"><span class="n">Origin</span><span class="o">:</span> <span class="l">http://10.255.255.16</span>
+</span></span><span class="line"><span class="cl"><span class="n">Referer</span><span class="o">:</span> <span class="l">http://10.255.255.16/</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept-Encoding</span><span class="o">:</span> <span class="l">gzip, deflate, br</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept-Language</span><span class="o">:</span> <span class="l">zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6</span>
+</span></span><span class="line"><span class="cl"><span class="n">Connection</span><span class="o">:</span> <span class="l">keep-alive</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;username&#34;</span><span class="p">:</span><span class="s2">&#34;8a4f8baf*******f917b62de4931951e&#34;</span><span class="p">,</span><span class="nt">&#34;password&#34;</span><span class="p">:</span><span class="s2">&#34;c7fdea3*******c4c628bfca2cb6cdad&#34;</span><span class="p">,</span><span class="nt">&#34;ifautologin&#34;</span><span class="p">:</span><span class="s2">&#34;f2555e47ba2332040eaa540bfe269c5a&#34;</span><span class="p">,</span><span class="nt">&#34;channel&#34;</span><span class="p">:</span><span class="s2">&#34;487f23259df1bc3df499d24ecd1f9bf0&#34;</span><span class="p">,</span><span class="nt">&#34;pagesign&#34;</span><span class="p">:</span><span class="s2">&#34;724df9a183fc697ce202c7ce7f623219&#34;</span><span class="p">,</span><span class="nt">&#34;usripadd&#34;</span><span class="p">:</span><span class="s2">&#34;9b80d8ee5867ebbdc0a7db0d5b52d654&#34;</span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>选运营商.txt</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="nf">POST</span> <span class="nn">/api/v1/login</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</span></span><span class="line"><span class="cl"><span class="n">Host</span><span class="o">:</span> <span class="l">10.255.255.16</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content-Length</span><span class="o">:</span> <span class="l">279</span>
+</span></span><span class="line"><span class="cl"><span class="n">Access-Control-Allow-Origin</span><span class="o">:</span> <span class="l">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">User-Agent</span><span class="o">:</span> <span class="l">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept</span><span class="o">:</span> <span class="l">application/json, text/plain, */*</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content-Type</span><span class="o">:</span> <span class="l">application/json;charset=UTF-8</span>
+</span></span><span class="line"><span class="cl"><span class="n">Origin</span><span class="o">:</span> <span class="l">http://10.255.255.16</span>
+</span></span><span class="line"><span class="cl"><span class="n">Referer</span><span class="o">:</span> <span class="l">http://10.255.255.16/</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept-Encoding</span><span class="o">:</span> <span class="l">gzip, deflate, br</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept-Language</span><span class="o">:</span> <span class="l">zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6</span>
+</span></span><span class="line"><span class="cl"><span class="n">Connection</span><span class="o">:</span> <span class="l">keep-alive</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;username&#34;</span><span class="p">:</span><span class="s2">&#34;8a4f8baf*******f917b62de4931951e&#34;</span><span class="p">,</span><span class="nt">&#34;password&#34;</span><span class="p">:</span><span class="s2">&#34;c7fdea3*******c4c628bfca2cb6cdad&#34;</span><span class="p">,</span><span class="nt">&#34;ifautologin&#34;</span><span class="p">:</span><span class="s2">&#34;f2555e47ba2332040eaa540bfe269c5a&#34;</span><span class="p">,</span><span class="nt">&#34;channel&#34;</span><span class="p">:</span><span class="s2">&#34;69844f2a65cd511993928ab8d0fbe207&#34;</span><span class="p">,</span><span class="nt">&#34;pagesign&#34;</span><span class="p">:</span><span class="s2">&#34;05eaea333a1b9eb6817bf703e5829ab6&#34;</span><span class="p">,</span><span class="nt">&#34;usripadd&#34;</span><span class="p">:</span><span class="s2">&#34;9b80d8ee5867ebbdc0a7db0d5b52d654&#34;</span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>分析这两部的数据包，可以看到对/api/v1/login这个接口发起了POST请求，参数是前端加密过后的，共有5个：</p>
+<ul>
+<li>username</li>
+<li>passward</li>
+<li>ifautologin</li>
+<li>channel</li>
+<li>pagesign</li>
+<li>usripadd</li>
+</ul>
+<p>并且其中channel和pagesign在一二两部中值也不同。</p>
+<p>到目前为止，其实要写出自动化脚本已经足够了，直接把这几个不明所以的参数一发就完事，但是不知道持久性如何，而且既然要逆向，何不一探究竟呢？正如千反田爱瑠所说：<strong>“我很好奇！”</strong></p>
+<p>根据刚才对数据包的分析结果，我们选取<code>pagesign</code>作为关键词，同样在开发者模式的<strong>源代码</strong>中的几个js脚本中搜索：结果显示，<code>chunk-2bb67818.1726b525.js</code>中有3条结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">(</span><span class="nx">A</span><span class="p">.</span><span class="nx">b</span><span class="p">)(</span><span class="k">this</span><span class="p">.</span><span class="nx">formData</span><span class="p">.</span><span class="nx">username</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                      <span class="p">,</span> <span class="nx">e</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">(</span><span class="nx">A</span><span class="p">.</span><span class="nx">a</span><span class="p">)(</span><span class="k">this</span><span class="p">.</span><span class="nx">formData</span><span class="p">.</span><span class="nx">username</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                      <span class="p">,</span> <span class="nx">o</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">(</span><span class="nx">A</span><span class="p">.</span><span class="nx">a</span><span class="p">)(</span><span class="k">this</span><span class="p">.</span><span class="nx">formData</span><span class="p">.</span><span class="nx">password</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                      <span class="p">,</span> <span class="nx">i</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">checked</span> <span class="o">?</span> <span class="s2">&#34;1&#34;</span> <span class="o">:</span> <span class="s2">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl">                      <span class="p">,</span> <span class="nx">r</span> <span class="o">=</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">(</span><span class="nx">A</span><span class="p">.</span><span class="nx">a</span><span class="p">)(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">n</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">Object</span><span class="p">(</span><span class="nx">A</span><span class="p">.</span><span class="nx">a</span><span class="p">)(</span><span class="s2">&#34;_GET&#34;</span><span class="p">,</span> <span class="nx">n</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                      <span class="p">,</span> <span class="nx">a</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">(</span><span class="nx">A</span><span class="p">.</span><span class="nx">a</span><span class="p">)(</span><span class="s2">&#34;firstauth&#34;</span><span class="p">,</span> <span class="nx">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">n</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">(</span><span class="nx">A</span><span class="p">.</span><span class="nx">a</span><span class="p">)(</span><span class="k">this</span><span class="p">.</span><span class="nx">ip</span><span class="p">,</span> <span class="nx">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">this</span><span class="p">.</span><span class="nx">$API</span><span class="p">.</span><span class="nx">login</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">username</span><span class="o">:</span> <span class="nx">e</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">password</span><span class="o">:</span> <span class="nx">o</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">ifautologin</span><span class="o">:</span> <span class="nx">i</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">channel</span><span class="o">:</span> <span class="nx">r</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">pagesign</span><span class="o">:</span> <span class="nx">a</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">usripadd</span><span class="o">:</span> <span class="nx">n</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到里面多次提到了<code>Object(A.a)(参数1,参数2)</code>和<code>Object(A.b)(参数1,参数2)</code>的形式</p>
+<p>并且大概可以推断出之前抓到登录中的channel就对应着<code>A.a(&quot;_GET&quot;, key)</code>，而在选运营商中channel就变成了别的字符串。</p>
+<p>所以接下来的目标很明朗，就是要找到这个<code>A.a()</code>和<code>A.b()</code>的源码，搞清楚它们究竟在做什么。</p>
+<p>由于javascrip的逆天结构，一个函数背后会有其id，再根据id映射到源码，还有可能层层套娃，所以根本不是人看的，这里我们借助集成AI的IDE来完成这项工作，为了不浪费我的Codex额度，我使用国产免费的Trae。</p>
+<p>在Trae打开到之前我们保存js脚本的文件夹，让ChatGPT给我们写一个prompt：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">你是一个擅长前端逆向和webpack打包分析的工程师。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">我有一段经过webpack压缩混淆的JS代码，其中出现了如下调用：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Object(A.a)(data, key)
+</span></span><span class="line"><span class="cl">Object(A.b)(username)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">请你帮我完成以下任务：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">1. 在代码中定位变量 A 的来源（通常是 var A = n(&#34;xxxx&#34;) 或类似形式）
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">2. 找到对应模块定义（webpack模块），也就是类似：
+</span></span><span class="line"><span class="cl">   xxxx: function(module, exports, n) { ... }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">3. 在该模块中找到：
+</span></span><span class="line"><span class="cl">   exports.a = function(...) { ... }
+</span></span><span class="line"><span class="cl">   exports.b = function(...) { ... }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">4. 输出这两个函数的完整源码，并做以下分析：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   * 是否使用了 md5 / sha1 / base64 / AES 等加密
+</span></span><span class="line"><span class="cl">   * 输入输出关系（例如：是否为 md5(data + key)）
+</span></span><span class="line"><span class="cl">   * 是否依赖第三方库（如 CryptoJS）
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">5. 如果可以，请将这两个函数还原成“未混淆、可读性高”的版本
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">6. 最后，请给出对应的 Python 实现（等价逻辑）
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">已知背景：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">* 这是一个校园网登录页面
+</span></span><span class="line"><span class="cl">* username / password / pagesign / channel 等字段都是通过 A.a / A.b 生成
+</span></span><span class="line"><span class="cl">* 返回值是32位hex字符串（疑似MD5）
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">请重点关注字符串拼接、哈希函数调用、编码转换等逻辑。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>把prompt粘贴到IDE的聊天侧栏中回车，AI就开始工作了。</p>
+<p>大概两分钟，AI输出了结果：</p>
+<p><strong>分析结果</strong></p>
+<p>变量A的来源 在 <code>chunk-2bb67818.1726b525.js</code> 文件的第161行，变量A是通过以下方式引入的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">A</span> <span class="o">=</span> <span class="nx">e</span><span class="p">(</span><span class="s2">&#34;90c5&#34;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p><strong>模块定义</strong></p>
+<p>在 <code>app.5ee45fcc.js</code> 文件的第14515行，找到了模块90c5的定义：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="s2">&#34;90c5&#34;</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">t</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">n</span><span class="p">.</span><span class="nx">d</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="s2">&#34;a&#34;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">r</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">n</span><span class="p">.</span><span class="nx">d</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="s2">&#34;b&#34;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">i</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">n</span><span class="p">(</span><span class="s2">&#34;0d03&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">n</span><span class="p">(</span><span class="s2">&#34;d3b7&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">n</span><span class="p">(</span><span class="s2">&#34;25f0&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">t</span> <span class="o">=</span> <span class="nx">n</span><span class="p">(</span><span class="s2">&#34;3452&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="nx">n</span><span class="p">.</span><span class="nx">n</span><span class="p">(</span><span class="nx">t</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">r</span> <span class="o">=</span> <span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">enc</span><span class="p">.</span><span class="nx">Utf8</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s2">&#34;axaQiQpsdFAacccs&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">			<span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="kd">var</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">o</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">enc</span><span class="p">.</span><span class="nx">Utf8</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">					<span class="k">void</span> <span class="mi">0</span> <span class="o">!==</span> <span class="nx">arguments</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">?</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">arguments</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">:</span>
+</span></span><span class="line"><span class="cl">					<span class="s2">&#34;axaQiQpsdFAacccs&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">e</span> <span class="o">=</span> <span class="nx">o</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">enc</span><span class="p">.</span><span class="nx">Utf8</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="nx">o</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">AES</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">t</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">mode</span><span class="o">:</span> <span class="nx">o</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">mode</span><span class="p">.</span><span class="nx">ECB</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">padding</span><span class="o">:</span> <span class="nx">o</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">pad</span><span class="p">.</span><span class="nx">Pkcs7</span>
+</span></span><span class="line"><span class="cl">				<span class="p">}).</span><span class="nx">ciphertext</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">enc</span><span class="p">.</span><span class="nx">Hex</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">i</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">o</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">SHA256</span><span class="p">(</span><span class="s2">&#34;axaQiQpsdFAacccs&#34;</span> <span class="o">+</span> <span class="nx">e</span><span class="p">).</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">toString</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">enc</span><span class="p">.</span><span class="nx">Hex</span><span class="p">).</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p><strong>函数分析</strong></p>
+<ol>
+<li>A.a 函数</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">o</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">enc</span><span class="p">.</span><span class="nx">Utf8</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">&amp;&amp;</span> <span class="k">void</span> <span class="mi">0</span> <span class="o">!==</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">arguments</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">?</span> <span class="nx">arguments</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">:</span>
+</span></span><span class="line"><span class="cl">		<span class="s2">&#34;axaQiQpsdFAacccs&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">e</span> <span class="o">=</span> <span class="nx">o</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">enc</span><span class="p">.</span><span class="nx">Utf8</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">o</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">AES</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">t</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">mode</span><span class="o">:</span> <span class="nx">o</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">mode</span><span class="p">.</span><span class="nx">ECB</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">padding</span><span class="o">:</span> <span class="nx">o</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">pad</span><span class="p">.</span><span class="nx">Pkcs7</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}).</span><span class="nx">ciphertext</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">enc</span><span class="p">.</span><span class="nx">Hex</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>分析：</strong></p>
+<ul>
+<li>加密算法： AES-ECB</li>
+<li>填充方式： Pkcs7</li>
+<li>默认密钥： &ldquo;axaQiQpsdFAacccs&rdquo;</li>
+<li>输入：
+<ul>
+<li>第一个参数：要加密的数据</li>
+<li>第二个参数（可选）：密钥，默认为&quot;axaQiQpsdFAacccs&quot;</li>
+</ul>
+</li>
+<li>输出： AES加密后的十六进制字符串</li>
+</ul>
+<ol start="2">
+<li>A.b 函数</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">o</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">SHA256</span><span class="p">(</span><span class="s2">&#34;axaQiQpsdFAacccs&#34;</span> <span class="o">+</span> <span class="nx">e</span><span class="p">).</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">toString</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">enc</span><span class="p">.</span><span class="nx">Hex</span><span class="p">).</span><span class="nx">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>分析：</strong></p>
+<ul>
+<li>哈希算法： SHA256</li>
+<li>输入： username</li>
+<li>处理逻辑： 对&quot;axaQiQpsdFAacccs&quot;+username进行SHA256哈希，然后取前16个字符</li>
+<li>输出： SHA256哈希值的前16个字符</li>
+<li>依赖库 ：
+<ul>
+<li>第三方库： CryptoJS</li>
+<li>模块3452： 是CryptoJS库的入口点，包含了AES和SHA256等加密算法的实现</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>至此已经基本一目了然了，现在唯一的一点就是选运营商时发生改变的channel和pagesign了，不过根据前面看到的登录时pagesign的明文是<code>firstauth</code>可以大致推断第二次发包里明文应该是<code>secauth</code>，反正密钥和加密方法都确定了反向解密不就行了吗？</p>
+<h3 id="验证猜想和编写脚本">验证猜想和编写脚本
+</h3><p>根据目前已经收集的信息，初步得到一个脚本：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">hashlib</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">Crypto.Util.Padding</span> <span class="kn">import</span> <span class="n">pad</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">URL</span> <span class="o">=</span> <span class="s2">&#34;http://10.255.255.16/api/v1/login&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">DEFAULT_KEY</span> <span class="o">=</span> <span class="s2">&#34;axaQiQpsdFAacccs&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ===== SHA256（A.b）=====</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">gen_key</span><span class="p">(</span><span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">s</span> <span class="o">=</span> <span class="n">DEFAULT_KEY</span> <span class="o">+</span> <span class="n">username</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()[:</span><span class="mi">16</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ===== AES ECB PKCS7（A.a）=====</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">aes_encrypt</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_KEY</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_ECB</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">encrypted</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">pad</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">AES</span><span class="o">.</span><span class="n">block_size</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">encrypted</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ===== 用户信息 =====</span>
+</span></span><span class="line"><span class="cl"><span class="n">username_raw</span> <span class="o">=</span> <span class="s2">&#34;你的账号&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">password_raw</span> <span class="o">=</span> <span class="s2">&#34;你的密码&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="o">=</span> <span class="s2">&#34;你的IP&#34;</span>   <span class="c1"># 建议抓包获取</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ===== 生成 key =====</span>
+</span></span><span class="line"><span class="cl"><span class="n">key</span> <span class="o">=</span> <span class="n">gen_key</span><span class="p">(</span><span class="n">username_raw</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ===== 第一步 =====</span>
+</span></span><span class="line"><span class="cl"><span class="n">data1</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;username&#34;</span><span class="p">:</span> <span class="n">aes_encrypt</span><span class="p">(</span><span class="n">username_raw</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;password&#34;</span><span class="p">:</span> <span class="n">aes_encrypt</span><span class="p">(</span><span class="n">password_raw</span><span class="p">,</span> <span class="n">key</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ifautologin&#34;</span><span class="p">:</span> <span class="n">aes_encrypt</span><span class="p">(</span><span class="s2">&#34;0&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;channel&#34;</span><span class="p">:</span> <span class="n">aes_encrypt</span><span class="p">(</span><span class="s2">&#34;_GET&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;pagesign&#34;</span><span class="p">:</span> <span class="n">aes_encrypt</span><span class="p">(</span><span class="s2">&#34;firstauth&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;usripadd&#34;</span><span class="p">:</span> <span class="n">aes_encrypt</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">r1</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Step1:&#34;</span><span class="p">,</span> <span class="n">r1</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ===== 第二步（选运营商）=====</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ⚠ 这里要填真实运营商字符串</span>
+</span></span><span class="line"><span class="cl"><span class="n">operator</span> <span class="o">=</span> <span class="s2">&#34;CMCC&#34;</span>   <span class="c1"># 或 &#34;CUCC&#34; / &#34;CTCC&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">data2</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;username&#34;</span><span class="p">:</span> <span class="n">data1</span><span class="p">[</span><span class="s2">&#34;username&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;password&#34;</span><span class="p">:</span> <span class="n">data1</span><span class="p">[</span><span class="s2">&#34;password&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ifautologin&#34;</span><span class="p">:</span> <span class="n">data1</span><span class="p">[</span><span class="s2">&#34;ifautologin&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;channel&#34;</span><span class="p">:</span> <span class="n">aes_encrypt</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span> <span class="n">key</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;pagesign&#34;</span><span class="p">:</span> <span class="n">aes_encrypt</span><span class="p">(</span><span class="s2">&#34;secauth&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">),</span>  <span class="c1"># ⚠ 可能是这个</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;usripadd&#34;</span><span class="p">:</span> <span class="n">data1</span><span class="p">[</span><span class="s2">&#34;usripadd&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">r2</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Step2:&#34;</span><span class="p">,</span> <span class="n">r2</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不过先不着急使用它，我们先按照逻辑生成一个key拿到cyberchef上反向解密一下第二个channel的明文：</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/%e6%9d%82%e9%a1%b9/img/nx1/004.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>解密结果竟然是3，不过回想起来第一次登录时候服务端返回的内容也就明白了：</p>
+<p><code>{&quot;code&quot;:200,&quot;message&quot;:&quot;ok&quot;,&quot;data&quot;:{&quot;channels&quot;:[{&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;校园网&quot;},{&quot;id&quot;:&quot;3&quot;,&quot;name&quot;:&quot;中国电信&quot;},{&quot;id&quot;:&quot;2&quot;,&quot;name&quot;:&quot;中国移动&quot;},{&quot;id&quot;:&quot;4&quot;,&quot;name&quot;:&quot;中国联通&quot;}]}}</code></p>
+<p>所以这里的明文其实就对应着所列出的运营商的id。</p>
+<p>接下来顺手把第二个pagesign反向解密一下：</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/post/%e6%9d%82%e9%a1%b9/img/nx1/005.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>事实证明它的明文是<code>secondauth</code>。</p>
+<p>至此，整个逻辑链条已经被我们完全破解，把上面的脚本优化一下就可以得到一个更适合实际部署的脚本：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">hashlib</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">Crypto.Util.Padding</span> <span class="kn">import</span> <span class="n">pad</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">is_online</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;https://www.baidu.com&#34;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">is_online</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;✅当前已连上校园网，无需重复登录！&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">exit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">URL</span> <span class="o">=</span> <span class="s2">&#34;http://10.255.255.16/api/v1/login&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">DEFAULT_KEY</span> <span class="o">=</span> <span class="s2">&#34;axaQiQpsdFAacccs&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ===== SHA256（A.b）=====</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">gen_key</span><span class="p">(</span><span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">s</span> <span class="o">=</span> <span class="n">DEFAULT_KEY</span> <span class="o">+</span> <span class="n">username</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()[:</span><span class="mi">16</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ===== AES ECB PKCS7（A.a）=====</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">aes_encrypt</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_KEY</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_ECB</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">encrypted</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">pad</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">AES</span><span class="o">.</span><span class="n">block_size</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">encrypted</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ===== 用户信息 =====</span>
+</span></span><span class="line"><span class="cl"><span class="n">username_raw</span> <span class="o">=</span> <span class="s2">&#34;你的账号&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">password_raw</span> <span class="o">=</span> <span class="s2">&#34;你的密码&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="o">=</span> <span class="s2">&#34;你的IP（网页上有）&#34;</span>   <span class="c1"># 建议抓包获取</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ===== 生成 key =====</span>
+</span></span><span class="line"><span class="cl"><span class="n">key</span> <span class="o">=</span> <span class="n">gen_key</span><span class="p">(</span><span class="n">username_raw</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ===== 第一步 =====</span>
+</span></span><span class="line"><span class="cl"><span class="n">data1</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;username&#34;</span><span class="p">:</span> <span class="n">aes_encrypt</span><span class="p">(</span><span class="n">username_raw</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;password&#34;</span><span class="p">:</span> <span class="n">aes_encrypt</span><span class="p">(</span><span class="n">password_raw</span><span class="p">,</span> <span class="n">key</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ifautologin&#34;</span><span class="p">:</span> <span class="n">aes_encrypt</span><span class="p">(</span><span class="s2">&#34;0&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;channel&#34;</span><span class="p">:</span> <span class="n">aes_encrypt</span><span class="p">(</span><span class="s2">&#34;_GET&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;pagesign&#34;</span><span class="p">:</span> <span class="n">aes_encrypt</span><span class="p">(</span><span class="s2">&#34;firstauth&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;usripadd&#34;</span><span class="p">:</span> <span class="n">aes_encrypt</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">r1</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Step1:&#34;</span><span class="p">,</span> <span class="n">r1</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ===== 第二步（选运营商）=====</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">data2</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;username&#34;</span><span class="p">:</span> <span class="n">data1</span><span class="p">[</span><span class="s2">&#34;username&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;password&#34;</span><span class="p">:</span> <span class="n">data1</span><span class="p">[</span><span class="s2">&#34;password&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ifautologin&#34;</span><span class="p">:</span> <span class="n">data1</span><span class="p">[</span><span class="s2">&#34;ifautologin&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;channel&#34;</span><span class="p">:</span> <span class="n">aes_encrypt</span><span class="p">(</span><span class="s2">&#34;运营商编号&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">),</span>   <span class="c1"># 此处选择运营商，1-校园网，2-中国移动，3-中国电信，4-中国联通</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;pagesign&#34;</span><span class="p">:</span> <span class="n">aes_encrypt</span><span class="p">(</span><span class="s2">&#34;secondauth&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;usripadd&#34;</span><span class="p">:</span> <span class="n">data1</span><span class="p">[</span><span class="s2">&#34;usripadd&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">r2</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Step2:&#34;</span><span class="p">,</span> <span class="n">r2</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ver</span> <span class="o">=</span> <span class="s1">&#39;{&#34;code&#34;:200,&#34;message&#34;:&#34;ok&#34;,&#34;data&#34;:{&#34;reauth&#34;:false&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">ver</span> <span class="ow">in</span> <span class="n">r2</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;✅自动登录成功&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后再树莓派上设一个计划任务就可以愉快的使用了。</p>
+<h2 id="经验总结">经验总结
+</h2><p>js这种不是给人看的东西一定要多用AI。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+<div class="math-katex"></div>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/%E6%9C%80%E6%96%B0%E4%BF%9D%E5%A7%86%E7%BA%A7%E6%95%99%E7%A8%8B%E5%9F%BA%E4%BA%8E%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E4%BA%91%E7%94%B5%E8%84%91%E7%9A%84%E5%85%A8%E8%87%AA%E5%8A%A8%E5%88%B7%E8%AF%BE%E5%B9%B3%E5%8F%B0/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://img1.dancihu.com/2023-10-31/a116a2e0-4624-8c67-900f-7e6165b9012f.jpg" loading="lazy" data-key="" data-hash="https://img1.dancihu.com/2023-10-31/a116a2e0-4624-8c67-900f-7e6165b9012f.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[最新]保姆级教程：基于云服务器/云电脑的全自动刷课平台</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/5.1-web-%E4%B9%8Bpython%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5ssti/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">5.1 Web 之Python模板注入SSTI</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/5.-web-%E5%85%A5%E9%97%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">5. Web 入门</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/4.-crypto%E5%85%A5%E9%97%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">4. Crypto入门</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/3.-misc-%E5%85%A5%E9%97%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">3. Misc 入门</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+        <div class="comment-container mt-8"></div>
+        
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="makabaka11/makabaka11.github.io"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 Retr0
+    </section>
+    
+    <section class="running-time">
+    已存在于互联网
+    <span id="runningdays" class="running-days"></span>
+    </section>
+    
+    <section class="totalcount">
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        发表了128篇文章 · 
+        总计215.67k字
+    </section>
+
+    
+    <section class="icp-record" style="margin: 8px 0; line-height: 1.5;">
+        <a href="https://icp.gov.moe/?keyword=20267077" target="_blank">萌ICP备20267077号</a>
+    </section>
+
+    <section class="powerby">
+        
+            Powered by ctOS <br/>
+        
+    </section>
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+
+                <script src="/js/APlayer.min.js"></script>
+                <script src="/js/Meting.min.js"></script>
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.eaf1211e4c7db355f37ceea53df13700e1b77fbcc3cfe8c1c1f69e4468a752e1.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<link rel="stylesheet" href="/css/custom.css">
+
+<script>
+(function () {
+    const url = new URL(window.location.href);
+
+    
+    if (url.searchParams.has('utterances')) {
+
+        
+        
+        window.location.replace(window.location.pathname);
+    }
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+
+<script>
+    var pjax = new Pjax({
+        selectors: [".main-container"]
+    });
+</script>
+
+
+<script src=https://www.retr0.xyz/js/topbar.min.js></script>
+
+
+
+<script>
+function initUtterances() {
+    const isArticle = document.querySelector('.article-page') && document.querySelector('.article-content');
+    if (!isArticle) return;
+
+    const oldScript = document.querySelector('script[src^="https://utteranc.es/client.js"]');
+    if (oldScript) oldScript.remove();
+
+    const container = document.querySelector('.comment-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    let script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'makabaka11/makabaka11.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+    container.appendChild(script);
+}
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    if (!window.pjax || !window.pjax.state) initUtterances();
+});
+</script>
+
+
+<script>
+pjax._handleResponse = pjax.handleResponse;
+pjax.handleResponse = function(responseText, request, href, options) {
+    if (request.responseText.match("<html")) {
+        if (responseText) {
+            let newDom = new DOMParser().parseFromString(responseText, 'text/html');
+            document.body.setAttribute("class", newDom.body.className);
+        }
+        pjax._handleResponse(responseText, request, href, options);
+    }
+};
+</script>
+
+
+<script>
+topbar.config({
+    barColors: {
+        '0': 'rgba(255, 255, 255, 1)',
+        '1.0': 'rgba(255, 183, 197, 1)'
+    }
+});
+
+document.addEventListener('pjax:send', () => topbar.show());
+
+document.addEventListener('pjax:complete', () => {
+    window.Stack.init();
+    topbar.hide();
+    setTimeout(initUtterances, 0);
+    updateViewCount();
+    renderKaTeX();
+    initPhotoSwipeFromDOM('.article-content');   
+    initLive2D();                                
+});
+</script>
+
+
+<script>
+function updateViewCount() {
+    const viewCountEl = document.getElementById('vercount_value_page_pv');
+    if (!viewCountEl) return;
+
+    viewCountEl.textContent = 'loading...';
+    const url = 'https://cn.vercount.one/js';
+
+    const old = document.querySelector(`script[src="${url}"]`);
+    if (old) old.remove();
+
+    const s = document.createElement('script');
+    s.src = url;
+    s.defer = true;
+    document.head.appendChild(s);
+
+    showHideView();
+}
+
+function showHideView() {
+    const viewCounts = document.querySelectorAll("#viewCount");
+    const isArticle = document.querySelector(".article-page");
+    viewCounts.forEach(ele => ele.style.display = isArticle ? 'block' : 'none');
+}
+</script>
+
+<script>
+    function showHideView() {
+        
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+
+
+
+<script>
+async function renderKaTeX() {
+    let katex = document.querySelector(".math-katex");
+    if (!katex) return;
+
+    while (typeof renderMathInElement !== 'function') {
+        await new Promise(r => setTimeout(r, 500));
+    }
+
+    const content = document.querySelector('.article-content') || document.body;
+    renderMathInElement(content, {
+        delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true }
+        ],
+        ignoredClasses: ["gist"]
+    });
+}
+</script>
+
+
+<div id="particles-js"></div>
+
+<script src=https://www.retr0.xyz/background/particles.min.js></script>
+<script>
+particlesJS.load('particles-js',
+    "https://www.retr0.xyz/background/particlesjs-config.json",
+    () => console.log('particles.js loaded')
+);
+</script>
+
+<style>
+#particles-js {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: -1;
+}
+</style>
+
+<script>
+
+function initPhotoSwipeFromDOM(selector) {
+    if (!window.PhotoSwipe) return;
+
+    const containers = document.querySelectorAll(selector);
+    if (!containers.length) return;
+
+    containers.forEach(container => {
+        const images = container.querySelectorAll('img');
+
+        images.forEach((img, index) => {
+
+            
+            function getImageSize() {
+                return new Promise(resolve => {
+                    if (img.complete && img.naturalWidth) {
+                        resolve({
+                            w: img.naturalWidth,
+                            h: img.naturalHeight
+                        });
+                    } else {
+                        const tmp = new Image();
+                        tmp.src = img.src || img.getAttribute("data-src");
+                        tmp.onload = () => resolve({ w: tmp.width, h: tmp.height });
+                    }
+                });
+            }
+
+            img.style.cursor = "zoom-in";
+
+            
+            img.addEventListener("click", async (e) => {
+                e.preventDefault();
+
+                const size = await getImageSize();
+                const pswpEl = document.querySelector('.pswp');
+
+                const items = Array.from(images).map(i => ({
+                    src: i.src || i.getAttribute("data-src"),
+                    msrc: i.src,
+                    w: i.naturalWidth || 800,
+                    h: i.naturalHeight || 600,
+                }));
+
+                items[index].w = size.w;
+                items[index].h = size.h;
+
+                const gallery = new PhotoSwipe(pswpEl, PhotoSwipeUI_Default, items, {
+                    index,
+                    history: false
+                });
+                
+                enablePhotoSwipeWebShare(gallery);
+
+                gallery.init();
+            });
+        });
+    });
+}
+
+
+
+
+
+function enablePhotoSwipeWebShare(gallery) {
+    gallery.listen('shareLinkClick', function(shareButtonData, e) {
+        e.preventDefault();
+
+        const item = gallery.currItem;
+
+        if (navigator.share) {
+            navigator.share({
+                title: document.title,
+                text: '给你分享一张图片：',
+                url: item.src
+            }).catch(err => console.log("分享失败：", err));
+
+            return false; 
+        }
+
+        
+        return true;
+    });
+}
+</script>
+
+
+
+<script>
+
+
+window._live2d_loaded = window._live2d_loaded || false;
+window._live2d_initialized = window._live2d_initialized || false;
+
+
+function loadLive2DAssetsOnce(cdnPath) {
+    if (window._live2d_loaded) return Promise.resolve();
+
+    window._live2d_loaded = true;
+
+    return Promise.all([
+        loadRes(cdnPath + "waifu.css", "css"),
+        loadRes(cdnPath + "Core/live2dcubismcore.js", "js"),
+        loadRes(cdnPath + "live2d-sdk.js", "js"),
+        loadRes(cdnPath + "waifu-tips.js", "js")
+    ]);
+}
+
+
+function initLive2DWidgetOnce(cdnPath) {
+
+    if (window._live2d_initialized) return;
+
+    
+    const old = document.querySelector("#waifu");
+    if (old) old.remove();
+
+    window._live2d_initialized = true;
+
+    initWidget({
+        waifuPath: cdnPath + "waifu-tips.json",
+        cdnPath: cdnPath + "Resources/",
+        tools: ["hitokoto", "asteroids", "express", "switch-model", "switch-texture", "photo", "info", "quit"],
+        dragEnable: true,
+        dragDirection: ["x", "y"],
+        switchType: "order"
+    });
+
+    console.log("[Live2D] Widget initialized.");
+}
+
+
+function loadRes(url, type) {
+    return new Promise((resolve) => {
+        let tag;
+        if (type === "css") {
+            tag = document.createElement("link");
+            tag.rel = "stylesheet";
+            tag.href = url;
+        } else {
+            tag = document.createElement("script");
+            tag.src = url;
+        }
+        tag.onload = resolve;
+        document.head.appendChild(tag);
+    });
+}
+
+
+function initLive2D() {
+    if (screen.width < 768) return;
+
+    const cdnPath = "https://www.retr0.xyz/blog-live2d/";
+
+    loadLive2DAssetsOnce(cdnPath)
+        .then(() => initLive2DWidgetOnce(cdnPath));
+}
+
+initLive2D();  
+
+
+document.addEventListener("pjax:complete", () => {
+    initLive2D(); 
+});
+</script>
+
+
+<style>
+    .highlight {
+         
+        max-height: 400px;
+        overflow: hidden;
+        position: relative;  
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .code-more-btn {
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: #f0f0f5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .code-more-img {
+        cursor: pointer !important;
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+</style>
+
+<script>
+  function initCodeMoreBox() {
+    let codeBlocks = document.querySelectorAll(".highlight");
+    if (!codeBlocks) {
+      return;
+    }
+    codeBlocks.forEach(codeBlock => {
+      
+      const existingBox = codeBlock.querySelector('.code-more-box');
+      if (existingBox) existingBox.remove();
+
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+        return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.addEventListener('click', () => {
+        codeBlock.classList.add('code-show');
+        codeMoreBox.style.display = 'none';
+        
+        window.dispatchEvent(new Event('resize'))
+      })
+      
+      let img = document.createElement('img');
+      img.classList.add('code-more-img');
+      img.src = "https://www.retr0.xyz/icons/codeMore.png"
+      
+      codeMoreBtn.appendChild(img);
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox)
+    })
+  }
+  
+  initCodeMoreBox();
+  
+  
+  document.addEventListener('pjax:complete', () => {
+    initCodeMoreBox();
+  });
+</script>
+
+
+<script>
+
+
+window.__articlePlayers = window.__articlePlayers || [];
+
+
+
+function getGlobalMetingPlayer() {
+    return window.__globalMetingPlayer || null;
+}
+
+
+
+function pauseGlobalMeting() {
+    const p = getGlobalMetingPlayer();
+    if (p && !p.audio.paused) {
+        p.pause();
+        console.log('[APlayer] Pause global Meting');
+    }
+}
+
+
+
+function pauseArticlePlayers() {
+    window.__articlePlayers.forEach(p => {
+        if (p && !p.audio.paused) {
+            p.pause();
+        }
+    });
+}
+
+
+
+function initAPlayers() {
+    if (typeof APlayer === "undefined") return;
+
+    document.querySelectorAll('.aplayer-article').forEach(el => {
+        if (el.dataset.loaded === "true") return;
+        el.dataset.loaded = "true";
+
+        const ap = new APlayer({
+            container: el,
+            fixed: false,
+            autoplay: false,
+            loop: 'none',
+            order: 'list',
+            preload: 'metadata',
+            volume: 0.7,
+            mutex: false, 
+            audio: [{
+                name: el.dataset.title || 'Unknown',
+                artist: el.dataset.artist || '',
+                url: el.dataset.src,
+                cover: el.dataset.cover || '',
+                lrc: el.dataset.lrc || '',
+            }]
+        });
+
+        
+        ap.on('play', () => {
+            
+            pauseGlobalMeting();
+
+            
+            window.__articlePlayers.forEach(other => {
+                if (other !== ap && !other.audio.paused) {
+                    other.pause();
+                }
+            });
+
+    console.log('[APlayer] Switch article track');
+});
+
+
+        window.__articlePlayers.push(ap);
+    });
+}
+
+
+
+function bindMetingMutex() {
+    const p = getGlobalMetingPlayer();
+    if (!p || p.__mutexBound) return;
+
+    p.__mutexBound = true;
+
+    
+    p.on('play', () => {
+        pauseArticlePlayers();
+    });
+
+    console.log('[Meting] Mutex bound');
+}
+
+
+
+function initAllPlayers() {
+    initAPlayers();
+    bindMetingMutex();
+}
+
+
+
+document.addEventListener("DOMContentLoaded", initAllPlayers);
+document.addEventListener("pjax:complete", initAllPlayers);
+</script>
+
+<script>
+
+
+function destroyArticlePlayers() {
+    if (!window.__articlePlayers || window.__articlePlayers.length === 0) return;
+
+    window.__articlePlayers.forEach(ap => {
+        try {
+            if (!ap.audio.paused) {
+                ap.pause();
+            }
+            ap.destroy(); 
+        } catch (e) {
+            console.warn('[APlayer] destroy failed', e);
+        }
+    });
+
+    window.__articlePlayers = [];
+    console.log('[APlayer] Article players destroyed');
+}
+
+
+
+document.addEventListener('pjax:send', () => {
+    destroyArticlePlayers();
+});
+</script>
+
+
+<script>
+let runningTimeTimer = null;
+
+function updateRunningTime() {
+    const el = document.getElementById('runningdays');
+    if (!el) return;
+
+    let start = '2025-10-26 00:00:00'; 
+    start = new Date(start.replace(/-/g, "/"));
+    const now = new Date();
+
+    const diff = Math.floor((now.getTime() - start.getTime()) / 1000);
+
+    const days = Math.floor(diff / (24 * 3600));
+    const hours = Math.floor((diff % (24 * 3600)) / 3600);
+    const minutes = Math.floor((diff % 3600) / 60);
+    const seconds = diff % 60;
+
+    el.textContent =
+        `${days}天${hours}小时${minutes}分钟${seconds}秒`;
+}
+
+function initRunningTime() {
+    
+    updateRunningTime();
+
+    
+    if (runningTimeTimer) {
+        clearInterval(runningTimeTimer);
+    }
+
+    runningTimeTimer = setInterval(updateRunningTime, 1000);
+}
+
+ 
+document.addEventListener('DOMContentLoaded', () => {
+    initRunningTime();
+});
+
+ 
+document.addEventListener('pjax:complete', () => {
+    initRunningTime();
+});
+</script>
+
+
+
+
+<script>
+  
+  let originalTitle = document.title; 
+  const leaveTip = "桥豆麻袋(#°Д°)";     
+  const backTip = "(*'▽`*)欢迎回来!";        
+  const recoverDelay = 2000;           
+  let visibilityChangeHandler = null;  
+  let titleRecoverTimer = null;        
+
+  
+  function initTitleSwitch() {
+    
+    if (visibilityChangeHandler) {
+      document.removeEventListener('visibilitychange', visibilityChangeHandler);
+    }
+
+    
+    originalTitle = document.title;
+
+    
+    visibilityChangeHandler = function() {
+      
+      clearTimeout(titleRecoverTimer);
+
+      if (document.hidden) {
+        
+        document.title = leaveTip;
+      } else {
+        
+        document.title = backTip;
+        
+        titleRecoverTimer = setTimeout(() => {
+          document.title = originalTitle;
+        }, recoverDelay);
+      }
+    };
+
+    
+    document.addEventListener('visibilitychange', visibilityChangeHandler);
+  }
+
+  
+  document.addEventListener('pjax:success', function() {
+    
+    initTitleSwitch();
+  });
+
+  
+  window.onload = function() {
+    initTitleSwitch();
+  };
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+<meting-js
+  id="14477349320"
+  server="netease"
+  type="playlist"
+  fixed="true"
+  bottom="20px"
+  right="20px"
+  autoplay="false"
+  width="300px"
+  preload="metadata"
+  mutex="false">
+</meting-js>
+
+<script>
+(function () {
+
+  
+  if (window.__global_meting_initialized) return;
+  window.__global_meting_initialized = true;
+
+  const STORAGE_KEY = "playInfo";
+  const PLAYLIST_ID = "14477349320";
+
+  function initGlobalMeting() {
+    const meting = document.querySelector('meting-js');
+    if (!meting) return;
+
+    
+    meting.addEventListener('aplayer-loaded', () => {
+      const ap = meting.aplayer;
+      if (!ap) return;
+
+      
+      window.__globalMetingPlayer = ap;
+      console.log('[Meting] Global APlayer ready');
+
+      bindPlayerEvents(ap);
+      restorePlayState(ap);
+    }, { once: true });
+  }
+
+  function bindPlayerEvents(ap) {
+    
+    const save = () => savePlayState(ap);
+
+    window.addEventListener('beforeunload', save);
+    document.addEventListener('visibilitychange', save);
+
+    
+    ap.on('play', () => {
+      document.dispatchEvent(new CustomEvent('global-player-play'));
+    });
+  }
+
+  function savePlayState(ap) {
+    if (!ap || !ap.list || !ap.audio) return;
+
+    const data = {
+      playlistId: PLAYLIST_ID,
+      index: ap.list.index,
+      currentTime: ap.audio.currentTime,
+      paused: ap.paused
+    };
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function restorePlayState(ap) {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!data || data.playlistId !== PLAYLIST_ID) return;
+
+    if (data.index < ap.list.songs.length) {
+      ap.list.switch(data.index);
+      ap.once('canplay', () => {
+        ap.seek(data.currentTime || 0);
+        if (!data.paused) {
+          ap.play().catch(() => {
+            ap.notice("点击继续播放", 3000);
+          });
+        }
+      });
+    }
+  }
+
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGlobalMeting);
+  } else {
+    initGlobalMeting();
+  }
+
+})();
+</script>
+
+    </body>
+</html>
