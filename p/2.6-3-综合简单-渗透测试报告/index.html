@@ -349,8 +349,8 @@
                 网安
             </a>
         
-            <a href="/categories/26%E5%AF%92%E5%81%87%E9%9B%86%E8%AE%AD/" >
-                26寒假集训
+            <a href="/categories/%E8%BF%9B%E9%98%B6%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" >
+                进阶渗透测试
             </a>
         
     </header>
@@ -409,7 +409,7 @@
 <h2 id="信息收集">信息收集
 </h2><p><code>arp-scan -l</code>扫一下目标IP</p>
 <!-- 这是一张图片，ocr 内容为： -->
-<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/001.png"
+<p><img src="/post/%e8%bf%9b%e9%98%b6%e6%b8%97%e9%80%8f%e6%b5%8b%e8%af%95/pic/2.6-3/001.png"
 	
 	
 	
@@ -420,7 +420,7 @@
 <p>确认了目标IP为<code>192.168.80.162</code></p>
 <p>nmap详细扫描<code>nmap -A 192.168.80.162</code></p>
 <!-- 这是一张图片，ocr 内容为： -->
-<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/002.png"
+<p><img src="/post/%e8%bf%9b%e9%98%b6%e6%b8%97%e9%80%8f%e6%b5%8b%e8%af%95/pic/2.6-3/002.png"
 	
 	
 	
@@ -431,7 +431,7 @@
 <p>看到打开了 <strong>21(ftp)、22(ssh)、80(http)</strong> 三个端口。</p>
 <p>先访问web页面吧<code>http://192.168.80.162/</code></p>
 <!-- 这是一张图片，ocr 内容为： -->
-<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/003.png"
+<p><img src="/post/%e8%bf%9b%e9%98%b6%e6%b8%97%e9%80%8f%e6%b5%8b%e8%af%95/pic/2.6-3/003.png"
 	
 	
 	
@@ -442,7 +442,7 @@
 <p>何意味？</p>
 <p>御剑扫一下</p>
 <!-- 这是一张图片，ocr 内容为： -->
-<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/004.png"
+<p><img src="/post/%e8%bf%9b%e9%98%b6%e6%b8%97%e9%80%8f%e6%b5%8b%e8%af%95/pic/2.6-3/004.png"
 	
 	
 	
@@ -452,7 +452,7 @@
 ></p>
 <p>看看<code>login.php</code>，</p>
 <!-- 这是一张图片，ocr 内容为： -->
-<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/005.png"
+<p><img src="/post/%e8%bf%9b%e9%98%b6%e6%b8%97%e9%80%8f%e6%b5%8b%e8%af%95/pic/2.6-3/005.png"
 	
 	
 	
@@ -463,7 +463,7 @@
 <p>随便输入账密提交抓不到包而是直接弹窗，关闭 js 后不弹窗了，说明存在前端检查。</p>
 <p>查看源代码发现如下的 js 代码：</p>
 <!-- 这是一张图片，ocr 内容为： -->
-<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/006.png"
+<p><img src="/post/%e8%bf%9b%e9%98%b6%e6%b8%97%e9%80%8f%e6%b5%8b%e8%af%95/pic/2.6-3/006.png"
 	
 	
 	
@@ -486,7 +486,7 @@
 </div><h2 id="文件上传">文件上传
 </h2><p>成功登入，发现存在文件上传：</p>
 <!-- 这是一张图片，ocr 内容为： -->
-<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/007.png"
+<p><img src="/post/%e8%bf%9b%e9%98%b6%e6%b8%97%e9%80%8f%e6%b5%8b%e8%af%95/pic/2.6-3/007.png"
 	
 	
 	
@@ -496,7 +496,7 @@
 ></p>
 <p>右键查看源代码，同样存在前端的 js 文件基础验证：</p>
 <!-- 这是一张图片，ocr 内容为： -->
-<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/008.png"
+<p><img src="/post/%e8%bf%9b%e9%98%b6%e6%b8%97%e9%80%8f%e6%b5%8b%e8%af%95/pic/2.6-3/008.png"
 	
 	
 	
@@ -507,7 +507,7 @@
 <h3 id="常规玩法webshell">常规玩法（webshell）
 </h3><p>写一个一句话木马，后缀名为jpg来绕过前端验证，burp抓包修改数据包里的后缀名为php</p>
 <!-- 这是一张图片，ocr 内容为： -->
-<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/009.png"
+<p><img src="/post/%e8%bf%9b%e9%98%b6%e6%b8%97%e9%80%8f%e6%b5%8b%e8%af%95/pic/2.6-3/009.png"
 	
 	
 	
@@ -517,7 +517,7 @@
 ></p>
 <p>查看<code>http://192.168.80.162/uploads/</code>已经成功上传并且可以成功执行语句</p>
 <!-- 这是一张图片，ocr 内容为： -->
-<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/010.png"
+<p><img src="/post/%e8%bf%9b%e9%98%b6%e6%b8%97%e9%80%8f%e6%b5%8b%e8%af%95/pic/2.6-3/010.png"
 	
 	
 	
@@ -537,7 +537,7 @@
 </div>
 </div><p>木马大概长这样：</p>
 <!-- 这是一张图片，ocr 内容为： -->
-<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/011.png"
+<p><img src="/post/%e8%bf%9b%e9%98%b6%e6%b8%97%e9%80%8f%e6%b5%8b%e8%af%95/pic/2.6-3/011.png"
 	
 	
 	
@@ -565,7 +565,7 @@
 </div><p>将刚才的木马上传（方法同上），到<code>http://192.168.80.162/uploads/</code>中访问该木马。</p>
 <p>成功拿到meterpreter</p>
 <!-- 这是一张图片，ocr 内容为： -->
-<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/012.png"
+<p><img src="/post/%e8%bf%9b%e9%98%b6%e6%b8%97%e9%80%8f%e6%b5%8b%e8%af%95/pic/2.6-3/012.png"
 	
 	
 	
@@ -589,7 +589,7 @@
 </div>
 </div><p>发现了<code>config.php</code>数据库配置文件</p>
 <!-- 这是一张图片，ocr 内容为： -->
-<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/013.png"
+<p><img src="/post/%e8%bf%9b%e9%98%b6%e6%b8%97%e9%80%8f%e6%b5%8b%e8%af%95/pic/2.6-3/013.png"
 	
 	
 	
@@ -617,7 +617,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><!-- 这是一张图片，ocr 内容为： -->
-<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/014.png"
+<p><img src="/post/%e8%bf%9b%e9%98%b6%e6%b8%97%e9%80%8f%e6%b5%8b%e8%af%95/pic/2.6-3/014.png"
 	
 	
 	
@@ -640,7 +640,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><!-- 这是一张图片，ocr 内容为： -->
-<p><img src="/post/26%e5%af%92%e5%81%87%e9%9b%86%e8%ae%ad/pic/2.6-3/015.png"
+<p><img src="/post/%e8%bf%9b%e9%98%b6%e6%b8%97%e9%80%8f%e6%b5%8b%e8%af%95/pic/2.6-3/015.png"
 	
 	
 	
