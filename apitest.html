@@ -277,7 +277,7 @@
 </select>
 
 <label>ID：</label>
-<input id="id" type="text" placeholder="例如：191232（单曲）或 3778678（歌单）">
+<input id="id" type="text" placeholder="输入歌曲/歌单ID，或包含id参数的链接">
 
 <button onclick="play()">▶ 播放</button>
 
@@ -289,6 +289,8 @@
 <div id="api-url" class="api-url"></div>
 
 <div id="player"></div>
+
+<div class="api-url">提示：若返回数据包含 lrc 字段，播放器会自动加载并显示歌词。</div>
 
 
   </div>
@@ -306,6 +308,24 @@
 <script>
 let ap = null;
 
+function extractId(inputValue) {
+  const value = inputValue.trim();
+  if (!value) return '';
+
+  if (/^\d+$/.test(value)) {
+    return value;
+  }
+
+  try {
+    const url = new URL(value);
+    const id = url.searchParams.get('id');
+    return id && /^\d+$/.test(id) ? id : '';
+  } catch (_) {
+    const match = value.match(/[?&]id=(\d+)/i);
+    return match ? match[1] : '';
+  }
+}
+
 function fillExample(server, type, id) {
   document.getElementById('server').value = server;
   document.getElementById('type').value = type;
@@ -315,11 +335,12 @@ function fillExample(server, type, id) {
 function play() {
   const server = document.getElementById('server').value;
   const type = document.getElementById('type').value;
-  const id = document.getElementById('id').value.trim();
+  const inputValue = document.getElementById('id').value;
+  const id = extractId(inputValue);
   const baseUrl = 'https://meting.retr0.xyz';
 
   if (!id) {
-    alert("请输入 ID");
+    alert("请输入正确的ID，或带有 id 参数的链接");
     return;
   }
 
@@ -337,11 +358,21 @@ function play() {
         return;
       }
 
+      const rawList = Array.isArray(data) ? data : [data];
+      const audioList = rawList.map(item => ({
+        name: item.name || item.title || '未知歌曲',
+        artist: item.artist || item.author || '未知歌手',
+        url: item.url,
+        cover: item.cover || item.pic || '',
+        lrc: item.lrc || ''
+      }));
+
       if (ap) ap.destroy();
 
       ap = new APlayer({
         container: document.getElementById('player'),
-        audio: Array.isArray(data) ? data : [data]
+        lrcType: 3,
+        audio: audioList
       });
     })
     .catch(err => {
