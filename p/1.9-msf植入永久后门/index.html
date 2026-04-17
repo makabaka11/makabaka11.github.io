@@ -1172,7 +1172,6 @@
         document.head.appendChild(customFont);
     }());
 </script>
-
 <link rel="stylesheet" href="/css/custom.css">
 
 <script>
@@ -1339,10 +1338,10 @@ async function renderKaTeX() {
 
 <div id="particles-js"></div>
 
-<script src=https://www.retr0.xyz/background/particles.min.js></script>
+<script src="https://www.retr0.xyz/background/particles.min.js"></script>
 <script>
 particlesJS.load('particles-js',
-    "https://www.retr0.xyz/background/particlesjs-config.json",
+    "https:\/\/www.retr0.xyz\/background\/particlesjs-config.json",
     () => console.log('particles.js loaded')
 );
 </script>
@@ -1599,7 +1598,7 @@ document.addEventListener("pjax:complete", () => {
       
       let img = document.createElement('img');
       img.classList.add('code-more-img');
-      img.src = "https://www.retr0.xyz/icons/codeMore.png"
+      img.src = "https:\/\/www.retr0.xyz\/icons\/codeMore.png"
       
       codeMoreBtn.appendChild(img);
       codeMoreBox.appendChild(codeMoreBtn);
@@ -1851,6 +1850,14 @@ document.addEventListener('pjax:complete', () => {
   window.onload = function() {
     initTitleSwitch();
   };
+</script>
+
+
+<script>
+if (typeof window !== 'undefined') {
+  
+  window.meting_api = "https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r";
+}
 </script>
 
 
