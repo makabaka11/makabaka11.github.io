@@ -276,21 +276,19 @@
   <option value="playlist">歌单</option>
 </select>
 
-<label>ID：</label>
+<label>ID或链接：</label>
 <input id="id" type="text" placeholder="输入歌曲/歌单ID，或包含id参数的链接">
 
 <button onclick="play()">▶ 播放</button>
 
 <div class="example-buttons">
-  <button onclick="fillExample('netease','song','191232')">示例单曲</button>
-  <button onclick="fillExample('netease','playlist','3778678')">示例歌单</button>
+  <button onclick="fillExample('netease','song','1824020871')">示例单曲</button>
+  <button onclick="fillExample('netease','playlist','3091541267')">示例歌单</button>
 </div>
 
 <div id="api-url" class="api-url"></div>
 
 <div id="player"></div>
-
-<div class="api-url">提示：若返回数据包含 lrc 字段，播放器会自动加载并显示歌词。</div>
 
 
   </div>
