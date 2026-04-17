@@ -316,13 +316,14 @@ function play() {
   const server = document.getElementById('server').value;
   const type = document.getElementById('type').value;
   const id = document.getElementById('id').value.trim();
+  const baseUrl = 'https://meting.retr0.xyz';
 
   if (!id) {
     alert("请输入 ID");
     return;
   }
 
-  const api = `/api?server=${server}&type=${type}&id=${id}`;
+  const api = `${baseUrl}/api?server=${server}&type=${type}&id=${id}`;
   document.getElementById("api-url").innerText = "请求地址：" + api;
 
   fetch(api)
