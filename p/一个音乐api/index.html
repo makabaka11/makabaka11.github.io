@@ -1199,7 +1199,6 @@ particlesJS.load('particles-js',
 </style>
 
 <script>
-
 function initPhotoSwipeFromDOM(selector) {
     if (!window.PhotoSwipe) return;
 
@@ -1212,6 +1211,9 @@ function initPhotoSwipeFromDOM(selector) {
         images.forEach((img, index) => {
 
             
+            if (img.__pswp_bound) return;
+            img.__pswp_bound = true;
+
             function getImageSize() {
                 return new Promise(resolve => {
                     if (img.complete && img.naturalWidth) {
@@ -1229,7 +1231,6 @@ function initPhotoSwipeFromDOM(selector) {
 
             img.style.cursor = "zoom-in";
 
-            
             img.addEventListener("click", async (e) => {
                 e.preventDefault();
 
@@ -1250,8 +1251,10 @@ function initPhotoSwipeFromDOM(selector) {
                     index,
                     history: false
                 });
-                
-                enablePhotoSwipeWebShare(gallery);
+
+                if (typeof enablePhotoSwipeWebShare === "function") {
+                    enablePhotoSwipeWebShare(gallery);
+                }
 
                 gallery.init();
             });
@@ -1259,6 +1262,19 @@ function initPhotoSwipeFromDOM(selector) {
     });
 }
 
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    initPhotoSwipeFromDOM('.post-content');
+});
+
+
+document.addEventListener("pjax:complete", () => {
+    setTimeout(() => {
+        initPhotoSwipeFromDOM('.post-content');
+    }, 50);
+});
 
 
 
