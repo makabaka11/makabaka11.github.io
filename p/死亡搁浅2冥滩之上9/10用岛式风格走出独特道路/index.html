@@ -426,7 +426,7 @@
 	
 	
 ></p>
-<div class="aplayer-article">
+<div class="aplayer-wrap">
   <meting-js
     server="netease"
     type="song"
@@ -600,7 +600,7 @@
 <p>这还不是最令人惊讶的，当我从主菜单点击&quot;继续游戏&quot;后仅仅花了1秒钟就进入到了游戏内时，这种丝滑的体验带给了我前所未有的冲击。</p>
 <h2 id="不止配乐">不止配乐
 </h2><p>这些视觉盛宴再次得到了优秀音乐的支撑 —— 无论是 Woodkid 空灵的人声在孤寂的山峰上回荡，还是 Ludvig Forssell 那曲动人的《BB’s Theme》在完美的时机插入 —— 所有音乐都起到了令人震撼的烘托作用。尤其是在你接近目的地时，一首Low Roar的曲子更是让我深受触动并迷上了这个宝藏乐队（但可惜Low Roar的主唱在2022年因急性哮喘及并发症去世，RIP🕯️）</p>
-<div class="aplayer-article">
+<div class="aplayer-wrap">
   <meting-js
     server="netease"
     type="song"
@@ -629,7 +629,7 @@
 总体而言，《死亡搁浅 2：冥滩之上》是一部极具野心与抱负的作品。它不仅成功解决了前作的诸多不足，更在多个维度上实现了自我超越。对于期待看到游戏产业不断创新的玩家来说，这是一部不可多得的佳作，也预示着这个系列未来发展的无限可能。</p>
 <h2 id="music-time">Music Time！
 </h2><p>这首游戏中有着重要作用的<strong>Polytope</strong>在游戏内外的社群中都获得了大家的一致好评，一起来欣赏一下吧！</p>
-<div class="aplayer-article">
+<div class="aplayer-wrap">
   <meting-js
     server="netease"
     type="song"
@@ -1965,6 +1965,38 @@ if (typeof window !== 'undefined') {
 }
 </script>
 
+<script>
+function reinitMetingJS() {
+  document.querySelectorAll('meting-js').forEach(oldEl => {
+
+    
+    if (oldEl.__reloaded) return;
+    oldEl.__reloaded = true;
+
+    const parent = oldEl.parentNode;
+
+    
+    const newEl = document.createElement('meting-js');
+
+    for (let attr of oldEl.attributes) {
+      newEl.setAttribute(attr.name, attr.value);
+    }
+
+    
+    parent.replaceChild(newEl, oldEl);
+
+    console.log('[Meting] re-init');
+  });
+}
+
+
+document.addEventListener("pjax:complete", () => {
+  setTimeout(reinitMetingJS, 50);
+});
+
+
+document.addEventListener("DOMContentLoaded", reinitMetingJS);
+</script>
 
 
 

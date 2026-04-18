@@ -471,7 +471,7 @@
 <p>​		愿我们都能在自己的日常里，找到那份轻音的旋律。</p>
 <h3 id="music-time">Music Time!
 </h3><p>结尾带来一首剧中几人告别时演奏的一首《相遇天使》，欢迎欣赏（当然您在剧中按照剧情顺其自然的收听更好）</p>
-<div class="aplayer-article">
+<div class="aplayer-wrap">
   <meting-js
     server="netease"
     type="song"
@@ -1816,6 +1816,38 @@ if (typeof window !== 'undefined') {
 }
 </script>
 
+<script>
+function reinitMetingJS() {
+  document.querySelectorAll('meting-js').forEach(oldEl => {
+
+    
+    if (oldEl.__reloaded) return;
+    oldEl.__reloaded = true;
+
+    const parent = oldEl.parentNode;
+
+    
+    const newEl = document.createElement('meting-js');
+
+    for (let attr of oldEl.attributes) {
+      newEl.setAttribute(attr.name, attr.value);
+    }
+
+    
+    parent.replaceChild(newEl, oldEl);
+
+    console.log('[Meting] re-init');
+  });
+}
+
+
+document.addEventListener("pjax:complete", () => {
+  setTimeout(reinitMetingJS, 50);
+});
+
+
+document.addEventListener("DOMContentLoaded", reinitMetingJS);
+</script>
 
 
 

@@ -3331,6 +3331,38 @@ if (typeof window !== 'undefined') {
 }
 </script>
 
+<script>
+function reinitMetingJS() {
+  document.querySelectorAll('meting-js').forEach(oldEl => {
+
+    
+    if (oldEl.__reloaded) return;
+    oldEl.__reloaded = true;
+
+    const parent = oldEl.parentNode;
+
+    
+    const newEl = document.createElement('meting-js');
+
+    for (let attr of oldEl.attributes) {
+      newEl.setAttribute(attr.name, attr.value);
+    }
+
+    
+    parent.replaceChild(newEl, oldEl);
+
+    console.log('[Meting] re-init');
+  });
+}
+
+
+document.addEventListener("pjax:complete", () => {
+  setTimeout(reinitMetingJS, 50);
+});
+
+
+document.addEventListener("DOMContentLoaded", reinitMetingJS);
+</script>
 
 
 
