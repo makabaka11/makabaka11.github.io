@@ -1463,7 +1463,6 @@ function initPhotoSwipeFromDOM(selector) {
 
         images.forEach((img, index) => {
 
-            
             if (img.__pswp_bound) return;
             img.__pswp_bound = true;
 
@@ -1517,16 +1516,31 @@ function initPhotoSwipeFromDOM(selector) {
 
 
 
+function waitAndInit() {
+    let retry = 0;
 
-document.addEventListener("DOMContentLoaded", () => {
-    initPhotoSwipeFromDOM('.post-content');
-});
+    const timer = setInterval(() => {
+        const el = document.querySelector('.post-content img');
+
+        if (el) {
+            clearInterval(timer);
+            initPhotoSwipeFromDOM('.post-content');
+        }
+
+        if (retry++ > 20) {
+            clearInterval(timer);
+        }
+    }, 100);
+}
+
+
+
+
+document.addEventListener("DOMContentLoaded", waitAndInit);
 
 
 document.addEventListener("pjax:complete", () => {
-    setTimeout(() => {
-        initPhotoSwipeFromDOM('.post-content');
-    }, 50);
+    setTimeout(waitAndInit, 50);
 });
 
 
