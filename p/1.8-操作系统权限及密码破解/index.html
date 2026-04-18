@@ -1154,7 +1154,7 @@
             
         
         发表了133篇文章 · 
-        总计228.71k字
+        总计228.75k字
     </section>
 
     
@@ -1987,36 +1987,87 @@ if (typeof window !== 'undefined') {
 </script>
 
 <script>
-function reinitMetingJS() {
-  document.querySelectorAll('meting-js').forEach(oldEl => {
+(function () {
 
-    
-    if (oldEl.__reloaded) return;
-    oldEl.__reloaded = true;
+  
 
-    const parent = oldEl.parentNode;
+  function isGlobalMeting(el) {
+    return el.querySelector('.aplayer-fixed') !== null;
+  }
 
-    
-    const newEl = document.createElement('meting-js');
+  
 
-    for (let attr of oldEl.attributes) {
-      newEl.setAttribute(attr.name, attr.value);
-    }
+  function initArticleMeting() {
+    document.querySelectorAll('meting-js').forEach(meting => {
 
-    
-    parent.replaceChild(newEl, oldEl);
+      
+      if (isGlobalMeting(meting)) return;
 
-    console.log('[Meting] re-init');
-  });
-}
+      if (meting.__initialized) return;
+      meting.__initialized = true;
 
+      meting.addEventListener('aplayer-loaded', () => {
+        const ap = meting.aplayer;
+        if (!ap) return;
 
-document.addEventListener("pjax:complete", () => {
-  setTimeout(reinitMetingJS, 50);
-});
+        console.log('[Meting] article ready');
 
+        
+        ap.on('play', () => {
+          const global = document.querySelector('.aplayer-fixed');
+          if (global && global._aplayer && !global._aplayer.audio.paused) {
+            global._aplayer.pause();
+          }
 
-document.addEventListener("DOMContentLoaded", reinitMetingJS);
+          
+          document.querySelectorAll('meting-js').forEach(el => {
+            const other = el.aplayer;
+            if (other && other !== ap && !other.audio.paused) {
+              other.pause();
+            }
+          });
+        });
+
+      });
+    });
+  }
+
+  
+
+  function reinitMeting() {
+    document.querySelectorAll('meting-js').forEach(oldEl => {
+
+      if (isGlobalMeting(oldEl)) return; 
+
+      if (oldEl.__reloaded) return;
+      oldEl.__reloaded = true;
+
+      const parent = oldEl.parentNode;
+      const newEl = document.createElement('meting-js');
+
+      for (let attr of oldEl.attributes) {
+        newEl.setAttribute(attr.name, attr.value);
+      }
+
+      parent.replaceChild(newEl, oldEl);
+
+      console.log('[Meting] reinit article');
+    });
+  }
+
+  function safeInit() {
+    setTimeout(() => {
+      reinitMeting();
+      initArticleMeting();
+    }, 50);
+  }
+
+  
+
+  document.addEventListener("DOMContentLoaded", safeInit);
+  document.addEventListener("pjax:complete", safeInit);
+
+})();
 </script>
 
 
