@@ -110,7 +110,21 @@
 	
 	
 &gt;&lt;/p&gt;
-</description>
+&lt;h1 id=&#34;music-time&#34;&gt;Music Time！
+&lt;/h1&gt;&lt;p&gt;正如文中所说，这首神插入的《雨滴之歌》也是奇妙又好听呢，一起来听听吧！&lt;/p&gt;
+&lt;div class=&#34;aplayer-wrap&#34;&gt;
+  &lt;meting-js
+    server=&#34;netease&#34;
+    type=&#34;song&#34;
+    id=&#34;520459951&#34;
+    fixed=&#34;false&#34;
+    autoplay=&#34;false&#34;
+    loop=&#34;none&#34;
+    order=&#34;list&#34;
+    preload=&#34;auto&#34;
+    volume=&#34;0.7&#34;&gt;
+  &lt;/meting-js&gt;
+&lt;/div&gt;</description>
         </item>
         <item>
         <title>[动画短评]《末日后酒店》8.5/10：二次元版《底特律:变人》？没那么简单</title>
