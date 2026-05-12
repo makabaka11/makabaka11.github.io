@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>弹幕精选算法</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root {
+    --bg: #0a0c14;
+    --surface: #111520;
+    --surface2: #181d2e;
+    --border: #232840;
+    --accent: #4f8fff;
+    --accent2: #ff6b6b;
+    --accent3: #6bffb8;
+    --text: #e8eaf6;
+    --text-dim: #6b7280;
+    --text-muted: #3d4460;
+    --tag-bg: #1a2040;
+    --radius: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans SC', sans-serif;
+    min-height: 100vh;
+    padding: 20px 32px;
+  }
+
+  h1 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    background: linear-gradient(90deg, var(--accent), var(--accent3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 4px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 28px;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 20px;
+    min-height: calc(100vh - 80px);
+  }
+
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+  }
+
+  .panel-title {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* 参数控制 */
+  .param-group { margin-bottom: 18px; }
+
+  .param-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+  }
+
+  .param-value {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent3);
+    font-size: 13px;
+  }
+
+  input[type=range] {
+    width: 100%;
+    height: 3px;
+    -webkit-appearance: none;
+    background: var(--border);
+    border-radius: 2px;
+    outline: none;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  .checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-dim);
+    cursor: pointer;
+    margin-bottom: 8px;
+  }
+
+  .checkbox-group input[type=checkbox] {
+    accent-color: var(--accent);
+    width: 14px; height: 14px;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 16px 0;
+  }
+
+  /* 输入区 */
+  .right-col { display: flex; flex-direction: column; gap: 14px; }
+
+  textarea {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    padding: 14px;
+    resize: vertical;
+    outline: none;
+    line-height: 1.7;
+    min-height: 140px;
+    transition: border-color 0.2s;
+  }
+
+  textarea:focus { border-color: var(--accent); }
+
+  .btn-row { display: flex; gap: 10px; align-items: center; }
+
+  button {
+    padding: 9px 20px;
+    border-radius: 8px;
+    border: none;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .btn-primary:hover { background: #6fa8ff; box-shadow: 0 0 14px rgba(79,143,255,0.4); }
+
+  .btn-secondary {
+    background: var(--surface2);
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+  }
+
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  .btn-export {
+    background: var(--surface2);
+    color: var(--accent3);
+    border: 1px solid var(--border);
+    margin-left: auto;
+  }
+
+  .btn-export:hover { border-color: var(--accent3); box-shadow: 0 0 10px rgba(107,255,184,0.2); }
+
+  /* 统计 */
+  .stats-row {
+    display: flex;
+    gap: 14px;
+  }
+
+  .stat-card {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-size: 32px;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label { font-size: 12px; color: var(--text-dim); }
+
+  /* 弹幕列表 */
+  .list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .filter-tabs {
+    display: flex;
+    gap: 6px;
+  }
+
+  .tab {
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-dim);
+    transition: all 0.15s;
+  }
+
+  .tab.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  .danmaku-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 4px;
+  }
+
+  .danmaku-list::-webkit-scrollbar { width: 4px; }
+  .danmaku-list::-webkit-scrollbar-track { background: transparent; }
+  .danmaku-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .danmaku-item {
+    display: grid;
+    grid-template-columns: 52px 1fr auto auto;
+    gap: 10px;
+    align-items: center;
+    padding: 10px 12px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+    animation: slideIn 0.2s ease;
+    transition: border-color 0.15s;
+  }
+
+  .danmaku-item:hover { border-color: var(--accent); }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .danmaku-time {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+
+  .danmaku-content { color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  .danmaku-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent3);
+    white-space: nowrap;
+  }
+
+  .tag {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .tag-keep { background: rgba(107,255,184,0.12); color: var(--accent3); }
+  .tag-drop { background: rgba(255,107,107,0.12); color: var(--accent2); }
+  .tag-type { background: var(--tag-bg); color: var(--text-dim); }
+
+  .reason-badges { display: flex; gap: 4px; flex-wrap: wrap; }
+  .reason-badge {
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 11px;
+    background: rgba(255,107,107,0.1);
+    color: var(--accent2);
+    border: 1px solid rgba(255,107,107,0.2);
+  }
+
+  .empty-hint {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 14px;
+    padding: 40px 0;
+  }
+
+  /* 输出 */
+  .output-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    max-height: 200px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    background: rgba(79,143,255,0.12);
+    color: var(--accent);
+    margin-left: 6px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .algo-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 12px;
+    border-left: 2px solid var(--accent);
+    margin-top: 4px;
+  }
+</style>
+</head>
+<body>
+
+<h1>智能弹幕精选算法</h1>
+<p class="subtitle">// better_danmaku_filter</p>
+
+
+<div class="layout">
+
+  <!-- 左侧参数面板 -->
+  <div>
+    <div class="panel">
+      <div class="panel-title">算法参数</div>
+
+      <div class="param-group">
+        <div class="param-label">
+          <span>最终保留比例</span>
+          <span class="param-value" id="val-ratio">30%</span>
+        </div>
+        <input type="range" id="p-ratio" min="5" max="80" value="30" step="5">
+      </div>
+
+      <div class="param-group">
+        <div class="param-label">
+          <span>时间窗口（秒）去重</span>
+          <span class="param-value" id="val-window">5s</span>
+        </div>
+        <input type="range" id="p-window" min="1" max="30" value="5" step="1">
+      </div>
+
+      <div class="param-group">
+        <div class="param-label">
+          <span>最短弹幕长度（字符）</span>
+          <span class="param-value" id="val-minlen">3</span>
+        </div>
+        <input type="range" id="p-minlen" min="1" max="10" value="3" step="1">
+      </div>
+
+      <div class="param-group">
+        <div class="param-label">
+          <span>重复字符占比阈值</span>
+          <span class="param-value" id="val-repeat">60%</span>
+        </div>
+        <input type="range" id="p-repeat" min="30" max="100" value="60" step="5">
+      </div>
+
+      <div class="param-group">
+        <div class="param-label">
+          <span>全大写/数字弹幕惩罚</span>
+          <span class="param-value" id="val-penalty">-30</span>
+        </div>
+        <input type="range" id="p-penalty" min="0" max="80" value="30" step="5">
+      </div>
+
+      <hr class="divider">
+
+      <div class="panel-title">过滤规则</div>
+
+      <label class="checkbox-group">
+        <input type="checkbox" id="f-duplicate" checked>
+        过滤相似/重复弹幕
+      </label>
+      <label class="checkbox-group">
+        <input type="checkbox" id="f-spam" checked>
+        过滤刷屏弹幕（同内容连发）
+      </label>
+      <label class="checkbox-group">
+        <input type="checkbox" id="f-short" checked>
+        过滤过短弹幕
+      </label>
+      <label class="checkbox-group">
+        <input type="checkbox" id="f-emoji" checked>
+        允许纯emoji弹幕降权
+      </label>
+      <label class="checkbox-group">
+        <input type="checkbox" id="f-advanced" checked>
+        高级语义评分（多样性加权）
+      </label>
+
+      <hr class="divider">
+
+      <div class="algo-desc">
+        <b style="color:var(--accent)">评分维度：</b><br>
+        长度分 · 字符多样性 · 稀有度（时间窗口内出现频次倒数）· 语义信息量（非重复字/总字） · 类型权重（高级弹幕 +10）
+      </div>
+    </div>
+  </div>
+
+  <!-- 右侧主区域 -->
+  <div class="right-col">
+
+    <!-- 统计 -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num" id="s-total" style="color:var(--text)">0</div>
+        <div class="stat-label">原始弹幕</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="s-kept" style="color:var(--accent3)">0</div>
+        <div class="stat-label">精选保留</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="s-filtered" style="color:var(--accent2)">0</div>
+        <div class="stat-label">过滤丢弃</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="s-rate" style="color:var(--accent)">0%</div>
+        <div class="stat-label">保留率</div>
+      </div>
+    </div>
+
+    <!-- 输入 -->
+    <div class="panel">
+      <div class="panel-title">输入弹幕 JSON <span class="badge">粘贴或加载示例</span></div>
+      <textarea id="input-json" placeholder='{
+  "count": 100,
+  "comments": [
+    {"time": 0, "content": "签到", "type": "scroll", "color": "rgb(255,255,255)", "isMe": false},
+    {"time": 5.2, "content": "好笑", "type": "scroll", "color": "rgb(255,255,255)", "isMe": false}
+  ]
+}'></textarea>
+      <div class="btn-row" style="margin-top:10px">
+        <button class="btn-primary" onclick="runFilter()">▶ 运行精选</button>
+        <button class="btn-secondary" onclick="loadExample()">加载示例数据</button>
+        <button class="btn-secondary" onclick="loadFromFile()">📂 导入文件</button>
+        <input type="file" id="file-input" accept=".json" style="display:none" onchange="handleFile(event)">
+        <button class="btn-export" onclick="exportResult()">⬇ 导出 JSON</button>
+      </div>
+    </div>
+
+    <!-- 结果列表 -->
+    <div class="panel">
+      <div class="list-header">
+        <div class="panel-title" style="margin:0">精选结果</div>
+        <div class="filter-tabs">
+          <div class="tab active" onclick="switchTab(this,'all')">全部</div>
+          <div class="tab" onclick="switchTab(this,'kept')">保留</div>
+          <div class="tab" onclick="switchTab(this,'drop')">过滤</div>
+        </div>
+      </div>
+      <div class="danmaku-list" id="result-list">
+        <div class="empty-hint">运行算法后，精选结果将在此显示</div>
+      </div>
+    </div>
+
+    <!-- 输出 JSON -->
+    <div class="panel">
+      <div class="panel-title">输出 JSON（精选弹幕）</div>
+      <div class="output-box" id="output-json">// 运行后显示精选结果 JSON</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+// 工具函数
+// ─────────────────────────────────────────────
+
+function getParam(id) { return +document.getElementById(id).value; }
+function getCheck(id) { return document.getElementById(id).checked; }
+
+// 绑定滑块显示
+const sliders = [
+  ['p-ratio', 'val-ratio', v => v + '%'],
+  ['p-window', 'val-window', v => v + 's'],
+  ['p-minlen', 'val-minlen', v => v],
+  ['p-repeat', 'val-repeat', v => v + '%'],
+  ['p-penalty', 'val-penalty', v => '-' + v],
+];
+sliders.forEach(([id, vid, fmt]) => {
+  const el = document.getElementById(id);
+  const out = document.getElementById(vid);
+  el.addEventListener('input', () => { out.textContent = fmt(el.value); });
+});
+
+// ─────────────────────────────────────────────
+// 核心算法
+// ─────────────────────────────────────────────
+
+/**
+ * 计算字符串的字符多样性（不重复字符数 / 总字符数）
+ */
+function charDiversity(s) {
+  if (!s.length) return 0;
+  return new Set(s).size / s.length;
+}
+
+/**
+ * 判断是否为纯 emoji 弹幕
+ */
+function isPureEmoji(s) {
+  // 去掉所有 emoji 后如果为空则是纯 emoji
+  const noEmoji = s.replace(/[\u{1F000}-\u{1FFFF}\u{2600}-\u{27FF}\u{2B00}-\u{2BFF}]/gu, '').trim();
+  return noEmoji.length === 0 && s.length > 0;
+}
+
+/**
+ * 判断是否为纯数字/字母弹幕
+ */
+function isPureAlphaNum(s) {
+  return /^[a-zA-Z0-9\s]+$/.test(s.trim());
+}
+
+/**
+ * 计算重复字符占比（最多出现的字符 / 总字符）
+ */
+function maxCharRatio(s) {
+  if (!s.length) return 0;
+  const freq = {};
+  for (const c of s) freq[c] = (freq[c] || 0) + 1;
+  return Math.max(...Object.values(freq)) / s.length;
+}
+
+/**
+ * 简单的相似度：归一化编辑距离（Levenshtein）
+ */
+function similarity(a, b) {
+  const la = a.length, lb = b.length;
+  if (!la || !lb) return 0;
+  if (a === b) return 1;
+  // 长度差过大直接认为不相似
+  if (Math.abs(la - lb) / Math.max(la, lb) > 0.5) return 0;
+  const dp = Array.from({ length: la + 1 }, (_, i) => [i]);
+  for (let j = 0; j <= lb; j++) dp[0][j] = j;
+  for (let i = 1; i <= la; i++)
+    for (let j = 1; j <= lb; j++)
+      dp[i][j] = a[i-1] === b[j-1]
+        ? dp[i-1][j-1]
+        : 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+  const dist = dp[la][lb];
+  return 1 - dist / Math.max(la, lb);
+}
+
+/**
+ * 主评分函数：返回 0-100 分
+ */
+function scoreItem(item, params) {
+  const { minLen, repeatThreshold, penalty, allowEmoji } = params;
+  const text = String(item.content || '').trim();
+  let score = 50;
+  const reasons = [];
+
+  // 1. 长度评分（鼓励适中长度）
+  const len = text.length;
+  if (len <= 2) { score -= 30; }
+  else if (len <= 5) { score += 5; }
+  else if (len <= 15) { score += 15; }
+  else if (len <= 30) { score += 10; }
+  else { score += 5; } // 过长弹幕适当降权（可能是复制粘贴）
+
+  // 2. 字符多样性（多样=有内容）
+  const div = charDiversity(text);
+  score += Math.round(div * 20);
+
+  // 3. 重复字符惩罚（"哈哈哈哈" 类）
+  const repRatio = maxCharRatio(text);
+  if (repRatio > repeatThreshold / 100) {
+    const pen = Math.round((repRatio - repeatThreshold / 100) * 60);
+    score -= pen;
+    reasons.push('重复字');
+  }
+
+  // 4. 纯 emoji 弹幕降权
+  if (isPureEmoji(text)) {
+    if (allowEmoji) { score -= 10; reasons.push('纯emoji'); }
+    else { score -= 40; reasons.push('纯emoji'); }
+  }
+
+  // 5. 全英数弹幕（无中文语境）惩罚
+  if (isPureAlphaNum(text)) {
+    score -= penalty;
+    reasons.push('全英数');
+  }
+
+  // 6. 弹幕类型权重（type=4/5 通常是高级弹幕）
+  if (item.type === 4 || item.type === 5) score += 10;
+  if (item.type === 6 || item.type === 7) score -= 5; // 代码/BAS 弹幕
+
+  return { score: Math.max(0, Math.min(100, score)), reasons };
+}
+
+/**
+ * 弹幕精选主函数
+ * @param {Array} items - 弹幕数组 [{time, content, type, color}, ...]
+ * @param {Object} params - 参数
+ * @returns {{ kept: Array, dropped: Array, all: Array }}
+ */
+function filterDanmaku(items, params) {
+  const {
+    ratio,         // 保留比例 0-1
+    windowSec,     // 时间窗口（秒）
+    minLen,        // 最短字符数
+    filterDuplicate,
+    filterSpam,
+    filterShort,
+    filterAdvanced,
+  } = params;
+
+  const result = [];
+
+  // Step 1: 基础过滤
+  for (const item of items) {
+    const text = String(item.content || '').trim();
+    const dropReasons = [];
+
+    if (filterShort && text.length < minLen) {
+      dropReasons.push('太短');
+    }
+
+    result.push({
+      ...item,
+      _text: text,
+      _dropReasons: dropReasons,
+      _prefiltered: dropReasons.length > 0,
+    });
+  }
+
+  // Step 2: 刷屏过滤（滑动窗口内内容完全相同）
+  if (filterSpam) {
+    // 按时间排序
+    result.sort((a, b) => a.time - b.time);
+    const recentContents = []; // {time, text}
+    for (const item of result) {
+      if (item._prefiltered) continue;
+      // 清理窗口外的
+      const cutoff = item.time - params.windowSec;
+      while (recentContents.length && recentContents[0].time < cutoff) recentContents.shift();
+      // 精确重复检测
+      const exact = recentContents.filter(r => r.text === item._text);
+      if (exact.length >= 2) {
+        item._dropReasons.push('刷屏');
+        item._prefiltered = true;
+      }
+      recentContents.push({ time: item.time, text: item._text });
+    }
+  }
+
+  // Step 3: 相似去重（时间窗口内，编辑距离相似度 > 0.8 的保留得分高的）
+  if (filterDuplicate) {
+    result.sort((a, b) => a.time - b.time);
+    for (let i = 0; i < result.length; i++) {
+      if (result[i]._prefiltered) continue;
+      for (let j = i + 1; j < result.length; j++) {
+        if (result[j].time - result[i].time > params.windowSec) break;
+        if (result[j]._prefiltered) continue;
+        const sim = similarity(result[i]._text, result[j]._text);
+        if (sim > 0.82) {
+          // 保留先出现的（或后续在评分阶段处理）
+          result[j]._dropReasons.push('近似重复');
+          result[j]._prefiltered = true;
+        }
+      }
+    }
+  }
+
+  // Step 4: 评分
+  for (const item of result) {
+    if (item._prefiltered) { item._score = 0; item._scoreReasons = []; continue; }
+    const { score, reasons } = scoreItem(item, params);
+    item._score = score;
+    item._scoreReasons = reasons;
+  }
+
+  // Step 5: 时间多样性加权（每段时间至少保留一条，避免某段完全空白）
+  if (filterAdvanced) {
+    // 找出时间范围
+    const times = result.map(r => r.time).filter(t => !isNaN(t));
+    if (times.length) {
+      const tMin = Math.min(...times);
+      const tMax = Math.max(...times);
+      const segCount = Math.max(1, Math.ceil((tMax - tMin) / 30)); // 30秒一段
+      const segSize = (tMax - tMin) / segCount;
+      // 统计每段非过滤弹幕数量
+      const segCounts = new Array(segCount).fill(0);
+      for (const item of result) {
+        if (!item._prefiltered) {
+          const seg = Math.min(segCount - 1, Math.floor((item.time - tMin) / segSize));
+          segCounts[seg]++;
+        }
+      }
+      // 稀疏段内弹幕加权
+      for (const item of result) {
+        if (item._prefiltered) continue;
+        const seg = Math.min(segCount - 1, Math.floor((item.time - tMin) / segSize));
+        if (segCounts[seg] < 3) {
+          item._score = Math.min(100, item._score + 15); // 稀疏段加分
+        }
+      }
+    }
+  }
+
+  // Step 6: 按评分排序，取前 ratio%
+  const candidates = result.filter(r => !r._prefiltered);
+  candidates.sort((a, b) => b._score - a._score);
+  const keepCount = Math.max(1, Math.round(candidates.length * ratio));
+  const keepSet = new Set(candidates.slice(0, keepCount).map((_, i) => candidates[i]));
+
+  // Step 7: 标记保留/丢弃
+  for (const item of result) {
+    if (item._prefiltered) {
+      item._kept = false;
+    } else {
+      item._kept = keepSet.has(item);
+      if (!item._kept) item._dropReasons.push('分数不足(' + item._score + ')');
+    }
+  }
+
+  // 输出
+  const kept = result.filter(r => r._kept).map(({ time, content, type, color, isMe }) => ({ time, content, type, color, isMe }));
+  const dropped = result.filter(r => !r._kept);
+
+  // 按时间排序返回
+  kept.sort((a, b) => a.time - b.time);
+
+  return { kept, dropped, all: result };
+}
+
+// ─────────────────────────────────────────────
+// UI 逻辑
+// ─────────────────────────────────────────────
+
+let lastResult = null;
+let currentTab = 'all';
+
+/**
+ * 将字符串类型映射为数字类型，统一内部处理
+ */
+function normalizeType(t) {
+  if (typeof t === 'number') return t;
+  const map = { scroll: 1, top: 5, bottom: 4, advanced: 6, bas: 7 };
+  return map[t] || 1;
+}
+
+/**
+ * 解析输入 JSON，支持两种格式：
+ *  1. 包裹格式: { count, comments: [...] }
+ *  2. 平铺格式: [ {time, content, ...}, ... ]
+ */
+function parseInput(raw) {
+  const data = JSON.parse(raw);
+  let items;
+  if (Array.isArray(data)) {
+    items = data;
+  } else if (data && Array.isArray(data.comments)) {
+    items = data.comments;
+  } else {
+    throw new Error('需要数组或包含 comments 数组的对象');
+  }
+  // 标准化 type 字段
+  return items.map(item => ({
+    ...item,
+    type: normalizeType(item.type),
+  }));
+}
+
+function runFilter() {
+  let items;
+  try {
+    items = parseInput(document.getElementById('input-json').value);
+  } catch(e) {
+    alert('JSON 解析失败：' + e.message);
+    return;
+  }
+
+  const params = {
+    ratio: getParam('p-ratio') / 100,
+    windowSec: getParam('p-window'),
+    minLen: getParam('p-minlen'),
+    repeatThreshold: getParam('p-repeat'),
+    penalty: getParam('p-penalty'),
+    allowEmoji: getCheck('f-emoji'),
+    filterDuplicate: getCheck('f-duplicate'),
+    filterSpam: getCheck('f-spam'),
+    filterShort: getCheck('f-short'),
+    filterAdvanced: getCheck('f-advanced'),
+  };
+
+  const result = filterDanmaku(items, params);
+  lastResult = result;
+
+  // 统计
+  document.getElementById('s-total').textContent = items.length;
+  document.getElementById('s-kept').textContent = result.kept.length;
+  document.getElementById('s-filtered').textContent = items.length - result.kept.length;
+  const rate = items.length ? Math.round(result.kept.length / items.length * 100) : 0;
+  document.getElementById('s-rate').textContent = rate + '%';
+
+  // 输出 JSON
+  const output = { count: result.kept.length, comments: result.kept };
+  document.getElementById('output-json').textContent = JSON.stringify(output, null, 2);
+
+  renderList(currentTab);
+}
+
+function renderList(tab) {
+  if (!lastResult) return;
+  const { all } = lastResult;
+  const list = document.getElementById('result-list');
+
+  let items = all;
+  if (tab === 'kept') items = all.filter(r => r._kept);
+  if (tab === 'drop') items = all.filter(r => !r._kept);
+
+  if (!items.length) {
+    list.innerHTML = '<div class="empty-hint">暂无数据</div>';
+    return;
+  }
+
+  list.innerHTML = items.map(item => {
+    const kept = item._kept;
+    const reasons = [...(item._dropReasons || []), ...(item._scoreReasons || [])];
+    const typeLabel = { 1: '滚动', scroll: '滚动', 4: '底部', bottom: '底部', 5: '顶部', top: '顶部', 6: '高级', advanced: '高级', 7: 'BAS', bas: 'BAS' }[item.type] || ('T' + item.type);
+    const score = item._score !== undefined ? item._score : '-';
+    const reasonHtml = reasons.length
+      ? `<div class="reason-badges">${reasons.map(r => `<span class="reason-badge">${r}</span>`).join('')}</div>`
+      : '';
+
+    return `<div class="danmaku-item">
+      <span class="danmaku-time">${formatTime(item.time)}</span>
+      <div>
+        <div class="danmaku-content" title="${escHtml(item.content)}">${escHtml(item.content)}</div>
+        ${reasonHtml}
+      </div>
+      <span class="danmaku-score">★${score}</span>
+      <div style="display:flex;gap:4px;flex-direction:column;align-items:flex-end">
+        <span class="tag ${kept ? 'tag-keep' : 'tag-drop'}">${kept ? '✓ 保留' : '✗ 过滤'}</span>
+        <span class="tag tag-type">${typeLabel}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function switchTab(el, tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  currentTab = tab;
+  renderList(tab);
+}
+
+function formatTime(t) {
+  if (isNaN(t)) return '--:--';
+  const m = Math.floor(t / 60), s = Math.floor(t % 60);
+  return String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function exportResult() {
+  if (!lastResult) { alert('请先运行精选'); return; }
+  const output = { count: lastResult.kept.length, comments: lastResult.kept };
+  const blob = new Blob([JSON.stringify(output, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'danmaku_filtered.json';
+  a.click();
+}
+
+function loadFromFile() {
+  document.getElementById('file-input').click();
+}
+
+function handleFile(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    document.getElementById('input-json').value = ev.target.result;
+  };
+  reader.readAsText(file);
+}
+
+function loadExample() {
+  const example = generateExample();
+  document.getElementById('input-json').value = JSON.stringify(example, null, 2);
+}
+
+function generateExample() {
+  const contents = [
+    '哈哈哈哈哈哈哈哈', '这个太好笑了', '笑死我了', '哈哈哈哈哈哈',
+    '好厉害啊', '这个操作6', '真的假的', '绝了绝了绝了绝了',
+    '这里是精华', '前方高能', '前方高能', '前方高能预警',
+    '这个BGM是什么', '名字？', 'BGM名字呢', '求BGM',
+    '哦', '哦哦', '？？？', '我去',
+    '这个画面真的绝', '制作组太用心了', '细节好多',
+    '泪目', '破防了', '我哭了', '真的哭了',
+    '233333', 'lol', 'xd', 'haha',
+    '这剧情太扯了吧', '编剧是不是没睡觉', '离谱',
+    '啊啊啊啊啊啊啊', '好好好好好好好',
+    '一模一样的弹幕', '一模一样的弹幕', '一模一样的弹幕',
+    '这个转场太丝滑了', '剪辑真的厉害',
+    '主角太帅了', '男主绝了', '女主好美',
+    '🤣🤣🤣', '😭😭', '👍👍👍',
+  ];
+
+  const comments = [];
+  let t = 0;
+  for (let i = 0; i < 60; i++) {
+    t += Math.random() * 8;
+    const text = contents[Math.floor(Math.random() * contents.length)];
+    comments.push({
+      time: Math.round(t * 10) / 10,
+      content: text,
+      type: 'scroll',
+      color: 'rgb(255,255,255)',
+      isMe: false,
+    });
+  }
+  comments.sort((a, b) => a.time - b.time);
+  return { count: comments.length, comments };
+}
+</script>
+</body>
+</html>
