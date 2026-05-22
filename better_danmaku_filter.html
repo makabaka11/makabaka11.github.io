@@ -442,7 +442,7 @@
 
       <div class="algo-desc">
         <b style="color:var(--accent)">评分维度：</b><br>
-        长度分 · 字符多样性 · 稀有度（时间窗口内出现频次倒数）· 语义信息量（非重复字/总字） · 类型权重（高级弹幕 +10）
+        长度分 · 字符多样性 · 重复字符惩罚 · 纯Emoji降权 · 全英数惩罚 · 稀疏时段加分
       </div>
     </div>
   </div>
@@ -634,10 +634,6 @@ function scoreItem(item, params) {
     reasons.push('全英数');
   }
 
-  // 6. 弹幕类型权重（type=4/5 通常是高级弹幕）
-  if (item.type === 4 || item.type === 5) score += 10;
-  if (item.type === 6 || item.type === 7) score -= 5; // 代码/BAS 弹幕
-
   return { score: Math.max(0, Math.min(100, score)), reasons };
 }
 
@@ -689,7 +685,8 @@ function filterDanmaku(items, params) {
       while (recentContents.length && recentContents[0].time < cutoff) recentContents.shift();
       // 精确重复检测
       const exact = recentContents.filter(r => r.text === item._text);
-      if (exact.length >= 2) {
+      const spamLimit = (item.type === 'scroll' || item.type === 1) ? 3 : 2;
+      if (exact.length >= spamLimit) {
         item._dropReasons.push('刷屏');
         item._prefiltered = true;
       }
@@ -697,7 +694,7 @@ function filterDanmaku(items, params) {
     }
   }
 
-  // Step 3: 相似去重（时间窗口内，编辑距离相似度 > 0.8 的保留得分高的）
+  // Step 3: 相似去重（时间窗口内，滚动弹幕阈值 0.93，其他 0.82）
   if (filterDuplicate) {
     result.sort((a, b) => a.time - b.time);
     for (let i = 0; i < result.length; i++) {
@@ -706,7 +703,8 @@ function filterDanmaku(items, params) {
         if (result[j].time - result[i].time > params.windowSec) break;
         if (result[j]._prefiltered) continue;
         const sim = similarity(result[i]._text, result[j]._text);
-        if (sim > 0.82) {
+        const dupThreshold = (result[j].type === 'scroll' || result[j].type === 1) ? 0.93 : 0.82;
+        if (sim > dupThreshold) {
           // 保留先出现的（或后续在评分阶段处理）
           result[j]._dropReasons.push('近似重复');
           result[j]._prefiltered = true;
@@ -755,6 +753,7 @@ function filterDanmaku(items, params) {
   const candidates = result.filter(r => !r._prefiltered);
   candidates.sort((a, b) => b._score - a._score);
   const keepCount = Math.max(1, Math.round(candidates.length * ratio));
+  // 若 candidates 为空则 keepCount 至少为 1（但 candidates 已过滤，实际不会为空）
   const keepSet = new Set(candidates.slice(0, keepCount).map((_, i) => candidates[i]));
 
   // Step 7: 标记保留/丢弃
