@@ -15,6 +15,12 @@
 <meta name="twitter:description" content="多态（基础） 多态，指的是：多种状态，即完成某个行为时，使用不同的对象会得到不同的状态。\n示例：\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 class Animal: def speak(self): pass class Dog(Animal): def speak(self): print(&#39;汪汪汪&#39;) class Cat(Animal): def speak(self): print(&#39;喵喵喵&#39;) def make_noise(animal:Animal):\t# 专门定义一个函数用来在传入不同参数时调用相应的对象 animal.speak() dog = Dog() cat = Cat() make_noise(dog) make_noise(cat) 从上面的示例我们可以看出，所谓多态其实就是专门定义一个函数用来在传入不同参数时调用相应的对象，\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css2?family=JetBrains+Mono:wght@400;500;700&display=swap">
+
         <link rel="stylesheet" href="/css/APlayer.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
         <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>

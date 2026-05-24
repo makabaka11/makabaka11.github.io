@@ -35,3 +35,31 @@
 .menu-social li a:hover svg {
   animation: socialIconRotate 0.8s ease-in-out 1;
 }
+
+/* ================= 字体配置 ================= */
+
+/* 覆盖主题 CSS 变量 — 大标题 + 正文：霞鹜文楷 */
+:root {
+  --base-font-family: 'LXGW WenKai', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --article-font-family: var(--base-font-family);
+  --code-font-family: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
+}
+
+/* UI / 按钮 / 标签：思源黑体（覆盖主题直接使用 --base-font-family 的地方） */
+nav,
+button,
+input,
+select,
+textarea,
+.tag,
+.tag-cloud a,
+.pagination a,
+.search-input,
+.sidebar .menu a,
+.sidebar .menu-item,
+.site-title,
+.widget-title,
+.copyright,
+.footer {
+  font-family: 'Noto Sans SC', 'LXGW WenKai', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
