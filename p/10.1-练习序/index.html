@@ -1052,7 +1052,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.eaf1211e4c7db355f37ceea53df13700e1b77fbcc3cfe8c1c1f69e4468a752e1.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.815176a7e01fbb56e983d8678af5840e25ec77e1a9239d135ce3cc76fd9cd3af.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
@@ -1248,8 +1248,65 @@ particlesJS.load('particles-js',
 </style>
 
 <script>
+
+
+function ensurePhotoSwipeAssets() {
+    if (window._pswpAssetsLoading) return window._pswpAssetsLoading;
+    window._pswpAssetsLoading = new Promise((resolve) => {
+        if (window.PhotoSwipe && window.PhotoSwipeUI_Default) {
+            resolve();
+            return;
+        }
+
+        const cssUrls = [
+            'https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css',
+            'https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css'
+        ];
+        const jsUrls = [
+            'https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js',
+            'https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js'
+        ];
+
+        
+        cssUrls.forEach(url => {
+            if (!document.querySelector(`link[href="${url}"]`)) {
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = url;
+                document.head.appendChild(link);
+            }
+        });
+
+        let loaded = 0;
+        const total = jsUrls.length;
+        jsUrls.forEach(url => {
+            
+            if (document.querySelector(`script[src="${url}"]`)) {
+                loaded++;
+                if (loaded === total) resolve();
+                return;
+            }
+            const s = document.createElement('script');
+            s.src = url;
+            s.onload = () => {
+                loaded++;
+                if (loaded === total) resolve();
+            };
+            s.onerror = () => {
+                loaded++;
+                if (loaded === total) resolve();
+            };
+            document.head.appendChild(s);
+        });
+    });
+    return window._pswpAssetsLoading;
+}
+
 function initPhotoSwipeFromDOM(selector) {
-    if (!window.PhotoSwipe) return;
+    if (!window.PhotoSwipe) {
+        ensurePhotoSwipeAssets().then(() => initPhotoSwipeFromDOM(selector));
+        return;
+    }
 
     const containers = document.querySelectorAll(selector);
     if (!containers.length) return;
@@ -1335,8 +1392,11 @@ function waitAndInit() {
 document.addEventListener("DOMContentLoaded", waitAndInit);
 
 
+window.addEventListener("load", waitAndInit);
+
+
 document.addEventListener("pjax:complete", () => {
-    setTimeout(waitAndInit, 50);
+    setTimeout(waitAndInit, 100);
 });
 
 
