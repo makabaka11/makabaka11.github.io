@@ -424,110 +424,110 @@
 <p><strong>信息泄露、暴力破解、SQL注入、RCE、文件包含、文件上传、反序列化、SSRF、SSTI、XSS、XEE、JWT、Node.JS原型链污染等.</strong></p>
 <h3 id="web常见术语">Web常见术语
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>术语</th>
-          <th>简介</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>协议(Protocol)</td>
-          <td>通信规则和标准，例如 HTTP(s)、FTP、TCP/IP 等</td>
-      </tr>
-      <tr>
-          <td>IP</td>
-          <td>网络中设备的唯一地址标识，用于定位主机</td>
-      </tr>
-      <tr>
-          <td>端口(Port)</td>
-          <td>标识主机上运行的具体服务的入口编号【HTTP:80，HTTPS:443】</td>
-      </tr>
-      <tr>
-          <td>URL</td>
-          <td>统一资源定位符，完整的网址/地址【包含协议、域名、IP、端口、路径、参数】</td>
-      </tr>
-      <tr>
-          <td>地址(Address)</td>
-          <td>广义称呼，可以是 IP 地址或域名</td>
-      </tr>
-      <tr>
-          <td>目录(Directory)</td>
-          <td>网站文件夹层级，如 /admin/，（目录/路径/访问级别）</td>
-      </tr>
-      <tr>
-          <td>路径(Path)</td>
-          <td>URL 中具体的资源位置，如 /images/logo.png</td>
-      </tr>
-      <tr>
-          <td>权限(Permission)</td>
-          <td>用户/进程对文件、目录或操作的访问控制（读/写/执行/访问级别）</td>
-      </tr>
-      <tr>
-          <td>文件(File)</td>
-          <td>网站的资源载体，如 index.php、config.yaml</td>
-      </tr>
-      <tr>
-          <td>请求方法（HTTP Method）</td>
-          <td>客户端与服务器交互的动作，如 GET【获取】、POST【提交】、PUT、DELETE 等</td>
-      </tr>
-      <tr>
-          <td>状态码(Status Code)</td>
-          <td>服务器对请求的响应标识，如 200 OK、403 Forbidden、404 Not Found、500 Internal Error</td>
-      </tr>
-      <tr>
-          <td>代理(Proxy)</td>
-          <td>转发请求的中间服务器，可用于隐藏身份、突破限制或流量转发</td>
-      </tr>
-      <tr>
-          <td>GET</td>
-          <td>一种请求方法，请求参数在 URL 查询字符串中，常用于获取数据</td>
-      </tr>
-      <tr>
-          <td>POST</td>
-          <td>一种请求方法，请求参数在请求体中，常用于提交数据</td>
-      </tr>
-      <tr>
-          <td>Cookie</td>
-          <td>服务器写入客户端的小数据，用于会话保持、身份认证等</td>
-      </tr>
-      <tr>
-          <td>请求(Request)</td>
-          <td>客户端发送给服务器的消息，包含请求行、请求头、请求体</td>
-      </tr>
-      <tr>
-          <td>响应(Response)</td>
-          <td>服务器返回给客户端的消息，包含状态行、响应头、响应体</td>
-      </tr>
-      <tr>
-          <td>抓包(Packet Capture)</td>
-          <td>拦截并分析网络传输的数据包，常用工具 Burp Suite、Wireshark</td>
-      </tr>
-      <tr>
-          <td>内网(Intranet)</td>
-          <td>内部局域网，IP 多为 <code>10.*_.*_.*</code><em>、</em><code>172.16.*.*-172.31.*.*</code>、<code>192.168.*.*</code></td>
-      </tr>
-      <tr>
-          <td>外网(Internet)</td>
-          <td>公共互联网，能够被全球访问</td>
-      </tr>
-      <tr>
-          <td>EXP(Exploit)</td>
-          <td>用于<strong>利用漏洞</strong>的攻击脚本或方法，通常可直接获取敏感信息或权限</td>
-      </tr>
-      <tr>
-          <td>POC（Proof of Concept）</td>
-          <td>漏洞的<strong>概念验证</strong>，证明漏洞存在但不一定完全利用</td>
-      </tr>
-      <tr>
-          <td>WebShell</td>
-          <td>攻击者上传的恶意脚本文件，用于远程控制服务器如 PHP 一句话木马</td>
-      </tr>
-      <tr>
-          <td>GetShell</td>
-          <td>攻击者通过漏洞成功拿到 WebShell 的过程</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>术语</th>
+					<th>简介</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>协议(Protocol)</td>
+					<td>通信规则和标准，例如 HTTP(s)、FTP、TCP/IP 等</td>
+			</tr>
+			<tr>
+					<td>IP</td>
+					<td>网络中设备的唯一地址标识，用于定位主机</td>
+			</tr>
+			<tr>
+					<td>端口(Port)</td>
+					<td>标识主机上运行的具体服务的入口编号【HTTP:80，HTTPS:443】</td>
+			</tr>
+			<tr>
+					<td>URL</td>
+					<td>统一资源定位符，完整的网址/地址【包含协议、域名、IP、端口、路径、参数】</td>
+			</tr>
+			<tr>
+					<td>地址(Address)</td>
+					<td>广义称呼，可以是 IP 地址或域名</td>
+			</tr>
+			<tr>
+					<td>目录(Directory)</td>
+					<td>网站文件夹层级，如 /admin/，（目录/路径/访问级别）</td>
+			</tr>
+			<tr>
+					<td>路径(Path)</td>
+					<td>URL 中具体的资源位置，如 /images/logo.png</td>
+			</tr>
+			<tr>
+					<td>权限(Permission)</td>
+					<td>用户/进程对文件、目录或操作的访问控制（读/写/执行/访问级别）</td>
+			</tr>
+			<tr>
+					<td>文件(File)</td>
+					<td>网站的资源载体，如 index.php、config.yaml</td>
+			</tr>
+			<tr>
+					<td>请求方法（HTTP Method）</td>
+					<td>客户端与服务器交互的动作，如 GET【获取】、POST【提交】、PUT、DELETE 等</td>
+			</tr>
+			<tr>
+					<td>状态码(Status Code)</td>
+					<td>服务器对请求的响应标识，如 200 OK、403 Forbidden、404 Not Found、500 Internal Error</td>
+			</tr>
+			<tr>
+					<td>代理(Proxy)</td>
+					<td>转发请求的中间服务器，可用于隐藏身份、突破限制或流量转发</td>
+			</tr>
+			<tr>
+					<td>GET</td>
+					<td>一种请求方法，请求参数在 URL 查询字符串中，常用于获取数据</td>
+			</tr>
+			<tr>
+					<td>POST</td>
+					<td>一种请求方法，请求参数在请求体中，常用于提交数据</td>
+			</tr>
+			<tr>
+					<td>Cookie</td>
+					<td>服务器写入客户端的小数据，用于会话保持、身份认证等</td>
+			</tr>
+			<tr>
+					<td>请求(Request)</td>
+					<td>客户端发送给服务器的消息，包含请求行、请求头、请求体</td>
+			</tr>
+			<tr>
+					<td>响应(Response)</td>
+					<td>服务器返回给客户端的消息，包含状态行、响应头、响应体</td>
+			</tr>
+			<tr>
+					<td>抓包(Packet Capture)</td>
+					<td>拦截并分析网络传输的数据包，常用工具 Burp Suite、Wireshark</td>
+			</tr>
+			<tr>
+					<td>内网(Intranet)</td>
+					<td>内部局域网，IP 多为 <code>10.*_.*_.*</code><em>、</em><code>172.16.*.*-172.31.*.*</code>、<code>192.168.*.*</code></td>
+			</tr>
+			<tr>
+					<td>外网(Internet)</td>
+					<td>公共互联网，能够被全球访问</td>
+			</tr>
+			<tr>
+					<td>EXP(Exploit)</td>
+					<td>用于<strong>利用漏洞</strong>的攻击脚本或方法，通常可直接获取敏感信息或权限</td>
+			</tr>
+			<tr>
+					<td>POC（Proof of Concept）</td>
+					<td>漏洞的<strong>概念验证</strong>，证明漏洞存在但不一定完全利用</td>
+			</tr>
+			<tr>
+					<td>WebShell</td>
+					<td>攻击者上传的恶意脚本文件，用于远程控制服务器如 PHP 一句话木马</td>
+			</tr>
+			<tr>
+					<td>GetShell</td>
+					<td>攻击者通过漏洞成功拿到 WebShell 的过程</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="需要准备的工具">需要准备的工具
 </h3><ol>

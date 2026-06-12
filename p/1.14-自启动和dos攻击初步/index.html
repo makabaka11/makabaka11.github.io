@@ -459,70 +459,70 @@
 </div>
 </div><p><strong>参数解释：</strong></p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>参数</th>
-          <th>英文全称/含义</th>
-          <th>具体作用</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>-c 2000</code></td>
-          <td><code>connections</code>（并发连接数）</td>
-          <td>指定向目标服务器同时建立<strong>2000个并发HTTP连接</strong>，这是攻击的核心资源消耗项，连接数越多，对服务器的资源占用越严重。</td>
-      </tr>
-      <tr>
-          <td><code>-B</code></td>
-          <td><code>Body attack</code>（慢POST攻击）</td>
-          <td>明确攻击类型为<strong>Slow POST（慢POST攻击）</strong>（也叫Body byterange attack），这是慢HTTP攻击的一种，核心是故意缓慢发送POST请求体，长时间占用服务器连接。</td>
-      </tr>
-      <tr>
-          <td><code>-g</code></td>
-          <td><code>generate statistics</code>（生成统计日志）</td>
-          <td>启用日志记录功能，会生成<strong>CSV格式的原始数据文件</strong>和<strong>HTML格式的可视化报告</strong>，用于记录攻击过程中的连接状态、响应时间、服务器负载等数据。</td>
-      </tr>
-      <tr>
-          <td><code>-o body_states</code></td>
-          <td><code>output prefix</code>（输出文件前缀）</td>
-          <td>指定日志文件的前缀为<code>body_states</code>，结合<code>-g</code>参数，会生成<code>body_states.csv</code>（数据文件）和<code>body_states.html</code>（可视化报告）两个文件。</td>
-      </tr>
-      <tr>
-          <td><code>-i 110</code></td>
-          <td><code>interval</code>（数据块发送间隔）</td>
-          <td>指定每次发送请求体数据块之间的<strong>时间间隔为110毫秒（ms）</strong>。间隔越长，服务器的连接被占用的时间越久，攻击效果越显著。</td>
-      </tr>
-      <tr>
-          <td><code>-r 200</code></td>
-          <td><code>rate</code>（每秒新建连接数）</td>
-          <td>指定<strong>每秒向目标新建200个连接</strong>，直到达到<code>-c 2000</code>的并发连接上限（约10秒可达到2000个并发）。</td>
-      </tr>
-      <tr>
-          <td><code>-s 8192</code></td>
-          <td><code>content length size</code>（内容长度）</td>
-          <td>在HTTP请求头的<code>Content-Length</code>字段中声明<strong>预期发送8192字节（8KB）的请求体</strong>，欺骗服务器保持连接等待接收完整数据。</td>
-      </tr>
-      <tr>
-          <td><code>-t FAKEVERB</code></td>
-          <td><code>HTTP verb</code>（HTTP方法）</td>
-          <td>指定HTTP请求使用<strong>伪造的非标准方法</strong><code>FAKEVERB</code>（正常HTTP方法为GET/POST/PUT等）。此举可尝试绕过部分服务器的防护规则，也用于测试服务器对非标准方法的兼容性。</td>
-      </tr>
-      <tr>
-          <td><code>-u http://[目标ip]</code></td>
-          <td><code>URL</code>（目标地址）</td>
-          <td>指定<strong>攻击目标的URL</strong>，需将<code>[目标ip]</code>替换为实际的服务器IP或域名。</td>
-      </tr>
-      <tr>
-          <td><code>-x 10</code></td>
-          <td><code>block size</code>（数据块长度）</td>
-          <td>指定每次向服务器发送的<strong>请求体数据块长度为10字节</strong>。即每次只发10字节，等待110毫秒后再发下一个10字节，故意拖延请求体的传输速度。</td>
-      </tr>
-      <tr>
-          <td><code>-p 3</code></td>
-          <td><code>probe timeout</code>（探测超时时间）</td>
-          <td>在发起正式攻击前，工具会先发送一个<strong>探测请求</strong>检查目标是否可达，若3秒内无响应则判定目标不可达，停止攻击。</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>参数</th>
+					<th>英文全称/含义</th>
+					<th>具体作用</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>-c 2000</code></td>
+					<td><code>connections</code>（并发连接数）</td>
+					<td>指定向目标服务器同时建立<strong>2000个并发HTTP连接</strong>，这是攻击的核心资源消耗项，连接数越多，对服务器的资源占用越严重。</td>
+			</tr>
+			<tr>
+					<td><code>-B</code></td>
+					<td><code>Body attack</code>（慢POST攻击）</td>
+					<td>明确攻击类型为<strong>Slow POST（慢POST攻击）</strong>（也叫Body byterange attack），这是慢HTTP攻击的一种，核心是故意缓慢发送POST请求体，长时间占用服务器连接。</td>
+			</tr>
+			<tr>
+					<td><code>-g</code></td>
+					<td><code>generate statistics</code>（生成统计日志）</td>
+					<td>启用日志记录功能，会生成<strong>CSV格式的原始数据文件</strong>和<strong>HTML格式的可视化报告</strong>，用于记录攻击过程中的连接状态、响应时间、服务器负载等数据。</td>
+			</tr>
+			<tr>
+					<td><code>-o body_states</code></td>
+					<td><code>output prefix</code>（输出文件前缀）</td>
+					<td>指定日志文件的前缀为<code>body_states</code>，结合<code>-g</code>参数，会生成<code>body_states.csv</code>（数据文件）和<code>body_states.html</code>（可视化报告）两个文件。</td>
+			</tr>
+			<tr>
+					<td><code>-i 110</code></td>
+					<td><code>interval</code>（数据块发送间隔）</td>
+					<td>指定每次发送请求体数据块之间的<strong>时间间隔为110毫秒（ms）</strong>。间隔越长，服务器的连接被占用的时间越久，攻击效果越显著。</td>
+			</tr>
+			<tr>
+					<td><code>-r 200</code></td>
+					<td><code>rate</code>（每秒新建连接数）</td>
+					<td>指定<strong>每秒向目标新建200个连接</strong>，直到达到<code>-c 2000</code>的并发连接上限（约10秒可达到2000个并发）。</td>
+			</tr>
+			<tr>
+					<td><code>-s 8192</code></td>
+					<td><code>content length size</code>（内容长度）</td>
+					<td>在HTTP请求头的<code>Content-Length</code>字段中声明<strong>预期发送8192字节（8KB）的请求体</strong>，欺骗服务器保持连接等待接收完整数据。</td>
+			</tr>
+			<tr>
+					<td><code>-t FAKEVERB</code></td>
+					<td><code>HTTP verb</code>（HTTP方法）</td>
+					<td>指定HTTP请求使用<strong>伪造的非标准方法</strong><code>FAKEVERB</code>（正常HTTP方法为GET/POST/PUT等）。此举可尝试绕过部分服务器的防护规则，也用于测试服务器对非标准方法的兼容性。</td>
+			</tr>
+			<tr>
+					<td><code>-u http://[目标ip]</code></td>
+					<td><code>URL</code>（目标地址）</td>
+					<td>指定<strong>攻击目标的URL</strong>，需将<code>[目标ip]</code>替换为实际的服务器IP或域名。</td>
+			</tr>
+			<tr>
+					<td><code>-x 10</code></td>
+					<td><code>block size</code>（数据块长度）</td>
+					<td>指定每次向服务器发送的<strong>请求体数据块长度为10字节</strong>。即每次只发10字节，等待110毫秒后再发下一个10字节，故意拖延请求体的传输速度。</td>
+			</tr>
+			<tr>
+					<td><code>-p 3</code></td>
+					<td><code>probe timeout</code>（探测超时时间）</td>
+					<td>在发起正式攻击前，工具会先发送一个<strong>探测请求</strong>检查目标是否可达，若3秒内无响应则判定目标不可达，停止攻击。</td>
+			</tr>
+	</tbody>
 </table></div>
 <p><strong>原理解析：</strong> 发送 POST 请求时，在请求头中声明<code>Content-Length: 8192</code>（要发 8KB 数据），然后以 <strong>10 字节 / 110ms</strong> 的极慢速度发送请求体，让服务器一直等待接收完整的请求体，从而长期占用连接资源。</p>
 <h4 id="slowloris攻击针对所有接受-get-请求的页面基本通用">slowloris攻击（针对所有接受 GET 请求的页面，基本通用）

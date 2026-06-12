@@ -497,86 +497,86 @@
 <p>例如你要查询含有<code>\</code>的数据，参数就要填<code>'%\\\\%'</code>，详情见下文。</p>
 <h4 id="转义字符对照表">转义字符对照表
 </h4><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>转义序列</strong></th>
-          <th><strong>代表的字符</strong></th>
-          <th><strong>说明</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>\n</code></td>
-          <td>换行符（LF）</td>
-          <td>表示换行操作</td>
-      </tr>
-      <tr>
-          <td><code>\t</code></td>
-          <td>制表符（Tab）</td>
-          <td>表示横向制表</td>
-      </tr>
-      <tr>
-          <td><code>\r</code></td>
-          <td>回车符（CR）</td>
-          <td>表示回车操作</td>
-      </tr>
-      <tr>
-          <td><code>\b</code></td>
-          <td>退格符</td>
-          <td>表示删除前一个字符的操作</td>
-      </tr>
-      <tr>
-          <td><code>\0</code></td>
-          <td>NULL 字符</td>
-          <td>ASCII 0 字符，常用于字符串结束标记</td>
-      </tr>
-      <tr>
-          <td><code>\\</code></td>
-          <td>反斜杠 <code>\</code></td>
-          <td>表示反斜杠本身（字符串中直接写<code>\</code><br/>会被解析为转义符，需用<code>\\</code><br/>表示字面量）</td>
-      </tr>
-      <tr>
-          <td><code>\'</code></td>
-          <td>单引号 <code>'</code></td>
-          <td>表示单引号本身（避免与字符串的单引号边界冲突）</td>
-      </tr>
-      <tr>
-          <td><code>\&quot;</code></td>
-          <td>双引号 <code>&quot;</code></td>
-          <td>表示双引号本身（当 SQL 模式为<code>ANSI_QUOTES</code><br/>时，双引号可能被解析为标识符，需转义）</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>转义序列</strong></th>
+					<th><strong>代表的字符</strong></th>
+					<th><strong>说明</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>\n</code></td>
+					<td>换行符（LF）</td>
+					<td>表示换行操作</td>
+			</tr>
+			<tr>
+					<td><code>\t</code></td>
+					<td>制表符（Tab）</td>
+					<td>表示横向制表</td>
+			</tr>
+			<tr>
+					<td><code>\r</code></td>
+					<td>回车符（CR）</td>
+					<td>表示回车操作</td>
+			</tr>
+			<tr>
+					<td><code>\b</code></td>
+					<td>退格符</td>
+					<td>表示删除前一个字符的操作</td>
+			</tr>
+			<tr>
+					<td><code>\0</code></td>
+					<td>NULL 字符</td>
+					<td>ASCII 0 字符，常用于字符串结束标记</td>
+			</tr>
+			<tr>
+					<td><code>\\</code></td>
+					<td>反斜杠 <code>\</code></td>
+					<td>表示反斜杠本身（字符串中直接写<code>\</code><br/>会被解析为转义符，需用<code>\\</code><br/>表示字面量）</td>
+			</tr>
+			<tr>
+					<td><code>\'</code></td>
+					<td>单引号 <code>'</code></td>
+					<td>表示单引号本身（避免与字符串的单引号边界冲突）</td>
+			</tr>
+			<tr>
+					<td><code>\&quot;</code></td>
+					<td>双引号 <code>&quot;</code></td>
+					<td>表示双引号本身（当 SQL 模式为<code>ANSI_QUOTES</code><br/>时，双引号可能被解析为标识符，需转义）</td>
+			</tr>
+	</tbody>
 </table></div>
 <p>在 LIKE 查询中，<code>%</code>和<code>_</code>是通配符，若要匹配它们本身，必须额外转义。</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>目标字符</strong></th>
-          <th><strong>转义方式（默认）</strong></th>
-          <th><strong>转义方式（ESCAPE 自定义）</strong></th>
-          <th><strong>示例（默认转义）</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>%</code><br/>（百分号）</td>
-          <td><code>\%</code></td>
-          <td><code>#%</code><br/>（以<code>#</code><br/>为转义符）</td>
-          <td><code>LIKE '%\%%'</code></td>
-      </tr>
-      <tr>
-          <td><code>_</code><br/>（下划线）</td>
-          <td><code>\_</code></td>
-          <td><code>#_</code><br/>（以<code>#</code><br/>为转义符）</td>
-          <td><code>LIKE '%\_%'</code></td>
-      </tr>
-      <tr>
-          <td><code>\</code><br/>（反斜杠）</td>
-          <td><code>\\\\</code></td>
-          <td><code>#\</code><br/>（以<code>#</code><br/>为转义符）</td>
-          <td><code>LIKE '%\\\\%'</code></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>目标字符</strong></th>
+					<th><strong>转义方式（默认）</strong></th>
+					<th><strong>转义方式（ESCAPE 自定义）</strong></th>
+					<th><strong>示例（默认转义）</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>%</code><br/>（百分号）</td>
+					<td><code>\%</code></td>
+					<td><code>#%</code><br/>（以<code>#</code><br/>为转义符）</td>
+					<td><code>LIKE '%\%%'</code></td>
+			</tr>
+			<tr>
+					<td><code>_</code><br/>（下划线）</td>
+					<td><code>\_</code></td>
+					<td><code>#_</code><br/>（以<code>#</code><br/>为转义符）</td>
+					<td><code>LIKE '%\_%'</code></td>
+			</tr>
+			<tr>
+					<td><code>\</code><br/>（反斜杠）</td>
+					<td><code>\\\\</code></td>
+					<td><code>#\</code><br/>（以<code>#</code><br/>为转义符）</td>
+					<td><code>LIKE '%\\\\%'</code></td>
+			</tr>
+	</tbody>
 </table></div>
 <p>🔍 <strong>注意：</strong></p>
 <ol>
@@ -723,40 +723,40 @@
 <li>实际测试序列（从种子<code>0</code>开始）：</li>
 </ul>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>调用次数</strong></th>
-          <th><code>rand(0)</code><strong>返回值</strong></th>
-          <th><code>floor(rand(0)*2)</code>结果</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>第 1 次</td>
-          <td>0.15522042769493574</td>
-          <td>0</td>
-      </tr>
-      <tr>
-          <td>第 2 次</td>
-          <td>0.6207181804390444</td>
-          <td>1</td>
-      </tr>
-      <tr>
-          <td>第 3 次</td>
-          <td>0.6387417590220086</td>
-          <td>1</td>
-      </tr>
-      <tr>
-          <td>第 4 次</td>
-          <td>0.4010441501938625</td>
-          <td>0</td>
-      </tr>
-      <tr>
-          <td>第 5 次</td>
-          <td>0.7180266582204114</td>
-          <td>1</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>调用次数</strong></th>
+					<th><code>rand(0)</code><strong>返回值</strong></th>
+					<th><code>floor(rand(0)*2)</code>结果</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>第 1 次</td>
+					<td>0.15522042769493574</td>
+					<td>0</td>
+			</tr>
+			<tr>
+					<td>第 2 次</td>
+					<td>0.6207181804390444</td>
+					<td>1</td>
+			</tr>
+			<tr>
+					<td>第 3 次</td>
+					<td>0.6387417590220086</td>
+					<td>1</td>
+			</tr>
+			<tr>
+					<td>第 4 次</td>
+					<td>0.4010441501938625</td>
+					<td>0</td>
+			</tr>
+			<tr>
+					<td>第 5 次</td>
+					<td>0.7180266582204114</td>
+					<td>1</td>
+			</tr>
+	</tbody>
 </table></div>
 <p><strong>2. <code>GROUP BY</code> 的虚拟表执行流程</strong></p>
 <p><code>GROUP BY</code>会维护一个<strong>虚拟临时表</strong> ，结构为<code>(分组键x, 计数count)</code>，执行逻辑是：</p>
@@ -775,18 +775,18 @@
 </h5><p>假设<code>users</code>表有<strong>至少 3 行数据</strong> （触发报错的必要条件），我们逐行分析虚拟表的变化：</p>
 <p><strong>初始化状态</strong> ，虚拟表为空：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: center"><strong>x</strong></th>
-          <th style="text-align: center"><strong>count</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: center">空</td>
-          <td style="text-align: center">空</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: center"><strong>x</strong></th>
+					<th style="text-align: center"><strong>count</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: center">空</td>
+					<td style="text-align: center">空</td>
+			</tr>
+	</tbody>
 </table></div>
 <h6 id="步骤-1处理第-1-行数据">步骤 1：处理第 1 行数据
 </h6><ol>
@@ -797,18 +797,18 @@
 </ol>
 <p>虚拟表现在：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>x</strong></th>
-          <th><strong>count</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>1</td>
-          <td>1</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>x</strong></th>
+					<th><strong>count</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>1</td>
+					<td>1</td>
+			</tr>
+	</tbody>
 </table></div>
 <h6 id="步骤-2处理第-2-行数据">步骤 2：处理第 2 行数据
 </h6><ol>
@@ -817,18 +817,18 @@
 </ol>
 <p>虚拟表现在：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>x</strong></th>
-          <th><strong>count</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>1</td>
-          <td>2</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>x</strong></th>
+					<th><strong>count</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>1</td>
+					<td>2</td>
+			</tr>
+	</tbody>
 </table></div>
 <h6 id="步骤-3处理第-3-行数据触发报错">步骤 3：处理第 3 行数据（触发报错‼️）
 </h6><ol>
@@ -1078,45 +1078,45 @@
 <h3 id="常见注入点">常见注入点
 </h3><p>HTTP 头中可能存在注入漏洞的字段包括：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>头部字段</strong></th>
-          <th><strong>常见使用场景</strong></th>
-          <th><strong>注入风险说明</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>User-Agent</td>
-          <td>记录客户端浏览器信息</td>
-          <td>广泛用于日志，易被忽略过滤</td>
-      </tr>
-      <tr>
-          <td>Referer</td>
-          <td>记录访问来源页面</td>
-          <td>部分应用会存储该信息用于分析</td>
-      </tr>
-      <tr>
-          <td>Cookie</td>
-          <td>会话管理、用户标识</td>
-          <td>常包含用户 ID 等关键信息，直接用于查询</td>
-      </tr>
-      <tr>
-          <td>X-Forwarded-For</td>
-          <td>获取客户端真实 IP</td>
-          <td>反向代理环境下常用，易被直接存入数据库</td>
-      </tr>
-      <tr>
-          <td>Host</td>
-          <td>指定目标服务器域名</td>
-          <td>部分应用会根据 Host 值生成动态内容</td>
-      </tr>
-      <tr>
-          <td>Accept-Language</td>
-          <td>语言偏好设置</td>
-          <td>多语言网站可能使用该值查询数据库</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>头部字段</strong></th>
+					<th><strong>常见使用场景</strong></th>
+					<th><strong>注入风险说明</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>User-Agent</td>
+					<td>记录客户端浏览器信息</td>
+					<td>广泛用于日志，易被忽略过滤</td>
+			</tr>
+			<tr>
+					<td>Referer</td>
+					<td>记录访问来源页面</td>
+					<td>部分应用会存储该信息用于分析</td>
+			</tr>
+			<tr>
+					<td>Cookie</td>
+					<td>会话管理、用户标识</td>
+					<td>常包含用户 ID 等关键信息，直接用于查询</td>
+			</tr>
+			<tr>
+					<td>X-Forwarded-For</td>
+					<td>获取客户端真实 IP</td>
+					<td>反向代理环境下常用，易被直接存入数据库</td>
+			</tr>
+			<tr>
+					<td>Host</td>
+					<td>指定目标服务器域名</td>
+					<td>部分应用会根据 Host 值生成动态内容</td>
+			</tr>
+			<tr>
+					<td>Accept-Language</td>
+					<td>语言偏好设置</td>
+					<td>多语言网站可能使用该值查询数据库</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="使用sqlmap注入">使用sqlmap注入
 </h3><h4 id="前置准备抓取目标-http-请求包">前置准备：抓取目标 HTTP 请求包

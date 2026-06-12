@@ -495,38 +495,38 @@
 <li><strong>魔术方法</strong></li>
 </ol>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>魔术方法</th>
-          <th>描述</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>__class__</code></td>
-          <td>返回对象所属的类。</td>
-      </tr>
-      <tr>
-          <td><code>__base__</code></td>
-          <td>返回该类所继承的上一个基类。(常用于查找基类)</td>
-      </tr>
-      <tr>
-          <td><code>__mro__</code></td>
-          <td>返回一个类所继承的基类元组 (Method Resolution Order)。方法在解析时按照元组的顺序解析。(常用于查找基类)</td>
-      </tr>
-      <tr>
-          <td><code>__subclasses__</code></td>
-          <td>每个新类都保留了子类的引用，这个方法返回一个类中仍然可用的子类引用的列表。</td>
-      </tr>
-      <tr>
-          <td><code>__init__</code></td>
-          <td>类的初始化方法，在对象创建后被调用。</td>
-      </tr>
-      <tr>
-          <td><code>__globals__</code></td>
-          <td>对包含函数全局变量的字典的引用。</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>魔术方法</th>
+					<th>描述</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>__class__</code></td>
+					<td>返回对象所属的类。</td>
+			</tr>
+			<tr>
+					<td><code>__base__</code></td>
+					<td>返回该类所继承的上一个基类。(常用于查找基类)</td>
+			</tr>
+			<tr>
+					<td><code>__mro__</code></td>
+					<td>返回一个类所继承的基类元组 (Method Resolution Order)。方法在解析时按照元组的顺序解析。(常用于查找基类)</td>
+			</tr>
+			<tr>
+					<td><code>__subclasses__</code></td>
+					<td>每个新类都保留了子类的引用，这个方法返回一个类中仍然可用的子类引用的列表。</td>
+			</tr>
+			<tr>
+					<td><code>__init__</code></td>
+					<td>类的初始化方法，在对象创建后被调用。</td>
+			</tr>
+			<tr>
+					<td><code>__globals__</code></td>
+					<td>对包含函数全局变量的字典的引用。</td>
+			</tr>
+	</tbody>
 </table></div>
 <hr>
 <ol start="2">
@@ -1245,25 +1245,25 @@
     >ssti.py</a></p>
 <h3 id="过滤下划线">过滤下划线
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>对象</strong></th>
-          <th><strong>获取数据的方式</strong></th>
-          <th><strong>对应的 HTTP 方法</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>request.form</code></td>
-          <td>从 <strong>请求体(Body)</strong> 中解析表单数据</td>
-          <td>主要是 <strong>POST</strong></td>
-      </tr>
-      <tr>
-          <td><code>request.args</code></td>
-          <td>从 <strong>URL 查询字符串</strong> 中获取参数</td>
-          <td>主要是 <strong>GET</strong></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>对象</strong></th>
+					<th><strong>获取数据的方式</strong></th>
+					<th><strong>对应的 HTTP 方法</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>request.form</code></td>
+					<td>从 <strong>请求体(Body)</strong> 中解析表单数据</td>
+					<td>主要是 <strong>POST</strong></td>
+			</tr>
+			<tr>
+					<td><code>request.args</code></td>
+					<td>从 <strong>URL 查询字符串</strong> 中获取参数</td>
+					<td>主要是 <strong>GET</strong></td>
+			</tr>
+	</tbody>
 </table></div>
 <hr>
 <h2 id="fenjing-使用">fenjing 使用

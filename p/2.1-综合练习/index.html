@@ -643,11 +643,11 @@
 <pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nv">$a</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl"><span class="k">eval</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\$</span><span class="s2">o=strtolower(</span><span class="se">\&#34;</span><span class="si">$a\</span><span class="s2">&#34;</span><span class="p">);</span><span class="s2">&#34;);
-</span></span></span><span class="line"><span class="cl"><span class="s2">echo </span><span class="si">$o</span><span class="s2">;
-</span></span></span><span class="line"><span class="cl"><span class="s2">show_source(__FILE__);
-</span></span></span><span class="line"><span class="cl"><span class="s2">
-</span></span></span><span class="line"><span class="cl"><span class="s2">?&gt;
+</span></span><span class="line"><span class="cl"><span class="k">eval</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\$</span><span class="s2">o=strtolower(</span><span class="se">\&#34;</span><span class="si">$a</span><span class="se">\&#34;</span><span class="s2">);&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nv">$o</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">show_source</span><span class="p">(</span><span class="no">__FILE__</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>解析：</strong></p>

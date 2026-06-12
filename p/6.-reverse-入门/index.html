@@ -481,35 +481,35 @@
 </h4><h4 id="控制流平坦化">控制流平坦化
 </h4><h4 id="movofuscator">movofuscator
 </h4><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>混淆技术</th>
-          <th>原理简述</th>
-          <th>逆向对抗策略</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>花指令 (Junk Code)</td>
-          <td>插入无意义指令，或利用 <code>jmp</code><br/>/<code>call</code><br/>/<code>ret</code><br/> 改变执行流，使反编译器错误解析代码。</td>
-          <td>手动修复执行流，识别并跳过 / 删除花指令。</td>
-      </tr>
-      <tr>
-          <td>Self-Modified Code</td>
-          <td>代码在运行时动态修改自身的指令或数据。</td>
-          <td>在修改发生后，重新进行动态分析和反汇编。</td>
-      </tr>
-      <tr>
-          <td>控制流平坦化 (Control Flow Flattening)</td>
-          <td>将所有条件判断和循环结构转化为一个集中的主调度循环（<code>switch/case</code><br/>）。</td>
-          <td>还原控制流图（CFG），利用工具辅助去混淆。</td>
-      </tr>
-      <tr>
-          <td>Movfuscator</td>
-          <td>仅使用 <code>mov</code><br/> 指令实现所有逻辑运算和控制流。</td>
-          <td>专注于数据流分析，而非指令语义。</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>混淆技术</th>
+					<th>原理简述</th>
+					<th>逆向对抗策略</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>花指令 (Junk Code)</td>
+					<td>插入无意义指令，或利用 <code>jmp</code><br/>/<code>call</code><br/>/<code>ret</code><br/> 改变执行流，使反编译器错误解析代码。</td>
+					<td>手动修复执行流，识别并跳过 / 删除花指令。</td>
+			</tr>
+			<tr>
+					<td>Self-Modified Code</td>
+					<td>代码在运行时动态修改自身的指令或数据。</td>
+					<td>在修改发生后，重新进行动态分析和反汇编。</td>
+			</tr>
+			<tr>
+					<td>控制流平坦化 (Control Flow Flattening)</td>
+					<td>将所有条件判断和循环结构转化为一个集中的主调度循环（<code>switch/case</code><br/>）。</td>
+					<td>还原控制流图（CFG），利用工具辅助去混淆。</td>
+			</tr>
+			<tr>
+					<td>Movfuscator</td>
+					<td>仅使用 <code>mov</code><br/> 指令实现所有逻辑运算和控制流。</td>
+					<td>专注于数据流分析，而非指令语义。</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="迷宫问题">迷宫问题
 </h3><p>这个算是逆向里面比较典型的一种题目类型，迷宫问题有以下特点：</p>
@@ -1134,35 +1134,35 @@
 </div>
 </div><p>里面有4个函数，直接扔给AI分析：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>伪代码函数名</strong></th>
-          <th><strong>对应 RC4 步骤</strong></th>
-          <th><strong>作用描述（C/C++ 伪代码实现）</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>sub_401780(a1)</code></td>
-          <td>S-box 初始化（Initialization）</td>
-          <td>将 256 字节的目标数组 <code>a1</code><br/>（S-box S）初始化为恒等排列：S[i]=i。</td>
-      </tr>
-      <tr>
-          <td><code>sub_401800(a1, a2, a3)</code></td>
-          <td>密钥扩展（Key Expansion）</td>
-          <td>将密钥 <code>a2</code><br/>（长度 <code>a3</code><br/>）扩展成 256 字节的临时数组 K。如果密钥短于 256 字节，则循环重复填充。</td>
-      </tr>
-      <tr>
-          <td><code>sub_4018E0(a1, a2)</code></td>
-          <td>密钥调度算法（KSA）</td>
-          <td>使用扩展后的密钥 K（<code>a2</code><br/>）对 S-box S（<code>a1</code><br/>）进行 256 轮置乱，使其进入高度随机状态。</td>
-      </tr>
-      <tr>
-          <td><code>sub_4015E0(a1, Stream, a3)</code></td>
-          <td>伪随机生成与加解密（PRGA）</td>
-          <td>循环生成密钥流 Ki，并将其与输入文件（<code>Stream</code><br/>）的字节异或（Ci=Pi⊕Ki），结果写入输出文件（<code>a3</code><br/>）。</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>伪代码函数名</strong></th>
+					<th><strong>对应 RC4 步骤</strong></th>
+					<th><strong>作用描述（C/C++ 伪代码实现）</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>sub_401780(a1)</code></td>
+					<td>S-box 初始化（Initialization）</td>
+					<td>将 256 字节的目标数组 <code>a1</code><br/>（S-box S）初始化为恒等排列：S[i]=i。</td>
+			</tr>
+			<tr>
+					<td><code>sub_401800(a1, a2, a3)</code></td>
+					<td>密钥扩展（Key Expansion）</td>
+					<td>将密钥 <code>a2</code><br/>（长度 <code>a3</code><br/>）扩展成 256 字节的临时数组 K。如果密钥短于 256 字节，则循环重复填充。</td>
+			</tr>
+			<tr>
+					<td><code>sub_4018E0(a1, a2)</code></td>
+					<td>密钥调度算法（KSA）</td>
+					<td>使用扩展后的密钥 K（<code>a2</code><br/>）对 S-box S（<code>a1</code><br/>）进行 256 轮置乱，使其进入高度随机状态。</td>
+			</tr>
+			<tr>
+					<td><code>sub_4015E0(a1, Stream, a3)</code></td>
+					<td>伪随机生成与加解密（PRGA）</td>
+					<td>循环生成密钥流 Ki，并将其与输入文件（<code>Stream</code><br/>）的字节异或（Ci=Pi⊕Ki），结果写入输出文件（<code>a3</code><br/>）。</td>
+			</tr>
+	</tbody>
 </table></div>
 <p>函数 <code>sub_4014E0</code> 将上述所有 RC4 组件整合在一起，<strong>实现了对文件内容进行 RC4 加密或解密的功能</strong>。</p>
 <p>使用cyberchef进行解密，填入上面的密钥<code>[Warnning]Access_Unauthorized</code>作为Passphrase，选择文件<code>enflag.txt</code>作为input，得到flag：</p>

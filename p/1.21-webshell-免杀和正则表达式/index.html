@@ -675,135 +675,135 @@
 </h3><p><strong><font style="color:#DF2A3F;">仅供参靠，实战建议交给AI解决！</font></strong></p>
 <p><strong>功能:</strong> 匹配东西，找东西</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>正则表达式</strong></th>
-          <th><strong>准确描述</strong></th>
-          <th><strong>示例（匹配 / 不匹配说明）</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>\w</code></td>
-          <td>匹配字母（大小写）、数字、下划线，等价于 <code>[A-Za-z0-9_]</code>（<strong>非所有字符</strong>）</td>
-          <td>匹配：<code>a</code>、<code>5</code>、<code>_</code>、<code>B</code>；不匹配：<code>@</code>、<code>空格</code>、<code>￥</code>、<code>\n</code></td>
-      </tr>
-      <tr>
-          <td><code>\w{3}</code></td>
-          <td>匹配连续 3 个字母 / 数字 / 下划线（固定长度）</td>
-          <td>匹配：<code>abc</code>、<code>89_</code>、<code>X78</code>；不匹配：<code>ab</code>、<code>abcd</code>、<code>a 8</code>（含空格）</td>
-      </tr>
-      <tr>
-          <td><code>\w+</code></td>
-          <td>匹配 1 次或多次字母 / 数字 / 下划线（贪婪匹配，至少 1 个）</td>
-          <td>匹配：<code>user123</code>、<code>_abc</code>、<code>888</code>；不匹配：空字符串、<code>@123</code>（以特殊字符开头）</td>
-      </tr>
-      <tr>
-          <td><code>\s</code></td>
-          <td>匹配空白字符（空格、制表符<code>\t</code>、换行符<code>\n</code>、回车符<code>\r</code>等）</td>
-          <td>匹配：（空格）、<code>\t</code>、<code>\n</code>；不匹配：<code>a</code>、<code>5</code>、<code>@</code></td>
-      </tr>
-      <tr>
-          <td><code>^</code></td>
-          <td>锚点，匹配字符串的<strong>开头位置</strong>（多行模式下匹配每行开头）</td>
-          <td><code>^hello</code>：匹配<code>hello world</code>，不匹配<code>world hello</code></td>
-      </tr>
-      <tr>
-          <td><code>$</code></td>
-          <td>锚点，匹配字符串的<strong>结尾位置</strong>（多行模式下匹配每行结尾）</td>
-          <td><code>world$</code>：匹配<code>hello world</code>，不匹配<code>world hello</code></td>
-      </tr>
-      <tr>
-          <td><code>\b\w{3}\b</code></td>
-          <td><code>\b</code>是单词边界，匹配 “独立的 3 个字符的单词”（前后为非字母 / 数字 / 下划线）</td>
-          <td>匹配：<code>abc</code>（单独）、<code>abc 123</code>中的<code>abc</code>；不匹配：<code>abcd</code>中的<code>abc</code>、<code>aabc</code>中的<code>abc</code></td>
-      </tr>
-      <tr>
-          <td><code>\d</code></td>
-          <td>匹配单个数字（0-9），等价于 <code>[0-9]</code></td>
-          <td>匹配：<code>0</code>、<code>9</code>；不匹配：<code>a</code>、<code>_</code>、<code>空格</code></td>
-      </tr>
-      <tr>
-          <td><code>\d{3}-\d{7}</code></td>
-          <td>匹配 “3 位数字 - 7 位数字” 的格式（典型座机号格式）</td>
-          <td>匹配：<code>010-1234567</code>、<code>888-9999999</code>；不匹配：<code>01-1234567</code>（位数不足）、<code>010-123456</code></td>
-      </tr>
-      <tr>
-          <td><code>\w+@(qq.com竖线gmail.com)</code></td>
-          <td>匹配以字母 / 数字 / 下划线开头，@后是qq.com或gmail.com的邮箱</td>
-          <td>匹配：<code>user123@qq.com</code>、<code>abc_88@gmail.com</code>；不匹配：<code>user@163.com</code>、<code>@qq.com</code></td>
-      </tr>
-      <tr>
-          <td><code>*</code></td>
-          <td>匹配前面的表达式 0 次或多次（贪婪匹配）</td>
-          <td><code>a*</code>：匹配<code>空字符串</code>、<code>a</code>、<code>aaaa</code>；<code>\d*</code>：匹配<code>空</code>、<code>123</code></td>
-      </tr>
-      <tr>
-          <td><code>.</code></td>
-          <td>匹配除换行符<code>\n</code>外的任意单个字符</td>
-          <td><code>.</code>：匹配<code>a</code>、<code>5</code>、<code>@</code>、<code>空格</code>；不匹配：<code>\n</code></td>
-      </tr>
-      <tr>
-          <td><code>?</code></td>
-          <td>匹配前面的表达式 0 次或 1 次（非贪婪）</td>
-          <td><code>a?</code>：匹配<code>空</code>、<code>a</code>；不匹配：<code>aa</code>（仅匹配第一个 a）</td>
-      </tr>
-      <tr>
-          <td><code>+</code></td>
-          <td>匹配前面的表达式 1 次或多次（贪婪，至少 1 次）</td>
-          <td><code>a+</code>：匹配<code>a</code>、<code>aaaa</code>；不匹配：空字符串</td>
-      </tr>
-      <tr>
-          <td><code>.*</code></td>
-          <td>贪婪匹配：匹配除换行外的任意字符 0 次或多次（尽可能多匹配）</td>
-          <td><code>a.*b</code>：匹配<code>a123b</code>、<code>a@@@b</code>，若字符串是<code>a1b2b</code>则匹配<code>a1b2b</code>（而非<code>a1b</code>）</td>
-      </tr>
-      <tr>
-          <td><code>\[.*?\]</code></td>
-          <td>非贪婪匹配：匹配<code>[</code>和<code>]</code>之间的任意内容（尽可能少匹配）</td>
-          <td><code>\[.*?\]</code>：字符串<code>[abc][def]</code>中匹配<code>[abc]</code>和<code>[def]</code>（而非整体<code>[abc][def]</code>）</td>
-      </tr>
-      <tr>
-          <td><code>\[label[0-9]\](.*?)\[/label[0-9]\]</code></td>
-          <td>匹配<code>[label数字]</code>和<code>[/label数字]</code>之间的内容（非贪婪）</td>
-          <td>匹配：<code>[label1]test[/label1]</code>中的<code>test</code>；不匹配：<code>[labela]test[/label1]</code>（数字不匹配）</td>
-      </tr>
-      <tr>
-          <td><code>.orn</code></td>
-          <td>匹配 “任意字符 + orn” 的 4 字符组合</td>
-          <td>匹配：<code>corn</code>、<code>born</code>、<code>@orn</code>；不匹配：<code>orn</code>（字符不足）、<code>corrn</code></td>
-      </tr>
-      <tr>
-          <td><code>[ab]bcd</code></td>
-          <td>匹配以 a 或 b 开头，后接 bcd 的字符串（字符类）</td>
-          <td>匹配：<code>abcd</code>、<code>bbcd</code>；不匹配：<code>cbcd</code>、<code>abxd</code></td>
-      </tr>
-      <tr>
-          <td><code>[^a]bcd</code></td>
-          <td>匹配以 “非 a 字符” 开头，后接 bcd 的字符串（反向字符类）</td>
-          <td>匹配：<code>bbcd</code>、<code>5bcd</code>、<code>@bcd</code>；不匹配：<code>abcd</code></td>
-      </tr>
-      <tr>
-          <td><code>[f-z]+</code></td>
-          <td>匹配 1 次或多次 f 到 z 的小写字母（字符范围）</td>
-          <td>匹配：<code>f</code>、<code>xyz</code>、<code>mnop</code>；不匹配：<code>F</code>（大写）、<code>abc</code>、<code>123</code></td>
-      </tr>
-      <tr>
-          <td><code>[a]?bcd</code></td>
-          <td>匹配 “a（可选）+ bcd”，即 bcd 或 abcd</td>
-          <td>匹配：<code>bcd</code>、<code>abcd</code>；不匹配：<code>aabcd</code>、<code>xbcd</code></td>
-      </tr>
-      <tr>
-          <td><code>[0-3]{3}</code></td>
-          <td>匹配连续 3 个 0-3 的数字（固定长度 + 字符范围）</td>
-          <td>匹配：<code>012</code>、<code>333</code>、<code>201</code>；不匹配：<code>456</code>、<code>01</code>、<code>014</code></td>
-      </tr>
-      <tr>
-          <td><code>()</code></td>
-          <td>分组：将括号内的表达式视为一个整体，可配合量词 / 或使用</td>
-          <td>(ab)+：匹配<code>ab</code>、<code>abab</code></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>正则表达式</strong></th>
+					<th><strong>准确描述</strong></th>
+					<th><strong>示例（匹配 / 不匹配说明）</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>\w</code></td>
+					<td>匹配字母（大小写）、数字、下划线，等价于 <code>[A-Za-z0-9_]</code>（<strong>非所有字符</strong>）</td>
+					<td>匹配：<code>a</code>、<code>5</code>、<code>_</code>、<code>B</code>；不匹配：<code>@</code>、<code>空格</code>、<code>￥</code>、<code>\n</code></td>
+			</tr>
+			<tr>
+					<td><code>\w{3}</code></td>
+					<td>匹配连续 3 个字母 / 数字 / 下划线（固定长度）</td>
+					<td>匹配：<code>abc</code>、<code>89_</code>、<code>X78</code>；不匹配：<code>ab</code>、<code>abcd</code>、<code>a 8</code>（含空格）</td>
+			</tr>
+			<tr>
+					<td><code>\w+</code></td>
+					<td>匹配 1 次或多次字母 / 数字 / 下划线（贪婪匹配，至少 1 个）</td>
+					<td>匹配：<code>user123</code>、<code>_abc</code>、<code>888</code>；不匹配：空字符串、<code>@123</code>（以特殊字符开头）</td>
+			</tr>
+			<tr>
+					<td><code>\s</code></td>
+					<td>匹配空白字符（空格、制表符<code>\t</code>、换行符<code>\n</code>、回车符<code>\r</code>等）</td>
+					<td>匹配：（空格）、<code>\t</code>、<code>\n</code>；不匹配：<code>a</code>、<code>5</code>、<code>@</code></td>
+			</tr>
+			<tr>
+					<td><code>^</code></td>
+					<td>锚点，匹配字符串的<strong>开头位置</strong>（多行模式下匹配每行开头）</td>
+					<td><code>^hello</code>：匹配<code>hello world</code>，不匹配<code>world hello</code></td>
+			</tr>
+			<tr>
+					<td><code>$</code></td>
+					<td>锚点，匹配字符串的<strong>结尾位置</strong>（多行模式下匹配每行结尾）</td>
+					<td><code>world$</code>：匹配<code>hello world</code>，不匹配<code>world hello</code></td>
+			</tr>
+			<tr>
+					<td><code>\b\w{3}\b</code></td>
+					<td><code>\b</code>是单词边界，匹配 “独立的 3 个字符的单词”（前后为非字母 / 数字 / 下划线）</td>
+					<td>匹配：<code>abc</code>（单独）、<code>abc 123</code>中的<code>abc</code>；不匹配：<code>abcd</code>中的<code>abc</code>、<code>aabc</code>中的<code>abc</code></td>
+			</tr>
+			<tr>
+					<td><code>\d</code></td>
+					<td>匹配单个数字（0-9），等价于 <code>[0-9]</code></td>
+					<td>匹配：<code>0</code>、<code>9</code>；不匹配：<code>a</code>、<code>_</code>、<code>空格</code></td>
+			</tr>
+			<tr>
+					<td><code>\d{3}-\d{7}</code></td>
+					<td>匹配 “3 位数字 - 7 位数字” 的格式（典型座机号格式）</td>
+					<td>匹配：<code>010-1234567</code>、<code>888-9999999</code>；不匹配：<code>01-1234567</code>（位数不足）、<code>010-123456</code></td>
+			</tr>
+			<tr>
+					<td><code>\w+@(qq.com竖线gmail.com)</code></td>
+					<td>匹配以字母 / 数字 / 下划线开头，@后是qq.com或gmail.com的邮箱</td>
+					<td>匹配：<code>user123@qq.com</code>、<code>abc_88@gmail.com</code>；不匹配：<code>user@163.com</code>、<code>@qq.com</code></td>
+			</tr>
+			<tr>
+					<td><code>*</code></td>
+					<td>匹配前面的表达式 0 次或多次（贪婪匹配）</td>
+					<td><code>a*</code>：匹配<code>空字符串</code>、<code>a</code>、<code>aaaa</code>；<code>\d*</code>：匹配<code>空</code>、<code>123</code></td>
+			</tr>
+			<tr>
+					<td><code>.</code></td>
+					<td>匹配除换行符<code>\n</code>外的任意单个字符</td>
+					<td><code>.</code>：匹配<code>a</code>、<code>5</code>、<code>@</code>、<code>空格</code>；不匹配：<code>\n</code></td>
+			</tr>
+			<tr>
+					<td><code>?</code></td>
+					<td>匹配前面的表达式 0 次或 1 次（非贪婪）</td>
+					<td><code>a?</code>：匹配<code>空</code>、<code>a</code>；不匹配：<code>aa</code>（仅匹配第一个 a）</td>
+			</tr>
+			<tr>
+					<td><code>+</code></td>
+					<td>匹配前面的表达式 1 次或多次（贪婪，至少 1 次）</td>
+					<td><code>a+</code>：匹配<code>a</code>、<code>aaaa</code>；不匹配：空字符串</td>
+			</tr>
+			<tr>
+					<td><code>.*</code></td>
+					<td>贪婪匹配：匹配除换行外的任意字符 0 次或多次（尽可能多匹配）</td>
+					<td><code>a.*b</code>：匹配<code>a123b</code>、<code>a@@@b</code>，若字符串是<code>a1b2b</code>则匹配<code>a1b2b</code>（而非<code>a1b</code>）</td>
+			</tr>
+			<tr>
+					<td><code>\[.*?\]</code></td>
+					<td>非贪婪匹配：匹配<code>[</code>和<code>]</code>之间的任意内容（尽可能少匹配）</td>
+					<td><code>\[.*?\]</code>：字符串<code>[abc][def]</code>中匹配<code>[abc]</code>和<code>[def]</code>（而非整体<code>[abc][def]</code>）</td>
+			</tr>
+			<tr>
+					<td><code>\[label[0-9]\](.*?)\[/label[0-9]\]</code></td>
+					<td>匹配<code>[label数字]</code>和<code>[/label数字]</code>之间的内容（非贪婪）</td>
+					<td>匹配：<code>[label1]test[/label1]</code>中的<code>test</code>；不匹配：<code>[labela]test[/label1]</code>（数字不匹配）</td>
+			</tr>
+			<tr>
+					<td><code>.orn</code></td>
+					<td>匹配 “任意字符 + orn” 的 4 字符组合</td>
+					<td>匹配：<code>corn</code>、<code>born</code>、<code>@orn</code>；不匹配：<code>orn</code>（字符不足）、<code>corrn</code></td>
+			</tr>
+			<tr>
+					<td><code>[ab]bcd</code></td>
+					<td>匹配以 a 或 b 开头，后接 bcd 的字符串（字符类）</td>
+					<td>匹配：<code>abcd</code>、<code>bbcd</code>；不匹配：<code>cbcd</code>、<code>abxd</code></td>
+			</tr>
+			<tr>
+					<td><code>[^a]bcd</code></td>
+					<td>匹配以 “非 a 字符” 开头，后接 bcd 的字符串（反向字符类）</td>
+					<td>匹配：<code>bbcd</code>、<code>5bcd</code>、<code>@bcd</code>；不匹配：<code>abcd</code></td>
+			</tr>
+			<tr>
+					<td><code>[f-z]+</code></td>
+					<td>匹配 1 次或多次 f 到 z 的小写字母（字符范围）</td>
+					<td>匹配：<code>f</code>、<code>xyz</code>、<code>mnop</code>；不匹配：<code>F</code>（大写）、<code>abc</code>、<code>123</code></td>
+			</tr>
+			<tr>
+					<td><code>[a]?bcd</code></td>
+					<td>匹配 “a（可选）+ bcd”，即 bcd 或 abcd</td>
+					<td>匹配：<code>bcd</code>、<code>abcd</code>；不匹配：<code>aabcd</code>、<code>xbcd</code></td>
+			</tr>
+			<tr>
+					<td><code>[0-3]{3}</code></td>
+					<td>匹配连续 3 个 0-3 的数字（固定长度 + 字符范围）</td>
+					<td>匹配：<code>012</code>、<code>333</code>、<code>201</code>；不匹配：<code>456</code>、<code>01</code>、<code>014</code></td>
+			</tr>
+			<tr>
+					<td><code>()</code></td>
+					<td>分组：将括号内的表达式视为一个整体，可配合量词 / 或使用</td>
+					<td>(ab)+：匹配<code>ab</code>、<code>abab</code></td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="php正则表达式">php正则表达式
 </h3><p><code>i</code> 忽略大小写</p>
