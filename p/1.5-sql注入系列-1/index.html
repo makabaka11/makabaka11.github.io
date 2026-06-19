@@ -850,23 +850,300 @@
         <div class="comment-container mt-8"></div>
         
         
-    <script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
-<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet'/>
-<div id="waline" class="waline-container"></div>
+    <div id="waline" class="waline-container"></div>
 <style>
-    .waline-container {
-        background-color: var(--card-background);
-        border-radius: var(--card-border-radius);
-        box-shadow: var(--shadow-l1);
-        padding: var(--card-padding);
-        --waline-font-size: var(--article-font-size);
-    }
-    .waline-container .wl-count {
-        color: var(--card-text-color-main);
-    }
+ 
+
+ 
+:root,
+[data-scheme="light"] {
+    --waline-theme-color: #D97706;
+    --waline-active-color: #B45309;
+    --waline-white: #fff;
+    --waline-light-grey: #999;
+    --waline-dark-grey: #666;
+    --waline-color: #444;
+    --waline-bgcolor: transparent;
+    --waline-bgcolor-light: transparent;
+     
+    --waline-bgcolor-hover: rgba(217, 119, 6, 0.08);
+     
+    --waline-border-color: rgba(218, 218, 218, 0.4);
+    --waline-disable-bgcolor: rgba(0, 0, 0, 0.04);
+    --waline-disable-color: #bbb;
+    --waline-code-bgcolor: #fafafa;
+     
+    --waline-bq-color: rgba(217, 119, 6, 0.06);
+    --waline-badge-color: #D97706;
+    --waline-badge-font-size: 0.75em;
+    --waline-info-bgcolor: transparent;
+    --waline-info-color: #999;
+    --waline-info-font-size: 0.75em;
+    --waline-font-size: 16px;
+    --waline-border: none;
+    --waline-avatar-radius: 50%;
+    --waline-box-shadow: none;
+
+     
+     
+    --wl-glass-bg:       rgba(255, 255, 255, 0.85);
+     
+    --wl-glass-bg-cards: rgba(255, 255, 255, 0.8);
+     
+    --wl-glass-bg-panel: rgba(255, 255, 255, 0.78);
+     
+    --wl-glass-bg-input: rgba(255, 255, 255, 0.82);
+     
+    --wl-glass-border:   rgba(0, 0, 0, 0.08);
+     
+    --wl-glass-shadow:   0 2px 10px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+ 
+ 
+html[data-scheme="dark"] {
+    --waline-theme-color: #60A5FA;
+    --waline-active-color: #93BBFD;
+
+     
+    --waline-white: #fff;
+    --waline-light-grey: rgba(255, 255, 255, 0.72);
+    --waline-dark-grey: rgba(255, 255, 255, 0.88);
+
+    --waline-color: rgba(255, 255, 255, 0.85);
+    --waline-bgcolor: transparent;
+    --waline-bgcolor-light: transparent;
+     
+    --waline-bgcolor-hover: rgba(96, 165, 250, 0.12);
+     
+    --waline-border-color: rgba(255, 255, 255, 0.1);
+    --waline-disable-bgcolor: rgba(255, 255, 255, 0.05);
+    --waline-disable-color: rgba(255, 255, 255, 0.25);
+    --waline-code-bgcolor: #272822;
+     
+    --waline-bq-color: rgba(96, 165, 250, 0.08);
+    --waline-badge-color: #60A5FA;
+    --waline-badge-font-size: 0.75em;
+    --waline-info-bgcolor: transparent;
+    --waline-info-color: rgba(255, 255, 255, 0.7);
+    --waline-info-font-size: 0.75em;
+    --waline-font-size: 16px;
+    --waline-border: none;
+    --waline-avatar-radius: 50%;
+    --waline-box-shadow: none;
+
+     
+     
+    --wl-glass-bg:       rgba(255, 255, 255, 0.12);
+     
+    --wl-glass-bg-cards: rgba(255, 255, 255, 0.1);
+     
+    --wl-glass-bg-panel: rgba(255, 255, 255, 0.1);
+     
+    --wl-glass-bg-input: rgba(255, 255, 255, 0.13);
+     
+    --wl-glass-border:   rgba(255, 255, 255, 0.16);
+     
+    --wl-glass-shadow:   0 4px 16px rgba(0, 0, 0, 0.45);
+}
+
+ 
+
+ 
+#waline {
+    background: var(--wl-glass-bg-cards) !important;
+    backdrop-filter: blur(10px) saturate(120%);
+    -webkit-backdrop-filter: blur(10px) saturate(120%);
+    border: 1px solid var(--wl-glass-border) !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    box-shadow: var(--wl-glass-shadow) !important;
+}
+
+ 
+#waline .wl-panel {
+     
+    background: transparent !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 1px solid var(--wl-glass-border) !important;
+    border-radius: 12px !important;
+    padding: 16px !important;
+    margin-top: 20px !important;
+    box-shadow: var(--wl-glass-shadow) !important;
+}
+
+ 
+#waline .wl-cards {
+    background: transparent !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin-top: 8px !important;
+}
+
+ 
+#waline .wl-card-item > .wl-card {
+    background: transparent !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-radius: 8px !important;
+    padding: 8px 4px !important;
+    margin: 0 !important;
+}
+
+ 
+#waline .wl-input,
+#waline .wl-editor {
+    background: var(--wl-glass-bg-input) !important;
+    border: 1px solid var(--wl-glass-border) !important;
+    border-radius: 8px !important;
+    box-shadow: var(--wl-glass-shadow) !important;
+}
+
+ 
+#waline .wl-emoji-popup,
+#waline .wl-gif-popup {
+    background: var(--wl-glass-bg) !important;
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid var(--wl-glass-border) !important;
+    box-shadow: var(--wl-glass-shadow) !important;
+}
+
+ 
+
+ 
+[data-scheme="dark"] #waline .wl-count {
+    color: rgba(255, 255, 255, 0.92) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-header label {
+    color: rgba(255, 255, 255, 0.78) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-card .wl-nick,
+[data-scheme="dark"] #waline .wl-card span.wl-nick {
+    color: rgba(255, 255, 255, 0.92) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-card .wl-time {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-content {
+    color: rgba(255, 255, 255, 0.88) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-card .wl-reply,
+[data-scheme="dark"] #waline .wl-card .wl-like,
+[data-scheme="dark"] #waline .wl-card .wl-edit,
+[data-scheme="dark"] #waline .wl-card .wl-delete {
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+[data-scheme="dark"] #waline .wl-card .wl-reply:hover,
+[data-scheme="dark"] #waline .wl-card .wl-like:hover,
+[data-scheme="dark"] #waline .wl-card .wl-edit:hover,
+[data-scheme="dark"] #waline .wl-card .wl-delete:hover {
+    color: var(--waline-theme-color) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-empty {
+    color: rgba(255, 255, 255, 0.72) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-meta > span {
+    color: rgba(255, 255, 255, 0.72) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-page button {
+    color: rgba(255, 255, 255, 0.78) !important;
+}
+
+ 
+
+[data-scheme="light"] #waline .wl-editor:focus,
+[data-scheme="light"] #waline .wl-input:focus {
+    box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15) !important;
+    border-color: var(--waline-theme-color) !important;
+}
+[data-scheme="dark"] #waline .wl-editor:focus,
+[data-scheme="dark"] #waline .wl-input:focus {
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15) !important;
+    border-color: var(--waline-theme-color) !important;
+}
+
+#waline .wl-btn.primary {
+    border-radius: 8px !important;
+    font-weight: 600;
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+#waline .wl-btn.primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+#waline .wl-btn:not(.primary) {
+    border-radius: 8px !important;
+}
+
+[data-scheme="light"] #waline .wl-card-item .wl-card-item {
+    border-left: 3px solid rgba(217, 119, 6, 0.3) !important;
+}
+[data-scheme="dark"] #waline .wl-card-item .wl-card-item {
+    border-left: 3px solid rgba(96, 165, 250, 0.3) !important;
+}
+
+#waline .wl-emoji-popup button {
+    transition: transform 0.15s ease;
+}
+#waline .wl-emoji-popup button:hover {
+    transform: scale(1.2);
+}
+
+#waline .wl-user-avatar img,
+#waline .wl-avatar img {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+[data-scheme="light"] #waline blockquote {
+    border-left-color: #FDE68A !important;
+}
+[data-scheme="dark"] #waline blockquote {
+    border-left-color: rgba(96, 165, 250, 0.4) !important;
+}
+
+#waline .wl-power {
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+}
+#waline .wl-power:hover {
+    opacity: 1;
+}
+
+[data-scheme="dark"] #waline pre code,
+[data-scheme="dark"] #waline .wl-content pre code {
+    color: #ccc !important;
+}
 </style><script>
     
-    Waline.init({"avatar":"","dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://unpkg.com/@waline/emojis@1.0.1/weibo"],"lang":"zh-CN","locale":{"admin":"Admin","placeholder":"真的不想说点什么吗..."},"requiredMeta":["nick","email"],"serverURL":"https://waline.retr0.xyz/"});
+    
+    
+    
+    window._walineConfig = {"avatar":"","dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://unpkg.com/@waline/emojis@1.4.0/tw-emoji"],"lang":"zh-CN","locale":{"admin":"Admin","placeholder":"真的不想说点什么吗..."},"requiredMeta":["nick","email"],"serverURL":"https://waline.retr0.xyz/"};
+    
+    if (typeof initWaline === 'function') {
+        initWaline();
+    }
 </script>
 
     
@@ -1304,21 +1581,6 @@
     }());
 </script>
 <link rel="stylesheet" href="/css/custom.css">
-
-<script>
-(function () {
-    const url = new URL(window.location.href);
-
-    
-    if (url.searchParams.has('utterances')) {
-
-        
-        
-        window.location.replace(window.location.pathname);
-    }
-})();
-</script>
-
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 
 <script>
@@ -1331,35 +1593,6 @@
 <script src=https://www.retr0.xyz/js/topbar.min.js></script>
 
 
-
-<script>
-function initUtterances() {
-    const isArticle = document.querySelector('.article-page') && document.querySelector('.article-content');
-    if (!isArticle) return;
-
-    const oldScript = document.querySelector('script[src^="https://utteranc.es/client.js"]');
-    if (oldScript) oldScript.remove();
-
-    const container = document.querySelector('.comment-container');
-    if (!container) return;
-
-    container.innerHTML = '';
-
-    let script = document.createElement('script');
-    script.src = 'https://utteranc.es/client.js';
-    script.setAttribute('repo', 'makabaka11/makabaka11.github.io');
-    script.setAttribute('issue-term', 'pathname');
-    script.setAttribute('crossorigin', 'anonymous');
-    script.async = true;
-    container.appendChild(script);
-}
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    if (!window.pjax || !window.pjax.state) initUtterances();
-});
-</script>
 
 
 <script>
@@ -1389,7 +1622,6 @@ document.addEventListener('pjax:send', () => topbar.show());
 document.addEventListener('pjax:complete', () => {
     window.Stack.init();
     topbar.hide();
-    setTimeout(initUtterances, 0);
     updateViewCount();
     renderKaTeX();
     initPhotoSwipeFromDOM('.article-content');   
@@ -1833,6 +2065,71 @@ document.addEventListener("pjax:complete", () => {
   document.addEventListener('pjax:complete', () => {
     initCodeMoreBox();
   });
+</script>
+
+
+<script>
+
+
+window._walineInstance = null;     
+window._walineLibPromise = null;   
+window._walinePending = false;     
+
+function loadWalineLib() {
+    if (window.Waline) return Promise.resolve(window.Waline);
+    if (window._walineLibPromise) return window._walineLibPromise;
+
+    const cssUrl = 'https://unpkg.com/@waline/client@v2/dist/waline.css';
+    const jsUrl  = 'https://unpkg.com/@waline/client@v2/dist/waline.js';
+
+    if (!document.querySelector('link[href*="waline.css"]')) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = cssUrl;
+        document.head.appendChild(link);
+    }
+
+    window._walineLibPromise = new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = jsUrl;
+        s.onload = () => resolve(window.Waline);
+        s.onerror = (e) => {
+            console.error('[Waline] 脚本加载失败', e);
+            reject(e);
+        };
+        document.head.appendChild(s);
+    });
+    return window._walineLibPromise;
+}
+
+function initWaline() {
+    const container = document.getElementById('waline');
+    if (!container) return;              
+    if (!window._walineConfig) return;   
+    if (window._walinePending) return;   
+    window._walinePending = true;
+
+    
+    if (window._walineInstance && typeof window._walineInstance.destroy === 'function') {
+        try { window._walineInstance.destroy(); } catch (e) {   }
+        window._walineInstance = null;
+    }
+
+    loadWalineLib()
+        .then(() => {
+            window._walinePending = false;
+            
+            if (!document.getElementById('waline')) return;
+            window._walineInstance = window.Waline.init(window._walineConfig);
+            console.log('[Waline] initialized');
+        })
+        .catch(() => { window._walinePending = false; });
+}
+
+
+document.addEventListener('DOMContentLoaded', initWaline);
+
+document.addEventListener('pjax:complete', initWaline);
 </script>
 
 

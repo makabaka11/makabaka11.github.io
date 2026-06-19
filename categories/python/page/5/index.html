@@ -867,21 +867,6 @@
     }());
 </script>
 <link rel="stylesheet" href="/css/custom.css">
-
-<script>
-(function () {
-    const url = new URL(window.location.href);
-
-    
-    if (url.searchParams.has('utterances')) {
-
-        
-        
-        window.location.replace(window.location.pathname);
-    }
-})();
-</script>
-
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 
 <script>
@@ -894,35 +879,6 @@
 <script src=https://www.retr0.xyz/js/topbar.min.js></script>
 
 
-
-<script>
-function initUtterances() {
-    const isArticle = document.querySelector('.article-page') && document.querySelector('.article-content');
-    if (!isArticle) return;
-
-    const oldScript = document.querySelector('script[src^="https://utteranc.es/client.js"]');
-    if (oldScript) oldScript.remove();
-
-    const container = document.querySelector('.comment-container');
-    if (!container) return;
-
-    container.innerHTML = '';
-
-    let script = document.createElement('script');
-    script.src = 'https://utteranc.es/client.js';
-    script.setAttribute('repo', 'makabaka11/makabaka11.github.io');
-    script.setAttribute('issue-term', 'pathname');
-    script.setAttribute('crossorigin', 'anonymous');
-    script.async = true;
-    container.appendChild(script);
-}
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    if (!window.pjax || !window.pjax.state) initUtterances();
-});
-</script>
 
 
 <script>
@@ -952,7 +908,6 @@ document.addEventListener('pjax:send', () => topbar.show());
 document.addEventListener('pjax:complete', () => {
     window.Stack.init();
     topbar.hide();
-    setTimeout(initUtterances, 0);
     updateViewCount();
     renderKaTeX();
     initPhotoSwipeFromDOM('.article-content');   
@@ -1396,6 +1351,71 @@ document.addEventListener("pjax:complete", () => {
   document.addEventListener('pjax:complete', () => {
     initCodeMoreBox();
   });
+</script>
+
+
+<script>
+
+
+window._walineInstance = null;     
+window._walineLibPromise = null;   
+window._walinePending = false;     
+
+function loadWalineLib() {
+    if (window.Waline) return Promise.resolve(window.Waline);
+    if (window._walineLibPromise) return window._walineLibPromise;
+
+    const cssUrl = 'https://unpkg.com/@waline/client@v2/dist/waline.css';
+    const jsUrl  = 'https://unpkg.com/@waline/client@v2/dist/waline.js';
+
+    if (!document.querySelector('link[href*="waline.css"]')) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = cssUrl;
+        document.head.appendChild(link);
+    }
+
+    window._walineLibPromise = new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = jsUrl;
+        s.onload = () => resolve(window.Waline);
+        s.onerror = (e) => {
+            console.error('[Waline] 脚本加载失败', e);
+            reject(e);
+        };
+        document.head.appendChild(s);
+    });
+    return window._walineLibPromise;
+}
+
+function initWaline() {
+    const container = document.getElementById('waline');
+    if (!container) return;              
+    if (!window._walineConfig) return;   
+    if (window._walinePending) return;   
+    window._walinePending = true;
+
+    
+    if (window._walineInstance && typeof window._walineInstance.destroy === 'function') {
+        try { window._walineInstance.destroy(); } catch (e) {   }
+        window._walineInstance = null;
+    }
+
+    loadWalineLib()
+        .then(() => {
+            window._walinePending = false;
+            
+            if (!document.getElementById('waline')) return;
+            window._walineInstance = window.Waline.init(window._walineConfig);
+            console.log('[Waline] initialized');
+        })
+        .catch(() => { window._walinePending = false; });
+}
+
+
+document.addEventListener('DOMContentLoaded', initWaline);
+
+document.addEventListener('pjax:complete', initWaline);
 </script>
 
 
