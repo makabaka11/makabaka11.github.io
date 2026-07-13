@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Mon, 13 Jul 2026 20:03:14 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 13 Jul 2026 21:31:58 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>留言板 | Msg Board</title>
         <link>https://www.retr0.xyz/message/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -404,6 +404,181 @@
 </description>
         </item>
         <item>
+        <title>1.2 Hello,Cargo</title>
+        <link>https://www.retr0.xyz/p/1.2-hellocargo/</link>
+        <pubDate>Mon, 13 Jul 2026 21:31:58 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/1.2-hellocargo/</guid>
+        <description>&lt;p&gt;上一节我们提到，rustc 编译命令仅适用于小型项目和和文件，对于大型项目，我们需要使用 Cargo。&lt;/p&gt;
+&lt;h2 id=&#34;cargo-是什么&#34;&gt;Cargo 是什么？
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Cargo 是 Rust 的构建系统和包管理工具
+&lt;ul&gt;
+&lt;li&gt;**用途：**构建代码、下载依赖的库、构建这些库&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;安装 Rust 的时候会安装 Cargo
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;安装成功检验：&lt;/strong&gt;&lt;code&gt;cargo --version&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;使用-cargo-创建项目&#34;&gt;使用 Cargo 创建项目
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;执行命令：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cargo new hello_cargo
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;可以看到创建好的件目录如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hello_cargo
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│  .gitignore（初始化了一个git仓库）
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│  Cargo.toml
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;└─src
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        main.rs
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;cargotoml&#34;&gt;Cargo.toml
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;TOML（Tom&amp;rsquo;s Obvious,Minimal Language）格式，是Cargo的配置格式&lt;/li&gt;
+&lt;li&gt;[package]，是一个区域标题，表示下方内容是用来配置包（package）的
+&lt;ul&gt;
+&lt;li&gt;name，项目名&lt;/li&gt;
+&lt;li&gt;version，项目版本&lt;/li&gt;
+&lt;li&gt;authors，项目作者&lt;/li&gt;
+&lt;li&gt;edition，使用的 Rust 版本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;[dependencies]，另一个区域的开始，它会列出项目的依赖项。&lt;/li&gt;
+&lt;li&gt;在 Rust 里面，代码的包称作 create。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;下图为一个简单的Cargo.toml文件示例：&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-toml&#34; data-lang=&#34;toml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;package&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;name&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;hello_cargo&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;version&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;0.1.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;edition&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;2024&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;dependencies&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;srcmainrs&#34;&gt;src/main.rs
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;cargo 生成的&lt;code&gt;main.rs&lt;/code&gt;在 src 目录下&lt;/li&gt;
+&lt;li&gt;而Cargo.toml 在项目顶层下&lt;/li&gt;
+&lt;li&gt;源代码都应该在src目录下&lt;/li&gt;
+&lt;li&gt;顶层目录可以放置：README、LICENSE（许可信息）、配置文件和其它与程序源码无关的文件&lt;/li&gt;
+&lt;li&gt;如果创建项目时没有使用 cargo，也可以把项目转化为使用 cargo：
+&lt;ul&gt;
+&lt;li&gt;把源代码文件移动到 src 下&lt;/li&gt;
+&lt;li&gt;创建	&lt;code&gt;Cargo.toml&lt;/code&gt;并填写相应的配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;构建-cargo-项目cargo-build&#34;&gt;构建 Cargo 项目：cargo build
+&lt;/h2&gt;&lt;p&gt;要构建Cargo项目，您需要使用命令：&lt;code&gt;cargo build&lt;/code&gt;，它会在当前项目的&lt;code&gt;target/debug&lt;/code&gt;下生成可执行文件。&lt;/p&gt;
+&lt;p&gt;**注意：**第一次运行&lt;code&gt;cargo build&lt;/code&gt;会在项目目录顶层生成 &lt;code&gt;cargo.lock&lt;/code&gt;文件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;该文件负责追踪项目依赖的精确版本&lt;/li&gt;
+&lt;li&gt;不需要也不建议修改此文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;运行-cargo-项目cargo-run&#34;&gt;运行 Cargo 项目：cargo run
+&lt;/h2&gt;&lt;p&gt;比起 &lt;code&gt;cargo build&lt;/code&gt;,&lt;code&gt;cargo run&lt;/code&gt;命令会在编译结束后&lt;strong&gt;自动运行可执行文件&lt;/strong&gt;，但如果执行该命令时源代码没有任何修改，则不会重新编译，而是直接执行可执行文件。&lt;/p&gt;
+&lt;h2 id=&#34;cargo-check&#34;&gt;cargo check
+&lt;/h2&gt;&lt;p&gt;使用&lt;code&gt;cargo check&lt;/code&gt;可以快速地检查代码以确保代码最终能顺利通过编译，执行后不会产生任何可执行文件。&lt;/p&gt;
+&lt;p&gt;虽然在编译时 Rust 编译器也会抛出代码的错误，但是&lt;code&gt;cargo check&lt;/code&gt;要比&lt;code&gt;cargo build&lt;/code&gt;快得多，因此编写代码的时候可以连续反复的使用&lt;code&gt;cargo check&lt;/code&gt;检查代码，提高效率&lt;/p&gt;
+&lt;h2 id=&#34;为发布构建&#34;&gt;为发布构建
+&lt;/h2&gt;&lt;p&gt;默认的&lt;code&gt;cargo build&lt;/code&gt;命令构建的是debug版本，顾名思义是方便调试的版本，其性能远不如正式的release版，也不能充分发挥出Rust的性能优势，所以当您需要为发布而构建时，请执行以下命令：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cargo build --release
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;构建 release 版在编译时会进行优化：代码会运行的更快，但是编译时间更长&lt;/p&gt;
+&lt;p&gt;编译成功后会在项目的&lt;code&gt;target/release&lt;/code&gt;下生成可执行文件，也就是说构建命令分为两种配置：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;debug版本&lt;/li&gt;
+&lt;li&gt;release版本&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>1.1 Hello World</title>
+        <link>https://www.retr0.xyz/p/1.1-hello-world/</link>
+        <pubDate>Mon, 13 Jul 2026 21:31:04 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/1.1-hello-world/</guid>
+        <description>&lt;p&gt;当您已经完成rust环境的配置后，可以开始本节内容：&lt;/p&gt;
+&lt;p&gt;创建一个文件夹，例如&lt;strong&gt;rust_learn&lt;/strong&gt;，在当中新建&lt;code&gt;main.rs&lt;/code&gt;文件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;fn&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;fm&#34;&gt;println!&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Hello World!&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;对于简单的rs文件，我们使用&lt;code&gt;rustc&lt;/code&gt;命令来进行编译：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;rustc main.rs
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;您会看到目录当中出现了main.exe和main.pdb文件（Windows平台），使用&lt;code&gt;.\main&lt;/code&gt;来运行编译后的程序。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;接下来我们来分析这个简单的例子：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定义函数：&lt;code&gt;fn main() {}&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;没有参数，没有返回&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;main 函数很特别：它是每个 Rust 程序最先运行的代码&lt;/li&gt;
+&lt;li&gt;打印文本：&lt;code&gt;println!(&amp;quot;Hello World!&amp;quot;);&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;Rust 的缩进是 4 个空格而不是 Tab&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;println!&lt;/code&gt;是一个 Rust macro（宏）（如果是函数则没有&lt;code&gt;!&lt;/code&gt;）&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Hello World!&amp;rdquo; 是字符串，它是&lt;code&gt;println!&lt;/code&gt;的参数&lt;/li&gt;
+&lt;li&gt;这行代码以&lt;code&gt;;&lt;/code&gt;结尾&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>[Vibe Coding]一个让所有网页视频都能爽看弹幕的油猴脚本</title>
         <link>https://www.retr0.xyz/p/vibe-coding%E4%B8%80%E4%B8%AA%E8%AE%A9%E6%89%80%E6%9C%89%E7%BD%91%E9%A1%B5%E8%A7%86%E9%A2%91%E9%83%BD%E8%83%BD%E7%88%BD%E7%9C%8B%E5%BC%B9%E5%B9%95%E7%9A%84%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC/</link>
         <pubDate>Mon, 13 Jul 2026 20:03:14 +0800</pubDate>
@@ -412,7 +587,7 @@
         <description>&lt;img src="https://www.retr0.xyz/blog-img/20260626123308168.png" alt="Featured image of post [Vibe Coding]一个让所有网页视频都能爽看弹幕的油猴脚本" /&gt;&lt;p&gt;事情起源于我还那剩5天就过期，但还剩52%额度的 Coding Plan，当我看到时间一点点流逝的时候顿时紧张了起来，于是我开始在脑内给AI找活干，于是最终就有了这个项目。&lt;/p&gt;
 &lt;p&gt;其实我个人更偏向于 Bt 下载资源到本地观看，但经验告诉我其实还有大部分人是在线观看，那有人肯定要问了，为什么不用Kazumi、Animeko之类的？那我都说了这个纯是为了消耗token的，脚本只是副产物罢了，不过万一能帮到人呢？哪怕就一个也是值得的。废话不多说，下面开始介绍。&lt;/p&gt;
 &lt;h2 id=&#34;脚本介绍&#34;&gt;脚本介绍
-&lt;/h2&gt;&lt;p&gt;**「今天要来点弹幕吗？」**是一个能让您在任何网页播放器上观看弹幕的油猴插件，支持自动载入同目录弹幕文件（仅支持Openlist）和通过弹弹 play 远程匹配弹幕文件。让你在不支持弹幕的网站也能畅快地观看弹幕。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;「今天要来点弹幕吗？」&lt;/strong&gt; 是一个能让您在任何网页播放器上观看弹幕的油猴插件，支持自动载入同目录弹幕文件（仅支持Openlist）和通过弹弹 play 远程匹配弹幕文件。让你在不支持弹幕的网站也能畅快地观看弹幕。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/20260626123308168.png&#34;
 	
 	
@@ -447,7 +622,7 @@
 &lt;h2 id=&#34;安装和最佳食用指南&#34;&gt;安装和最佳食用指南
 &lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;浏览器先装 &lt;strong&gt;Tampermonkey&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;**安装脚本：**在 Tampermonkey 面板中新建脚本，粘贴脚本全部内容，保存。或者直接把 .user.js 文件拖入 Tampermonkey。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;安装脚本：&lt;/strong&gt; 在 Tampermonkey 面板中新建脚本，粘贴脚本全部内容，保存。或者直接把 .user.js 文件拖入 Tampermonkey。&lt;/li&gt;
 &lt;li&gt;打开任意带有网页播放器的页面，看到播放器控件当中（如果是暂未适配的播放器也可能是网页右下方），多了一个弹幕按钮，点击后打开弹幕和配置菜单&lt;/li&gt;
 &lt;li&gt;点击&lt;strong&gt;通用设置&lt;/strong&gt;，开启 AI 开关并填写 AI 相关配置（地址、key、模型 ID，选轻量化的简单模型即可，AI 会自动提取番剧的名称和集数），启用&lt;strong&gt;全自动载入&lt;/strong&gt;，刷新页面，插件之后将会自动为网页中当前番剧匹配并载入弹幕；&lt;/li&gt;
 &lt;li&gt;自动匹配有误？您可以点击菜单中的&lt;strong&gt;弹弹play 弹幕搜索&lt;/strong&gt;手动搜索番剧。&lt;/li&gt;

@@ -16,7 +16,7 @@
         <description>&lt;img src="https://www.retr0.xyz/blog-img/20260626123308168.png" alt="Featured image of post [Vibe Coding]一个让所有网页视频都能爽看弹幕的油猴脚本" /&gt;&lt;p&gt;事情起源于我还那剩5天就过期，但还剩52%额度的 Coding Plan，当我看到时间一点点流逝的时候顿时紧张了起来，于是我开始在脑内给AI找活干，于是最终就有了这个项目。&lt;/p&gt;
 &lt;p&gt;其实我个人更偏向于 Bt 下载资源到本地观看，但经验告诉我其实还有大部分人是在线观看，那有人肯定要问了，为什么不用Kazumi、Animeko之类的？那我都说了这个纯是为了消耗token的，脚本只是副产物罢了，不过万一能帮到人呢？哪怕就一个也是值得的。废话不多说，下面开始介绍。&lt;/p&gt;
 &lt;h2 id=&#34;脚本介绍&#34;&gt;脚本介绍
-&lt;/h2&gt;&lt;p&gt;**「今天要来点弹幕吗？」**是一个能让您在任何网页播放器上观看弹幕的油猴插件，支持自动载入同目录弹幕文件（仅支持Openlist）和通过弹弹 play 远程匹配弹幕文件。让你在不支持弹幕的网站也能畅快地观看弹幕。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;「今天要来点弹幕吗？」&lt;/strong&gt; 是一个能让您在任何网页播放器上观看弹幕的油猴插件，支持自动载入同目录弹幕文件（仅支持Openlist）和通过弹弹 play 远程匹配弹幕文件。让你在不支持弹幕的网站也能畅快地观看弹幕。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/20260626123308168.png&#34;
 	
 	
@@ -51,7 +51,7 @@
 &lt;h2 id=&#34;安装和最佳食用指南&#34;&gt;安装和最佳食用指南
 &lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;浏览器先装 &lt;strong&gt;Tampermonkey&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;**安装脚本：**在 Tampermonkey 面板中新建脚本，粘贴脚本全部内容，保存。或者直接把 .user.js 文件拖入 Tampermonkey。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;安装脚本：&lt;/strong&gt; 在 Tampermonkey 面板中新建脚本，粘贴脚本全部内容，保存。或者直接把 .user.js 文件拖入 Tampermonkey。&lt;/li&gt;
 &lt;li&gt;打开任意带有网页播放器的页面，看到播放器控件当中（如果是暂未适配的播放器也可能是网页右下方），多了一个弹幕按钮，点击后打开弹幕和配置菜单&lt;/li&gt;
 &lt;li&gt;点击&lt;strong&gt;通用设置&lt;/strong&gt;，开启 AI 开关并填写 AI 相关配置（地址、key、模型 ID，选轻量化的简单模型即可，AI 会自动提取番剧的名称和集数），启用&lt;strong&gt;全自动载入&lt;/strong&gt;，刷新页面，插件之后将会自动为网页中当前番剧匹配并载入弹幕；&lt;/li&gt;
 &lt;li&gt;自动匹配有误？您可以点击菜单中的&lt;strong&gt;弹弹play 弹幕搜索&lt;/strong&gt;手动搜索番剧。&lt;/li&gt;
