@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Tue, 14 Jul 2026 12:06:53 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 15 Jul 2026 00:27:50 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>[动画短评]《可塑性记忆》8.4/10：新颖讨人的设定，或许能在当下焕发新生？（但愿吧）</title>
         <link>https://www.retr0.xyz/p/%E5%8A%A8%E7%94%BB%E7%9F%AD%E8%AF%84%E5%8F%AF%E5%A1%91%E6%80%A7%E8%AE%B0%E5%BF%868.4/10%E6%96%B0%E9%A2%96%E8%AE%A8%E4%BA%BA%E7%9A%84%E8%AE%BE%E5%AE%9A%E6%88%96%E8%AE%B8%E8%83%BD%E5%9C%A8%E5%BD%93%E4%B8%8B%E7%84%95%E5%8F%91%E6%96%B0%E7%94%9F%E4%BD%86%E6%84%BF%E5%90%A7/</link>
         <pubDate>Wed, 17 Jun 2026 15:33:47 +0800</pubDate>
@@ -145,253 +145,177 @@
 </description>
         </item>
         <item>
-        <title>《死亡搁浅2：冥滩之上》9/10：用“岛式风格”走出独特道路</title>
-        <link>https://www.retr0.xyz/p/%E6%AD%BB%E4%BA%A1%E6%90%81%E6%B5%852%E5%86%A5%E6%BB%A9%E4%B9%8B%E4%B8%8A9/10%E7%94%A8%E5%B2%9B%E5%BC%8F%E9%A3%8E%E6%A0%BC%E8%B5%B0%E5%87%BA%E7%8B%AC%E7%89%B9%E9%81%93%E8%B7%AF/</link>
-        <pubDate>Sat, 18 Apr 2026 16:26:39 +0800</pubDate>
+        <title>[Vibe Coding] 当下，我们如何使用AI快速参与项目：以NipaPlay为例</title>
+        <link>https://www.retr0.xyz/p/vibe-coding-%E5%BD%93%E4%B8%8B%E6%88%91%E4%BB%AC%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8ai%E5%BF%AB%E9%80%9F%E5%8F%82%E4%B8%8E%E9%A1%B9%E7%9B%AE%E4%BB%A5nipaplay%E4%B8%BA%E4%BE%8B/</link>
+        <pubDate>Wed, 15 Jul 2026 00:27:50 +0800</pubDate>
         
-        <guid>https://www.retr0.xyz/p/%E6%AD%BB%E4%BA%A1%E6%90%81%E6%B5%852%E5%86%A5%E6%BB%A9%E4%B9%8B%E4%B8%8A9/10%E7%94%A8%E5%B2%9B%E5%BC%8F%E9%A3%8E%E6%A0%BC%E8%B5%B0%E5%87%BA%E7%8B%AC%E7%89%B9%E9%81%93%E8%B7%AF/</guid>
-        <description>&lt;img src="https://www.retr0.xyz/blog-img/20260325145445_1.jpg" alt="Featured image of post 《死亡搁浅2：冥滩之上》9/10：用“岛式风格”走出独特道路" /&gt;&lt;p&gt;神必的红色紧身服武士、会跳舞的汽车碰撞测试假人、二刺螈纸片人、BOSS战吉他对邦，你没有听错，这些都是我在《死亡搁浅2：冥滩之上》当中见识到种种抽象事物的一小部分，但小岛秀夫确实用自己的抽象设计，为玩家交出了一份完美的答卷。&lt;/p&gt;
-&lt;p&gt;如今在商业游戏遍地、粪作流水线式产出的市场上，小岛秀夫还能为我们展示属于他自己的理解，展现出天马行空的创造力，这样看来《死亡搁浅2》无疑是伟大的：它将末世背景的科幻叙事和大幅改善的潜行式玩法完美的结合在里一起，在具有实验性质的前作上进一步融入小岛个人的想法和风格，才有了这样一部的令人惊艳的作品，换句话说，如果有别的厂商来做那么一款同样玩法的科技+送快递+战斗的游戏，我很可能并不会去玩。&lt;/p&gt;
+        <guid>https://www.retr0.xyz/p/vibe-coding-%E5%BD%93%E4%B8%8B%E6%88%91%E4%BB%AC%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8ai%E5%BF%AB%E9%80%9F%E5%8F%82%E4%B8%8E%E9%A1%B9%E7%9B%AE%E4%BB%A5nipaplay%E4%B8%BA%E4%BE%8B/</guid>
+        <description>&lt;img src="https://www.retr0.xyz/blog-img/20260715003038133.png" alt="Featured image of post [Vibe Coding] 当下，我们如何使用AI快速参与项目：以NipaPlay为例" /&gt;&lt;h1 id=&#34;vibe-coding-当下我们如何使用ai快速参与项目以nipaplay为例&#34;&gt;[Vibe Coding] 当下，我们如何使用AI快速参与项目：以NipaPlay为例
+&lt;/h1&gt;&lt;blockquote class=&#34;alert alert-caution&#34;&gt;
+    &lt;p class=&#34;alert-title&#34;&gt;&lt;svg class=&#34;alert-icon&#34; viewBox=&#34;0 0 16 16&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;M4.47.22A.749.749 0 0 1 5 0h6c.199 0 .389.079.53.22l4.25 4.25c.141.14.22.331.22.53v6a.749.749 0 0 1-.22.53l-4.25 4.25A.749.749 0 0 1 11 16H5a.749.749 0 0 1-.53-.22L.22 11.53A.749.749 0 0 1 0 11V5c0-.199.079-.389.22-.53Zm.84 1.28L1.5 5.31v5.38l3.81 3.81h5.38l3.81-3.81V5.31L10.69 1.5ZM8 4a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 4Zm0 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;Caution&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Vibe Coding&lt;/strong&gt;，也就是用AI辅助编程，并不意味着任何一个完全没接触编程的人都能轻松写出自己的项目，它仍然需要你有较强的逻辑思维能力，建议您在开始之前至少了解任意一门高级语言并具备基础的算法思维。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;大概在2026年3月份左右，我开始翻阅Github试图找一些项目来练手，最终便锁定了这个我自己平时也在用的弹幕番剧播放器项目：&lt;a class=&#34;link&#34; href=&#34;https://github.com/AimesSoft/NipaPlay-Reload&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AimesSoft/NipaPlay-Reload&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/image-20260714230803978.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20260714230803978&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;由项目主页可以看到，该项目主要使用 Flutter（Dart）语言，在我加入和维护团队后又引入了Rust语言支持和JavaScript插件系统（这个是我写的），截止2026年7月14日共收获🌟Stars 1622个，还是一个综合性比较强的中等人气项目的，拿来练手非常不错。更重要的是，项目主非常欢迎新贡献者加入项目，并且容许使用AI编程（貌似他本身就是一个重度AI信徒）。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/image-20260715001401512.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20260715001401512&#34;
+	
+	
+&gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;26年春节期间，我体验了《死亡搁浅》第一代，并为它打出了8分的分数（详见文章：&lt;a class=&#34;link&#34; href=&#34;https://www.retr0.xyz/p/%E6%B8%B8%E6%88%8F%E7%9F%AD%E8%AF%84%E6%AD%BB%E4%BA%A1%E6%90%81%E6%B5%858/10%E6%89%93%E7%A0%B4%E4%BC%A0%E7%BB%9F%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%93%B2%E5%AD%A6%E5%A4%A7%E4%BD%9C/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;[游戏短评]《死亡搁浅》8/10：打破传统的深度哲学大作&lt;/a&gt;），因此，当我看到第二代登录PC平台steam商店的时候就十分心动，最终在正式发售的前两周下定决心预购。3月19日晚上10点半，游戏正式解锁，花了5分钟解压预载文件后正式进入游戏，首先震惊我的就是宏大的开场，山姆还有一代中的BB，也就是“洛”，正坐在荒凉的高山头上，随后玩家迎来的第一个任务：带着洛回家，此处伴随着背景音乐《&lt;strong&gt;Minus Sixty One&lt;/strong&gt;》中震撼的童声，不得不说给我带来了极大的震撼：&lt;/p&gt;
-&lt;!-- 这是一张图片，ocr 内容为： --&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776491966659-a37b6b4b-57c0-415a-87eb-7cb343f5352c.jpeg&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;div class=&#34;aplayer-wrap&#34;&gt;
-  &lt;meting-js
-    server=&#34;netease&#34;
-    type=&#34;song&#34;
-    id=&#34;2711291901&#34;
-    fixed=&#34;false&#34;
-    autoplay=&#34;false&#34;
-    loop=&#34;none&#34;
-    order=&#34;list&#34;
-    preload=&#34;auto&#34;
-    volume=&#34;0.7&#34;&gt;
-  &lt;/meting-js&gt;
-&lt;/div&gt;
-&lt;p&gt;小洛可爱捏~(￣▽￣)~*&lt;/p&gt;
-&lt;!-- 这是一张图片，ocr 内容为： --&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776491991432-da6f9ddf-b48d-44d2-9748-d50f0dd4fcec.jpeg&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;那么，我们开始。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;我对初代《死亡搁浅》的评价是：它让人感觉很有深度，但却显得有些难以捉摸：它太复杂太有深度了——就像一个装满宝藏的神秘保险箱，可惜我始终没能找到打开它的正确方式。而《死亡搁浅2》的出现，则让我喜闻乐见地看到，这个系列终于实现了它应有的潜力。无论是叙事深度还是玩法体验，这部续作都展现出了更加成熟和自信的姿态。&lt;/p&gt;
-&lt;p&gt;在前作基础上，游戏的许多不足之处都得到了显著改善，整体体验变得更加圆润流畅。这一次，它不仅讲述了一个更加聚焦、动人的故事，更是进一步拓展和深化了这个后启示录世界的背景设定。如果你对初代作品抱有疑虑，续作的进步或许无法完全改变你的看法。但如果你和我一样，对初代保持着一种将信将疑的态度，那么《死亡搁浅2》绝对会让你重新审视这个系列，并很有可能彻底爱上它。&lt;/p&gt;
-&lt;!-- 这是一张图片，ocr 内容为： --&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776494233010-5c86011a-d224-4227-aae5-90ce45ebc87b.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;对于游玩过前作的玩家来说，之后的剧情背景架构和节奏感会很有熟悉感，还是由诺曼·瑞杜斯（AKA弩哥）扮演的山姆·波特·布里吉斯，肩负起连接末世中各个避难所的使命，最终组成完整的开罗尔网络。&lt;/p&gt;
-&lt;p&gt;在进行每个任务（订单）之前，你都要做好充足的准备，决定自己需要哪些装备。地图上显示经过一条河？那就带上几架梯子吧；路线要经过敌人出没的区域？那就备好足够的武器弹药；货物可能有些多？那就造一辆摩托或皮卡吧。&lt;/p&gt;
-&lt;p&gt;这种【事前准备——克服过程中的障碍——抵达目的地】的循环就构成了《死亡搁浅2》的主要流程。&lt;/p&gt;
-&lt;!-- 这是一张图片，ocr 内容为： --&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776494881183-7c44c99c-ec91-49f6-8065-0a3e71990652.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h2 id=&#34;新地图新机制&#34;&gt;新地图，新机制
-&lt;/h2&gt;&lt;p&gt;在墨西哥地图约两个小时的&amp;quot;新手教程&amp;quot;后，玩家透过板块门（一种可跨越大陆板块的传送门）来到了本作的主要地图——澳大利亚。&lt;/p&gt;
-&lt;p&gt;这片狂野大陆拥有丰富多样的地形，包括石滩、沙漠和丛林等，玩家将在这里体验不断变换的景色。但随着地形的变化，挑战也随之升级。沙尘暴猛烈地袭击，会导致山姆难以保持平衡，黄沙弥漫，能见度大幅降低。地震导致地面剧烈震动，货物翻滚。大雨使河流水位上涨，河道拓宽，洪水泛滥，淹没普通的梯子。这些现象似乎在表明，地球正在用自身的力量回应人类的数字化进程。连接是必要的吗？自然似乎在坚决地说&amp;quot;不&amp;quot;。&lt;/p&gt;
-&lt;!-- 这是一张图片，ocr 内容为： --&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776495697997-4c9bd2ba-e65e-4af4-b167-ff2d72914f89.jpeg&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h2 id=&#34;升级的潜行战斗&#34;&gt;升级的潜行战斗
-&lt;/h2&gt;&lt;p&gt;但是第二代相较于前作的最大不同就是它大大提高了游戏性，缓解了前作被玩家诟病的“准入门槛高”、”对不上电波“、“不知道在玩什么”的问题，毕竟从根本上来说，《死亡搁浅》系列在战斗系统上确实就是小岛最擅长的潜行，那就要把潜行这个内核给做好。于是你就可以根据自己的喜好选择不同的方式解决敌人：&lt;/p&gt;
+&lt;h2 id=&#34;如果你从来没有参与过项目&#34;&gt;如果你从来没有参与过项目：
+&lt;/h2&gt;&lt;p&gt;那么你很可能需要先装好一个基础的工作环境（workspace）， &lt;strong&gt;它通常包括 Git、合适的代码编辑器+插件或者成品IDE、良好的网络环境&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;以 NipaPlay-Reload 为例，这个项目主要用 Flutter（Dart）开发，同时引入了 Rust 和 JavaScript 插件系统。所以你的环境配置需要覆盖这几门语言。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Git 是必须的&lt;/strong&gt; ，不用多解释，clone 项目、提交 commit 都靠它。去官网下载安装，配好 SSH key 就行（现在也支https连接网页登录了，不过直连网络不太好）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;编辑器方面无脑 VSCode&lt;/strong&gt; ，轻量、插件生态丰富、对 AI 工具的支持也不错。装好之后必装这几个插件：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;享受在一个制高点用狙击枪在敌人发现不了的情况下把人都点完？可以。&lt;/li&gt;
-&lt;li&gt;喜欢拿这消音手枪和近战武器绕道敌人背后一个个解决？可以。&lt;/li&gt;
-&lt;li&gt;FPS打多了，就喜欢拿把突击步枪或霰弹枪跟敌人对枪？也可以。&lt;/li&gt;
-&lt;li&gt;我有火力不足恐惧症：想要身上背满榴弹发射器、机枪和火箭筒？再好不过了。&lt;/li&gt;
-&lt;li&gt;哪怕你对战斗真的一点兴趣都没有，你也可以呼叫 DHV 麦哲伦 号为你提供火力打击一键清图。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Flutter/Dart 插件&lt;/strong&gt; （官方那个）—— 语法高亮、自动补全、调试，Flutter 项目必备&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Rust Analyzer&lt;/strong&gt; —— Rust 语言支持，NipaPlay 的两个弹幕内核用到了 Rust（其中包括我主导开发的&lt;a class=&#34;link&#34; href=&#34;https://github.com/makabaka11/DFM-Next&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;DFM-Next&lt;/a&gt;弹幕引擎）&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;另外在本作中由于开篇不久后就可以获得枪械类道具，因此前作中劝退不少人的恐怖的&amp;quot;BT&amp;quot;也不再是什么大问题。&lt;/p&gt;
-&lt;p&gt;在你成功地用麻醉狙挨个点掉了每个敌人，完美执行力自己的计划时，会产生一种一切都在意料之中的满足；但是当你打空了一枪，迎来了成群的敌人而被迫边逃边切武器时同样让人心跳加速。&lt;/p&gt;
-&lt;!-- 这是一张图片，ocr 内容为： --&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776496186554-f1a0d357-8a29-4274-8ccb-7c4a33ebba58.png&#34;
+&lt;p&gt;装好工作环境后，去到你想参与的项目主页fork一个仓库，然后使用&lt;code&gt;git clone &amp;lt;URL&amp;gt;&lt;/code&gt;下载你fork来的仓库到本地，使用&lt;code&gt;git branch -b &amp;lt;分支名&amp;gt;&lt;/code&gt;创建新分支后就可以开始工作了。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;ai-工具选择&#34;&gt;AI 工具选择
+&lt;/h2&gt;&lt;p&gt;2026 年的 AI 编程工具格局和一年前已经大不一样了。去年大家还在热议 Copilot 和 Cursor，今年的风向标已经变了——Stack Overflow 开发者调查显示，Claude Code 的满意度达到了 46%，Cursor 19%，Copilot 掉到了 9%。我简单说说市面上主流的几款：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.trae.cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Trae&lt;/a&gt;&lt;/strong&gt; —— 字节跳动出品，基于 VSCode 深度集成 AI。核心亮点是 &lt;strong&gt;Builder Mode&lt;/strong&gt; （也叫 SOLO 模式），可以用自然语言一次性生成前后端加配置的完整项目。免费版对个人开发者已经够用。优点是国产、免费、上手快，缺点是排队机制很烦人，不过在冷门时段还是可以多薅薅羊毛的。如果你从来没试过 AI 编程，从 Trae 入门几乎零成本。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a class=&#34;link&#34; href=&#34;https://code.claude.com/docs/zh-CN/quickstart&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Claude Code&lt;/a&gt;&lt;/strong&gt; —— A/ 家的终端 Agent 工具，纯命令行交互，也是我用得最多的AI工具。最大优势是超强的自治能力——你可以直接跟它说“把这个模块全部重构，测试跑通”，它会自己改文件、跑测试、处理报错，循环往复直到完成。还支持后台子智能体并行跑任务。缺点也很明显：纯终端没有图形界面（不过TUI用着也还不错，实在不习惯使用VS code里的Claude Code插件就有可以点点点的GUI了），此外由于逆天A/公司的不做人行为，它前些天被爆出代码中含有恶意针对中国用户的行为（如果确认是中国用户则通过隐写标记报告给A/，然后直接封号），最安全有顾虑的用户就别用了；总的来说，它适合复杂重构和自动化任务，不适合日常边写边问。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-tip&#34;&gt;
+    &lt;p class=&#34;alert-title&#34;&gt;&lt;svg class=&#34;alert-icon&#34; viewBox=&#34;0 0 16 16&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;Tip&lt;/p&gt;
+    &lt;p&gt;如果使用Cluade Code，建议安装长期记忆插件&lt;a class=&#34;link&#34; href=&#34;https://github.com/thedotmack/claude-mem&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;claude-mem&lt;/a&gt;来让AI记住项目内容，省略每次开启新会话你的重复的介绍步骤&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Codex&lt;/strong&gt; —— OpenAI 家的编程 Agent，和 &lt;strong&gt;Claude Code&lt;/strong&gt; 的能力基本一致，并且分为GUI和TUI两种，如果是喜欢图形界面的可以选择前者，并且在Claude Code爆出恶意代码事件之后，国内一大批开发者也相应的转到了Codex当中。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/243ebc59414be19b1fc799fabf346e2e66771bd671518ea.webp&#34;
 	
 	
 	
 	loading=&#34;lazy&#34;
 	
+		alt=&#34;243ebc59414be19b1fc799fabf346e2e66771bd671518ea&#34;
+	
 	
 &gt;&lt;/p&gt;
-&lt;h2 id=&#34;新道具新技能&#34;&gt;新道具，新技能
-&lt;/h2&gt;&lt;p&gt;本作不同于初代较为简陋的角色成长系统，新加入了APAS强化功能技能树，系统会根据你完成订单的风格特点为你解锁不同的技能（例如潜行、战斗、货运等）：如果你经常选择正面战斗，就会解锁【基础自瞄】之类的新技能。如果你经常给其他玩家的建筑点赞，比如一个恰好在关键时刻帮助了你的安全屋，那么你就能解锁一个提升其他玩家线上建筑（比如桥梁和发电机）数量的技能。&lt;/p&gt;
-&lt;p&gt;通过启用这些技能，可以大大方便你的游玩体验（但是有几个技能点完全就是负优化啊~）&lt;/p&gt;
-&lt;!-- 这是一张图片，ocr 内容为： --&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776497148266-c27353dd-3ddb-4369-a88e-b4b10812d806.jpeg&#34;
+&lt;p&gt;&lt;strong&gt;我的建议是&lt;/strong&gt; ：日常写代码用 Trae（免费且顺手），复杂重构和自动化任务用 Claude Code 或 Codex。三者可以搭配使用，不冲突。&lt;/p&gt;
+&lt;p&gt;对于Vibe Coding新手，推荐使用—— &lt;strong&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/farion1231/cc-switch/releases&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CC Switch&lt;/a&gt;&lt;/strong&gt; ：它可以让你一键管理和切换AI工具当中的模型。谁说Claude Code和Codex中一定要用官方家的模型？使用CC Switch即可为他们接入价格便宜且效果不错的国产模型。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;当下各家-ai-模型推荐&#34;&gt;当下各家 AI 模型推荐
+&lt;/h2&gt;&lt;p&gt;聊完工具，再说说模型。工具是外壳，模型才是真正干活的脑子。2026 年 7 月这个时间点，我的推荐如下：&lt;/p&gt;
+&lt;h3 id=&#34;主推glm-52&#34;&gt;主推：GLM-5.2
+&lt;/h3&gt;&lt;p&gt;智谱在 2026 年 6 月 17 日正式开源的新一代旗舰模型。在编程能力上，GLM-5.2 在 Code Arena 拿下了 1595 分，排名总榜第二， &lt;strong&gt;在全球可用模型中排名第一&lt;/strong&gt; 。FrontierSWE 基准测试中仅次于 Claude Opus 4.8。有开发者直言“这是国内第一款在我工作流上达到 Opus 级的模型”。最关键的是它 &lt;strong&gt;MIT 协议开源&lt;/strong&gt; ，权重可以自由下载、部署、商用。性能逼近闭源顶尖，价格还远低于Opus-4.8，这就是我主推它的原因。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.bigmodel.cn/markdown/1781632244480plan2.png?attname=plan2.png&#34;
 	
 	
 	
 	loading=&#34;lazy&#34;
 	
+		alt=&#34;Description&#34;
+	
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;不过这些技能可以自由地启用或关闭，提供了很高的灵活性，进一步提高了为特定任务做准备时的自由度。&lt;/p&gt;
-&lt;p&gt;除了技能之外，本作中还增加了许多新道具，只要提高地图上每个避难所的连接星级，就解锁它们。&lt;/p&gt;
-&lt;!-- 这是一张图片，ocr 内容为： --&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776497487812-1deccb42-707e-4ea7-a988-a4ec6b499b6a.jpeg&#34;
+&lt;h3 id=&#34;主推deepseek-v4-pro&#34;&gt;主推：DeepSeek-V4-Pro
+&lt;/h3&gt;&lt;p&gt;深度求索在 2026 年 4 月 24 日发布的开源模型。 &lt;strong&gt;Agentic Coding 能力号称开源最强&lt;/strong&gt; ——官方明确表示已与 Claude Code、OpenCode 等 Agent 工具深度集成，支持 100 万上下文。&lt;/p&gt;
+&lt;p&gt;它最大的优势便是无敌的性价比，发布一段时间后便宣布价格永久降为原价格的1/4（虽然最近说要在高峰期价格翻倍），不过它低廉的价格+好用的缓存命中机制++优异的质量还是深受广大开发者欢迎&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/image-20260715001754501.png&#34;
 	
 	
 	
 	loading=&#34;lazy&#34;
 	
+		alt=&#34;image-20260715001754501&#34;
+	
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;如果你十分享受在前作中送快递，那么本作一定会带给你更加激动的体验：通过电动单轨列车，你可以在各个主要节点城之间运送大量货物，轻轻一点，几百公斤的金属材料就可以被运往各处，不过想要完全体验到单轨网络的便利也的确需要你和其他在线玩家一起投入不少精力与资源来重建。&lt;/p&gt;
-&lt;!-- 这是一张图片，ocr 内容为： --&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776497731029-b21176f6-8023-45a8-8587-d55558c9684d.jpeg&#34;
+&lt;h3 id=&#34;进阶gpt-56-sol&#34;&gt;进阶：GPT-5.6 Sol
+&lt;/h3&gt;&lt;p&gt;OpenAI 在 2026 年 7 月 9 日全面上线的旗舰模型。在 Artificial Analysis Coding Agent Index 中，开启 max 推理强度的 GPT-5.6 Sol 以 &lt;strong&gt;80 分创下新的 SOTA&lt;/strong&gt; ——比 Fable 5 高出 2.8 分。在编程、知识型工作、网络安全领域均达到行业前沿水平。&lt;/p&gt;
+&lt;p&gt;由于预算原因，GPT系列原本并不是我常用的模型，但是奥特曼（OpenAI的老板）不知怎么良心发现了，疯狂给用户赠送额度充值机会，也就是不管已经用了多少额度全部重置，这样一来GPT系列确实可以站上便宜这一桌了。&lt;/p&gt;
+&lt;h3 id=&#34;富哥可选claude-opus-48&#34;&gt;富哥可选：Claude Opus 4.8
+&lt;/h3&gt;&lt;p&gt;Anthropic 在 2026 年 5 月 28 日发布的旗舰模型。在代码生成、幻觉控制与科学推理三大能力维度均位居全球首位。 &lt;strong&gt;最大的特点是“靠谱”&lt;/strong&gt; ——在 Claude Code 中，它会主动问对的问题、发现自己的错误、在计划不合理时提出异议。代码缺陷漏报率降至前代的四分之一。&lt;/p&gt;
+&lt;p&gt;但 Opus 4.8 的 API 调用成本很高，Max 版 Claude Code 每月 100-150 美元。预算充足且对代码质量要求极高的场景才考虑，大部分开发者用 GLM-5.2 和 DeepSeek-V4-Pro 已经完全够了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/136cd7c63e7537106702f5626a5c934769f7a052f699af5.webp&#34;
 	
 	
 	
 	loading=&#34;lazy&#34;
 	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;此外，本作中新增的矿场建筑也为材料不足的老大难问题提供了解决方案：想要陶瓷？只需提供1600的开罗尔晶体，然后就可以开采出3200点的材料，量大管饱。&lt;/p&gt;
-&lt;h2 id=&#34;独一档的剧情设计&#34;&gt;独一档的剧情设计
-&lt;/h2&gt;&lt;p&gt;本作的主要剧情依旧由小岛秀夫亲自执笔，在故事的开头山姆想要带着洛在美墨边境过上平静的隐居生活，但这一梦想很快就被打破，山姆必须背负起连接澳大利亚的重任。&lt;/p&gt;
-&lt;p&gt;不过小岛依旧在剧情中融入了他对世界和社会的理解，它讲述了一个发人深省的故事，探讨了过度沉浸于数字世界会对人类灵魂造成何种侵蚀，以及面对面的接触变得越来越弥足珍贵，&amp;ldquo;世界越小，世界越大&amp;rdquo; —— 尤其是在后疫情时代。&lt;/p&gt;
-&lt;p&gt;此外，《死亡搁浅2》中对关于新美国私人公司APAC收委托连接澳大利亚开罗尔网络是否属于入侵扩张以及由此引发的暴力冲突等问题的探讨也不得不发人深思，令人联想到当今世界上的一些势力是否可以认为是游戏中的原型。&lt;/p&gt;
-&lt;p&gt;但《死亡搁浅 2》不只是审视外界。前作思考了人类在数字时代能否还建立真正的连接 —— 在仅仅几个月后，它思考的问题就在疫情期间成为了残酷的现实（预言家刀了）。而《死亡搁浅 2》则是对初代中提出的问题进行了追问，又或许是小岛对自己在一代中给出的答案并不满意。它剖析了自我，但是并没有沉溺于自己的世界，最终讲述了一个在许多层面都颇有意味的精彩故事。&lt;/p&gt;
-&lt;p&gt;游戏中每个角色都塑造的细腻而复杂，一些细微的面部抽搐或是藏在眼角的一滴眼泪都为角色们赋予了更多的深度：沉稳的山姆、帅气而理性的芙拉吉尔、善良的小雨，他们都完美契合了整个故事的深度与宏大。&lt;/p&gt;
-&lt;p&gt;不过最让我又爱又恨的应该就是特洛伊·贝克扮演的希格斯，这个男人每次登场几乎都会抢尽风头，作为一个反派，小岛不仅没有给他设置任何洗白的剧情，甚至角色自己也多次提到自己就是为了让世界混乱而存在的，相反，希格斯在剧情中几乎是无恶不作，只要每次出场几乎就给山姆一行人造成巨大的麻烦。这种纯坏蛋反派在当今的艺术作品中反而显得更弥足珍贵了。&lt;/p&gt;
-&lt;!-- 这是一张图片，ocr 内容为： --&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776499554292-5784e523-33f7-472d-ac8b-af8054eb75c8.jpeg&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
+		alt=&#34;136cd7c63e7537106702f5626a5c934769f7a052f699af5&#34;
 	
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;前面提到了，小岛在剧情中有非常多疯狂而抽象的表现手法（夹带私货），例如你可以在其中一个避难所给二次元纸片人送货从而获得相应奖励：&lt;/p&gt;
-&lt;!-- 这是一张图片，ocr 内容为： --&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776499659235-a37ca5ee-ec9e-4ae7-8a73-03d4e6f6e81f.jpeg&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;!-- 这是一张图片，ocr 内容为： --&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776499648865-94917317-3958-449e-b0b3-1218464f90f1.jpeg&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;你也可以见证到史上最抽象的最终BOSS战：吉他对邦&lt;/p&gt;
-&lt;!-- 这是一张图片，ocr 内容为： --&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776499710489-c05d8a83-1cd6-43f3-8f39-898c8b8c31f7.jpeg&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;不过这些抽象的东西我完全看不腻，小岛秀夫愿意用这种方式向我们展现在别的游戏中从未见过的事物，这也是我最喜欢这位明星制作人的一点：在大胆的创意与充足的预算相结合时，就能带来无与伦比的震撼体验。&lt;/p&gt;
-&lt;h2 id=&#34;极致的画面和优化&#34;&gt;极致的画面和优化
-&lt;/h2&gt;&lt;p&gt;《死亡搁浅2》带给我的视觉体验是震撼的，笔者i9-14900HX和RTX 5070 Laptop 8G+32G内存的配置在打开DLSS后可以高画质稳定约260帧率，即使打开光追也能稳定约110帧。&lt;/p&gt;
-&lt;!-- 这是一张图片，ocr 内容为： --&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776500001762-34549767-69c5-48b8-822e-cfc534e0044f.jpeg&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;这还不是最令人惊讶的，当我从主菜单点击&amp;quot;继续游戏&amp;quot;后仅仅花了1秒钟就进入到了游戏内时，这种丝滑的体验带给了我前所未有的冲击。&lt;/p&gt;
-&lt;h2 id=&#34;不止配乐&#34;&gt;不止配乐
-&lt;/h2&gt;&lt;p&gt;这些视觉盛宴再次得到了优秀音乐的支撑 —— 无论是 Woodkid 空灵的人声在孤寂的山峰上回荡，还是 Ludvig Forssell 那曲动人的《BB’s Theme》在完美的时机插入 —— 所有音乐都起到了令人震撼的烘托作用。尤其是在你接近目的地时，一首Low Roar的曲子更是让我深受触动并迷上了这个宝藏乐队（但可惜Low Roar的主唱在2022年因急性哮喘及并发症去世，RIP🕯️）&lt;/p&gt;
-&lt;div class=&#34;aplayer-wrap&#34;&gt;
-  &lt;meting-js
-    server=&#34;netease&#34;
-    type=&#34;song&#34;
-    id=&#34;1400013102&#34;
-    fixed=&#34;false&#34;
-    autoplay=&#34;false&#34;
-    loop=&#34;none&#34;
-    order=&#34;list&#34;
-    preload=&#34;auto&#34;
-    volume=&#34;0.7&#34;&gt;
-  &lt;/meting-js&gt;
-&lt;/div&gt;
-&lt;!-- 这是一张图片，ocr 内容为： --&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776500250512-33cdec90-cacf-4a28-b5a4-28d4e6481d73.jpeg&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h2 id=&#34;总结&#34;&gt;总结
-&lt;/h2&gt;&lt;p&gt;《死亡搁浅 2：冥滩之上》无疑是对初代作品的一次全方位进化与升华。作为一款发轫于深刻哲学思考的游戏续作，它不仅延续了前作对人类社会、文明进程的深刻反思，更在叙事结构、玩法机制以及视觉呈现等多个维度实现了突破性提升。&lt;br&gt;
-新作将舞台拓展至辽阔的澳大利亚大陆，在这片陌生而神秘的土地上，开发团队构建了一个更具层次感的开放世界。游戏摒弃了前作中略显生硬的叙事节奏，在保留其一贯的哲学思辨内核的同时，赋予了故事更加自然流畅的展开方式。潜行动作玩法经过精心打磨，展现出更高的自由度与策略深度，让玩家在探索过程中始终保持新鲜感与期待感。&lt;br&gt;
-本作最令人称道之处在于其大胆（抽象）的艺术风格与创新性叙事手法。游戏中随处可见的创意闪光点，既体现在视觉表现的奇思妙想上，也渗透在剧情推进的每一个细节之中。尽管游戏仍保留着些许前作的怪诞特质，但这恰恰成为了其独特魅力的组成部分，彰显了开发团队对艺术表达的坚定追求。&lt;br&gt;
-总体而言，《死亡搁浅 2：冥滩之上》是一部极具野心与抱负的作品。它不仅成功解决了前作的诸多不足，更在多个维度上实现了自我超越。对于期待看到游戏产业不断创新的玩家来说，这是一部不可多得的佳作，也预示着这个系列未来发展的无限可能。&lt;/p&gt;
-&lt;h2 id=&#34;music-time&#34;&gt;Music Time！
-&lt;/h2&gt;&lt;p&gt;这首游戏中有着重要作用的&lt;strong&gt;Polytope&lt;/strong&gt;在游戏内外的社群中都获得了大家的一致好评，一起来欣赏一下吧！&lt;/p&gt;
-&lt;div class=&#34;aplayer-wrap&#34;&gt;
-  &lt;meting-js
-    server=&#34;netease&#34;
-    type=&#34;song&#34;
-    id=&#34;2716879804&#34;
-    fixed=&#34;false&#34;
-    autoplay=&#34;false&#34;
-    loop=&#34;none&#34;
-    order=&#34;list&#34;
-    preload=&#34;auto&#34;
-    volume=&#34;0.7&#34;&gt;
-  &lt;/meting-js&gt;
-&lt;/div&gt;
-&lt;p&gt;看到这里，如果你对《死亡搁浅2：冥滩之上》有不错的兴趣的话，不妨试试吧&lt;/p&gt;
-&lt;div style=&#34;max-width:800px; margin:2rem auto; text-align:center;&#34;&gt;
-  &lt;iframe 
-    src=&#34;https://store.steampowered.com/widget/3280350/&#34; 
-    width=&#34;100%&#34; 
-    height=&#34;190&#34; 
-    frameborder=&#34;0&#34; 
-    allowfullscreen
-    style=&#34;border-radius:8px; box-shadow:0 2px 12px rgba(0,0,0,0.1);&#34;&gt;
-  &lt;/iframe&gt;
-&lt;/div&gt;
-&lt;p&gt;笔者通关于2026年4月4日17:34，存档时长54.3h。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;coding-plan-介绍&#34;&gt;Coding Plan 介绍
+&lt;/h2&gt;&lt;p&gt;有了好模型，怎么用得起是个问题。API 后付费对于个人开发者来说，一不小心就跑出几百块账单。我主推 &lt;strong&gt;火山引擎的 Coding Plan&lt;/strong&gt; 。&lt;/p&gt;
+&lt;p&gt;Coding Plan 是火山引擎专为开发者打造的 AI 编程订阅服务。订阅后你可以用固定月费调用多款主流编程模型，不用操心单次 API 计费。目前 Coding Plan 集成了 DeepSeek V4 系列、GLM 系列、Kimi 系列等多款模型。&lt;/p&gt;
+&lt;p&gt;价格方面， &lt;strong&gt;Coding Plan Lite 原价 40 元/月，Pro 版 200 元/月&lt;/strong&gt; 。更关键的是—— &lt;strong&gt;即日起至 2026 年 8 月 27 日，新购、升级或续费均可享受首两个月 2.5 折优惠&lt;/strong&gt; ，Lite 版折算下来只要 &lt;strong&gt;9.9 元/月&lt;/strong&gt; ，Pro 版 &lt;strong&gt;49.9 元/月&lt;/strong&gt; 。&lt;/p&gt;
+&lt;p&gt;所以先把这首两个月的羊毛好屌再说，不过亲自使用下来，我发现最近火山的Coding Plan经常出现http 429的限流问题，虽然AI工具会自己retry请求，不过这还是让人很头疼，综合来说，把这活动期间的羊毛先拿下还是不错的。&lt;/p&gt;
+&lt;p&gt;其次是 &lt;strong&gt;&lt;a class=&#34;link&#34; href=&#34;https://opencode.ai/docs/zh-cn/go/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Go | OpenCode&lt;/a&gt;&lt;/strong&gt; ，它是由OpenCode提供的套餐服务， &lt;strong&gt;首月只需 5 美元&lt;/strong&gt; ，之后 &lt;strong&gt;每月 10 美元&lt;/strong&gt; ，包含常见的国内知名模型，支持支付宝支付。&lt;/p&gt;
+&lt;p&gt;总之，对于普通入门开发者，我推荐购买火山的Coding plan或者使用DeepSeek的直充API。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;一些简单的使用习惯和提示词技巧&#34;&gt;一些简单的使用习惯和提示词技巧
+&lt;/h2&gt;&lt;p&gt;最后分享几个我踩过坑之后总结出来的习惯和技巧：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. 先让 AI 读文档，再让 AI 写代码&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;参与一个陌生项目，别上来就让 AI 改代码。先把项目的 &lt;code&gt;README.md&lt;/code&gt;、&lt;code&gt;CONTRIBUTING_GUIDE&lt;/code&gt; 丢给 AI，让它理解项目结构、技术栈和代码规范。NipaPlay 的文档很完善，有完整的贡献者指南和使用文档。让 AI 先读一遍，后续生成代码的质量会高很多。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-tip&#34;&gt;
+    &lt;p class=&#34;alert-title&#34;&gt;&lt;svg class=&#34;alert-icon&#34; viewBox=&#34;0 0 16 16&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;Tip&lt;/p&gt;
+    &lt;p&gt;对于Cluade Code，可以直接使用&lt;code&gt;/init&lt;/code&gt;指令快速让AI自动理解项目并生成CLAUDE.md记忆文档。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;2. 分步骤给指令，不要一次塞太多&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;AI 的上下文再大，也不代表它能一次性处理好所有事。比如你想给 NipaPlay 加一个新功能，可以拆成：①理解现有架构 → ②设计方案 → ③写核心代码 → ④写测试 → ⑤提 PR。每一步确认没问题再继续。这样出错了也好定位。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. 给足上下文，尤其是“不要做什么”&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;告诉 AI 你要什么很重要，告诉 AI 你不要什么同样重要。比如“参考现有代码风格，不要引入新的第三方库”“保持和现有 API 一致，不要 breaking change”。这些约束能大幅减少 AI 的“自由发挥”。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4. 善用 AGENTS.md 或 CLAUDE.md&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;很多 AI 编程工具（Claude Code、Codex 等）都支持项目根目录下的 &lt;code&gt;AGENTS.md&lt;/code&gt; 或 &lt;code&gt;CLAUDE.md&lt;/code&gt; 作为持久化指令。把项目的代码规范、架构说明、常用命令写进去，AI 每次启动都会自动加载这些上下文。一劳永逸。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;5. 让 AI 解释它的改动（多用Plan Mode）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;别光让 AI 改代码，在改动之前，让它解释准备怎么改。尤其是复杂重构场景，AI 的改法可能藏着你没注意到的边界情况。让它输出改动说明，真正开干的时候你才心里有底。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;6. 错了就回滚，别跟 AI 死磕&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;AI 有时候会在一个错误的方向上越走越远。发现不对劲就立刻中断+&lt;code&gt;git reset --hard&lt;/code&gt;，重新跟 AI 描述问题，换一种说法或者直接开一个新的会话。花 5 分钟重置比花 1 小时纠正 AI 的错误要划算得多。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;7. 不要珍惜会话，每次改动任务使用单独会话&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;很多人在使用AI工具时会珍惜之前的会话数据，认为正好之前的AI还记得项目大概是个什么，所以就接着让它处理新的需求了。实际上这种用法不仅会降低使用质量而且还给上下文塞进一堆和新需求无关的旧记忆，造成不必要的浪费。用着用着触发自动compact（压缩上下文）就老实了。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;8. 以实际测试为准&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;不要被AI的花言巧语所欺骗，一切都以你编译后的实际测试为准。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-tip&#34;&gt;
+    &lt;p class=&#34;alert-title&#34;&gt;&lt;svg class=&#34;alert-icon&#34; viewBox=&#34;0 0 16 16&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;Tip&lt;/p&gt;
+    &lt;p&gt;建议您把一个大需求拆成若干阶段（可以让AI帮忙拆），各个阶段之间留空当进行测试，测试通过后即可先提交这一阶段的commit&lt;/p&gt;&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;以上就是我用 AI 参与 NipaPlay 项目的一些经验和心得。说到底，Vibe Coding 的核心不是让 AI 替你干活，而是 &lt;strong&gt;让 AI 成为你更高效的协作者&lt;/strong&gt; ——你负责方向感和判断力以及准确的测试并描述问题，AI 负责执行力和速度。工具和模型都在快速迭代，但好的工作流和习惯才是长期有效的。&lt;/p&gt;
+&lt;p&gt;NipaPlay 的项目主页有完整的贡献者指南，项目主也明确欢迎 AI 辅助贡献。如果你感兴趣，不妨从修一个简单 bug 或者写一个文档开始试试，迈出第一步比什么都重要。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;在此也欢迎各位使用我们的软件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;GitHub Releases (推荐)&lt;/strong&gt; : &lt;a class=&#34;link&#34; href=&#34;https://github.com/AimesSoft/nipaplay-reload/releases&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;下载最新版本&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;iOS (App Store)&lt;/strong&gt; :&lt;/p&gt;
+&lt;a href=&#34;https://apps.apple.com/cn/app/nipaplay/id6751284970&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;
+&lt;img src=&#34;https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/zh-cn?size=250x83&amp;releaseDate=1738800000&#34; width=&#34;200&#34; alt=&#34;Download on the App Store&#34;/&gt;
+&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Windows (Microsoft Store)&lt;/strong&gt; :&lt;/p&gt;
+&lt;a href=&#34;https://apps.microsoft.com/detail/9nmr8clq0gcr?referrer=appbadge&amp;mode=full&#34; target=&#34;_blank&#34;  rel=&#34;noopener noreferrer&#34;&gt;
+&lt;img src=&#34;https://get.microsoft.com/images/zh-cn%20dark.svg&#34; width=&#34;200&#34;/&gt;
+&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;祝您Vibe Coding玩得开心 🚀&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -795,7 +719,8 @@
 &lt;h2 id=&#34;获取方式&#34;&gt;获取方式
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;项目地址：&lt;a class=&#34;link&#34; href=&#34;https://github.com/makabaka11/web-danmaku-plugin&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;[Github]makabaka11/web-danmaku-plugin&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;一键安装（脚本猫）：https://scriptcat.org/zh-CN/script-show-page/6796&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一键安装（脚本猫）：&lt;a class=&#34;link&#34; href=&#34;https://scriptcat.org/zh-CN/script-show-page/6796&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;今天要来点弹幕吗？ | ScriptCat&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -905,6 +830,256 @@
 	
 	
 &gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>《死亡搁浅2：冥滩之上》9/10：用“岛式风格”走出独特道路</title>
+        <link>https://www.retr0.xyz/p/%E6%AD%BB%E4%BA%A1%E6%90%81%E6%B5%852%E5%86%A5%E6%BB%A9%E4%B9%8B%E4%B8%8A9/10%E7%94%A8%E5%B2%9B%E5%BC%8F%E9%A3%8E%E6%A0%BC%E8%B5%B0%E5%87%BA%E7%8B%AC%E7%89%B9%E9%81%93%E8%B7%AF/</link>
+        <pubDate>Sat, 18 Apr 2026 16:26:39 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/%E6%AD%BB%E4%BA%A1%E6%90%81%E6%B5%852%E5%86%A5%E6%BB%A9%E4%B9%8B%E4%B8%8A9/10%E7%94%A8%E5%B2%9B%E5%BC%8F%E9%A3%8E%E6%A0%BC%E8%B5%B0%E5%87%BA%E7%8B%AC%E7%89%B9%E9%81%93%E8%B7%AF/</guid>
+        <description>&lt;img src="https://www.retr0.xyz/blog-img/20260325145445_1.jpg" alt="Featured image of post 《死亡搁浅2：冥滩之上》9/10：用“岛式风格”走出独特道路" /&gt;&lt;p&gt;神必的红色紧身服武士、会跳舞的汽车碰撞测试假人、二刺螈纸片人、BOSS战吉他对邦，你没有听错，这些都是我在《死亡搁浅2：冥滩之上》当中见识到种种抽象事物的一小部分，但小岛秀夫确实用自己的抽象设计，为玩家交出了一份完美的答卷。&lt;/p&gt;
+&lt;p&gt;如今在商业游戏遍地、粪作流水线式产出的市场上，小岛秀夫还能为我们展示属于他自己的理解，展现出天马行空的创造力，这样看来《死亡搁浅2》无疑是伟大的：它将末世背景的科幻叙事和大幅改善的潜行式玩法完美的结合在里一起，在具有实验性质的前作上进一步融入小岛个人的想法和风格，才有了这样一部的令人惊艳的作品，换句话说，如果有别的厂商来做那么一款同样玩法的科技+送快递+战斗的游戏，我很可能并不会去玩。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;26年春节期间，我体验了《死亡搁浅》第一代，并为它打出了8分的分数（详见文章：&lt;a class=&#34;link&#34; href=&#34;https://www.retr0.xyz/p/%E6%B8%B8%E6%88%8F%E7%9F%AD%E8%AF%84%E6%AD%BB%E4%BA%A1%E6%90%81%E6%B5%858/10%E6%89%93%E7%A0%B4%E4%BC%A0%E7%BB%9F%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%93%B2%E5%AD%A6%E5%A4%A7%E4%BD%9C/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;[游戏短评]《死亡搁浅》8/10：打破传统的深度哲学大作&lt;/a&gt;），因此，当我看到第二代登录PC平台steam商店的时候就十分心动，最终在正式发售的前两周下定决心预购。3月19日晚上10点半，游戏正式解锁，花了5分钟解压预载文件后正式进入游戏，首先震惊我的就是宏大的开场，山姆还有一代中的BB，也就是“洛”，正坐在荒凉的高山头上，随后玩家迎来的第一个任务：带着洛回家，此处伴随着背景音乐《&lt;strong&gt;Minus Sixty One&lt;/strong&gt;》中震撼的童声，不得不说给我带来了极大的震撼：&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776491966659-a37b6b4b-57c0-415a-87eb-7cb343f5352c.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;div class=&#34;aplayer-wrap&#34;&gt;
+  &lt;meting-js
+    server=&#34;netease&#34;
+    type=&#34;song&#34;
+    id=&#34;2711291901&#34;
+    fixed=&#34;false&#34;
+    autoplay=&#34;false&#34;
+    loop=&#34;none&#34;
+    order=&#34;list&#34;
+    preload=&#34;auto&#34;
+    volume=&#34;0.7&#34;&gt;
+  &lt;/meting-js&gt;
+&lt;/div&gt;
+&lt;p&gt;小洛可爱捏~(￣▽￣)~*&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776491991432-da6f9ddf-b48d-44d2-9748-d50f0dd4fcec.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;那么，我们开始。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;我对初代《死亡搁浅》的评价是：它让人感觉很有深度，但却显得有些难以捉摸：它太复杂太有深度了——就像一个装满宝藏的神秘保险箱，可惜我始终没能找到打开它的正确方式。而《死亡搁浅2》的出现，则让我喜闻乐见地看到，这个系列终于实现了它应有的潜力。无论是叙事深度还是玩法体验，这部续作都展现出了更加成熟和自信的姿态。&lt;/p&gt;
+&lt;p&gt;在前作基础上，游戏的许多不足之处都得到了显著改善，整体体验变得更加圆润流畅。这一次，它不仅讲述了一个更加聚焦、动人的故事，更是进一步拓展和深化了这个后启示录世界的背景设定。如果你对初代作品抱有疑虑，续作的进步或许无法完全改变你的看法。但如果你和我一样，对初代保持着一种将信将疑的态度，那么《死亡搁浅2》绝对会让你重新审视这个系列，并很有可能彻底爱上它。&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776494233010-5c86011a-d224-4227-aae5-90ce45ebc87b.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;对于游玩过前作的玩家来说，之后的剧情背景架构和节奏感会很有熟悉感，还是由诺曼·瑞杜斯（AKA弩哥）扮演的山姆·波特·布里吉斯，肩负起连接末世中各个避难所的使命，最终组成完整的开罗尔网络。&lt;/p&gt;
+&lt;p&gt;在进行每个任务（订单）之前，你都要做好充足的准备，决定自己需要哪些装备。地图上显示经过一条河？那就带上几架梯子吧；路线要经过敌人出没的区域？那就备好足够的武器弹药；货物可能有些多？那就造一辆摩托或皮卡吧。&lt;/p&gt;
+&lt;p&gt;这种【事前准备——克服过程中的障碍——抵达目的地】的循环就构成了《死亡搁浅2》的主要流程。&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776494881183-7c44c99c-ec91-49f6-8065-0a3e71990652.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;新地图新机制&#34;&gt;新地图，新机制
+&lt;/h2&gt;&lt;p&gt;在墨西哥地图约两个小时的&amp;quot;新手教程&amp;quot;后，玩家透过板块门（一种可跨越大陆板块的传送门）来到了本作的主要地图——澳大利亚。&lt;/p&gt;
+&lt;p&gt;这片狂野大陆拥有丰富多样的地形，包括石滩、沙漠和丛林等，玩家将在这里体验不断变换的景色。但随着地形的变化，挑战也随之升级。沙尘暴猛烈地袭击，会导致山姆难以保持平衡，黄沙弥漫，能见度大幅降低。地震导致地面剧烈震动，货物翻滚。大雨使河流水位上涨，河道拓宽，洪水泛滥，淹没普通的梯子。这些现象似乎在表明，地球正在用自身的力量回应人类的数字化进程。连接是必要的吗？自然似乎在坚决地说&amp;quot;不&amp;quot;。&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776495697997-4c9bd2ba-e65e-4af4-b167-ff2d72914f89.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;升级的潜行战斗&#34;&gt;升级的潜行战斗
+&lt;/h2&gt;&lt;p&gt;但是第二代相较于前作的最大不同就是它大大提高了游戏性，缓解了前作被玩家诟病的“准入门槛高”、”对不上电波“、“不知道在玩什么”的问题，毕竟从根本上来说，《死亡搁浅》系列在战斗系统上确实就是小岛最擅长的潜行，那就要把潜行这个内核给做好。于是你就可以根据自己的喜好选择不同的方式解决敌人：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;享受在一个制高点用狙击枪在敌人发现不了的情况下把人都点完？可以。&lt;/li&gt;
+&lt;li&gt;喜欢拿这消音手枪和近战武器绕道敌人背后一个个解决？可以。&lt;/li&gt;
+&lt;li&gt;FPS打多了，就喜欢拿把突击步枪或霰弹枪跟敌人对枪？也可以。&lt;/li&gt;
+&lt;li&gt;我有火力不足恐惧症：想要身上背满榴弹发射器、机枪和火箭筒？再好不过了。&lt;/li&gt;
+&lt;li&gt;哪怕你对战斗真的一点兴趣都没有，你也可以呼叫 DHV 麦哲伦 号为你提供火力打击一键清图。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;另外在本作中由于开篇不久后就可以获得枪械类道具，因此前作中劝退不少人的恐怖的&amp;quot;BT&amp;quot;也不再是什么大问题。&lt;/p&gt;
+&lt;p&gt;在你成功地用麻醉狙挨个点掉了每个敌人，完美执行力自己的计划时，会产生一种一切都在意料之中的满足；但是当你打空了一枪，迎来了成群的敌人而被迫边逃边切武器时同样让人心跳加速。&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776496186554-f1a0d357-8a29-4274-8ccb-7c4a33ebba58.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;新道具新技能&#34;&gt;新道具，新技能
+&lt;/h2&gt;&lt;p&gt;本作不同于初代较为简陋的角色成长系统，新加入了APAS强化功能技能树，系统会根据你完成订单的风格特点为你解锁不同的技能（例如潜行、战斗、货运等）：如果你经常选择正面战斗，就会解锁【基础自瞄】之类的新技能。如果你经常给其他玩家的建筑点赞，比如一个恰好在关键时刻帮助了你的安全屋，那么你就能解锁一个提升其他玩家线上建筑（比如桥梁和发电机）数量的技能。&lt;/p&gt;
+&lt;p&gt;通过启用这些技能，可以大大方便你的游玩体验（但是有几个技能点完全就是负优化啊~）&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776497148266-c27353dd-3ddb-4369-a88e-b4b10812d806.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;不过这些技能可以自由地启用或关闭，提供了很高的灵活性，进一步提高了为特定任务做准备时的自由度。&lt;/p&gt;
+&lt;p&gt;除了技能之外，本作中还增加了许多新道具，只要提高地图上每个避难所的连接星级，就解锁它们。&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776497487812-1deccb42-707e-4ea7-a988-a4ec6b499b6a.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;如果你十分享受在前作中送快递，那么本作一定会带给你更加激动的体验：通过电动单轨列车，你可以在各个主要节点城之间运送大量货物，轻轻一点，几百公斤的金属材料就可以被运往各处，不过想要完全体验到单轨网络的便利也的确需要你和其他在线玩家一起投入不少精力与资源来重建。&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776497731029-b21176f6-8023-45a8-8587-d55558c9684d.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;此外，本作中新增的矿场建筑也为材料不足的老大难问题提供了解决方案：想要陶瓷？只需提供1600的开罗尔晶体，然后就可以开采出3200点的材料，量大管饱。&lt;/p&gt;
+&lt;h2 id=&#34;独一档的剧情设计&#34;&gt;独一档的剧情设计
+&lt;/h2&gt;&lt;p&gt;本作的主要剧情依旧由小岛秀夫亲自执笔，在故事的开头山姆想要带着洛在美墨边境过上平静的隐居生活，但这一梦想很快就被打破，山姆必须背负起连接澳大利亚的重任。&lt;/p&gt;
+&lt;p&gt;不过小岛依旧在剧情中融入了他对世界和社会的理解，它讲述了一个发人深省的故事，探讨了过度沉浸于数字世界会对人类灵魂造成何种侵蚀，以及面对面的接触变得越来越弥足珍贵，&amp;ldquo;世界越小，世界越大&amp;rdquo; —— 尤其是在后疫情时代。&lt;/p&gt;
+&lt;p&gt;此外，《死亡搁浅2》中对关于新美国私人公司APAC收委托连接澳大利亚开罗尔网络是否属于入侵扩张以及由此引发的暴力冲突等问题的探讨也不得不发人深思，令人联想到当今世界上的一些势力是否可以认为是游戏中的原型。&lt;/p&gt;
+&lt;p&gt;但《死亡搁浅 2》不只是审视外界。前作思考了人类在数字时代能否还建立真正的连接 —— 在仅仅几个月后，它思考的问题就在疫情期间成为了残酷的现实（预言家刀了）。而《死亡搁浅 2》则是对初代中提出的问题进行了追问，又或许是小岛对自己在一代中给出的答案并不满意。它剖析了自我，但是并没有沉溺于自己的世界，最终讲述了一个在许多层面都颇有意味的精彩故事。&lt;/p&gt;
+&lt;p&gt;游戏中每个角色都塑造的细腻而复杂，一些细微的面部抽搐或是藏在眼角的一滴眼泪都为角色们赋予了更多的深度：沉稳的山姆、帅气而理性的芙拉吉尔、善良的小雨，他们都完美契合了整个故事的深度与宏大。&lt;/p&gt;
+&lt;p&gt;不过最让我又爱又恨的应该就是特洛伊·贝克扮演的希格斯，这个男人每次登场几乎都会抢尽风头，作为一个反派，小岛不仅没有给他设置任何洗白的剧情，甚至角色自己也多次提到自己就是为了让世界混乱而存在的，相反，希格斯在剧情中几乎是无恶不作，只要每次出场几乎就给山姆一行人造成巨大的麻烦。这种纯坏蛋反派在当今的艺术作品中反而显得更弥足珍贵了。&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776499554292-5784e523-33f7-472d-ac8b-af8054eb75c8.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;前面提到了，小岛在剧情中有非常多疯狂而抽象的表现手法（夹带私货），例如你可以在其中一个避难所给二次元纸片人送货从而获得相应奖励：&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776499659235-a37ca5ee-ec9e-4ae7-8a73-03d4e6f6e81f.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776499648865-94917317-3958-449e-b0b3-1218464f90f1.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;你也可以见证到史上最抽象的最终BOSS战：吉他对邦&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776499710489-c05d8a83-1cd6-43f3-8f39-898c8b8c31f7.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;不过这些抽象的东西我完全看不腻，小岛秀夫愿意用这种方式向我们展现在别的游戏中从未见过的事物，这也是我最喜欢这位明星制作人的一点：在大胆的创意与充足的预算相结合时，就能带来无与伦比的震撼体验。&lt;/p&gt;
+&lt;h2 id=&#34;极致的画面和优化&#34;&gt;极致的画面和优化
+&lt;/h2&gt;&lt;p&gt;《死亡搁浅2》带给我的视觉体验是震撼的，笔者i9-14900HX和RTX 5070 Laptop 8G+32G内存的配置在打开DLSS后可以高画质稳定约260帧率，即使打开光追也能稳定约110帧。&lt;/p&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776500001762-34549767-69c5-48b8-822e-cfc534e0044f.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这还不是最令人惊讶的，当我从主菜单点击&amp;quot;继续游戏&amp;quot;后仅仅花了1秒钟就进入到了游戏内时，这种丝滑的体验带给了我前所未有的冲击。&lt;/p&gt;
+&lt;h2 id=&#34;不止配乐&#34;&gt;不止配乐
+&lt;/h2&gt;&lt;p&gt;这些视觉盛宴再次得到了优秀音乐的支撑 —— 无论是 Woodkid 空灵的人声在孤寂的山峰上回荡，还是 Ludvig Forssell 那曲动人的《BB’s Theme》在完美的时机插入 —— 所有音乐都起到了令人震撼的烘托作用。尤其是在你接近目的地时，一首Low Roar的曲子更是让我深受触动并迷上了这个宝藏乐队（但可惜Low Roar的主唱在2022年因急性哮喘及并发症去世，RIP🕯️）&lt;/p&gt;
+&lt;div class=&#34;aplayer-wrap&#34;&gt;
+  &lt;meting-js
+    server=&#34;netease&#34;
+    type=&#34;song&#34;
+    id=&#34;1400013102&#34;
+    fixed=&#34;false&#34;
+    autoplay=&#34;false&#34;
+    loop=&#34;none&#34;
+    order=&#34;list&#34;
+    preload=&#34;auto&#34;
+    volume=&#34;0.7&#34;&gt;
+  &lt;/meting-js&gt;
+&lt;/div&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/1776500250512-33cdec90-cacf-4a28-b5a4-28d4e6481d73.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结
+&lt;/h2&gt;&lt;p&gt;《死亡搁浅 2：冥滩之上》无疑是对初代作品的一次全方位进化与升华。作为一款发轫于深刻哲学思考的游戏续作，它不仅延续了前作对人类社会、文明进程的深刻反思，更在叙事结构、玩法机制以及视觉呈现等多个维度实现了突破性提升。&lt;br&gt;
+新作将舞台拓展至辽阔的澳大利亚大陆，在这片陌生而神秘的土地上，开发团队构建了一个更具层次感的开放世界。游戏摒弃了前作中略显生硬的叙事节奏，在保留其一贯的哲学思辨内核的同时，赋予了故事更加自然流畅的展开方式。潜行动作玩法经过精心打磨，展现出更高的自由度与策略深度，让玩家在探索过程中始终保持新鲜感与期待感。&lt;br&gt;
+本作最令人称道之处在于其大胆（抽象）的艺术风格与创新性叙事手法。游戏中随处可见的创意闪光点，既体现在视觉表现的奇思妙想上，也渗透在剧情推进的每一个细节之中。尽管游戏仍保留着些许前作的怪诞特质，但这恰恰成为了其独特魅力的组成部分，彰显了开发团队对艺术表达的坚定追求。&lt;br&gt;
+总体而言，《死亡搁浅 2：冥滩之上》是一部极具野心与抱负的作品。它不仅成功解决了前作的诸多不足，更在多个维度上实现了自我超越。对于期待看到游戏产业不断创新的玩家来说，这是一部不可多得的佳作，也预示着这个系列未来发展的无限可能。&lt;/p&gt;
+&lt;h2 id=&#34;music-time&#34;&gt;Music Time！
+&lt;/h2&gt;&lt;p&gt;这首游戏中有着重要作用的&lt;strong&gt;Polytope&lt;/strong&gt;在游戏内外的社群中都获得了大家的一致好评，一起来欣赏一下吧！&lt;/p&gt;
+&lt;div class=&#34;aplayer-wrap&#34;&gt;
+  &lt;meting-js
+    server=&#34;netease&#34;
+    type=&#34;song&#34;
+    id=&#34;2716879804&#34;
+    fixed=&#34;false&#34;
+    autoplay=&#34;false&#34;
+    loop=&#34;none&#34;
+    order=&#34;list&#34;
+    preload=&#34;auto&#34;
+    volume=&#34;0.7&#34;&gt;
+  &lt;/meting-js&gt;
+&lt;/div&gt;
+&lt;p&gt;看到这里，如果你对《死亡搁浅2：冥滩之上》有不错的兴趣的话，不妨试试吧&lt;/p&gt;
+&lt;div style=&#34;max-width:800px; margin:2rem auto; text-align:center;&#34;&gt;
+  &lt;iframe 
+    src=&#34;https://store.steampowered.com/widget/3280350/&#34; 
+    width=&#34;100%&#34; 
+    height=&#34;190&#34; 
+    frameborder=&#34;0&#34; 
+    allowfullscreen
+    style=&#34;border-radius:8px; box-shadow:0 2px 12px rgba(0,0,0,0.1);&#34;&gt;
+  &lt;/iframe&gt;
+&lt;/div&gt;
+&lt;p&gt;笔者通关于2026年4月4日17:34，存档时长54.3h。&lt;/p&gt;
 </description>
         </item>
         <item>
