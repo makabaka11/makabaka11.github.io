@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Mon, 13 Jul 2026 21:31:58 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 14 Jul 2026 12:06:53 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>留言板 | Msg Board</title>
         <link>https://www.retr0.xyz/message/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -404,6 +404,167 @@
 </description>
         </item>
         <item>
+        <title>2.1 猜数游戏：一次猜测</title>
+        <link>https://www.retr0.xyz/p/2.1-%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F%E4%B8%80%E6%AC%A1%E7%8C%9C%E6%B5%8B/</link>
+        <pubDate>Tue, 14 Jul 2026 12:06:53 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/2.1-%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F%E4%B8%80%E6%AC%A1%E7%8C%9C%E6%B5%8B/</guid>
+        <description>&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;p class=&#34;alert-title&#34;&gt;&lt;svg class=&#34;alert-icon&#34; viewBox=&#34;0 0 16 16&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;Note&lt;/p&gt;
+    &lt;p&gt;本章中您将学会：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;let、match 等方法&lt;/li&gt;
+&lt;li&gt;相关的函数&lt;/li&gt;
+&lt;li&gt;外部的 create&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;目标&#34;&gt;目标
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;生成一个1到100间的随机数&lt;/li&gt;
+&lt;li&gt;提示玩家输入一个猜测&lt;/li&gt;
+&lt;li&gt;猜完之后，程序会提示猜测是太小了还是太大了&lt;/li&gt;
+&lt;li&gt;如果猜测正确,那么打印出一个庆祝信息，程序退出&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;上手编写&#34;&gt;上手编写
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;新建项目：&lt;code&gt;cargo new guessing_game&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;打开&lt;code&gt;src/main.rs&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;赋值输入和输出&#34;&gt;赋值、输入和输出
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;【实例】&lt;/strong&gt; 写入以下代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;use&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;::&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;fn&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;fm&#34;&gt;println!&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;欢迎进入猜数游戏&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;fm&#34;&gt;println!&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;请输入一个数字：&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;mut&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;guess&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;::&lt;span class=&#34;n&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;::&lt;span class=&#34;n&#34;&gt;stdin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;read_line&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;mut&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;guess&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;expect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;读取失败&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;fm&#34;&gt;println!&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;你输入的数字是：&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{}&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;guess&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;输入&#34;&gt;输入
+&lt;/h4&gt;&lt;p&gt;要获取用户输入内容并打印输出，我们需要使用&lt;code&gt;io&lt;/code&gt;库，而&lt;code&gt;io&lt;/code&gt;库又在标准库&lt;code&gt;std&lt;/code&gt;(Standard)中。在一般情况，Rust会自动导入一定模块到程序的作用域中，这个操作称为prelude，但是如果我们要使用的库不包含在prelude中则需要使用&lt;code&gt;use&lt;/code&gt;语句显式导入相应的库，即：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;use&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;::&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;p&gt;转到下方的io语句，可见有多个表达式通过&lt;code&gt;.&lt;/code&gt;成员访问符相连而成，让我们分开解析它：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;::&lt;span class=&#34;n&#34;&gt;stdin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这个表达式的意思是调用&lt;code&gt;io&lt;/code&gt;库中的的&lt;code&gt;stdin()&lt;/code&gt;关联函数，它会返回一个&lt;code&gt;Stdin&lt;/code&gt;类型的实例，这个实例会被用作 &lt;strong&gt;句柄（handle）&lt;/strong&gt; 来处理终端中的标准输入。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;p class=&#34;alert-title&#34;&gt;&lt;svg class=&#34;alert-icon&#34; viewBox=&#34;0 0 16 16&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;Note&lt;/p&gt;
+    &lt;p&gt;句柄是操作系统用来标识各类资源的无特殊含义整数标识，程序打开文件、窗口、网络连接、内存对象后系统会分配唯一句柄，程序通过传递句柄就能操作对应资源，不用直接访问底层资源地址，资源释放时句柄随之失效。&lt;/p&gt;
+&lt;p&gt;指针直接存储内存真实地址，可随意加减偏移、访问任意内存；句柄是系统提供的抽象编号，不暴露真实内存地址，只能传给系统API操作资源，不能直接解引用，安全性更高。指针失效会造成野指针、内存越界崩溃，句柄失效仅会操作失败，不会乱访问内存；指针多用于用户态直接操作内存，句柄用于管理文件、窗口、内核对象等系统资源。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;如果上面我们没有使用&lt;code&gt;use&lt;/code&gt;导入语句，那么这里我们也可以写成：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;::&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;::&lt;span class=&#34;n&#34;&gt;stdin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;p&gt;接下来我们调用了&lt;code&gt;io::stdin()&lt;/code&gt;这个实例当中的&lt;code&gt;read_line&lt;/code&gt;方法，注意因为此处调用的是实例中的方法，所以使用&lt;code&gt;.&lt;/code&gt;点运算符，详细说明见下方赋值部分的 &lt;strong&gt;NOTE&lt;/strong&gt; 标记。&lt;/p&gt;
+&lt;p&gt;通过&lt;code&gt;read_line&lt;/code&gt;方法，我们可以把用户输入的内容放到一个字符串当中，因此这里的参数需要一个 &lt;strong&gt;可变字符串&lt;/strong&gt; ，而这里的参数&lt;code&gt;&amp;amp;mut guess&lt;/code&gt;前带有取地址符号&lt;code&gt;&amp;amp;&lt;/code&gt;，这告诉我们这里参数是以引用的形式传入的（也就是所谓的 &lt;strong&gt;方法的参数是按引用进行传递的&lt;/strong&gt; ）&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;p class=&#34;alert-title&#34;&gt;&lt;svg class=&#34;alert-icon&#34; viewBox=&#34;0 0 16 16&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;Note&lt;/p&gt;
+    &lt;p&gt;将鼠标悬浮在&lt;code&gt;read_line&lt;/code&gt;方法上我们可以看到它的说明，其中标注了该方法有一个返回值&lt;code&gt;io::Result&amp;lt;usize&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;io::Result&lt;/code&gt; 是 &lt;code&gt;std::io&lt;/code&gt; 模块下封装好的结果类型，&lt;code&gt;&amp;lt;usize&amp;gt;&lt;/code&gt; 代表成功时返回的值为无符号整数（一般代表读取 / 写入的字节数量）。该类型用于 IO 相关操作，分为两种状态： &lt;strong&gt;Ok&lt;/strong&gt; (结果) 表示读写成功并顺带返回结果， &lt;strong&gt;Err&lt;/strong&gt; (失败原因) 表示读写失败并携带 IO 异常信息，通过该返回值，该表达式是否操作成功可以被轻易的得知。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;接下来的&lt;code&gt;ecpect()&lt;/code&gt;这个异常捕获方法就是通过读取&lt;code&gt;read_line&lt;/code&gt;的返回值来工作，当&lt;code&gt;read_line&lt;/code&gt;的返回值为Err，&lt;code&gt;ecpect()&lt;/code&gt;会中断当前的程序并显示传入的字符串信息；当&lt;code&gt;read_line&lt;/code&gt;的返回值为Ok，&lt;code&gt;ecpect()&lt;/code&gt;会提取返回值当中的结果，并将其返回给用户。&lt;/p&gt;
+&lt;p&gt;如果我们去掉&lt;code&gt;ecpect()&lt;/code&gt;直接编译程序，这会看到编译器抛出的警告，从这一点可以看出Rust的安全性。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;来到最后的输出语句：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;fm&#34;&gt;println!&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;你输入的数字是：&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{}&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;guess&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;此处的&lt;code&gt;{}&lt;/code&gt;是一个占位符，对应着后面的变量值；当一个&lt;code&gt;println!&lt;/code&gt;语句中有多个占位符和变量时，占位符会按照从前往后的顺序一一对应后面的变量。&lt;/p&gt;
+&lt;h4 id=&#34;赋值&#34;&gt;赋值
+&lt;/h4&gt;&lt;p&gt;在 Rust 当中，我们使用&lt;code&gt;let&lt;/code&gt;语句来为变量赋值，例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;one&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;num&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;one&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;上面的语句会把one和num两个变量都赋值为1。&lt;/p&gt;
+&lt;p&gt;在Rust中的一大特点就是它的变量默认是 &lt;strong&gt;不可变的（immutable）&lt;/strong&gt; ，想要让变量可变，则需要在声明变量时加上&lt;code&gt;mut&lt;/code&gt;关键字，例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;mut&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;num&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;one&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;	&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//immutable
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;num&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;p&gt;让我们回到实例当中的赋值语句：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;mut&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;guess&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;::&lt;span class=&#34;n&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这里使用等号将可变变量&lt;code&gt;guess&lt;/code&gt;绑定了右面的表达式所返回的的值。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;String::new()&lt;/code&gt;会返回一个字符串的新的实例，在 Rust 中，字符串类型即为&lt;code&gt;String&lt;/code&gt;，而&lt;code&gt;new&lt;/code&gt;是&lt;code&gt;String&lt;/code&gt;类型的一个关联函数，这里使用&lt;code&gt;::&lt;/code&gt; &lt;strong&gt;（路径分隔符）&lt;/strong&gt; 来取&lt;code&gt;String&lt;/code&gt;类型的&lt;code&gt;new&lt;/code&gt;这个项。&lt;/p&gt;
+&lt;p&gt;在Rust当中，很多类型都有一个&lt;code&gt;new()&lt;/code&gt;关联函数，您可以用它来创建一个对应的新的实例。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;p class=&#34;alert-title&#34;&gt;&lt;svg class=&#34;alert-icon&#34; viewBox=&#34;0 0 16 16&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;Note&lt;/p&gt;
+    &lt;p&gt;&lt;code&gt;::&lt;/code&gt;是Rust路径分隔符，用于模块、类型等静态命名空间，无需实例即可访问关联函数、常量、枚举变体（不针对任何一个定义出来的实例）；区别于&lt;code&gt;.&lt;/code&gt;，后者仅操作实例对象。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>1.2 Hello,Cargo</title>
         <link>https://www.retr0.xyz/p/1.2-hellocargo/</link>
         <pubDate>Mon, 13 Jul 2026 21:31:58 +0800</pubDate>
@@ -534,10 +695,9 @@
         <pubDate>Mon, 13 Jul 2026 21:31:04 +0800</pubDate>
         
         <guid>https://www.retr0.xyz/p/1.1-hello-world/</guid>
-        <description>&lt;blockquote class=&#34;alert alert-note&#34;&gt;
-    &lt;p class=&#34;alert-title&#34;&gt;&lt;svg class=&#34;alert-icon&#34; viewBox=&#34;0 0 16 16&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;Note&lt;/p&gt;
-    &lt;p&gt;Rust 是一门需要编程基础的语言，换句话说，它并不简单，建议您在开始学习 Rust &amp;gt; 前先掌
-一定的 C 或 C++ 基础。&lt;/p&gt;&lt;/blockquote&gt;
+        <description>&lt;blockquote class=&#34;alert alert-caution&#34;&gt;
+    &lt;p class=&#34;alert-title&#34;&gt;&lt;svg class=&#34;alert-icon&#34; viewBox=&#34;0 0 16 16&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;M4.47.22A.749.749 0 0 1 5 0h6c.199 0 .389.079.53.22l4.25 4.25c.141.14.22.331.22.53v6a.749.749 0 0 1-.22.53l-4.25 4.25A.749.749 0 0 1 11 16H5a.749.749 0 0 1-.53-.22L.22 11.53A.749.749 0 0 1 0 11V5c0-.199.079-.389.22-.53Zm.84 1.28L1.5 5.31v5.38l3.81 3.81h5.38l3.81-3.81V5.31L10.69 1.5ZM8 4a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 4Zm0 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;Caution&lt;/p&gt;
+    &lt;p&gt;Rust 是一门需要编程基础的语言，换句话说，它并不简单，建议您在开始学习 Rust 前先掌握一定的 C 或 C++ 基础。&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;当您已经完成rust环境的配置后，可以开始本节内容：&lt;/p&gt;
 &lt;p&gt;创建一个文件夹，例如&lt;strong&gt;rust_learn&lt;/strong&gt;，在当中新建&lt;code&gt;main.rs&lt;/code&gt;文件：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -33067,6 +33227,48 @@ SHA256：24d004a104d4d54034dbcffc2a4b19a11f39008a575aa614ea04703480b1022c&lt;/p&
         <description></description>
         </item>
         <item>
+        <title></title>
+        <link>https://www.retr0.xyz/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://www.retr0.xyz/</guid>
+        <description>&lt;h2 id=&#34;-hi-there-im-retr0&#34;&gt;👋 Hi there, I&amp;rsquo;m Retr0
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;Is my personality really that bad?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;-about-me&#34;&gt;🧑‍💻 About Me
+&lt;/h3&gt;&lt;p&gt;Nanjing University of Information Science and Technology · Marine Science · Code sometimes · Anime often&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;🔭 Maintaining &lt;a class=&#34;link&#34; href=&#34;https://github.com/AimesSoft/NipaPlay-Reload&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;NipaPlay-Reload&lt;/a&gt; (1.6k ⭐ thanks folks)&lt;/li&gt;
+&lt;li&gt;🌱 Exploring: Python · Flutter · Web Security · CTF · Penetration Testing&lt;/li&gt;
+&lt;li&gt;🤖 Working on a 2D roguelike game using the Godot engine：&lt;a class=&#34;link&#34; href=&#34;https://naiwa.retr0.xyz&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;naiwa-run&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;🎮 Playing games &amp;amp; writing reviews&lt;/li&gt;
+&lt;li&gt;🎬 Anime enthusiast&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;-tech-stack&#34;&gt;🛠️ Tech Stack
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Python · Flutter · Rust · Web Security · CTF · Kali
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Penetration Testing · A bit of frontend now and then
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;-github-stats&#34;&gt;📊 GitHub Stats
+&lt;/h3&gt;  &lt;img align=&#34;&#34; height=&#34;180px&#34; src=&#34;https://github-readme-stats-alpha-vert-25.vercel.app/api?username=makabaka11&#34;/&gt;
+&lt;h3 id=&#34;-contact&#34;&gt;📫 Contact
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Email：&lt;a class=&#34;link&#34; href=&#34;mailto:ded000@retr0.xyz&#34; &gt;ded000@retr0.xyz&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Blog：&lt;a class=&#34;link&#34; href=&#34;https://www.retr0.xyz&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;www.retr0.xyz&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>[MGA]2025个人年度游戏——《米塔MiSide》</title>
         <link>https://www.retr0.xyz/s/miside/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -33121,46 +33323,6 @@ SHA256：24d004a104d4d54034dbcffc2a4b19a11f39008a575aa614ea04703480b1022c&lt;/p&
         
         <guid>https://www.retr0.xyz/s/nx1/</guid>
         <description></description>
-        </item>
-        <item>
-        <title>关于 | About</title>
-        <link>https://www.retr0.xyz/%E5%85%B3%E4%BA%8E-about/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-        
-        <guid>https://www.retr0.xyz/%E5%85%B3%E4%BA%8E-about/</guid>
-        <description>&lt;h2 id=&#34;-hi-there-im-retr0&#34;&gt;👋 Hi there, I&amp;rsquo;m Retr0
-&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;Is my personality really that bad?&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;-about-me&#34;&gt;🧑‍💻 About Me
-&lt;/h3&gt;&lt;p&gt;Nanjing University of Information Science and Technology · Marine Science · Code sometimes · Anime often&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;🔭 Maintaining &lt;a class=&#34;link&#34; href=&#34;https://github.com/AimesSoft/NipaPlay-Reload&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;NipaPlay-Reload&lt;/a&gt; (1.5k ⭐ thanks folks)&lt;/li&gt;
-&lt;li&gt;🌱 Exploring: Python · Web Security · CTF · Penetration Testing&lt;/li&gt;
-&lt;li&gt;🎮 Playing games &amp;amp; writing reviews&lt;/li&gt;
-&lt;li&gt;🎬 Anime enthusiast&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;-tech-stack&#34;&gt;🛠️ Tech Stack
-&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Python · Web Security · CTF · Kali
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Penetration Testing · A bit of frontend now and then
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;-github-stats&#34;&gt;📊 GitHub Stats
-&lt;/h3&gt;&lt;img align=&#34;&#34; height=&#34;180px&#34; src=&#34;https://github-readme-stats-alpha-vert-25.vercel.app/api?username=makabaka11&#34;/&gt;
-&lt;h3 id=&#34;-contact&#34;&gt;📫 Contact
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;Email：&lt;a class=&#34;link&#34; href=&#34;mailto:ded000@retr0.xyz&#34; &gt;ded000@retr0.xyz&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Blog：&lt;a class=&#34;link&#34; href=&#34;https://www.retr0.xyz&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;www.retr0.xyz&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
         </item>
         <item>
         <title>技术链接 | Links</title>

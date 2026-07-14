@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="👋 Hi there, I&rsquo;m Retr0 Is my personality really that bad?\n🧑\u200d💻 About Me Nanjing University of Information Science and Technology · Marine Science · Code sometimes · Anime often\n🔭 Maintaining NipaPlay-Reload (1.5k ⭐ thanks folks) 🌱 Exploring: Python · Web Security · CTF · Penetration Testing 🎮 Playing games &amp; writing reviews 🎬 Anime enthusiast 🛠️ Tech Stack 1 2 Python · Web Security · CTF · Kali Penetration Testing · A bit of frontend now and then 📊 GitHub Stats 📫 Contact Email：ded000@retr0.xyz Blog：www.retr0.xyz ">
-<title>关于 | About</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="经典老三样：赋值、输入和输出">
+<title>2.1 猜数游戏：一次猜测</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/%E5%85%B3%E4%BA%8E-about/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/2.1-%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F%E4%B8%80%E6%AC%A1%E7%8C%9C%E6%B5%8B/'>
 
-<link rel="stylesheet" href="/scss/style.min.e99117adbedc53a15fd675f2864a3c19bf22e672c1f2d56a2e49b699b01a3bfc.css"><meta property='og:title' content="关于 | About">
-<meta property='og:description' content="👋 Hi there, I&rsquo;m Retr0 Is my personality really that bad?\n🧑\u200d💻 About Me Nanjing University of Information Science and Technology · Marine Science · Code sometimes · Anime often\n🔭 Maintaining NipaPlay-Reload (1.5k ⭐ thanks folks) 🌱 Exploring: Python · Web Security · CTF · Penetration Testing 🎮 Playing games &amp; writing reviews 🎬 Anime enthusiast 🛠️ Tech Stack 1 2 Python · Web Security · CTF · Kali Penetration Testing · A bit of frontend now and then 📊 GitHub Stats 📫 Contact Email：ded000@retr0.xyz Blog：www.retr0.xyz ">
-<meta property='og:url' content='https://www.retr0.xyz/%E5%85%B3%E4%BA%8E-about/'>
+<link rel="stylesheet" href="/scss/style.min.e99117adbedc53a15fd675f2864a3c19bf22e672c1f2d56a2e49b699b01a3bfc.css"><meta property='og:title' content="2.1 猜数游戏：一次猜测">
+<meta property='og:description' content="经典老三样：赋值、输入和输出">
+<meta property='og:url' content='https://www.retr0.xyz/p/2.1-%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F%E4%B8%80%E6%AC%A1%E7%8C%9C%E6%B5%8B/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Page' />
-<meta name="twitter:title" content="关于 | About">
-<meta name="twitter:description" content="👋 Hi there, I&rsquo;m Retr0 Is my personality really that bad?\n🧑\u200d💻 About Me Nanjing University of Information Science and Technology · Marine Science · Code sometimes · Anime often\n🔭 Maintaining NipaPlay-Reload (1.5k ⭐ thanks folks) 🌱 Exploring: Python · Web Security · CTF · Penetration Testing 🎮 Playing games &amp; writing reviews 🎬 Anime enthusiast 🛠️ Tech Stack 1 2 Python · Web Security · CTF · Kali Penetration Testing · A bit of frontend now and then 📊 GitHub Stats 📫 Contact Email：ded000@retr0.xyz Blog：www.retr0.xyz ">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-07-14T12:06:53&#43;08:00'/><meta property='article:modified_time' content='2026-07-14T12:06:53&#43;08:00'/>
+<meta name="twitter:title" content="2.1 猜数游戏：一次猜测">
+<meta name="twitter:description" content="经典老三样：赋值、输入和输出">
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css">
@@ -186,25 +186,6 @@
         </li>
         
         
-        <li  class='current' >
-            <a href='/%E5%85%B3%E4%BA%8E-about/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>关于 | About</span>
-            </a>
-        </li>
-        
-        
         <li >
             <a href='/archives/' >
                 
@@ -325,12 +306,15 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#-hi-there-im-retr0">👋 Hi there, I&rsquo;m Retr0</a>
+    <li><a href="#目标">目标</a></li>
+    <li><a href="#上手编写">上手编写</a>
       <ol>
-        <li><a href="#-about-me">🧑‍💻 About Me</a></li>
-        <li><a href="#-tech-stack">🛠️ Tech Stack</a></li>
-        <li><a href="#-github-stats">📊 GitHub Stats</a></li>
-        <li><a href="#-contact">📫 Contact</a></li>
+        <li><a href="#赋值输入和输出">赋值、输入和输出</a>
+          <ol>
+            <li><a href="#输入">输入</a></li>
+            <li><a href="#赋值">赋值</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
   </ol>
@@ -349,12 +333,24 @@
 
     <div class="article-details">
     
+    <header class="article-category">
+        
+            <a href="/categories/rust/" style="background-color: #f74c00; color: #fff;">
+                Rust
+            </a>
+        
+    </header>
+    
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/%E5%85%B3%E4%BA%8E-about/">关于 | About</a>
+            <a href="/p/2.1-%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F%E4%B8%80%E6%AC%A1%E7%8C%9C%E6%B5%8B/">2.1 猜数游戏：一次猜测</a>
         </h2>
     
+        
+        <h3 class="article-subtitle">
+            经典老三样：赋值、输入和输出
+        </h3>
         
     </div>
 
@@ -363,6 +359,19 @@
      
     
     <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-07-14 | 12:06</time>
+            </div>
         
 
         
@@ -384,38 +393,159 @@
     <section class="article-content">
     
     
-    <h2 id="-hi-there-im-retr0">👋 Hi there, I&rsquo;m Retr0
-</h2><blockquote>
-<p>Is my personality really that bad?</p>
-</blockquote>
-<h3 id="-about-me">🧑‍💻 About Me
-</h3><p>Nanjing University of Information Science and Technology · Marine Science · Code sometimes · Anime often</p>
+    <blockquote class="alert alert-note">
+    <p class="alert-title"><svg class="alert-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+    <p>本章中您将学会：</p>
 <ul>
-<li>🔭 Maintaining <a class="link" href="https://github.com/AimesSoft/NipaPlay-Reload"  target="_blank" rel="noopener"
-    >NipaPlay-Reload</a> (1.5k ⭐ thanks folks)</li>
-<li>🌱 Exploring: Python · Web Security · CTF · Penetration Testing</li>
-<li>🎮 Playing games &amp; writing reviews</li>
-<li>🎬 Anime enthusiast</li>
+<li>let、match 等方法</li>
+<li>相关的函数</li>
+<li>外部的 create</li>
+<li>&hellip;&hellip;</li>
+</ul></blockquote>
+<h2 id="目标">目标
+</h2><ul>
+<li>生成一个1到100间的随机数</li>
+<li>提示玩家输入一个猜测</li>
+<li>猜完之后，程序会提示猜测是太小了还是太大了</li>
+<li>如果猜测正确,那么打印出一个庆祝信息，程序退出</li>
 </ul>
-<h3 id="-tech-stack">🛠️ Tech Stack
-</h3><div class="highlight"><div class="chroma">
+<h2 id="上手编写">上手编写
+</h2><ol>
+<li>新建项目：<code>cargo new guessing_game</code></li>
+<li>打开<code>src/main.rs</code></li>
+</ol>
+<h3 id="赋值输入和输出">赋值、输入和输出
+</h3><p><strong>【实例】</strong> 写入以下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">io</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;欢迎进入猜数游戏&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;请输入一个数字：&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">guess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">new</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">io</span>::<span class="n">stdin</span><span class="p">().</span><span class="n">read_line</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">guess</span><span class="p">).</span><span class="n">expect</span><span class="p">(</span><span class="s">&#34;读取失败&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;你输入的数字是：</span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">guess</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="输入">输入
+</h4><p>要获取用户输入内容并打印输出，我们需要使用<code>io</code>库，而<code>io</code>库又在标准库<code>std</code>(Standard)中。在一般情况，Rust会自动导入一定模块到程序的作用域中，这个操作称为prelude，但是如果我们要使用的库不包含在prelude中则需要使用<code>use</code>语句显式导入相应的库，即：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">io</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>转到下方的io语句，可见有多个表达式通过<code>.</code>成员访问符相连而成，让我们分开解析它：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="n">io</span>::<span class="n">stdin</span><span class="p">()</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个表达式的意思是调用<code>io</code>库中的的<code>stdin()</code>关联函数，它会返回一个<code>Stdin</code>类型的实例，这个实例会被用作 <strong>句柄（handle）</strong> 来处理终端中的标准输入。</p>
+<blockquote class="alert alert-note">
+    <p class="alert-title"><svg class="alert-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+    <p>句柄是操作系统用来标识各类资源的无特殊含义整数标识，程序打开文件、窗口、网络连接、内存对象后系统会分配唯一句柄，程序通过传递句柄就能操作对应资源，不用直接访问底层资源地址，资源释放时句柄随之失效。</p>
+<p>指针直接存储内存真实地址，可随意加减偏移、访问任意内存；句柄是系统提供的抽象编号，不暴露真实内存地址，只能传给系统API操作资源，不能直接解引用，安全性更高。指针失效会造成野指针、内存越界崩溃，句柄失效仅会操作失败，不会乱访问内存；指针多用于用户态直接操作内存，句柄用于管理文件、窗口、内核对象等系统资源。</p></blockquote>
+<p>如果上面我们没有使用<code>use</code>导入语句，那么这里我们也可以写成：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="n">std</span>::<span class="n">io</span>::<span class="n">stdin</span><span class="p">()</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>接下来我们调用了<code>io::stdin()</code>这个实例当中的<code>read_line</code>方法，注意因为此处调用的是实例中的方法，所以使用<code>.</code>点运算符，详细说明见下方赋值部分的 <strong>NOTE</strong> 标记。</p>
+<p>通过<code>read_line</code>方法，我们可以把用户输入的内容放到一个字符串当中，因此这里的参数需要一个 <strong>可变字符串</strong> ，而这里的参数<code>&amp;mut guess</code>前带有取地址符号<code>&amp;</code>，这告诉我们这里参数是以引用的形式传入的（也就是所谓的 <strong>方法的参数是按引用进行传递的</strong> ）</p>
+<blockquote class="alert alert-note">
+    <p class="alert-title"><svg class="alert-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+    <p>将鼠标悬浮在<code>read_line</code>方法上我们可以看到它的说明，其中标注了该方法有一个返回值<code>io::Result&lt;usize&gt;</code></p>
+<p><code>io::Result</code> 是 <code>std::io</code> 模块下封装好的结果类型，<code>&lt;usize&gt;</code> 代表成功时返回的值为无符号整数（一般代表读取 / 写入的字节数量）。该类型用于 IO 相关操作，分为两种状态： <strong>Ok</strong> (结果) 表示读写成功并顺带返回结果， <strong>Err</strong> (失败原因) 表示读写失败并携带 IO 异常信息，通过该返回值，该表达式是否操作成功可以被轻易的得知。</p></blockquote>
+<p>接下来的<code>ecpect()</code>这个异常捕获方法就是通过读取<code>read_line</code>的返回值来工作，当<code>read_line</code>的返回值为Err，<code>ecpect()</code>会中断当前的程序并显示传入的字符串信息；当<code>read_line</code>的返回值为Ok，<code>ecpect()</code>会提取返回值当中的结果，并将其返回给用户。</p>
+<p>如果我们去掉<code>ecpect()</code>直接编译程序，这会看到编译器抛出的警告，从这一点可以看出Rust的安全性。</p>
+<hr>
+<p>来到最后的输出语句：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;你输入的数字是：</span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">guess</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>此处的<code>{}</code>是一个占位符，对应着后面的变量值；当一个<code>println!</code>语句中有多个占位符和变量时，占位符会按照从前往后的顺序一一对应后面的变量。</p>
+<h4 id="赋值">赋值
+</h4><p>在 Rust 当中，我们使用<code>let</code>语句来为变量赋值，例如：</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Python · Web Security · CTF · Kali
-</span></span><span class="line"><span class="cl">Penetration Testing · A bit of frontend now and then
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">one</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="-github-stats">📊 GitHub Stats
-</h3><img align="" height="180px" src="https://github-readme-stats-alpha-vert-25.vercel.app/api?username=makabaka11"/>
-<h3 id="-contact">📫 Contact
-</h3><ul>
-<li>Email：<a class="link" href="mailto:ded000@retr0.xyz" >ded000@retr0.xyz</a></li>
-<li>Blog：<a class="link" href="https://www.retr0.xyz"  target="_blank" rel="noopener"
-    >www.retr0.xyz</a></li>
-</ul>
+</div><p>上面的语句会把one和num两个变量都赋值为1。</p>
+<p>在Rust中的一大特点就是它的变量默认是 <strong>不可变的（immutable）</strong> ，想要让变量可变，则需要在声明变量时加上<code>mut</code>关键字，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">	</span><span class="c1">//immutable
+</span></span></span><span class="line"><span class="cl"><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>让我们回到实例当中的赋值语句：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">guess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">new</span><span class="p">();</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里使用等号将可变变量<code>guess</code>绑定了右面的表达式所返回的的值。</p>
+<p><code>String::new()</code>会返回一个字符串的新的实例，在 Rust 中，字符串类型即为<code>String</code>，而<code>new</code>是<code>String</code>类型的一个关联函数，这里使用<code>::</code> <strong>（路径分隔符）</strong> 来取<code>String</code>类型的<code>new</code>这个项。</p>
+<p>在Rust当中，很多类型都有一个<code>new()</code>关联函数，您可以用它来创建一个对应的新的实例。</p>
+<blockquote class="alert alert-note">
+    <p class="alert-title"><svg class="alert-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+    <p><code>::</code>是Rust路径分隔符，用于模块、类型等静态命名空间，无需实例即可访问关联函数、常量、枚举变体（不针对任何一个定义出来的实例）；区别于<code>.</code>，后者仅操作实例对象。</p></blockquote>
 
 </section>
 
@@ -470,6 +600,41 @@
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/1.2-hellocargo/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.2 Hello,Cargo</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.1-hello-world/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.1 Hello World</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     
@@ -1098,8 +1263,10 @@ html[data-scheme="dark"] {
         
             
         
-        发表了141篇文章 · 
-        总计236.01k字
+            
+        
+        发表了142篇文章 · 
+        总计237.96k字
     </section>
 
     

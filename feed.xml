@@ -7,7 +7,14 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Mon, 13 Jul 2026 21:31:58 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/feed.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 14 Jul 2026 12:06:53 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/feed.xml" rel="self" type="application/rss+xml" /><item>
+        <title>2.1 猜数游戏：一次猜测</title>
+        <link>https://www.retr0.xyz/p/2.1-%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F%E4%B8%80%E6%AC%A1%E7%8C%9C%E6%B5%8B/</link>
+        <pubDate>Tue, 14 Jul 2026 12:06:53 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/2.1-%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F%E4%B8%80%E6%AC%A1%E7%8C%9C%E6%B5%8B/</guid>
+        </item>
+        <item>
         <title>1.2 Hello,Cargo</title>
         <link>https://www.retr0.xyz/p/1.2-hellocargo/</link>
         <pubDate>Mon, 13 Jul 2026 21:31:58 +0800</pubDate>
@@ -244,13 +251,6 @@
         <pubDate>Fri, 06 Feb 2026 15:45:23 +0800</pubDate>
         
         <guid>https://www.retr0.xyz/p/2.6-3-%E7%BB%BC%E5%90%88%E7%AE%80%E5%8D%95-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/</guid>
-        </item>
-        <item>
-        <title>2.6-2 ctf-命令注入 渗透测试报告</title>
-        <link>https://www.retr0.xyz/p/2.6-2-ctf-%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/</link>
-        <pubDate>Fri, 06 Feb 2026 13:52:21 +0800</pubDate>
-        
-        <guid>https://www.retr0.xyz/p/2.6-2-ctf-%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/</guid>
         </item>
         </channel>
 </rss>
