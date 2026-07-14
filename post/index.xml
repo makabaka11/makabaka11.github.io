@@ -150,8 +150,7 @@
         <pubDate>Wed, 15 Jul 2026 00:27:50 +0800</pubDate>
         
         <guid>https://www.retr0.xyz/p/vibe-coding-%E5%BD%93%E4%B8%8B%E6%88%91%E4%BB%AC%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8ai%E5%BF%AB%E9%80%9F%E5%8F%82%E4%B8%8E%E9%A1%B9%E7%9B%AE%E4%BB%A5nipaplay%E4%B8%BA%E4%BE%8B/</guid>
-        <description>&lt;img src="https://www.retr0.xyz/blog-img/20260715003038133.png" alt="Featured image of post [Vibe Coding] 当下，我们如何使用AI快速参与项目：以NipaPlay为例" /&gt;&lt;h1 id=&#34;vibe-coding-当下我们如何使用ai快速参与项目以nipaplay为例&#34;&gt;[Vibe Coding] 当下，我们如何使用AI快速参与项目：以NipaPlay为例
-&lt;/h1&gt;&lt;blockquote class=&#34;alert alert-caution&#34;&gt;
+        <description>&lt;img src="https://www.retr0.xyz/blog-img/20260715003038133.png" alt="Featured image of post [Vibe Coding] 当下，我们如何使用AI快速参与项目：以NipaPlay为例" /&gt;&lt;blockquote class=&#34;alert alert-caution&#34;&gt;
     &lt;p class=&#34;alert-title&#34;&gt;&lt;svg class=&#34;alert-icon&#34; viewBox=&#34;0 0 16 16&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;M4.47.22A.749.749 0 0 1 5 0h6c.199 0 .389.079.53.22l4.25 4.25c.141.14.22.331.22.53v6a.749.749 0 0 1-.22.53l-4.25 4.25A.749.749 0 0 1 11 16H5a.749.749 0 0 1-.53-.22L.22 11.53A.749.749 0 0 1 0 11V5c0-.199.079-.389.22-.53Zm.84 1.28L1.5 5.31v5.38l3.81 3.81h5.38l3.81-3.81V5.31L10.69 1.5ZM8 4a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 4Zm0 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;Caution&lt;/p&gt;
     &lt;p&gt;&lt;strong&gt;Vibe Coding&lt;/strong&gt;，也就是用AI辅助编程，并不意味着任何一个完全没接触编程的人都能轻松写出自己的项目，它仍然需要你有较强的逻辑思维能力，建议您在开始之前至少了解任意一门高级语言并具备基础的算法思维。&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;大概在2026年3月份左右，我开始翻阅Github试图找一些项目来练手，最终便锁定了这个我自己平时也在用的弹幕番剧播放器项目：&lt;a class=&#34;link&#34; href=&#34;https://github.com/AimesSoft/NipaPlay-Reload&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
