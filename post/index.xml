@@ -405,12 +405,12 @@
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;Cargo 是 Rust 的构建系统和包管理工具
 &lt;ul&gt;
-&lt;li&gt;**用途：**构建代码、下载依赖的库、构建这些库&amp;hellip;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;用途：&lt;/strong&gt; 构建代码、下载依赖的库、构建这些库&amp;hellip;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;安装 Rust 的时候会安装 Cargo
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;安装成功检验：&lt;/strong&gt;&lt;code&gt;cargo --version&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;安装成功检验：&lt;/strong&gt; &lt;code&gt;cargo --version&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -491,13 +491,13 @@
 &lt;/ul&gt;
 &lt;h2 id=&#34;构建-cargo-项目cargo-build&#34;&gt;构建 Cargo 项目：cargo build
 &lt;/h2&gt;&lt;p&gt;要构建Cargo项目，您需要使用命令：&lt;code&gt;cargo build&lt;/code&gt;，它会在当前项目的&lt;code&gt;target/debug&lt;/code&gt;下生成可执行文件。&lt;/p&gt;
-&lt;p&gt;**注意：**第一次运行&lt;code&gt;cargo build&lt;/code&gt;会在项目目录顶层生成 &lt;code&gt;cargo.lock&lt;/code&gt;文件&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意：&lt;/strong&gt; 第一次运行&lt;code&gt;cargo build&lt;/code&gt;会在项目目录顶层生成 &lt;code&gt;cargo.lock&lt;/code&gt;文件&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;该文件负责追踪项目依赖的精确版本&lt;/li&gt;
 &lt;li&gt;不需要也不建议修改此文件&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;运行-cargo-项目cargo-run&#34;&gt;运行 Cargo 项目：cargo run
-&lt;/h2&gt;&lt;p&gt;比起 &lt;code&gt;cargo build&lt;/code&gt;,&lt;code&gt;cargo run&lt;/code&gt;命令会在编译结束后&lt;strong&gt;自动运行可执行文件&lt;/strong&gt;，但如果执行该命令时源代码没有任何修改，则不会重新编译，而是直接执行可执行文件。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;比起 &lt;code&gt;cargo build&lt;/code&gt;,&lt;code&gt;cargo run&lt;/code&gt;命令会在编译结束后 &lt;strong&gt;自动运行可执行文件&lt;/strong&gt; ，但如果执行该命令时源代码没有任何修改，则不会重新编译，而是直接执行可执行文件。&lt;/p&gt;
 &lt;h2 id=&#34;cargo-check&#34;&gt;cargo check
 &lt;/h2&gt;&lt;p&gt;使用&lt;code&gt;cargo check&lt;/code&gt;可以快速地检查代码以确保代码最终能顺利通过编译，执行后不会产生任何可执行文件。&lt;/p&gt;
 &lt;p&gt;虽然在编译时 Rust 编译器也会抛出代码的错误，但是&lt;code&gt;cargo check&lt;/code&gt;要比&lt;code&gt;cargo build&lt;/code&gt;快得多，因此编写代码的时候可以连续反复的使用&lt;code&gt;cargo check&lt;/code&gt;检查代码，提高效率&lt;/p&gt;
@@ -525,7 +525,11 @@
         <pubDate>Mon, 13 Jul 2026 21:31:04 +0800</pubDate>
         
         <guid>https://www.retr0.xyz/p/1.1-hello-world/</guid>
-        <description>&lt;p&gt;当您已经完成rust环境的配置后，可以开始本节内容：&lt;/p&gt;
+        <description>&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;p class=&#34;alert-title&#34;&gt;&lt;svg class=&#34;alert-icon&#34; viewBox=&#34;0 0 16 16&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;Note&lt;/p&gt;
+    &lt;p&gt;Rust 是一门需要编程基础的语言，换句话说，它并不简单，建议您在开始学习 Rust &amp;gt; 前先掌
+一定的 C 或 C++ 基础。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;当您已经完成rust环境的配置后，可以开始本节内容：&lt;/p&gt;
 &lt;p&gt;创建一个文件夹，例如&lt;strong&gt;rust_learn&lt;/strong&gt;，在当中新建&lt;code&gt;main.rs&lt;/code&gt;文件：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
