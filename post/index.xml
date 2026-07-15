@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Wed, 15 Jul 2026 00:27:50 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 15 Jul 2026 11:02:12 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>[动画短评]《可塑性记忆》8.4/10：新颖讨人的设定，或许能在当下焕发新生？（但愿吧）</title>
         <link>https://www.retr0.xyz/p/%E5%8A%A8%E7%94%BB%E7%9F%AD%E8%AF%84%E5%8F%AF%E5%A1%91%E6%80%A7%E8%AE%B0%E5%BF%868.4/10%E6%96%B0%E9%A2%96%E8%AE%A8%E4%BA%BA%E7%9A%84%E8%AE%BE%E5%AE%9A%E6%88%96%E8%AE%B8%E8%83%BD%E5%9C%A8%E5%BD%93%E4%B8%8B%E7%84%95%E5%8F%91%E6%96%B0%E7%94%9F%E4%BD%86%E6%84%BF%E5%90%A7/</link>
         <pubDate>Wed, 17 Jun 2026 15:33:47 +0800</pubDate>
@@ -143,6 +143,68 @@
 &lt;p&gt;夜来幽梦忽还乡，小轩窗，正梳妆。相顾无言，惟有泪千行。&lt;/p&gt;
 &lt;p&gt;料得年年肠断处，明月夜，短松冈。&lt;/p&gt;
 </description>
+        </item>
+        <item>
+        <title>2.2 猜数游戏：生成神秘数字</title>
+        <link>https://www.retr0.xyz/p/2.2-%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F%E7%94%9F%E6%88%90%E7%A5%9E%E7%A7%98%E6%95%B0%E5%AD%97/</link>
+        <pubDate>Wed, 15 Jul 2026 11:02:12 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/2.2-%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F%E7%94%9F%E6%88%90%E7%A5%9E%E7%A7%98%E6%95%B0%E5%AD%97/</guid>
+        <description>&lt;h2 id=&#34;导包&#34;&gt;导包
+&lt;/h2&gt;&lt;p&gt;要生成随机数，我们需要使用Rust中的&lt;a class=&#34;link&#34; href=&#34;https://crates.io/crates/rand&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;rand&lt;/a&gt;这个库（create），要向当前的Cargo项目中添加一个新的依赖库，可以有下面两种方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;执行命令:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cargo add &amp;lt;库名&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;打开&lt;code&gt;Cargo.toml&lt;/code&gt;文件，在[dependencies]下新的一行中写入&lt;code&gt;库名 = &amp;quot;版本号&amp;quot;&lt;/code&gt;的形式，例如：&lt;code&gt;rand = &amp;quot;0.10.2&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;调包&#34;&gt;调包
+&lt;/h2&gt;&lt;p&gt;查看rand库的文档，看到最新版rand库的导入方法：&lt;/p&gt;
+&lt;p&gt;它相当于把若干个常用的trait（抽象接口）封装为了一个prelude方便用户快速导入，&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;use&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rand&lt;/span&gt;::&lt;span class=&#34;n&#34;&gt;prelude&lt;/span&gt;::&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;p class=&#34;alert-title&#34;&gt;&lt;svg class=&#34;alert-icon&#34; viewBox=&#34;0 0 16 16&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;Note&lt;/p&gt;
+    &lt;p&gt;trait 是 &lt;strong&gt;Rust&lt;/strong&gt; 的 &lt;strong&gt;抽象接口&lt;/strong&gt; ，用来定义一组 &lt;strong&gt;共享行为&lt;/strong&gt; ，类似其他语言的接口（Interface），但功能更强。&lt;/p&gt;
+&lt;p&gt;作用：把相同的方法抽出来，让不同类型实现同一套行为，实现多态、代码复用。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;现在我们可以正式使用里面的方法来生成一个随机数了，在合适的位置写入下面的语句：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;secret_num&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rand&lt;/span&gt;::&lt;span class=&#34;n&#34;&gt;rng&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;random_range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;..=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;让我们分析等号右面的表达式：&lt;/p&gt;
+&lt;p&gt;首先&lt;code&gt;rand::rng()&lt;/code&gt;创建了一个针对变量&lt;code&gt;secret_num&lt;/code&gt;的实例，方便我们接下来的操作&lt;/p&gt;
+&lt;p&gt;然后在这个实例中，我们调用&lt;code&gt;random_range()&lt;/code&gt;在指定范围内生成随机数，范围参数是1~100，注意写法为&lt;code&gt;low..=high&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;接下来你就可以输出这个随机数了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;fm&#34;&gt;println!&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;生成的随机数是：&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{}&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;secret_num&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
         </item>
         <item>
         <title>[Vibe Coding] 当下，我们如何使用AI快速参与项目：以NipaPlay为例</title>

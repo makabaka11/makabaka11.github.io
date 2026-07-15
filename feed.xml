@@ -7,7 +7,14 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Wed, 15 Jul 2026 00:27:50 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/feed.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 15 Jul 2026 11:02:12 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/feed.xml" rel="self" type="application/rss+xml" /><item>
+        <title>2.2 猜数游戏：生成神秘数字</title>
+        <link>https://www.retr0.xyz/p/2.2-%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F%E7%94%9F%E6%88%90%E7%A5%9E%E7%A7%98%E6%95%B0%E5%AD%97/</link>
+        <pubDate>Wed, 15 Jul 2026 11:02:12 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/2.2-%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F%E7%94%9F%E6%88%90%E7%A5%9E%E7%A7%98%E6%95%B0%E5%AD%97/</guid>
+        </item>
+        <item>
         <title>[Vibe Coding] 当下，我们如何使用AI快速参与项目：以NipaPlay为例</title>
         <link>https://www.retr0.xyz/p/vibe-coding-%E5%BD%93%E4%B8%8B%E6%88%91%E4%BB%AC%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8ai%E5%BF%AB%E9%80%9F%E5%8F%82%E4%B8%8E%E9%A1%B9%E7%9B%AE%E4%BB%A5nipaplay%E4%B8%BA%E4%BE%8B/</link>
         <pubDate>Wed, 15 Jul 2026 00:27:50 +0800</pubDate>
@@ -244,13 +251,6 @@
         <pubDate>Mon, 09 Feb 2026 14:13:14 +0800</pubDate>
         
         <guid>https://www.retr0.xyz/p/%E4%B8%A2%E6%8E%89%E5%B9%BB%E6%83%B3%E5%87%86%E5%A4%87%E6%96%97%E4%BA%89/</guid>
-        </item>
-        <item>
-        <title>2.7 CISP-PTE 模拟二 全WP</title>
-        <link>https://www.retr0.xyz/p/2.7-cisp-pte-%E6%A8%A1%E6%8B%9F%E4%BA%8C-%E5%85%A8wp/</link>
-        <pubDate>Sat, 07 Feb 2026 15:58:16 +0800</pubDate>
-        
-        <guid>https://www.retr0.xyz/p/2.7-cisp-pte-%E6%A8%A1%E6%8B%9F%E4%BA%8C-%E5%85%A8wp/</guid>
         </item>
         </channel>
 </rss>
