@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="我的性格真的很糟糕吗？">
-<title>Category: 进阶渗透测试 - Retr0的小窝</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="了解Rust当中的loop函数">
+<title>2.4 猜数游戏：多次猜测</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/categories/%E8%BF%9B%E9%98%B6%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/2.4-%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F%E5%A4%9A%E6%AC%A1%E7%8C%9C%E6%B5%8B/'>
 
-<link rel="stylesheet" href="/scss/style.min.e99117adbedc53a15fd675f2864a3c19bf22e672c1f2d56a2e49b699b01a3bfc.css"><meta property='og:title' content="Category: 进阶渗透测试 - Retr0的小窝">
-<meta property='og:description' content="我的性格真的很糟糕吗？">
-<meta property='og:url' content='https://www.retr0.xyz/categories/%E8%BF%9B%E9%98%B6%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/'>
+<link rel="stylesheet" href="/scss/style.min.e99117adbedc53a15fd675f2864a3c19bf22e672c1f2d56a2e49b699b01a3bfc.css"><meta property='og:title' content="2.4 猜数游戏：多次猜测">
+<meta property='og:description' content="了解Rust当中的loop函数">
+<meta property='og:url' content='https://www.retr0.xyz/p/2.4-%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F%E5%A4%9A%E6%AC%A1%E7%8C%9C%E6%B5%8B/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-07-16T16:51:26&#43;08:00 '/>
-<meta name="twitter:title" content="Category: 进阶渗透测试 - Retr0的小窝">
-<meta name="twitter:description" content="我的性格真的很糟糕吗？"><link rel="alternate" type="application/rss&#43;xml" href="https://www.retr0.xyz/categories/%E8%BF%9B%E9%98%B6%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/index.xml">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-07-16T16:51:26&#43;08:00'/><meta property='article:modified_time' content='2026-07-16T16:51:26&#43;08:00'/>
+<meta name="twitter:title" content="2.4 猜数游戏：多次猜测">
+<meta name="twitter:description" content="了解Rust当中的loop函数">
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css">
@@ -26,7 +26,9 @@
         <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     </head>
-    <body class="">
+    <body class="
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -301,262 +303,661 @@
     </ol>
 </aside>
 
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                <form action="/search/" class="search-form widget" >
-        <p>
-            <label>搜索</label>
-            <input name="keyword" required placeholder="输入关键词..." />
-        
-            <button title="搜索">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
+    
 
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
 
-
-            </button>
-        </p>
-    </form>
-            
+    <div class="article-details">
+    
+    <header class="article-category">
         
-            
-                <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">归档</h2>
-
-        
-        
-        
-        
-        
-        <div class="widget-archive--list">
-            <div class="archives-year">
-                    <a href="/archives/#2026">
-                        
-                            <span class="year">2026</span>
-                            <span class="count">74</span>
-                        
-                    </a> 
-                </div>
-            <div class="archives-year">
-                    <a href="/archives/#2025">
-                        
-                            <span class="year">2025</span>
-                            <span class="count">72</span>
-                        
-                    </a> 
-                </div>
-            
-        </div>
-    </section>
-            
-        
-            
-                <section class="widget tagCloud">
-    <div class="widget-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-    </div>
-    <h2 class="widget-title section-title">分类</h2>
-
-    <div class="tagCloud-tags">
-        
-            <a href="/categories/%E7%BD%91%E5%AE%89/" class="font_size_50">
-                网安
-            </a>
-        
-            <a href="/categories/python/" class="font_size_34">
-                Python
-            </a>
-        
-            <a href="/categories/%E8%BF%9B%E9%98%B6%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" class="font_size_24">
-                进阶渗透测试
-            </a>
-        
-            <a href="/categories/%E5%BD%B1%E8%A7%86/" class="font_size_17">
-                影视
-            </a>
-        
-            <a href="/categories/%E5%9F%BA%E7%A1%80%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" class="font_size_16">
-                基础渗透测试
-            </a>
-        
-            <a href="/categories/%E6%B8%B8%E6%88%8F/" class="font_size_16">
-                游戏
-            </a>
-        
-            <a href="/categories/anime/" class="font_size_15">
-                Anime
-            </a>
-        
-            <a href="/categories/ctf/" class="font_size_7">
-                CTF
-            </a>
-        
-            <a href="/categories/%E6%9D%82%E9%A1%B9/" class="font_size_7">
-                杂项
-            </a>
-        
-            <a href="/categories/rust/" class="font_size_6">
+            <a href="/categories/rust/" style="background-color: #f74c00; color: #fff;">
                 Rust
             </a>
         
-    </div>
-</section>
-
-            
-        
-    </aside>
-
-
-            <main class="main full-width">
-    <header>
-        <h3 class="section-title">
-            
-                Categories
-            
-        </h3>
-
-        <div class="section-card">
-            <div class="section-details">
-                <h3 class="section-count">24 个页面</h3>
-                <h1 class="section-term">进阶渗透测试</h1>
-                
-            </div>
-        </div>
     </header>
     
-    <section class="article-list--compact">
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/2.4-%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F%E5%A4%9A%E6%AC%A1%E7%8C%9C%E6%B5%8B/">2.4 猜数游戏：多次猜测</a>
+        </h2>
+    
         
-            <article>
-    <a href="/p/2.7-cisp-pte-%E6%A8%A1%E6%8B%9F%E4%BA%8C-%E5%85%A8wp/">
-        <div class="article-details">
-            <h2 class="article-title">2.7 CISP-PTE 模拟二 全WP</h2>
-            <footer class="article-time">
-                <time datetime='2026-02-07T15:58:16&#43;08:00'>2026-02-07 | 15:58</time>
-            </footer>
+        <h3 class="article-subtitle">
+            了解Rust当中的loop函数
+        </h3>
+        
+    </div>
+
+    
+    
+     
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-07-16 | 16:51</time>
+            </div>
+        
+
+        
+
+        
+        <div id="viewCount">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
         </div>
-    </a>
-</article>
-        
-            <article>
-    <a href="/p/2.6-3-%E7%BB%BC%E5%90%88%E7%AE%80%E5%8D%95-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/">
-        <div class="article-details">
-            <h2 class="article-title">2.6-3 综合简单 渗透测试报告</h2>
-            <footer class="article-time">
-                <time datetime='2026-02-06T15:45:23&#43;08:00'>2026-02-06 | 15:45</time>
-            </footer>
-        </div>
-    </a>
-</article>
-        
-            <article>
-    <a href="/p/2.6-2-ctf-%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/">
-        <div class="article-details">
-            <h2 class="article-title">2.6-2 ctf-命令注入 渗透测试报告</h2>
-            <footer class="article-time">
-                <time datetime='2026-02-06T13:52:21&#43;08:00'>2026-02-06 | 13:52</time>
-            </footer>
-        </div>
-    </a>
-</article>
-        
-            <article>
-    <a href="/p/2.6-1-dc4%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/">
-        <div class="article-details">
-            <h2 class="article-title">2.6-1 DC4渗透测试报告</h2>
-            <footer class="article-time">
-                <time datetime='2026-02-06T13:46:53&#43;08:00'>2026-02-06 | 13:46</time>
-            </footer>
-        </div>
-    </a>
-</article>
-        
-            <article>
-    <a href="/p/2.5-dc%E9%9D%B6%E5%9C%BA%E4%B9%8B%E7%BB%BC%E5%90%88%E6%B8%97%E9%80%8F/">
-        <div class="article-details">
-            <h2 class="article-title">2.5 DC靶场之综合渗透</h2>
-            <footer class="article-time">
-                <time datetime='2026-02-05T17:36:57&#43;08:00'>2026-02-05 | 17:36</time>
-            </footer>
-        </div>
-    </a>
-</article>
-        
-            <article>
-    <a href="/p/2.3-sp-pte%E6%A8%A1%E6%8B%9F%E5%85%A8wp/">
-        <div class="article-details">
-            <h2 class="article-title">2.3-SP PTE模拟全WP</h2>
-            <footer class="article-time">
-                <time datetime='2026-02-03T20:40:01&#43;08:00'>2026-02-03 | 20:40</time>
-            </footer>
-        </div>
-    </a>
-</article>
-        
-            <article>
-    <a href="/p/2.3-%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">
-        <div class="article-details">
-            <h2 class="article-title">2.3 代码审计</h2>
-            <footer class="article-time">
-                <time datetime='2026-02-03T20:39:40&#43;08:00'>2026-02-03 | 20:39</time>
-            </footer>
-        </div>
-    </a>
-</article>
-        
-            <article>
-    <a href="/p/2.2-%E6%95%B0%E5%AD%97%E5%8F%96%E8%AF%81/">
-        <div class="article-details">
-            <h2 class="article-title">2.2 数字取证</h2>
-            <footer class="article-time">
-                <time datetime='2026-02-02T18:14:46&#43;08:00'>2026-02-02 | 18:14</time>
-            </footer>
-        </div>
-    </a>
-</article>
-        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>到目前为止，我们的猜数游戏还只允许猜测一次，这显然不正常，因此我们要创建一个无限循环，让用户直到猜对为止，使用<code>loop</code>语句，将从用户输入到判断结果并输出的全部代码包裹进去，注意内部的代码和loop之间存在缩进：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="k">loop</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;请输入一个数字：&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">guess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">new</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">io</span>::<span class="n">stdin</span><span class="p">().</span><span class="n">read_line</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">guess</span><span class="p">).</span><span class="n">expect</span><span class="p">(</span><span class="s">&#34;读取失败&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">guess</span>:<span class="kt">u32</span> <span class="o">=</span><span class="w"> </span><span class="n">guess</span><span class="p">.</span><span class="n">trim</span><span class="p">().</span><span class="n">parse</span><span class="p">().</span><span class="n">expect</span><span class="p">(</span><span class="s">&#34;您输入的不是整数！&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;你输入的数字是：</span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">guess</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="n">guess</span><span class="p">.</span><span class="n">cmp</span><span class="p">(</span><span class="o">&amp;</span><span class="n">secret_num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Ordering</span>::<span class="n">Less</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;小了&#34;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Ordering</span>::<span class="n">Greater</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;大了&#34;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Ordering</span>::<span class="n">Equal</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;您猜对了！&#34;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样一来loop内的代码就会不断循环运行，可是这会导致即使用户猜对了程序也不退出。</p>
+<p>为此，我们只需给判断猜对后的表达式加上<code>break</code>，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="n">guess</span><span class="p">.</span><span class="n">cmp</span><span class="p">(</span><span class="o">&amp;</span><span class="n">secret_num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Ordering</span>::<span class="n">Less</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;小了&#34;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Ordering</span>::<span class="n">Greater</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;大了&#34;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Ordering</span>::<span class="n">Equal</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;您猜对了！&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                           </span><span class="k">break</span><span class="p">;}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>相信您在玩这个猜数游戏时肯定会遇到不小心输入了非整数的情景，这时候程序就会立刻崩溃停止，那么我们如何增强程序的健壮性呢？</p>
+<p>首先找到触发崩溃的代码为止，很显然问题就出在<code>guess</code>的u32类型转换上，后面使用了<code>expect</code>来输出报错，但是这并不能阻止程序的停止，为此，我们可以使用match来处理这里的异常。</p>
+<p>在之前，我们已经介绍了<code>parse()</code>方法会返回<code>Result</code>类型的返回值，也就是<code>Ok(num)</code>和<code>Err(_)</code>两种形式的数据，所以我们可以直接把他们当成两个分支使用match来枚举，做如下替换：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="n">guess</span>:<span class="kt">u32</span> <span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">guess</span><span class="p">.</span><span class="n">trim</span><span class="p">().</span><span class="n">parse</span><span class="p">(){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nb">Ok</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">num</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nb">Err</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">continue</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意此处的<code>Ok(num) =&gt; num,</code>使用了形参<code>num</code>来输出转换的结果，<code>Err(_)</code>中的<code>_</code>通配符表示我们不关心里面的具体信息。</p>
+<blockquote class="alert alert-note">
+    <p class="alert-title"><svg class="alert-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+    <p>在Rust中，常使用match语句来处理异常，增强程序的健壮性。</p></blockquote>
+<hr>
+<p>至此，我们得到了完整可玩的猜数游戏：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">io</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">cmp</span>::<span class="n">Ordering</span>::<span class="p">{</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">Less</span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">rand</span>::<span class="n">prelude</span>::<span class="o">*</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;欢迎进入猜数游戏&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">secret_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span>::<span class="n">rng</span><span class="p">().</span><span class="n">random_range</span><span class="p">(</span><span class="mi">1</span><span class="o">..=</span><span class="mi">100</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">loop</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;请输入一个数字：&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">guess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">new</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">io</span>::<span class="n">stdin</span><span class="p">().</span><span class="n">read_line</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">guess</span><span class="p">).</span><span class="n">expect</span><span class="p">(</span><span class="s">&#34;读取失败&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">guess</span>:<span class="kt">u32</span> <span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">guess</span><span class="p">.</span><span class="n">trim</span><span class="p">().</span><span class="n">parse</span><span class="p">(){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="nb">Ok</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">num</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="nb">Err</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">continue</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;你输入的数字是：</span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">guess</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">match</span><span class="w"> </span><span class="n">guess</span><span class="p">.</span><span class="n">cmp</span><span class="p">(</span><span class="o">&amp;</span><span class="n">secret_num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">Ordering</span>::<span class="n">Less</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;小了&#34;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">Ordering</span>::<span class="n">Greater</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;大了&#34;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">Ordering</span>::<span class="n">Equal</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;您猜对了！&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">break</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>本章内容到此结束=）</p>
+<h1 id="𝓕𝓲𝓷">𝓕𝓲𝓷
+</h1>
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
     </section>
-    <nav class='pagination'>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+<div class="math-katex"></div>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/2.3-%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F%E6%AF%94%E8%BE%83%E7%8C%9C%E6%B5%8B%E6%95%B0%E5%AD%97%E5%92%8C%E7%A5%9E%E7%A7%98%E6%95%B0%E5%AD%97/">
         
         
 
-        
-            
-                <span class='page-link current'>1</span>
-                
-            
-            
-                    <a class='page-link' href='/categories/%E8%BF%9B%E9%98%B6%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/page/2/'>2</a>
-                
-            
-            
-                    <a class='page-link' href='/categories/%E8%BF%9B%E9%98%B6%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/page/3/'>3</a>
-                
-            
-    </nav>
+        <div class="article-details">
+            <h2 class="article-title">2.3 猜数游戏：比较猜测数字和神秘数字</h2>
+        </div>
+    </a>
+</article>
 
-<footer class="site-footer">
+            
+                
+<article class="">
+    <a href="/p/2.2-%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F%E7%94%9F%E6%88%90%E7%A5%9E%E7%A7%98%E6%95%B0%E5%AD%97/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2.2 猜数游戏：生成神秘数字</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/2.1-%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F%E4%B8%80%E6%AC%A1%E7%8C%9C%E6%B5%8B/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2.1 猜数游戏：一次猜测</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.2-hellocargo/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.2 Hello,Cargo</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/1.1-hello-world/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">1.1 Hello World</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+        <div class="comment-container mt-8"></div>
+        
+        
+    <div id="waline" class="waline-container"></div>
+<style>
+ 
+
+ 
+:root,
+[data-scheme="light"] {
+    --waline-theme-color: #D97706;
+    --waline-active-color: #B45309;
+    --waline-white: #fff;
+    --waline-light-grey: #999;
+    --waline-dark-grey: #666;
+    --waline-color: #444;
+    --waline-bgcolor: transparent;
+    --waline-bgcolor-light: transparent;
+     
+    --waline-bgcolor-hover: rgba(217, 119, 6, 0.08);
+     
+    --waline-border-color: rgba(218, 218, 218, 0.4);
+    --waline-disable-bgcolor: rgba(0, 0, 0, 0.04);
+    --waline-disable-color: #bbb;
+    --waline-code-bgcolor: #fafafa;
+     
+    --waline-bq-color: rgba(217, 119, 6, 0.06);
+    --waline-badge-color: #D97706;
+    --waline-badge-font-size: 0.75em;
+    --waline-info-bgcolor: transparent;
+    --waline-info-color: #999;
+    --waline-info-font-size: 0.75em;
+    --waline-font-size: 16px;
+    --waline-border: none;
+    --waline-avatar-radius: 50%;
+    --waline-box-shadow: none;
+
+     
+     
+    --wl-glass-bg:       rgba(255, 255, 255, 0.85);
+     
+    --wl-glass-bg-cards: rgba(255, 255, 255, 0.8);
+     
+    --wl-glass-bg-panel: rgba(255, 255, 255, 0.78);
+     
+    --wl-glass-bg-input: rgba(255, 255, 255, 0.82);
+     
+    --wl-glass-border:   rgba(0, 0, 0, 0.08);
+     
+    --wl-glass-shadow:   0 2px 10px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+ 
+ 
+html[data-scheme="dark"] {
+    --waline-theme-color: #60A5FA;
+    --waline-active-color: #93BBFD;
+
+     
+    --waline-white: #fff;
+    --waline-light-grey: rgba(255, 255, 255, 0.72);
+    --waline-dark-grey: rgba(255, 255, 255, 0.88);
+
+    --waline-color: rgba(255, 255, 255, 0.85);
+    --waline-bgcolor: transparent;
+    --waline-bgcolor-light: transparent;
+     
+    --waline-bgcolor-hover: rgba(96, 165, 250, 0.12);
+     
+    --waline-border-color: rgba(255, 255, 255, 0.1);
+    --waline-disable-bgcolor: rgba(255, 255, 255, 0.05);
+    --waline-disable-color: rgba(255, 255, 255, 0.25);
+    --waline-code-bgcolor: #272822;
+     
+    --waline-bq-color: rgba(96, 165, 250, 0.08);
+    --waline-badge-color: #60A5FA;
+    --waline-badge-font-size: 0.75em;
+    --waline-info-bgcolor: transparent;
+    --waline-info-color: rgba(255, 255, 255, 0.7);
+    --waline-info-font-size: 0.75em;
+    --waline-font-size: 16px;
+    --waline-border: none;
+    --waline-avatar-radius: 50%;
+    --waline-box-shadow: none;
+
+     
+     
+    --wl-glass-bg:       rgba(255, 255, 255, 0.12);
+     
+    --wl-glass-bg-cards: rgba(255, 255, 255, 0.1);
+     
+    --wl-glass-bg-panel: rgba(255, 255, 255, 0.1);
+     
+    --wl-glass-bg-input: rgba(255, 255, 255, 0.13);
+     
+    --wl-glass-border:   rgba(255, 255, 255, 0.16);
+     
+    --wl-glass-shadow:   0 4px 16px rgba(0, 0, 0, 0.45);
+}
+
+ 
+
+ 
+#waline {
+    background: var(--wl-glass-bg-cards) !important;
+    backdrop-filter: blur(10px) saturate(120%);
+    -webkit-backdrop-filter: blur(10px) saturate(120%);
+    border: 1px solid var(--wl-glass-border) !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    box-shadow: var(--wl-glass-shadow) !important;
+}
+
+ 
+#waline .wl-panel {
+     
+    background: transparent !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 1px solid var(--wl-glass-border) !important;
+    border-radius: 12px !important;
+    padding: 16px !important;
+    margin-top: 20px !important;
+    box-shadow: var(--wl-glass-shadow) !important;
+}
+
+ 
+#waline .wl-cards {
+    background: transparent !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin-top: 8px !important;
+}
+
+ 
+#waline .wl-card-item > .wl-card {
+    background: transparent !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-radius: 8px !important;
+    padding: 8px 4px !important;
+    margin: 0 !important;
+}
+
+ 
+#waline .wl-input,
+#waline .wl-editor {
+    background: var(--wl-glass-bg-input) !important;
+    border: 1px solid var(--wl-glass-border) !important;
+    border-radius: 8px !important;
+    box-shadow: var(--wl-glass-shadow) !important;
+}
+
+ 
+#waline .wl-emoji-popup,
+#waline .wl-gif-popup {
+    background: var(--wl-glass-bg) !important;
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid var(--wl-glass-border) !important;
+    box-shadow: var(--wl-glass-shadow) !important;
+}
+
+ 
+
+ 
+[data-scheme="dark"] #waline .wl-count {
+    color: rgba(255, 255, 255, 0.92) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-header label {
+    color: rgba(255, 255, 255, 0.78) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-card .wl-nick,
+[data-scheme="dark"] #waline .wl-card span.wl-nick {
+    color: rgba(255, 255, 255, 0.92) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-card .wl-time {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-content {
+    color: rgba(255, 255, 255, 0.88) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-card .wl-reply,
+[data-scheme="dark"] #waline .wl-card .wl-like,
+[data-scheme="dark"] #waline .wl-card .wl-edit,
+[data-scheme="dark"] #waline .wl-card .wl-delete {
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+[data-scheme="dark"] #waline .wl-card .wl-reply:hover,
+[data-scheme="dark"] #waline .wl-card .wl-like:hover,
+[data-scheme="dark"] #waline .wl-card .wl-edit:hover,
+[data-scheme="dark"] #waline .wl-card .wl-delete:hover {
+    color: var(--waline-theme-color) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-empty {
+    color: rgba(255, 255, 255, 0.72) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-meta > span {
+    color: rgba(255, 255, 255, 0.72) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-page button {
+    color: rgba(255, 255, 255, 0.78) !important;
+}
+
+ 
+
+[data-scheme="light"] #waline .wl-editor:focus,
+[data-scheme="light"] #waline .wl-input:focus {
+    box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15) !important;
+    border-color: var(--waline-theme-color) !important;
+}
+[data-scheme="dark"] #waline .wl-editor:focus,
+[data-scheme="dark"] #waline .wl-input:focus {
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15) !important;
+    border-color: var(--waline-theme-color) !important;
+}
+
+#waline .wl-btn.primary {
+    border-radius: 8px !important;
+    font-weight: 600;
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+#waline .wl-btn.primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+#waline .wl-btn:not(.primary) {
+    border-radius: 8px !important;
+}
+
+[data-scheme="light"] #waline .wl-card-item .wl-card-item {
+    border-left: 3px solid rgba(217, 119, 6, 0.3) !important;
+}
+[data-scheme="dark"] #waline .wl-card-item .wl-card-item {
+    border-left: 3px solid rgba(96, 165, 250, 0.3) !important;
+}
+
+#waline .wl-emoji-popup button {
+    transition: transform 0.15s ease;
+}
+#waline .wl-emoji-popup button:hover {
+    transform: scale(1.2);
+}
+
+#waline .wl-user-avatar img,
+#waline .wl-avatar img {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+[data-scheme="light"] #waline blockquote {
+    border-left-color: #FDE68A !important;
+}
+[data-scheme="dark"] #waline blockquote {
+    border-left-color: rgba(96, 165, 250, 0.4) !important;
+}
+
+#waline .wl-power {
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+}
+#waline .wl-power:hover {
+    opacity: 1;
+}
+
+[data-scheme="dark"] #waline pre code,
+[data-scheme="dark"] #waline .wl-content pre code {
+    color: #ccc !important;
+}
+</style><script>
+    
+    
+    
+    
+    window._walineConfig = {"avatar":"","dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://unpkg.com/@waline/emojis@1.4.0/tw-emoji"],"lang":"zh-CN","locale":{"admin":"Admin","placeholder":"真的不想说点什么吗..."},"requiredMeta":["nick","email"],"serverURL":"https://waline.retr0.xyz/"};
+    
+    if (typeof initWaline === 'function') {
+        initWaline();
+    }
+</script>
+
+    
+
+    <footer class="site-footer">
     <section class="copyright">
         &copy; 
         
@@ -904,6 +1305,84 @@
         
     </section>
 </footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
 
 
                 <script src="/js/APlayer.min.js"></script>
