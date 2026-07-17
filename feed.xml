@@ -7,7 +7,14 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Thu, 16 Jul 2026 16:51:26 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/feed.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 17 Jul 2026 09:51:40 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/feed.xml" rel="self" type="application/rss+xml" /><item>
+        <title>3.1 变量与可变性</title>
+        <link>https://www.retr0.xyz/p/3.1-%E5%8F%98%E9%87%8F%E4%B8%8E%E5%8F%AF%E5%8F%98%E6%80%A7/</link>
+        <pubDate>Fri, 17 Jul 2026 09:51:40 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/3.1-%E5%8F%98%E9%87%8F%E4%B8%8E%E5%8F%AF%E5%8F%98%E6%80%A7/</guid>
+        </item>
+        <item>
         <title>2.4 猜数游戏：多次猜测</title>
         <link>https://www.retr0.xyz/p/2.4-%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F%E5%A4%9A%E6%AC%A1%E7%8C%9C%E6%B5%8B/</link>
         <pubDate>Thu, 16 Jul 2026 16:51:26 +0800</pubDate>
@@ -244,13 +251,6 @@
         <pubDate>Mon, 16 Feb 2026 18:37:19 +0800</pubDate>
         
         <guid>https://www.retr0.xyz/p/%E6%B8%B8%E6%88%8F%E6%97%A0%E8%AF%84%E8%AE%BA%E8%8D%92%E9%87%8E%E5%A4%A7%E9%95%96%E5%AE%A2%E6%95%91%E8%B5%8E210/10%E5%8D%8E%E4%B8%BD%E7%9A%84%E5%B7%A8%E5%9E%8B%E8%A5%BF%E9%83%A8%E5%8F%B2%E8%AF%97/</guid>
-        </item>
-        <item>
-        <title>[游戏短评]《To the moon 去月球》8/10：一场执念，编织独立游戏叙事的温情星河</title>
-        <link>https://www.retr0.xyz/p/%E6%B8%B8%E6%88%8F%E7%9F%AD%E8%AF%84to-the-moon-%E5%8E%BB%E6%9C%88%E7%90%838/10%E4%B8%80%E5%9C%BA%E6%89%A7%E5%BF%B5%E7%BC%96%E7%BB%87%E7%8B%AC%E7%AB%8B%E6%B8%B8%E6%88%8F%E5%8F%99%E4%BA%8B%E7%9A%84%E6%B8%A9%E6%83%85%E6%98%9F%E6%B2%B3/</link>
-        <pubDate>Mon, 16 Feb 2026 10:24:34 +0800</pubDate>
-        
-        <guid>https://www.retr0.xyz/p/%E6%B8%B8%E6%88%8F%E7%9F%AD%E8%AF%84to-the-moon-%E5%8E%BB%E6%9C%88%E7%90%838/10%E4%B8%80%E5%9C%BA%E6%89%A7%E5%BF%B5%E7%BC%96%E7%BB%87%E7%8B%AC%E7%AB%8B%E6%B8%B8%E6%88%8F%E5%8F%99%E4%BA%8B%E7%9A%84%E6%B8%A9%E6%83%85%E6%98%9F%E6%B2%B3/</guid>
         </item>
         </channel>
 </rss>
