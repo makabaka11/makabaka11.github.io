@@ -7,7 +7,164 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Fri, 17 Jul 2026 09:51:40 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/rust/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 18 Jul 2026 10:13:05 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/rust/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>3.2 数据类型：标量类型</title>
+        <link>https://www.retr0.xyz/p/3.2-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%A0%87%E9%87%8F%E7%B1%BB%E5%9E%8B/</link>
+        <pubDate>Sat, 18 Jul 2026 10:13:05 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/3.2-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%A0%87%E9%87%8F%E7%B1%BB%E5%9E%8B/</guid>
+        <description>&lt;h2 id=&#34;数据类型&#34;&gt;数据类型
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;数据类型分为标量和复合类型&lt;/li&gt;
+&lt;li&gt;Rust是静态编译语言,在编译时必须知道所有变量的类型
+&lt;ul&gt;
+&lt;li&gt;基于使用的值,编译器通常能够推断出它的具体类型&lt;/li&gt;
+&lt;li&gt;但如果可能的类型比较多（例如把String转为整数的parse方法），就必须添加类型的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;标注，否则编译会报错，例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;:&lt;span class=&#34;kt&#34;&gt;u32&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;42&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;trim&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;parse&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;expect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Not a number!&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;	&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;正确，因为显式声明了数据类型&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//let x = &amp;#34;42&amp;#34;.trim().parse().expect(&amp;#34;Not a number!&amp;#34;);	错误，没有声明数据类型
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;标量类型&#34;&gt;标量类型
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;一个标量代表一个单一的值&lt;/li&gt;
+&lt;li&gt;Rust 有四个主要的标量类型：
+&lt;ul&gt;
+&lt;li&gt;整数类型&lt;/li&gt;
+&lt;li&gt;浮点类型&lt;/li&gt;
+&lt;li&gt;布尔类型&lt;/li&gt;
+&lt;li&gt;字符类型&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;整数类型&#34;&gt;整数类型
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;整数类型没有小数部分&lt;/li&gt;
+&lt;li&gt;例如 u32 就是一个无符号的整数类型，占据 32 位的空间；范围：0~4,294,967,295（即 2^32 - 1）&lt;/li&gt;
+&lt;li&gt;无符号整数类型以 u 开头（unsinged int）&lt;/li&gt;
+&lt;li&gt;有符号整数类型以 i 开头（int）&lt;/li&gt;
+&lt;li&gt;Rust 的整数类型列表如图：
+&lt;ul&gt;
+&lt;li&gt;每种都分i 和 u，以及固定的位数：&lt;/li&gt;
+&lt;li&gt;有符号范围：-2&lt;sup&gt;n-1 &lt;/sup&gt;到 2&lt;sup&gt;n-1&lt;/sup&gt;-1&lt;/li&gt;
+&lt;li&gt;无符号范围：0 到 2&lt;sup&gt;n&lt;/sup&gt; - 1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.nlark.com/yuque/0/2026/png/61753668/1784336148010-8583e261-74cd-47b3-954d-e0ee0f059678.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-important&#34;&gt;
+    &lt;p class=&#34;alert-title&#34;&gt;&lt;svg class=&#34;alert-icon&#34; viewBox=&#34;0 0 16 16&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;Important&lt;/p&gt;
+    &lt;p&gt;特殊：isize 和 usize 类型&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;isize 和 useize 类型的位数由程序运行的计算机的架构所决定：
+&lt;ul&gt;
+&lt;li&gt;如果是 64 位计算机的，那就是 64 位的&lt;/li&gt;
+&lt;li&gt;. . .&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;使用 isize 或 usize 的主要场景是对某种集合进行索引操作&lt;/li&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;h4 id=&#34;整数字面值&#34;&gt;整数字面值
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;除了 byte 类型外，所有的数值字面值都允许使用类型后缀（例如 57u8）&lt;/li&gt;
+&lt;li&gt;如果你不太清楚应该使用哪种类型，可以使用 Rust 相应的 &lt;strong&gt;默认类型&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;整数的默认类型是 i32：总体上来说速度很快，即使在 64 位系统中&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- 这是一张图片，ocr 内容为： --&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.nlark.com/yuque/0/2026/png/61753668/1784336801037-61a3fb6c-7b65-4b7c-b6a9-8665a1e5961b.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;整数溢出&#34;&gt;整数溢出
+&lt;/h4&gt;&lt;p&gt;整数溢出指的是整数的值超出它的数据类型的范围，例如：&lt;/p&gt;
+&lt;p&gt;u8 的范围是 0-255，如果你把一个 u8 变量的值设为 256，那么：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;调试模式下编译：Rust 会检查整数溢出，如果发生溢出，程序在运行时就会panic&lt;/li&gt;
+&lt;li&gt;发布模式下（&amp;ndash;release）编译：Rust 不会检查可能导致 panic 的整数溢出。如果溢出发生，Rust会执行“环绕”操作：
+&lt;ul&gt;
+&lt;li&gt;256变成0，257变成1&amp;hellip;&lt;/li&gt;
+&lt;li&gt;但程序不会panic&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;浮点类型&#34;&gt;浮点类型
+&lt;/h3&gt;&lt;p&gt;Rust 有两种基础的浮点类型，也就是含有小数部分的类型&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;f32，32位，单精度&lt;/li&gt;
+&lt;li&gt;f64，64位，双精度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Rust 的浮点类型使用了 IEEE-754 标准来表述。&lt;/p&gt;
+&lt;p&gt;Rust 中浮点类型的默认类型是 f64，因为在现代 CPU 上 f64 和 f32 的速度差不多，而且精度更高。&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;1.28&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;	&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//不带显式声明
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;:&lt;span class=&#34;kt&#34;&gt;f32&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;2.56&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;	&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//带显式声明
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;布尔类型&#34;&gt;布尔类型
+&lt;/h3&gt;&lt;p&gt;Rust 的布尔类型也有两个值：&lt;code&gt;true&lt;/code&gt;和&lt;code&gt;false&lt;/code&gt;，都只占一个字节大小。符号是bool，例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;t&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;	&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//不带显式声明
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;:&lt;span class=&#34;nc&#34;&gt;boll&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;flase&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;	&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//带显式声明
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;字符类型&#34;&gt;字符类型
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Rust中的char类型被用来描述语言中最基础的单个字符&lt;/li&gt;
+&lt;li&gt;字符类型的字面值使用单引号&lt;/li&gt;
+&lt;li&gt;占用 4 字节大小&lt;/li&gt;
+&lt;li&gt;是 Unicode 标量值，可以表示比 ASCII 多得多的字符内容：拼音、中日韩文、林长度空白字符、emoji 标签等，范围： &lt;strong&gt;U+0000到U+D7FF&lt;/strong&gt; 和 &lt;strong&gt;U+E000到U+10FFFF&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;但 Unicode 中并没有“字符”的概念，所以直觉上认为的 字符也许与 Rust 中的概念并不相符&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;&amp;#39;z&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;: &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;&amp;#39;ʓ&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;z&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;&amp;#39;🤫&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
         <title>3.1 变量与可变性</title>
         <link>https://www.retr0.xyz/p/3.1-%E5%8F%98%E9%87%8F%E4%B8%8E%E5%8F%AF%E5%8F%98%E6%80%A7/</link>
         <pubDate>Fri, 17 Jul 2026 09:51:40 +0800</pubDate>
