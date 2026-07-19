@@ -246,7 +246,6 @@
 &lt;p&gt;Godot 4 的 ENetMultiplayerPeer 提供了不错的底层支持，但&amp;quot;能连上&amp;quot;和&amp;quot;能玩&amp;quot;之间还差得远：&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;第一个问题：迷宫同步。&lt;/strong&gt; 两端各自生成迷宫，结果完全不同——玩家在两张地图上各自跑。解决方案是只有主机生成迷宫，序列化为 JSON 通过 RPC 广播给所有客户端。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;第二个问题：退出闪退。&lt;/strong&gt; 房主退出到主菜单时崩溃——&amp;ldquo;Trying to assign invalid previously freed instance&amp;rdquo;。原因是退出时断开网络连接触发了信号回调，但回调里访问的场景节点已经被释放了。解决方案是在退出前显式断开所有信号连接并清理代理实体。&lt;/p&gt;
-&lt;p&gt;【图片占位：多人联机游戏截图，展示多个玩家角色在同一迷宫中，右上角有小地图显示玩家位置】&lt;/p&gt;
 &lt;p&gt;这些坑每一个都花了我至少一个晚上来排查。多人游戏的状态同步、时序问题、边界条件，远比想象中复杂。而且局域网和远程（我提供服务器）联机之间又有不同。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;一些心得&#34;&gt;一些心得
