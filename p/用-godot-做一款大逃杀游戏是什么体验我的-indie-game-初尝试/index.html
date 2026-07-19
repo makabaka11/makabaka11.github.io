@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="前情提要 之前我们学习了通过一行行代码为变量的属性赋值，像是这样：\n1 2 3 4 stu_1.name = &#39;小明&#39; stu_1.gender = &#39;男&#39; stu_1.age = 22 stu_1.area = &#39;江苏&#39; 但是这样未免有些过于繁琐了，那么有没有什么方法能化简这一过程呢？\n有的，兄弟有的。\n">
-<title>S1.4 构造方法</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="就在近一个月，我开始开发了一款肉鸽大逃杀游戏，这里是我的开发经验。">
+<title>用 Godot 做一款大逃杀游戏是什么体验？——我的 Indie Game 初尝试</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/p/s1.4-%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/%E7%94%A8-godot-%E5%81%9A%E4%B8%80%E6%AC%BE%E5%A4%A7%E9%80%83%E6%9D%80%E6%B8%B8%E6%88%8F%E6%98%AF%E4%BB%80%E4%B9%88%E4%BD%93%E9%AA%8C%E6%88%91%E7%9A%84-indie-game-%E5%88%9D%E5%B0%9D%E8%AF%95/'>
 
-<link rel="stylesheet" href="/scss/style.min.e99117adbedc53a15fd675f2864a3c19bf22e672c1f2d56a2e49b699b01a3bfc.css"><meta property='og:title' content="S1.4 构造方法">
-<meta property='og:description' content="前情提要 之前我们学习了通过一行行代码为变量的属性赋值，像是这样：\n1 2 3 4 stu_1.name = &#39;小明&#39; stu_1.gender = &#39;男&#39; stu_1.age = 22 stu_1.area = &#39;江苏&#39; 但是这样未免有些过于繁琐了，那么有没有什么方法能化简这一过程呢？\n有的，兄弟有的。\n">
-<meta property='og:url' content='https://www.retr0.xyz/p/s1.4-%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95/'>
+<link rel="stylesheet" href="/scss/style.min.e99117adbedc53a15fd675f2864a3c19bf22e672c1f2d56a2e49b699b01a3bfc.css"><meta property='og:title' content="用 Godot 做一款大逃杀游戏是什么体验？——我的 Indie Game 初尝试">
+<meta property='og:description' content="就在近一个月，我开始开发了一款肉鸽大逃杀游戏，这里是我的开发经验。">
+<meta property='og:url' content='https://www.retr0.xyz/p/%E7%94%A8-godot-%E5%81%9A%E4%B8%80%E6%AC%BE%E5%A4%A7%E9%80%83%E6%9D%80%E6%B8%B8%E6%88%8F%E6%98%AF%E4%BB%80%E4%B9%88%E4%BD%93%E9%AA%8C%E6%88%91%E7%9A%84-indie-game-%E5%88%9D%E5%B0%9D%E8%AF%95/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-17T22:47:14&#43;08:00'/><meta property='article:modified_time' content='2025-12-17T22:47:14&#43;08:00'/>
-<meta name="twitter:title" content="S1.4 构造方法">
-<meta name="twitter:description" content="前情提要 之前我们学习了通过一行行代码为变量的属性赋值，像是这样：\n1 2 3 4 stu_1.name = &#39;小明&#39; stu_1.gender = &#39;男&#39; stu_1.age = 22 stu_1.area = &#39;江苏&#39; 但是这样未免有些过于繁琐了，那么有没有什么方法能化简这一过程呢？\n有的，兄弟有的。\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-07-19T15:43:05&#43;08:00'/><meta property='article:modified_time' content='2026-07-19T15:43:05&#43;08:00'/><meta property='og:image' content='https://www.retr0.xyz/blog-img/20260719154400232.png' />
+<meta name="twitter:title" content="用 Godot 做一款大逃杀游戏是什么体验？——我的 Indie Game 初尝试">
+<meta name="twitter:description" content="就在近一个月，我开始开发了一款肉鸽大逃杀游戏，这里是我的开发经验。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://www.retr0.xyz/blog-img/20260719154400232.png' />
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css">
@@ -325,13 +326,15 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#前情提要">前情提要</a></li>
-    <li><a href="#构造方法">构造方法</a>
-      <ol>
-        <li><a href="#定义">定义</a></li>
-        <li><a href="#quickstart">Quickstart：</a></li>
-      </ol>
-    </li>
+    <li><a href="#起因">起因</a></li>
+    <li><a href="#为什么是-godot">为什么是 Godot</a></li>
+    <li><a href="#先从-wasd-开始">先从 WASD 开始</a></li>
+    <li><a href="#迷宫生成第一次和算法打交道">迷宫生成：第一次和算法打交道</a></li>
+    <li><a href="#手榴弹从简单到复杂的典型">手榴弹：从简单到复杂的典型</a></li>
+    <li><a href="#多人联机真正的大坑">多人联机：真正的大坑</a></li>
+    <li><a href="#一些心得">一些心得</a></li>
+    <li><a href="#关于这个游戏">关于这个游戏</a></li>
+    <li><a href="#最后">最后</a></li>
   </ol>
 </nav>
         </div>
@@ -343,15 +346,23 @@
 
 
             <main class="main full-width">
-    <article class="main-article">
+    <article class="has-image main-article">
     <header class="article-header">
+        <div class="article-image">
+            <a href="/p/%E7%94%A8-godot-%E5%81%9A%E4%B8%80%E6%AC%BE%E5%A4%A7%E9%80%83%E6%9D%80%E6%B8%B8%E6%88%8F%E6%98%AF%E4%BB%80%E4%B9%88%E4%BD%93%E9%AA%8C%E6%88%91%E7%9A%84-indie-game-%E5%88%9D%E5%B0%9D%E8%AF%95/">
+                
+                    <img src="https://www.retr0.xyz/blog-img/20260719154400232.png" loading="lazy" alt="Featured image of post 用 Godot 做一款大逃杀游戏是什么体验？——我的 Indie Game 初尝试" />
+                
+            </a>
+        </div>
+    
 
     <div class="article-details">
     
     <header class="article-category">
         
-            <a href="/categories/python/" style="background-color: #2A87D8; color: #fff;">
-                Python
+            <a href="/categories/%E6%9D%82%E9%A1%B9/" style="background-color: #40a070; color: #fff;">
+                杂项
             </a>
         
     </header>
@@ -359,9 +370,13 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/s1.4-%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95/">S1.4 构造方法</a>
+            <a href="/p/%E7%94%A8-godot-%E5%81%9A%E4%B8%80%E6%AC%BE%E5%A4%A7%E9%80%83%E6%9D%80%E6%B8%B8%E6%88%8F%E6%98%AF%E4%BB%80%E4%B9%88%E4%BD%93%E9%AA%8C%E6%88%91%E7%9A%84-indie-game-%E5%88%9D%E5%B0%9D%E8%AF%95/">用 Godot 做一款大逃杀游戏是什么体验？——我的 Indie Game 初尝试</a>
         </h2>
     
+        
+        <h3 class="article-subtitle">
+            就在近一个月，我开始开发了一款肉鸽大逃杀游戏，这里是我的开发经验。
+        </h3>
         
     </div>
 
@@ -381,7 +396,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-17 | 22:47</time>
+                <time class="article-time--published">2026-07-19 | 15:43</time>
             </div>
         
 
@@ -404,64 +419,144 @@
     <section class="article-content">
     
     
-    <h2 id="前情提要">前情提要
-</h2><p>之前我们学习了通过一行行代码为变量的属性赋值，像是这样：</p>
+    <h2 id="起因">起因
+</h2><p>作为一个学习和尝试了不少项目的业余程序员，&ldquo;做一款自己的游戏&quot;这件事在我待办清单上躺了不知道多久。直到某天凌晨三点，我又一次刷到别人用 Godot 做的独立游戏展示视频<a class="link" href="https://www.bilibili.com/video/BV1s6rDBpEvo/"  target="_blank" rel="noopener"
+    >2D游戏中的雨天效果 DEV LOG.02</a>，终于忍不住下载了引擎</p>
+<p>果然和很多游戏制作人一样，这个过程是令人惊喜而兴奋的，那天晚上我没有睡觉。</p>
+<hr>
+<h2 id="为什么是-godot">为什么是 Godot
+</h2><p>说实话，选择 Godot 并不是什么深思熟虑的结果——它免费、开源、轻量（当看到整个引擎只有一个 70 多 MB 的可执行文件的时候我真的震惊了）。对于一个只想&quot;试试看&quot;的人来说，这个门槛恰到好处。</p>
+<p>但真正让我留下来的，是它的场景-节点体系。</p>
+<p><img src="/blog-img/image-20260719152632275.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20260719152632275"
+	
+	
+></p>
+<p>Godot 的思路是：一切皆节点。一个玩家角色是一个场景，它由 Sprite、Collider、Script 等子节点组合而成；而一个关卡场景可以把玩家场景作为子节点实例化进来。这种组合式的设计让复用变得非常自然——我的敌人、玩家、甚至手榴弹，都可以共享同一套移动和碰撞逻辑。</p>
+<p>这和写代码时的组合优于继承是同一个道理，只不过 Godot 把它可视化了。</p>
+<hr>
+<h2 id="先从-wasd-开始">先从 WASD 开始
+</h2><p>我的第一步是让一个方块在屏幕上移动。GDScript 的语法对 Python 用户来说几乎零门槛：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">stu_1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;小明&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="n">stu_1</span><span class="o">.</span><span class="n">gender</span> <span class="o">=</span> <span class="s1">&#39;男&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="n">stu_1</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="mi">22</span>
-</span></span><span class="line"><span class="cl"><span class="n">stu_1</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="s1">&#39;江苏&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-gdscript" data-lang="gdscript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="n">speed</span> <span class="o">=</span> <span class="mf">200.0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="n">dir</span> <span class="o">=</span> <span class="nc">Input</span><span class="o">.</span><span class="nf">get_vector</span><span class="p">(</span><span class="s2">&#34;move_left&#34;</span><span class="p">,</span> <span class="s2">&#34;move_right&#34;</span><span class="p">,</span> <span class="s2">&#34;move_up&#34;</span><span class="p">,</span> <span class="s2">&#34;move_down&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">velocity</span> <span class="o">=</span> <span class="n">dir</span> <span class="o">*</span> <span class="n">speed</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">move_and_slide</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>但是这样未免有些过于繁琐了，那么有没有什么方法能化简这一过程呢？</p>
-<p><strong>有的，兄弟有的。</strong></p>
-<h2 id="构造方法">构造方法
-</h2><h3 id="定义">定义
-</h3><p>Python类可以使用：<code>__init__()</code>方法，称之为 <strong>构造方法</strong> 。</p>
-<p>可以实现：</p>
+</div><p>几行代码，在项目设置里绑定一下键位，一个小方块就能在屏幕上跑了。那种&quot;我居然真的在做游戏&quot;的兴奋感，大概每个独立游戏开发者都经历过。</p>
+<hr>
+<h2 id="迷宫生成第一次和算法打交道">迷宫生成：第一次和算法打交道
+</h2><p>大逃杀需要一个战场。我选择了递归回溯法生成随机迷宫——实现简单，效果不错。算法本身不难，但让我花了不少时间的是&quot;让生成的迷宫看起来好玩&rdquo;：通道不能太窄也不能太宽，死胡同要有但不能全是，出口的位置要贴墙合理……</p>
+<p><img src="/blog-img/image-20260719152827994.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20260719152827994"
+	
+	
+></p>
+<p>这些调参的过程，让我第一次意识到&quot;游戏设计&quot;和&quot;写代码&quot;是两件截然不同的事。代码能跑不代表游戏好玩。</p>
+<hr>
+<h2 id="手榴弹从简单到复杂的典型">手榴弹：从简单到复杂的典型
+</h2><p>手榴弹系统是我投入精力最多的部分，也是整个开发过程中最典型的&quot;需求蔓延&quot;案例。</p>
+<p>最初的需求很简单：按 G 键投掷，落地后倒计时爆炸。三行代码就能搞定。</p>
+<p>然后问题来了——</p>
 <ul>
-<li>在创建类对象（构造类）的时候，<font style="color:#DF2A3F;">会自动执行。</font></li>
-<li>在创建类对象（构造类）的时候，<font style="color:#DF2A3F;">将传入参数自动传给</font><code>__init__()</code><font style="color:#DF2A3F;">方法使用。</font></li>
+<li>
+<p>爆炸肯定得有个火焰的粒子特效吧</p>
+</li>
+<li>
+<p>手榴弹被子弹击中应该立刻引爆吧？</p>
+</li>
+<li>
+<p>那投出去瞬间被自己的子弹打到怎么办？</p>
+</li>
+<li>
+<p>地上拾取的手榴弹被爆炸波及要不要连锁？</p>
+</li>
+<li>
+<p>爆炸音效和爆炸事件要同步，否则会有间隙感……</p>
+</li>
 </ul>
-<h3 id="quickstart">Quickstart：
-</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Student</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">#以下可以省略#</span>
-</span></span><span class="line"><span class="cl">    <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
-</span></span><span class="line"><span class="cl">    <span class="n">age</span> <span class="o">=</span> <span class="kc">None</span>
-</span></span><span class="line"><span class="cl">    <span class="n">tel</span> <span class="o">=</span> <span class="kc">None</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">#############</span>
-</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">age</span><span class="p">,</span><span class="n">tel</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
-</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">tel</span> <span class="o">=</span> <span class="n">tel</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Student类创建了一个对象&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">stu1</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;小明&#39;</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">13888888888</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div>
+<p><img src="/blog-img/image-20260719153148002.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20260719153148002"
+	
+	
+></p>
+<p>最后手榴弹系统变成了这样：投掷后 3 秒内被射击命中立刻引爆；AI 扔出手榴弹后 0.5 秒内禁止射击防止自杀；爆炸用切比雪夫距离 + Bresenham 视线检测判定范围和穿墙；音效分前摇和爆炸两段，前摇可以被爆炸音效截断实现无缝衔接……</p>
+<p>一个简单的&quot;扔出去然后炸&quot;变成了几百行代码。但这就是游戏开发——每个&quot;应该吧&quot;背后都是一整条逻辑链。</p>
+<hr>
+<h2 id="多人联机真正的大坑">多人联机：真正的大坑
+</h2><p>如果说手榴弹是复杂度的坑，那多人联机就是架构的坑。</p>
+<p>Godot 4 的 ENetMultiplayerPeer 提供了不错的底层支持，但&quot;能连上&quot;和&quot;能玩&quot;之间还差得远：</p>
+<p><strong>第一个问题：迷宫同步。</strong> 两端各自生成迷宫，结果完全不同——玩家在两张地图上各自跑。解决方案是只有主机生成迷宫，序列化为 JSON 通过 RPC 广播给所有客户端。</p>
+<p><strong>第二个问题：退出闪退。</strong> 房主退出到主菜单时崩溃——&ldquo;Trying to assign invalid previously freed instance&rdquo;。原因是退出时断开网络连接触发了信号回调，但回调里访问的场景节点已经被释放了。解决方案是在退出前显式断开所有信号连接并清理代理实体。</p>
+<p>【图片占位：多人联机游戏截图，展示多个玩家角色在同一迷宫中，右上角有小地图显示玩家位置】</p>
+<p>这些坑每一个都花了我至少一个晚上来排查。多人游戏的状态同步、时序问题、边界条件，远比想象中复杂。而且局域网和远程（我提供服务器）联机之间又有不同。</p>
+<hr>
+<h2 id="一些心得">一些心得
+</h2><p><strong>1. Godot 适合快速原型，但不等于不需要架构。</strong></p>
+<p>GDScript 写起来很爽，但一旦项目过了&quot;能用&quot;的阶段，没有清晰的架构就会开始到处打补丁。我后期的很多时间都花在重构上——把散落在各处的网络同步逻辑收拢到 NetworkManager 单例里，把信号连接和断开的生命周期管理好——或许我应该多翻翻插件库的。</p>
+<p><strong>2. 调试多人游戏是一种全新的痛苦。</strong></p>
+<p>单机游戏的 bug 是确定的，多人游戏的 bug 是概率性的——&ldquo;有时候房主退出会闪退&quot;这种问题，本质上是时序竞争。解决这类问题需要的不是更多 print，而是更清晰的信号生命周期管理。况且你还需要双设备同步测试，你一定能想象到我在两台电脑之间来回挪动的狼狈情景。</p>
+<p><strong>3. 游戏设计比游戏编程难十倍。</strong></p>
+<p>霰弹枪射速太快伤害超模、PVP 出生点太近开局秒杀、AI 扔手雷把自己炸死……这些都不是代码 bug，而是设计问题。数值平衡和体验调优，才是真正吃时间的地方。</p>
+<hr>
+<h2 id="关于这个游戏">关于这个游戏
+</h2><p><strong>奶蛙快跑</strong> 是一款用 Godot 4.6 开发的 2D 俯视角 Roguelike大逃杀游戏。支持单人和多人联机（局域网/远程），包含 PVP 和 PVE 两种模式。你可以把它想象成一个迷宫版的简易大逃杀——在随机生成的迷宫中搜索武器和补给，击败敌人（AI 或其他玩家），活到最后。</p>
+<p><img src="/blog-img/image-20260719153721168.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20260719153721168"
+	
+	
+></p>
+<p><img src="https://naiwa.retr0.xyz/website/%E5%A4%A7%E9%80%83%E6%9D%80.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="【图片占位：PVP 模式多人对战截图，展示玩家在迷宫中交战的场景】"
+	
+	
+></p>
+<p>如果你感兴趣，可以在这里体验：<strong><a class="link" href="naiwa.retr0.xyz" >奶蛙快跑-RetrSoft</a></strong></p>
+<hr>
+<h2 id="最后">最后
+</h2><p>作为一个 Godot 初学者，我的体验总结成一句话就是：<strong>入门容易，精通很难，但过程很快乐。</strong></p>
+<p>那种&quot;几行代码就让东西动起来&quot;的即时反馈，是做别的项目永远体会不到的。就算最后做出来的东西粗糙、有 bug、没几个人玩，但那个凌晨三点让方块在屏幕上跑起来的瞬间，值了。</p>
+<hr>
+<p><em>本文基于 Godot 4.6 和 GDScript 开发经验撰写。游戏仍在持续开发中，欢迎试玩反馈。</em></p>
+<p><strong>祝您在游戏中玩得愉快，就像我在开发它的时候那样。</strong></p>
+
 </section>
 
 
@@ -522,13 +617,76 @@
         <div class="flex article-list--tile">
             
                 
-<article class="">
-    <a href="/p/11.5-%E5%85%B6%E4%BB%96%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/">
+<article class="has-image">
+    <a href="/p/%E4%B8%80%E4%B8%AA%E9%9F%B3%E4%B9%90api/">
         
+        
+            <div class="article-image">
+                
+                    <img src="https://www.retr0.xyz/blog-img/image-20260417201502680.png" loading="lazy" data-key="" data-hash="https://www.retr0.xyz/blog-img/image-20260417201502680.png"/>
+                
+            </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">11.5 其他第三方库</h2>
+            <h2 class="article-title">一个音乐API！</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E5%AE%9E%E6%88%98%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%AF%B9%E6%A0%A1%E5%9B%AD%E7%BD%91%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2%E7%9A%84%E9%80%86%E5%90%91/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/post/%e6%9d%82%e9%a1%b9/img/nx1/001.png" loading="lazy" data-key="" data-hash="/post/杂项/img/nx1/001.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【实战】记一次对校园网登录页面的逆向</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E6%9C%80%E6%96%B0%E4%BF%9D%E5%A7%86%E7%BA%A7%E6%95%99%E7%A8%8B%E5%9F%BA%E4%BA%8E%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E4%BA%91%E7%94%B5%E8%84%91%E7%9A%84%E5%85%A8%E8%87%AA%E5%8A%A8%E5%88%B7%E8%AF%BE%E5%B9%B3%E5%8F%B0/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://img1.dancihu.com/2023-10-31/a116a2e0-4624-8c67-900f-7e6165b9012f.jpg" loading="lazy" data-key="" data-hash="https://img1.dancihu.com/2023-10-31/a116a2e0-4624-8c67-900f-7e6165b9012f.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[最新]保姆级教程：基于云服务器/云电脑的全自动刷课平台</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E8%BE%B9%E5%81%9A%E8%BE%B9%E8%AE%B0%E5%9F%BA%E4%BA%8E%E6%A0%91%E8%8E%93%E6%B4%BE-alist-%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E7%9A%84%E5%86%85%E7%BD%91%E7%95%AA%E5%89%A7%E5%AD%98%E5%82%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/post/%e6%9d%82%e9%a1%b9/img/RP/image.png" loading="lazy" data-key="" data-hash="/post/杂项/img/RP/image.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【边做边记】基于树莓派&#43;Alist&#43;百度网盘的内网番剧存储服务器搭建</h2>
         </div>
     </a>
 </article>
@@ -536,51 +694,12 @@
             
                 
 <article class="">
-    <a href="/p/11.4-jieba%E5%BA%93/">
+    <a href="/p/%E8%A3%85%E6%9C%BA%E6%B3%9540%E6%9D%A1-laws-for-computer-assembly/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">11.4 jieba库</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/11.3-random%E5%BA%93/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">11.3 random库</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/11.2-turtle%E5%BA%93%E7%BB%98%E5%9B%BE/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">11.2 turtle库绘图</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/11.1-format%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">11.1 format格式化输出</h2>
+            <h2 class="article-title">装机法40条 (Laws for Computer Assembly)</h2>
         </div>
     </a>
 </article>

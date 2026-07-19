@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Sun, 19 Jul 2026 10:41:44 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 19 Jul 2026 15:43:05 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>留言板 | Msg Board</title>
         <link>https://www.retr0.xyz/message/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -151,6 +151,151 @@
 &lt;p&gt;纵使相逢应不识，尘满面，鬓如霜。&lt;/p&gt;
 &lt;p&gt;夜来幽梦忽还乡，小轩窗，正梳妆。相顾无言，惟有泪千行。&lt;/p&gt;
 &lt;p&gt;料得年年肠断处，明月夜，短松冈。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>用 Godot 做一款大逃杀游戏是什么体验？——我的 Indie Game 初尝试</title>
+        <link>https://www.retr0.xyz/p/%E7%94%A8-godot-%E5%81%9A%E4%B8%80%E6%AC%BE%E5%A4%A7%E9%80%83%E6%9D%80%E6%B8%B8%E6%88%8F%E6%98%AF%E4%BB%80%E4%B9%88%E4%BD%93%E9%AA%8C%E6%88%91%E7%9A%84-indie-game-%E5%88%9D%E5%B0%9D%E8%AF%95/</link>
+        <pubDate>Sun, 19 Jul 2026 15:43:05 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/p/%E7%94%A8-godot-%E5%81%9A%E4%B8%80%E6%AC%BE%E5%A4%A7%E9%80%83%E6%9D%80%E6%B8%B8%E6%88%8F%E6%98%AF%E4%BB%80%E4%B9%88%E4%BD%93%E9%AA%8C%E6%88%91%E7%9A%84-indie-game-%E5%88%9D%E5%B0%9D%E8%AF%95/</guid>
+        <description>&lt;img src="https://www.retr0.xyz/blog-img/20260719154400232.png" alt="Featured image of post 用 Godot 做一款大逃杀游戏是什么体验？——我的 Indie Game 初尝试" /&gt;&lt;h2 id=&#34;起因&#34;&gt;起因
+&lt;/h2&gt;&lt;p&gt;作为一个学习和尝试了不少项目的业余程序员，&amp;ldquo;做一款自己的游戏&amp;quot;这件事在我待办清单上躺了不知道多久。直到某天凌晨三点，我又一次刷到别人用 Godot 做的独立游戏展示视频&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1s6rDBpEvo/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;2D游戏中的雨天效果 DEV LOG.02&lt;/a&gt;，终于忍不住下载了引擎&lt;/p&gt;
+&lt;p&gt;果然和很多游戏制作人一样，这个过程是令人惊喜而兴奋的，那天晚上我没有睡觉。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;为什么是-godot&#34;&gt;为什么是 Godot
+&lt;/h2&gt;&lt;p&gt;说实话，选择 Godot 并不是什么深思熟虑的结果——它免费、开源、轻量（当看到整个引擎只有一个 70 多 MB 的可执行文件的时候我真的震惊了）。对于一个只想&amp;quot;试试看&amp;quot;的人来说，这个门槛恰到好处。&lt;/p&gt;
+&lt;p&gt;但真正让我留下来的，是它的场景-节点体系。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/image-20260719152632275.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20260719152632275&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Godot 的思路是：一切皆节点。一个玩家角色是一个场景，它由 Sprite、Collider、Script 等子节点组合而成；而一个关卡场景可以把玩家场景作为子节点实例化进来。这种组合式的设计让复用变得非常自然——我的敌人、玩家、甚至手榴弹，都可以共享同一套移动和碰撞逻辑。&lt;/p&gt;
+&lt;p&gt;这和写代码时的组合优于继承是同一个道理，只不过 Godot 把它可视化了。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;先从-wasd-开始&#34;&gt;先从 WASD 开始
+&lt;/h2&gt;&lt;p&gt;我的第一步是让一个方块在屏幕上移动。GDScript 的语法对 Python 用户来说几乎零门槛：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-gdscript&#34; data-lang=&#34;gdscript&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;speed&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;200.0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;_process&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;delta&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dir&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Input&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;get_vector&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;move_left&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;move_right&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;move_up&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;move_down&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;velocity&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dir&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;speed&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;move_and_slide&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;几行代码，在项目设置里绑定一下键位，一个小方块就能在屏幕上跑了。那种&amp;quot;我居然真的在做游戏&amp;quot;的兴奋感，大概每个独立游戏开发者都经历过。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;迷宫生成第一次和算法打交道&#34;&gt;迷宫生成：第一次和算法打交道
+&lt;/h2&gt;&lt;p&gt;大逃杀需要一个战场。我选择了递归回溯法生成随机迷宫——实现简单，效果不错。算法本身不难，但让我花了不少时间的是&amp;quot;让生成的迷宫看起来好玩&amp;rdquo;：通道不能太窄也不能太宽，死胡同要有但不能全是，出口的位置要贴墙合理……&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/image-20260719152827994.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20260719152827994&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这些调参的过程，让我第一次意识到&amp;quot;游戏设计&amp;quot;和&amp;quot;写代码&amp;quot;是两件截然不同的事。代码能跑不代表游戏好玩。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;手榴弹从简单到复杂的典型&#34;&gt;手榴弹：从简单到复杂的典型
+&lt;/h2&gt;&lt;p&gt;手榴弹系统是我投入精力最多的部分，也是整个开发过程中最典型的&amp;quot;需求蔓延&amp;quot;案例。&lt;/p&gt;
+&lt;p&gt;最初的需求很简单：按 G 键投掷，落地后倒计时爆炸。三行代码就能搞定。&lt;/p&gt;
+&lt;p&gt;然后问题来了——&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;爆炸肯定得有个火焰的粒子特效吧&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;手榴弹被子弹击中应该立刻引爆吧？&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;那投出去瞬间被自己的子弹打到怎么办？&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;地上拾取的手榴弹被爆炸波及要不要连锁？&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;爆炸音效和爆炸事件要同步，否则会有间隙感……&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/image-20260719153148002.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20260719153148002&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;最后手榴弹系统变成了这样：投掷后 3 秒内被射击命中立刻引爆；AI 扔出手榴弹后 0.5 秒内禁止射击防止自杀；爆炸用切比雪夫距离 + Bresenham 视线检测判定范围和穿墙；音效分前摇和爆炸两段，前摇可以被爆炸音效截断实现无缝衔接……&lt;/p&gt;
+&lt;p&gt;一个简单的&amp;quot;扔出去然后炸&amp;quot;变成了几百行代码。但这就是游戏开发——每个&amp;quot;应该吧&amp;quot;背后都是一整条逻辑链。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;多人联机真正的大坑&#34;&gt;多人联机：真正的大坑
+&lt;/h2&gt;&lt;p&gt;如果说手榴弹是复杂度的坑，那多人联机就是架构的坑。&lt;/p&gt;
+&lt;p&gt;Godot 4 的 ENetMultiplayerPeer 提供了不错的底层支持，但&amp;quot;能连上&amp;quot;和&amp;quot;能玩&amp;quot;之间还差得远：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第一个问题：迷宫同步。&lt;/strong&gt; 两端各自生成迷宫，结果完全不同——玩家在两张地图上各自跑。解决方案是只有主机生成迷宫，序列化为 JSON 通过 RPC 广播给所有客户端。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第二个问题：退出闪退。&lt;/strong&gt; 房主退出到主菜单时崩溃——&amp;ldquo;Trying to assign invalid previously freed instance&amp;rdquo;。原因是退出时断开网络连接触发了信号回调，但回调里访问的场景节点已经被释放了。解决方案是在退出前显式断开所有信号连接并清理代理实体。&lt;/p&gt;
+&lt;p&gt;【图片占位：多人联机游戏截图，展示多个玩家角色在同一迷宫中，右上角有小地图显示玩家位置】&lt;/p&gt;
+&lt;p&gt;这些坑每一个都花了我至少一个晚上来排查。多人游戏的状态同步、时序问题、边界条件，远比想象中复杂。而且局域网和远程（我提供服务器）联机之间又有不同。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;一些心得&#34;&gt;一些心得
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;1. Godot 适合快速原型，但不等于不需要架构。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;GDScript 写起来很爽，但一旦项目过了&amp;quot;能用&amp;quot;的阶段，没有清晰的架构就会开始到处打补丁。我后期的很多时间都花在重构上——把散落在各处的网络同步逻辑收拢到 NetworkManager 单例里，把信号连接和断开的生命周期管理好——或许我应该多翻翻插件库的。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. 调试多人游戏是一种全新的痛苦。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;单机游戏的 bug 是确定的，多人游戏的 bug 是概率性的——&amp;ldquo;有时候房主退出会闪退&amp;quot;这种问题，本质上是时序竞争。解决这类问题需要的不是更多 print，而是更清晰的信号生命周期管理。况且你还需要双设备同步测试，你一定能想象到我在两台电脑之间来回挪动的狼狈情景。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. 游戏设计比游戏编程难十倍。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;霰弹枪射速太快伤害超模、PVP 出生点太近开局秒杀、AI 扔手雷把自己炸死……这些都不是代码 bug，而是设计问题。数值平衡和体验调优，才是真正吃时间的地方。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;关于这个游戏&#34;&gt;关于这个游戏
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;奶蛙快跑&lt;/strong&gt; 是一款用 Godot 4.6 开发的 2D 俯视角 Roguelike大逃杀游戏。支持单人和多人联机（局域网/远程），包含 PVP 和 PVE 两种模式。你可以把它想象成一个迷宫版的简易大逃杀——在随机生成的迷宫中搜索武器和补给，击败敌人（AI 或其他玩家），活到最后。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.retr0.xyz/blog-img/image-20260719153721168.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20260719153721168&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://naiwa.retr0.xyz/website/%E5%A4%A7%E9%80%83%E6%9D%80.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;【图片占位：PVP 模式多人对战截图，展示玩家在迷宫中交战的场景】&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;如果你感兴趣，可以在这里体验：&lt;strong&gt;&lt;a class=&#34;link&#34; href=&#34;naiwa.retr0.xyz&#34; &gt;奶蛙快跑-RetrSoft&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;最后&#34;&gt;最后
+&lt;/h2&gt;&lt;p&gt;作为一个 Godot 初学者，我的体验总结成一句话就是：&lt;strong&gt;入门容易，精通很难，但过程很快乐。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;那种&amp;quot;几行代码就让东西动起来&amp;quot;的即时反馈，是做别的项目永远体会不到的。就算最后做出来的东西粗糙、有 bug、没几个人玩，但那个凌晨三点让方块在屏幕上跑起来的瞬间，值了。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;本文基于 Godot 4.6 和 GDScript 开发经验撰写。游戏仍在持续开发中，欢迎试玩反馈。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;祝您在游戏中玩得愉快，就像我在开发它的时候那样。&lt;/strong&gt;&lt;/p&gt;
 </description>
         </item>
         <item>

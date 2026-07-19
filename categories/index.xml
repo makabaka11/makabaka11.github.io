@@ -7,7 +7,15 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Sun, 19 Jul 2026 10:41:44 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 19 Jul 2026 15:43:05 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>杂项</title>
+        <link>https://www.retr0.xyz/categories/%E6%9D%82%E9%A1%B9/</link>
+        <pubDate>Sun, 19 Jul 2026 15:43:05 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/categories/%E6%9D%82%E9%A1%B9/</guid>
+        <description>&lt;img src="https://free.picui.cn/free/2026/01/12/69647b0c3978a.jpg" alt="Featured image of post 杂项" /&gt;</description>
+        </item>
+        <item>
         <title>Rust</title>
         <link>https://www.retr0.xyz/categories/rust/</link>
         <pubDate>Sun, 19 Jul 2026 10:41:44 +0800</pubDate>
@@ -46,14 +54,6 @@
         
         <guid>https://www.retr0.xyz/categories/%E6%B8%B8%E6%88%8F/</guid>
         <description>&lt;img src="https://www.retr0.xyz/categories/%E6%B8%B8%E6%88%8F/game.png" alt="Featured image of post 游戏" /&gt;</description>
-        </item>
-        <item>
-        <title>杂项</title>
-        <link>https://www.retr0.xyz/categories/%E6%9D%82%E9%A1%B9/</link>
-        <pubDate>Fri, 17 Apr 2026 20:20:31 +0800</pubDate>
-        
-        <guid>https://www.retr0.xyz/categories/%E6%9D%82%E9%A1%B9/</guid>
-        <description>&lt;img src="https://free.picui.cn/free/2026/01/12/69647b0c3978a.jpg" alt="Featured image of post 杂项" /&gt;</description>
         </item>
         <item>
         <title>CTF</title>
