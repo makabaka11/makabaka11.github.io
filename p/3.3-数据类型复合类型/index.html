@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Hello World! 如果你能看到这篇文章，说明我的博客已经正常开通。\n总之，\n欢迎订阅！\n">
-<title>Hello_world</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="学习Rust当中的复合数据类型：元组合数组">
+<title>3.3 数据类型：复合类型</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/p/hello_world/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/3.3-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/'>
 
-<link rel="stylesheet" href="/scss/style.min.e99117adbedc53a15fd675f2864a3c19bf22e672c1f2d56a2e49b699b01a3bfc.css"><meta property='og:title' content="Hello_world">
-<meta property='og:description' content="Hello World! 如果你能看到这篇文章，说明我的博客已经正常开通。\n总之，\n欢迎订阅！\n">
-<meta property='og:url' content='https://www.retr0.xyz/p/hello_world/'>
+<link rel="stylesheet" href="/scss/style.min.e99117adbedc53a15fd675f2864a3c19bf22e672c1f2d56a2e49b699b01a3bfc.css"><meta property='og:title' content="3.3 数据类型：复合类型">
+<meta property='og:description' content="学习Rust当中的复合数据类型：元组合数组">
+<meta property='og:url' content='https://www.retr0.xyz/p/3.3-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-10-26T23:13:26&#43;08:00'/><meta property='article:modified_time' content='2025-10-26T23:13:26&#43;08:00'/>
-<meta name="twitter:title" content="Hello_world">
-<meta name="twitter:description" content="Hello World! 如果你能看到这篇文章，说明我的博客已经正常开通。\n总之，\n欢迎订阅！\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-07-19T10:41:44&#43;08:00'/><meta property='article:modified_time' content='2026-07-19T10:41:44&#43;08:00'/>
+<meta name="twitter:title" content="3.3 数据类型：复合类型">
+<meta name="twitter:description" content="学习Rust当中的复合数据类型：元组合数组">
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css">
@@ -303,7 +303,51 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#tuple">Tuple</a>
+      <ol>
+        <li><a href="#创建tuple">创建Tuple</a></li>
+        <li><a href="#获取tuple的元素值">获取Tuple的元素值</a></li>
+      </ol>
+    </li>
+    <li><a href="#数组">数组</a>
+      <ol>
+        <li><a href="#声明一个数组">声明一个数组</a></li>
+        <li><a href="#数组的类型">数组的类型</a></li>
+        <li><a href="#另一种声明数组的方法">另一种声明数组的方法</a></li>
+        <li><a href="#引用数组的元素">引用数组的元素</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -311,12 +355,24 @@
 
     <div class="article-details">
     
+    <header class="article-category">
+        
+            <a href="/categories/rust/" style="background-color: #f74c00; color: #fff;">
+                Rust
+            </a>
+        
+    </header>
+    
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/hello_world/">Hello_world</a>
+            <a href="/p/3.3-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/">3.3 数据类型：复合类型</a>
         </h2>
     
+        
+        <h3 class="article-subtitle">
+            学习Rust当中的复合数据类型：元组合数组
+        </h3>
         
     </div>
 
@@ -336,7 +392,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-10-26 | 23:13</time>
+                <time class="article-time--published">2026-07-19 | 10:41</time>
             </div>
         
 
@@ -359,10 +415,128 @@
     <section class="article-content">
     
     
-    <h1 id="hello-world">Hello World!
-</h1><p>如果你能看到这篇文章，说明我的博客已经正常开通。</p>
-<p>总之，</p>
-<p>欢迎订阅！</p>
+    <p>复合类型指的是可以将多个值放在一个类型里的数据类型。</p>
+<p>Rust 提供了两种基础的复合类型： <strong>元祖（Tuple）、数组</strong></p>
+<h2 id="tuple">Tuple
+</h2><ul>
+<li>元祖可以将多个类型的值放在一个类型里</li>
+<li>元祖的长度是固定的：一旦声明就无法改变</li>
+</ul>
+<h3 id="创建tuple">创建Tuple
+</h3><ul>
+<li>在小括号里，将使用逗号分开</li>
+<li>Tuple 中的每个位置都对应一个类型，Tuple 中个元素的类型不必相同</li>
+</ul>
+<p><strong>例如：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="n">tup</span><span class="w"> </span>: <span class="p">(</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="kt">f64</span><span class="p">,</span><span class="w"> </span><span class="kt">u8</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">13</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mf">5.2</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="获取tuple的元素值">获取Tuple的元素值
+</h3><p>和其他语言一样，Rust中要引用Tuple中元素的值也是使用下标</p>
+<p><strong>例如：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">tup</span><span class="w"> </span>: <span class="p">(</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="kt">f64</span><span class="p">,</span><span class="w"> </span><span class="kt">u8</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">13</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mf">5.2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;</span><span class="si">{}</span><span class="s">,</span><span class="si">{}</span><span class="s">,</span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">tup</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">tup</span><span class="p">.</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">tup</span><span class="p">.</span><span class="mi">2</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="数组">数组
+</h2><ul>
+<li>数组只接受相同类型的多个元素</li>
+<li>数组的长度是固定的</li>
+</ul>
+<h3 id="声明一个数组">声明一个数组
+</h3><ul>
+<li>在中括号内，各值用逗号分开</li>
+</ul>
+<p><strong>例如：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">];</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote class="alert alert-note">
+    <p class="alert-title"><svg class="alert-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+    <p><strong>数组的用处：</strong> 如果你想让你的数据存放在 stack（栈）上而不是 heap（堆）上，或者想保证有固定数量的元素，这时使用数组更有好处</p>
+<p>数组没有 Vector 灵活（后面会提到）：</p>
+<ul>
+<li>Vector 和数组类似，它由标准库提供</li>
+<li>Vector 的长度可以改变</li>
+<li>如果你不确定应该使用数组还是 Vector，那么大概率你应该使用Vector</li>
+</ul></blockquote>
+<h3 id="数组的类型">数组的类型
+</h3><p>数组的类型使用<code>[类型;长度]</code>的格式表示</p>
+<p><strong>例如：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="n">a</span>:<span class="p">[</span><span class="kt">i32</span><span class="p">;</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">];</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="另一种声明数组的方法">另一种声明数组的方法
+</h3><p>如果数组的每个元素值都相同，那么可以在：</p>
+<ul>
+<li>中括号里指定初始值</li>
+<li>然后是一个<code>;</code></li>
+<li>最后是数组的长度</li>
+</ul>
+<p>例如：<code>let a = [3;5]</code>，那么它相当于<code>let a = [3, 3, 3, 3, 3]</code></p>
+<h3 id="引用数组的元素">引用数组的元素
+</h3><p>要访问数组的元素，同样需要使用索引下标</p>
+<p><strong>例如：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">weekdays</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="s">&#34;SUN&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="s">&#34;MON&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="s">&#34;TUES&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="s">&#34;WED&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="s">&#34;THUR&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="s">&#34;FRI&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="s">&#34;SAT&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;</span><span class="si">{}</span><span class="s">,</span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="n">weekdays</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">weekdays</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>数组是 Stack 上分配的单个块的内存</li>
+<li>可以使用索引来访问数组的元素（如上）</li>
+<li>如果访问的索引超出了数组的范围，编译会直接报错（Rust 不会允许其继续访问相应地址的 内存）</li>
+</ul>
 
 </section>
 
@@ -417,6 +591,80 @@
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/3.2-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%A0%87%E9%87%8F%E7%B1%BB%E5%9E%8B/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">3.2 数据类型：标量类型</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/3.1-%E5%8F%98%E9%87%8F%E4%B8%8E%E5%8F%AF%E5%8F%98%E6%80%A7/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">3.1 变量与可变性</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/2.4-%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F%E5%A4%9A%E6%AC%A1%E7%8C%9C%E6%B5%8B/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2.4 猜数游戏：多次猜测</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/2.3-%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F%E6%AF%94%E8%BE%83%E7%8C%9C%E6%B5%8B%E6%95%B0%E5%AD%97%E5%92%8C%E7%A5%9E%E7%A7%98%E6%95%B0%E5%AD%97/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2.3 猜数游戏：比较猜测数字和神秘数字</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/2.2-%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F%E7%94%9F%E6%88%90%E7%A5%9E%E7%A7%98%E6%95%B0%E5%AD%97/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2.2 猜数游戏：生成神秘数字</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     
