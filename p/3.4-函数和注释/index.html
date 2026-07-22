@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-    <head>
-	<meta name="generator" content="Hugo 0.164.0"><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="我的性格真的很糟糕吗？">
-<title>Pager 15 - Retr0的小窝</title>
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="学习Rust中函数的相关内容">
+<title>3.4 函数和注释</title>
 
-<link rel='canonical' href='https://www.retr0.xyz/'>
+<link rel='canonical' href='https://www.retr0.xyz/p/3.4-%E5%87%BD%E6%95%B0%E5%92%8C%E6%B3%A8%E9%87%8A/'>
 
-<link rel="stylesheet" href="/scss/style.min.e99117adbedc53a15fd675f2864a3c19bf22e672c1f2d56a2e49b699b01a3bfc.css"><meta property='og:title' content="Retr0的小窝">
-<meta property='og:description' content="我的性格真的很糟糕吗？">
-<meta property='og:url' content='https://www.retr0.xyz/'>
+<link rel="stylesheet" href="/scss/style.min.e99117adbedc53a15fd675f2864a3c19bf22e672c1f2d56a2e49b699b01a3bfc.css"><meta property='og:title' content="3.4 函数和注释">
+<meta property='og:description' content="学习Rust中函数的相关内容">
+<meta property='og:url' content='https://www.retr0.xyz/p/3.4-%E5%87%BD%E6%95%B0%E5%92%8C%E6%B3%A8%E9%87%8A/'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-07-22T10:51:05&#43;08:00 '/>
-<meta name="twitter:title" content="Retr0的小窝">
-<meta name="twitter:description" content="我的性格真的很糟糕吗？"><link rel="alternate" type="application/rss&#43;xml" href="https://www.retr0.xyz/index.xml">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-07-22T10:51:05&#43;08:00'/><meta property='article:modified_time' content='2026-07-22T10:51:05&#43;08:00'/>
+<meta name="twitter:title" content="3.4 函数和注释">
+<meta name="twitter:description" content="学习Rust中函数的相关内容">
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css">
@@ -27,7 +26,9 @@
         <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     </head>
-    <body class="">
+    <body class="
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -165,7 +166,7 @@
         
         
         
-        <li  class='current' >
+        <li >
             <a href='/' >
                 
                 
@@ -305,69 +306,10 @@
     <aside class="sidebar right-sidebar sticky">
         
             
-                <form action="/search/" class="search-form widget" >
-        <p>
-            <label>搜索</label>
-            <input name="keyword" required placeholder="输入关键词..." />
-        
-            <button title="搜索">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-            </button>
-        </p>
-    </form>
-            
-        
-            
-                <section class="widget archives">
+                
+    <section class="widget archives">
         <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">归档</h2>
-
-        
-        
-        
-        
-        
-        <div class="widget-archive--list">
-            <div class="archives-year">
-                    <a href="/archives/#2026">
-                        
-                            <span class="year">2026</span>
-                            <span class="count">79</span>
-                        
-                    </a> 
-                </div>
-            <div class="archives-year">
-                    <a href="/archives/#2025">
-                        
-                            <span class="year">2025</span>
-                            <span class="count">72</span>
-                        
-                    </a> 
-                </div>
-            
-        </div>
-    </section>
-            
-        
-            
-                <section class="widget tagCloud">
-    <div class="widget-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <line x1="5" y1="9" x2="19" y2="9" />
   <line x1="5" y1="15" x2="19" y2="15" />
@@ -377,53 +319,21 @@
 
 
 
-    </div>
-    <h2 class="widget-title section-title">分类</h2>
-
-    <div class="tagCloud-tags">
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
         
-            <a href="/categories/%E7%BD%91%E5%AE%89/" class="font_size_50">
-                网安
-            </a>
-        
-            <a href="/categories/python/" class="font_size_34">
-                Python
-            </a>
-        
-            <a href="/categories/%E8%BF%9B%E9%98%B6%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" class="font_size_24">
-                进阶渗透测试
-            </a>
-        
-            <a href="/categories/%E5%BD%B1%E8%A7%86/" class="font_size_17">
-                影视
-            </a>
-        
-            <a href="/categories/%E5%9F%BA%E7%A1%80%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" class="font_size_16">
-                基础渗透测试
-            </a>
-        
-            <a href="/categories/%E6%B8%B8%E6%88%8F/" class="font_size_16">
-                游戏
-            </a>
-        
-            <a href="/categories/anime/" class="font_size_15">
-                Anime
-            </a>
-        
-            <a href="/categories/rust/" class="font_size_10">
-                Rust
-            </a>
-        
-            <a href="/categories/%E6%9D%82%E9%A1%B9/" class="font_size_8">
-                杂项
-            </a>
-        
-            <a href="/categories/ctf/" class="font_size_7">
-                CTF
-            </a>
-        
-    </div>
-</section>
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#函数的声明">函数的声明</a></li>
+    <li><a href="#函数的参数">函数的参数</a></li>
+    <li><a href="#函数体中的语句和表达式">函数体中的语句和表达式</a></li>
+    <li><a href="#函数的返回值">函数的返回值</a></li>
+    <li><a href="#注释">注释</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
 
             
         
@@ -431,34 +341,15 @@
 
 
             <main class="main full-width">
-    
-    
-    
-    
-    
-    <div class="welcome">
-    <p style="font-size: 2rem; text-align: center; font-weight: bold">
-        <span class="handshake">👋</span>
-        <span class="jump-text1" > Welcome</span>
-        <span class="jump-text2"> To </span>
-        <span class="jump-text3" style="color:#e99312">R</span><span class="jump-text4" style="color:#e99312">e</span><span class="jump-text5" style="color:#e99312">t</span><span class="jump-text6" style="color:#e99312">r</span><span class="jump-text7" style="color:#e99312">0</span><span class="jump-text8" style="color:#e99312">'s</span>
-        <span class="jump-text9" style="color:#e99312">Blog</span>
-    </p>
-    </div>
-    
-
-    <section class="article-list">
-        
-            
-<article class="">
+    <article class="main-article">
     <header class="article-header">
 
     <div class="article-details">
     
     <header class="article-category">
         
-            <a href="/categories/%E6%B8%B8%E6%88%8F/" style="background-color: #FF7C01; color: #fff;">
-                游戏
+            <a href="/categories/rust/" style="background-color: #f74c00; color: #fff;">
+                Rust
             </a>
         
     </header>
@@ -466,192 +357,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E6%B8%B8%E6%88%8F%E8%B5%84%E6%BA%90%E5%8A%A8%E4%BD%9C%E6%A0%BC%E6%96%97%E7%B1%BB/">游戏资源：动作格斗类</a>
-        </h2>
-    
-        
-    </div>
-
-    
-    
-     
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">2025-11-29 | 22:45</time>
-            </div>
-        
-
-        
-
-        
-        <div id="viewCount">
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-            <time class="article-time--reading">
-                <span id="vercount_value_page_pv">loading... </span>次
-            </time>
-        </div>
-    </footer>
-    
-
-    
-</div>
-</header>
-</article>
-        
-            
-<article class="">
-    <header class="article-header">
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/%E6%B8%B8%E6%88%8F/" style="background-color: #FF7C01; color: #fff;">
-                游戏
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/%E6%B8%B8%E6%88%8F%E8%B5%84%E6%BA%90galgame%E7%B1%BB%E5%92%8C%E8%A7%86%E8%A7%89%E5%B0%8F%E8%AF%B4%E7%B1%BB/">游戏资源：Galgame类和视觉小说类</a>
-        </h2>
-    
-        
-    </div>
-
-    
-    
-     
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">2025-11-29 | 22:44</time>
-            </div>
-        
-
-        
-
-        
-        <div id="viewCount">
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-            <time class="article-time--reading">
-                <span id="vercount_value_page_pv">loading... </span>次
-            </time>
-        </div>
-    </footer>
-    
-
-    
-</div>
-</header>
-</article>
-        
-            
-<article class="">
-    <header class="article-header">
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/%E6%B8%B8%E6%88%8F/" style="background-color: #FF7C01; color: #fff;">
-                游戏
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/%E6%B8%B8%E6%88%8F%E8%B5%84%E6%BA%90fps%E6%88%96tps%E7%B1%BB/">游戏资源：FPS或TPS类</a>
-        </h2>
-    
-        
-    </div>
-
-    
-    
-     
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">2025-11-29 | 22:44</time>
-            </div>
-        
-
-        
-
-        
-        <div id="viewCount">
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-            <time class="article-time--reading">
-                <span id="vercount_value_page_pv">loading... </span>次
-            </time>
-        </div>
-    </footer>
-    
-
-    
-</div>
-</header>
-</article>
-        
-            
-<article class="">
-    <header class="article-header">
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/%E6%B8%B8%E6%88%8F/" style="background-color: #FF7C01; color: #fff;">
-                游戏
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/%E8%BD%AF%E4%BB%B6%E8%B5%84%E6%BA%90/">软件资源</a>
+            <a href="/p/3.4-%E5%87%BD%E6%95%B0%E5%92%8C%E6%B3%A8%E9%87%8A/">3.4 函数和注释</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            别问我为什么放在“游戏”分类里，问就是懒。
+            学习Rust中函数的相关内容
         </h3>
         
     </div>
@@ -672,7 +383,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-11-29 | 22:42</time>
+                <time class="article-time--published">2026-07-22 | 10:51</time>
             </div>
         
 
@@ -691,371 +402,566 @@
     
 </div>
 </header>
-</article>
-        
-            
-<article class="">
-    <header class="article-header">
 
-    <div class="article-details">
+    <section class="article-content">
     
-    <header class="article-category">
-        
-            <a href="/categories/%E7%BD%91%E5%AE%89/" style="background-color: #BEBDBD; color: #fff;">
-                网安
-            </a>
-        
-            <a href="/categories/%E5%9F%BA%E7%A1%80%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" >
-                基础渗透测试
-            </a>
-        
-    </header>
+    
+    <h2 id="函数的声明">函数的声明
+</h2><p>声明函数使用 fn 关键字</p>
+<p>依照惯例，针对函数和变量名，Rust 使用 _snake case _命名规范：</p>
+<ul>
+<li>所有的字母都是小写的，单词之间使用下划线分开</li>
+</ul>
+<p><strong>例如：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Hello World!&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">fun</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">fun</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Good morning!&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Rust 中的函数只要有定义且可达就能调用，与先后顺序无关。</p>
+<h2 id="函数的参数">函数的参数
+</h2><p>和 C 一样，Rust中函数的参数同样分为：parameters（形参，定义时写的参数）,arguments（实参，实际调用时传的参数）</p>
+<p>在函数签名里，必须生命每个参数的类型</p>
+<p><strong>例如：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Hello World!&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">fun</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span><span class="w">	</span><span class="c1">// arguments
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">fun</span><span class="p">(</span><span class="n">x</span>:<span class="kt">i32</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">	</span><span class="c1">// parameters
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;x的值为：</span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="n">x</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="函数体中的语句和表达式">函数体中的语句和表达式
+</h2><ul>
+<li>函数体由一系列语句组成，可选的由一个表达式结束</li>
+<li>Rust 是一个基于表达式的语言</li>
+<li><strong>语句是执行一些动作的指令，没有返回值</strong></li>
+<li><strong>表达式会计算产生一个返回值</strong></li>
+<li>函数的定义也是语句</li>
+</ul>
+<p>对于由多段代码组成的块，最后一行若是表达式 <strong>且没有被分号终止</strong> ，则将其返回值视为这个块的返回值， <strong>例如：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;y的值为：</span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="n">y</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>若将块的最后一行加上分号，则所在行变成了语句，不再产生返回值；</p>
+<blockquote class="alert alert-note">
+    <p class="alert-title"><svg class="alert-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+    <p>实际上，每个语句都有一个空元祖类型的返回值<code>()</code>，这个类型只有一种数据，就是它本身，它不支持被打印或调用</p></blockquote>
+<h2 id="函数的返回值">函数的返回值
+</h2><ul>
+<li>在<code>-&gt;</code>符号后边声明函数返回值的类型，但是不可以为返回值命名</li>
+<li>在Rust中 ，返回值这就是函数体里面最后一个表达式的值</li>
+<li>若是想提前返回，需使用 return 关键字，并指定一个值（大多数函数都是默认使用最后一个表达式作为返回值）</li>
+</ul>
+<p><strong>例如：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">five</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="kt">i32</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="mi">5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">five</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;x的值为：</span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="n">x</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="注释">注释
+</h2><p>和其他语言类似，Rust支持<code>//</code>和<code>/* */</code>两种类型的注释，后者支持跨行</p>
+
+</section>
+
+
+    <footer class="article-footer">
     
 
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/1.5-sql%E6%B3%A8%E5%85%A5%E7%B3%BB%E5%88%97-1/">1.5 SQL注入系列-1</a>
-        </h2>
     
-        
-        <h3 class="article-subtitle">
-            GET类型的mysql类数据库注入初步教程，包括手动和工具辅助两部分
-        </h3>
-        
-    </div>
-
-    
-    
-     
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
 </svg>
-                <time class="article-time--published">2025-11-28 | 20:07</time>
-            </div>
-        
 
-        
 
-        
-        <div id="viewCount">
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-            <time class="article-time--reading">
-                <span id="vercount_value_page_pv">loading... </span>次
-            </time>
-        </div>
-    </footer>
-    
 
-    
-</div>
-</header>
-</article>
-        
-            
-<article class="">
-    <header class="article-header">
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/%E7%BD%91%E5%AE%89/" style="background-color: #BEBDBD; color: #fff;">
-                网安
-            </a>
-        
-            <a href="/categories/%E5%9F%BA%E7%A1%80%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" >
-                基础渗透测试
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/1.4-php%E5%9F%BA%E7%A1%80%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%A4%E4%BA%92/">1.4 php基础：用户交互与数据库交互</a>
-        </h2>
-    
-        
-        <h3 class="article-subtitle">
-            学习php的基础语法，如何与用户及数据库交互，以及命令行直接操作数据库。
-        </h3>
-        
-    </div>
-
-    
-    
-     
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">2025-11-26 | 23:11</time>
-            </div>
-        
-
-        
-
-        
-        <div id="viewCount">
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-            <time class="article-time--reading">
-                <span id="vercount_value_page_pv">loading... </span>次
-            </time>
-        </div>
-    </footer>
-    
-
-    
-</div>
-</header>
-</article>
-        
-            
-<article class="has-image">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/%E6%95%99%E7%A8%8B%E5%90%91%E5%9F%BA%E4%BA%8Etermux%E5%9C%A8%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E5%AE%89%E8%A3%85kali/">
-                
-                    <img src="/post/kali%e4%bb%8e%e5%85%a5%e9%97%a8%e5%88%b0%e5%85%a5%e7%8b%b1/termux.webp" loading="lazy" alt="Featured image of post [教程向]基于Termux在安卓手机上安装Kali" />
-                
-            </a>
-        </div>
-    
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/kali/" style="background-color: #018AE1; color: #fff;">
-                Kali
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/%E6%95%99%E7%A8%8B%E5%90%91%E5%9F%BA%E4%BA%8Etermux%E5%9C%A8%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E5%AE%89%E8%A3%85kali/">[教程向]基于Termux在安卓手机上安装Kali</a>
-        </h2>
-    
-        
-        <h3 class="article-subtitle">
-            在你的手机上搭建一台随时可用的Kali！
-        </h3>
-        
-    </div>
-
-    
-    
-     
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">2025-11-25 | 23:23</time>
-            </div>
-        
-
-        
-
-        
-        <div id="viewCount">
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-            <time class="article-time--reading">
-                <span id="vercount_value_page_pv">loading... </span>次
-            </time>
-        </div>
-    </footer>
-    
-
-    
-</div>
-</header>
-</article>
-        
-            
-<article class="">
-    <header class="article-header">
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/python/" style="background-color: #2A87D8; color: #fff;">
-                Python
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/10.1-%E7%BB%83%E4%B9%A0%E5%BA%8F/">10.1 练习：序</a>
-        </h2>
-    
-        
-        <h3 class="article-subtitle">
-            接下来有几个练习，这些是你需要先了解的。
-        </h3>
-        
-    </div>
-
-    
-    
-     
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">2025-11-25 | 22:37</time>
-            </div>
-        
-
-        
-
-        
-        <div id="viewCount">
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-            <time class="article-time--reading">
-                <span id="vercount_value_page_pv">loading... </span>次
-            </time>
-        </div>
-    </footer>
-    
-
-    
-</div>
-</header>
-</article>
-        
+        <span>Licensed under CC BY-NC-SA 4.0</span>
     </section>
-    <nav class='pagination'>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+<div class="math-katex"></div>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/3.3-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/">
         
         
 
-        
-            
-                    <a class='page-link' href='/'>1</a>
-                
-            
-            
-                    
-                        
-                        <span class='page-link dots'>&hellip;</span>
-                    
-                
-            
-            
-                    
-                
-            
-            
-                    
-                
-            
-            
-                    
-                
-            
-            
-                    
-                
-            
-            
-                    
-                
-            
-            
-                    
-                
-            
-            
-                    
-                
-            
-            
-                    
-                
-            
-            
-                    
-                
-            
-            
-                    
-                
-            
-            
-                    
-                
-            
-            
-                    <a class='page-link' href='/page/14/'>14</a>
-                
-            
-            
-                <span class='page-link current'>15</span>
-                
-            
-            
-                    <a class='page-link' href='/page/16/'>16</a>
-                
-            
-            
-                    
-                        
-                        <span class='page-link dots'>&hellip;</span>
-                    
-                
-            
-            
-                    
-                
-            
-            
-                    <a class='page-link' href='/page/19/'>19</a>
-                
-            
-    </nav>
+        <div class="article-details">
+            <h2 class="article-title">3.3 数据类型：复合类型</h2>
+        </div>
+    </a>
+</article>
 
-<footer class="site-footer">
+            
+                
+<article class="">
+    <a href="/p/3.2-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%A0%87%E9%87%8F%E7%B1%BB%E5%9E%8B/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">3.2 数据类型：标量类型</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/3.1-%E5%8F%98%E9%87%8F%E4%B8%8E%E5%8F%AF%E5%8F%98%E6%80%A7/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">3.1 变量与可变性</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/2.4-%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F%E5%A4%9A%E6%AC%A1%E7%8C%9C%E6%B5%8B/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2.4 猜数游戏：多次猜测</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/2.3-%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F%E6%AF%94%E8%BE%83%E7%8C%9C%E6%B5%8B%E6%95%B0%E5%AD%97%E5%92%8C%E7%A5%9E%E7%A7%98%E6%95%B0%E5%AD%97/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2.3 猜数游戏：比较猜测数字和神秘数字</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+        <div class="comment-container mt-8"></div>
+        
+        
+    <div id="waline" class="waline-container"></div>
+<style>
+ 
+
+ 
+:root,
+[data-scheme="light"] {
+    --waline-theme-color: #D97706;
+    --waline-active-color: #B45309;
+    --waline-white: #fff;
+    --waline-light-grey: #999;
+    --waline-dark-grey: #666;
+    --waline-color: #444;
+    --waline-bgcolor: transparent;
+    --waline-bgcolor-light: transparent;
+     
+    --waline-bgcolor-hover: rgba(217, 119, 6, 0.08);
+     
+    --waline-border-color: rgba(218, 218, 218, 0.4);
+    --waline-disable-bgcolor: rgba(0, 0, 0, 0.04);
+    --waline-disable-color: #bbb;
+    --waline-code-bgcolor: #fafafa;
+     
+    --waline-bq-color: rgba(217, 119, 6, 0.06);
+    --waline-badge-color: #D97706;
+    --waline-badge-font-size: 0.75em;
+    --waline-info-bgcolor: transparent;
+    --waline-info-color: #999;
+    --waline-info-font-size: 0.75em;
+    --waline-font-size: 16px;
+    --waline-border: none;
+    --waline-avatar-radius: 50%;
+    --waline-box-shadow: none;
+
+     
+     
+    --wl-glass-bg:       rgba(255, 255, 255, 0.85);
+     
+    --wl-glass-bg-cards: rgba(255, 255, 255, 0.8);
+     
+    --wl-glass-bg-panel: rgba(255, 255, 255, 0.78);
+     
+    --wl-glass-bg-input: rgba(255, 255, 255, 0.82);
+     
+    --wl-glass-border:   rgba(0, 0, 0, 0.08);
+     
+    --wl-glass-shadow:   0 2px 10px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+ 
+ 
+html[data-scheme="dark"] {
+    --waline-theme-color: #60A5FA;
+    --waline-active-color: #93BBFD;
+
+     
+    --waline-white: #fff;
+    --waline-light-grey: rgba(255, 255, 255, 0.72);
+    --waline-dark-grey: rgba(255, 255, 255, 0.88);
+
+    --waline-color: rgba(255, 255, 255, 0.85);
+    --waline-bgcolor: transparent;
+    --waline-bgcolor-light: transparent;
+     
+    --waline-bgcolor-hover: rgba(96, 165, 250, 0.12);
+     
+    --waline-border-color: rgba(255, 255, 255, 0.1);
+    --waline-disable-bgcolor: rgba(255, 255, 255, 0.05);
+    --waline-disable-color: rgba(255, 255, 255, 0.25);
+    --waline-code-bgcolor: #272822;
+     
+    --waline-bq-color: rgba(96, 165, 250, 0.08);
+    --waline-badge-color: #60A5FA;
+    --waline-badge-font-size: 0.75em;
+    --waline-info-bgcolor: transparent;
+    --waline-info-color: rgba(255, 255, 255, 0.7);
+    --waline-info-font-size: 0.75em;
+    --waline-font-size: 16px;
+    --waline-border: none;
+    --waline-avatar-radius: 50%;
+    --waline-box-shadow: none;
+
+     
+     
+    --wl-glass-bg:       rgba(255, 255, 255, 0.12);
+     
+    --wl-glass-bg-cards: rgba(255, 255, 255, 0.1);
+     
+    --wl-glass-bg-panel: rgba(255, 255, 255, 0.1);
+     
+    --wl-glass-bg-input: rgba(255, 255, 255, 0.13);
+     
+    --wl-glass-border:   rgba(255, 255, 255, 0.16);
+     
+    --wl-glass-shadow:   0 4px 16px rgba(0, 0, 0, 0.45);
+}
+
+ 
+
+ 
+#waline {
+    background: var(--wl-glass-bg-cards) !important;
+    backdrop-filter: blur(10px) saturate(120%);
+    -webkit-backdrop-filter: blur(10px) saturate(120%);
+    border: 1px solid var(--wl-glass-border) !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    box-shadow: var(--wl-glass-shadow) !important;
+}
+
+ 
+#waline .wl-panel {
+     
+    background: transparent !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 1px solid var(--wl-glass-border) !important;
+    border-radius: 12px !important;
+    padding: 16px !important;
+    margin-top: 20px !important;
+    box-shadow: var(--wl-glass-shadow) !important;
+}
+
+ 
+#waline .wl-cards {
+    background: transparent !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin-top: 8px !important;
+}
+
+ 
+#waline .wl-card-item > .wl-card {
+    background: transparent !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-radius: 8px !important;
+    padding: 8px 4px !important;
+    margin: 0 !important;
+}
+
+ 
+#waline .wl-input,
+#waline .wl-editor {
+    background: var(--wl-glass-bg-input) !important;
+    border: 1px solid var(--wl-glass-border) !important;
+    border-radius: 8px !important;
+    box-shadow: var(--wl-glass-shadow) !important;
+}
+
+ 
+#waline .wl-emoji-popup,
+#waline .wl-gif-popup {
+    background: var(--wl-glass-bg) !important;
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid var(--wl-glass-border) !important;
+    box-shadow: var(--wl-glass-shadow) !important;
+}
+
+ 
+
+ 
+[data-scheme="dark"] #waline .wl-count {
+    color: rgba(255, 255, 255, 0.92) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-header label {
+    color: rgba(255, 255, 255, 0.78) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-card .wl-nick,
+[data-scheme="dark"] #waline .wl-card span.wl-nick {
+    color: rgba(255, 255, 255, 0.92) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-card .wl-time {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-content {
+    color: rgba(255, 255, 255, 0.88) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-card .wl-reply,
+[data-scheme="dark"] #waline .wl-card .wl-like,
+[data-scheme="dark"] #waline .wl-card .wl-edit,
+[data-scheme="dark"] #waline .wl-card .wl-delete {
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+[data-scheme="dark"] #waline .wl-card .wl-reply:hover,
+[data-scheme="dark"] #waline .wl-card .wl-like:hover,
+[data-scheme="dark"] #waline .wl-card .wl-edit:hover,
+[data-scheme="dark"] #waline .wl-card .wl-delete:hover {
+    color: var(--waline-theme-color) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-empty {
+    color: rgba(255, 255, 255, 0.72) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-meta > span {
+    color: rgba(255, 255, 255, 0.72) !important;
+}
+
+ 
+[data-scheme="dark"] #waline .wl-page button {
+    color: rgba(255, 255, 255, 0.78) !important;
+}
+
+ 
+
+[data-scheme="light"] #waline .wl-editor:focus,
+[data-scheme="light"] #waline .wl-input:focus {
+    box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15) !important;
+    border-color: var(--waline-theme-color) !important;
+}
+[data-scheme="dark"] #waline .wl-editor:focus,
+[data-scheme="dark"] #waline .wl-input:focus {
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15) !important;
+    border-color: var(--waline-theme-color) !important;
+}
+
+#waline .wl-btn.primary {
+    border-radius: 8px !important;
+    font-weight: 600;
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+#waline .wl-btn.primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+#waline .wl-btn:not(.primary) {
+    border-radius: 8px !important;
+}
+
+[data-scheme="light"] #waline .wl-card-item .wl-card-item {
+    border-left: 3px solid rgba(217, 119, 6, 0.3) !important;
+}
+[data-scheme="dark"] #waline .wl-card-item .wl-card-item {
+    border-left: 3px solid rgba(96, 165, 250, 0.3) !important;
+}
+
+#waline .wl-emoji-popup button {
+    transition: transform 0.15s ease;
+}
+#waline .wl-emoji-popup button:hover {
+    transform: scale(1.2);
+}
+
+#waline .wl-user-avatar img,
+#waline .wl-avatar img {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+[data-scheme="light"] #waline blockquote {
+    border-left-color: #FDE68A !important;
+}
+[data-scheme="dark"] #waline blockquote {
+    border-left-color: rgba(96, 165, 250, 0.4) !important;
+}
+
+#waline .wl-power {
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+}
+#waline .wl-power:hover {
+    opacity: 1;
+}
+
+[data-scheme="dark"] #waline pre code,
+[data-scheme="dark"] #waline .wl-content pre code {
+    color: #ccc !important;
+}
+</style><script>
+    
+    
+    
+    
+    window._walineConfig = {"avatar":"","dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://unpkg.com/@waline/emojis@1.4.0/tw-emoji"],"lang":"zh-CN","locale":{"admin":"Admin","placeholder":"真的不想说点什么吗..."},"requiredMeta":["nick","email"],"serverURL":"https://waline.retr0.xyz/"};
+    
+    if (typeof initWaline === 'function') {
+        initWaline();
+    }
+</script>
+
+    
+
+    <footer class="site-footer">
     <section class="copyright">
         &copy; 
         
@@ -1413,6 +1319,85 @@
         
     </section>
 </footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
 
                 <script src="/js/APlayer.min.js"></script>
                 <script src="/js/Meting.min.js"></script>
