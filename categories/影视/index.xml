@@ -76,12 +76,18 @@
 &lt;p&gt;临近马年春节，我在单人宿舍中独自欣赏完了《Clannad》系列，听完最后一个ED后思考良久，最终打出了10分 的满分，因为它真的值得。&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;你可能曾经在哪听过这首歌：&lt;/p&gt;
-&lt;div
-  class=&#34;aplayer-article&#34;
-  data-title=&#34;だんご大家族&#34;
-  data-artist=&#34;茶太&#34;
-  data-src=&#34;https://www.retr0.xyz/music/茶太 - だんご大家族.mp3&#34;
-  data-cover=&#34;/music/cover/tuanzi.jpg&#34;&gt;
+&lt;div class=&#34;aplayer-wrap&#34;&gt;
+  &lt;meting-js
+    server=&#34;netease&#34;
+    type=&#34;song&#34;
+    id=&#34;760533&#34;
+    fixed=&#34;false&#34;
+    autoplay=&#34;false&#34;
+    loop=&#34;none&#34;
+    order=&#34;list&#34;
+    preload=&#34;auto&#34;
+    volume=&#34;0.7&#34;&gt;
+  &lt;/meting-js&gt;
 &lt;/div&gt;
 &lt;p&gt;没错，这首《团子大家族》正是来自《Clannad》，作为主题曲穿插全片，只不过已经看完的我之后每一次再听到这首歌就止不住心酸。&lt;/p&gt;
 &lt;p&gt;那我们正式开始。&lt;/p&gt;
