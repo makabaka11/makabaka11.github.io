@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://www.retr0.xyz/p/%E4%B8%BB%E6%B5%81%E7%BD%91%E7%9B%98%E8%A7%A3%E6%9E%90%E6%BB%A1%E9%80%9F%E4%B8%8B%E8%BD%BD-%E7%99%BE%E5%BA%A6%E5%A4%B8%E5%85%8B%E8%BF%85%E9%9B%B7%E9%98%BF%E9%87%8C/'>
 
-<link rel="stylesheet" href="/scss/style.min.e99117adbedc53a15fd675f2864a3c19bf22e672c1f2d56a2e49b699b01a3bfc.css"><meta property='og:title' content="主流网盘解析,满速下载 ,(百度,夸克,迅雷,阿里)">
+<link rel="stylesheet" href="/scss/style.min.cabc62472403e563f3b7bbbddd12da7a73f0e716a790179bac9b9632786efa60.css"><meta property='og:title' content="主流网盘解析,满速下载 ,(百度,夸克,迅雷,阿里)">
 <meta property='og:description' content="博主分享了百度、夸克、阿里和迅雷网盘的解析工具和下载器，实现满速下载。">
 <meta property='og:url' content='https://www.retr0.xyz/p/%E4%B8%BB%E6%B5%81%E7%BD%91%E7%9B%98%E8%A7%A3%E6%9E%90%E6%BB%A1%E9%80%9F%E4%B8%8B%E8%BD%BD-%E7%99%BE%E5%BA%A6%E5%A4%B8%E5%85%8B%E8%BF%85%E9%9B%B7%E9%98%BF%E9%87%8C/'>
 <meta property='og:site_name' content='Retr0的小窝'>
@@ -221,6 +221,27 @@
 
                 
                 <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                
+                <span>分类 | Categories</span>
             </a>
         </li>
         
@@ -1121,8 +1142,10 @@ html[data-scheme="dark"] {
         
             
         
-        发表了151篇文章 · 
-        总计250.51k字
+            
+        
+        发表了152篇文章 · 
+        总计251.75k字
     </section>
 
     
@@ -1236,6 +1259,9 @@ html[data-scheme="dark"] {
         document.head.appendChild(customFont);
     }());
 </script>
+<link rel="stylesheet" href="/css/travel-gallery.css">
+
+<script src="/js/travel-gallery.js" defer></script>
 <link rel="stylesheet" href="/css/custom.css">
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 
@@ -1439,7 +1465,7 @@ function initPhotoSwipeFromDOM(selector) {
     if (!containers.length) return;
 
     containers.forEach(container => {
-        const images = container.querySelectorAll('img');
+        const images = Array.from(container.querySelectorAll('img')).filter(img => !img.closest('.trip-gallery'));
 
         images.forEach((img, index) => {
 

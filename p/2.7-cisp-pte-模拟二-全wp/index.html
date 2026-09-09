@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://www.retr0.xyz/p/2.7-cisp-pte-%E6%A8%A1%E6%8B%9F%E4%BA%8C-%E5%85%A8wp/'>
 
-<link rel="stylesheet" href="/scss/style.min.e99117adbedc53a15fd675f2864a3c19bf22e672c1f2d56a2e49b699b01a3bfc.css"><meta property='og:title' content="2.7 CISP-PTE 模拟二 全WP">
+<link rel="stylesheet" href="/scss/style.min.cabc62472403e563f3b7bbbddd12da7a73f0e716a790179bac9b9632786efa60.css"><meta property='og:title' content="2.7 CISP-PTE 模拟二 全WP">
 <meta property='og:description' content=" 警钟长鸣\nSQL注入（sqlmap读文件） 右键查看源代码发现写有测试密码：admin123\n登录后进入了一个病历管理后台，可以编辑其中的病情，\n我们选择一个进行编辑，打开抓包后提交，复制数据包的内容保存到abc.txt中，把txt放在sqlmap的文件夹里，使用sqlmap读取文件\n">
 <meta property='og:url' content='https://www.retr0.xyz/p/2.7-cisp-pte-%E6%A8%A1%E6%8B%9F%E4%BA%8C-%E5%85%A8wp/'>
 <meta property='og:site_name' content='Retr0的小窝'>
@@ -221,6 +221,27 @@
 
                 
                 <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                
+                <span>分类 | Categories</span>
             </a>
         </li>
         
@@ -1416,8 +1437,10 @@ html[data-scheme="dark"] {
         
             
         
-        发表了151篇文章 · 
-        总计250.51k字
+            
+        
+        发表了152篇文章 · 
+        总计251.75k字
     </section>
 
     
@@ -1531,6 +1554,9 @@ html[data-scheme="dark"] {
         document.head.appendChild(customFont);
     }());
 </script>
+<link rel="stylesheet" href="/css/travel-gallery.css">
+
+<script src="/js/travel-gallery.js" defer></script>
 <link rel="stylesheet" href="/css/custom.css">
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 
@@ -1734,7 +1760,7 @@ function initPhotoSwipeFromDOM(selector) {
     if (!containers.length) return;
 
     containers.forEach(container => {
-        const images = container.querySelectorAll('img');
+        const images = Array.from(container.querySelectorAll('img')).filter(img => !img.closest('.trip-gallery'));
 
         images.forEach((img, index) => {
 

@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://www.retr0.xyz/p/s1.9-%E5%A4%9A%E6%80%81/'>
 
-<link rel="stylesheet" href="/scss/style.min.e99117adbedc53a15fd675f2864a3c19bf22e672c1f2d56a2e49b699b01a3bfc.css"><meta property='og:title' content="S1.9 多态">
+<link rel="stylesheet" href="/scss/style.min.cabc62472403e563f3b7bbbddd12da7a73f0e716a790179bac9b9632786efa60.css"><meta property='og:title' content="S1.9 多态">
 <meta property='og:description' content="多态（基础） 多态，指的是：多种状态，即完成某个行为时，使用不同的对象会得到不同的状态。\n示例：\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 class Animal: def speak(self): pass class Dog(Animal): def speak(self): print(&#39;汪汪汪&#39;) class Cat(Animal): def speak(self): print(&#39;喵喵喵&#39;) def make_noise(animal:Animal):\t# 专门定义一个函数用来在传入不同参数时调用相应的对象 animal.speak() dog = Dog() cat = Cat() make_noise(dog) make_noise(cat) 从上面的示例我们可以看出，所谓多态其实就是专门定义一个函数用来在传入不同参数时调用相应的对象，\n">
 <meta property='og:url' content='https://www.retr0.xyz/p/s1.9-%E5%A4%9A%E6%80%81/'>
 <meta property='og:site_name' content='Retr0的小窝'>
@@ -221,6 +221,27 @@
 
                 
                 <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                
+                <span>分类 | Categories</span>
             </a>
         </li>
         
@@ -1325,8 +1346,10 @@ html[data-scheme="dark"] {
         
             
         
-        发表了151篇文章 · 
-        总计250.51k字
+            
+        
+        发表了152篇文章 · 
+        总计251.75k字
     </section>
 
     
@@ -1440,6 +1463,9 @@ html[data-scheme="dark"] {
         document.head.appendChild(customFont);
     }());
 </script>
+<link rel="stylesheet" href="/css/travel-gallery.css">
+
+<script src="/js/travel-gallery.js" defer></script>
 <link rel="stylesheet" href="/css/custom.css">
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 
@@ -1643,7 +1669,7 @@ function initPhotoSwipeFromDOM(selector) {
     if (!containers.length) return;
 
     containers.forEach(container => {
-        const images = container.querySelectorAll('img');
+        const images = Array.from(container.querySelectorAll('img')).filter(img => !img.closest('.trip-gallery'));
 
         images.forEach((img, index) => {
 

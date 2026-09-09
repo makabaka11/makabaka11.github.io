@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Categories on Retr0的小窝</title>
+        <title>分类 | Categories on Retr0的小窝</title>
         <link>https://www.retr0.xyz/categories/</link>
-        <description>Recent content in Categories on Retr0的小窝</description>
+        <description>Recent content in 分类 | Categories on Retr0的小窝</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Retr0</copyright>
-        <lastBuildDate>Wed, 22 Jul 2026 10:51:05 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 09 Sep 2026 17:22:50 +0800</lastBuildDate><atom:link href="https://www.retr0.xyz/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Anime</title>
+        <link>https://www.retr0.xyz/categories/anime/</link>
+        <pubDate>Wed, 09 Sep 2026 17:22:50 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/categories/anime/</guid>
+        <description>&lt;img src="https://www.retr0.xyz/categories/anime/IMG_20250821_133541.png" alt="Featured image of post Anime" /&gt;</description>
+        </item>
+        <item>
+        <title>影视</title>
+        <link>https://www.retr0.xyz/categories/%E5%BD%B1%E8%A7%86/</link>
+        <pubDate>Wed, 09 Sep 2026 17:22:50 +0800</pubDate>
+        
+        <guid>https://www.retr0.xyz/categories/%E5%BD%B1%E8%A7%86/</guid>
+        <description>&lt;img src="https://files.nowre.com/articles/2022/12/oppenheimer.jpeg" alt="Featured image of post 影视" /&gt;</description>
+        </item>
+        <item>
         <title>Rust</title>
         <link>https://www.retr0.xyz/categories/rust/</link>
         <pubDate>Wed, 22 Jul 2026 10:51:05 +0800</pubDate>
@@ -30,22 +46,6 @@
         
         <guid>https://www.retr0.xyz/categories/ai-agents/</guid>
         <description>&lt;img src="https://www.retr0.xyz/blog-img/ddd2821c8e6fef7e99a4be372aa0f903.png" alt="Featured image of post AI Agents" /&gt;</description>
-        </item>
-        <item>
-        <title>Anime</title>
-        <link>https://www.retr0.xyz/categories/anime/</link>
-        <pubDate>Wed, 17 Jun 2026 15:33:47 +0800</pubDate>
-        
-        <guid>https://www.retr0.xyz/categories/anime/</guid>
-        <description>&lt;img src="https://www.retr0.xyz/categories/anime/IMG_20250821_133541.png" alt="Featured image of post Anime" /&gt;</description>
-        </item>
-        <item>
-        <title>影视</title>
-        <link>https://www.retr0.xyz/categories/%E5%BD%B1%E8%A7%86/</link>
-        <pubDate>Wed, 17 Jun 2026 15:33:47 +0800</pubDate>
-        
-        <guid>https://www.retr0.xyz/categories/%E5%BD%B1%E8%A7%86/</guid>
-        <description>&lt;img src="https://files.nowre.com/articles/2022/12/oppenheimer.jpeg" alt="Featured image of post 影视" /&gt;</description>
         </item>
         <item>
         <title>游戏</title>

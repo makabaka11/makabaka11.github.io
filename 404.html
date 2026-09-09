@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://www.retr0.xyz/404.html'>
 
-<link rel="stylesheet" href="/scss/style.min.e99117adbedc53a15fd675f2864a3c19bf22e672c1f2d56a2e49b699b01a3bfc.css"><meta property='og:title' content="404 Page not found">
+<link rel="stylesheet" href="/scss/style.min.cabc62472403e563f3b7bbbddd12da7a73f0e716a790179bac9b9632786efa60.css"><meta property='og:title' content="404 Page not found">
 <meta property='og:description' content="我的性格真的很糟糕吗？">
 <meta property='og:url' content='https://www.retr0.xyz/404.html'>
 <meta property='og:site_name' content='Retr0的小窝'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-07-22T10:51:05&#43;08:00 '/>
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-09-09T17:22:50&#43;08:00 '/>
 <meta name="twitter:title" content="404 Page not found">
 <meta name="twitter:description" content="我的性格真的很糟糕吗？">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -219,6 +219,27 @@
 
                 
                 <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                
+                <span>分类 | Categories</span>
             </a>
         </li>
         
@@ -682,8 +703,10 @@
         
             
         
-        发表了151篇文章 · 
-        总计250.51k字
+            
+        
+        发表了152篇文章 · 
+        总计251.75k字
     </section>
 
     
@@ -719,6 +742,9 @@
         document.head.appendChild(customFont);
     }());
 </script>
+<link rel="stylesheet" href="/css/travel-gallery.css">
+
+<script src="/js/travel-gallery.js" defer></script>
 <link rel="stylesheet" href="/css/custom.css">
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 
@@ -922,7 +948,7 @@ function initPhotoSwipeFromDOM(selector) {
     if (!containers.length) return;
 
     containers.forEach(container => {
-        const images = container.querySelectorAll('img');
+        const images = Array.from(container.querySelectorAll('img')).filter(img => !img.closest('.trip-gallery'));
 
         images.forEach((img, index) => {
 

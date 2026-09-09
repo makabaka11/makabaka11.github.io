@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://www.retr0.xyz/p/vibe-coding-%E5%BD%93%E4%B8%8B%E6%88%91%E4%BB%AC%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8ai%E5%BF%AB%E9%80%9F%E5%8F%82%E4%B8%8E%E9%A1%B9%E7%9B%AE%E4%BB%A5nipaplay%E4%B8%BA%E4%BE%8B/'>
 
-<link rel="stylesheet" href="/scss/style.min.e99117adbedc53a15fd675f2864a3c19bf22e672c1f2d56a2e49b699b01a3bfc.css"><meta property='og:title' content="[Vibe Coding] 当下，我们如何使用AI快速参与项目：以NipaPlay为例">
+<link rel="stylesheet" href="/scss/style.min.cabc62472403e563f3b7bbbddd12da7a73f0e716a790179bac9b9632786efa60.css"><meta property='og:title' content="[Vibe Coding] 当下，我们如何使用AI快速参与项目：以NipaPlay为例">
 <meta property='og:description' content="给那些有一点编程基础的人的Vibe Coding入门教程">
 <meta property='og:url' content='https://www.retr0.xyz/p/vibe-coding-%E5%BD%93%E4%B8%8B%E6%88%91%E4%BB%AC%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8ai%E5%BF%AB%E9%80%9F%E5%8F%82%E4%B8%8E%E9%A1%B9%E7%9B%AE%E4%BB%A5nipaplay%E4%B8%BA%E4%BE%8B/'>
 <meta property='og:site_name' content='Retr0的小窝'>
@@ -222,6 +222,27 @@
 
                 
                 <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                
+                <span>分类 | Categories</span>
             </a>
         </li>
         
@@ -1317,8 +1338,10 @@ html[data-scheme="dark"] {
         
             
         
-        发表了151篇文章 · 
-        总计250.51k字
+            
+        
+        发表了152篇文章 · 
+        总计251.75k字
     </section>
 
     
@@ -1432,6 +1455,9 @@ html[data-scheme="dark"] {
         document.head.appendChild(customFont);
     }());
 </script>
+<link rel="stylesheet" href="/css/travel-gallery.css">
+
+<script src="/js/travel-gallery.js" defer></script>
 <link rel="stylesheet" href="/css/custom.css">
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 
@@ -1635,7 +1661,7 @@ function initPhotoSwipeFromDOM(selector) {
     if (!containers.length) return;
 
     containers.forEach(container => {
-        const images = container.querySelectorAll('img');
+        const images = Array.from(container.querySelectorAll('img')).filter(img => !img.closest('.trip-gallery'));
 
         images.forEach((img, index) => {
 
