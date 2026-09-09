@@ -13,6 +13,7 @@
   const next = root.querySelector('.trip-next');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let index = 0, offset = 0, cards = [], frame = 0, busy = false, queued = 0, drag = null;
+  let stageWidth = stage.clientWidth, animations = [], disposed = false;
   let suppressClickUntil = 0, lightbox = null, opening = false, requestId = 0;
   async function openLightbox(img) {
     if (busy || drag || opening || lightbox || performance.now() < suppressClickUntil) return;
@@ -23,7 +24,7 @@
         await window.ensurePhotoSwipeAssets();
       }
       if (!img.complete || !img.naturalWidth) await img.decode();
-      if (request !== requestId || !root.isConnected || !img.isConnected || busy || !img.naturalWidth) return;
+      if (request !== requestId || !root.isConnected || !img.isConnected || !img.hasAttribute('data-trip-main') || busy || !img.naturalWidth) return;
       const pswp = document.querySelector('.pswp');
       if (!pswp || !window.PhotoSwipe || !window.PhotoSwipeUI_Default) return;
       const rect = img.getBoundingClientRect();
@@ -64,53 +65,87 @@
   dots.replaceChildren();
   photos.forEach(() => dots.append(document.createElement('i')));
   function build() {
-    stage.replaceChildren(); cards = [];
-    for (let slot = -2; slot <= 2; slot++) {
+    // Reuse the five slots. Only the recycled, offscreen card changes its image.
+    for (const slot of [0, -1, 1, -2, 2]) {
       if (photos.length === 1 && slot !== 0) continue;
       const p = wrap(index + slot), photo = photos[p];
-      const card = document.createElement('figure'); card.className = 'trip-card';
-      const img = document.createElement('img'); img.src = photo.src; img.alt = photo.alt || photo.caption; img.draggable = false; img.decoding = 'async';
+      let entry = cards.find(item => item.slot === slot);
+      if (!entry) {
+        const card = document.createElement('figure'); card.className = 'trip-card';
+        const img = document.createElement('img'); img.draggable = false; img.decoding = 'async';
+        const caption = document.createElement('figcaption');
+        const number = document.createElement('small');
+        const text = document.createElement('span'); text.className = 'trip-caption';
+        caption.append(number, text); card.append(img, caption); stage.append(card);
+        entry = {card, img, number, text, slot, photoIndex: -1}; cards.push(entry);
+      }
+      const {card, img, number, text} = entry;
+      img.fetchPriority = slot === 0 ? 'high' : 'low';
+      if (entry.photoIndex !== p) {
+        img.alt = photo.alt || photo.caption;
+        img.src = photo.src;
+        entry.photoIndex = p;
+        number.textContent = pad(p + 1); text.textContent = photo.caption;
+      }
       if (slot === 0) {
         img.dataset.tripMain = ''; img.tabIndex = 0; img.setAttribute('role', 'button');
         img.setAttribute('aria-label', `放大图片：${img.alt}`);
+      } else {
+        delete img.dataset.tripMain; img.removeAttribute('tabindex');
+        img.removeAttribute('role'); img.removeAttribute('aria-label');
       }
-      const caption = document.createElement('figcaption');
-      const number = document.createElement('small'); number.textContent = pad(p + 1);
-      const text = document.createElement('span'); text.className = 'trip-caption'; text.textContent = photo.caption;
-      caption.append(number, text); card.append(img, caption); stage.append(card);
-      card.setAttribute('aria-hidden', String(slot !== 0)); cards.push({card, slot});
+      card.setAttribute('aria-hidden', String(slot !== 0));
     }
     count.textContent = `${pad(index + 1)} / ${pad(photos.length)}`;
     [...dots.children].forEach((dot, i) => dot.classList.toggle('active', i === index));
     live.textContent = `第 ${index + 1} 张，共 ${photos.length} 张。${photos[index].caption}`;
     draw();
   }
-  function draw() {
-    const w = stage.clientWidth, mobile = w <= 600;
-    cards.forEach(({card, slot}) => {
-      const position = slot - offset, distance = Math.abs(position);
+  function appearance(slot, progress) {
+      const w = stageWidth, mobile = w <= 600;
+      const position = slot - progress, distance = Math.abs(position);
       const scale = mobile ? 1 : 1 - Math.min(distance, 1) * .38;
       const x = position * w * (mobile ? 1.04 : .35);
       const y = mobile ? 0 : Math.min(distance, 1) * (position < 0 ? 34 : 49);
       const rotation = mobile ? 0 : Math.max(-1, Math.min(1, position)) * 3;
-      card.style.transform = `translateX(-50%) translate3d(${x}px,${y}px,0) rotate(${rotation}deg) scale(${scale})`;
-      card.style.opacity = Math.max(0, Math.min(1, 2 - distance));
-      card.style.zIndex = String(Math.round(100 - distance * 10));
+      return {
+        transform: `translateX(-50%) translate3d(${x}px,${y}px,0) rotate(${rotation}deg) scale(${scale})`,
+        opacity: Math.max(0, Math.min(1, 2 - distance))
+      };
+  }
+  function draw() {
+    cards.forEach(({card, slot}) => {
+      Object.assign(card.style, appearance(slot, offset));
+      card.style.zIndex = String(Math.round(100 - Math.abs(slot - offset) * 10));
     });
   }
   function animate(destination) {
     busy = true;
-    const start = offset, startTime = performance.now();
     const duration = reduced.matches ? 0 : 620;
-    function tick(now) {
-      if (!root.isConnected) return;
-      const t = duration ? Math.min(1, (now - startTime) / duration) : 1;
-      offset = start + (destination - start) * (1 - Math.pow(1 - t, 4)); draw();
-      if (t < 1) { frame = requestAnimationFrame(tick); return; }
-      index = wrap(index + destination); offset = 0; busy = false; build();
-      if (queued) { const direction = Math.sign(queued); queued -= direction; animate(direction); }
+    // Transform/opacity animation can run without a JavaScript callback every frame.
+    animations = cards.map(({card, slot}) => card.animate([
+      appearance(slot, offset), appearance(slot, destination)
+    ], {duration, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'forwards'}));
+    // Swap stacking order while the cards cross, using the same motion easing.
+    // Keep this separate from transform/opacity animation; mobile needs no overlap swap.
+    if (stageWidth > 600) {
+      animations.push(...cards.map(({card, slot}) => card.animate([
+        {zIndex: Math.round(100 - Math.abs(slot - offset) * 10)},
+        {zIndex: Math.round(100 - Math.abs(slot - destination) * 10)}
+      ], {duration, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'forwards'})));
     }
-    frame = requestAnimationFrame(tick);
+    Promise.all(animations.map(animation => animation.finished)).then(() => {
+      if (disposed || !root.isConnected) return;
+      index = wrap(index + destination); offset = 0; busy = false;
+      for (const entry of cards) {
+        entry.slot -= destination;
+        if (entry.slot < -2) entry.slot += 5;
+        if (entry.slot > 2) entry.slot -= 5;
+      }
+      build();
+      animations.forEach(animation => animation.cancel()); animations = [];
+      if (queued) { const direction = Math.sign(queued); queued -= direction; animate(direction); }
+    }).catch(() => { /* Cancellation when leaving the page is expected. */ });
   }
   function step(direction) {
     if (photos.length < 2 || drag) return;
@@ -134,14 +169,14 @@
     drag.horizontal = true; drag.dx = dx; stage.classList.add('is-dragging');
     if (!stage.hasPointerCapture(e.pointerId)) stage.setPointerCapture(e.pointerId);
     if (photos.length < 2) return;
-    const stride = stage.clientWidth * (stage.clientWidth <= 600 ? 1.04 : .35);
+    const stride = stageWidth * (stageWidth <= 600 ? 1.04 : .35);
     offset = Math.max(-1, Math.min(1, -dx / stride));
     cancelAnimationFrame(frame); frame = requestAnimationFrame(draw);
   });
   function finish(e, cancelled = false) {
     if (!drag || e.pointerId !== drag.id) return;
     if (cancelled || drag.moved) suppressClickUntil = performance.now() + 600;
-    const destination = !cancelled && photos.length > 1 && Math.abs(drag.dx) > Math.min(55, stage.clientWidth * .12) ? (drag.dx < 0 ? 1 : -1) : 0;
+    const destination = !cancelled && photos.length > 1 && Math.abs(drag.dx) > Math.min(55, stageWidth * .12) ? (drag.dx < 0 ? 1 : -1) : 0;
     const id = drag.id; drag = null; stage.classList.remove('is-dragging');
     if (stage.hasPointerCapture(id)) stage.releasePointerCapture(id);
     cancelAnimationFrame(frame);
@@ -150,12 +185,20 @@
   listen(stage, 'pointerup', e => finish(e));
   listen(stage, 'pointercancel', e => finish(e, true));
   listen(stage, 'lostpointercapture', e => finish(e, true));
-  const observer = new ResizeObserver(draw);
+  const observer = new ResizeObserver(entries => {
+    const width = entries[0].contentRect.width;
+    if (Math.abs(width - stageWidth) < 0.5) return;
+    stageWidth = width;
+    if (busy) animations.forEach(animation => animation.finish());
+    else draw();
+  });
   observer.observe(stage);
   prev.disabled = next.disabled = photos.length < 2;
   if (photos.length) build(); else { count.textContent = '暂无照片'; }
 
     return () => {
+      disposed = true;
+      animations.forEach(animation => animation.cancel()); animations = [];
       requestId++;
       if (lightbox) lightbox.close();
       cancelAnimationFrame(frame);
