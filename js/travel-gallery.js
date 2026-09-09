@@ -96,8 +96,7 @@
       }
       card.setAttribute('aria-hidden', String(slot !== 0));
     }
-    count.textContent = `${pad(index + 1)} / ${pad(photos.length)}`;
-    [...dots.children].forEach((dot, i) => dot.classList.toggle('active', i === index));
+    updateIndicators(index);
     live.textContent = `第 ${index + 1} 张，共 ${photos.length} 张。${photos[index].caption}`;
     draw();
   }
@@ -121,6 +120,7 @@
   }
   function animate(destination) {
     busy = true;
+    updateIndicators(wrap(index + destination));
     const duration = reduced.matches ? 0 : 620;
     // Transform/opacity animation can run without a JavaScript callback every frame.
     animations = cards.map(({card, slot}) => card.animate([
@@ -146,6 +146,10 @@
       animations.forEach(animation => animation.cancel()); animations = [];
       if (queued) { const direction = Math.sign(queued); queued -= direction; animate(direction); }
     }).catch(() => { /* Cancellation when leaving the page is expected. */ });
+  }
+  function updateIndicators(activeIndex) {
+    count.textContent = `${pad(activeIndex + 1)} / ${pad(photos.length)}`;
+    [...dots.children].forEach((dot, i) => dot.classList.toggle('active', i === activeIndex));
   }
   function step(direction) {
     if (photos.length < 2 || drag) return;

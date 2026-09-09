@@ -20,7 +20,7 @@
   .trip-pagination { text-align:center; min-width:78px; }
   .trip-count { font-size:12px; letter-spacing:3px; font-variant-numeric:tabular-nums; }
   .trip-dots { display:flex; justify-content:center; gap:5px; margin-top:9px; }
-  .trip-dots i { width:4px; height:4px; border-radius:9px; background:var(--trip-line); transition:width .45s,background .45s; }
+  .trip-dots i { width:4px; height:4px; border-radius:9px; background:var(--trip-line); transition:width .18s,background .18s; }
   .trip-dots i.active { width:18px; background:var(--trip-accent); }
   .trip-sr { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
   @container(max-width:600px) { .trip-gallery .trip-card { width:92%; border-radius:16px; padding:7px 7px 0; } .trip-stage { height:calc(52cqw + 135px); } .trip-gallery .trip-card figcaption { font-size:12px; } }
