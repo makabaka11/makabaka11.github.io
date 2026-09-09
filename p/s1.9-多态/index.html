@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://www.retr0.xyz/p/s1.9-%E5%A4%9A%E6%80%81/'>
 
-<link rel="stylesheet" href="/scss/style.min.cabc62472403e563f3b7bbbddd12da7a73f0e716a790179bac9b9632786efa60.css"><meta property='og:title' content="S1.9 多态">
+<link rel="stylesheet" href="/scss/style.min.d18ea8e9e86d89ba3f9b7e56774dfc9ae65ddeafeff2f942d5ea9e1316fd09fe.css"><meta property='og:title' content="S1.9 多态">
 <meta property='og:description' content="多态（基础） 多态，指的是：多种状态，即完成某个行为时，使用不同的对象会得到不同的状态。\n示例：\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 class Animal: def speak(self): pass class Dog(Animal): def speak(self): print(&#39;汪汪汪&#39;) class Cat(Animal): def speak(self): print(&#39;喵喵喵&#39;) def make_noise(animal:Animal):\t# 专门定义一个函数用来在传入不同参数时调用相应的对象 animal.speak() dog = Dog() cat = Cat() make_noise(dog) make_noise(cat) 从上面的示例我们可以看出，所谓多态其实就是专门定义一个函数用来在传入不同参数时调用相应的对象，\n">
 <meta property='og:url' content='https://www.retr0.xyz/p/s1.9-%E5%A4%9A%E6%80%81/'>
 <meta property='og:site_name' content='Retr0的小窝'>
@@ -1451,7 +1451,7 @@ html[data-scheme="dark"] {
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.4a3bdc5966f2d06d8b22f20aa77c6fb645e0377cca879908bf297277a89bdae0.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.d334d763334898be363bf5b7d34f77fdfb345a4034d68716a80536c81be2bfbd.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
@@ -1585,23 +1585,23 @@ async function renderKaTeX() {
 </script>
 
 
-<div id="particles-js"></div>
+<div id="particles-js" aria-hidden="true"></div>
 
 <script src="https://www.retr0.xyz/background/particles.min.js"></script>
-<script>
-particlesJS.load('particles-js',
-    "https:\/\/www.retr0.xyz\/background\/particlesjs-config.json",
-    () => console.log('particles.js loaded')
-);
-</script>
+<script src="/background/init.8fc74b792ab606db19165d994479bf6ec5e98f82589ac419dbcae0eb25a4c185.js" data-config="/background/particlesjs-config.json" defer></script>
 
 <style>
 #particles-js {
     position: fixed;
     top: 0; left: 0;
     width: 100%;
+    height: 100vh;
+    height: 100lvh;
+    pointer-events: none;
+    contain: strict;
     z-index: -1;
 }
+#particles-js canvas { display: block; }
 </style>
 
 <script>

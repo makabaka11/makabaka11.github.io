@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://www.retr0.xyz/p/1.24-1-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E5%92%8C%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/'>
 
-<link rel="stylesheet" href="/scss/style.min.cabc62472403e563f3b7bbbddd12da7a73f0e716a790179bac9b9632786efa60.css"><meta property='og:title' content="1.24-1 文件包含漏洞和命令执行漏洞">
+<link rel="stylesheet" href="/scss/style.min.d18ea8e9e86d89ba3f9b7e56774dfc9ae65ddeafeff2f942d5ea9e1316fd09fe.css"><meta property='og:title' content="1.24-1 文件包含漏洞和命令执行漏洞">
 <meta property='og:description' content="文件包含漏洞 搭建靶场所用文件：https://pan.baidu.com/s/1IoX4I73J5mnD96tzlnV6UQ?pwd=s86q\n这部分在之前的【文件上传】当中已有运用，详情请看1.19 XSS 注入攻击2与文件上传\n文件包含在php中有两种写法：\ninclude\t出错但继续 require\t出错会停 include_once\t相当于include，但会检查确保只包含一次 require\t相当于require，但会检查确保只包含一次 本地包含（Local File Include） 在靶场中选择File Inclusion(local)选择一个选项后用burp抓包可以看见提交的数据包中第一行为：\n">
 <meta property='og:url' content='https://www.retr0.xyz/p/1.24-1-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E5%92%8C%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/'>
 <meta property='og:site_name' content='Retr0的小窝'>
@@ -1647,7 +1647,7 @@ html[data-scheme="dark"] {
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.4a3bdc5966f2d06d8b22f20aa77c6fb645e0377cca879908bf297277a89bdae0.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.d334d763334898be363bf5b7d34f77fdfb345a4034d68716a80536c81be2bfbd.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
@@ -1781,23 +1781,23 @@ async function renderKaTeX() {
 </script>
 
 
-<div id="particles-js"></div>
+<div id="particles-js" aria-hidden="true"></div>
 
 <script src="https://www.retr0.xyz/background/particles.min.js"></script>
-<script>
-particlesJS.load('particles-js',
-    "https:\/\/www.retr0.xyz\/background\/particlesjs-config.json",
-    () => console.log('particles.js loaded')
-);
-</script>
+<script src="/background/init.8fc74b792ab606db19165d994479bf6ec5e98f82589ac419dbcae0eb25a4c185.js" data-config="/background/particlesjs-config.json" defer></script>
 
 <style>
 #particles-js {
     position: fixed;
     top: 0; left: 0;
     width: 100%;
+    height: 100vh;
+    height: 100lvh;
+    pointer-events: none;
+    contain: strict;
     z-index: -1;
 }
+#particles-js canvas { display: block; }
 </style>
 
 <script>
