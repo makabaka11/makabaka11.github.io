@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://www.retr0.xyz/p/1.11-linux%E6%8F%90%E6%9D%83%E7%BB%AD%E5%92%8C%E9%92%93%E9%B1%BC%E7%BD%91%E7%AB%99/'>
 
-<link rel="stylesheet" href="/scss/style.min.d18ea8e9e86d89ba3f9b7e56774dfc9ae65ddeafeff2f942d5ea9e1316fd09fe.css"><meta property='og:title' content="1.11 Linux提权(续)和钓鱼网站">
+<link rel="stylesheet" href="/scss/style.min.f5ee5f3312e82fd6e4560ceb39a473ac5dda57498208011dd2b1ea5008afab0a.css"><meta property='og:title' content="1.11 Linux提权(续)和钓鱼网站">
 <meta property='og:description' content="提权(续) 以下命令除非特别指出，均在ssh中执行\n寻找敏感的隐藏文件\n1 find / -name &#34;.*&#34; -type f -path &#34;/home/*&#34; -exec ls -al {} \\; 2&gt;/dev/null 有可能找到用户自己存储的明文密码，使用cat查看，再使用su [用户名]切换到对应权限\n">
 <meta property='og:url' content='https://www.retr0.xyz/p/1.11-linux%E6%8F%90%E6%9D%83%E7%BB%AD%E5%92%8C%E9%92%93%E9%B1%BC%E7%BD%91%E7%AB%99/'>
 <meta property='og:site_name' content='Retr0的小窝'>
@@ -247,18 +247,6 @@
         
         
         <li >
-            <a href='/message/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-message"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 9h8" /><path d="M8 13h6" /><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" /></svg>
-                
-                <span>留言板 | Msg Board</span>
-            </a>
-        </li>
-        
-        
-        <li >
             <a href='/gallery/' >
                 
                 
@@ -266,7 +254,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h3l2-3h4l2 3h3a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"/><circle cx="12" cy="13" r="4"/></svg>
 
                 
-                <span>相册 | Gallery</span>
+                <span>画廊</span>
             </a>
         </li>
         
@@ -1853,8 +1841,15 @@ html[data-scheme="dark"] {
     </section>
 
     
-    <section class="icp-record" style="margin: 8px 0; line-height: 1.5;">
-        <a href="https://icp.gov.moe/?keyword=20267077" target="_blank">萌ICP备20267077号</a>
+    <section class="icp-record">
+        <a href="https://icp.gov.moe/?keyword=20267077" target="_blank" rel="noopener noreferrer" aria-label="查看萌ICP备20267077号备案信息">
+            <span class="icp-spark" aria-hidden="true">✦</span>
+            <span class="icp-copy">
+                <small>MOE ICP RECORD</small>
+                <span>萌ICP备20267077号</span>
+            </span>
+            <span class="icp-arrow" aria-hidden="true">↗</span>
+        </a>
     </section>
 
     <section class="powerby">
@@ -1863,6 +1858,7 @@ html[data-scheme="dark"] {
         
     </section>
 </footer>
+
 
     
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
@@ -1951,7 +1947,7 @@ html[data-scheme="dark"] {
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.d334d763334898be363bf5b7d34f77fdfb345a4034d68716a80536c81be2bfbd.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.d334d763334898be363bf5b7d34f77fdfb345a4034d68716a80536c81be2bfbd.js" defer></script><script type="text/javascript" src="/ts/custom.dd71c9a8ffb7b290b96e7de2c1f298e28c66331ec39aada910176b2cf269dc9b.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
@@ -1968,7 +1964,7 @@ html[data-scheme="dark"] {
 <link rel="stylesheet" href="/css/travel-gallery.css">
 
 <script src="/js/travel-gallery.js" defer></script>
-<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="/css/custom.css?v=20260910-1">
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 
 <script>
@@ -2013,7 +2009,7 @@ document.addEventListener('pjax:complete', () => {
     updateViewCount();
     renderKaTeX();
     initPhotoSwipeFromDOM('.article-content');   
-    initLive2D();                                
+    initPreferredWaifu();
 });
 </script>
 
@@ -2306,9 +2302,23 @@ function loadLive2DAssetsOnce(cdnPath) {
 }
 
 
+function setLegacyLive2DVisible(visible) {
+    const waifu = document.querySelector("#waifu");
+    const toggle = document.querySelector("#waifu-toggle");
+    if (waifu) {
+        waifu.style.display = visible ? "" : "none";
+        if (visible) setTimeout(() => { waifu.style.bottom = "0px"; }, 0);
+    }
+    if (toggle) toggle.style.display = visible ? "" : "none";
+}
+
 function initLive2DWidgetOnce(cdnPath) {
 
-    if (window._live2d_initialized) return;
+    if (window._live2d_initialized) {
+        setLegacyLive2DVisible(true);
+        return;
+    }
+    if (window.__blogPetState === "ready" || window.__blogPetState === "disabled-mobile") return;
 
     
     const old = document.querySelector("#waifu");
@@ -2319,7 +2329,7 @@ function initLive2DWidgetOnce(cdnPath) {
     initWidget({
         waifuPath: cdnPath + "waifu-tips.json",
         cdnPath: cdnPath + "Resources/",
-        tools: ["hitokoto", "asteroids", "express", "switch-model", "switch-texture", "photo", "info", "quit"],
+        tools: ["hitokoto", "asteroids", "express", "switch-model", "switch-texture", "switch-new", "photo", "info", "quit"],
         dragEnable: true,
         dragDirection: ["x", "y"],
         switchType: "order"
@@ -2348,6 +2358,7 @@ function loadRes(url, type) {
 
 function initLive2D() {
     if (screen.width < 768) return;
+    if (window.__blogPetState === "ready" || window.__blogPetState === "starting" || window.__blogPetState === "disabled-mobile") return;
 
     const cdnPath = "https://www.retr0.xyz/blog-live2d/";
 
@@ -2355,11 +2366,43 @@ function initLive2D() {
         .then(() => initLive2DWidgetOnce(cdnPath));
 }
 
-initLive2D();  
+
+
+window._preferredWaifuFallbackTimer = window._preferredWaifuFallbackTimer || null;
+
+function initPreferredWaifu() {
+    if (screen.width < 768 || window.__blogPetState === "disabled-mobile") return;
+    if (window.__blogPetState === "fallback") {
+        initLive2D();
+        return;
+    }
+    if (window.__blogPetState === "ready") return;
+    clearTimeout(window._preferredWaifuFallbackTimer);
+    window._preferredWaifuFallbackTimer = setTimeout(() => {
+        if (window.__blogPetState !== "ready" && window.__blogPetState !== "disabled-mobile") {
+            window.__blogPetState = "fallback";
+            initLive2D();
+        }
+    }, 8000);
+}
+
+document.addEventListener("blog-pet:ready", () => {
+    clearTimeout(window._preferredWaifuFallbackTimer);
+    if (window.__blogPetState === "ready" && document.querySelector("#blog-pet")) {
+        setLegacyLive2DVisible(false);
+    }
+});
+
+document.addEventListener("blog-pet:fallback", () => {
+    clearTimeout(window._preferredWaifuFallbackTimer);
+    initLive2D();
+});
+
+initPreferredWaifu();
 
 
 document.addEventListener("pjax:complete", () => {
-    initLive2D(); 
+    initPreferredWaifu();
 });
 </script>
 

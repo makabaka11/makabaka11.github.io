@@ -64,3 +64,89 @@ textarea,
 .footer {
   font-family: 'Noto Sans SC', 'LXGW WenKai', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
 }
+
+/* 萌备案：与 Stack 卡片色彩一致的轻量徽章 */
+.site-footer .icp-record {
+  margin: 12px 0 10px;
+}
+
+.site-footer .icp-record a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 42px;
+  padding: 7px 12px 7px 9px;
+  border: 1px solid var(--card-separator-color);
+  border-radius: 13px;
+  color: var(--card-text-color-main);
+  background: color-mix(in srgb, var(--card-background) 82%, transparent);
+  box-shadow: 0 7px 22px rgba(80, 98, 86, 0.08);
+  text-decoration: none;
+  font-family: 'Noto Sans SC', 'LXGW WenKai', sans-serif;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease, background .25s ease;
+}
+
+.site-footer .icp-spark {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  flex: 0 0 27px;
+  border-radius: 9px;
+  color: var(--accent-color);
+  background: color-mix(in srgb, var(--accent-color) 12%, transparent);
+  font-size: 13px;
+  transition: transform .35s cubic-bezier(.22, 1, .36, 1);
+}
+
+.site-footer .icp-copy {
+  display: grid;
+  gap: 1px;
+  line-height: 1.35;
+}
+
+.site-footer .icp-copy small {
+  color: var(--card-text-color-tertiary);
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 1.45px;
+}
+
+.site-footer .icp-copy > span {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .35px;
+}
+
+.site-footer .icp-arrow {
+  margin-left: 2px;
+  color: var(--card-text-color-tertiary);
+  font-size: 15px;
+  transition: transform .3s cubic-bezier(.22, 1, .36, 1), color .25s ease;
+}
+
+@media (hover: hover) {
+  .site-footer .icp-record a:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--accent-color) 45%, var(--card-separator-color));
+    background: var(--card-background);
+    box-shadow: 0 10px 26px rgba(80, 98, 86, 0.14);
+  }
+
+  .site-footer .icp-record a:hover .icp-spark {
+    transform: rotate(18deg) scale(1.08);
+  }
+
+  .site-footer .icp-record a:hover .icp-arrow {
+    color: var(--accent-color);
+    transform: translate(2px, -2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-footer .icp-record a,
+  .site-footer .icp-spark,
+  .site-footer .icp-arrow {
+    transition: none;
+  }
+}
