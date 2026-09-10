@@ -168,8 +168,9 @@
     if (!drag || drag.id !== e.pointerId) return;
     const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
     if (Math.hypot(dx, dy) > 8) drag.moved = true;
-    if (!drag.horizontal && Math.abs(dx) < 7) return;
-    if (!drag.horizontal && Math.abs(dy) > Math.abs(dx)) { finish(e, true); return; }
+    // 触屏拖动轨迹天然带纵向噪声，用 1.5 倍 + 6px 的容差判定方向，避免轻微倾斜就取消拖动。
+    if (!drag.horizontal && Math.abs(dx) < 7 && Math.abs(dy) < 7) return;
+    if (!drag.horizontal && Math.abs(dy) > Math.abs(dx) * 1.5 + 6) { finish(e, true); return; }
     drag.horizontal = true; drag.dx = dx; stage.classList.add('is-dragging');
     if (!stage.hasPointerCapture(e.pointerId)) stage.setPointerCapture(e.pointerId);
     if (photos.length < 2) return;
@@ -184,6 +185,8 @@
     const id = drag.id; drag = null; stage.classList.remove('is-dragging');
     if (stage.hasPointerCapture(id)) stage.releasePointerCapture(id);
     cancelAnimationFrame(frame);
+    // 取消（被判定为纵向滚动/浏览器接管）时静默复位，不做回弹动画，避免“抖动”观感。
+    if (cancelled) { offset = 0; draw(); return; }
     if (offset || destination) animate(destination);
   }
   listen(stage, 'pointerup', e => finish(e));
