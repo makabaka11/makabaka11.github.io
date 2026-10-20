@@ -541,6 +541,8 @@
   </url><url>
     <loc>https://www.retr0.xyz/tags/</loc>
   </url><url>
+    <loc>https://www.retr0.xyz/anime-score-preview/</loc>
+  </url><url>
     <loc>https://www.retr0.xyz/%E5%85%B3%E4%BA%8E-about/</loc>
   </url><url>
     <loc>https://www.retr0.xyz/gallery/</loc>
@@ -550,5 +552,7 @@
     <loc>https://www.retr0.xyz/categories/%E8%AF%BE%E5%A0%82%E5%B0%8F%E8%AE%B0/</loc>
   </url><url>
     <loc>https://www.retr0.xyz/search/</loc>
+  </url><url>
+    <loc>https://www.retr0.xyz/game-score-preview/</loc>
   </url>
 </urlset>

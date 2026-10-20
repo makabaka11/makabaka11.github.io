@@ -25,6 +25,238 @@
         <description></description>
         </item>
         <item>
+        <title>动画评分组件预览</title>
+        <link>https://www.retr0.xyz/anime-score-preview/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://www.retr0.xyz/anime-score-preview/</guid>
+        <description>&lt;h2 id=&#34;六维评分&#34;&gt;六维评分
+&lt;/h2&gt;&lt;p&gt;以下为演示分数，可直接把短代码复制到动画评测正文中。&lt;/p&gt;
+&lt;section class=&#34;anime-score anime-score--anime&#34; aria-label=&#34;动画评分&#34;&gt;
+    &lt;div class=&#34;anime-score__overall&#34;&gt;
+        &lt;div class=&#34;anime-score__hex&#34; aria-label=&#34;总分 8.5 / 10&#34;&gt;
+            &lt;span class=&#34;anime-score__total&#34;&gt;8.5&lt;/span&gt;
+            &lt;span class=&#34;anime-score__outof&#34;&gt;/ 10&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;anime-score__dimensions&#34;&gt;
+        &lt;div class=&#34;anime-score__dimension&#34;&gt;
+            &lt;div class=&#34;anime-score__row&#34;&gt;
+                &lt;span&gt;剧情构成&lt;/span&gt;
+                &lt;span class=&#34;anime-score__number&#34;&gt;&lt;strong&gt;8&lt;/strong&gt;&lt;span&gt; / 10&lt;/span&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;anime-score__track&#34; aria-hidden=&#34;true&#34;&gt;&lt;span style=&#34;width: 80%&#34;&gt;&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;anime-score__dimension&#34;&gt;
+            &lt;div class=&#34;anime-score__row&#34;&gt;
+                &lt;span&gt;制作水平&lt;/span&gt;
+                &lt;span class=&#34;anime-score__number&#34;&gt;&lt;strong&gt;9&lt;/strong&gt;&lt;span&gt; / 10&lt;/span&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;anime-score__track&#34; aria-hidden=&#34;true&#34;&gt;&lt;span style=&#34;width: 90%&#34;&gt;&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;anime-score__dimension&#34;&gt;
+            &lt;div class=&#34;anime-score__row&#34;&gt;
+                &lt;span&gt;人物塑造&lt;/span&gt;
+                &lt;span class=&#34;anime-score__number&#34;&gt;&lt;strong&gt;8.5&lt;/strong&gt;&lt;span&gt; / 10&lt;/span&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;anime-score__track&#34; aria-hidden=&#34;true&#34;&gt;&lt;span style=&#34;width: 85%&#34;&gt;&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;anime-score__dimension&#34;&gt;
+            &lt;div class=&#34;anime-score__row&#34;&gt;
+                &lt;span&gt;氛围营造&lt;/span&gt;
+                &lt;span class=&#34;anime-score__number&#34;&gt;&lt;strong&gt;9&lt;/strong&gt;&lt;span&gt; / 10&lt;/span&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;anime-score__track&#34; aria-hidden=&#34;true&#34;&gt;&lt;span style=&#34;width: 90%&#34;&gt;&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;anime-score__dimension&#34;&gt;
+            &lt;div class=&#34;anime-score__row&#34;&gt;
+                &lt;span&gt;个人主观感受&lt;/span&gt;
+                &lt;span class=&#34;anime-score__number&#34;&gt;&lt;strong&gt;9.5&lt;/strong&gt;&lt;span&gt; / 10&lt;/span&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;anime-score__track&#34; aria-hidden=&#34;true&#34;&gt;&lt;span style=&#34;width: 95%&#34;&gt;&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;anime-score__dimension&#34;&gt;
+            &lt;div class=&#34;anime-score__row&#34;&gt;
+                &lt;span&gt;思想情感价值&lt;/span&gt;
+                &lt;span class=&#34;anime-score__number&#34;&gt;&lt;strong&gt;8&lt;/strong&gt;&lt;span&gt; / 10&lt;/span&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;anime-score__track&#34; aria-hidden=&#34;true&#34;&gt;&lt;span style=&#34;width: 80%&#34;&gt;&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;anime-score__chart&#34;&gt;
+        &lt;svg class=&#34;anime-score__radar&#34; viewBox=&#34;0 0 340 300&#34; role=&#34;img&#34; aria-labelledby=&#34;anime-score-0-title anime-score-0-desc&#34;&gt;
+            &lt;title id=&#34;anime-score-0-title&#34;&gt;6维评分雷达图&lt;/title&gt;
+            &lt;desc id=&#34;anime-score-0-desc&#34;&gt;满分 10 分。剧情构成 8 分；制作水平 9 分；人物塑造 8.5 分；氛围营造 9 分；个人主观感受 9.5 分；思想情感价值 8 分；&lt;/desc&gt;
+            &lt;polygon class=&#34;anime-score__grid&#34; points=&#34;170.00,131.60 185.93,140.80 185.93,159.20 170.00,168.40 154.07,159.20 154.07,140.80&#34; /&gt;
+            &lt;polygon class=&#34;anime-score__grid&#34; points=&#34;170.00,113.20 201.87,131.60 201.87,168.40 170.00,186.80 138.13,168.40 138.13,131.60&#34; /&gt;
+            &lt;polygon class=&#34;anime-score__grid&#34; points=&#34;170.00,94.80 217.80,122.40 217.80,177.60 170.00,205.20 122.20,177.60 122.20,122.40&#34; /&gt;
+            &lt;polygon class=&#34;anime-score__grid&#34; points=&#34;170.00,76.40 233.74,113.20 233.74,186.80 170.00,223.60 106.26,186.80 106.26,113.20&#34; /&gt;
+            &lt;polygon class=&#34;anime-score__grid&#34; points=&#34;170.00,58.00 249.67,104.00 249.67,196.00 170.00,242.00 90.33,196.00 90.33,104.00&#34; /&gt;
+            &lt;line class=&#34;anime-score__axis&#34; x1=&#34;170&#34; y1=&#34;150&#34; x2=&#34;170&#34; y2=&#34;58&#34; /&gt;
+            &lt;text class=&#34;anime-score__label&#34; x=&#34;170&#34; y=&#34;37&#34; text-anchor=&#34;middle&#34; dominant-baseline=&#34;middle&#34;&gt;剧情构成&lt;/text&gt;
+            &lt;line class=&#34;anime-score__axis&#34; x1=&#34;170&#34; y1=&#34;150&#34; x2=&#34;249.67433714816835&#34; y2=&#34;104&#34; /&gt;
+            &lt;text class=&#34;anime-score__label&#34; x=&#34;267.8608706276416&#34; y=&#34;93.5&#34; text-anchor=&#34;start&#34; dominant-baseline=&#34;middle&#34;&gt;制作水平&lt;/text&gt;
+            &lt;line class=&#34;anime-score__axis&#34; x1=&#34;170&#34; y1=&#34;150&#34; x2=&#34;249.67433714816838&#34; y2=&#34;196&#34; /&gt;
+            &lt;text class=&#34;anime-score__label&#34; x=&#34;267.8608706276416&#34; y=&#34;206.49999999999997&#34; text-anchor=&#34;start&#34; dominant-baseline=&#34;middle&#34;&gt;人物塑造&lt;/text&gt;
+            &lt;line class=&#34;anime-score__axis&#34; x1=&#34;170&#34; y1=&#34;150&#34; x2=&#34;170&#34; y2=&#34;242&#34; /&gt;
+            &lt;text class=&#34;anime-score__label&#34; x=&#34;170&#34; y=&#34;263&#34; text-anchor=&#34;middle&#34; dominant-baseline=&#34;middle&#34;&gt;氛围营造&lt;/text&gt;
+            &lt;line class=&#34;anime-score__axis&#34; x1=&#34;170&#34; y1=&#34;150&#34; x2=&#34;90.32566285183167&#34; y2=&#34;196.00000000000003&#34; /&gt;
+            &lt;text class=&#34;anime-score__label&#34; x=&#34;72.13912937235845&#34; y=&#34;206.50000000000003&#34; text-anchor=&#34;end&#34; dominant-baseline=&#34;middle&#34;&gt;个人主观感受&lt;/text&gt;
+            &lt;line class=&#34;anime-score__axis&#34; x1=&#34;170&#34; y1=&#34;150&#34; x2=&#34;90.32566285183165&#34; y2=&#34;104&#34; /&gt;
+            &lt;text class=&#34;anime-score__label&#34; x=&#34;72.13912937235844&#34; y=&#34;93.49999999999999&#34; text-anchor=&#34;end&#34; dominant-baseline=&#34;middle&#34;&gt;思想情感价值&lt;/text&gt;
+            &lt;polygon class=&#34;anime-score__shape&#34; points=&#34;170.00,76.40 241.71,108.60 237.72,189.10 170.00,232.80 94.31,193.70 106.26,113.20&#34; /&gt;
+            &lt;circle class=&#34;anime-score__point&#34; cx=&#34;170.00&#34; cy=&#34;76.40&#34; r=&#34;3.5&#34; /&gt;
+            &lt;circle class=&#34;anime-score__point&#34; cx=&#34;241.71&#34; cy=&#34;108.60&#34; r=&#34;3.5&#34; /&gt;
+            &lt;circle class=&#34;anime-score__point&#34; cx=&#34;237.72&#34; cy=&#34;189.10&#34; r=&#34;3.5&#34; /&gt;
+            &lt;circle class=&#34;anime-score__point&#34; cx=&#34;170.00&#34; cy=&#34;232.80&#34; r=&#34;3.5&#34; /&gt;
+            &lt;circle class=&#34;anime-score__point&#34; cx=&#34;94.31&#34; cy=&#34;193.70&#34; r=&#34;3.5&#34; /&gt;
+            &lt;circle class=&#34;anime-score__point&#34; cx=&#34;106.26&#34; cy=&#34;113.20&#34; r=&#34;3.5&#34; /&gt;
+            &lt;text class=&#34;anime-score__scale&#34; x=&#34;176&#34; y=&#34;55&#34;&gt;10&lt;/text&gt;
+            &lt;text class=&#34;anime-score__scale&#34; x=&#34;176&#34; y=&#34;146&#34;&gt;0&lt;/text&gt;
+        &lt;/svg&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;{{&amp;lt; anime-score total=&amp;#34;8.5&amp;#34; story=&amp;#34;8&amp;#34; production=&amp;#34;9&amp;#34; character=&amp;#34;8.5&amp;#34; atmosphere=&amp;#34;9&amp;#34; enjoyment=&amp;#34;9.5&amp;#34; value=&amp;#34;8&amp;#34; &amp;gt;}}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;五维评分&#34;&gt;五维评分
+&lt;/h2&gt;&lt;p&gt;省略 &lt;code&gt;value&lt;/code&gt; 即隐藏「思想情感价值」，雷达图自动切换为五边形。省略 &lt;code&gt;total&lt;/code&gt; 时，总分为已填写维度的算术平均值，四舍五入至一位小数。&lt;/p&gt;
+&lt;section class=&#34;anime-score anime-score--anime&#34; aria-label=&#34;动画评分&#34;&gt;
+    &lt;div class=&#34;anime-score__overall&#34;&gt;
+        &lt;div class=&#34;anime-score__hex&#34; aria-label=&#34;总分 8 / 10&#34;&gt;
+            &lt;span class=&#34;anime-score__total&#34;&gt;8&lt;/span&gt;
+            &lt;span class=&#34;anime-score__outof&#34;&gt;/ 10&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;anime-score__dimensions&#34;&gt;
+        &lt;div class=&#34;anime-score__dimension&#34;&gt;
+            &lt;div class=&#34;anime-score__row&#34;&gt;
+                &lt;span&gt;剧情构成&lt;/span&gt;
+                &lt;span class=&#34;anime-score__number&#34;&gt;&lt;strong&gt;7&lt;/strong&gt;&lt;span&gt; / 10&lt;/span&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;anime-score__track&#34; aria-hidden=&#34;true&#34;&gt;&lt;span style=&#34;width: 70%&#34;&gt;&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;anime-score__dimension&#34;&gt;
+            &lt;div class=&#34;anime-score__row&#34;&gt;
+                &lt;span&gt;制作水平&lt;/span&gt;
+                &lt;span class=&#34;anime-score__number&#34;&gt;&lt;strong&gt;8&lt;/strong&gt;&lt;span&gt; / 10&lt;/span&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;anime-score__track&#34; aria-hidden=&#34;true&#34;&gt;&lt;span style=&#34;width: 80%&#34;&gt;&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;anime-score__dimension&#34;&gt;
+            &lt;div class=&#34;anime-score__row&#34;&gt;
+                &lt;span&gt;人物塑造&lt;/span&gt;
+                &lt;span class=&#34;anime-score__number&#34;&gt;&lt;strong&gt;7.5&lt;/strong&gt;&lt;span&gt; / 10&lt;/span&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;anime-score__track&#34; aria-hidden=&#34;true&#34;&gt;&lt;span style=&#34;width: 75%&#34;&gt;&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;anime-score__dimension&#34;&gt;
+            &lt;div class=&#34;anime-score__row&#34;&gt;
+                &lt;span&gt;氛围营造&lt;/span&gt;
+                &lt;span class=&#34;anime-score__number&#34;&gt;&lt;strong&gt;9&lt;/strong&gt;&lt;span&gt; / 10&lt;/span&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;anime-score__track&#34; aria-hidden=&#34;true&#34;&gt;&lt;span style=&#34;width: 90%&#34;&gt;&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;anime-score__dimension&#34;&gt;
+            &lt;div class=&#34;anime-score__row&#34;&gt;
+                &lt;span&gt;个人主观感受&lt;/span&gt;
+                &lt;span class=&#34;anime-score__number&#34;&gt;&lt;strong&gt;8.5&lt;/strong&gt;&lt;span&gt; / 10&lt;/span&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;anime-score__track&#34; aria-hidden=&#34;true&#34;&gt;&lt;span style=&#34;width: 85%&#34;&gt;&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;anime-score__chart&#34;&gt;
+        &lt;svg class=&#34;anime-score__radar&#34; viewBox=&#34;0 0 340 300&#34; role=&#34;img&#34; aria-labelledby=&#34;anime-score-1-title anime-score-1-desc&#34;&gt;
+            &lt;title id=&#34;anime-score-1-title&#34;&gt;5维评分雷达图&lt;/title&gt;
+            &lt;desc id=&#34;anime-score-1-desc&#34;&gt;满分 10 分。剧情构成 7 分；制作水平 8 分；人物塑造 7.5 分；氛围营造 9 分；个人主观感受 8.5 分；&lt;/desc&gt;
+            &lt;polygon class=&#34;anime-score__grid&#34; points=&#34;170.00,131.60 187.50,144.31 180.82,164.89 159.18,164.89 152.50,144.31&#34; /&gt;
+            &lt;polygon class=&#34;anime-score__grid&#34; points=&#34;170.00,113.20 205.00,138.63 191.63,179.77 148.37,179.77 135.00,138.63&#34; /&gt;
+            &lt;polygon class=&#34;anime-score__grid&#34; points=&#34;170.00,94.80 222.50,132.94 202.45,194.66 137.55,194.66 117.50,132.94&#34; /&gt;
+            &lt;polygon class=&#34;anime-score__grid&#34; points=&#34;170.00,76.40 240.00,127.26 213.26,209.54 126.74,209.54 100.00,127.26&#34; /&gt;
+            &lt;polygon class=&#34;anime-score__grid&#34; points=&#34;170.00,58.00 257.50,121.57 224.08,224.43 115.92,224.43 82.50,121.57&#34; /&gt;
+            &lt;line class=&#34;anime-score__axis&#34; x1=&#34;170&#34; y1=&#34;150&#34; x2=&#34;170&#34; y2=&#34;58&#34; /&gt;
+            &lt;text class=&#34;anime-score__label&#34; x=&#34;170&#34; y=&#34;37&#34; text-anchor=&#34;middle&#34; dominant-baseline=&#34;middle&#34;&gt;剧情构成&lt;/text&gt;
+            &lt;line class=&#34;anime-score__axis&#34; x1=&#34;170&#34; y1=&#34;150&#34; x2=&#34;257.49719949915414&#34; y2=&#34;121.57043651750485&#34; /&gt;
+            &lt;text class=&#34;anime-score__label&#34; x=&#34;277.46938634135233&#34; y=&#34;115.08107963563094&#34; text-anchor=&#34;start&#34; dominant-baseline=&#34;middle&#34;&gt;制作水平&lt;/text&gt;
+            &lt;line class=&#34;anime-score__axis&#34; x1=&#34;170&#34; y1=&#34;150&#34; x2=&#34;224.07624321090753&#34; y2=&#34;224.42956348249515&#34; /&gt;
+            &lt;text class=&#34;anime-score__label&#34; x=&#34;236.41973350904948&#34; y=&#34;241.41892036436906&#34; text-anchor=&#34;start&#34; dominant-baseline=&#34;middle&#34;&gt;人物塑造&lt;/text&gt;
+            &lt;line class=&#34;anime-score__axis&#34; x1=&#34;170&#34; y1=&#34;150&#34; x2=&#34;115.92375678909248&#34; y2=&#34;224.42956348249515&#34; /&gt;
+            &lt;text class=&#34;anime-score__label&#34; x=&#34;103.58026649095055&#34; y=&#34;241.41892036436906&#34; text-anchor=&#34;end&#34; dominant-baseline=&#34;middle&#34;&gt;氛围营造&lt;/text&gt;
+            &lt;line class=&#34;anime-score__axis&#34; x1=&#34;170&#34; y1=&#34;150&#34; x2=&#34;82.50280050084586&#34; y2=&#34;121.57043651750485&#34; /&gt;
+            &lt;text class=&#34;anime-score__label&#34; x=&#34;62.53061365864764&#34; y=&#34;115.08107963563096&#34; text-anchor=&#34;end&#34; dominant-baseline=&#34;middle&#34;&gt;个人主观感受&lt;/text&gt;
+            &lt;polygon class=&#34;anime-score__shape&#34; points=&#34;170.00,85.60 240.00,127.26 210.56,205.82 121.33,216.99 95.63,125.83&#34; /&gt;
+            &lt;circle class=&#34;anime-score__point&#34; cx=&#34;170.00&#34; cy=&#34;85.60&#34; r=&#34;3.5&#34; /&gt;
+            &lt;circle class=&#34;anime-score__point&#34; cx=&#34;240.00&#34; cy=&#34;127.26&#34; r=&#34;3.5&#34; /&gt;
+            &lt;circle class=&#34;anime-score__point&#34; cx=&#34;210.56&#34; cy=&#34;205.82&#34; r=&#34;3.5&#34; /&gt;
+            &lt;circle class=&#34;anime-score__point&#34; cx=&#34;121.33&#34; cy=&#34;216.99&#34; r=&#34;3.5&#34; /&gt;
+            &lt;circle class=&#34;anime-score__point&#34; cx=&#34;95.63&#34; cy=&#34;125.83&#34; r=&#34;3.5&#34; /&gt;
+            &lt;text class=&#34;anime-score__scale&#34; x=&#34;176&#34; y=&#34;55&#34;&gt;10&lt;/text&gt;
+            &lt;text class=&#34;anime-score__scale&#34; x=&#34;176&#34; y=&#34;146&#34;&gt;0&lt;/text&gt;
+        &lt;/svg&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;{{&amp;lt; anime-score story=&amp;#34;7&amp;#34; production=&amp;#34;8&amp;#34; character=&amp;#34;7.5&amp;#34; atmosphere=&amp;#34;9&amp;#34; enjoyment=&amp;#34;8.5&amp;#34; &amp;gt;}}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;参数&lt;/th&gt;
+					&lt;th&gt;对应内容&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;story&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;剧情构成（必填）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;production&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;制作水平（必填）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;character&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;人物塑造（必填）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;atmosphere&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;氛围营造（必填）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;enjoyment&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;个人主观感受（必填）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;value&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;思想情感价值（可选，填 0 也会显示）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;total&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;手动指定总分（可选）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;title&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;辅助阅读标签（默认「动画评分」，不显示在卡片中）&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;所有分数均为 0–10，支持小数。同一篇文章可以插入多个组件。组件在构建时生成 HTML 和 SVG，无需额外脚本；支持博客明暗主题与窄屏排版。&lt;/p&gt;
+&lt;p&gt;本页为草稿，使用 &lt;code&gt;hugo server -D&lt;/code&gt; 预览，不会随正常构建发布。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>关于 | About</title>
         <link>https://www.retr0.xyz/%E5%85%B3%E4%BA%8E-about/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -89,6 +321,139 @@
         
         <guid>https://www.retr0.xyz/search/</guid>
         <description></description>
+        </item>
+        <item>
+        <title>游戏评分组件预览</title>
+        <link>https://www.retr0.xyz/game-score-preview/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://www.retr0.xyz/game-score-preview/</guid>
+        <description>&lt;h2 id=&#34;游戏评分&#34;&gt;游戏评分
+&lt;/h2&gt;&lt;p&gt;以下为演示分数，可直接把短代码复制到游戏评测正文中。&lt;/p&gt;
+&lt;section class=&#34;anime-score anime-score--game&#34; aria-label=&#34;游戏评分&#34;&gt;
+    &lt;div class=&#34;anime-score__overall&#34;&gt;
+        &lt;div class=&#34;anime-score__hex&#34; aria-label=&#34;总分 8.5 / 10&#34;&gt;
+            &lt;span class=&#34;anime-score__total&#34;&gt;8.5&lt;/span&gt;
+            &lt;span class=&#34;anime-score__outof&#34;&gt;/ 10&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;anime-score__dimensions&#34;&gt;
+        &lt;div class=&#34;anime-score__dimension&#34;&gt;
+            &lt;div class=&#34;anime-score__row&#34;&gt;
+                &lt;span&gt;玩法&lt;/span&gt;
+                &lt;span class=&#34;anime-score__number&#34;&gt;&lt;strong&gt;9&lt;/strong&gt;&lt;span&gt; / 10&lt;/span&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;anime-score__track&#34; aria-hidden=&#34;true&#34;&gt;&lt;span style=&#34;width: 90%&#34;&gt;&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;anime-score__dimension&#34;&gt;
+            &lt;div class=&#34;anime-score__row&#34;&gt;
+                &lt;span&gt;概念&lt;/span&gt;
+                &lt;span class=&#34;anime-score__number&#34;&gt;&lt;strong&gt;8.5&lt;/strong&gt;&lt;span&gt; / 10&lt;/span&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;anime-score__track&#34; aria-hidden=&#34;true&#34;&gt;&lt;span style=&#34;width: 85%&#34;&gt;&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;anime-score__dimension&#34;&gt;
+            &lt;div class=&#34;anime-score__row&#34;&gt;
+                &lt;span&gt;视听&lt;/span&gt;
+                &lt;span class=&#34;anime-score__number&#34;&gt;&lt;strong&gt;9&lt;/strong&gt;&lt;span&gt; / 10&lt;/span&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;anime-score__track&#34; aria-hidden=&#34;true&#34;&gt;&lt;span style=&#34;width: 90%&#34;&gt;&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;anime-score__dimension&#34;&gt;
+            &lt;div class=&#34;anime-score__row&#34;&gt;
+                &lt;span&gt;系统&lt;/span&gt;
+                &lt;span class=&#34;anime-score__number&#34;&gt;&lt;strong&gt;8&lt;/strong&gt;&lt;span&gt; / 10&lt;/span&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;anime-score__track&#34; aria-hidden=&#34;true&#34;&gt;&lt;span style=&#34;width: 80%&#34;&gt;&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;anime-score__dimension&#34;&gt;
+            &lt;div class=&#34;anime-score__row&#34;&gt;
+                &lt;span&gt;技术&lt;/span&gt;
+                &lt;span class=&#34;anime-score__number&#34;&gt;&lt;strong&gt;7.5&lt;/strong&gt;&lt;span&gt; / 10&lt;/span&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;anime-score__track&#34; aria-hidden=&#34;true&#34;&gt;&lt;span style=&#34;width: 75%&#34;&gt;&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;anime-score__chart&#34;&gt;
+        &lt;svg class=&#34;anime-score__radar&#34; viewBox=&#34;0 0 340 300&#34; role=&#34;img&#34; aria-labelledby=&#34;game-score-0-title game-score-0-desc&#34;&gt;
+            &lt;title id=&#34;game-score-0-title&#34;&gt;5维评分雷达图&lt;/title&gt;
+            &lt;desc id=&#34;game-score-0-desc&#34;&gt;满分 10 分。玩法 9 分；概念 8.5 分；视听 9 分；系统 8 分；技术 7.5 分；&lt;/desc&gt;
+            &lt;polygon class=&#34;anime-score__grid&#34; points=&#34;170.00,131.60 187.50,144.31 180.82,164.89 159.18,164.89 152.50,144.31&#34; /&gt;
+            &lt;polygon class=&#34;anime-score__grid&#34; points=&#34;170.00,113.20 205.00,138.63 191.63,179.77 148.37,179.77 135.00,138.63&#34; /&gt;
+            &lt;polygon class=&#34;anime-score__grid&#34; points=&#34;170.00,94.80 222.50,132.94 202.45,194.66 137.55,194.66 117.50,132.94&#34; /&gt;
+            &lt;polygon class=&#34;anime-score__grid&#34; points=&#34;170.00,76.40 240.00,127.26 213.26,209.54 126.74,209.54 100.00,127.26&#34; /&gt;
+            &lt;polygon class=&#34;anime-score__grid&#34; points=&#34;170.00,58.00 257.50,121.57 224.08,224.43 115.92,224.43 82.50,121.57&#34; /&gt;
+            &lt;line class=&#34;anime-score__axis&#34; x1=&#34;170&#34; y1=&#34;150&#34; x2=&#34;170&#34; y2=&#34;58&#34; /&gt;
+            &lt;text class=&#34;anime-score__label&#34; x=&#34;170&#34; y=&#34;37&#34; text-anchor=&#34;middle&#34; dominant-baseline=&#34;middle&#34;&gt;玩法&lt;/text&gt;
+            &lt;line class=&#34;anime-score__axis&#34; x1=&#34;170&#34; y1=&#34;150&#34; x2=&#34;257.49719949915414&#34; y2=&#34;121.57043651750485&#34; /&gt;
+            &lt;text class=&#34;anime-score__label&#34; x=&#34;277.46938634135233&#34; y=&#34;115.08107963563094&#34; text-anchor=&#34;start&#34; dominant-baseline=&#34;middle&#34;&gt;概念&lt;/text&gt;
+            &lt;line class=&#34;anime-score__axis&#34; x1=&#34;170&#34; y1=&#34;150&#34; x2=&#34;224.07624321090753&#34; y2=&#34;224.42956348249515&#34; /&gt;
+            &lt;text class=&#34;anime-score__label&#34; x=&#34;236.41973350904948&#34; y=&#34;241.41892036436906&#34; text-anchor=&#34;start&#34; dominant-baseline=&#34;middle&#34;&gt;视听&lt;/text&gt;
+            &lt;line class=&#34;anime-score__axis&#34; x1=&#34;170&#34; y1=&#34;150&#34; x2=&#34;115.92375678909248&#34; y2=&#34;224.42956348249515&#34; /&gt;
+            &lt;text class=&#34;anime-score__label&#34; x=&#34;103.58026649095055&#34; y=&#34;241.41892036436906&#34; text-anchor=&#34;end&#34; dominant-baseline=&#34;middle&#34;&gt;系统&lt;/text&gt;
+            &lt;line class=&#34;anime-score__axis&#34; x1=&#34;170&#34; y1=&#34;150&#34; x2=&#34;82.50280050084586&#34; y2=&#34;121.57043651750485&#34; /&gt;
+            &lt;text class=&#34;anime-score__label&#34; x=&#34;62.53061365864764&#34; y=&#34;115.08107963563096&#34; text-anchor=&#34;end&#34; dominant-baseline=&#34;middle&#34;&gt;技术&lt;/text&gt;
+            &lt;polygon class=&#34;anime-score__shape&#34; points=&#34;170.00,67.20 244.37,125.83 218.67,216.99 126.74,209.54 104.38,128.68&#34; /&gt;
+            &lt;circle class=&#34;anime-score__point&#34; cx=&#34;170.00&#34; cy=&#34;67.20&#34; r=&#34;3.5&#34; /&gt;
+            &lt;circle class=&#34;anime-score__point&#34; cx=&#34;244.37&#34; cy=&#34;125.83&#34; r=&#34;3.5&#34; /&gt;
+            &lt;circle class=&#34;anime-score__point&#34; cx=&#34;218.67&#34; cy=&#34;216.99&#34; r=&#34;3.5&#34; /&gt;
+            &lt;circle class=&#34;anime-score__point&#34; cx=&#34;126.74&#34; cy=&#34;209.54&#34; r=&#34;3.5&#34; /&gt;
+            &lt;circle class=&#34;anime-score__point&#34; cx=&#34;104.38&#34; cy=&#34;128.68&#34; r=&#34;3.5&#34; /&gt;
+            &lt;text class=&#34;anime-score__scale&#34; x=&#34;176&#34; y=&#34;55&#34;&gt;10&lt;/text&gt;
+            &lt;text class=&#34;anime-score__scale&#34; x=&#34;176&#34; y=&#34;146&#34;&gt;0&lt;/text&gt;
+        &lt;/svg&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;{{&amp;lt; game-score total=&amp;#34;8.5&amp;#34; gameplay=&amp;#34;9&amp;#34; concept=&amp;#34;8.5&amp;#34; audiovisual=&amp;#34;9&amp;#34; systems=&amp;#34;8&amp;#34; technology=&amp;#34;7.5&amp;#34; &amp;gt;}}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;参数&lt;/th&gt;
+					&lt;th&gt;对应内容&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;gameplay&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;玩法（必填）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;concept&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;概念（必填）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;audiovisual&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;视听（必填）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;systems&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;系统（必填）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;technology&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;技术（必填）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;total&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;手动指定总分（可选，省略则计算五维均分，四舍五入至一位小数）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;title&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;辅助阅读标签（默认「游戏评分」，不显示在卡片中）&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;所有分数均为 0–10，支持小数。支持同一篇文章插入多个动画或游戏评分组件，以及明暗主题和手机排版。&lt;/p&gt;
+&lt;p&gt;本页为草稿，使用 &lt;code&gt;hugo server -D&lt;/code&gt; 预览，不会随正常构建发布。&lt;/p&gt;
+</description>
         </item>
         
     </channel>
