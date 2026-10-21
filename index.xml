@@ -74,7 +74,7 @@
         &lt;/div&gt;
     &lt;/div&gt;
     &lt;div class=&#34;anime-score__chart&#34;&gt;
-        &lt;svg class=&#34;anime-score__radar&#34; viewBox=&#34;0 0 340 300&#34; role=&#34;img&#34; aria-labelledby=&#34;anime-score-0-title anime-score-0-desc&#34; data-scale-min=&#34;6&#34; data-scale-max=&#34;10&#34; data-scale-step=&#34;1&#34;&gt;
+        &lt;svg class=&#34;anime-score__radar&#34; viewBox=&#34;-36 0 412 300&#34; role=&#34;img&#34; aria-labelledby=&#34;anime-score-0-title anime-score-0-desc&#34; data-scale-min=&#34;6&#34; data-scale-max=&#34;10&#34; data-scale-step=&#34;1&#34;&gt;
             &lt;title id=&#34;anime-score-0-title&#34;&gt;6维评分雷达图&lt;/title&gt;
             &lt;desc id=&#34;anime-score-0-desc&#34;&gt;满分 10 分。雷达图中心 6 分，外圈 10 分，每格 1 分。剧情构成 7 分；制作水平 8 分；人物塑造 8.3 分；氛围营造 10 分；个人主观感受 9.5 分；思想情感价值 8 分；&lt;/desc&gt;
             &lt;polygon class=&#34;anime-score__grid&#34; points=&#34;170.00,127.00 189.92,138.50 189.92,161.50 170.00,173.00 150.08,161.50 150.08,138.50&#34; /&gt;
@@ -105,7 +105,6 @@
             &lt;text class=&#34;anime-score__scale&#34; x=&#34;176&#34; y=&#34;79&#34;&gt;9&lt;/text&gt;
             &lt;text class=&#34;anime-score__scale&#34; x=&#34;176&#34; y=&#34;56&#34;&gt;10&lt;/text&gt;
             &lt;text class=&#34;anime-score__scale&#34; x=&#34;176&#34; y=&#34;148&#34;&gt;6&lt;/text&gt;
-            &lt;text class=&#34;anime-score__range&#34; x=&#34;170&#34; y=&#34;286&#34; text-anchor=&#34;middle&#34;&gt;刻度 6–10 · 每格 1 分&lt;/text&gt;
         &lt;/svg&gt;
     &lt;/div&gt;
 &lt;/section&gt;
@@ -2034,7 +2033,7 @@
         &lt;/div&gt;
     &lt;/div&gt;
     &lt;div class=&#34;anime-score__chart&#34;&gt;
-        &lt;svg class=&#34;anime-score__radar&#34; viewBox=&#34;0 0 340 300&#34; role=&#34;img&#34; aria-labelledby=&#34;game-score-0-title game-score-0-desc&#34; data-scale-min=&#34;6&#34; data-scale-max=&#34;10&#34; data-scale-step=&#34;1&#34;&gt;
+        &lt;svg class=&#34;anime-score__radar&#34; viewBox=&#34;-36 0 412 300&#34; role=&#34;img&#34; aria-labelledby=&#34;game-score-0-title game-score-0-desc&#34; data-scale-min=&#34;6&#34; data-scale-max=&#34;10&#34; data-scale-step=&#34;1&#34;&gt;
             &lt;title id=&#34;game-score-0-title&#34;&gt;5维评分雷达图&lt;/title&gt;
             &lt;desc id=&#34;game-score-0-desc&#34;&gt;满分 10 分。雷达图中心 6 分，外圈 10 分，每格 1 分。玩法 9 分；概念 7.7 分；视听 10 分；系统 9.5 分；技术 10 分；&lt;/desc&gt;
             &lt;polygon class=&#34;anime-score__grid&#34; points=&#34;170.00,127.00 191.87,142.89 183.52,168.61 156.48,168.61 148.13,142.89&#34; /&gt;
@@ -2062,7 +2061,6 @@
             &lt;text class=&#34;anime-score__scale&#34; x=&#34;176&#34; y=&#34;79&#34;&gt;9&lt;/text&gt;
             &lt;text class=&#34;anime-score__scale&#34; x=&#34;176&#34; y=&#34;56&#34;&gt;10&lt;/text&gt;
             &lt;text class=&#34;anime-score__scale&#34; x=&#34;176&#34; y=&#34;148&#34;&gt;6&lt;/text&gt;
-            &lt;text class=&#34;anime-score__range&#34; x=&#34;170&#34; y=&#34;286&#34; text-anchor=&#34;middle&#34;&gt;刻度 6–10 · 每格 1 分&lt;/text&gt;
         &lt;/svg&gt;
     &lt;/div&gt;
 &lt;/section&gt;
@@ -34772,7 +34770,7 @@ SHA256：24d004a104d4d54034dbcffc2a4b19a11f39008a575aa614ea04703480b1022c&lt;/p&
         &lt;/div&gt;
     &lt;/div&gt;
     &lt;div class=&#34;anime-score__chart&#34;&gt;
-        &lt;svg class=&#34;anime-score__radar&#34; viewBox=&#34;0 0 340 300&#34; role=&#34;img&#34; aria-labelledby=&#34;anime-score-0-title anime-score-0-desc&#34; data-scale-min=&#34;7&#34; data-scale-max=&#34;10&#34; data-scale-step=&#34;1&#34;&gt;
+        &lt;svg class=&#34;anime-score__radar&#34; viewBox=&#34;-36 0 412 300&#34; role=&#34;img&#34; aria-labelledby=&#34;anime-score-0-title anime-score-0-desc&#34; data-scale-min=&#34;7&#34; data-scale-max=&#34;10&#34; data-scale-step=&#34;1&#34;&gt;
             &lt;title id=&#34;anime-score-0-title&#34;&gt;6维评分雷达图&lt;/title&gt;
             &lt;desc id=&#34;anime-score-0-desc&#34;&gt;满分 10 分。雷达图中心 7 分，外圈 10 分，每格 1 分。剧情构成 8 分；制作水平 9 分；人物塑造 8.5 分；氛围营造 9 分；个人主观感受 9.5 分；思想情感价值 8 分；&lt;/desc&gt;
             &lt;polygon class=&#34;anime-score__grid&#34; points=&#34;170.00,119.33 196.56,134.67 196.56,165.33 170.00,180.67 143.44,165.33 143.44,134.67&#34; /&gt;
@@ -34801,7 +34799,6 @@ SHA256：24d004a104d4d54034dbcffc2a4b19a11f39008a575aa614ea04703480b1022c&lt;/p&
             &lt;text class=&#34;anime-score__scale&#34; x=&#34;176&#34; y=&#34;86.66666666666667&#34;&gt;9&lt;/text&gt;
             &lt;text class=&#34;anime-score__scale&#34; x=&#34;176&#34; y=&#34;56&#34;&gt;10&lt;/text&gt;
             &lt;text class=&#34;anime-score__scale&#34; x=&#34;176&#34; y=&#34;148&#34;&gt;7&lt;/text&gt;
-            &lt;text class=&#34;anime-score__range&#34; x=&#34;170&#34; y=&#34;286&#34; text-anchor=&#34;middle&#34;&gt;刻度 7–10 · 每格 1 分&lt;/text&gt;
         &lt;/svg&gt;
     &lt;/div&gt;
 &lt;/section&gt;
@@ -34861,7 +34858,7 @@ SHA256：24d004a104d4d54034dbcffc2a4b19a11f39008a575aa614ea04703480b1022c&lt;/p&
         &lt;/div&gt;
     &lt;/div&gt;
     &lt;div class=&#34;anime-score__chart&#34;&gt;
-        &lt;svg class=&#34;anime-score__radar&#34; viewBox=&#34;0 0 340 300&#34; role=&#34;img&#34; aria-labelledby=&#34;anime-score-1-title anime-score-1-desc&#34; data-scale-min=&#34;6&#34; data-scale-max=&#34;10&#34; data-scale-step=&#34;1&#34;&gt;
+        &lt;svg class=&#34;anime-score__radar&#34; viewBox=&#34;-36 0 412 300&#34; role=&#34;img&#34; aria-labelledby=&#34;anime-score-1-title anime-score-1-desc&#34; data-scale-min=&#34;6&#34; data-scale-max=&#34;10&#34; data-scale-step=&#34;1&#34;&gt;
             &lt;title id=&#34;anime-score-1-title&#34;&gt;5维评分雷达图&lt;/title&gt;
             &lt;desc id=&#34;anime-score-1-desc&#34;&gt;满分 10 分。雷达图中心 6 分，外圈 10 分，每格 1 分。剧情构成 7 分；制作水平 8 分；人物塑造 7.5 分；氛围营造 9 分；个人主观感受 8.5 分；&lt;/desc&gt;
             &lt;polygon class=&#34;anime-score__grid&#34; points=&#34;170.00,127.00 191.87,142.89 183.52,168.61 156.48,168.61 148.13,142.89&#34; /&gt;
@@ -34889,7 +34886,6 @@ SHA256：24d004a104d4d54034dbcffc2a4b19a11f39008a575aa614ea04703480b1022c&lt;/p&
             &lt;text class=&#34;anime-score__scale&#34; x=&#34;176&#34; y=&#34;79&#34;&gt;9&lt;/text&gt;
             &lt;text class=&#34;anime-score__scale&#34; x=&#34;176&#34; y=&#34;56&#34;&gt;10&lt;/text&gt;
             &lt;text class=&#34;anime-score__scale&#34; x=&#34;176&#34; y=&#34;148&#34;&gt;6&lt;/text&gt;
-            &lt;text class=&#34;anime-score__range&#34; x=&#34;170&#34; y=&#34;286&#34; text-anchor=&#34;middle&#34;&gt;刻度 6–10 · 每格 1 分&lt;/text&gt;
         &lt;/svg&gt;
     &lt;/div&gt;
 &lt;/section&gt;
@@ -34944,7 +34940,7 @@ SHA256：24d004a104d4d54034dbcffc2a4b19a11f39008a575aa614ea04703480b1022c&lt;/p&
 			&lt;/tr&gt;
 	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;所有分数均为 0–10，支持小数。同一篇文章可以插入多个组件。雷达图会根据分数范围自动调整中心值与分度，并在图下标明刻度范围；中间进度槽始终使用 0–10。组件在构建时生成 HTML 和 SVG，无需额外脚本；支持博客明暗主题与窄屏排版。&lt;/p&gt;
+&lt;p&gt;所有分数均为 0–10，支持小数。同一篇文章可以插入多个组件。雷达图会根据分数范围自动调整中心值与分度，并在图内显示刻度数字；中间进度槽始终使用 0–10。组件在构建时生成 HTML 和 SVG，无需额外脚本；支持博客明暗主题与窄屏排版。&lt;/p&gt;
 &lt;p&gt;本页为草稿，使用 &lt;code&gt;hugo server -D&lt;/code&gt; 预览，不会随正常构建发布。&lt;/p&gt;
 </description>
         </item>
@@ -35067,7 +35063,7 @@ SHA256：24d004a104d4d54034dbcffc2a4b19a11f39008a575aa614ea04703480b1022c&lt;/p&
         &lt;/div&gt;
     &lt;/div&gt;
     &lt;div class=&#34;anime-score__chart&#34;&gt;
-        &lt;svg class=&#34;anime-score__radar&#34; viewBox=&#34;0 0 340 300&#34; role=&#34;img&#34; aria-labelledby=&#34;game-score-0-title game-score-0-desc&#34; data-scale-min=&#34;6&#34; data-scale-max=&#34;10&#34; data-scale-step=&#34;1&#34;&gt;
+        &lt;svg class=&#34;anime-score__radar&#34; viewBox=&#34;-36 0 412 300&#34; role=&#34;img&#34; aria-labelledby=&#34;game-score-0-title game-score-0-desc&#34; data-scale-min=&#34;6&#34; data-scale-max=&#34;10&#34; data-scale-step=&#34;1&#34;&gt;
             &lt;title id=&#34;game-score-0-title&#34;&gt;5维评分雷达图&lt;/title&gt;
             &lt;desc id=&#34;game-score-0-desc&#34;&gt;满分 10 分。雷达图中心 6 分，外圈 10 分，每格 1 分。玩法 9 分；概念 8.5 分；视听 9 分；系统 8 分；技术 7.5 分；&lt;/desc&gt;
             &lt;polygon class=&#34;anime-score__grid&#34; points=&#34;170.00,127.00 191.87,142.89 183.52,168.61 156.48,168.61 148.13,142.89&#34; /&gt;
@@ -35095,7 +35091,6 @@ SHA256：24d004a104d4d54034dbcffc2a4b19a11f39008a575aa614ea04703480b1022c&lt;/p&
             &lt;text class=&#34;anime-score__scale&#34; x=&#34;176&#34; y=&#34;79&#34;&gt;9&lt;/text&gt;
             &lt;text class=&#34;anime-score__scale&#34; x=&#34;176&#34; y=&#34;56&#34;&gt;10&lt;/text&gt;
             &lt;text class=&#34;anime-score__scale&#34; x=&#34;176&#34; y=&#34;148&#34;&gt;6&lt;/text&gt;
-            &lt;text class=&#34;anime-score__range&#34; x=&#34;170&#34; y=&#34;286&#34; text-anchor=&#34;middle&#34;&gt;刻度 6–10 · 每格 1 分&lt;/text&gt;
         &lt;/svg&gt;
     &lt;/div&gt;
 &lt;/section&gt;
@@ -35146,7 +35141,7 @@ SHA256：24d004a104d4d54034dbcffc2a4b19a11f39008a575aa614ea04703480b1022c&lt;/p&
 			&lt;/tr&gt;
 	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;所有分数均为 0–10，支持小数。雷达图会根据分数范围自动调整中心值与分度，并在图下标明刻度范围；中间进度槽始终使用 0–10。支持同一篇文章插入多个动画或游戏评分组件，以及明暗主题和手机排版。&lt;/p&gt;
+&lt;p&gt;所有分数均为 0–10，支持小数。雷达图会根据分数范围自动调整中心值与分度，并在图内显示刻度数字；中间进度槽始终使用 0–10。支持同一篇文章插入多个动画或游戏评分组件，以及明暗主题和手机排版。&lt;/p&gt;
 &lt;p&gt;本页为草稿，使用 &lt;code&gt;hugo server -D&lt;/code&gt; 预览，不会随正常构建发布。&lt;/p&gt;
 </description>
         </item>
